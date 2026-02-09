@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
@@ -10,50 +10,178 @@
     <meta name="theme-color" content="#08090a">
     <title>Speech Test — How Well Does AI Understand You?</title>
 
-    <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #08090a;
             color: #f7f8f8;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+        a { color: inherit; text-decoration: none; }
+
+        /* Nav */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            background: rgba(8,9,10,0.8);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .nav-inner {
+            max-width: 1152px; margin: 0 auto;
+            padding: 0 16px; height: 56px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        @media (min-width: 640px) { .nav-inner { padding: 0 24px; } }
+        @media (min-width: 1024px) { .nav-inner { height: 72px; padding: 0 32px; } }
+        .nav-link {
+            color: #8a8f98; font-size: 14px; font-weight: 500;
+            transition: color 0.15s;
+            display: inline-flex; align-items: center; gap: 6px;
+        }
+        .nav-link:hover { color: #f7f8f8; }
+        .x-icon { width: 18px; height: 18px; }
+
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 96px 16px 64px;
+        }
+        @media (min-width: 640px) { .main { padding: 96px 24px 64px; } }
+        @media (min-width: 1024px) { .main { padding: 128px 24px 64px; } }
+        .main-inner {
+            max-width: 576px; margin: 0 auto;
+        }
+
+        /* Page header */
+        .page-header { margin-bottom: 32px; }
+        .page-header h1 {
+            font-size: 2rem; font-weight: 600;
+            letter-spacing: -0.03em; line-height: 1.1;
+            color: #f7f8f8; margin-bottom: 12px;
+        }
+        @media (min-width: 640px) { .page-header h1 { font-size: 2.5rem; } }
+        .page-header p {
+            font-size: 15px; color: #8a8f98; line-height: 1.6;
+        }
+
+        /* Card */
+        .card {
+            border-radius: 12px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 20px;
+        }
+        .card-label {
+            font-size: 13px; font-weight: 500; color: #565960;
+            text-transform: uppercase; letter-spacing: 0.025em;
+            margin-bottom: 12px;
+        }
+
+        /* Text block (reference / recognized) */
+        .text-block {
+            font-size: 15px; color: #b4b7be; line-height: 1.8;
+            padding: 16px; border-radius: 8px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+        }
+        @media (min-width: 1024px) { .text-block { font-size: 16px; } }
+        .text-block-recognized { line-height: 1.7; }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            font-weight: 500; border-radius: 12px;
+            transition: all 0.15s;
+            height: 48px; padding: 0 24px;
+            font-size: 15px; font-family: inherit;
+            border: none; cursor: pointer;
+        }
+        .btn:active { transform: scale(0.98); }
+        .btn-record {
+            background: #dc2626; color: #fff;
+        }
+        .btn-record:hover { background: #ef4444; }
+        .btn-record.btn-recording {
+            background: #991b1b;
+        }
+        .btn-record.btn-disabled {
+            opacity: 0.5; cursor: not-allowed;
+        }
+        .btn-secondary {
+            background: rgba(255,255,255,0.04); color: #8a8f98;
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.06); color: #f7f8f8; }
+
+        /* Status text */
+        .status {
+            font-size: 13px; color: #565960;
+            text-align: center; margin-top: 12px;
+        }
+
+        /* Result */
+        .result-card { margin-bottom: 16px; }
+        .score-center { text-align: center; padding: 16px 0; }
+        .score-value { font-size: 3rem; line-height: 1; font-weight: 700; }
+        .score-good { color: #34d399; }
+        .score-medium { color: #fbbf24; }
+        .score-bad { color: #f87171; }
+        .score-label { font-size: 13px; color: #565960; margin-top: 8px; }
+
+        /* Spacing helpers */
+        .mb-16 { margin-bottom: 16px; }
+        .mb-20 { margin-bottom: 20px; }
+
+        /* Info */
+        .info {
+            font-size: 13px; color: #565960;
+            text-align: center; margin-top: 32px;
+            line-height: 1.625;
+        }
+        .info a { color: #8a8f98; transition: color 0.15s; }
+        .info a:hover { color: #f7f8f8; }
+
+        /* Footer */
+        .footer {
+            padding: 24px 16px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .footer-inner {
+            max-width: 1152px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: center;
+        }
+        @media (min-width: 640px) { .footer { padding: 24px; } }
+        @media (min-width: 1024px) { .footer { padding: 24px 32px; } }
+        .footer-copy { font-size: 13px; color: #5c5f66; }
+
+        /* Utility */
+        .hidden { display: none; }
+
+        /* Recording pulse animation */
         @keyframes pulse-recording {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.6; }
         }
-        .recording-pulse {
-            animation: pulse-recording 1.5s infinite;
-        }
+        .recording-pulse { animation: pulse-recording 1.5s infinite; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body>
 
     <!-- ===== NAVIGATION ===== -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-[#08090a]/80 backdrop-blur-xl border-b border-white/[0.04]">
-        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 lg:h-[72px]">
-            <a href="/" class="text-[#8a8f98] hover:text-[#f7f8f8] text-[14px] font-medium transition-colors inline-flex items-center gap-1.5">
-                ← DayOneBuilder
-            </a>
-            <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer"
-               class="text-[#8a8f98] hover:text-[#f7f8f8] transition-colors inline-flex items-center">
-                <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
+    <header class="nav">
+        <nav class="nav-inner">
+            <a href="../index.html" class="nav-link">← DayOneBuilder</a>
+            <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer" class="nav-link">
+                <svg class="x-icon" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
             </a>
@@ -61,57 +189,51 @@
     </header>
 
     <!-- ===== MAIN CONTENT ===== -->
-    <main class="flex-1 pt-24 lg:pt-32 pb-16 px-4 sm:px-6">
-        <div class="max-w-xl mx-auto">
-            <div class="mb-8">
-                <h1 class="text-[2rem] sm:text-[2.5rem] font-semibold tracking-[-0.03em] leading-[1.1] text-[#f7f8f8] mb-3">
-                    🎤 Speech Test
-                </h1>
-                <p class="text-[15px] text-[#8a8f98] leading-[1.6]">
-                    Read the text aloud. AI will score how clearly you speak English.
-                </p>
+    <main class="main">
+        <div class="main-inner">
+            <div class="page-header">
+                <h1>🎤 Speech Test</h1>
+                <p>Read the text aloud. AI will score how clearly you speak English.</p>
             </div>
 
             <!-- Reference Text Card -->
-            <div class="rounded-xl bg-white/[0.02] border border-white/[0.06] p-5 mb-5">
-                <h3 class="text-[13px] font-medium text-[#565960] uppercase tracking-wide mb-3">Read this text</h3>
-                <div id="reference-text" class="text-[15px] lg:text-base text-[#b4b7be] leading-[1.8] p-4 rounded-lg bg-white/[0.02] border border-white/[0.04] mb-4"></div>
-                <button id="record-btn" onclick="toggleRecording()"
-                    class="w-full inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all h-12 px-6 text-[15px] bg-red-600 text-white hover:bg-red-500 active:scale-[0.98]">
+            <div class="card mb-20">
+                <h3 class="card-label">Read this text</h3>
+                <div id="reference-text" class="text-block mb-16"></div>
+                <button id="record-btn" onclick="toggleRecording()" class="btn btn-record">
                     🎙 Hold to Record
                 </button>
-                <p class="text-[13px] text-[#565960] text-center mt-3" id="status"></p>
+                <p class="status" id="status"></p>
             </div>
 
             <!-- Result Card -->
             <div class="hidden" id="result">
-                <div class="rounded-xl bg-white/[0.02] border border-white/[0.06] p-5 mb-4">
-                    <div class="text-center py-4">
-                        <div class="text-5xl font-bold" id="score-value"></div>
-                        <p class="text-[13px] text-[#565960] mt-2">Clarity Score</p>
+                <div class="card result-card">
+                    <div class="score-center">
+                        <div class="score-value" id="score-value"></div>
+                        <p class="score-label">Clarity Score</p>
                     </div>
-                    <h3 class="text-[13px] font-medium text-[#565960] uppercase tracking-wide mb-3">AI heard</h3>
-                    <div id="recognized-text" class="text-[15px] text-[#b4b7be] leading-[1.7] p-4 rounded-lg bg-white/[0.02] border border-white/[0.04]"></div>
+                    <h3 class="card-label">AI heard</h3>
+                    <div id="recognized-text" class="text-block text-block-recognized"></div>
                 </div>
-                <button onclick="newText()"
-                    class="w-full inline-flex items-center justify-center gap-2 font-medium rounded-xl transition-all h-12 px-6 text-[15px] bg-white/[0.04] text-[#8a8f98] hover:bg-white/[0.06] hover:text-[#f7f8f8] active:scale-[0.98] border border-white/[0.06]">
+                <button onclick="newText()" class="btn btn-secondary">
                     Try Another Text
                 </button>
             </div>
 
             <!-- Info -->
-            <p class="text-[13px] text-[#565960] text-center mt-8 leading-relaxed">
+            <p class="info">
                 Powered by Groq Whisper large-v3. Audio is sent to Groq API for recognition.<br>
                 No data is stored.
-                <a href="https://x.com/DayOneBuilder" target="_blank" class="text-[#8a8f98] hover:text-[#f7f8f8] transition-colors">@DayOneBuilder</a>
+                <a href="https://x.com/DayOneBuilder" target="_blank">@DayOneBuilder</a>
             </p>
         </div>
     </main>
 
     <!-- ===== FOOTER ===== -->
-    <footer class="py-6 border-t border-white/[0.04]">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-            <p class="text-[#5c5f66] text-[13px]">© 2026 DayOneBuilder</p>
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-copy">© 2026 DayOneBuilder</span>
         </div>
     </footer>
 
@@ -155,8 +277,7 @@
                     mediaRecorder.start();
                     isRecording = true;
                     btn.textContent = '⏹ Stop Recording';
-                    btn.classList.add('recording-pulse', 'bg-red-800');
-                    btn.classList.remove('bg-red-600');
+                    btn.classList.add('recording-pulse', 'btn-recording');
                     document.getElementById('status').textContent = 'Listening...';
                 } catch (e) {
                     document.getElementById('status').textContent = '❌ Microphone access denied';
@@ -165,10 +286,9 @@
                 mediaRecorder.stop();
                 isRecording = false;
                 btn.textContent = '🎙 Hold to Record';
-                btn.classList.remove('recording-pulse', 'bg-red-800');
-                btn.classList.add('bg-red-600');
+                btn.classList.remove('recording-pulse', 'btn-recording');
                 btn.disabled = true;
-                btn.classList.add('opacity-50', 'cursor-not-allowed');
+                btn.classList.add('btn-disabled');
                 document.getElementById('status').textContent = '⏳ Recognizing...';
             }
         }
@@ -199,7 +319,7 @@
         function enableRecordBtn() {
             const btn = document.getElementById('record-btn');
             btn.disabled = false;
-            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            btn.classList.remove('btn-disabled');
         }
 
         function showResult(recognized) {
@@ -210,7 +330,7 @@
 
             const scoreEl = document.getElementById('score-value');
             scoreEl.textContent = score + '%';
-            scoreEl.className = 'text-5xl font-bold ' + (score >= 80 ? 'text-emerald-400' : score >= 50 ? 'text-amber-400' : 'text-red-400');
+            scoreEl.className = 'score-value ' + (score >= 80 ? 'score-good' : score >= 50 ? 'score-medium' : 'score-bad');
 
             document.getElementById('result').classList.remove('hidden');
             document.getElementById('status').textContent = '';
