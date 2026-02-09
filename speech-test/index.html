@@ -253,7 +253,7 @@
         let audioChunks = [];
         let isRecording = false;
 
-        const GROQ_API_KEY = '';
+        const WORKER_URL = 'https://speech-api.dayonebuilder.workers.dev/transcribe';
 
         function newText() {
             const el = document.getElementById('reference-text');
@@ -302,9 +302,8 @@
             formData.append('response_format', 'json');
 
             try {
-                const resp = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
+                const resp = await fetch(WORKER_URL, {
                     method: 'POST',
-                    headers: { 'Authorization': `Bearer ${GROQ_API_KEY}` },
                     body: formData
                 });
                 const data = await resp.json();
