@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech Test — How Well Does AI Understand You?</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 640px;
+            padding: 48px 24px;
+            width: 100%;
+        }
+        h1 { font-size: 2rem; color: #fff; margin-bottom: 8px; }
+        .subtitle { color: #888; margin-bottom: 32px; }
+        .card {
+            background: #141414;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+        .card h3 { color: #fff; margin-bottom: 12px; }
+        #reference-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: #ccc;
+            padding: 16px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        button {
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        #record-btn {
+            background: #dc2626;
+            color: white;
+            width: 100%;
+        }
+        #record-btn:hover { background: #ef4444; }
+        #record-btn.recording {
+            background: #991b1b;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        #record-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+        .result {
+            margin-top: 20px;
+            display: none;
+        }
+        .result.show { display: block; }
+        #recognized-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            padding: 16px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+        .score {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            padding: 24px;
+        }
+        .score.high { color: #4ade80; }
+        .score.mid { color: #facc15; }
+        .score.low { color: #ef4444; }
+        .score-label {
+            text-align: center;
+            color: #888;
+            margin-top: -12px;
+            margin-bottom: 16px;
+        }
+        .diff-match { color: #4ade80; }
+        .diff-miss { color: #ef4444; text-decoration: line-through; }
+        .status { color: #888; text-align: center; padding: 12px; }
+        a.back { color: #888; text-decoration: none; font-size: 0.9rem; }
+        a.back:hover { color: #ccc; }
+        .info { color: #666; font-size: 0.85rem; margin-top: 24px; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="/">← DayOneBuilder</a>
+        <h1 style="margin-top: 24px;">🎤 Speech Test</h1>
+        <p class="subtitle">Read the text aloud. AI will score how clearly you speak English.</p>
+
+        <div class="card">
+            <h3>Read this text:</h3>
+            <div id="reference-text"></div>
+            <button id="record-btn" onclick="toggleRecording()">🎙 Hold to Record</button>
+            <p class="status" id="status"></p>
+        </div>
+
+        <div class="result" id="result">
+            <div class="card">
+                <div class="score" id="score-value"></div>
+                <p class="score-label">Clarity Score</p>
+                <h3>AI heard:</h3>
+                <div id="recognized-text"></div>
+            </div>
+            <button onclick="newText()" style="background:#222;color:#fff;width:100%;">Try Another Text</button>
+        </div>
+
+        <p class="info">
+            Powered by Groq Whisper large-v3. Audio is sent to Groq API for recognition.<br>
+            No data is stored. <a href="https://x.com/DayOneBuilder" style="color:#1DA1F2;">@DayOneBuilder</a>
+        </p>
+    </div>
+
+    <script>
+        const texts = [
+            "The quick brown fox jumps over the lazy dog near the riverbank on a warm summer afternoon.",
+            "Technology is transforming how we communicate, work, and live our daily lives around the world.",
+            "She sells seashells by the seashore, and the shells she sells are seashells for sure.",
+            "The weather forecast predicts heavy rainfall throughout the weekend across the northern regions.",
+            "A good developer writes code that humans can understand, not just code that machines can execute.",
+            "Please call Stella and ask her to bring these things from the store: six spoons of fresh snow peas, five thick slabs of blue cheese, and maybe a snack for her brother Bob.",
+            "International cooperation is essential for addressing global challenges such as climate change and public health.",
+            "The restaurant on the corner serves excellent breakfast, especially their homemade pancakes with maple syrup.",
+        ];
+
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let isRecording = false;
+
+        // REPLACE WITH YOUR GROQ API KEY for client-side use
+        // For production, use a proxy server to hide the key
+        const GROQ_API_KEY = ''; // Will be set via config
+
+        function newText() {
+            const el = document.getElementById('reference-text');
+            el.textContent = texts[Math.floor(Math.random() * texts.length)];
+            document.getElementById('result').classList.remove('show');
+            document.getElementById('status').textContent = '';
+        }
+
+        async function toggleRecording() {
+            const btn = document.getElementById('record-btn');
+            if (!isRecording) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+                    audioChunks = [];
+                    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+                    mediaRecorder.onstop = () => {
+                        stream.getTracks().forEach(t => t.stop());
+                        processAudio();
+                    };
+                    mediaRecorder.start();
+                    isRecording = true;
+                    btn.textContent = '⏹ Stop Recording';
+                    btn.classList.add('recording');
+                    document.getElementById('status').textContent = 'Listening...';
+                } catch (e) {
+                    document.getElementById('status').textContent = '❌ Microphone access denied';
+                }
+            } else {
+                mediaRecorder.stop();
+                isRecording = false;
+                btn.textContent = '🎙 Hold to Record';
+                btn.classList.remove('recording');
+                btn.disabled = true;
+                document.getElementById('status').textContent = '⏳ Recognizing...';
+            }
+        }
+
+        async function processAudio() {
+            const blob = new Blob(audioChunks, { type: 'audio/webm' });
+            const formData = new FormData();
+            formData.append('file', blob, 'recording.webm');
+            formData.append('model', 'whisper-large-v3');
+            formData.append('language', 'en');
+            formData.append('response_format', 'json');
+
+            try {
+                const resp = await fetch('https://api.groq.com/openai/v1/audio/transcriptions', {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${GROQ_API_KEY}` },
+                    body: formData
+                });
+                const data = await resp.json();
+                if (data.error) throw new Error(data.error.message);
+                showResult(data.text || '');
+            } catch (e) {
+                document.getElementById('status').textContent = '❌ Recognition failed: ' + e.message;
+                document.getElementById('record-btn').disabled = false;
+            }
+        }
+
+        function showResult(recognized) {
+            const reference = document.getElementById('reference-text').textContent;
+            const score = calculateScore(reference, recognized);
+
+            document.getElementById('recognized-text').textContent = recognized;
+
+            const scoreEl = document.getElementById('score-value');
+            scoreEl.textContent = score + '%';
+            scoreEl.className = 'score ' + (score >= 80 ? 'high' : score >= 50 ? 'mid' : 'low');
+
+            document.getElementById('result').classList.add('show');
+            document.getElementById('status').textContent = '';
+            document.getElementById('record-btn').disabled = false;
+        }
+
+        function calculateScore(reference, recognized) {
+            const refWords = reference.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/);
+            const recWords = recognized.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/);
+
+            let matches = 0;
+            const recSet = new Set(recWords);
+            for (const word of refWords) {
+                if (recSet.has(word)) matches++;
+            }
+            return Math.min(100, Math.round((matches / refWords.length) * 100));
+        }
+
+        newText();
+    </script>
+</body>
+</html>
