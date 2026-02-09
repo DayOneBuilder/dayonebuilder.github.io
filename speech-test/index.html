@@ -134,6 +134,13 @@
             border: 1px solid rgba(255,255,255,0.06);
         }
         .btn-secondary:hover { background: rgba(255,255,255,0.06); color: #f7f8f8; }
+        .btn-x {
+            background: #000; color: #fff;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .btn-x:hover { background: #1a1a1a; }
+        .btn-row { display: flex; gap: 12px; }
+        .btn-row .btn { flex: 1; }
 
         /* Status text */
         .status {
@@ -209,29 +216,43 @@
                 <p>Read the text aloud. AI will score how clearly you speak English.</p>
             </div>
 
-            <!-- Reference Text Card -->
-            <div class="card mb-20">
-                <h3 class="card-label">Read this text</h3>
-                <div id="reference-text" class="text-block mb-16"></div>
-                <button id="record-btn" onclick="toggleRecording()" class="btn btn-record">
-                    🎙 Hold to Record
-                </button>
-                <p class="status" id="status"></p>
+            <!-- ===== RECORD SCREEN ===== -->
+            <div id="screen-record">
+                <div class="card mb-20">
+                    <h3 class="card-label">Read this text</h3>
+                    <div id="reference-text" class="text-block mb-16"></div>
+                    <button id="record-btn" onclick="toggleRecording()" class="btn btn-record">
+                        Start Recording
+                    </button>
+                    <p class="status" id="status"></p>
+                </div>
             </div>
 
-            <!-- Result Card -->
-            <div class="hidden" id="result">
-                <div class="card result-card">
+            <!-- ===== RESULT SCREEN ===== -->
+            <div id="screen-result" class="hidden">
+                <div class="card mb-16">
                     <div class="score-center">
                         <div class="score-value" id="score-value"></div>
                         <p class="score-label">Clarity Score</p>
                     </div>
+                </div>
+                <div class="card mb-16">
                     <h3 class="card-label">AI heard</h3>
                     <div id="recognized-text" class="text-block text-block-recognized"></div>
                 </div>
-                <button onclick="newText()" class="btn btn-secondary">
-                    Try Another Text
-                </button>
+                <div class="card mb-20">
+                    <h3 class="card-label">Original text</h3>
+                    <div id="reference-text-copy" class="text-block"></div>
+                </div>
+                <div class="btn-row">
+                    <button onclick="shareOnX()" class="btn btn-x">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        Share
+                    </button>
+                    <button onclick="newText()" class="btn btn-secondary">
+                        Try Again
+                    </button>
+                </div>
             </div>
 
             <!-- Info -->
@@ -271,8 +292,10 @@
         function newText() {
             const el = document.getElementById('reference-text');
             el.textContent = texts[Math.floor(Math.random() * texts.length)];
-            document.getElementById('result').classList.add('hidden');
+            document.getElementById('screen-record').classList.remove('hidden');
+            document.getElementById('screen-result').classList.add('hidden');
             document.getElementById('status').textContent = '';
+            enableRecordBtn();
         }
 
         async function toggleRecording() {
@@ -289,7 +312,7 @@
                     };
                     mediaRecorder.start();
                     isRecording = true;
-                    btn.textContent = '⏹ Stop Recording';
+                    btn.textContent = 'Stop Recording';
                     btn.classList.add('recording-pulse', 'btn-recording');
                     document.getElementById('status').textContent = 'Listening...';
                 } catch (e) {
@@ -298,7 +321,7 @@
             } else {
                 mediaRecorder.stop();
                 isRecording = false;
-                btn.textContent = '🎙 Hold to Record';
+                btn.textContent = 'Start Recording';
                 btn.classList.remove('recording-pulse', 'btn-recording');
                 btn.disabled = true;
                 btn.classList.add('btn-disabled');
@@ -334,19 +357,27 @@
             btn.classList.remove('btn-disabled');
         }
 
+        let lastScore = 0;
+
         function showResult(recognized) {
             const reference = document.getElementById('reference-text').textContent;
             const score = calculateScore(reference, recognized);
+            lastScore = score;
 
             document.getElementById('recognized-text').textContent = recognized;
+            document.getElementById('reference-text-copy').textContent = reference;
 
             const scoreEl = document.getElementById('score-value');
             scoreEl.textContent = score + '%';
             scoreEl.className = 'score-value ' + (score >= 80 ? 'score-good' : score >= 50 ? 'score-medium' : 'score-bad');
 
-            document.getElementById('result').classList.remove('hidden');
-            document.getElementById('status').textContent = '';
-            enableRecordBtn();
+            document.getElementById('screen-record').classList.add('hidden');
+            document.getElementById('screen-result').classList.remove('hidden');
+        }
+
+        function shareOnX() {
+            const text = `I scored ${lastScore}% on the AI Speech Clarity Test! How well does AI understand you?\n\nhttps://dayonebuilder.github.io/speech-test/`;
+            window.open('https://x.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
         }
 
         function calculateScore(reference, recognized) {

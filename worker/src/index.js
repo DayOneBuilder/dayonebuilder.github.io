@@ -1,4 +1,7 @@
-const ALLOWED_ORIGIN = 'https://dayonebuilder.github.io';
+const ALLOWED_ORIGINS = new Set([
+  'https://dayonebuilder.github.io',
+  'null', // file:// sends Origin: null
+]);
 const GROQ_URL = 'https://api.groq.com/openai/v1/audio/transcriptions';
 
 // Simple in-memory rate limiting: max 30 requests per minute per IP
@@ -19,9 +22,13 @@ function isRateLimited(ip) {
   return entry.count > RATE_LIMIT;
 }
 
+function isAllowedOrigin(origin) {
+  return ALLOWED_ORIGINS.has(origin);
+}
+
 function corsHeaders(origin) {
   return {
-    'Access-Control-Allow-Origin': origin,
+    'Access-Control-Allow-Origin': origin === 'null' ? '*' : origin,
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
   };
@@ -33,7 +40,7 @@ export default {
 
     // CORS preflight
     if (request.method === 'OPTIONS') {
-      if (origin !== ALLOWED_ORIGIN) {
+      if (!isAllowedOrigin(origin)) {
         return new Response('Forbidden', { status: 403 });
       }
       return new Response(null, { status: 204, headers: corsHeaders(origin) });
@@ -46,7 +53,7 @@ export default {
     }
 
     // Origin check
-    if (origin !== ALLOWED_ORIGIN) {
+    if (!isAllowedOrigin(origin)) {
       return new Response('Forbidden', { status: 403 });
     }
 
