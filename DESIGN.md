@@ -8,8 +8,8 @@
 | Technology | Purpose |
 |---|---|
 | **HTML/CSS/JS** | Static pages (GitHub Pages) |
-| **Tailwind CSS** (CDN) | Utility-first styles |
-| **Inter** (Google Fonts) | Primary font, weights: 400, 500, 600, 700, 800 |
+| **Inline CSS** (`<style>`) | All styles in `<style>` block, no external CSS frameworks |
+| **Inter** (Google Fonts) | Primary font, weights: 400, 500, 600, 700 |
 
 ---
 
@@ -37,54 +37,55 @@
 
 ### 2.2 Text Colors (bright to dim)
 
-| HEX | Tailwind Class | Usage | Frequency |
-|---|---|---|---|
-| `#f7f8f8` | `text-[#f7f8f8]` | Headings, primary text | 202 |
-| `#e0e1e3` | `text-[#e0e1e3]` | Secondary headings | 175 |
-| `#c2c3c7` | `text-[#c2c3c7]` | FAQ subheadings | 11 |
-| `#b4b7be` | `text-[#b4b7be]` | Descriptive text | 157 |
-| `#9ca0a8` | `text-[#9ca0a8]` | Soft text | 112 |
-| `#8a8f98` | `text-[#8a8f98]` | Navigation, captions, meta | 155 |
-| `#7a7e85` | `text-[#7a7e85]` | Inactive text | 138 |
-| `#6b6f76` | `text-[#6b6f76]` | Icons, dim text | 153 |
-| `#5c5f66` | `text-[#5c5f66]` | Dimmest text | 154 |
-| `#565960` | `text-[#565960]` | Badges, meta | 125 |
-| `#484b51` | `text-[#484b51]` | Barely visible | 50 |
-| `#3a3d44` | `text-[#3a3d44]` | Borders, dividers | 9 |
+| HEX | CSS | Usage |
+|---|---|---|
+| `#f7f8f8` | `color: #f7f8f8` | Headings, primary text |
+| `#e0e1e3` | `color: #e0e1e3` | Secondary headings |
+| `#c2c3c7` | `color: #c2c3c7` | FAQ subheadings |
+| `#b4b7be` | `color: #b4b7be` | Descriptive text |
+| `#9ca0a8` | `color: #9ca0a8` | Soft text |
+| `#8a8f98` | `color: #8a8f98` | Navigation, captions, meta |
+| `#7a7e85` | `color: #7a7e85` | Inactive text |
+| `#6b6f76` | `color: #6b6f76` | Icons, dim text |
+| `#5c5f66` | `color: #5c5f66` | Dimmest text |
+| `#565960` | `color: #565960` | Badges, meta |
+| `#484b51` | `color: #484b51` | Barely visible |
+| `#3a3d44` | `color: #3a3d44` | Borders, dividers |
 
 ### 2.3 Accent / Semantic Colors
 
 ```css
 /* Success (green) */
---success:          #10b981;   /* emerald-500 */
---success-foreground: #34d399; /* emerald-400 */
+--success:          #10b981;
+--success-foreground: #34d399;
 
 /* Warning (yellow) */
---warning:          #f59e0b;   /* amber-500 */
---warning-foreground: #fbbf24; /* amber-400 */
+--warning:          #f59e0b;
+--warning-foreground: #fbbf24;
 
 /* Info (blue) */
---info:             #3b82f6;   /* blue-500 */
---info-foreground:  #60a5fa;   /* blue-400 */
+--info:             #3b82f6;
+--info-foreground:  #60a5fa;
 
 /* Danger (red) */
---danger:           #ef4444;   /* red-500 */
---danger-foreground: #f87171;  /* red-400 */
+--danger:           #ef4444;
+--danger-foreground: #f87171;
 ```
 
 ### 2.4 Transparent Colors (key design pattern!)
 
 ```css
 /* White with opacity — for borders and backgrounds on dark surfaces */
-bg-white/[0.02]    /* Barely visible background */
-bg-white/[0.04]    /* Light background (badges, ghost buttons) */
-bg-white/[0.06]    /* Noticeable background (secondary) */
-bg-white/[0.1]     /* Interactive element background */
-bg-white/[0.15]    /* Hover state */
+rgba(255,255,255,0.02)    /* Barely visible background */
+rgba(255,255,255,0.04)    /* Light background (badges, ghost buttons) */
+rgba(255,255,255,0.06)    /* Noticeable background (secondary) */
+rgba(255,255,255,0.1)     /* Interactive element background */
+rgba(255,255,255,0.15)    /* Hover state */
 
-border-white/[0.04]  /* Barely visible border */
-border-white/[0.06]  /* Light border */
-border-white/[0.08]  /* Standard border */
+/* Borders */
+border: 1px solid rgba(255,255,255,0.04);  /* Barely visible */
+border: 1px solid rgba(255,255,255,0.06);  /* Standard */
+border: 1px solid rgba(255,255,255,0.08);  /* Accent */
 ```
 
 ---
@@ -93,35 +94,35 @@ border-white/[0.08]  /* Standard border */
 
 ### Font: Inter
 
-```
-font-family: 'Inter', sans-serif;
+```css
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 ```
 
 Include:
 ```html
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 ```
 
 ### Heading Hierarchy
 
 | Element | Size (mobile → desktop) | Weight | Tracking | Line-height |
 |---|---|---|---|---|
-| **H1 (Hero)** | `text-[2.25rem]` → `sm:text-5xl` → `lg:text-[3.25rem]` → `xl:text-6xl` | `font-semibold` (600) | `tracking-[-0.03em]` | `leading-[1.1]` |
-| **H2 (Section)** | `text-2xl` → `sm:text-3xl` → `lg:text-4xl` | `font-semibold` (600) | `tracking-tight` | — |
-| **H3 (Card title)** | `text-lg` → `text-xl` | `font-semibold` (600) | — | — |
-| **Body** | `text-[15px]` → `lg:text-base` | `font-normal` (400) | — | `leading-[1.6]` |
-| **Small/Meta** | `text-[13px]` / `text-xs` | `font-medium` (500) | — | — |
-| **Tiny badge** | `text-[11px]` | `font-semibold` (600) / `font-medium` (500) | `tracking-wide` | — |
-| **Nav items** | `text-[14px]` | `font-medium` (500) | — | — |
+| **H1 (Hero)** | `2.25rem` → `3rem` (640px) → `3.25rem` (1024px) → `3.75rem` (1280px) | 600 | `-0.03em` | `1.1` |
+| **H2 (Section)** | `1.5rem` → `1.875rem` (640px) → `2.25rem` (1024px) | 600 | `-0.02em` | — |
+| **H3 (Card title)** | `15px` → `18px` | 600 | — | — |
+| **Body** | `15px` → `16px` (1024px) | 400 | — | `1.6` |
+| **Small/Meta** | `13px` | 500 | — | — |
+| **Tiny badge** | `11px` | 600 | `0.025em` | — |
+| **Nav items** | `14px` | 500 | — | — |
 
 ### Text Colors by Level
 
-```
-H1:           text-[#f7f8f8]   — maximum brightness
-Body:         text-[#8a8f98]   — muted
-Small/Meta:   text-[#5c5f66]   — barely visible
-Nav inactive: text-[#8a8f98]   — medium
-Nav hover:    text-[#f7f8f8]   — bright
+```css
+h1          { color: #f7f8f8; }   /* maximum brightness */
+body        { color: #8a8f98; }   /* muted */
+small, meta { color: #5c5f66; }   /* barely visible */
+nav         { color: #8a8f98; }   /* medium */
+nav:hover   { color: #f7f8f8; }   /* bright */
 ```
 
 ---
@@ -130,56 +131,64 @@ Nav hover:    text-[#f7f8f8]   — bright
 
 ### 4.1 Primary CTA (white, main)
 
-```html
-<button class="
-  inline-flex items-center justify-center gap-2
-  font-medium rounded-xl
-  transition-all
-  bg-white text-zinc-900
-  hover:bg-gray-100
-  active:scale-[0.98]
-  h-12 px-6 text-[15px]
-">
-  Get Started
-</button>
+```css
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: background 0.15s, transform 0.1s;
+    background: #fff;
+    color: #18181b;
+    height: 48px;
+    padding: 0 24px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+}
+.btn-primary:hover { background: #f3f4f6; }
+.btn-primary:active { transform: scale(0.98); }
 ```
-
-**Characteristics:**
-- Background: white (`bg-white`)
-- Text: dark (`text-zinc-900`)
-- Border radius: `rounded-xl` (12px)
-- Height: `h-12` (48px)
-- Padding: `px-6` (24px) or `px-7` (28px)
-- Text size: `text-[15px]`
-- Hover: `hover:bg-gray-100`
-- Active: `active:scale-[0.98]` (slight squeeze)
 
 ### 4.2 Ghost / Secondary (transparent)
 
-```html
-<button class="
-  inline-flex items-center justify-center gap-2
-  font-medium rounded-xl
-  transition-all
-  text-[#8a8f98] hover:text-[#f7f8f8]
-  active:text-[#b4b7be]
-  h-12 px-5 text-[15px]
-">
-  Watch Demo
-</button>
+```css
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all 0.15s;
+    background: rgba(255,255,255,0.04);
+    color: #8a8f98;
+    border: 1px solid rgba(255,255,255,0.06);
+    height: 48px;
+    padding: 0 24px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.06); color: #f7f8f8; }
+.btn-secondary:active { transform: scale(0.98); }
 ```
 
 ### 4.3 Pill Badge
 
-```html
-<span class="
-  inline-flex items-center px-3 py-1
-  rounded-full
-  bg-white text-zinc-900
-  text-[11px] font-semibold tracking-wide
-">
-  Popular
-</span>
+```css
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+.badge-live { background: rgba(16,185,129,0.1); color: #34d399; }
+.badge-soon { background: rgba(245,158,11,0.1); color: #fbbf24; }
 ```
 
 ---
@@ -188,44 +197,69 @@ Nav hover:    text-[#f7f8f8]   — bright
 
 ### 5.1 Navigation (Header)
 
-- Fixed header
-- Height: `h-14` (mobile) / `h-[72px]` (desktop)
-- Logo: text-based "DayOneBuilder"
-- Nav hidden on mobile: `hidden lg:flex`
-- Icons: `w-[18px] h-[18px]`
+```css
+.nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(8,9,10,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.nav-inner {
+    max-width: 1152px;
+    margin: 0 auto;
+    padding: 0 16px;
+    height: 56px;                      /* mobile */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+@media (min-width: 1024px) {
+    .nav-inner { height: 72px; padding: 0 32px; }
+}
+```
 
 ### 5.2 Hero Section
 
-**Key styles:**
 ```css
-/* Container */
-.hero { padding-top: 96px; /* lg: 160px */ }
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 112px 16px 64px;
+    text-align: center;
+}
+@media (min-width: 1024px) {
+    .hero { padding: 176px 32px 96px; }
+}
 
 /* Background effect — blurred circle */
-.bg-blur {
-  position: absolute;
-  top: -300px; left: -300px;
-  width: 600px; height: 600px;
-  background: rgba(255,255,255,0.02);
-  border-radius: 50%;
-  filter: blur(120px);
+.hero-glow {
+    position: absolute;
+    top: -300px; left: -300px;
+    width: 600px; height: 600px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
 }
 
-/* Title */
-.hero-title {
-  font-size: 2.25rem; /* → 3.25rem → 3.75rem */
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: #f7f8f8;
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #f7f8f8;
 }
+@media (min-width: 640px) { .hero h1 { font-size: 3rem; } }
+@media (min-width: 1024px) { .hero h1 { font-size: 3.5rem; } }
 
-/* Subtitle */
-.hero-subtitle {
-  font-size: 15px;
-  color: #8a8f98;
-  max-width: 24rem;
-  line-height: 1.6;
+.hero p {
+    font-size: 15px;
+    color: #8a8f98;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 ```
 
@@ -236,42 +270,59 @@ Nav hover:    text-[#f7f8f8]   — bright
 ### 6.1 Container
 
 ```css
-max-width: max-w-5xl (1024px) — for content
-max-width: max-w-6xl (1152px) — for wide sections
-padding-x: px-4 sm:px-6 lg:px-8
-margin: mx-auto
+.container {
+    max-width: 1024px;   /* content */
+    /* or 1152px for wide sections */
+    margin: 0 auto;
+    padding: 0 16px;
+}
+@media (min-width: 640px) { .container { padding: 0 24px; } }
+@media (min-width: 1024px) { .container { padding: 0 32px; } }
 ```
 
 ### 6.2 Section
 
-```html
-<section class="py-16 lg:py-24">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12 lg:mb-16">
-      <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#f7f8f8] tracking-tight mb-4">
-        Section Title
-      </h2>
-      <p class="text-[15px] text-[#8a8f98] max-w-md mx-auto">
-        Section description text
-      </p>
-    </div>
-  </div>
-</section>
+```css
+.section {
+    padding: 64px 16px;
+}
+@media (min-width: 1024px) {
+    .section { padding: 96px 32px; }
+}
+.section-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+.section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #f7f8f8;
+    margin-bottom: 16px;
+}
+@media (min-width: 640px) { .section-header h2 { font-size: 1.875rem; } }
+@media (min-width: 1024px) { .section-header h2 { font-size: 2.25rem; } }
+.section-header p {
+    font-size: 15px;
+    color: #8a8f98;
+    max-width: 28rem;
+    margin: 0 auto;
+}
 ```
 
 ### 6.3 Card (universal)
 
-```html
-<div class="
-  rounded-xl
-  bg-white/[0.02]
-  border border-white/[0.06]
-  p-5
-  hover:bg-white/[0.04]
-  transition-colors
-">
-  <!-- content -->
-</div>
+```css
+.card {
+    border-radius: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 20px;
+    transition: background 0.15s;
+}
+.card:hover {
+    background: rgba(255,255,255,0.04);
+}
 ```
 
 ---
@@ -281,16 +332,16 @@ margin: mx-auto
 ### 7.1 Core Transitions
 
 ```css
-transition-colors    /* Colors only */
-transition-all       /* All properties */
-duration: 150ms      /* Tailwind default */
+transition: color 0.15s;          /* Color only */
+transition: all 0.15s;            /* All properties */
+transition: background 0.15s;     /* Background only */
 ```
 
 ### 7.2 Micro-interactions
 
 ```css
 /* Button press */
-active:scale-[0.98]
+.btn:active { transform: scale(0.98); }
 ```
 
 ### 7.3 Custom Animations
@@ -298,40 +349,39 @@ active:scale-[0.98]
 ```css
 /* Soft pulse for status dots */
 @keyframes pulse-subtle {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
 }
-animation: pulse-subtle 2s ease-in-out infinite;
+.pulse { animation: pulse-subtle 2s ease-in-out infinite; }
 ```
 
 ---
 
-## 8. Responsive Grid (Breakpoints)
-
-Standard Tailwind breakpoints:
+## 8. Responsive Breakpoints
 
 | Breakpoint | Size | Usage |
 |---|---|---|
 | **default** | < 640px | Mobile first |
-| **sm:** | ≥ 640px | Small screens |
-| **md:** | ≥ 768px | Tablets |
-| **lg:** | ≥ 1024px | Desktop (primary) |
-| **xl:** | ≥ 1280px | Large screens |
+| **640px** | ≥ 640px | Small screens |
+| **768px** | ≥ 768px | Tablets |
+| **1024px** | ≥ 1024px | Desktop (primary) |
+| **1280px** | ≥ 1280px | Large screens |
 
 ### Common Responsive Patterns
 
 ```css
 /* Card grid */
-grid-cols-1 → sm:grid-cols-2 → lg:grid-cols-3
-
-/* Navigation */
-hamburger (mobile) → lg:flex (desktop)
+.grid { grid-template-columns: 1fr; }
+@media (min-width: 640px) { .grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .grid { grid-template-columns: 1fr 1fr 1fr; } }
 
 /* Section padding */
-py-16 → lg:py-24
+.section { padding: 64px 16px; }
+@media (min-width: 1024px) { .section { padding: 96px 32px; } }
 
 /* Hero top padding */
-pt-24 → lg:pt-40
+.hero { padding-top: 112px; }
+@media (min-width: 1024px) { .hero { padding-top: 176px; } }
 ```
 
 ---
@@ -340,28 +390,36 @@ pt-24 → lg:pt-40
 
 ### 9.1 Blurred Circles (Ambient Glow)
 
-```html
-<div class="absolute -top-[300px] -left-[300px]
-            w-[600px] h-[600px]
-            bg-white/[0.02]
-            rounded-full
-            blur-[120px]">
-</div>
+```css
+.glow {
+    position: absolute;
+    top: -300px; left: -300px;
+    width: 600px; height: 600px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+}
 ```
 
 ### 9.2 Borders via Transparent White
 
 ```css
-border border-white/[0.04]   /* Barely visible */
-border border-white/[0.06]   /* Standard */
-border border-white/[0.08]   /* Accent */
+border: 1px solid rgba(255,255,255,0.04);   /* Barely visible */
+border: 1px solid rgba(255,255,255,0.06);   /* Standard */
+border: 1px solid rgba(255,255,255,0.08);   /* Accent */
 ```
 
 ### 9.3 Card Hover Effect
 
 ```css
-hover:bg-white/[0.04]   /* Light highlight */
-transition-colors        /* Smooth transition */
+.card {
+    background: rgba(255,255,255,0.02);
+    transition: background 0.15s;
+}
+.card:hover {
+    background: rgba(255,255,255,0.04);
+}
 ```
 
 ---
@@ -372,12 +430,14 @@ When creating new pages based on this design system, verify:
 
 - [ ] Background: `#08090a` (near-black, NOT pure `#000`)
 - [ ] Font: Inter, loaded via Google Fonts
-- [ ] Headings: `font-semibold`, tracking `-0.03em`, color `#f7f8f8`
-- [ ] Body text: `text-[15px]`, color `#8a8f98`
-- [ ] Buttons: white bg, `rounded-xl`, height `h-12`, `active:scale-[0.98]`
-- [ ] Cards: `bg-white/[0.02]`, `border border-white/[0.06]`, `rounded-xl`
-- [ ] Borders: via `white/[opacity]`, not gray colors
-- [ ] Background glow: blurred circle `blur-[120px]` on hero
-- [ ] Navigation: `h-[72px]` on desktop, white CTA button
-- [ ] Responsive: mobile-first, grid breaks at `sm:` and `lg:`
-- [ ] Animations: `transition-colors` on everything, `active:scale` on buttons
+- [ ] All styles in inline `<style>` block (no Tailwind CDN)
+- [ ] Headings: `font-weight: 600`, `letter-spacing: -0.03em`, `color: #f7f8f8`
+- [ ] Body text: `font-size: 15px`, `color: #8a8f98`
+- [ ] Buttons: white bg, `border-radius: 12px`, `height: 48px`, `transform: scale(0.98)` on active
+- [ ] Cards: `rgba(255,255,255,0.02)` bg, `rgba(255,255,255,0.06)` border, `border-radius: 12px`
+- [ ] Borders: via `rgba(255,255,255,opacity)`, not gray colors
+- [ ] Background glow: blurred circle `filter: blur(120px)` on hero
+- [ ] Navigation: 72px height on desktop, white CTA button
+- [ ] Responsive: mobile-first, media queries at `640px` and `1024px`
+- [ ] Animations: `transition` on interactive elements, `scale(0.98)` on buttons
+- [ ] Links: relative paths with explicit `index.html` for `file://` compatibility
