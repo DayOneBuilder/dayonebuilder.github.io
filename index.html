@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
@@ -10,129 +10,216 @@
     <meta name="theme-color" content="#08090a">
     <title>DayOneBuilder — Building 0→1</title>
     <meta name="description" content="AI experiments, tools, and daily builds. One project at a time.">
+    <meta property="og:title" content="DayOneBuilder — Building 0→1">
+    <meta property="og:description" content="AI experiments, tools, and daily builds. One project at a time.">
+    <meta property="og:url" content="https://dayonebuilder.github.io">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@DayOneBuilder">
 
-    <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #08090a;
             color: #f7f8f8;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
         }
+        a { color: inherit; text-decoration: none; }
+
+        /* Nav */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+            background: rgba(8,9,10,0.8);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .nav-inner {
+            max-width: 1152px; margin: 0 auto;
+            padding: 0 16px; height: 56px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        @media (min-width: 1024px) { .nav-inner { height: 72px; padding: 0 32px; } }
+        .nav-logo { font-size: 18px; font-weight: 600; letter-spacing: -0.02em; color: #f7f8f8; }
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        .nav-link { color: #8a8f98; font-size: 14px; font-weight: 500; transition: color 0.15s; }
+        .nav-link:hover { color: #f7f8f8; }
+        .nav-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.06); }
+        .hide-mobile { display: none; }
+        @media (min-width: 640px) { .hide-mobile { display: block; } }
+
+        /* Hero */
+        .hero {
+            position: relative; overflow: hidden;
+            padding: 112px 16px 64px; text-align: center;
+        }
+        @media (min-width: 1024px) { .hero { padding: 176px 32px 96px; } }
+        .hero-glow1 {
+            position: absolute; top: -300px; left: -200px;
+            width: 600px; height: 600px;
+            background: rgba(255,255,255,0.02); border-radius: 50%;
+            filter: blur(120px); pointer-events: none;
+        }
+        .hero-glow2 {
+            position: absolute; top: -200px; right: -300px;
+            width: 500px; height: 500px;
+            background: rgba(255,255,255,0.015); border-radius: 50%;
+            filter: blur(120px); pointer-events: none;
+        }
+        .hero h1 {
+            font-size: 2.5rem; font-weight: 600;
+            letter-spacing: -0.03em; line-height: 1.1;
+            margin-bottom: 20px; position: relative;
+        }
+        @media (min-width: 640px) { .hero h1 { font-size: 3rem; } }
+        @media (min-width: 1024px) { .hero h1 { font-size: 3.5rem; } }
+        .hero p {
+            font-size: 15px; color: #8a8f98;
+            max-width: 400px; margin: 0 auto 32px;
+            line-height: 1.6; position: relative;
+        }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #fff; color: #18181b;
+            font-size: 15px; font-weight: 500;
+            padding: 0 24px; height: 48px;
+            border-radius: 12px; border: none; cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            position: relative;
+        }
+        .hero-cta:hover { background: #f3f4f6; }
+        .hero-cta:active { transform: scale(0.98); }
+        .hero-cta svg { width: 16px; height: 16px; }
+
+        /* Projects */
+        .projects {
+            padding: 64px 16px;
+            max-width: 1024px; margin: 0 auto;
+        }
+        @media (min-width: 1024px) { .projects { padding: 96px 32px; } }
+        .projects-header {
+            text-align: center; margin-bottom: 48px;
+        }
+        .projects-header h2 {
+            font-size: 1.5rem; font-weight: 600;
+            letter-spacing: -0.02em; margin-bottom: 16px;
+        }
+        @media (min-width: 640px) { .projects-header h2 { font-size: 1.875rem; } }
+        @media (min-width: 1024px) { .projects-header h2 { font-size: 2.25rem; } }
+        .projects-header p { font-size: 15px; color: #8a8f98; }
+        .projects-grid {
+            display: grid; grid-template-columns: 1fr;
+            gap: 16px; max-width: 720px; margin: 0 auto;
+        }
+        @media (min-width: 640px) { .projects-grid { grid-template-columns: 1fr 1fr; } }
+        .project-card {
+            display: block;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px; padding: 20px;
+            transition: background 0.15s;
+        }
+        .project-card:hover { background: rgba(255,255,255,0.04); }
+        .project-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .project-icon {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+        }
+        .badge {
+            display: inline-flex; align-items: center;
+            padding: 2px 10px; border-radius: 999px;
+            font-size: 11px; font-weight: 600; letter-spacing: 0.02em;
+        }
+        .badge-soon { background: rgba(245,158,11,0.1); color: #fbbf24; }
+        .badge-live { background: rgba(16,185,129,0.1); color: #34d399; }
+        .project-card h3 {
+            font-size: 15px; font-weight: 600; margin-bottom: 8px;
+        }
+        .project-card p {
+            font-size: 13px; color: #6b6f76; line-height: 1.6;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 24px 16px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .footer-inner {
+            max-width: 1152px; margin: 0 auto;
+            display: flex; flex-direction: column; align-items: center; gap: 12px;
+        }
+        @media (min-width: 640px) {
+            .footer-inner { flex-direction: row; justify-content: space-between; }
+        }
+        .footer-copy { font-size: 14px; color: #5c5f66; }
+        .footer-link {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 13px; color: #5c5f66; transition: color 0.15s;
+        }
+        .footer-link:hover { color: #8a8f98; }
+        .footer-link svg { width: 14px; height: 14px; }
+
+        .x-icon { width: 18px; height: 18px; }
     </style>
 </head>
 <body>
 
-    <!-- ===== NAVIGATION ===== -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-[#08090a]/80 backdrop-blur-xl border-b border-white/[0.04]">
-        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 lg:h-[72px]">
-            <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" class="text-[#f7f8f8] text-lg font-semibold tracking-tight cursor-pointer">
-                DayOneBuilder
-            </a>
-            <div class="flex items-center gap-6">
-                <a href="#projects" class="text-[#8a8f98] hover:text-[#f7f8f8] text-[14px] font-medium transition-colors hidden sm:inline-flex">
-                    Projects
-                </a>
-                <div class="w-px h-4 bg-white/[0.06] hidden sm:block"></div>
-                <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer"
-                   class="text-[#8a8f98] hover:text-[#f7f8f8] transition-colors inline-flex items-center">
-                    <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
+    <header class="nav">
+        <nav class="nav-inner">
+            <a href="/" class="nav-logo">DayOneBuilder</a>
+            <div class="nav-right">
+                <a href="#projects" class="nav-link hide-mobile">Projects</a>
+                <div class="nav-divider hide-mobile"></div>
+                <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer" class="nav-link">
+                    <svg class="x-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
             </div>
         </nav>
     </header>
 
-    <!-- ===== HERO ===== -->
-    <section class="relative pt-28 lg:pt-44 pb-16 lg:pb-24 overflow-hidden">
-        <!-- Background glow -->
-        <div class="absolute -top-[300px] -left-[200px] w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-[120px]"></div>
-        <div class="absolute -top-[200px] -right-[300px] w-[500px] h-[500px] bg-white/[0.015] rounded-full blur-[120px]"></div>
+    <section class="hero">
+        <div class="hero-glow1"></div>
+        <div class="hero-glow2"></div>
+        <h1>Building 0→1</h1>
+        <p>AI experiments, tools, and daily builds.<br>One project at a time.</p>
+        <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer" class="hero-cta">
+            Follow on X
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+    </section>
 
-        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-[2.5rem] sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-semibold tracking-[-0.03em] leading-[1.1] text-[#f7f8f8] mb-5">
-                Building 0→1
-            </h1>
-            <p class="text-[15px] lg:text-base text-[#8a8f98] max-w-md mx-auto mb-8 leading-[1.6]">
-                AI experiments, tools, and daily builds.<br>One project at a time.
-            </p>
-            <div class="flex items-center justify-center gap-3">
-                <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center gap-2 font-medium rounded-xl bg-white text-zinc-900 hover:bg-gray-100 active:scale-[0.98] transition-all h-12 px-6 text-[15px]">
-                    Follow on X
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                </a>
-            </div>
+    <section class="projects" id="projects">
+        <div class="projects-header">
+            <h2>Projects</h2>
+            <p>Experiments shipped from zero to one.</p>
+        </div>
+        <div class="projects-grid">
+            <a href="/speech-test/" class="project-card">
+                <div class="project-top">
+                    <div class="project-icon">🎤</div>
+                    <span class="badge badge-soon">Coming soon</span>
+                </div>
+                <h3>Speech Test</h3>
+                <p>Test your English pronunciation with AI. Read a text, get instant feedback powered by Groq Whisper.</p>
+            </a>
         </div>
     </section>
 
-    <!-- ===== PROJECTS ===== -->
-    <section id="projects" class="py-16 lg:py-24">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#f7f8f8] tracking-tight mb-4">
-                    Projects
-                </h2>
-                <p class="text-[15px] text-[#8a8f98]">
-                    Experiments shipped from zero to one.
-                </p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 max-w-3xl mx-auto">
-                <!-- Speech Test Card -->
-                <a href="/speech-test/" class="group rounded-xl bg-white/[0.02] border border-white/[0.06] p-5 hover:bg-white/[0.04] transition-colors block">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
-                            <span class="text-lg">🎤</span>
-                        </div>
-                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 text-[11px] font-semibold tracking-wide">
-                            Coming soon
-                        </span>
-                    </div>
-                    <h3 class="text-[15px] font-semibold text-[#f7f8f8] mb-2 group-hover:text-white transition-colors">
-                        Speech Test
-                    </h3>
-                    <p class="text-[13px] text-[#6b6f76] leading-relaxed">
-                        Test your English pronunciation with AI. Read a text, get instant feedback powered by Groq Whisper.
-                    </p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
-    <footer class="py-8 border-t border-white/[0.04]">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p class="text-[#5c5f66] text-sm">
-                    © 2026 DayOneBuilder
-                </p>
-                <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer"
-                   class="text-[#5c5f66] hover:text-[#8a8f98] transition-colors inline-flex items-center gap-1.5 text-[13px]">
-                    <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                    @DayOneBuilder
-                </a>
-            </div>
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-copy">© 2026 DayOneBuilder</span>
+            <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer" class="footer-link">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                @DayOneBuilder
+            </a>
         </div>
     </footer>
 
