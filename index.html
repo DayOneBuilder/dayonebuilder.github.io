@@ -1,113 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-KQMLYS3VVE");</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DayOneBuilder — AI Experiments Lab</title>
+    <meta name="theme-color" content="#08090a">
+    <title>DayOneBuilder — Building 0→1</title>
+    <meta name="description" content="AI experiments, tools, and daily builds. One project at a time.">
+
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .container {
-            max-width: 720px;
-            padding: 60px 24px;
-            width: 100%;
-        }
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-        .tagline {
-            font-size: 1.1rem;
-            color: #888;
-            margin-bottom: 48px;
-        }
-        .tagline a {
-            color: #1DA1F2;
-            text-decoration: none;
-        }
-        .tagline a:hover { text-decoration: underline; }
-        h2 {
-            font-size: 1.3rem;
-            color: #fff;
-            margin-bottom: 24px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #222;
-        }
-        .projects {
-            display: grid;
-            gap: 16px;
-        }
-        .project {
-            background: #141414;
-            border: 1px solid #222;
-            border-radius: 12px;
-            padding: 24px;
-            transition: border-color 0.2s;
-        }
-        .project:hover { border-color: #444; }
-        .project a {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #fff;
-            text-decoration: none;
-        }
-        .project a:hover { color: #1DA1F2; }
-        .project p {
-            color: #888;
-            margin-top: 8px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        .badge {
-            display: inline-block;
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 6px;
-            margin-top: 12px;
-            font-weight: 600;
-        }
-        .badge.live { background: #0d3320; color: #4ade80; }
-        .badge.wip { background: #332d0d; color: #facc15; }
-        footer {
-            margin-top: 64px;
-            color: #555;
-            font-size: 0.85rem;
+            background: #08090a;
+            color: #f7f8f8;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔧 DayOneBuilder</h1>
-        <p class="tagline">
-            Building 0→1 | AI automation lab | Daily experiments<br>
-            <a href="https://x.com/DayOneBuilder" target="_blank">@DayOneBuilder on X</a>
-        </p>
 
-        <h2>Projects</h2>
-        <div class="projects">
-            <div class="project">
-                <a href="/speech-test/">🎤 Speech Test</a>
-                <p>Test your English pronunciation with AI. Read a text, get instant feedback on how well speech recognition understands you. Powered by Groq + Whisper large-v3.</p>
-                <span class="badge wip">🚧 Coming soon</span>
+    <!-- ===== NAVIGATION ===== -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#08090a]/80 backdrop-blur-xl border-b border-white/[0.04]">
+        <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 lg:h-[72px]">
+            <a href="/" class="text-[#f7f8f8] text-lg font-semibold tracking-tight">
+                DayOneBuilder
+            </a>
+            <div class="flex items-center gap-6">
+                <a href="#projects" class="text-[#8a8f98] hover:text-[#f7f8f8] text-[14px] font-medium transition-colors hidden sm:inline-flex">
+                    Projects
+                </a>
+                <div class="w-px h-4 bg-white/[0.06] hidden sm:block"></div>
+                <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer"
+                   class="text-[#8a8f98] hover:text-[#f7f8f8] transition-colors inline-flex items-center">
+                    <svg class="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="relative pt-28 lg:pt-44 pb-16 lg:pb-24 overflow-hidden">
+        <!-- Background glow -->
+        <div class="absolute -top-[300px] -left-[200px] w-[600px] h-[600px] bg-white/[0.02] rounded-full blur-[120px]"></div>
+        <div class="absolute -top-[200px] -right-[300px] w-[500px] h-[500px] bg-white/[0.015] rounded-full blur-[120px]"></div>
+
+        <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-[2.5rem] sm:text-5xl lg:text-[3.5rem] xl:text-6xl font-semibold tracking-[-0.03em] leading-[1.1] text-[#f7f8f8] mb-5">
+                Building 0→1
+            </h1>
+            <p class="text-[15px] lg:text-base text-[#8a8f98] max-w-md mx-auto mb-8 leading-[1.6]">
+                AI experiments, tools, and daily builds.<br>One project at a time.
+            </p>
+            <div class="flex items-center justify-center gap-3">
+                <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer"
+                   class="inline-flex items-center justify-center gap-2 font-medium rounded-xl bg-white text-zinc-900 hover:bg-gray-100 active:scale-[0.98] transition-all h-12 px-6 text-[15px]">
+                    Follow on X
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
             </div>
         </div>
+    </section>
 
-        <footer>
-            Built with AI agents, caffeine, and curiosity.
-        </footer>
-    </div>
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects" class="py-16 lg:py-24">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-semibold text-[#f7f8f8] tracking-tight mb-4">
+                    Projects
+                </h2>
+                <p class="text-[15px] text-[#8a8f98]">
+                    Experiments shipped from zero to one.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 max-w-3xl mx-auto">
+                <!-- Speech Test Card -->
+                <a href="/speech-test/" class="group rounded-xl bg-white/[0.02] border border-white/[0.06] p-5 hover:bg-white/[0.04] transition-colors block">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-white/[0.04] border border-white/[0.08] flex items-center justify-center">
+                            <span class="text-lg">🎤</span>
+                        </div>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 text-[11px] font-semibold tracking-wide">
+                            Coming soon
+                        </span>
+                    </div>
+                    <h3 class="text-[15px] font-semibold text-[#f7f8f8] mb-2 group-hover:text-white transition-colors">
+                        Speech Test
+                    </h3>
+                    <p class="text-[13px] text-[#6b6f76] leading-relaxed">
+                        Test your English pronunciation with AI. Read a text, get instant feedback powered by Groq Whisper.
+                    </p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="py-8 border-t border-white/[0.04]">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p class="text-[#5c5f66] text-sm">
+                    © 2026 DayOneBuilder
+                </p>
+                <a href="https://x.com/DayOneBuilder" target="_blank" rel="noopener noreferrer"
+                   class="text-[#5c5f66] hover:text-[#8a8f98] transition-colors inline-flex items-center gap-1.5 text-[13px]">
+                    <svg class="w-[14px] h-[14px]" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    @DayOneBuilder
+                </a>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
