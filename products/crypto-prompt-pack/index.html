@@ -70,6 +70,29 @@
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .card {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .label {
+        display: inline-flex;
+        margin-left: 10px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--muted);
+      }
+      @media (max-width: 760px) {
+        .grid { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
@@ -77,10 +100,13 @@
       <a class="back" href="/products/">← Back to products</a>
       <div class="panel">
         <h1>50 AI Prompts for Crypto Research</h1>
-        <div class="price">$5.99</div>
+        <div class="price">$5.99</div><span class="label">Instant download</span>
         <p>
-          If your token research lives across tabs, screenshots, whitepapers, and messy notes,
-          this pack turns that sprawl into a repeatable diligence workflow.
+          <strong>Stop turning every token idea into a mess of tabs, screenshots, and half-finished notes.</strong>
+        </p>
+        <p>
+          This prompt pack gives you a repeatable way to review claims, pressure-test narratives, compare projects,
+          and surface red flags before you commit more time or capital.
         </p>
         <p>Use it to challenge token narratives faster, compare projects on the same frame, and turn raw inputs into a decision you can actually act on.</p>
         <ul>
@@ -90,9 +116,27 @@
           <li>Compare competing projects with the same research structure</li>
           <li>Organize wallet and on-chain research into cleaner notes</li>
         </ul>
-        <a class="cta" href="https://checkout.dayonebuilder.online/buy/crypto-prompt-pack">Buy now with crypto or card</a>
+        <div class="grid">
+          <div class="card">
+            <strong>What you get</strong>
+            <ul>
+              <li>50 copy-paste prompts in one downloadable file</li>
+              <li>Prompts for thesis building, whitepaper review, risk checks, competitive analysis, and wallet research</li>
+              <li>A structure you can reuse whenever a new token, protocol, or narrative appears</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Best for</strong>
+            <ul>
+              <li>Traders and investors who are tired of researching in scattered tabs and notes</li>
+              <li>Researchers who want a repeatable frame for comparing projects</li>
+              <li>Crypto users who already use AI but want better prompts than generic chat requests</li>
+            </ul>
+          </div>
+        </div>
+        <a class="cta" href="https://checkout.dayonebuilder.online/buy/crypto-prompt-pack">Get instant access</a>
         <div class="note">
-          Best for traders, researchers, and curious buyers who already use AI but want a tighter crypto research process. Checkout is handled on the secure DayOneBuilder payment domain and unlocks the file automatically after NOWPayments confirms payment.
+          Instant digital delivery after NOWPayments confirms payment. Pay with crypto or card. The file unlocks automatically on the thank-you page.
         </div>
       </div>
     </div>
