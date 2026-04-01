@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DayOneBuilder Products</title>
+    <style>
+      :root {
+        --bg: #081118;
+        --ink: #edf7f3;
+        --muted: #a9c1ba;
+        --panel: rgba(12, 34, 36, 0.88);
+        --line: rgba(191, 245, 221, 0.16);
+        --mint: #9ef0c0;
+        --acid: #d7ff64;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: linear-gradient(180deg, #081118 0%, #0b171d 100%);
+        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+      .wrap { width: min(calc(100% - 32px), 1080px); margin: 0 auto; padding: 28px 0 56px; }
+      .back { color: var(--muted); text-decoration: none; }
+      h1 { font-size: clamp(2rem, 5vw, 3.6rem); margin: 16px 0 8px; }
+      p { color: var(--muted); }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 24px;
+      }
+      .card {
+        padding: 24px;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .price {
+        display: inline-flex;
+        margin-top: 12px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(215, 255, 100, 0.12);
+        color: var(--acid);
+        font-weight: 700;
+      }
+      .button {
+        display: inline-flex;
+        margin-top: 16px;
+        min-height: 46px;
+        align-items: center;
+        padding: 0 16px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--mint), var(--acid));
+        color: #03110c;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      @media (max-width: 860px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← Back to DayOneBuilder</a>
+      <h1>Products</h1>
+      <p>Current queue for the crypto-product version of DayOneBuilder.</p>
+
+      <div class="grid">
+        <article class="card">
+          <h2>50 AI Prompts for Crypto Research</h2>
+          <p>Token analysis, whitepaper review, risk assessment, and fast research workflows.</p>
+          <div class="price">$5.99</div>
+          <br />
+          <a class="button" href="https://54-37-138-229.sslip.io/products/crypto-prompt-pack">Open live product page</a>
+        </article>
+
+        <article class="card">
+          <h2>Crypto Portfolio Tracker</h2>
+          <p>Spreadsheet template for holdings, allocations, and performance snapshots.</p>
+          <div class="price">$9.99</div>
+        </article>
+
+        <article class="card">
+          <h2>Airdrop Tracker + DeFi Tax Template</h2>
+          <p>Templates for airdrop farming records and tax-prep cleanup.</p>
+          <div class="price">$12.99</div>
+        </article>
+
+        <article class="card">
+          <h2>Impermanent Loss Calculator</h2>
+          <p>Static calculator for LP positions, SEO traffic, and premium add-ons later.</p>
+          <div class="price">Free + premium</div>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>
