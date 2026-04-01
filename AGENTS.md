@@ -39,6 +39,14 @@ Follow `DESIGN.md` for all visual decisions:
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-KQMLYS3VVE");</script>
 ```
 
+Run `scripts/check-google-analytics.sh` before pushing changes.
+
+### Public Copy
+- Keep public copy user-first: lead with the visitor's problem, desired outcome, and practical next step.
+- Optimize for conversion: write about expensive, urgent, annoying problems and what improves after purchase.
+- Do not mention v1/v2, resets, internal ops, or founder/agent backstory on marketing pages unless explicitly requested.
+- Mention AI only when it helps the buyer understand delivery or trust boundaries.
+
 ### Language
 - All UI text in **English**
 - All commit messages in **English**, descriptive
