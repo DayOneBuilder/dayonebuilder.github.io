@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Crypto Portfolio Tracker Spreadsheet: What to Track for Real Wallet P&amp;L | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A practical guide to building a crypto portfolio tracker spreadsheet that covers wallet P&amp;L, cost basis, transfers, staking, airdrops, and DeFi positions."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #07131a;
+        --ink: #eff8f5;
+        --muted: #b7ccc6;
+        --panel: rgba(10, 31, 33, 0.88);
+        --line: rgba(191, 245, 221, 0.16);
+        --mint: #9ef0c0;
+        --acid: #d7ff64;
+        --max: 900px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(158, 240, 192, 0.12), transparent 28%),
+          linear-gradient(180deg, #07131a 0%, #08171d 48%, #061116 100%);
+        font: 16px/1.7 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+      a { color: inherit; }
+      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; padding: 28px 0 56px; }
+      .back { color: var(--muted); text-decoration: none; }
+      .panel {
+        margin-top: 18px;
+        padding: 30px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(215, 255, 100, 0.24);
+        color: var(--acid);
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3 { line-height: 1.08; }
+      h1 { font-size: clamp(2.1rem, 5vw, 4rem); margin: 14px 0 12px; }
+      h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
+      h3 { font-size: 1.05rem; margin-top: 24px; }
+      p, li { color: var(--muted); }
+      ul, ol { padding-left: 20px; }
+      .toc, .note {
+        margin: 20px 0;
+        padding: 18px 20px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.025);
+      }
+      code {
+        padding: 2px 6px;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.08);
+        color: var(--ink);
+      }
+      @media (max-width: 760px) {
+        .grid { grid-template-columns: 1fr; }
+        .panel { padding: 22px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <article class="panel">
+        <div class="eyebrow">SEO guide · wallet P&amp;L</div>
+        <h1>Crypto portfolio tracker spreadsheet: what to track if you want real wallet P&amp;L</h1>
+        <p>
+          Most crypto portfolio trackers look fine until you move funds between wallets, LP into DeFi,
+          claim an airdrop, or bridge assets across chains. Then the numbers drift and your "profit"
+          turns into fiction. A good crypto portfolio tracker spreadsheet should answer one practical question:
+          <strong>what do I actually own, what did it cost me, and what is the wallet-level P&amp;L now?</strong>
+        </p>
+        <p>
+          This page is for people searching for a crypto portfolio tracker template, wallet P&amp;L spreadsheet,
+          or a way to track crypto manually before paying for heavier software.
+        </p>
+
+        <div class="toc">
+          <strong>Quick outline</strong>
+          <ol>
+            <li>What a tracker must do</li>
+            <li>The minimum tabs to include</li>
+            <li>Fields that stop P&amp;L from breaking</li>
+            <li>How to handle staking, DeFi, bridges, and airdrops</li>
+            <li>Common mistakes</li>
+          </ol>
+        </div>
+
+        <h2>What a crypto tracker must do</h2>
+        <p>A useful tracker is not just a holdings list. It needs to do five jobs well:</p>
+        <div class="grid">
+          <div class="card">
+            <h3>1. Separate wallets from transactions</h3>
+            <p>If you mix wallet balances and raw trade history in one sheet, reconciliation gets ugly fast.</p>
+          </div>
+          <div class="card">
+            <h3>2. Keep transfer history neutral</h3>
+            <p>Moving funds from one wallet to another should not look like new profit or new spending.</p>
+          </div>
+          <div class="card">
+            <h3>3. Preserve cost basis</h3>
+            <p>Without cost basis, your wallet P&amp;L is just current value with vibes attached.</p>
+          </div>
+          <div class="card">
+            <h3>4. Tag non-trade events</h3>
+            <p>Staking rewards, airdrops, bridges, and LP deposits need explicit labels or they distort returns.</p>
+          </div>
+          <div class="card">
+            <h3>5. Reconcile current balances</h3>
+            <p>Periodic balance checks catch data-entry drift before tax season turns into pain.</p>
+          </div>
+          <div class="card">
+            <h3>6. Show both wallet and portfolio views</h3>
+            <p>You want one tab for total exposure and another for specific wallets or chains.</p>
+          </div>
+        </div>
+
+        <h2>The minimum tabs your spreadsheet should have</h2>
+        <h3>1) Wallets</h3>
+        <p>One row per wallet or exchange account.</p>
+        <ul>
+          <li>Wallet label</li>
+          <li>Chain</li>
+          <li>Address or account nickname</li>
+          <li>Type: exchange, hot wallet, cold wallet, DeFi burner, etc.</li>
+          <li>Status: active, archived, watch-only</li>
+        </ul>
+
+        <h3>2) Transactions</h3>
+        <p>This is the core log. Every meaningful movement should land here.</p>
+        <ul>
+          <li>Date/time</li>
+          <li>Wallet</li>
+          <li>Asset in / amount in</li>
+          <li>Asset out / amount out</li>
+          <li>USD value at time of event</li>
+          <li>Fee asset / fee amount / fee USD</li>
+          <li>Event type</li>
+          <li>Counterparty or protocol</li>
+          <li>Tx hash / notes</li>
+        </ul>
+
+        <h3>3) Holdings snapshot</h3>
+        <p>A current-balance tab by wallet and token. This is where you compare expected balances against reality.</p>
+
+        <h3>4) Cost basis + realized P&amp;L</h3>
+        <p>Even if you do not build a full tax engine, you should still track basic acquisition cost and realized exits.</p>
+
+        <h3>5) Dashboard</h3>
+        <p>Your summary tab should answer, at a glance:</p>
+        <ul>
+          <li>Total portfolio value</li>
+          <li>Total cost basis</li>
+          <li>Unrealized P&amp;L</li>
+          <li>Realized P&amp;L</li>
+          <li>Top wallet exposure</li>
+          <li>Stablecoin balance</li>
+          <li>DeFi capital currently deployed</li>
+        </ul>
+
+        <h2>Fields that stop wallet P&amp;L from breaking</h2>
+        <p>If you only add one improvement to your current sheet, make it these columns:</p>
+        <ul>
+          <li><code>event_type</code> — buy, sell, transfer_in, transfer_out, bridge, stake, unstake, reward, airdrop, LP_deposit, LP_withdraw, borrow, repay</li>
+          <li><code>linked_transfer_id</code> — so one wallet's outflow can match another wallet's inflow</li>
+          <li><code>cost_basis_usd</code> — the amount actually at risk from acquisition</li>
+          <li><code>fee_usd</code> — because gas quietly changes returns</li>
+          <li><code>source_of_truth</code> — exchange export, block explorer, manual entry, protocol dashboard</li>
+        </ul>
+        <p>
+          The difference between a decent crypto P&amp;L tracker and a broken one is usually not the dashboard.
+          It is the event tagging.
+        </p>
+
+        <h2>How to handle common crypto edge cases</h2>
+        <h3>Bridges</h3>
+        <p>Treat bridge out and bridge in as linked transfers, not a sale and rebuy, unless there was a real disposal event.</p>
+
+        <h3>Staking rewards</h3>
+        <p>Log rewards separately from principal. If you blend them together, you lose clarity on yield versus capital movement.</p>
+
+        <h3>Airdrops</h3>
+        <p>Track the receipt date, token amount, and your chosen valuation method at receipt. Even if tax treatment differs by country, operationally you still want the event recorded.</p>
+
+        <h3>LP positions and impermanent loss</h3>
+        <p>
+          LP deposits are not simple buys. Record token amounts deposited, the pool/protocol, and later token amounts withdrawn.
+          If you want clean performance analysis, keep a separate tab for LP entries/exits and compare the withdrawal value to a hold-only baseline.
+        </p>
+
+        <h3>Transfers between your own wallets</h3>
+        <p>This is where most sheets die. Internal transfers should preserve cost basis and should not count as fresh capital inflow.</p>
+
+        <h2>Common mistakes</h2>
+        <ul>
+          <li>Counting deposits to an exchange as new purchases</li>
+          <li>Ignoring fees entirely</li>
+          <li>Using only today's prices instead of transaction-time values for historical logs</li>
+          <li>Lumping staking rewards into buys</li>
+          <li>Tracking balances without a transaction ledger</li>
+          <li>Letting one sheet cover too many chains without standard event labels</li>
+        </ul>
+
+        <h2>A simple starting structure</h2>
+        <p>If you want the minimum viable setup, build these columns first:</p>
+        <div class="note">
+          <strong>Transactions tab starter columns</strong><br />
+          date | wallet | chain | event_type | asset_in | qty_in | asset_out | qty_out | usd_value | fee_asset | fee_qty | fee_usd | protocol | tx_hash | linked_transfer_id | notes
+        </div>
+
+        <p>
+          Then add a dashboard with totals by wallet, chain, and token class. That gets you surprisingly far,
+          especially if your real goal is better operational clarity rather than accountant-grade reporting on day one.
+        </p>
+
+        <h2>Bottom line</h2>
+        <p>
+          A crypto portfolio tracker spreadsheet works when it treats the portfolio like a system instead of a watchlist.
+          If your current setup cannot explain wallet P&amp;L after bridges, staking, and airdrops, it is too shallow.
+          Start with better event types, linked transfers, and a holdings reconciliation habit.
+        </p>
+
+        <div class="note">
+          <strong>Fast next step</strong>
+          <p>
+            If wallet tracking is the bottleneck, start by copying the tab structure and fields above into your own sheet today.
+            If research is still the bigger bottleneck, use the live
+            <a href="https://checkout.dayonebuilder.online/products/crypto-prompt-pack">Crypto Prompt Pack</a>
+            to cut token due diligence time first.
+          </p>
+          <p>
+            You can also browse the full <a href="/products/">crypto tools library</a> to see what fits your workflow next.
+          </p>
+        </div>
+
+        <p>
+          More practical crypto workflow guides are being published inside DayOneBuilder as the product library grows.
+        </p>
+      </article>
+    </div>
+  </body>
+</html>
