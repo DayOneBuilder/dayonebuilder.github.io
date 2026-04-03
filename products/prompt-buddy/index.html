@@ -8,7 +8,7 @@
     <title>Prompt Buddy | DayOneBuilder</title>
     <meta
       name="description"
-      content="Prompt Buddy is an observer-style coach for crypto prompts. It catches vague asks, missing verification, and weak framing before you waste a run."
+      content="Prompt Buddy is a terminal sidecar for crypto prompts. It catches vague asks, missing verification, and weak framing before you waste a run."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -180,10 +180,10 @@
       <div class="panel">
         <h1>Prompt Buddy</h1>
         <div class="price">Installable repo</div><span class="label">Direct bundle still available</span>
-        <p><strong>This is for the moment you keep typing as usual, but a side observer can tell you are about to waste the run.</strong></p>
+        <p><strong>You keep writing like usual. Prompt Buddy sits beside you and tells you when the prompt is about to go sideways.</strong></p>
         <p>
-          Prompt Buddy is being rebuilt around that job. It watches for vague crypto prompts, weak verification, missing context,
-          and bad framing, then points you to the exact fix before the agent disappears into confident guessing.
+          It now ships as a terminal sidecar plus a local observer for crypto prompts. Paste a draft, get a quick intervention,
+          open the right checklist, and tighten the ask before the agent runs with the wrong idea.
         </p>
 
         <div class="install-box">
@@ -198,12 +198,14 @@
             <a class="secondary-link" href="https://github.com/DayOneBuilder/dob-prompt-buddy">Open GitHub repo</a>
             <a class="ghost-button" href="/downloads/dayonebuilder-prompt-buddy-starter.zip">Direct bundle</a>
           </div>
-          <p style="margin-top: 14px;">If your CLI wants explicit steps, use the repo README. The quiet paths are: run Codex inside the repo, run Claude Code with <code>--plugin-dir .</code>, or use <code>./install.sh</code> for a personal install.</p>
-          <p style="margin-top: 14px;">The honest shipped slice right now is the observer engine plus the training pack. The visible on-screen sidecar comes later.</p>
+          <p style="margin-top: 14px;">If your CLI wants explicit steps, use the repo README. The quiet paths are: run Codex inside the repo, run Claude Code with <code>--plugin-dir .</code>, unzip the direct bundle, or use <code>./install.sh</code> for a personal install.</p>
+          <p style="margin-top: 14px;">The honest shipped slice right now is a terminal sidecar/TUI, the same observer engine, and the training pack it routes into.</p>
           <pre><code>git clone https://github.com/DayOneBuilder/dob-prompt-buddy.git
 cd dob-prompt-buddy
 ./install.sh
-dob-prompt-buddy observe "look at this wallet"</code></pre>
+dob-prompt-buddy sidecar
+# or:
+dob-prompt-buddy sidecar --plain "look at this wallet"</code></pre>
         </div>
 
         <h2>Recognize the pain?</h2>
@@ -229,28 +231,30 @@ dob-prompt-buddy observe "look at this wallet"</code></pre>
         <h2>What gets better after install</h2>
         <div class="grid">
           <div class="card">
-            <strong>You get the observer foundation now</strong>
-            <p>The repo already ships a local observer command that flags weak prompts and points at the right recovery path.</p>
+            <strong>You get a visible sidecar now</strong>
+            <p>Open the sidecar, paste the draft, and it shows severity, likely slips, next files, and a better stub before you send anything.</p>
           </div>
           <div class="card">
             <strong>The guidance stays crypto-specific</strong>
             <p>Token DD, wallet review, and yield scans each get their own route instead of being flattened into generic prompt advice.</p>
           </div>
           <div class="card">
-            <strong>You can scaffold the starter pack anywhere</strong>
-            <p>The repo exports the same training files the observer uses, so the support material can travel with your workflow.</p>
+            <strong>The bundle stays local and light</strong>
+            <p>The sidecar and observer run on Python stdlib plus bash. You do not need a stack of extra packages just to check a prompt.</p>
           </div>
           <div class="card">
-            <strong>You still keep the simple path</strong>
-            <p>If you just want the files, grab the direct bundle and move on. If you want the observer logic too, install the repo.</p>
+            <strong>You still keep the fast path</strong>
+            <p>Use the TUI if you want the panel. Use <code>--plain</code> if you just want the quick read. Download the bundle if you want it all in one zip.</p>
           </div>
         </div>
 
         <h2>What is inside</h2>
         <div class="grid">
           <div class="card">
-            <strong>Starter pack</strong>
+            <strong>Direct bundle</strong>
             <ul>
+              <li>Terminal sidecar launcher</li>
+              <li>Local observer CLI</li>
               <li>Before-send checklist</li>
               <li>Token DD prompt checklist</li>
               <li>Wallet review prompt checklist</li>
@@ -263,11 +267,11 @@ dob-prompt-buddy observe "look at this wallet"</code></pre>
           <div class="card">
             <strong>Repo extras</strong>
             <ul>
-              <li>Local observer CLI</li>
               <li>Codex plugin manifest</li>
               <li>Claude plugin manifest</li>
               <li>Repo-scoped skill for quiet in-repo use</li>
-              <li>Fallback install script for standalone setup</li>
+              <li>Install and uninstall scripts</li>
+              <li>Plain mode and interactive TUI paths</li>
             </ul>
           </div>
         </div>
