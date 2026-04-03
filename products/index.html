@@ -1,12 +1,13 @@
 <!doctype html>
+<!-- public-copy-allow: Ben Ison -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Free crypto tools for research, tracking, and workflow cleanup | DayOneBuilder</title>
+    <title>Free crypto tools with installable repos | DayOneBuilder</title>
     <meta
       name="description"
-      content="Browse the current DayOneBuilder crypto tools. Every live product starts with a free core download, with optional support if it earns a place in your workflow."
+      content="Browse the current DayOneBuilder crypto tools. Each live product now has its own installable GitHub repo, a free direct download, and an optional support flow."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -35,7 +36,7 @@
       .wrap { width: min(calc(100% - 32px), 1080px); margin: 0 auto; padding: 28px 0 56px; }
       .back { color: var(--muted); text-decoration: none; }
       h1 { font-size: clamp(2rem, 5vw, 3.6rem); margin: 16px 0 8px; }
-      p { color: var(--muted); }
+      p, code { color: var(--muted); }
       .grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -79,6 +80,14 @@
         color: var(--ink);
         border: 1px solid var(--line);
       }
+      .phrase {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.24);
+      }
+      code { font-family: "IBM Plex Mono", monospace; }
       @media (max-width: 860px) {
         .grid { grid-template-columns: 1fr; }
       }
@@ -87,17 +96,21 @@
   <body>
     <div class="wrap">
       <a class="back" href="/">← Back to DayOneBuilder</a>
-      <h1>Start with the bottleneck that annoys you most</h1>
-      <p>Every live product here starts free. Download the core, put it to work, and support it later only if it earns that support.</p>
+      <h1>Use the free core, or tell your agent to install the repo</h1>
+      <p>
+        Every live product now has three paths: a public product page, a dedicated GitHub repo per product, and a free direct download.
+        If you want the tool to live inside your agent workflow, use the repo.
+      </p>
 
       <div class="grid">
         <article class="card">
           <h2>50 AI Prompts for Crypto Research</h2>
           <p>For when token research is scattered across tabs, screenshots, whitepapers, and half-finished notes.</p>
-          <div class="price">Free</div>
-          <p>Download the pack now. Optional support is available if it helps.</p>
+          <div class="price">Free + installable repo</div>
+          <div class="phrase"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
           <div class="button-row">
             <a class="button" href="/products/crypto-prompt-pack/">Open page</a>
+            <a class="button secondary" href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">GitHub repo</a>
             <a class="button secondary" href="/downloads/dayonebuilder-50-ai-prompts-for-crypto-research.md" download>Download</a>
           </div>
         </article>
@@ -105,10 +118,11 @@
         <article class="card">
           <h2>Crypto Portfolio Tracker</h2>
           <p>For when balances live across wallets and your cost basis or wallet P&amp;L keeps drifting.</p>
-          <div class="price">Free</div>
-          <p>Starter workbook included. Support flow is optional and separate.</p>
+          <div class="price">Free + installable repo</div>
+          <div class="phrase"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
           <div class="button-row">
             <a class="button" href="/products/crypto-portfolio-tracker/">Open page</a>
+            <a class="button secondary" href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">GitHub repo</a>
             <a class="button secondary" href="/downloads/dayonebuilder-crypto-portfolio-tracker.zip">Download</a>
           </div>
         </article>
@@ -116,18 +130,22 @@
         <article class="card">
           <h2>Crypto Research Copilot Starter</h2>
           <p>For when token, wallet, and yield research still starts from zero every time.</p>
-          <div class="price">Free</div>
-          <p>Workflow starter bundle included. Support is optional.</p>
+          <div class="price">Free + installable repo</div>
+          <div class="phrase"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
           <div class="button-row">
             <a class="button" href="/products/crypto-research-copilot/">Open page</a>
+            <a class="button secondary" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">GitHub repo</a>
             <a class="button secondary" href="/downloads/dayonebuilder-crypto-research-copilot-starter.zip">Download</a>
           </div>
         </article>
 
         <article class="card">
-          <h2>What happens after the free core</h2>
-          <p>Paid layers only make sense when they add real extra depth, hosting cost, or team setup value. They are not the starting point.</p>
-          <div class="price">Support first</div>
+          <h2>What changed</h2>
+          <p>
+            These are no longer just loose files and starter zips. Each live product now has its own repo and its own install phrase,
+            so the agent-install story is explicit instead of implied.
+          </p>
+          <div class="price">Repo per product</div>
         </article>
       </div>
     </div>

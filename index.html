@@ -1,12 +1,13 @@
 <!doctype html>
+<!-- public-copy-allow: Ben Ison -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Free crypto tools for research, tracking, and workflow cleanup | DayOneBuilder</title>
+    <title>Free crypto tools with installable repos | DayOneBuilder</title>
     <meta
       name="description"
-      content="Download free crypto tools for token research, wallet tracking, and workflow cleanup. Use the core product first, then support it if it earns a place in your stack."
+      content="Free crypto tools for token research, tracking, and workflow cleanup. Every live DayOneBuilder product now has its own installable GitHub repo plus a free direct download."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -29,7 +30,6 @@
         --max: 1180px;
         --radius: 24px;
       }
-
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
       body {
@@ -41,8 +41,8 @@
           linear-gradient(180deg, #07131a 0%, #08171d 52%, #061116 100%);
         font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", "Segoe UI", sans-serif;
       }
-
       a { color: inherit; text-decoration: none; }
+      code { font-family: "IBM Plex Mono", monospace; color: var(--muted); }
       .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
       .nav {
         display: flex;
@@ -64,7 +64,7 @@
         border-radius: 999px;
         border: 1px solid transparent;
         font-weight: 700;
-        transition: transform 180ms ease, opacity 180ms ease;
+        transition: transform 180ms ease;
       }
       .button:hover { transform: translateY(-1px); }
       .button.primary {
@@ -75,7 +75,6 @@
         border-color: var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
-
       .hero {
         display: grid;
         grid-template-columns: 1.15fr 0.85fr;
@@ -109,18 +108,16 @@
         margin-bottom: 18px;
       }
       h1, h2, h3 { margin: 0 0 14px; line-height: 1.05; }
-      h1 { font-size: clamp(2.6rem, 6vw, 5.2rem); max-width: 11ch; }
+      h1 { font-size: clamp(2.6rem, 6vw, 5.2rem); max-width: 12ch; }
       h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
-      h3 { font-size: 1.15rem; }
       p { margin: 0 0 16px; color: var(--muted); }
       .lead { font-size: 1.08rem; max-width: 58ch; }
       .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 22px; }
-      .stats, .grid, .products, .steps {
+      .stats, .products, .steps {
         display: grid;
         gap: 16px;
       }
       .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .mini, .product, .step, .note {
@@ -158,10 +155,14 @@
         border: 1px solid var(--line);
         font-weight: 700;
       }
+      .phrase {
+        margin-top: 14px;
+        padding: 12px 14px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.24);
+      }
       section { padding: 26px 0; }
-      .section-head { max-width: 66ch; margin-bottom: 18px; }
-      .list { margin: 0; padding-left: 18px; color: var(--muted); }
-      .list li { margin-bottom: 10px; }
       footer {
         padding: 34px 0 52px;
         color: var(--muted);
@@ -175,11 +176,9 @@
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
-
       @media (max-width: 960px) {
         .hero,
         .stats,
-        .grid,
         .products,
         .steps { grid-template-columns: 1fr; }
       }
@@ -189,113 +188,105 @@
     <div class="wrap">
       <nav class="nav">
         <div class="brand">DayOneBuilder</div>
-        <a class="button secondary" href="/products/">Browse free tools</a>
+        <a class="button secondary" href="/products/">Browse live tools</a>
       </nav>
 
       <section class="hero">
         <div class="hero-copy">
           <div class="eyebrow">Crypto workflow tools</div>
-          <h1>Useful first. Optional support second.</h1>
+          <h1>Free core first. Repo install when you want your agent to keep it.</h1>
           <p class="lead">
             DayOneBuilder publishes small crypto tools for messy token research, wallet tracking, and workflow cleanup.
-            Every live product starts with a free core you can use right away.
+            Every live product now has its own GitHub repo, its own install phrase, and its own free download.
           </p>
           <p>
-            If a tool earns a place in your stack, support it. If it does not, you still got something useful without
-            being forced through a paywall first.
+            That means you can still grab the file fast, but you can also tell your agent to install the repo and keep the product inside your workflow instead of losing it in another downloads folder.
           </p>
           <div class="actions">
             <a class="button primary" href="/products/">See the live tools</a>
-            <a class="button secondary" href="/products/crypto-prompt-pack/">Start with research prompts</a>
+            <a class="button secondary" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">Open a repo</a>
           </div>
           <div class="stats">
             <div class="mini">
-              <strong>3 live tools</strong>
-              Research prompts, a portfolio tracker, and a research workflow starter are all live now.
+              <strong>3 live repos</strong>
+              Prompt pack, portfolio tracker, and research copilot now each live in their own GitHub repo.
             </div>
             <div class="mini">
-              <strong>Free core access</strong>
-              Download the main file first. Decide later whether it deserves support.
+              <strong>Agent install phrases</strong>
+              Each product now has a direct install phrase you can give to your agent instead of only a ZIP or file link.
             </div>
             <div class="mini">
-              <strong>Support flow ready</strong>
-              Crypto or card support is available when a tool actually helps.
+              <strong>Free + support</strong>
+              The core stays free. Support is there if the tool earns a place in your stack.
             </div>
           </div>
         </div>
         <aside class="hero-side">
-          <h2>What these tools are built for</h2>
-          <ul class="list">
-            <li>Token research that keeps turning into ten tabs and no decision</li>
-            <li>Wallet balances, transfers, and DeFi positions that wreck simple P&amp;L sheets</li>
-            <li>Research sessions that start from scratch every single time</li>
-            <li>People who want small, practical tools instead of another heavy platform</li>
-          </ul>
+          <h2>The three install phrases</h2>
+          <div class="phrase"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
+          <div class="phrase"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
+          <div class="phrase"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
           <div class="note">
-            <strong>How the model works</strong>
-            Use the free core. Support it if it saves you time. Paid add-ons only make sense later when they cover real extra work.
+            If your agent does not infer the shell steps automatically yet, each repo also includes a plain <code>git clone ... && ./install.sh</code> fallback.
           </div>
         </aside>
       </section>
 
       <section>
-        <div class="section-head">
-          <h2>Live now</h2>
-          <p>Pick the bottleneck that wastes the most time today. Start there.</p>
-        </div>
+        <h2>Live now</h2>
         <div class="products">
           <article class="product">
             <strong>50 AI Prompts for Crypto Research</strong>
             For token diligence, whitepaper review, risk checks, and project comparison when your research is scattered.
-            <div class="price">Free</div>
+            <div class="price">Free + installable repo</div>
             <div class="actions-inline">
               <a href="/products/crypto-prompt-pack/">Open page</a>
+              <a href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">GitHub repo</a>
               <a href="/downloads/dayonebuilder-50-ai-prompts-for-crypto-research.md" download>Download</a>
             </div>
           </article>
           <article class="product">
             <strong>Crypto Portfolio Tracker</strong>
             For wallets, exchanges, transfers, rewards, cost basis, and P&amp;L when your current sheet keeps drifting.
-            <div class="price">Free</div>
+            <div class="price">Free + installable repo</div>
             <div class="actions-inline">
               <a href="/products/crypto-portfolio-tracker/">Open page</a>
+              <a href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">GitHub repo</a>
               <a href="/downloads/dayonebuilder-crypto-portfolio-tracker.zip">Download</a>
             </div>
           </article>
           <article class="product">
             <strong>Crypto Research Copilot Starter</strong>
-            For token review, wallet checks, and yield comparison when every session still starts from zero.
-            <div class="price">Free</div>
+            For token, wallet, and yield research when every session still starts from zero.
+            <div class="price">Free + installable repo</div>
             <div class="actions-inline">
               <a href="/products/crypto-research-copilot/">Open page</a>
+              <a href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">GitHub repo</a>
               <a href="/downloads/dayonebuilder-crypto-research-copilot-starter.zip">Download</a>
             </div>
           </article>
           <article class="product">
-            <strong>What is coming next</strong>
-            A prompt coach for AI-assisted crypto work, plus more tracker and DeFi workflow tools.
-            <div class="price">Free core first</div>
+            <strong>What changed</strong>
+            These are no longer just loose freebies. The install story is explicit now: repo per product, install phrase per product, donation flow per product.
+            <div class="price">Repo per product</div>
           </article>
         </div>
       </section>
 
       <section>
-        <div class="section-head">
-          <h2>Why this flow is better</h2>
-          <p>People should be able to get value before they are asked for money. That makes the product easier to try, easier to share, and easier to care about.</p>
-        </div>
+        <h2>How to use the model</h2>
         <div class="steps">
           <div class="step">
-            <strong>Use it</strong>
-            Download the core file and see whether it actually fixes an annoying job in your workflow.
+            <strong>Use the repo if the agent should keep it</strong>
+            Install the product repo when you want the tool to stay available as a skill or reusable workflow.
           </div>
           <div class="step">
-            <strong>Keep it if it works</strong>
-            If it earns a place in your rotation, keep using it and send feedback or support.
+            <strong>Use the download if you just want the file</strong>
+            The direct free download still exists for each product.
           </div>
           <div class="step">
-            <strong>Pay later only when it is justified</strong>
-            Bigger paid layers only make sense when they add real depth, hosting cost, or team setup value.
+            <strong>Support later if it earns that support</strong>
+            The money ask comes after value, not before.
           </div>
         </div>
       </section>

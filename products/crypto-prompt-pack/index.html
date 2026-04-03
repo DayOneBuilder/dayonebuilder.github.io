@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- public-copy-allow: Ben Ison -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -6,7 +7,7 @@
     <title>50 AI Prompts for Crypto Research | DayOneBuilder</title>
     <meta
       name="description"
-      content="Download 50 crypto research prompts free. Use them for token diligence, whitepaper review, risk checks, and cleaner project comparison."
+      content="Free crypto research prompt pack with an installable GitHub repo. Tell your agent to install the DayOneBuilder prompt pack by Ben Ison or download the file directly."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -24,6 +25,7 @@
         --line: rgba(191, 245, 221, 0.16);
         --mint: #9ef0c0;
         --sand: #f7d49c;
+        --acid: #d7ff64;
       }
       * { box-sizing: border-box; }
       body {
@@ -32,7 +34,7 @@
         background: linear-gradient(180deg, #07131a 0%, #0a171d 100%);
         font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
       }
-      .wrap { width: min(calc(100% - 32px), 920px); margin: 0 auto; padding: 28px 0 60px; }
+      .wrap { width: min(calc(100% - 32px), 960px); margin: 0 auto; padding: 28px 0 60px; }
       .panel {
         margin-top: 18px;
         padding: 28px;
@@ -45,7 +47,7 @@
       h1, h2 { line-height: 1.06; }
       h1 { font-size: clamp(2rem, 5vw, 4rem); margin: 12px 0; }
       h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
-      p, li { color: var(--muted); }
+      p, li, code { color: var(--muted); }
       .price {
         display: inline-flex;
         margin: 10px 0 18px;
@@ -86,7 +88,8 @@
         border: 1px solid var(--line);
         color: var(--ink);
       }
-      .note {
+      .note,
+      .install-box {
         margin-top: 18px;
         padding: 16px 18px;
         border-radius: 18px;
@@ -105,6 +108,18 @@
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
+      .phrase,
+      pre {
+        margin: 12px 0 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.24);
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      code { font-family: "IBM Plex Mono", monospace; }
       @media (max-width: 820px) {
         .grid { grid-template-columns: 1fr; }
       }
@@ -115,7 +130,7 @@
       <a class="back" href="/products/">← Back to products</a>
       <div class="panel">
         <h1>50 AI Prompts for Crypto Research</h1>
-        <div class="price">Free</div><span class="label">Optional support</span>
+        <div class="price">Free</div><span class="label">Installable repo + optional support</span>
         <p>
           <strong>Stop turning every token idea into a mess of tabs, screenshots, and half-finished notes.</strong>
         </p>
@@ -124,9 +139,27 @@
           whitepaper reading, risk checks, thesis pressure-testing, and project comparison.
         </p>
         <p>
-          Use it when your research is busy but not sharp, or when you keep realizing too late that you asked the wrong
-          questions first.
+          You can still download the file directly, but now it also lives as its own GitHub repo so your agent can install it as a reusable skill.
         </p>
+
+        <h2>Install with your agent</h2>
+        <div class="install-box">
+          <strong>Tell your agent:</strong>
+          <div class="phrase"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
+          <p>
+            Repo: <a href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">github.com/DayOneBuilder/dob-crypto-prompt-pack</a>
+          </p>
+          <p>
+            Honest fallback if your agent does not infer the shell steps yet:
+          </p>
+          <pre><code>git clone https://github.com/DayOneBuilder/dob-crypto-prompt-pack.git
+cd dob-crypto-prompt-pack
+./install.sh</code></pre>
+          <p>
+            The install script adds reusable agent skills, copies the prompt pack into <code>~/.dayonebuilder/</code>,
+            and installs a helper launcher at <code>~/.local/bin/dob-crypto-prompt-pack</code>.
+          </p>
+        </div>
 
         <div class="grid">
           <div class="card">
@@ -140,11 +173,11 @@
             </ul>
           </div>
           <div class="card">
-            <strong>Why it helps</strong>
+            <strong>What the repo install adds</strong>
             <ul>
-              <li>Gets you out of vague chat prompts</li>
-              <li>Pushes research toward missing evidence and weak spots</li>
-              <li>Makes one project easier to compare against another on the same frame</li>
+              <li>A reusable agent skill instead of a one-off file</li>
+              <li>A helper command to export the full pack anywhere you want</li>
+              <li>A clean GitHub repo per product instead of burying it inside one workspace</li>
             </ul>
           </div>
         </div>
@@ -154,9 +187,9 @@
           <div class="card">
             <strong>Inside the file</strong>
             <ul>
-              <li>50 prompts in one downloadable markdown file</li>
+              <li>50 prompts in one markdown file</li>
               <li>Prompts grouped by research job, not random category spam</li>
-              <li>A simple structure you can keep adapting to your own workflow</li>
+              <li>A structure you can keep adapting to your own workflow</li>
             </ul>
           </div>
           <div class="card">
@@ -170,13 +203,13 @@
         </div>
 
         <div class="cta-row">
-          <a class="cta" href="/downloads/dayonebuilder-50-ai-prompts-for-crypto-research.md" download>Download free</a>
+          <a class="cta" href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">Open GitHub repo</a>
+          <a class="tier" href="/downloads/dayonebuilder-50-ai-prompts-for-crypto-research.md" download>Download free</a>
           <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-prompt-pack?amount=20">Support $20</a>
           <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-prompt-pack">Custom support</a>
         </div>
         <div class="note">
-          Use the pack first. If it saves you from rebuilding the same research prompts every week, support it.
-          If it does not, keep the file and move on.
+          If you only want the file, download it. If you want the prompt pack to live inside your agent workflow, use the repo install.
         </div>
         <div class="support-row">
           <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-prompt-pack?amount=200">Support $200</a>

@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- public-copy-allow: Ben Ison -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -6,7 +7,7 @@
     <title>Crypto Portfolio Tracker | DayOneBuilder</title>
     <meta
       name="description"
-      content="Download the Crypto Portfolio Tracker free. Track wallets, transactions, holdings, cost basis, and P&L in one starter workbook."
+      content="Free crypto portfolio tracker with an installable GitHub repo. Tell your agent to install the DayOneBuilder tracker by Ben Ison or download the workbook bundle directly."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -24,6 +25,7 @@
         --line: rgba(191, 245, 221, 0.16);
         --mint: #9ef0c0;
         --sand: #f7d49c;
+        --acid: #d7ff64;
       }
       * { box-sizing: border-box; }
       body {
@@ -45,7 +47,7 @@
       h1, h2 { line-height: 1.08; }
       h1 { font-size: clamp(2rem, 5vw, 4rem); margin: 12px 0; }
       h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
-      p, li { color: var(--muted); }
+      p, li, code { color: var(--muted); }
       .price {
         display: inline-flex;
         margin: 10px 0 18px;
@@ -86,7 +88,8 @@
         border: 1px solid var(--line);
         color: var(--ink);
       }
-      .note {
+      .note,
+      .install-box {
         margin-top: 18px;
         padding: 16px 18px;
         border-radius: 18px;
@@ -105,6 +108,18 @@
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
+      .phrase,
+      pre {
+        margin: 12px 0 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.24);
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      code { font-family: "IBM Plex Mono", monospace; }
       @media (max-width: 820px) {
         .grid { grid-template-columns: 1fr; }
       }
@@ -115,7 +130,7 @@
       <a class="back" href="/products/">← Back to products</a>
       <div class="panel">
         <h1>Crypto Portfolio Tracker</h1>
-        <div class="price">Free</div><span class="label">Optional support</span>
+        <div class="price">Free</div><span class="label">Installable repo + optional support</span>
         <p>
           <strong>Stop guessing your wallet P&amp;L from scattered balances and half-clean transaction notes.</strong>
         </p>
@@ -124,9 +139,26 @@
           realized P&amp;L, and unrealized P&amp;L without pretending crypto accounting is simple.
         </p>
         <p>
-          It is built for people whose current sheet keeps drifting the moment transfers, bridges, staking rewards, or
-          airdrops start piling up.
+          You can still download the workbook bundle directly, but now it also lives as its own GitHub repo so your agent can install it,
+          generate a fresh file, and keep the tracker inside a repeatable workflow.
         </p>
+
+        <h2>Install with your agent</h2>
+        <div class="install-box">
+          <strong>Tell your agent:</strong>
+          <div class="phrase"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
+          <p>
+            Repo: <a href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">github.com/DayOneBuilder/dob-crypto-portfolio-tracker</a>
+          </p>
+          <p>Honest fallback if your agent does not infer the shell steps yet:</p>
+          <pre><code>git clone https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker.git
+cd dob-crypto-portfolio-tracker
+./install.sh</code></pre>
+          <p>
+            The install script adds reusable agent skills, copies the workbook into <code>~/.dayonebuilder/</code>,
+            and installs a helper launcher at <code>~/.local/bin/dob-crypto-portfolio-tracker</code>.
+          </p>
+        </div>
 
         <div class="grid">
           <div class="card">
@@ -139,11 +171,11 @@
             </ul>
           </div>
           <div class="card">
-            <strong>Why it helps</strong>
+            <strong>What the repo install adds</strong>
             <ul>
-              <li>Keeps internal transfers from distorting your view</li>
-              <li>Gives you one structure for buys, sells, staking, rewards, and DeFi events</li>
-              <li>Makes cleanup less painful later</li>
+              <li>A reusable agent skill instead of a one-off ZIP</li>
+              <li>A helper command that creates a fresh workbook wherever you want it</li>
+              <li>A dedicated GitHub repo per product with its own install contract</li>
             </ul>
           </div>
         </div>
@@ -151,11 +183,11 @@
         <h2>What you get</h2>
         <div class="grid">
           <div class="card">
-            <strong>Inside the download</strong>
+            <strong>Inside the starter</strong>
             <ul>
-              <li>1 ZIP with the workbook and setup README</li>
-              <li>Tabs for Instructions, Wallets, Transactions, Holdings, and Dashboard</li>
-              <li>A starter layout you can extend in Excel, LibreOffice, or similar apps</li>
+              <li>1 workbook template for wallets, transactions, holdings, and dashboard totals</li>
+              <li>A setup README with tab and event-type guidance</li>
+              <li>A structure you can extend in Excel, LibreOffice, or similar apps</li>
             </ul>
           </div>
           <div class="card">
@@ -163,19 +195,19 @@
             <ul>
               <li>Anyone tracking multiple wallets or exchanges by hand</li>
               <li>Anyone trying to fix cost basis after transfers, bridges, or rewards</li>
-              <li>Anyone who wants a practical sheet before paying for bigger software</li>
+              <li>Anyone who wants a practical sheet before paying for heavier software</li>
             </ul>
           </div>
         </div>
 
         <div class="cta-row">
-          <a class="cta" href="/downloads/dayonebuilder-crypto-portfolio-tracker.zip">Download free</a>
+          <a class="cta" href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">Open GitHub repo</a>
+          <a class="tier" href="/downloads/dayonebuilder-crypto-portfolio-tracker.zip">Download free</a>
           <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-portfolio-tracker?amount=20">Support $20</a>
           <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-portfolio-tracker">Custom support</a>
         </div>
         <div class="note">
-          Start with the free tracker. If it saves you from another ugly reconciliation session, support the next version.
-          If not, you still leave with a better workbook than a blank sheet.
+          If you only want the workbook, download it. If you want your agent to keep the tracker available as a reusable tool, use the repo install.
         </div>
         <div class="support-row">
           <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-portfolio-tracker?amount=200">Support $200</a>

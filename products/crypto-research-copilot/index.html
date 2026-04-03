@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- public-copy-allow: Ben Ison -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -6,7 +7,7 @@
     <title>Crypto Research Copilot Starter | DayOneBuilder</title>
     <meta
       name="description"
-      content="Download the Crypto Research Copilot Starter free. Get workflow templates for token due diligence, wallet review, and yield scanning."
+      content="Free crypto research copilot bundle with an installable GitHub repo. Tell your agent to install the DayOneBuilder copilot by Ben Ison or download the starter bundle directly."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -24,6 +25,7 @@
         --line: rgba(191, 245, 221, 0.16);
         --mint: #9ef0c0;
         --sand: #f7d49c;
+        --acid: #d7ff64;
       }
       * { box-sizing: border-box; }
       body {
@@ -45,7 +47,7 @@
       h1, h2 { line-height: 1.08; }
       h1 { font-size: clamp(2rem, 5vw, 4rem); margin: 12px 0; }
       h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
-      p, li { color: var(--muted); }
+      p, li, code { color: var(--muted); }
       .price {
         display: inline-flex;
         margin: 10px 0 18px;
@@ -86,32 +88,41 @@
         border: 1px solid var(--line);
         color: var(--ink);
       }
-      .note {
+      .note,
+      .install-box {
         margin-top: 18px;
         padding: 16px 18px;
         border-radius: 18px;
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
-      .grid {
+      .grid,
+      .mini {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 16px;
         margin-top: 18px;
       }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .mini { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .card {
         padding: 18px;
         border-radius: 18px;
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
-      .mini {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 18px;
-      }
       .mini .card strong { display: block; margin-bottom: 8px; }
+      .phrase,
+      pre {
+        margin: 12px 0 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.24);
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      code { font-family: "IBM Plex Mono", monospace; }
       @media (max-width: 820px) {
         .grid, .mini { grid-template-columns: 1fr; }
       }
@@ -122,18 +133,34 @@
       <a class="back" href="/products/">← Back to products</a>
       <div class="panel">
         <h1>Crypto Research Copilot Starter</h1>
-        <div class="price">Free</div><span class="label">Optional support</span>
+        <div class="price">Free</div><span class="label">Installable repo + optional support</span>
         <p>
           <strong>Stop starting every crypto research session from a blank chat and scattered tabs.</strong>
         </p>
         <p>
-          This starter bundle gives you a cleaner structure for three jobs that eat time fast: token due diligence,
-          wallet review, and yield scanning. Instead of rebuilding the same workflow every session, you start with a frame.
+          This starter bundle gives you a cleaner structure for token due diligence, wallet review, and yield scanning.
+          Instead of rebuilding the same workflow every session, you start with a frame that your agent can keep using.
         </p>
         <p>
-          It is built for people who already use an AI assistant for crypto work but want better structure,
-          sharper questions, and less drift between one session and the next.
+          This one especially needed its own installable repo, so now it has one.
         </p>
+
+        <h2>Install with your agent</h2>
+        <div class="install-box">
+          <strong>Tell your agent:</strong>
+          <div class="phrase"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
+          <p>
+            Repo: <a href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">github.com/DayOneBuilder/dob-crypto-research-copilot</a>
+          </p>
+          <p>Honest fallback if your agent does not infer the shell steps yet:</p>
+          <pre><code>git clone https://github.com/DayOneBuilder/dob-crypto-research-copilot.git
+cd dob-crypto-research-copilot
+./install.sh</code></pre>
+          <p>
+            The install script adds reusable agent skills, copies the workflow bundle into <code>~/.dayonebuilder/</code>,
+            and installs a helper launcher at <code>~/.local/bin/dob-crypto-research-copilot</code>.
+          </p>
+        </div>
 
         <div class="mini">
           <div class="card">
@@ -150,22 +177,22 @@
           </div>
         </div>
 
-        <h2>What you get</h2>
+        <h2>What the repo install adds</h2>
         <div class="grid">
           <div class="card">
-            <strong>Inside the download</strong>
+            <strong>Reusable agent workflow</strong>
             <ul>
-              <li>1 ZIP with the starter bundle and workflow docs</li>
-              <li>Workflows for token due diligence, wallet review, and yield scanning</li>
-              <li>A starter connector-stack note covering the first recommended crypto data stack</li>
+              <li>A dedicated GitHub repo per product</li>
+              <li>A reusable skill layer for agent workflows</li>
+              <li>A helper that scaffolds the workflow bundle into any local research folder</li>
             </ul>
           </div>
           <div class="card">
-            <strong>Why this is useful</strong>
+            <strong>What stays free</strong>
             <ul>
-              <li>Gives you repeatable prompts and structure instead of ad hoc chat sessions</li>
-              <li>Pushes research toward practical checks instead of soft summary filler</li>
-              <li>Makes one token, wallet, or yield idea easier to compare against another on the same frame</li>
+              <li>The repo itself</li>
+              <li>The starter workflows and connector-stack note</li>
+              <li>The downloadable starter bundle</li>
             </ul>
           </div>
         </div>
@@ -191,13 +218,13 @@
         </div>
 
         <div class="cta-row">
-          <a class="cta" href="/downloads/dayonebuilder-crypto-research-copilot-starter.zip">Download free</a>
+          <a class="cta" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">Open GitHub repo</a>
+          <a class="tier" href="/downloads/dayonebuilder-crypto-research-copilot-starter.zip">Download free</a>
           <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-research-copilot?amount=20">Support $20</a>
           <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-research-copilot">Custom support</a>
         </div>
         <div class="note">
-          Use the starter first. If it becomes part of your research routine, support the next round of improvements.
-          If it does not, you still leave with a workable bundle.
+          If you only want the starter bundle, download it. If you want the bundle to live inside your agent workflow, use the repo install.
         </div>
         <div class="support-row">
           <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-research-copilot?amount=200">Support $200</a>
