@@ -145,17 +145,28 @@
           The free core is intentionally narrow: check the prompt, spot what is missing, and rewrite it into something more usable.
         </p>
 
-        <h2>Install with your agent</h2>
+        <h2>Pick the least noisy path</h2>
         <div class="install-box">
-          <strong>Tell your agent:</strong>
-          <div class="phrase"><code>Install dayonebuilder/dob-prompt-buddy by Ben Ison.</code></div>
+          <strong>Fastest path if you already work in the repo</strong>
+          <p>
+            Use Prompt Buddy inside the cloned repo first. That keeps the setup local and avoids extra personal install steps.
+          </p>
           <p>
             Repo: <a href="https://github.com/DayOneBuilder/dob-prompt-buddy">github.com/DayOneBuilder/dob-prompt-buddy</a>
           </p>
-          <p>Fallback if your agent does not infer the shell steps yet:</p>
           <pre><code>git clone https://github.com/DayOneBuilder/dob-prompt-buddy.git
 cd dob-prompt-buddy
 ./install.sh</code></pre>
+          <p>
+            If you use Claude and want the repo-scoped path, run it from the repo with <code>--plugin-dir .</code>.
+          </p>
+          <div class="phrase"><code>Install dayonebuilder/dob-prompt-buddy by Ben Ison.</code></div>
+          <p>
+            Use that install phrase when you want your agent to handle the repo setup for you.
+          </p>
+          <p>
+            If you only want the checklists and examples without installing anything, use the free ZIP instead. The install script is only for people who want Prompt Buddy to live inside their agent workflow.
+          </p>
           <p>
             The install script adds reusable agent skills, copies the prompt-buddy assets into <code>~/.dayonebuilder/</code>,
             and installs a helper launcher at <code>~/.local/bin/dob-prompt-buddy</code>.
