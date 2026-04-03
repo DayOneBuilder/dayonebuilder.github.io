@@ -1,13 +1,14 @@
 <!doctype html>
 <!-- public-copy-allow: Ben Ison -->
+<!-- public-copy-allow: Codex -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Free crypto tools with installable repos | DayOneBuilder</title>
+    <title>Crypto tools your agent can actually keep using | DayOneBuilder</title>
     <meta
       name="description"
-      content="Free crypto tools for token research, tracking, and workflow cleanup. Every live DayOneBuilder product now has its own installable GitHub repo plus a free direct download."
+      content="Small crypto tools for research, tracking, and workflow cleanup. Copy the install phrase to your agent, open the repo, or use the direct file when you want the fast path."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -15,6 +16,21 @@
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
+
+      async function copyPhrase(button) {
+        const text = button.getAttribute("data-copy");
+        const original = button.dataset.original || button.textContent;
+        button.dataset.original = original;
+        try {
+          await navigator.clipboard.writeText(text);
+          button.textContent = "Copied";
+        } catch (err) {
+          button.textContent = "Copy failed";
+        }
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1600);
+      }
     </script>
     <style>
       :root {
@@ -55,29 +71,32 @@
         letter-spacing: 0.03em;
         text-transform: uppercase;
       }
-      .button {
+      .button,
+      .ghost,
+      .copy-button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         min-height: 48px;
         padding: 0 18px;
         border-radius: 999px;
-        border: 1px solid transparent;
         font-weight: 700;
-        transition: transform 180ms ease;
+        border: 1px solid transparent;
       }
-      .button:hover { transform: translateY(-1px); }
-      .button.primary {
+      .button,
+      .copy-button {
         background: linear-gradient(135deg, var(--mint), var(--acid));
         color: #03110c;
+        cursor: pointer;
       }
-      .button.secondary {
+      .ghost {
         border-color: var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
+      button.copy-button { font: inherit; }
       .hero {
         display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
+        grid-template-columns: 1.1fr 0.9fr;
         gap: 22px;
         padding: 30px 0 22px;
       }
@@ -108,11 +127,18 @@
         margin-bottom: 18px;
       }
       h1, h2, h3 { margin: 0 0 14px; line-height: 1.05; }
-      h1 { font-size: clamp(2.6rem, 6vw, 5.2rem); max-width: 12ch; }
+      h1 { font-size: clamp(2.6rem, 6vw, 5rem); max-width: 12ch; }
       h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
       p { margin: 0 0 16px; color: var(--muted); }
       .lead { font-size: 1.08rem; max-width: 58ch; }
-      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 24px 0 22px; }
+      .actions,
+      .agent-row,
+      .actions-inline {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .actions { margin: 24px 0 22px; }
       .stats, .products, .steps {
         display: grid;
         gap: 16px;
@@ -126,11 +152,7 @@
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.035);
       }
-      .mini strong, .product strong {
-        display: block;
-        margin-bottom: 6px;
-        font-size: 1.05rem;
-      }
+      .mini strong, .product strong { display: block; margin-bottom: 6px; font-size: 1.05rem; }
       .price {
         display: inline-flex;
         margin-top: 12px;
@@ -140,21 +162,30 @@
         color: var(--acid);
         font-weight: 700;
       }
-      .actions-inline {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 16px;
-      }
-      .actions-inline a {
+      .agent-pill {
         display: inline-flex;
         align-items: center;
-        min-height: 42px;
-        padding: 0 14px;
+        gap: 8px;
+        min-height: 36px;
+        padding: 0 12px;
         border-radius: 999px;
         border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
         font-weight: 700;
       }
+      .agent-mark {
+        display: inline-flex;
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .codex .agent-mark { background: linear-gradient(135deg, #c6ff72, #73f1be); color: #04100a; }
+      .claude .agent-mark { background: linear-gradient(135deg, #f7d49c, #ffc3a3); color: #20110a; }
       .phrase {
         margin-top: 14px;
         padding: 12px 14px;
@@ -188,46 +219,49 @@
     <div class="wrap">
       <nav class="nav">
         <div class="brand">DayOneBuilder</div>
-        <a class="button secondary" href="/products/">Browse live tools</a>
+        <a class="ghost" href="/products/">Browse live tools</a>
       </nav>
 
       <section class="hero">
         <div class="hero-copy">
           <div class="eyebrow">Crypto workflow tools</div>
-          <h1>Free core first. Repo install when you want your agent to keep it.</h1>
+          <h1>Your agent should not have to start from zero every time.</h1>
           <p class="lead">
-            DayOneBuilder publishes small crypto tools for messy token research, wallet tracking, and workflow cleanup.
-            Every live product now has its own GitHub repo, its own install phrase, and its own free download.
+            DayOneBuilder makes small crypto tools for recurring pain: messy token research, drifting portfolio sheets, and research sessions that keep falling back to a blank chat.
           </p>
           <p>
-            That means you can still grab the file fast, but you can also tell your agent to install the repo and keep the product inside your workflow instead of losing it in another downloads folder.
+            Each live product has its own repo, its own install phrase, and a direct file if you want the fast path. The point is not a fancy funnel. The point is getting the tool into use.
           </p>
           <div class="actions">
-            <a class="button primary" href="/products/">See the live tools</a>
-            <a class="button secondary" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">Open a repo</a>
+            <a class="button" href="/products/">See the live tools</a>
+            <a class="ghost" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">Open a repo</a>
           </div>
           <div class="stats">
             <div class="mini">
-              <strong>3 live repos</strong>
-              Prompt pack, portfolio tracker, and research copilot now each live in their own GitHub repo.
+              <strong>3 live installable repos</strong>
+              Prompt pack, portfolio tracker, and research copilot now each live in their own repo.
             </div>
             <div class="mini">
-              <strong>Agent install phrases</strong>
-              Each product now has a direct install phrase you can give to your agent instead of only a ZIP or file link.
+              <strong>Copy-paste install phrases</strong>
+              You can hand one clean line to your agent instead of shoving another ZIP into Downloads.
             </div>
             <div class="mini">
-              <strong>Free + support</strong>
-              The core stays free. Support is there if the tool earns a place in your stack.
+              <strong>Value first</strong>
+              The goal right now is people using the tools and getting relief from the annoying parts of their workflow.
             </div>
           </div>
         </div>
         <aside class="hero-side">
-          <h2>The three install phrases</h2>
-          <div class="phrase"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
-          <div class="phrase"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
-          <div class="phrase"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
-          <div class="note">
-            If your agent does not infer the shell steps automatically yet, each repo also includes a plain <code>git clone ... && ./install.sh</code> fallback.
+          <h2>Works with</h2>
+          <div class="agent-row">
+            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
+            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
+          </div>
+          <div class="note" style="margin-top: 18px;">
+            <strong>The faster path</strong>
+            <p style="margin-top: 10px;">
+              Open the product page, copy the install phrase, paste it to your agent, and move on. If you only want the raw file, the direct download is still there.
+            </p>
           </div>
         </aside>
       </section>
@@ -237,56 +271,56 @@
         <div class="products">
           <article class="product">
             <strong>50 AI Prompts for Crypto Research</strong>
-            For token diligence, whitepaper review, risk checks, and project comparison when your research is scattered.
-            <div class="price">Free + installable repo</div>
-            <div class="actions-inline">
-              <a href="/products/crypto-prompt-pack/">Open page</a>
-              <a href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">GitHub repo</a>
-              <a href="/downloads/dayonebuilder-50-ai-prompts-for-crypto-research.md" download>Download</a>
+            For token diligence, whitepaper review, risk checks, and comparison work when your research turns into tab chaos.
+            <div class="price">Installable repo</div>
+            <div class="phrase"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
+            <div class="actions-inline" style="margin-top: 14px;">
+              <button class="copy-button" data-copy="Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
+              <a class="ghost" href="/products/crypto-prompt-pack/">Product page</a>
             </div>
           </article>
           <article class="product">
             <strong>Crypto Portfolio Tracker</strong>
-            For wallets, exchanges, transfers, rewards, cost basis, and P&amp;L when your current sheet keeps drifting.
-            <div class="price">Free + installable repo</div>
-            <div class="actions-inline">
-              <a href="/products/crypto-portfolio-tracker/">Open page</a>
-              <a href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">GitHub repo</a>
-              <a href="/downloads/dayonebuilder-crypto-portfolio-tracker.zip">Download</a>
+            For wallets, transfers, bridges, rewards, cost basis, and the sort of sheet drift that makes you stop trusting the numbers.
+            <div class="price">Installable repo</div>
+            <div class="phrase"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
+            <div class="actions-inline" style="margin-top: 14px;">
+              <button class="copy-button" data-copy="Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
+              <a class="ghost" href="/products/crypto-portfolio-tracker/">Product page</a>
             </div>
           </article>
           <article class="product">
             <strong>Crypto Research Copilot Starter</strong>
-            For token, wallet, and yield research when every session still starts from zero.
-            <div class="price">Free + installable repo</div>
-            <div class="actions-inline">
-              <a href="/products/crypto-research-copilot/">Open page</a>
-              <a href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">GitHub repo</a>
-              <a href="/downloads/dayonebuilder-crypto-research-copilot-starter.zip">Download</a>
+            For token, wallet, and yield sessions where the first ten minutes keep getting wasted on weak setup.
+            <div class="price">Installable repo</div>
+            <div class="phrase"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
+            <div class="actions-inline" style="margin-top: 14px;">
+              <button class="copy-button" data-copy="Install dayonebuilder/dob-crypto-research-copilot by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
+              <a class="ghost" href="/products/crypto-research-copilot/">Product page</a>
             </div>
           </article>
           <article class="product">
-            <strong>What changed</strong>
-            These are no longer just loose freebies. The install story is explicit now: repo per product, install phrase per product, donation flow per product.
-            <div class="price">Repo per product</div>
+            <strong>What matters next</strong>
+            People using the tools. People starring the repos. People recognizing their own pain in the product pages and thinking, finally, yes, that is exactly the stupid part I want fixed.
+            <div class="price">Usage first</div>
           </article>
         </div>
       </section>
 
       <section>
-        <h2>How to use the model</h2>
+        <h2>What kind of problems these are built for</h2>
         <div class="steps">
           <div class="step">
-            <strong>Use the repo if the agent should keep it</strong>
-            Install the product repo when you want the tool to stay available as a skill or reusable workflow.
+            <strong>Research pain</strong>
+            You are doing real work, but the first frame is weak, scattered, and too easy to derail.
           </div>
           <div class="step">
-            <strong>Use the download if you just want the file</strong>
-            The direct free download still exists for each product.
+            <strong>Tracker pain</strong>
+            Your sheet behaves until real crypto activity hits it, then the ledger logic starts leaking.
           </div>
           <div class="step">
-            <strong>Support later if it earns that support</strong>
-            The money ask comes after value, not before.
+            <strong>Workflow pain</strong>
+            The agent can help, but only if you stop making it rediscover the same useful structure every session.
           </div>
         </div>
       </section>
@@ -296,7 +330,7 @@
           <div>DayOneBuilder</div>
           <div>
             <a href="/products/">Products</a> ·
-            <a href="https://checkout.dayonebuilder.online/products">Support checkout</a>
+            <a href="https://github.com/DayOneBuilder">GitHub</a>
           </div>
         </div>
       </footer>

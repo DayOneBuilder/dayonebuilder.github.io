@@ -1,5 +1,6 @@
 <!doctype html>
 <!-- public-copy-allow: Ben Ison -->
+<!-- public-copy-allow: Codex -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -7,7 +8,7 @@
     <title>50 AI Prompts for Crypto Research | DayOneBuilder</title>
     <meta
       name="description"
-      content="Free crypto research prompt pack with an installable GitHub repo. Tell your agent to install the DayOneBuilder prompt pack by Ben Ison or download the file directly."
+      content="Crypto research prompt pack for the moments when token diligence turns into tab chaos. Copy the install phrase for your agent or grab the direct file."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -15,6 +16,21 @@
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
+
+      async function copyPhrase(button) {
+        const text = button.getAttribute("data-copy");
+        const original = button.dataset.original || button.textContent;
+        button.dataset.original = original;
+        try {
+          await navigator.clipboard.writeText(text);
+          button.textContent = "Copied";
+        } catch (err) {
+          button.textContent = "Copy failed";
+        }
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1600);
+      }
     </script>
     <style>
       :root {
@@ -65,37 +81,79 @@
         border: 1px solid var(--line);
         color: var(--muted);
       }
-      .cta-row,
-      .support-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .cta,
-      .tier {
-        display: inline-flex;
-        min-height: 48px;
-        align-items: center;
-        padding: 0 18px;
-        border-radius: 999px;
-        font-weight: 700;
-      }
-      .cta {
-        background: linear-gradient(135deg, var(--mint), var(--sand));
-        color: #04100a;
-      }
-      .tier {
-        border: 1px solid var(--line);
-        color: var(--ink);
-      }
-      .note,
-      .install-box {
+      .install-box,
+      .note {
         margin-top: 18px;
-        padding: 16px 18px;
+        padding: 18px;
         border-radius: 18px;
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
+      .agent-row,
+      .cta-row,
+      .soft-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .agent-row { margin-top: 12px; }
+      .agent-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 38px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .agent-mark {
+        display: inline-flex;
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .codex .agent-mark { background: linear-gradient(135deg, #c6ff72, #73f1be); color: #04100a; }
+      .claude .agent-mark { background: linear-gradient(135deg, #f7d49c, #ffc3a3); color: #20110a; }
+      .install-line,
+      pre {
+        margin: 12px 0 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.24);
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      code { font-family: "IBM Plex Mono", monospace; }
+      .cta, .secondary-link, .ghost-button {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border-radius: 999px;
+        font-weight: 700;
+        border: 1px solid transparent;
+      }
+      .cta {
+        background: linear-gradient(135deg, var(--mint), var(--sand));
+        color: #04100a;
+        cursor: pointer;
+      }
+      .secondary-link,
+      .ghost-button {
+        border-color: var(--line);
+        color: var(--ink);
+      }
+      button.cta { font: inherit; }
       .grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -108,18 +166,11 @@
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
-      .phrase,
-      pre {
-        margin: 12px 0 0;
-        padding: 14px 16px;
-        border-radius: 16px;
-        border: 1px solid var(--line);
-        background: rgba(0, 0, 0, 0.24);
-        overflow: auto;
-        white-space: pre-wrap;
-        word-break: break-word;
+      .soft-link {
+        color: var(--sand);
+        text-decoration: underline;
+        text-underline-offset: 3px;
       }
-      code { font-family: "IBM Plex Mono", monospace; }
       @media (max-width: 820px) {
         .grid { grid-template-columns: 1fr; }
       }
@@ -130,90 +181,98 @@
       <a class="back" href="/products/">← Back to products</a>
       <div class="panel">
         <h1>50 AI Prompts for Crypto Research</h1>
-        <div class="price">Free</div><span class="label">Installable repo + optional support</span>
+        <div class="price">Installable repo</div><span class="label">Direct file still available</span>
+        <p><strong>This is for the days when one token idea turns into twelve tabs, half a whitepaper, and no clear conclusion.</strong></p>
         <p>
-          <strong>Stop turning every token idea into a mess of tabs, screenshots, and half-finished notes.</strong>
-        </p>
-        <p>
-          This pack gives you 50 prompts for the jobs that usually eat the most time: first-pass token review,
-          whitepaper reading, risk checks, thesis pressure-testing, and project comparison.
-        </p>
-        <p>
-          You can still download the file directly, but now it also lives as its own GitHub repo so your agent can install it as a reusable skill.
+          The point of this pack is simple: give your agent a better starting structure for token diligence, whitepaper review,
+          risk checks, and project comparison so you stop asking the same vague questions from scratch.
         </p>
 
-        <h2>Install with your agent</h2>
         <div class="install-box">
-          <strong>Tell your agent:</strong>
-          <div class="phrase"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
-          <p>
-            Repo: <a href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">github.com/DayOneBuilder/dob-crypto-prompt-pack</a>
-          </p>
-          <p>
-            Honest fallback if your agent does not infer the shell steps yet:
+          <strong>Paste this to your agent</strong>
+          <div class="agent-row">
+            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
+            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
+          </div>
+          <div class="install-line"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
+          <div class="cta-row" style="margin-top: 14px;">
+            <button class="cta" data-copy="Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
+            <a class="secondary-link" href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">Open GitHub repo</a>
+            <a class="ghost-button" href="/downloads/dayonebuilder-50-ai-prompts-for-crypto-research.md" download>Direct file</a>
+          </div>
+          <p style="margin-top: 14px;">
+            Honest fallback if your agent does not infer the install steps yet:
           </p>
           <pre><code>git clone https://github.com/DayOneBuilder/dob-crypto-prompt-pack.git
 cd dob-crypto-prompt-pack
 ./install.sh</code></pre>
-          <p>
-            The install script adds reusable agent skills, copies the prompt pack into <code>~/.dayonebuilder/</code>,
-            and installs a helper launcher at <code>~/.local/bin/dob-crypto-prompt-pack</code>.
-          </p>
         </div>
 
+        <h2>Recognize the pain?</h2>
         <div class="grid">
           <div class="card">
-            <strong>Use it for</strong>
-            <ul>
-              <li>Token thesis building</li>
-              <li>Whitepaper review</li>
-              <li>Risk and red-flag checks</li>
-              <li>Competitive comparison</li>
-              <li>Wallet and on-chain research</li>
-            </ul>
+            <strong>You keep asking soft questions</strong>
+            <p>You ask for a token summary, get a polished blob back, and still do not know what to pressure-test next.</p>
           </div>
           <div class="card">
-            <strong>What the repo install adds</strong>
-            <ul>
-              <li>A reusable agent skill instead of a one-off file</li>
-              <li>A helper command to export the full pack anywhere you want</li>
-              <li>A clean GitHub repo per product instead of burying it inside one workspace</li>
-            </ul>
+            <strong>You lose the good prompts</strong>
+            <p>Once you finally land on a useful prompt, it vanishes into chat history and you end up rebuilding it next week.</p>
+          </div>
+          <div class="card">
+            <strong>You waste time on the wrong checks</strong>
+            <p>The obvious red flags come up late because the session started too broad and too polite.</p>
+          </div>
+          <div class="card">
+            <strong>You want repeatability</strong>
+            <p>When two projects look similar, you need the same frame on both or the comparison falls apart.</p>
           </div>
         </div>
 
-        <h2>What you get</h2>
+        <h2>What gets better after install</h2>
         <div class="grid">
           <div class="card">
-            <strong>Inside the file</strong>
+            <strong>Your agent stops starting from zero</strong>
+            <p>The prompt pack becomes part of the workflow instead of another file you forgot you downloaded.</p>
+          </div>
+          <div class="card">
+            <strong>Research gets sharper faster</strong>
+            <p>You get better first-pass questions for token thesis, whitepaper review, unlock risk, red flags, and comparisons.</p>
+          </div>
+          <div class="card">
+            <strong>The full pack stays easy to export</strong>
+            <p>The repo install also gives you a helper command when you want the whole file in a local folder.</p>
+          </div>
+          <div class="card">
+            <strong>You can still keep it simple</strong>
+            <p>If you only want the raw file, the direct download still exists. Nothing forces you into extra ceremony.</p>
+          </div>
+        </div>
+
+        <h2>What is inside</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>Prompt jobs covered</strong>
             <ul>
-              <li>50 prompts in one markdown file</li>
-              <li>Prompts grouped by research job, not random category spam</li>
-              <li>A structure you can keep adapting to your own workflow</li>
+              <li>Quick thesis and bull vs bear framing</li>
+              <li>Whitepaper review and technical claims audit</li>
+              <li>Tokenomics, unlocks, and incentive checks</li>
+              <li>Competitive analysis and valuation framing</li>
+              <li>Risk scans, yield questions, and monitoring checklists</li>
             </ul>
           </div>
           <div class="card">
-            <strong>Best for</strong>
+            <strong>Repo extras</strong>
             <ul>
-              <li>Traders screening more tokens than they can research deeply by hand</li>
-              <li>Researchers who want a repeatable frame instead of improvising each session</li>
-              <li>Crypto users who already use AI but want better questions, not more filler</li>
+              <li>Install script for agent workflows</li>
+              <li>Reusable skill files for Codex and Claude Code</li>
+              <li>Helper command to export the full prompt pack anywhere you want it</li>
             </ul>
           </div>
         </div>
 
-        <div class="cta-row">
-          <a class="cta" href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">Open GitHub repo</a>
-          <a class="tier" href="/downloads/dayonebuilder-50-ai-prompts-for-crypto-research.md" download>Download free</a>
-          <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-prompt-pack?amount=20">Support $20</a>
-          <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-prompt-pack">Custom support</a>
-        </div>
         <div class="note">
-          If you only want the file, download it. If you want the prompt pack to live inside your agent workflow, use the repo install.
-        </div>
-        <div class="support-row">
-          <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-prompt-pack?amount=200">Support $200</a>
-          <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-prompt-pack?amount=1000">Support $1000</a>
+          If this ends up saving you time every week, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/crypto-prompt-pack">support future updates here</a>.
+          If not, take the pack and use it anyway.
         </div>
       </div>
     </div>

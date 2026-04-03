@@ -1,13 +1,14 @@
 <!doctype html>
 <!-- public-copy-allow: Ben Ison -->
+<!-- public-copy-allow: Codex -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Free crypto tools with installable repos | DayOneBuilder</title>
+    <title>Crypto tools you can hand to your agent | DayOneBuilder</title>
     <meta
       name="description"
-      content="Browse the current DayOneBuilder crypto tools. Each live product now has its own installable GitHub repo, a free direct download, and an optional support flow."
+      content="Three small crypto tools for research, tracking, and workflow cleanup. Copy the install phrase for your agent, open the repo, or grab the direct file."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -15,6 +16,21 @@
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
+
+      async function copyPhrase(button) {
+        const text = button.getAttribute("data-copy");
+        const original = button.dataset.original || button.textContent;
+        button.dataset.original = original;
+        try {
+          await navigator.clipboard.writeText(text);
+          button.textContent = "Copied";
+        } catch (err) {
+          button.textContent = "Copy failed";
+        }
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1600);
+      }
     </script>
     <style>
       :root {
@@ -25,6 +41,7 @@
         --line: rgba(191, 245, 221, 0.16);
         --mint: #9ef0c0;
         --acid: #d7ff64;
+        --sand: #f7d49c;
       }
       * { box-sizing: border-box; }
       body {
@@ -58,28 +75,37 @@
         color: var(--acid);
         font-weight: 700;
       }
+      .agent-row,
       .button-row {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        margin-top: 16px;
       }
-      .button {
+      .agent-row { margin-top: 14px; }
+      .agent-pill {
         display: inline-flex;
-        min-height: 46px;
         align-items: center;
-        padding: 0 16px;
+        gap: 8px;
+        min-height: 36px;
+        padding: 0 12px;
         border-radius: 999px;
-        background: linear-gradient(135deg, var(--mint), var(--acid));
-        color: #03110c;
-        font-weight: 700;
-        text-decoration: none;
-      }
-      .button.secondary {
-        background: transparent;
-        color: var(--ink);
         border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        font-weight: 700;
       }
+      .agent-mark {
+        display: inline-flex;
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .codex .agent-mark { background: linear-gradient(135deg, #c6ff72, #73f1be); color: #04100a; }
+      .claude .agent-mark { background: linear-gradient(135deg, #f7d49c, #ffc3a3); color: #20110a; }
       .phrase {
         margin-top: 14px;
         padding: 12px 14px;
@@ -88,6 +114,33 @@
         background: rgba(0, 0, 0, 0.24);
       }
       code { font-family: "IBM Plex Mono", monospace; }
+      .button,
+      .ghost {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        border-radius: 999px;
+        font-weight: 700;
+        border: 1px solid transparent;
+      }
+      .button {
+        background: linear-gradient(135deg, var(--mint), var(--acid));
+        color: #03110c;
+        cursor: pointer;
+      }
+      .ghost {
+        border-color: var(--line);
+        color: var(--ink);
+        text-decoration: none;
+      }
+      button.button { font: inherit; }
+      .soft-link {
+        color: var(--sand);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
       @media (max-width: 860px) {
         .grid { grid-template-columns: 1fr; }
       }
@@ -96,68 +149,68 @@
   <body>
     <div class="wrap">
       <a class="back" href="/">← Back to DayOneBuilder</a>
-      <h1>Use the free core, or tell your agent to install the repo</h1>
+      <h1>Use the tool that matches the mess you have right now</h1>
       <p>
-        Every live product now has three paths: a public product page, a dedicated GitHub repo per product, and a free direct download.
-        If you want the tool to live inside your agent workflow, use the repo.
+        These are small crypto products for recurring pain: research that starts too vague, portfolio sheets that drift, and agent workflows that keep falling back to zero.
+        The best first move is usually not a download button. It is copying one clean install phrase to your agent.
       </p>
 
       <div class="grid">
         <article class="card">
           <h2>50 AI Prompts for Crypto Research</h2>
-          <p>For when token research is scattered across tabs, screenshots, whitepapers, and half-finished notes.</p>
-          <div class="price">Free + installable repo</div>
+          <p>For token diligence, whitepaper review, risk checks, and comparison work when your research keeps turning into tab chaos.</p>
+          <div class="price">Installable repo</div>
+          <div class="agent-row">
+            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
+            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
+          </div>
           <div class="phrase"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
-          <div class="button-row">
-            <a class="button" href="/products/crypto-prompt-pack/">Open page</a>
-            <a class="button secondary" href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">GitHub repo</a>
-            <a class="button secondary" href="/downloads/dayonebuilder-50-ai-prompts-for-crypto-research.md" download>Download</a>
+          <div class="button-row" style="margin-top: 16px;">
+            <button class="button" data-copy="Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
+            <a class="ghost" href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">GitHub repo</a>
+            <a class="ghost" href="/products/crypto-prompt-pack/">Product page</a>
           </div>
         </article>
 
         <article class="card">
           <h2>Crypto Portfolio Tracker</h2>
-          <p>For when balances live across wallets and your cost basis or wallet P&amp;L keeps drifting.</p>
-          <div class="price">Free + installable repo</div>
+          <p>For wallet sprawl, transfers, bridges, rewards, and the kind of spreadsheet drift that makes you distrust your own totals.</p>
+          <div class="price">Installable repo</div>
+          <div class="agent-row">
+            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
+            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
+          </div>
           <div class="phrase"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
-          <div class="button-row">
-            <a class="button" href="/products/crypto-portfolio-tracker/">Open page</a>
-            <a class="button secondary" href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">GitHub repo</a>
-            <a class="button secondary" href="/downloads/dayonebuilder-crypto-portfolio-tracker.zip">Download</a>
+          <div class="button-row" style="margin-top: 16px;">
+            <button class="button" data-copy="Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
+            <a class="ghost" href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">GitHub repo</a>
+            <a class="ghost" href="/products/crypto-portfolio-tracker/">Product page</a>
           </div>
         </article>
 
         <article class="card">
           <h2>Crypto Research Copilot Starter</h2>
-          <p>For when token, wallet, and yield research still starts from zero every time.</p>
-          <div class="price">Free + installable repo</div>
+          <p>For token, wallet, and yield sessions where the agent keeps starting from a blank chat and a weak first frame.</p>
+          <div class="price">Installable repo</div>
+          <div class="agent-row">
+            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
+            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
+          </div>
           <div class="phrase"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
-          <div class="button-row">
-            <a class="button" href="/products/crypto-research-copilot/">Open page</a>
-            <a class="button secondary" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">GitHub repo</a>
-            <a class="button secondary" href="/downloads/dayonebuilder-crypto-research-copilot-starter.zip">Download</a>
+          <div class="button-row" style="margin-top: 16px;">
+            <button class="button" data-copy="Install dayonebuilder/dob-crypto-research-copilot by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
+            <a class="ghost" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">GitHub repo</a>
+            <a class="ghost" href="/products/crypto-research-copilot/">Product page</a>
           </div>
         </article>
 
         <article class="card">
-          <h2>Prompt Buddy</h2>
-          <p>For when your crypto prompt is still too vague and you want to fix it before wasting the agent run.</p>
-          <div class="price">Free + installable repo</div>
-          <div class="phrase"><code>Install dayonebuilder/dob-prompt-buddy by Ben Ison.</code></div>
-          <div class="button-row">
-            <a class="button" href="/products/prompt-buddy/">Open page</a>
-            <a class="button secondary" href="https://github.com/DayOneBuilder/dob-prompt-buddy">GitHub repo</a>
-            <a class="button secondary" href="/downloads/dayonebuilder-prompt-buddy-starter.zip">Download</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <h2>What changed</h2>
+          <h2>One quiet note on support</h2>
           <p>
-            These are no longer just loose files and starter zips. Each live product now has its own repo and its own install phrase,
-            so the agent-install story is explicit instead of implied.
+            The point right now is usage, installs, and people getting real value. If one of these ends up saving you time every week, there is a support link on the product page.
+            It does not need to be the first thing in your face.
           </p>
-          <div class="price">Repo per product</div>
+          <div class="price">Value first</div>
         </article>
       </div>
     </div>
