@@ -6,7 +6,7 @@
     <title>Crypto Portfolio Tracker | DayOneBuilder</title>
     <meta
       name="description"
-      content="A practical crypto portfolio tracker spreadsheet for people who need cleaner wallet records, cost basis visibility, and less broken P&amp;L."
+      content="Download the Crypto Portfolio Tracker free. Track wallets, transactions, holdings, cost basis, and P&L in one starter workbook."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -42,7 +42,7 @@
       }
       a { color: inherit; text-decoration: none; }
       .back { color: var(--muted); }
-      h1, h2, h3 { line-height: 1.08; }
+      h1, h2 { line-height: 1.08; }
       h1 { font-size: clamp(2rem, 5vw, 4rem); margin: 12px 0; }
       h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
       p, li { color: var(--muted); }
@@ -63,15 +63,28 @@
         border: 1px solid var(--line);
         color: var(--muted);
       }
-      .cta {
+      .cta-row,
+      .support-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .cta,
+      .tier {
         display: inline-flex;
         min-height: 48px;
         align-items: center;
         padding: 0 18px;
         border-radius: 999px;
+        font-weight: 700;
+      }
+      .cta {
         background: linear-gradient(135deg, var(--mint), var(--sand));
         color: #04100a;
-        font-weight: 700;
+      }
+      .tier {
+        border: 1px solid var(--line);
+        color: var(--ink);
       }
       .note {
         margin-top: 18px;
@@ -92,15 +105,8 @@
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
-      .mini {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 14px;
-        margin-top: 18px;
-      }
-      .mini .card strong { display: block; margin-bottom: 8px; }
       @media (max-width: 820px) {
-        .grid, .mini { grid-template-columns: 1fr; }
+        .grid { grid-template-columns: 1fr; }
       }
     </style>
   </head>
@@ -109,31 +115,36 @@
       <a class="back" href="/products/">← Back to products</a>
       <div class="panel">
         <h1>Crypto Portfolio Tracker</h1>
-        <div class="price">$9.99</div><span class="label">Instant download</span>
+        <div class="price">Free</div><span class="label">Optional support</span>
         <p>
           <strong>Stop guessing your wallet P&amp;L from scattered balances and half-clean transaction notes.</strong>
         </p>
         <p>
-          This spreadsheet gives you a clean starting structure for wallets, transactions, holdings, and a dashboard,
-          so transfers, fees, staking rewards, and airdrops do not keep wrecking the numbers.
+          This starter workbook gives you a cleaner place to track wallets, transactions, holdings, fees, cost basis,
+          realized P&amp;L, and unrealized P&amp;L without pretending crypto accounting is simple.
         </p>
         <p>
-          Use it when your balances are split across wallets or exchanges and your current sheet still cannot answer a simple question:
-          what do I own, what did it cost me, and what is the P&amp;L now?
+          It is built for people whose current sheet keeps drifting the moment transfers, bridges, staking rewards, or
+          airdrops start piling up.
         </p>
 
-        <div class="mini">
+        <div class="grid">
           <div class="card">
-            <strong>Works for</strong>
-            <p>Wallet-by-wallet tracking, exchange balances, and multi-chain recordkeeping.</p>
+            <strong>Use it for</strong>
+            <ul>
+              <li>Wallet and exchange tracking in one file</li>
+              <li>Transaction logging with cleaner event types</li>
+              <li>Holdings reconciliation and cost basis checks</li>
+              <li>Basic portfolio dashboard totals</li>
+            </ul>
           </div>
           <div class="card">
-            <strong>Handles</strong>
-            <p>Buys, sells, transfers, bridges, staking rewards, airdrops, LP events, and fees.</p>
-          </div>
-          <div class="card">
-            <strong>Built for</strong>
-            <p>Excel, LibreOffice, and Numbers-compatible spreadsheet workflows.</p>
+            <strong>Why it helps</strong>
+            <ul>
+              <li>Keeps internal transfers from distorting your view</li>
+              <li>Gives you one structure for buys, sells, staking, rewards, and DeFi events</li>
+              <li>Makes cleanup less painful later</li>
+            </ul>
           </div>
         </div>
 
@@ -142,59 +153,33 @@
           <div class="card">
             <strong>Inside the download</strong>
             <ul>
-              <li>1 ZIP file with the tracker workbook and setup README</li>
-              <li>Tabs for instructions, wallets, transactions, holdings, and dashboard</li>
-              <li>Starter formulas and structure for wallet-level cost basis and P&amp;L tracking</li>
+              <li>1 ZIP with the workbook and setup README</li>
+              <li>Tabs for Instructions, Wallets, Transactions, Holdings, and Dashboard</li>
+              <li>A starter layout you can extend in Excel, LibreOffice, or similar apps</li>
             </ul>
           </div>
           <div class="card">
-            <strong>Why this is useful</strong>
+            <strong>Best for</strong>
             <ul>
-              <li>Keeps internal transfers neutral instead of inflating profit</li>
-              <li>Makes fees visible so returns do not drift quietly</li>
-              <li>Gives you one place to reconcile balances before tax season gets ugly</li>
+              <li>Anyone tracking multiple wallets or exchanges by hand</li>
+              <li>Anyone trying to fix cost basis after transfers, bridges, or rewards</li>
+              <li>Anyone who wants a practical sheet before paying for bigger software</li>
             </ul>
           </div>
         </div>
 
-        <h2>What the workbook covers</h2>
-        <div class="grid">
-          <div class="card">
-            <strong>Instructions</strong>
-            <p>Setup notes, column guidance, and event-type hints so you are not starting from a blank file.</p>
-          </div>
-          <div class="card">
-            <strong>Wallets</strong>
-            <p>One row per wallet or exchange account, with chain, label, and status fields.</p>
-          </div>
-          <div class="card">
-            <strong>Transactions</strong>
-            <p>A working ledger for inflows, outflows, fees, protocol names, notes, and linked transfers.</p>
-          </div>
-          <div class="card">
-            <strong>Holdings</strong>
-            <p>A current-balance view for token amounts, prices, value, cost basis, and unrealized P&amp;L.</p>
-          </div>
-          <div class="card">
-            <strong>Dashboard</strong>
-            <p>Starter totals for portfolio value, cost basis, realized P&amp;L, unrealized P&amp;L, fees, and wallet count.</p>
-          </div>
-          <div class="card">
-            <strong>README</strong>
-            <p>A quick walkthrough of what is included and where to start once you open the file.</p>
-          </div>
+        <div class="cta-row">
+          <a class="cta" href="/downloads/dayonebuilder-crypto-portfolio-tracker.zip">Download free</a>
+          <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-portfolio-tracker?amount=20">Support $20</a>
+          <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-portfolio-tracker">Custom support</a>
         </div>
-
-        <h2>Best for</h2>
-        <ul>
-          <li>Crypto users tracking balances across multiple wallets or exchanges</li>
-          <li>Anyone whose current sheet breaks after transfers, bridging, staking, or airdrops</li>
-          <li>People who want a simple spreadsheet before paying for heavier portfolio software</li>
-        </ul>
-
-        <a class="cta" href="https://checkout.dayonebuilder.online/buy/crypto-portfolio-tracker">Get the tracker</a>
         <div class="note">
-          Instant digital delivery after NOWPayments confirms payment. Pay with crypto or card. The ZIP unlocks automatically on the thank-you page.
+          Start with the free tracker. If it saves you from another ugly reconciliation session, support the next version.
+          If not, you still leave with a better workbook than a blank sheet.
+        </div>
+        <div class="support-row">
+          <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-portfolio-tracker?amount=200">Support $200</a>
+          <a class="tier" href="https://checkout.dayonebuilder.online/donate/crypto-portfolio-tracker?amount=1000">Support $1000</a>
         </div>
       </div>
     </div>
