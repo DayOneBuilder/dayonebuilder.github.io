@@ -1,0 +1,223 @@
+<!doctype html>
+<!-- public-copy-allow: Ben Ison -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prompt Buddy | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Free prompt-coaching bundle for people who want cleaner crypto prompts before they send them to an agent."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #07131a;
+        --ink: #eff8f5;
+        --muted: #b7ccc6;
+        --panel: rgba(10, 31, 33, 0.88);
+        --line: rgba(191, 245, 221, 0.16);
+        --mint: #9ef0c0;
+        --sand: #f7d49c;
+        --acid: #d7ff64;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: linear-gradient(180deg, #07131a 0%, #0a171d 100%);
+        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+      .wrap { width: min(calc(100% - 32px), 960px); margin: 0 auto; padding: 28px 0 60px; }
+      .panel {
+        margin-top: 18px;
+        padding: 28px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      a { color: inherit; text-decoration: none; }
+      .back { color: var(--muted); }
+      h1, h2 { line-height: 1.08; }
+      h1 { font-size: clamp(2rem, 5vw, 4rem); margin: 12px 0; }
+      h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
+      p, li, code { color: var(--muted); }
+      .price {
+        display: inline-flex;
+        margin: 10px 0 18px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(158, 240, 192, 0.14);
+        color: var(--mint);
+        font-weight: 700;
+      }
+      .label {
+        display: inline-flex;
+        margin-left: 10px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--muted);
+      }
+      .cta-row,
+      .support-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .cta,
+      .tier {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        padding: 0 18px;
+        border-radius: 999px;
+        font-weight: 700;
+      }
+      .cta {
+        background: linear-gradient(135deg, var(--mint), var(--sand));
+        color: #04100a;
+      }
+      .tier {
+        border: 1px solid var(--line);
+        color: var(--ink);
+      }
+      .note,
+      .install-box {
+        margin-top: 18px;
+        padding: 16px 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .grid,
+      .mini {
+        display: grid;
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .mini { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .card {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .mini .card strong { display: block; margin-bottom: 8px; }
+      .phrase,
+      pre {
+        margin: 12px 0 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.24);
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      code { font-family: "IBM Plex Mono", monospace; }
+      @media (max-width: 820px) {
+        .grid, .mini { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/products/">← Back to products</a>
+      <div class="panel">
+        <h1>Prompt Buddy</h1>
+        <div class="price">Free</div><span class="label">Installable repo + optional support</span>
+        <p>
+          <strong>Stop sending vague crypto prompts that force the agent to guess what you meant.</strong>
+        </p>
+        <p>
+          Prompt Buddy is a small prompt-coaching bundle for the moment before you hit send. It helps tighten token DD,
+          wallet review, and yield-scan prompts so the agent gets a specific task instead of a fuzzy request.
+        </p>
+        <p>
+          The free core is intentionally narrow: check the prompt, spot what is missing, and rewrite it into something more usable.
+        </p>
+
+        <h2>Install with your agent</h2>
+        <div class="install-box">
+          <strong>Tell your agent:</strong>
+          <div class="phrase"><code>Install dayonebuilder/dob-prompt-buddy by Ben Ison.</code></div>
+          <p>
+            Repo: <a href="https://github.com/DayOneBuilder/dob-prompt-buddy">github.com/DayOneBuilder/dob-prompt-buddy</a>
+          </p>
+          <p>Fallback if your agent does not infer the shell steps yet:</p>
+          <pre><code>git clone https://github.com/DayOneBuilder/dob-prompt-buddy.git
+cd dob-prompt-buddy
+./install.sh</code></pre>
+          <p>
+            The install script adds reusable agent skills, copies the prompt-buddy assets into <code>~/.dayonebuilder/</code>,
+            and installs a helper launcher at <code>~/.local/bin/dob-prompt-buddy</code>.
+          </p>
+        </div>
+
+        <div class="mini">
+          <div class="card">
+            <strong>Token DD</strong>
+            <p>Turns vague token questions into a real due-diligence ask with sections, checks, and evidence rules.</p>
+          </div>
+          <div class="card">
+            <strong>Wallet review</strong>
+            <p>Forces wallet prompts to include chain, address, behavior checks, and limits on invented labels.</p>
+          </div>
+          <div class="card">
+            <strong>Yield scan</strong>
+            <p>Pushes prompts beyond "find the best APY" and toward risk, liquidity, and sustainability questions.</p>
+          </div>
+        </div>
+
+        <h2>What the free core includes</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>Prompt filters</strong>
+            <ul>
+              <li>A before-send checklist for vague prompts</li>
+              <li>Task-specific checks for token DD, wallet review, and yield scans</li>
+              <li>Weak-to-strong prompt examples you can reuse</li>
+            </ul>
+          </div>
+          <div class="card">
+            <strong>Repo install adds</strong>
+            <ul>
+              <li>A dedicated GitHub repo per product</li>
+              <li>A reusable skill layer for agent workflows</li>
+              <li>A helper that scaffolds the bundle into any local research folder</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>Best for</h2>
+        <ul>
+          <li>Crypto users who already use AI but still send weak first-draft prompts</li>
+          <li>Researchers who want tighter token, wallet, and yield asks</li>
+          <li>Anyone who wants a reusable prompt filter inside an agent workflow</li>
+        </ul>
+
+        <div class="cta-row">
+          <a class="cta" href="https://github.com/DayOneBuilder/dob-prompt-buddy">Open GitHub repo</a>
+          <a class="tier" href="/downloads/dayonebuilder-prompt-buddy-starter.zip">Download free</a>
+          <a class="tier" href="https://checkout.dayonebuilder.online/donate/prompt-buddy?amount=20">Support $20</a>
+          <a class="tier" href="https://checkout.dayonebuilder.online/donate/prompt-buddy">Custom support</a>
+        </div>
+        <div class="note">
+          Start with the free checklists and examples. If Prompt Buddy saves you bad prompts and wasted runs, support helps fund deeper prompt coaching and better install flows.
+        </div>
+        <div class="support-row">
+          <a class="tier" href="https://checkout.dayonebuilder.online/donate/prompt-buddy?amount=200">Support $200</a>
+          <a class="tier" href="https://checkout.dayonebuilder.online/donate/prompt-buddy?amount=1000">Support $1000</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
