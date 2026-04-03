@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Best Crypto Portfolio Tracker Spreadsheet: What Actually Matters | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="What makes a crypto portfolio tracker spreadsheet useful once you deal with transfers, bridges, staking rewards, airdrops, and wallet-level P&amp;L."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #07131a;
+        --ink: #eff8f5;
+        --muted: #b7ccc6;
+        --panel: rgba(10, 31, 33, 0.88);
+        --line: rgba(191, 245, 221, 0.16);
+        --mint: #9ef0c0;
+        --acid: #d7ff64;
+        --max: 920px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(158, 240, 192, 0.12), transparent 28%),
+          linear-gradient(180deg, #07131a 0%, #08171d 48%, #061116 100%);
+        font: 16px/1.7 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+      a { color: inherit; }
+      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; padding: 28px 0 56px; }
+      .back { color: var(--muted); text-decoration: none; }
+      .panel {
+        margin-top: 18px;
+        padding: 30px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(215, 255, 100, 0.24);
+        color: var(--acid);
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3 { line-height: 1.08; }
+      h1 { font-size: clamp(2.1rem, 5vw, 4rem); margin: 14px 0 12px; }
+      h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
+      h3 { font-size: 1.05rem; margin-top: 24px; }
+      p, li { color: var(--muted); }
+      ul { padding-left: 20px; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card, .note {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .cta {
+        display: inline-flex;
+        margin-top: 12px;
+        min-height: 48px;
+        align-items: center;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--mint), var(--acid));
+        color: #04100a;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      @media (max-width: 760px) {
+        .grid { grid-template-columns: 1fr; }
+        .panel { padding: 22px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <article class="panel">
+        <div class="eyebrow">comparison guide · wallet p&amp;l</div>
+        <h1>Best crypto portfolio tracker spreadsheet: what actually matters once the easy balances stop matching</h1>
+        <p>
+          Plenty of crypto spreadsheet templates look fine on day one. Then you move funds between wallets,
+          bridge assets, claim staking rewards, LP into a pool, or receive an airdrop. That is where weak trackers fall apart.
+        </p>
+        <p>
+          If you are searching for the best crypto portfolio tracker spreadsheet, the question is not whether a file looks neat.
+          The question is whether it still makes sense after normal crypto behavior starts happening.
+        </p>
+
+        <h2>What a spreadsheet has to get right</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Transfers should stay neutral</h3>
+            <p>Moving funds between your own wallets should not show up as fresh profit or fresh capital.</p>
+          </div>
+          <div class="card">
+            <h3>Cost basis cannot disappear</h3>
+            <p>If your sheet only tracks current value, you do not have usable P&amp;L. You have a watchlist with extra steps.</p>
+          </div>
+          <div class="card">
+            <h3>Fees need their own place</h3>
+            <p>Gas, bridge fees, and trading fees quietly wreck returns when they stay invisible.</p>
+          </div>
+          <div class="card">
+            <h3>Event types need labels</h3>
+            <p>Buys, sells, rewards, bridges, LP deposits, and airdrops should not all live under one vague transaction bucket.</p>
+          </div>
+        </div>
+
+        <h2>What weak spreadsheet templates usually miss</h2>
+        <ul>
+          <li>No way to link one wallet's transfer out with another wallet's transfer in</li>
+          <li>No field for transaction-time USD value, so historical rows become fuzzy later</li>
+          <li>No clear split between holdings, transactions, and dashboard views</li>
+          <li>No structure for staking rewards, airdrops, LP entries, or bridge activity</li>
+          <li>No quick way to reconcile balances against reality</li>
+        </ul>
+
+        <h2>What a strong spreadsheet setup usually includes</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Wallets tab</h3>
+            <p>One row per wallet or exchange account, with chain, label, and status.</p>
+          </div>
+          <div class="card">
+            <h3>Transactions tab</h3>
+            <p>A working ledger with event types, asset in, asset out, fee data, notes, and transfer linking.</p>
+          </div>
+          <div class="card">
+            <h3>Holdings tab</h3>
+            <p>Current balances, prices, current value, cost basis, and unrealized P&amp;L.</p>
+          </div>
+          <div class="card">
+            <h3>Dashboard tab</h3>
+            <p>Total portfolio value, cost basis, realized P&amp;L, unrealized P&amp;L, fees, and wallet count.</p>
+          </div>
+        </div>
+
+        <h2>Spreadsheet vs app</h2>
+        <p>
+          If you want automation, app integrations, and exchange sync, software can help. If you want control, editable structure,
+          and a clear view of how your records actually work, a spreadsheet is still hard to beat.
+        </p>
+        <p>
+          A lot of crypto users do not need a heavy portfolio app first. They need a spreadsheet that does not break the moment life gets more complicated than spot buys.
+        </p>
+
+        <h2>Who should use a spreadsheet first</h2>
+        <ul>
+          <li>People tracking a handful of wallets and exchanges</li>
+          <li>Anyone cleaning up cost basis after transfers, bridges, or DeFi activity</li>
+          <li>Anyone who wants a manual system before paying for a larger software stack</li>
+        </ul>
+
+        <div class="note">
+          <strong>A practical shortcut</strong>
+          <p>
+            If your current sheet keeps drifting, start with a workbook that already has the tabs and structure in place.
+            The live <a href="/products/crypto-portfolio-tracker/">Crypto Portfolio Tracker</a> gives you a starter file for wallets,
+            transactions, holdings, and dashboard tracking without forcing you to build everything from zero.
+          </p>
+          <a class="cta" href="/products/crypto-portfolio-tracker/">See the tracker</a>
+        </div>
+      </article>
+    </div>
+  </body>
+</html>
