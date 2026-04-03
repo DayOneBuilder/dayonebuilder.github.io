@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How to Write Better Crypto Prompts for AI Research | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A practical guide to writing better crypto prompts for token due diligence, wallet review, and yield scans without making the agent guess what you meant."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #07131a;
+        --ink: #eff8f5;
+        --muted: #b7ccc6;
+        --panel: rgba(10, 31, 33, 0.88);
+        --line: rgba(191, 245, 221, 0.16);
+        --mint: #9ef0c0;
+        --acid: #d7ff64;
+        --max: 920px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(158, 240, 192, 0.12), transparent 28%),
+          linear-gradient(180deg, #07131a 0%, #08171d 48%, #061116 100%);
+        font: 16px/1.7 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+      a { color: inherit; }
+      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; padding: 28px 0 56px; }
+      .back { color: var(--muted); text-decoration: none; }
+      .panel {
+        margin-top: 18px;
+        padding: 30px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(215, 255, 100, 0.24);
+        color: var(--acid);
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3 { line-height: 1.08; }
+      h1 { font-size: clamp(2.1rem, 5vw, 4rem); margin: 14px 0 12px; }
+      h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
+      p, li, code { color: var(--muted); }
+      ul { padding-left: 20px; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card, .note {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .cta {
+        display: inline-flex;
+        margin-top: 12px;
+        min-height: 48px;
+        align-items: center;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--mint), var(--acid));
+        color: #04100a;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      code {
+        font-family: "IBM Plex Mono", monospace;
+        background: rgba(0, 0, 0, 0.22);
+        padding: 2px 6px;
+        border-radius: 8px;
+      }
+      @media (max-width: 760px) {
+        .grid { grid-template-columns: 1fr; }
+        .panel { padding: 22px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <article class="panel">
+        <div class="eyebrow">prompt guide · crypto research</div>
+        <h1>How to write better crypto prompts for AI research without making the agent guess what you meant</h1>
+        <p>
+          A lot of bad AI output is just bad prompt input with extra steps. In crypto, that gets expensive fast.
+          A vague prompt can waste a token due-diligence pass, misread a wallet, or turn a yield scan into generic sludge.
+        </p>
+        <p>
+          If you want better AI help for crypto work, the goal is not to write longer prompts. The goal is to write prompts
+          that are specific enough for the agent to execute without guessing.
+        </p>
+
+        <h2>What weak crypto prompts usually look like</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Too vague</h3>
+            <p><code>Is this token legit?</code> gives the agent too much room to invent the job.</p>
+          </div>
+          <div class="card">
+            <h3>No context</h3>
+            <p>Missing chain, address, ticker, or risk angle means the answer starts on shaky ground.</p>
+          </div>
+          <div class="card">
+            <h3>No output format</h3>
+            <p>If you do not ask for sections, you usually get a blob of text instead of something you can compare.</p>
+          </div>
+          <div class="card">
+            <h3>No verification step</h3>
+            <p>The agent can sound confident without showing what should be checked before you trust the answer.</p>
+          </div>
+        </div>
+
+        <h2>What stronger crypto prompts usually include</h2>
+        <ul>
+          <li>The exact task: token DD, wallet review, yield scan, or something else</li>
+          <li>The exact subject: token ticker, contract, wallet address, chain, or niche</li>
+          <li>The output format: sections, bullets, table, red flags, next checks</li>
+          <li>One rule that keeps the agent honest, like separating facts from assumptions</li>
+          <li>A verification step so the answer does not stop at a smooth-looking conclusion</li>
+        </ul>
+
+        <h2>Example: token due diligence</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Weak</h3>
+            <p><code>Tell me if this token is good.</code></p>
+          </div>
+          <div class="card">
+            <h3>Better</h3>
+            <p><code>Review HYPE on Hyperliquid. Return: what it is, quick legitimacy check, liquidity questions, holder concentration risks, obvious red flags, and 3 next checks. Separate facts from assumptions.</code></p>
+          </div>
+        </div>
+
+        <h2>Example: wallet review</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Weak</h3>
+            <p><code>Look at this wallet.</code></p>
+          </div>
+          <div class="card">
+            <h3>Better</h3>
+            <p><code>Analyze wallet 0xABC... on Base. Return: balance picture, transfer behavior, protocol exposure, suspicious signs, and next checks. Keep claims tied to observable behavior and do not invent wallet labels.</code></p>
+          </div>
+        </div>
+
+        <h2>Example: yield scan</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Weak</h3>
+            <p><code>Find me the best yield.</code></p>
+          </div>
+          <div class="card">
+            <h3>Better</h3>
+            <p><code>Scan Arbitrum stablecoin yield options for cautious capital. Return: best-looking candidates, yield source, TVL/liquidity questions, key risks, and what to verify before deploying. Do not rank by APY alone.</code></p>
+          </div>
+        </div>
+
+        <h2>The shortcut</h2>
+        <p>
+          If your first drafts are usually too loose, use a prompt filter before you send them. That is often enough to improve the answer quality without changing models or adding more tools.
+        </p>
+
+        <div class="note">
+          <strong>Practical next step</strong>
+          <p>
+            If you want a reusable filter for crypto prompts, the live <a href="/products/prompt-buddy/">Prompt Buddy</a>
+            gives you a free repo, a free starter bundle, and checklists for token DD, wallet review, and yield scans.
+          </p>
+          <a class="cta" href="/products/prompt-buddy/">See Prompt Buddy</a>
+        </div>
+      </article>
+    </div>
+  </body>
+</html>
