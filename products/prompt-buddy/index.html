@@ -6,10 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Prompt Buddy | DayOneBuilder</title>
-    <meta
-      name="description"
-      content="Prompt Buddy is a terminal sidecar for crypto prompts. It catches vague asks, missing verification, and weak framing before you waste a run."
-    />
+    <meta name="description" content="Prompt guardrail for crypto work that catches weak framing before you waste a run on token DD, wallet review, or yield scans." />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,6 +30,7 @@
       }
     </script>
     <style>
+
       :root {
         --bg: #07131a;
         --ink: #eff8f5;
@@ -41,6 +39,7 @@
         --line: rgba(191, 245, 221, 0.16);
         --mint: #9ef0c0;
         --sand: #f7d49c;
+        --acid: #d7ff64;
       }
       * { box-sizing: border-box; }
       body {
@@ -49,7 +48,7 @@
         background: linear-gradient(180deg, #07131a 0%, #0a171d 100%);
         font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
       }
-      .wrap { width: min(calc(100% - 32px), 980px); margin: 0 auto; padding: 28px 0 60px; }
+      .wrap { width: min(calc(100% - 32px), 960px); margin: 0 auto; padding: 28px 0 60px; }
       .panel {
         margin-top: 18px;
         padding: 28px;
@@ -154,7 +153,7 @@
       button.cta { font: inherit; }
       .grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 16px;
         margin-top: 18px;
       }
@@ -178,16 +177,13 @@
     <div class="wrap">
       <a class="back" href="/products/">← Back to products</a>
       <div class="panel">
+        <div class="price">Prompt guardrail</div><span class="label">Installable repo + direct bundle</span>
         <h1>Prompt Buddy</h1>
-        <div class="price">Installable repo</div><span class="label">Direct bundle still available</span>
-        <p><strong>You keep writing like usual. Prompt Buddy sits beside you and tells you when the prompt is about to go sideways.</strong></p>
-        <p>
-          It now ships as a terminal sidecar plus a local observer for crypto prompts. Paste a draft, get a quick intervention,
-          open the right checklist, and tighten the ask before the agent runs with the wrong idea.
-        </p>
+        <p><strong>Catch weak prompts before they waste a run.</strong></p>
+        <p>Prompt Buddy reads the draft, points to the missing check, and nudges you toward a better ask before the agent runs with the wrong idea.</p>
 
         <div class="install-box">
-          <strong>Paste this to your agent</strong>
+          <strong>Install it</strong>
           <div class="agent-row">
             <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
             <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
@@ -196,90 +192,26 @@
           <div class="cta-row" style="margin-top: 14px;">
             <button class="cta" data-copy="Install dayonebuilder/dob-prompt-buddy by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
             <a class="secondary-link" href="https://github.com/DayOneBuilder/dob-prompt-buddy">Open GitHub repo</a>
-            <a class="ghost-button" href="/downloads/dayonebuilder-prompt-buddy-starter.zip">Direct bundle</a>
+            <a class="ghost-button" href="/downloads/dayonebuilder-prompt-buddy-starter.zip" download>Direct bundle</a>
           </div>
-          <p style="margin-top: 14px;">If your CLI wants explicit steps, use the repo README. The quiet paths are: run Codex inside the repo, run Claude Code with <code>--plugin-dir .</code>, unzip the direct bundle, or use <code>./install.sh</code> for a personal install.</p>
-          <p style="margin-top: 14px;">The honest shipped slice right now is a terminal sidecar/TUI, the same observer engine, and the training pack it routes into.</p>
-          <pre><code>git clone https://github.com/DayOneBuilder/dob-prompt-buddy.git
-cd dob-prompt-buddy
-./install.sh
-dob-prompt-buddy sidecar
-# or:
-dob-prompt-buddy sidecar --plain "look at this wallet"</code></pre>
+          <p style="margin-top: 14px;">The repo gives you the sidecar and observer setup. The bundle is there if you just want the files.</p>
         </div>
 
-        <h2>Recognize the pain?</h2>
+        <h2>Use it when</h2>
         <div class="grid">
-          <div class="card">
-            <strong>You type as usual and only notice the mistake after the run</strong>
-            <p>The agent sounds useful, but the prompt never asked for the right checks, format, or proof in the first place.</p>
-          </div>
-          <div class="card">
-            <strong>Broad prompts burn expensive runs</strong>
-            <p>The failure is often not model quality. The failure is a weak ask that leaves too much room for confident guessing.</p>
-          </div>
-          <div class="card">
-            <strong>You do not need another lecture</strong>
-            <p>You need one timely interrupt that says what is missing and where to fix it before you hit send.</p>
-          </div>
-          <div class="card">
-            <strong>You want the right lesson, not a giant tutorial menu</strong>
-            <p>If the mistake is wallet framing, show the wallet checklist. If it is a giant ambiguous ask, push plan mode first.</p>
-          </div>
+          <div class="card"><strong>You spot the mistake after the run</strong><p>The prompt problem should be obvious before the output arrives.</p></div>
+          <div class="card"><strong>A broad ask burns time or tokens</strong><p>Weak framing is often the real failure mode.</p></div>
+          <div class="card"><strong>You want the right checklist fast</strong><p>Show the missing step instead of giving a lecture.</p></div>
         </div>
 
-        <h2>What gets better after install</h2>
+        <h2>What you get</h2>
         <div class="grid">
-          <div class="card">
-            <strong>You get a visible sidecar now</strong>
-            <p>Open the sidecar, paste the draft, and it shows severity, likely slips, next files, and a better stub before you send anything.</p>
-          </div>
-          <div class="card">
-            <strong>The guidance stays crypto-specific</strong>
-            <p>Token DD, wallet review, and yield scans each get their own route instead of being flattened into generic prompt advice.</p>
-          </div>
-          <div class="card">
-            <strong>The bundle stays local and light</strong>
-            <p>The sidecar and observer run on Python stdlib plus bash. You do not need a stack of extra packages just to check a prompt.</p>
-          </div>
-          <div class="card">
-            <strong>You still keep the fast path</strong>
-            <p>Use the TUI if you want the panel. Use <code>--plain</code> if you just want the quick read. Download the bundle if you want it all in one zip.</p>
-          </div>
+          <div class="card"><strong>A visible sidecar and observer CLI</strong><p>Paste a draft and get a quick intervention before send.</p></div>
+          <div class="card"><strong>Crypto-specific routes</strong><p>Token DD, wallet review, and yield scans do not share one generic checklist.</p></div>
+          <div class="card"><strong>A local lightweight bundle</strong><p>Use the repo or direct ZIP without extra stack noise.</p></div>
         </div>
 
-        <h2>What is inside</h2>
-        <div class="grid">
-          <div class="card">
-            <strong>Direct bundle</strong>
-            <ul>
-              <li>Terminal sidecar launcher</li>
-              <li>Local observer CLI</li>
-              <li>Before-send checklist</li>
-              <li>Token DD prompt checklist</li>
-              <li>Wallet review prompt checklist</li>
-              <li>Yield scan prompt checklist</li>
-              <li>Intervention ladder</li>
-              <li>Training map</li>
-              <li>Weak-to-strong rewrite examples</li>
-            </ul>
-          </div>
-          <div class="card">
-            <strong>Repo extras</strong>
-            <ul>
-              <li>Codex plugin manifest</li>
-              <li>Claude plugin manifest</li>
-              <li>Repo-scoped skill for quiet in-repo use</li>
-              <li>Install and uninstall scripts</li>
-              <li>Plain mode and interactive TUI paths</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="note">
-          If Prompt Buddy keeps catching wasted runs, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/prompt-buddy">support future updates here</a>.
-          If not, take the starter pack and use it anyway.
-        </div>
+        <div class="note">If it catches one expensive bad prompt for you, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/prompt-buddy">support future updates here</a>. If not, keep using it.</div>
       </div>
     </div>
   </body>
