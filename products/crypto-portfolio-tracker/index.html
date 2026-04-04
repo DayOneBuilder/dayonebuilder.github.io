@@ -6,10 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Crypto Portfolio Tracker | DayOneBuilder</title>
-    <meta
-      name="description"
-      content="Crypto portfolio tracker for the mess that starts after transfers, bridges, rewards, and wallet sprawl. Copy the install phrase for your agent or grab the workbook directly."
-    />
+    <meta name="description" content="Crypto portfolio tracker workbook for bridges, transfers, rewards, and wallet sprawl that keep breaking your totals." />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,6 +30,7 @@
       }
     </script>
     <style>
+
       :root {
         --bg: #07131a;
         --ink: #eff8f5;
@@ -41,6 +39,7 @@
         --line: rgba(191, 245, 221, 0.16);
         --mint: #9ef0c0;
         --sand: #f7d49c;
+        --acid: #d7ff64;
       }
       * { box-sizing: border-box; }
       body {
@@ -154,7 +153,7 @@
       button.cta { font: inherit; }
       .grid {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 16px;
         margin-top: 18px;
       }
@@ -178,15 +177,13 @@
     <div class="wrap">
       <a class="back" href="/products/">← Back to products</a>
       <div class="panel">
+        <div class="price">Portfolio ledger</div><span class="label">Installable repo + direct workbook</span>
         <h1>Crypto Portfolio Tracker</h1>
-        <div class="price">Installable repo</div><span class="label">Direct workbook still available</span>
-        <p><strong>This is for the moment your neat little sheet collapses the second you bridge, stake, claim rewards, or move funds between wallets.</strong></p>
-        <p>
-          The tracker gives you a starting structure for wallets, transactions, holdings, fees, cost basis, and P&amp;L so you are not rebuilding the same ledger logic by hand every few weeks.
-        </p>
+        <p><strong>Track crypto without breaking your numbers.</strong></p>
+        <p>Use it when bridges, transfers, rewards, and wallet sprawl keep turning a simple sheet into fiction.</p>
 
         <div class="install-box">
-          <strong>Paste this to your agent</strong>
+          <strong>Install it</strong>
           <div class="agent-row">
             <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
             <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
@@ -195,81 +192,26 @@
           <div class="cta-row" style="margin-top: 14px;">
             <button class="cta" data-copy="Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
             <a class="secondary-link" href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">Open GitHub repo</a>
-            <a class="ghost-button" href="/downloads/dayonebuilder-crypto-portfolio-tracker.zip">Direct workbook</a>
+            <a class="ghost-button" href="/downloads/dayonebuilder-crypto-portfolio-tracker.zip" download>Direct workbook</a>
           </div>
-          <p style="margin-top: 14px;">If your CLI wants explicit steps, use the repo README. The quiet paths are: run Codex inside the repo, run Claude Code with <code>--plugin-dir .</code>, or use <code>./install.sh</code> for a personal install.</p>
-          <p style="margin-top: 14px;">Honest fallback if your agent does not infer the install steps yet:</p>
-          <pre><code>git clone https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker.git
-cd dob-crypto-portfolio-tracker
-./install.sh</code></pre>
+          <p style="margin-top: 14px;">Start with the workbook. Use the repo if you want a fresh clean copy whenever you need one.</p>
         </div>
 
-        <h2>Recognize the pain?</h2>
+        <h2>Use it when</h2>
         <div class="grid">
-          <div class="card">
-            <strong>Your balances look right until they do not</strong>
-            <p>Everything seems fine until one transfer, bridge, or reward turns the totals into fiction.</p>
-          </div>
-          <div class="card">
-            <strong>You cannot remember your own rules</strong>
-            <p>Three weeks later you are staring at a cell formula wondering what past-you meant by it.</p>
-          </div>
-          <div class="card">
-            <strong>You mix different event types together</strong>
-            <p>Buys, sells, fees, transfers, staking, and LP moves all get dumped into the same rough bucket.</p>
-          </div>
-          <div class="card">
-            <strong>You want a starter, not a monster tool</strong>
-            <p>Sometimes you just need a workbook that behaves better than a blank sheet and worse than enterprise software in exactly the right way.</p>
-          </div>
+          <div class="card"><strong>Transfers keep wrecking totals</strong><p>A bridge or internal move should not make the whole sheet feel fake.</p></div>
+          <div class="card"><strong>Everything lives in one messy table</strong><p>Buys, fees, rewards, and LP activity need cleaner buckets.</p></div>
+          <div class="card"><strong>You want a starter, not a platform</strong><p>This is a workbook you can actually keep up with.</p></div>
         </div>
 
-        <h2>What gets better after install</h2>
+        <h2>What you get</h2>
         <div class="grid">
-          <div class="card">
-            <strong>You can generate a fresh tracker fast</strong>
-            <p>The repo install gives you a helper command that drops a clean workbook wherever you want it.</p>
-          </div>
-          <div class="card">
-            <strong>The structure stays reusable</strong>
-            <p>You keep one repeatable starting point for wallets, ledger rows, holdings, and dashboard totals.</p>
-          </div>
-          <div class="card">
-            <strong>Transfers stop feeling like sabotage</strong>
-            <p>The point is not magic accounting. The point is fewer avoidable mistakes and less spreadsheet drift.</p>
-          </div>
-          <div class="card">
-            <strong>You still keep the simple path</strong>
-            <p>If you just want the workbook file, use the direct download and move on.</p>
-          </div>
+          <div class="card"><strong>A clean workbook structure</strong><p>Wallets, transactions, holdings, and a dashboard.</p></div>
+          <div class="card"><strong>A repeatable starting point</strong><p>The repo can generate a fresh tracker when the old one gets messy.</p></div>
+          <div class="card"><strong>A direct download path</strong><p>Take the workbook file if that is all you need.</p></div>
         </div>
 
-        <h2>What is inside</h2>
-        <div class="grid">
-          <div class="card">
-            <strong>Workbook structure</strong>
-            <ul>
-              <li>Instructions</li>
-              <li>Wallets</li>
-              <li>Transactions</li>
-              <li>Holdings</li>
-              <li>Dashboard</li>
-            </ul>
-          </div>
-          <div class="card">
-            <strong>Repo extras</strong>
-            <ul>
-              <li>Install script for agent workflows</li>
-              <li>Reusable skill files for Codex and Claude Code</li>
-              <li>Helper command to create a fresh workbook anywhere you want it</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="note">
-          If this becomes the sheet you keep coming back to, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/crypto-portfolio-tracker">support future updates here</a>.
-          If not, take the tracker and fix your workflow anyway.
-        </div>
+        <div class="note">If it keeps your numbers sane, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/crypto-portfolio-tracker">support future updates here</a>. If not, keep the workbook.</div>
       </div>
     </div>
   </body>
