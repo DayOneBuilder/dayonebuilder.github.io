@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wallet P&amp;L Calculator | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Wallet P&amp;L calculator for the moment deposits, withdrawals, and current holdings still refuse to line up cleanly."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <link rel="stylesheet" href="./calculator.css" />
+    <script defer src="./calculator.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/products/">← Back to products</a>
+      <section class="panel">
+        <div class="hero">
+          <div class="price">Free browser calculator</div><span class="label">Installable repo + direct ZIP</span>
+          <h1>Wallet P&amp;L Calculator</h1>
+          <p class="lede">
+            <strong>This is for the moment a wallet looks profitable in your head, but the deposits, withdrawals, and current bag still do not line up cleanly.</strong>
+          </p>
+          <p>
+            Enter total capital added, total value taken out, current holdings value, and the cost basis still attached to what is left. The calculator gives you a rough total, realized, and unrealized split without pretending to do tax-lot accounting.
+          </p>
+        </div>
+
+        <div class="install-box">
+          <strong>Use the free core now</strong>
+          <div class="install-line"><code>Live browser tool + standalone ZIP download</code></div>
+          <div class="cta-row" style="margin-top: 14px;">
+            <a class="cta" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">Download ZIP</a>
+            <a class="secondary-link" href="https://checkout.dayonebuilder.online/donate/wallet-pnl-calculator">Support this tool</a>
+          </div>
+          <p style="margin-top: 14px;">The installable repo is packaged locally and packaging passes. The browser page and ZIP are the public release for now.</p>
+        </div>
+
+        <section class="calculator-section">
+          <div class="section-heading">
+            <h2>Run the numbers</h2>
+            <p>Use external capital in and out. Leave out transfers between your own wallets or the result gets noisy fast.</p>
+          </div>
+
+          <div class="calculator-shell">
+            <div class="calc-grid">
+              <label class="field">
+                <span>Total deposits / capital in</span>
+                <input id="depositsInput" type="number" min="0" step="0.01" value="10000" />
+                <small>Total external capital added to the wallet for the period you care about.</small>
+              </label>
+
+              <label class="field">
+                <span>Total withdrawals / capital out</span>
+                <input id="withdrawalsInput" type="number" min="0" step="0.01" value="2500" />
+                <small>Total value already taken out of the wallet.</small>
+              </label>
+
+              <label class="field">
+                <span>Current holdings value</span>
+                <input id="holdingsValueInput" type="number" min="0" step="0.01" value="9200" />
+                <small>What the wallet still holds right now at current prices.</small>
+              </label>
+
+              <label class="field">
+                <span>Current holdings cost basis</span>
+                <input id="holdingsBasisInput" type="number" min="0" step="0.01" value="7000" />
+                <small>The basis still attached to the open position that remains in the wallet.</small>
+              </label>
+            </div>
+
+            <div class="example-row">
+              <button class="example-chip" type="button" data-deposits="10000" data-withdrawals="1000" data-holdings="14000" data-basis="9000">Mostly unrealized</button>
+              <button class="example-chip" type="button" data-deposits="10000" data-withdrawals="6000" data-holdings="7000" data-basis="4000">Round trip winner</button>
+              <button class="example-chip" type="button" data-deposits="10000" data-withdrawals="12000" data-holdings="1500" data-basis="500">Pulled profit</button>
+              <button class="example-chip" type="button" data-deposits="10000" data-withdrawals="2000" data-holdings="5000" data-basis="6000">Still underwater</button>
+            </div>
+
+            <div class="ratio-preview" id="consistencyNote"></div>
+
+            <div class="results-grid">
+              <article class="stat">
+                <span class="stat-label">Total P&amp;L</span>
+                <strong class="stat-value" id="totalPnl">$0.00</strong>
+                <span class="stat-note">Withdrawals plus current holdings minus deposits.</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">Total return</span>
+                <strong class="stat-value" id="totalReturnPct">0.00%</strong>
+                <span class="stat-note" id="returnNote">Relative to total deposits.</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">Net capital still in play</span>
+                <strong class="stat-value tone-neutral" id="netCapital">$0.00</strong>
+                <span class="stat-note">Deposits minus withdrawals.</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">Realized cost basis</span>
+                <strong class="stat-value tone-neutral" id="realizedBasis">$0.00</strong>
+                <span class="stat-note">Deposits minus the basis still sitting in the wallet.</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">Realized P&amp;L</span>
+                <strong class="stat-value" id="realizedPnl">$0.00</strong>
+                <span class="stat-note">Withdrawals minus realized cost basis.</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">Unrealized P&amp;L</span>
+                <strong class="stat-value" id="unrealizedPnl">$0.00</strong>
+                <span class="stat-note">Current holdings value minus current holdings cost basis.</span>
+              </article>
+            </div>
+
+            <div class="summary" id="explanation"></div>
+
+            <div class="assumptions">
+              <p><strong>Scope:</strong> rough wallet-level only. No tax lots, gas, staking accrual detail, or transfers between wallets you still control.</p>
+              <p class="formula-line">Formula: total P&amp;L = withdrawals + current holdings value - deposits</p>
+            </div>
+          </div>
+        </section>
+
+        <h2>Where this helps</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>You already pulled money out and want to know what the rest of the bag is doing</strong>
+            <p>This separates capital already taken out from what is still sitting in the wallet so the open position is easier to judge.</p>
+          </div>
+          <div class="card">
+            <strong>You need a rough realized versus unrealized split before deeper cleanup</strong>
+            <p>It gives you a fast estimate without forcing full spreadsheet reconstruction first.</p>
+          </div>
+          <div class="card">
+            <strong>You are pressure-testing a wallet summary that feels off</strong>
+            <p>If deposits, withdrawals, and current value still do not reconcile in your head, this gives you one clean frame.</p>
+          </div>
+          <div class="card">
+            <strong>You want one plain-English readout instead of back-solving the wallet in notes</strong>
+            <p>The output explains what the split means so you do not have to reconstruct the logic from memory.</p>
+          </div>
+        </div>
+
+        <h2>Assumptions worth keeping in view</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>Deposits and withdrawals should be external flows</strong>
+            <p>Do not count transfers between wallets you still control. That will distort both total and realized lines.</p>
+          </div>
+          <div class="card">
+            <strong>The current holdings cost basis is the key estimate</strong>
+            <p>If that number is sloppy, the realized and unrealized split will be sloppy too. The total P&amp;L line still stays simple.</p>
+          </div>
+          <div class="card">
+            <strong>Return percent only means something when deposits are above zero</strong>
+            <p>If the wallet was funded in another way, the calculator leaves the percent line out instead of inventing one.</p>
+          </div>
+          <div class="card">
+            <strong>This is wallet-level math, not tax-lot accounting</strong>
+            <p>Use it as a sanity check before deeper spreadsheet or tax software work, not as a replacement for lot tracking.</p>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          This is a rough decision aid, not tax or legal advice. If it saves you from trusting a bad wallet number, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/wallet-pnl-calculator">support future updates here</a>. If not, keep using it.
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
