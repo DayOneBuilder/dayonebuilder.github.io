@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DeFi Tax Records Checklist | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A practical checklist of the records you need for DeFi taxes before wallet history, bridges, LP moves, and airdrops turn into cleanup hell."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #07131a;
+        --ink: #eff8f5;
+        --muted: #b7ccc6;
+        --panel: rgba(10, 31, 33, 0.88);
+        --line: rgba(191, 245, 221, 0.16);
+        --mint: #9ef0c0;
+        --acid: #d7ff64;
+        --max: 920px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(158, 240, 192, 0.12), transparent 28%),
+          linear-gradient(180deg, #07131a 0%, #08171d 48%, #061116 100%);
+        font: 16px/1.7 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+      a { color: inherit; }
+      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; padding: 28px 0 56px; }
+      .back { color: var(--muted); text-decoration: none; }
+      .panel {
+        margin-top: 18px;
+        padding: 30px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(215, 255, 100, 0.24);
+        color: var(--acid);
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3 { line-height: 1.08; }
+      h1 { font-size: clamp(2.1rem, 5vw, 4rem); margin: 14px 0 12px; }
+      h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
+      p, li, code { color: var(--muted); }
+      ul { padding-left: 20px; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card, .note {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .cta {
+        display: inline-flex;
+        margin-top: 12px;
+        min-height: 48px;
+        align-items: center;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--mint), var(--acid));
+        color: #04100a;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      @media (max-width: 760px) {
+        .grid { grid-template-columns: 1fr; }
+        .panel { padding: 22px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <article class="panel">
+        <div class="eyebrow">defi tax faq · records</div>
+        <h1>DeFi tax records checklist</h1>
+        <p>
+          The worst time to figure out what records you need for DeFi taxes is after you have already bridged across chains,
+          farmed three protocols, claimed an airdrop, and forgotten where half the source data lives.
+        </p>
+        <p>
+          If you want tax prep to be annoying instead of catastrophic, start by collecting the records that stop you from rebuilding your year from memory.
+        </p>
+
+        <h2>The records most people need first</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Wallet and account list</h3>
+            <p>Every wallet, exchange account, and chain you touched. If one source is missing, the whole story gets weird fast.</p>
+          </div>
+          <div class="card">
+            <h3>Transaction exports</h3>
+            <p>CSV exports, explorer links, or wallet history for swaps, transfers, staking, LP moves, claims, and disposals.</p>
+          </div>
+          <div class="card">
+            <h3>Protocol activity notes</h3>
+            <p>Which protocol you used, what the action was, and why the movement happened. Raw transactions do not always explain intent.</p>
+          </div>
+          <div class="card">
+            <h3>Price and value context</h3>
+            <p>Receipt date, token amount, and estimated value at the time for things like rewards, airdrops, or weird token receipts.</p>
+          </div>
+        </div>
+
+        <h2>Events that usually cause cleanup pain</h2>
+        <ul>
+          <li>bridges that look like disposals if you do not track both sides</li>
+          <li>LP deposits and withdrawals without a clear before-and-after record</li>
+          <li>staking rewards that were received but never labeled</li>
+          <li>airdrop claims with no saved date or fair value note</li>
+          <li>wallet-to-wallet transfers that break cost basis if they are treated like sales</li>
+        </ul>
+
+        <h2>A practical way to keep this sane</h2>
+        <p>
+          You do not need to solve your entire tax treatment in one sitting. You do need one place to map sources, classify common DeFi events,
+          and flag the gaps before they spread into every later step.
+        </p>
+        <p>
+          That is usually enough to stop the worst failure mode: opening ten tabs, exporting random CSV files, and still not knowing what is missing.
+        </p>
+
+        <h2>What to collect before you start any cleanup pass</h2>
+        <ul>
+          <li>a wallet and source inventory</li>
+          <li>a simple event classification sheet</li>
+          <li>a checklist for records you still need to pull</li>
+          <li>notes on uncertain transactions you need to review later</li>
+        </ul>
+
+        <div class="note">
+          <strong>Practical next step</strong>
+          <p>
+            If you want a ready-made version of that structure, the live <a href="/products/defi-tax-prep-guide-2026/">DeFi Tax Prep Guide 2026</a>
+            includes a source checklist, event classification matrix, cleanup mistakes checklist, and wallet inventory file.
+          </p>
+          <a class="cta" href="/products/defi-tax-prep-guide-2026/">Open the guide</a>
+        </div>
+      </article>
+    </div>
+  </body>
+</html>
