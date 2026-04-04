@@ -6,10 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Impermanent Loss Calculator | DayOneBuilder</title>
-    <meta
-      name="description"
-      content="Impermanent loss calculator for the moment LP fees look comforting but you still need a straight hold vs pool answer."
-    />
+    <meta name="description" content="Impermanent loss calculator for checking whether LP fees actually beat the gap versus holding." />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -25,31 +22,23 @@
       <a class="back" href="/products/">← Back to products</a>
       <section class="panel">
         <div class="hero">
-          <div class="price">Free browser calculator</div><span class="label">Installable repo + direct ZIP</span>
+          <div class="price">LP check</div><span class="label">Free browser calculator + ZIP</span>
           <h1>Impermanent Loss Calculator</h1>
-          <p class="lede">
-            <strong>This is for the moment a pool APR looks fine on paper, but the price move underneath it might still be eating you alive.</strong>
-          </p>
-          <p>
-            Put in starting capital, the token price move, and any fee estimate you actually believe. The calculator shows whether the LP kept up with simple hold or whether the fees were never close.
-          </p>
+          <p class="lede"><strong>See if LP fees actually beat impermanent loss.</strong></p>
+          <p>Enter the price move and your fee estimate. The calculator compares hold versus LP without hand-waving.</p>
         </div>
 
         <div class="install-box">
-          <strong>Use the free core now</strong>
-          <div class="agent-row">
-            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex-ready</span>
-            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude-ready</span>
-          </div>
+          <strong>Use it now</strong>
           <div class="install-line"><code>Live browser tool + standalone ZIP download</code></div>
           <div class="cta-row" style="margin-top: 14px;">
             <a class="cta" href="/downloads/dayonebuilder-impermanent-loss-calculator.zip">Download ZIP</a>
-            <a class="secondary-link" href="https://checkout.dayonebuilder.online/donate/impermanent-loss-calculator">Support this tool</a>
+<a class="secondary-link" href="https://checkout.dayonebuilder.online/donate/impermanent-loss-calculator">Support this tool</a>
           </div>
-          <p style="margin-top: 14px;">The installable Codex and Claude repo is built locally and packaging passes. The public GitHub push is still blocked by the current token scope, so the browser page and ZIP are the public release for now.</p>
+          <p style="margin-top: 14px;">Use the browser tool now. Download the ZIP if you want the same calculator offline.</p>
         </div>
 
-        <section class="calculator-section">
+<section class="calculator-section">
           <div class="section-heading">
             <h2>Run the numbers</h2>
             <p>Assumes a 50/50 constant-product pool. Token A moves against token B. Token B is the quote side for the dollar view.</p>
@@ -144,49 +133,21 @@
           </div>
         </section>
 
-        <h2>Where this helps</h2>
+        <h2>Use it when</h2>
         <div class="grid">
-          <div class="card">
-            <strong>You are staring at a volatile pair and fee APR is clouding the picture</strong>
-            <p>This shows the damage from the price move first, then lets you add the fee estimate you think is real.</p>
-          </div>
-          <div class="card">
-            <strong>You want a fast before-entry check</strong>
-            <p>Sometimes the cleanest trade is admitting the LP needs more fee flow than the pair is likely to produce.</p>
-          </div>
-          <div class="card">
-            <strong>You already farmed the pair and want the honest post-move answer</strong>
-            <p>Plug in the move, add the fees you collected, and see whether the pool still kept up with hold.</p>
-          </div>
-          <div class="card">
-            <strong>You need one clean explanation for yourself or a teammate</strong>
-            <p>The output gives the math and a short plain-English summary instead of making you defend the formula from memory.</p>
-          </div>
+          <div class="card"><strong>APR looks good but the pair looks dangerous</strong><p>This shows whether the price move already killed the idea.</p></div>
+          <div class="card"><strong>You want a quick pre-entry check</strong><p>Sometimes the right answer is skipping the LP before you rationalize it.</p></div>
+          <div class="card"><strong>You want the post-move truth</strong><p>Add the fees you earned and see if the pool actually kept up with hold.</p></div>
         </div>
 
-        <h2>Assumptions worth keeping in view</h2>
+        <h2>Keep in mind</h2>
         <div class="grid">
-          <div class="card">
-            <strong>It is a 50/50 constant-product model</strong>
-            <p>This is the classic LP math. If you are using concentrated liquidity or custom weights, use a more specific tool.</p>
-          </div>
-          <div class="card">
-            <strong>Fee input is manual on purpose</strong>
-            <p>The calculator does not invent fee income for you. Put in the number you actually expect or already earned.</p>
-          </div>
-          <div class="card">
-            <strong>It keeps the dollar view simple</strong>
-            <p>Token B is treated as the quote side for the value comparison so the hold and LP lines stay readable.</p>
-          </div>
-          <div class="card">
-            <strong>It does not touch gas or taxes</strong>
-            <p>Those matter. They are separate from the hold-vs-LP comparison, so this page leaves them out instead of pretending otherwise.</p>
-          </div>
+          <div class="card"><strong>50/50 constant-product only</strong><p>Use a different tool for concentrated liquidity or custom weights.</p></div>
+          <div class="card"><strong>Fees are manual input</strong><p>The calculator does not invent income for you.</p></div>
+          <div class="card"><strong>No gas, taxes, or range logic</strong><p>This page keeps the hold-versus-LP question narrow on purpose.</p></div>
         </div>
 
-        <div class="footer-note">
-          This is a decision aid, not tax, legal, or yield advice. If it saves you from talking yourself into a bad LP entry, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/impermanent-loss-calculator">support future updates here</a>. If not, keep using it.
-        </div>
+        <div class="footer-note">This is a decision aid, not tax, legal, or yield advice. If it saves you from a bad LP entry, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/impermanent-loss-calculator">support future updates here</a>.</div>
       </section>
     </div>
   </body>
