@@ -1,13 +1,12 @@
 <!doctype html>
+<!-- public-copy-allow: Ben Ison -->
+<!-- public-copy-allow: Codex -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DeFi Tax Prep Guide 2026 | DayOneBuilder</title>
-    <meta
-      name="description"
-      content="Free DeFi tax prep guide bundle for the point where wallet exports, bridge history, LP moves, and reward receipts are still fixable if you organize them now."
-    />
+    <meta name="description" content="Free DeFi tax prep guide bundle for getting wallet lists, bridge records, and event labels straight before cleanup season." />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,70 +15,182 @@
       gtag("config", "G-KQMLYS3VVE");
     </script>
     <style>
-      :root { --bg:#07131a; --ink:#eff8f5; --muted:#b7ccc6; --panel:rgba(10,31,33,.88); --line:rgba(191,245,221,.16); --mint:#9ef0c0; --sand:#f7d49c; }
-      * { box-sizing:border-box; }
-      body { margin:0; color:var(--ink); background:linear-gradient(180deg,#07131a 0%,#0a171d 100%); font:16px/1.6 "Space Grotesk","IBM Plex Sans",sans-serif; }
-      .wrap { width:min(calc(100% - 32px),960px); margin:0 auto; padding:28px 0 60px; }
-      .panel { margin-top:18px; padding:28px; border-radius:24px; border:1px solid var(--line); background:var(--panel); }
-      a { color:inherit; text-decoration:none; } .back { color:var(--muted); } h1,h2 { line-height:1.06; } h1 { font-size:clamp(2rem,5vw,4rem); margin:12px 0; } h2 { font-size:clamp(1.35rem,3vw,2rem); margin-top:30px; } p,li,code { color:var(--muted); }
-      .price { display:inline-flex; margin:10px 0 18px; padding:7px 12px; border-radius:999px; background:rgba(158,240,192,.14); color:var(--mint); font-weight:700; }
-      .label { display:inline-flex; margin-left:10px; padding:7px 12px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
-      .install-box,.note { margin-top:18px; padding:18px; border-radius:18px; border:1px solid var(--line); background:rgba(255,255,255,.03); }
-      .cta-row { display:flex; flex-wrap:wrap; gap:10px; }
-      .cta,.secondary-link { display:inline-flex; min-height:48px; align-items:center; justify-content:center; padding:0 18px; border-radius:999px; font-weight:700; border:1px solid transparent; }
-      .cta { background:linear-gradient(135deg,var(--mint),var(--sand)); color:#04100a; }
-      .secondary-link { border-color:var(--line); color:var(--ink); }
-      .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:18px; } .card { padding:18px; border-radius:18px; border:1px solid var(--line); background:rgba(255,255,255,.03); } .soft-link { color:var(--sand); text-decoration:underline; text-underline-offset:3px; }
-      @media (max-width:820px) { .grid { grid-template-columns:1fr; } }
+
+      :root {
+        --bg: #07131a;
+        --ink: #eff8f5;
+        --muted: #b7ccc6;
+        --panel: rgba(10, 31, 33, 0.88);
+        --line: rgba(191, 245, 221, 0.16);
+        --mint: #9ef0c0;
+        --sand: #f7d49c;
+        --acid: #d7ff64;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: linear-gradient(180deg, #07131a 0%, #0a171d 100%);
+        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+      .wrap { width: min(calc(100% - 32px), 960px); margin: 0 auto; padding: 28px 0 60px; }
+      .panel {
+        margin-top: 18px;
+        padding: 28px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      a { color: inherit; text-decoration: none; }
+      .back { color: var(--muted); }
+      h1, h2 { line-height: 1.06; }
+      h1 { font-size: clamp(2rem, 5vw, 4rem); margin: 12px 0; }
+      h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
+      p, li, code { color: var(--muted); }
+      .price {
+        display: inline-flex;
+        margin: 10px 0 18px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: rgba(158, 240, 192, 0.14);
+        color: var(--mint);
+        font-weight: 700;
+      }
+      .label {
+        display: inline-flex;
+        margin-left: 10px;
+        padding: 7px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--muted);
+      }
+      .install-box,
+      .note {
+        margin-top: 18px;
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .agent-row,
+      .cta-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .agent-row { margin-top: 12px; }
+      .agent-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        min-height: 38px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        font-weight: 700;
+      }
+      .agent-mark {
+        display: inline-flex;
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 700;
+      }
+      .codex .agent-mark { background: linear-gradient(135deg, #c6ff72, #73f1be); color: #04100a; }
+      .claude .agent-mark { background: linear-gradient(135deg, #f7d49c, #ffc3a3); color: #20110a; }
+      .install-line,
+      pre {
+        margin: 12px 0 0;
+        padding: 14px 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.24);
+        overflow: auto;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      code { font-family: "IBM Plex Mono", monospace; }
+      .cta, .secondary-link, .ghost-button {
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border-radius: 999px;
+        font-weight: 700;
+        border: 1px solid transparent;
+      }
+      .cta {
+        background: linear-gradient(135deg, var(--mint), var(--sand));
+        color: #04100a;
+        cursor: pointer;
+      }
+      .secondary-link,
+      .ghost-button {
+        border-color: var(--line);
+        color: var(--ink);
+      }
+      button.cta { font: inherit; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 18px;
+      }
+      .card {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .soft-link {
+        color: var(--sand);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      @media (max-width: 820px) {
+        .grid { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
     <div class="wrap">
       <a class="back" href="/products/">← Back to products</a>
       <div class="panel">
+        <div class="price">Tax records</div><span class="label">Free guide bundle + ZIP</span>
         <h1>DeFi Tax Prep Guide 2026</h1>
-        <div class="price">Free guide bundle</div><span class="label">Direct ZIP download</span>
-        <p><strong>This is for the point where your swaps, bridge hops, LP moves, reward claims, and wallet exports are still recoverable if you organize them before cleanup season.</strong></p>
-        <p>
-          The free core gives you a plain-language prep guide, a record-source checklist, a working classification matrix for common DeFi events, a cleanup mistakes list, and a simple wallet inventory starter.
-        </p>
+        <p><strong>Get your DeFi records straight before tax prep.</strong></p>
+        <p>The bundle gives you a checklist, classification matrix, cleanup list, and wallet inventory starter so you have less to reconstruct later.</p>
 
         <div class="install-box">
-          <strong>Use the free core now</strong>
+          <strong>Use it now</strong>
           <div class="cta-row" style="margin-top: 14px;">
             <a class="cta" href="/downloads/dayonebuilder-defi-tax-prep-guide-2026.zip">Download ZIP</a>
-            <a class="secondary-link" href="https://checkout.dayonebuilder.online/donate/defi-tax-prep-guide-2026">Support this guide</a>
+
           </div>
-          <p style="margin-top: 14px;">The public release keeps the path simple: download the bundle, fill the inventory first, then work through the checklist and event matrix while the details are still fresh.</p>
+          <p style="margin-top: 14px;">Download the bundle, map the wallets first, then work through the checklist and event matrix while the details are still recoverable.</p>
         </div>
 
-        <h2>Where people usually lose the trail</h2>
+        <h2>Use it when</h2>
         <div class="grid">
-          <div class="card"><strong>The wallet list only exists in your head</strong><p>That feels manageable until a bridge or exchange transfer shows up from an address you forgot to include.</p></div>
-          <div class="card"><strong>Bridge history gets split in half</strong><p>When the send side and receive side are not saved together, same-owner movement starts looking like mystery activity.</p></div>
-          <div class="card"><strong>Rewards and airdrops arrive with no value note</strong><p>Later you remember the token, not the receipt date, the quantity, or what price source made sense at the time.</p></div>
-          <div class="card"><strong>LP events get dumped into a vague bucket</strong><p>Adding liquidity, removing liquidity, and claiming rewards are different events. Leaving them unlabeled is how cleanup drifts.</p></div>
+          <div class="card"><strong>Your wallet list lives in your head</strong><p>That works right up until one old address or exchange transfer goes missing.</p></div>
+          <div class="card"><strong>Bridges and transfers are missing one side</strong><p>Same-owner movement gets messy when the records split in half.</p></div>
+          <div class="card"><strong>Rewards, LP events, and airdrops were never labeled</strong><p>Those details are much easier to sort now than during cleanup panic.</p></div>
         </div>
 
-        <h2>What is inside</h2>
+        <h2>What you get</h2>
         <div class="grid">
-          <div class="card"><strong>Main guide</strong><p>A short practical guide for inventory, source collection, event labeling, and monthly close habits.</p></div>
-          <div class="card"><strong>Record-source checklist</strong><p>A pull list for wallet exports, exchange CSVs, bridge proof, claim pages, and price notes.</p></div>
-          <div class="card"><strong>Event classification matrix</strong><p>A working CSV for common DeFi event types so you do not flatten everything into one generic category.</p></div>
-          <div class="card"><strong>Cleanup checklist and inventory starter</strong><p>One checklist for the expensive mistakes, plus a simple CSV to map wallets, accounts, and saved exports.</p></div>
+          <div class="card"><strong>A short practical guide</strong><p>Covers inventory, record collection, and event labeling.</p></div>
+          <div class="card"><strong>A record-source checklist and event matrix</strong><p>Pull the right exports and stop flattening every DeFi action into one bucket.</p></div>
+          <div class="card"><strong>An inventory starter plus cleanup list</strong><p>Map wallets and catch the expensive mistakes before handoff.</p></div>
         </div>
 
-        <h2>What gets easier after one pass</h2>
-        <div class="grid">
-          <div class="card"><strong>You know what belongs to you</strong><p>The inventory file gives you one place to map wallets, exchange accounts, chains, and saved source files.</p></div>
-          <div class="card"><strong>Transfers and bridges are less likely to get misread</strong><p>Saving both sides early cuts down on fake disposals and unexplained inflows later.</p></div>
-          <div class="card"><strong>Receipt events stop depending on memory</strong><p>Reward and airdrop notes stay tied to the transaction or claim instead of a rough guess months later.</p></div>
-          <div class="card"><strong>The handoff gets cleaner</strong><p>You still need your own rules or a preparer. The difference is you are handing over records instead of a pile of half-explained exports.</p></div>
-        </div>
-
-        <div class="note">
-          This is a recordkeeping prep pack, not tax advice. If it saves you a cleanup weekend later, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/defi-tax-prep-guide-2026">support future updates here</a>. If not, take the bundle and keep going.
-        </div>
+        <div class="note">This is a recordkeeping prep pack, not tax advice. Take the bundle and get your records into better shape.</div>
       </div>
     </div>
   </body>
