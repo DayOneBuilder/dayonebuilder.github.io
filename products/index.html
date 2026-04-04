@@ -6,10 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Crypto tools you can hand to your agent | DayOneBuilder</title>
-    <meta
-      name="description"
-      content="Eight small crypto tools for research, prompt cleanup, wallet P&L checks, LP math, tracking, tax prep, and workflow support. Copy the install phrase for your agent, open the repo, or grab the direct file."
-    />
+    <meta name="description" content="Eight small crypto tools. Each one does one job." />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -53,6 +50,7 @@
       .wrap { width: min(calc(100% - 32px), 1080px); margin: 0 auto; padding: 28px 0 56px; }
       .back { color: var(--muted); text-decoration: none; }
       h1 { font-size: clamp(2rem, 5vw, 3.6rem); margin: 16px 0 8px; }
+      h2 { margin: 10px 0 8px; line-height: 1.08; }
       p, code { color: var(--muted); }
       .grid {
         display: grid;
@@ -75,37 +73,6 @@
         color: var(--acid);
         font-weight: 700;
       }
-      .agent-row,
-      .button-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .agent-row { margin-top: 14px; }
-      .agent-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        min-height: 36px;
-        padding: 0 12px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.03);
-        color: var(--ink);
-        font-weight: 700;
-      }
-      .agent-mark {
-        display: inline-flex;
-        width: 18px;
-        height: 18px;
-        border-radius: 999px;
-        align-items: center;
-        justify-content: center;
-        font-size: 11px;
-        font-weight: 700;
-      }
-      .codex .agent-mark { background: linear-gradient(135deg, #c6ff72, #73f1be); color: #04100a; }
-      .claude .agent-mark { background: linear-gradient(135deg, #f7d49c, #ffc3a3); color: #20110a; }
       .phrase {
         margin-top: 14px;
         padding: 12px 14px;
@@ -114,6 +81,11 @@
         background: rgba(0, 0, 0, 0.24);
       }
       code { font-family: "IBM Plex Mono", monospace; }
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
       .button,
       .ghost {
         display: inline-flex;
@@ -136,11 +108,6 @@
         text-decoration: none;
       }
       button.button { font: inherit; }
-      .soft-link {
-        color: var(--sand);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-      }
       @media (max-width: 860px) {
         .grid { grid-template-columns: 1fr; }
       }
@@ -149,138 +116,89 @@
   <body>
     <div class="wrap">
       <a class="back" href="/">← Back to DayOneBuilder</a>
-      <h1>Use the tool that matches the mess you have right now</h1>
-      <p>
-        These are small crypto products for recurring pain: research that starts too vague, wallet totals that still do not reconcile, portfolio sheets that drift, LP math people keep hand-waving, and agent workflows that keep falling back to zero.
-        The best first move is usually not a download button. It is copying one clean install phrase to your agent.
-      </p>
-      <p>
-        If your CLI wants explicit steps, each repo README now spells out the quiet paths: Codex inside the repo, Claude Code with <code>--plugin-dir .</code>, then <code>./install.sh</code> only as a fallback.
-      </p>
+      <h1>One tool. One job.</h1>
+      <p>Each product solves one recurring crypto mess. Pick the page that matches the problem in front of you.</p>
 
       <div class="grid">
         <article class="card">
+          <div class="price">Research prompts</div>
           <h2>50 AI Prompts for Crypto Research</h2>
-          <p>For token diligence, whitepaper review, risk checks, and comparison work when your research keeps turning into tab chaos.</p>
-          <div class="price">Installable repo</div>
-          <div class="agent-row">
-            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
-            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
-          </div>
+          <p>Stop starting token research from a blank chat.</p>
           <div class="phrase"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
           <div class="button-row" style="margin-top: 16px;">
             <button class="button" data-copy="Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">GitHub repo</a>
             <a class="ghost" href="/products/crypto-prompt-pack/">Product page</a>
           </div>
         </article>
-
         <article class="card">
+          <div class="price">Portfolio ledger</div>
           <h2>Crypto Portfolio Tracker</h2>
-          <p>For wallet sprawl, transfers, bridges, rewards, and the kind of spreadsheet drift that makes you distrust your own totals.</p>
-          <div class="price">Installable repo</div>
-          <div class="agent-row">
-            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
-            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
-          </div>
+          <p>Track crypto without breaking your numbers.</p>
           <div class="phrase"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
           <div class="button-row" style="margin-top: 16px;">
             <button class="button" data-copy="Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">GitHub repo</a>
             <a class="ghost" href="/products/crypto-portfolio-tracker/">Product page</a>
           </div>
         </article>
-
         <article class="card">
+          <div class="price">Research workflow</div>
           <h2>Crypto Research Copilot Starter</h2>
-          <p>For token, wallet, and yield sessions where the agent keeps starting from a blank chat and a weak first frame.</p>
-          <div class="price">Installable repo</div>
-          <div class="agent-row">
-            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
-            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
-          </div>
+          <p>Give your agent a better first pass.</p>
           <div class="phrase"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
           <div class="button-row" style="margin-top: 16px;">
             <button class="button" data-copy="Install dayonebuilder/dob-crypto-research-copilot by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">GitHub repo</a>
             <a class="ghost" href="/products/crypto-research-copilot/">Product page</a>
           </div>
         </article>
-
         <article class="card">
+          <div class="price">Prompt guardrail</div>
           <h2>Prompt Buddy</h2>
-          <p>For crypto prompts where a side observer should catch the weak framing before you waste a run on token DD, wallet review, or yield work.</p>
-          <div class="price">Installable repo</div>
-          <div class="agent-row">
-            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
-            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
-          </div>
+          <p>Catch weak prompts before they waste a run.</p>
           <div class="phrase"><code>Install dayonebuilder/dob-prompt-buddy by Ben Ison.</code></div>
           <div class="button-row" style="margin-top: 16px;">
             <button class="button" data-copy="Install dayonebuilder/dob-prompt-buddy by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="https://github.com/DayOneBuilder/dob-prompt-buddy">GitHub repo</a>
             <a class="ghost" href="/products/prompt-buddy/">Product page</a>
           </div>
         </article>
-
         <article class="card">
+          <div class="price">Airdrop records</div>
           <h2>Airdrop Tracker + DeFi Tax Template</h2>
-          <p>For the mess that starts when airdrop hunts, receipt dates, FMV notes, and later sells live across screenshots, tabs, and old memory.</p>
-          <div class="price">Installable repo</div>
-          <div class="agent-row">
-            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
-            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
-          </div>
+          <p>Keep the airdrop trail from claim to sale.</p>
           <div class="phrase"><code>Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison.</code></div>
           <div class="button-row" style="margin-top: 16px;">
             <button class="button" data-copy="Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="https://github.com/DayOneBuilder/dob-airdrop-tracker-tax-template">GitHub repo</a>
             <a class="ghost" href="/products/airdrop-tracker-tax-template/">Product page</a>
           </div>
         </article>
-
         <article class="card">
+          <div class="price">LP check</div>
           <h2>Impermanent Loss Calculator</h2>
-          <p>For the moment fee APR looks comforting but you still need to know whether the LP actually kept up with simple hold after the price moved.</p>
-          <div class="price">Free browser tool</div>
+          <p>See if LP fees actually beat impermanent loss.</p>
           <div class="phrase"><code>Live calculator + standalone ZIP download</code></div>
-          <p style="margin-top: 12px;">The installable repo is packaged locally and ready, but the public GitHub push is still blocked by token scope.</p>
           <div class="button-row" style="margin-top: 16px;">
             <a class="button" href="/downloads/dayonebuilder-impermanent-loss-calculator.zip">Download ZIP</a>
             <a class="ghost" href="/products/impermanent-loss-calculator/">Product page</a>
           </div>
         </article>
-
         <article class="card">
-          <h2>Wallet P&amp;L Calculator</h2>
-          <p>For the moment deposits, withdrawals, and the current bag still refuse to add up and you need a fast wallet-level sanity check.</p>
-          <div class="price">Free browser tool</div>
-          <div class="phrase"><code>Live calculator + standalone ZIP download</code></div>
-          <p style="margin-top: 12px;">The installable repo is packaged locally and ready. The browser page and ZIP are the public release right now.</p>
-          <div class="button-row" style="margin-top: 16px;">
-            <a class="button" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">Download ZIP</a>
-            <a class="ghost" href="/products/wallet-pnl-calculator/">Product page</a>
-          </div>
-        </article>
-
-        <article class="card">
+          <div class="price">Tax records</div>
           <h2>DeFi Tax Prep Guide 2026</h2>
-          <p>For the point where wallet exports, bridge history, LP moves, and reward receipts are still fixable if you organize them now instead of in one year-end panic.</p>
-          <div class="price">Free guide bundle</div>
-          <div class="phrase"><code>Standalone ZIP with guide, checklists, matrix, and inventory starter</code></div>
+          <p>Get your DeFi records straight before tax prep.</p>
+          <div class="phrase"><code>Guide bundle + checklist + event matrix + inventory starter</code></div>
           <div class="button-row" style="margin-top: 16px;">
             <a class="button" href="/downloads/dayonebuilder-defi-tax-prep-guide-2026.zip">Download ZIP</a>
             <a class="ghost" href="/products/defi-tax-prep-guide-2026/">Product page</a>
           </div>
         </article>
-
         <article class="card">
-          <h2>One quiet note on support</h2>
-          <p>
-            The point right now is usage, installs, and people getting real value. If one of these ends up saving you time every week, there is a support link on the product page.
-            It does not need to be the first thing in your face.
-          </p>
-          <div class="price">Value first</div>
+          <div class="price">Wallet P&amp;L</div>
+          <h2>Wallet P&amp;L Calculator</h2>
+          <p>See what a wallet actually made.</p>
+          <div class="phrase"><code>Live calculator + standalone ZIP download</code></div>
+          <div class="button-row" style="margin-top: 16px;">
+            <a class="button" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">Download ZIP</a>
+            <a class="ghost" href="/products/wallet-pnl-calculator/">Product page</a>
+          </div>
         </article>
       </div>
     </div>
