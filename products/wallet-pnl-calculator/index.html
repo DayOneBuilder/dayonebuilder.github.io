@@ -1,13 +1,12 @@
 <!doctype html>
+<!-- public-copy-allow: Ben Ison -->
+<!-- public-copy-allow: Codex -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Wallet P&amp;L Calculator | DayOneBuilder</title>
-    <meta
-      name="description"
-      content="Wallet P&amp;L calculator for the moment deposits, withdrawals, and current holdings still refuse to line up cleanly."
-    />
+    <meta name="description" content="Wallet P&amp;L calculator for getting a rough total, realized, and unrealized split when the wallet math feels off." />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -23,27 +22,23 @@
       <a class="back" href="/products/">← Back to products</a>
       <section class="panel">
         <div class="hero">
-          <div class="price">Free browser calculator</div><span class="label">Installable repo + direct ZIP</span>
+          <div class="price">Wallet P&amp;L</div><span class="label">Free browser calculator + ZIP</span>
           <h1>Wallet P&amp;L Calculator</h1>
-          <p class="lede">
-            <strong>This is for the moment a wallet looks profitable in your head, but the deposits, withdrawals, and current bag still do not line up cleanly.</strong>
-          </p>
-          <p>
-            Enter total capital added, total value taken out, current holdings value, and the cost basis still attached to what is left. The calculator gives you a rough total, realized, and unrealized split without pretending to do tax-lot accounting.
-          </p>
+          <p class="lede"><strong>See what a wallet actually made.</strong></p>
+          <p>Add deposits, withdrawals, current value, and remaining cost basis. You get a rough total, realized, and unrealized split fast.</p>
         </div>
 
         <div class="install-box">
-          <strong>Use the free core now</strong>
+          <strong>Use it now</strong>
           <div class="install-line"><code>Live browser tool + standalone ZIP download</code></div>
           <div class="cta-row" style="margin-top: 14px;">
             <a class="cta" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">Download ZIP</a>
-            <a class="secondary-link" href="https://checkout.dayonebuilder.online/donate/wallet-pnl-calculator">Support this tool</a>
+
           </div>
-          <p style="margin-top: 14px;">The installable repo is packaged locally and packaging passes. The browser page and ZIP are the public release for now.</p>
+          <p style="margin-top: 14px;">Use the browser tool for a quick answer. Download the ZIP if you want the same calculator offline.</p>
         </div>
 
-        <section class="calculator-section">
+<section class="calculator-section">
           <div class="section-heading">
             <h2>Run the numbers</h2>
             <p>Use external capital in and out. Leave out transfers between your own wallets or the result gets noisy fast.</p>
@@ -127,49 +122,21 @@
           </div>
         </section>
 
-        <h2>Where this helps</h2>
+        <h2>Use it when</h2>
         <div class="grid">
-          <div class="card">
-            <strong>You already pulled money out and want to know what the rest of the bag is doing</strong>
-            <p>This separates capital already taken out from what is still sitting in the wallet so the open position is easier to judge.</p>
-          </div>
-          <div class="card">
-            <strong>You need a rough realized versus unrealized split before deeper cleanup</strong>
-            <p>It gives you a fast estimate without forcing full spreadsheet reconstruction first.</p>
-          </div>
-          <div class="card">
-            <strong>You are pressure-testing a wallet summary that feels off</strong>
-            <p>If deposits, withdrawals, and current value still do not reconcile in your head, this gives you one clean frame.</p>
-          </div>
-          <div class="card">
-            <strong>You want one plain-English readout instead of back-solving the wallet in notes</strong>
-            <p>The output explains what the split means so you do not have to reconstruct the logic from memory.</p>
-          </div>
+          <div class="card"><strong>A wallet feels profitable but the math does not land</strong><p>This gives you one clean frame for the rough answer.</p></div>
+          <div class="card"><strong>You need realized versus unrealized fast</strong><p>Get the split before you rebuild the whole spreadsheet.</p></div>
+          <div class="card"><strong>You want a quick sanity check before deeper cleanup</strong><p>Use it to pressure-test the story your notes are telling.</p></div>
         </div>
 
-        <h2>Assumptions worth keeping in view</h2>
+        <h2>Keep in mind</h2>
         <div class="grid">
-          <div class="card">
-            <strong>Deposits and withdrawals should be external flows</strong>
-            <p>Do not count transfers between wallets you still control. That will distort both total and realized lines.</p>
-          </div>
-          <div class="card">
-            <strong>The current holdings cost basis is the key estimate</strong>
-            <p>If that number is sloppy, the realized and unrealized split will be sloppy too. The total P&amp;L line still stays simple.</p>
-          </div>
-          <div class="card">
-            <strong>Return percent only means something when deposits are above zero</strong>
-            <p>If the wallet was funded in another way, the calculator leaves the percent line out instead of inventing one.</p>
-          </div>
-          <div class="card">
-            <strong>This is wallet-level math, not tax-lot accounting</strong>
-            <p>Use it as a sanity check before deeper spreadsheet or tax software work, not as a replacement for lot tracking.</p>
-          </div>
+          <div class="card"><strong>Use external flows only</strong><p>Transfers between your own wallets will distort the result.</p></div>
+          <div class="card"><strong>Remaining basis drives the split</strong><p>If that input is sloppy, realized and unrealized will be sloppy too.</p></div>
+          <div class="card"><strong>This is wallet-level math</strong><p>It is a rough check, not full tax-lot accounting.</p></div>
         </div>
 
-        <div class="footer-note">
-          This is a rough decision aid, not tax or legal advice. If it saves you from trusting a bad wallet number, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/wallet-pnl-calculator">support future updates here</a>. If not, keep using it.
-        </div>
+        <div class="footer-note">This is a rough decision aid, not tax or legal advice. Take the calculator and use it for the quick read.</div>
       </section>
     </div>
   </body>
