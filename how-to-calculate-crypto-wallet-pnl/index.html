@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How to Calculate Crypto Wallet P&amp;L | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A practical guide to calculating crypto wallet P&L without getting lost in deposits, withdrawals, current holdings, and rough realized versus unrealized gains."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #07131a;
+        --ink: #eff8f5;
+        --muted: #b7ccc6;
+        --panel: rgba(10, 31, 33, 0.88);
+        --line: rgba(191, 245, 221, 0.16);
+        --mint: #9ef0c0;
+        --acid: #d7ff64;
+        --max: 920px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(158, 240, 192, 0.12), transparent 28%),
+          linear-gradient(180deg, #07131a 0%, #08171d 48%, #061116 100%);
+        font: 16px/1.7 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+      a { color: inherit; }
+      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; padding: 28px 0 56px; }
+      .back { color: var(--muted); text-decoration: none; }
+      .panel {
+        margin-top: 18px;
+        padding: 30px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(215, 255, 100, 0.24);
+        color: var(--acid);
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3 { line-height: 1.08; }
+      h1 { font-size: clamp(2.1rem, 5vw, 4rem); margin: 14px 0 12px; }
+      h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
+      p, li { color: var(--muted); }
+      ul { padding-left: 20px; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .card, .note {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .cta {
+        display: inline-flex;
+        margin-top: 12px;
+        min-height: 48px;
+        align-items: center;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--mint), var(--acid));
+        color: #04100a;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      @media (max-width: 760px) {
+        .grid { grid-template-columns: 1fr; }
+        .panel { padding: 22px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <article class="panel">
+        <div class="eyebrow">wallet faq · pnl</div>
+        <h1>How to calculate crypto wallet P&amp;L</h1>
+        <p>
+          Wallet P&amp;L gets messy fast because people mix up capital in, capital out, current holdings value, and cost basis, then try to force all of that into one number.
+        </p>
+        <p>
+          If you want a rough but useful wallet-level answer, split the job into a few parts instead of pretending one screenshot or dashboard number explains everything.
+        </p>
+
+        <h2>Start with the numbers that matter</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Total deposits</h3>
+            <p>How much capital you put into the wallet over time.</p>
+          </div>
+          <div class="card">
+            <h3>Total withdrawals</h3>
+            <p>How much capital you already pulled out.</p>
+          </div>
+          <div class="card">
+            <h3>Current holdings value</h3>
+            <p>What the wallet still holds right now at current prices.</p>
+          </div>
+          <div class="card">
+            <h3>Current holdings cost basis</h3>
+            <p>What the assets still sitting in the wallet originally cost you.</p>
+          </div>
+        </div>
+
+        <h2>One rough way to think about wallet P&amp;L</h2>
+        <ul>
+          <li><strong>Total P&amp;L</strong> = withdrawals + current holdings value - total deposits</li>
+          <li><strong>Net capital still in play</strong> = total deposits - withdrawals</li>
+          <li><strong>Unrealized P&amp;L</strong> = current holdings value - current holdings cost basis</li>
+          <li><strong>Realized P&amp;L</strong> = total P&amp;L - unrealized P&amp;L</li>
+        </ul>
+        <p>
+          That is not full tax accounting, but it is enough to stop guessing whether the wallet is actually up, flat, or bleeding.
+        </p>
+
+        <h2>Where people usually get this wrong</h2>
+        <ul>
+          <li>they treat wallet transfers like profit</li>
+          <li>they count deposits but forget withdrawals</li>
+          <li>they use current value without checking cost basis</li>
+          <li>they try to read realized and unrealized gains from one single portfolio number</li>
+        </ul>
+
+        <h2>What this helps you answer</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Is this wallet actually profitable?</h3>
+            <p>You can get a rough answer without rebuilding every trade from scratch first.</p>
+          </div>
+          <div class="card">
+            <h3>How much capital is still exposed?</h3>
+            <p>That matters when you are deciding whether the current holdings are carrying too much of the result.</p>
+          </div>
+          <div class="card">
+            <h3>Is the gain already realized or mostly paper?</h3>
+            <p>That distinction matters more than people admit.</p>
+          </div>
+          <div class="card">
+            <h3>Does the dashboard number even make sense?</h3>
+            <p>A simple calculator is often enough to catch obvious nonsense.</p>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Practical next step</strong>
+          <p>
+            If you want to run those inputs without building your own sheet first, use the live <a href="/products/wallet-pnl-calculator/">Wallet P&amp;L Calculator</a>.
+            It gives you a fast wallet-level sanity check for total, realized, and unrealized picture.
+          </p>
+          <a class="cta" href="/products/wallet-pnl-calculator/">Open the calculator</a>
+        </div>
+      </article>
+    </div>
+  </body>
+</html>
