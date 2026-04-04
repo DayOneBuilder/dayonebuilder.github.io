@@ -1,0 +1,115 @@
+<!doctype html>
+<!-- public-copy-allow: Ben Ison -->
+<!-- public-copy-allow: Codex -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Airdrop Tracker + DeFi Tax Template | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Airdrop tracker and DeFi tax template for the moment your farming notes, claim windows, and receipt values start living in five tabs and one bad memory."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+
+      async function copyPhrase(button) {
+        const text = button.getAttribute("data-copy");
+        const original = button.dataset.original || button.textContent;
+        button.dataset.original = original;
+        try {
+          await navigator.clipboard.writeText(text);
+          button.textContent = "Copied";
+        } catch (err) {
+          button.textContent = "Copy failed";
+        }
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1600);
+      }
+    </script>
+    <style>
+      :root { --bg:#07131a; --ink:#eff8f5; --muted:#b7ccc6; --panel:rgba(10,31,33,.88); --line:rgba(191,245,221,.16); --mint:#9ef0c0; --sand:#f7d49c; }
+      * { box-sizing:border-box; }
+      body { margin:0; color:var(--ink); background:linear-gradient(180deg,#07131a 0%,#0a171d 100%); font:16px/1.6 "Space Grotesk","IBM Plex Sans",sans-serif; }
+      .wrap { width:min(calc(100% - 32px),960px); margin:0 auto; padding:28px 0 60px; }
+      .panel { margin-top:18px; padding:28px; border-radius:24px; border:1px solid var(--line); background:var(--panel); }
+      a { color:inherit; text-decoration:none; } .back { color:var(--muted); } h1,h2 { line-height:1.06; } h1 { font-size:clamp(2rem,5vw,4rem); margin:12px 0; } h2 { font-size:clamp(1.35rem,3vw,2rem); margin-top:30px; } p,li,code { color:var(--muted); }
+      .price { display:inline-flex; margin:10px 0 18px; padding:7px 12px; border-radius:999px; background:rgba(158,240,192,.14); color:var(--mint); font-weight:700; }
+      .label { display:inline-flex; margin-left:10px; padding:7px 12px; border-radius:999px; border:1px solid var(--line); color:var(--muted); }
+      .install-box,.note { margin-top:18px; padding:18px; border-radius:18px; border:1px solid var(--line); background:rgba(255,255,255,.03); }
+      .agent-row,.cta-row { display:flex; flex-wrap:wrap; gap:10px; } .agent-row { margin-top:12px; }
+      .agent-pill { display:inline-flex; align-items:center; gap:8px; min-height:38px; padding:0 12px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--ink); font-weight:700; }
+      .agent-mark { display:inline-flex; width:18px; height:18px; border-radius:999px; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
+      .codex .agent-mark { background:linear-gradient(135deg,#c6ff72,#73f1be); color:#04100a; } .claude .agent-mark { background:linear-gradient(135deg,#f7d49c,#ffc3a3); color:#20110a; }
+      .install-line,pre { margin:12px 0 0; padding:14px 16px; border-radius:16px; border:1px solid var(--line); background:rgba(0,0,0,.24); overflow:auto; white-space:pre-wrap; word-break:break-word; }
+      code { font-family:"IBM Plex Mono",monospace; }
+      .cta,.secondary-link,.ghost-button { display:inline-flex; min-height:48px; align-items:center; justify-content:center; padding:0 18px; border-radius:999px; font-weight:700; border:1px solid transparent; }
+      .cta { background:linear-gradient(135deg,var(--mint),var(--sand)); color:#04100a; cursor:pointer; } .secondary-link,.ghost-button { border-color:var(--line); color:var(--ink); } button.cta { font:inherit; }
+      .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin-top:18px; } .card { padding:18px; border-radius:18px; border:1px solid var(--line); background:rgba(255,255,255,.03); } .soft-link { color:var(--sand); text-decoration:underline; text-underline-offset:3px; }
+      @media (max-width:820px) { .grid { grid-template-columns:1fr; } }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/products/">← Back to products</a>
+      <div class="panel">
+        <h1>Airdrop Tracker + DeFi Tax Template</h1>
+        <div class="price">Installable repo</div><span class="label">Direct workbook still available</span>
+        <p><strong>This is for the point where your airdrop farm notes, claim windows, receipt values, and later sell decisions stop fitting in one clean story.</strong></p>
+        <p>
+          The template gives you one place for campaign status, wallet assignment, claim links, token receipt dates, fair-market-value notes, and later disposal rows so you do not have to reconstruct the trail months later.
+        </p>
+
+        <div class="install-box">
+          <strong>Paste this to your agent</strong>
+          <div class="agent-row">
+            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
+            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
+          </div>
+          <div class="install-line"><code>Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison.</code></div>
+          <div class="cta-row" style="margin-top: 14px;">
+            <button class="cta" data-copy="Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
+            <a class="secondary-link" href="https://github.com/DayOneBuilder/dob-airdrop-tracker-tax-template">Open GitHub repo</a>
+            <a class="ghost-button" href="/downloads/dayonebuilder-airdrop-tracker-tax-template.zip">Direct workbook</a>
+          </div>
+          <p style="margin-top: 14px;">If your CLI wants explicit steps, use the repo README. The quiet paths are: run Codex inside the repo, run Claude Code with <code>--plugin-dir .</code>, or use <code>./install.sh</code> for a personal install.</p>
+          <p style="margin-top: 14px;">Honest fallback if your agent does not infer the install steps yet:</p>
+          <pre><code>git clone https://github.com/DayOneBuilder/dob-airdrop-tracker-tax-template
+cd dob-airdrop-tracker-tax-template
+./install.sh</code></pre>
+        </div>
+
+        <h2>Recognize the pain?</h2>
+        <div class="grid">
+          <div class="card"><strong>You know you farmed it, but not how well</strong><p>Weeks later you remember the protocol name, not the wallet, the action count, or the claim proof you meant to save.</p></div>
+          <div class="card"><strong>The claim finally lands and the tax trail starts there</strong><p>If you do not note receipt date and value when the tokens hit, you are guessing later.</p></div>
+          <div class="card"><strong>You sell part of it and lose the link to the receipt lot</strong><p>The hard part is not typing numbers. It is keeping the story from campaign to claim to disposal intact.</p></div>
+          <div class="card"><strong>You need a starter, not a tax platform</strong><p>This is a clean workbook you can open now, edit locally, and defend later with better notes.</p></div>
+        </div>
+
+        <h2>What is inside</h2>
+        <div class="grid">
+          <div class="card"><strong>Workbook tabs</strong><ul><li>Instructions</li><li>Airdrops</li><li>Tax Lots</li><li>Disposals</li><li>Summary</li></ul></div>
+          <div class="card"><strong>Repo extras</strong><ul><li>Install script for agent workflows</li><li>Reusable skill files for Codex and Claude Code</li><li>Helper command to create a fresh workbook anywhere you want it</li></ul></div>
+        </div>
+
+        <h2>What gets better after install</h2>
+        <div class="grid">
+          <div class="card"><strong>You stop scattering proof across tabs</strong><p>Campaign rows hold the basics: wallet, status, expected token, claim URL, and proof link.</p></div>
+          <div class="card"><strong>You capture the tax-sensitive moment on time</strong><p>The receipt lot tab gives you a simple place to log date, quantity, and fair market value when the tokens arrive.</p></div>
+          <div class="card"><strong>You can tie exits back to the right lot</strong><p>The disposals tab keeps later sales or swaps connected to the original receipt instead of floating loose in your notes.</p></div>
+          <div class="card"><strong>You keep the simple path</strong><p>If you just want the workbook file, use the direct ZIP and move on.</p></div>
+        </div>
+
+        <div class="note">
+          This is a recordkeeping starter, not tax advice. If it saves you a cleanup weekend later, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/airdrop-tracker-tax-template">support future updates here</a>. If not, take the sheet and keep going.
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
