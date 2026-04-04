@@ -1,0 +1,198 @@
+<!doctype html>
+<!-- public-copy-allow: Ben Ison -->
+<!-- public-copy-allow: Codex -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Impermanent Loss Calculator | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Impermanent loss calculator for the moment LP fees look comforting but you still need a straight hold vs pool answer."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <link rel="stylesheet" href="./calculator.css" />
+    <script defer src="./calculator.js"></script>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/products/">← Back to products</a>
+      <section class="panel">
+        <div class="hero">
+          <div class="price">Free browser calculator</div><span class="label">Installable repo + direct ZIP</span>
+          <h1>Impermanent Loss Calculator</h1>
+          <p class="lede">
+            <strong>This is for the moment a pool APR looks fine on paper, but the price move underneath it might still be eating you alive.</strong>
+          </p>
+          <p>
+            Put in starting capital, the token price move, and any fee estimate you actually believe. The calculator shows whether the LP kept up with simple hold or whether the fees were never close.
+          </p>
+        </div>
+
+        <div class="install-box">
+          <strong>Paste this to your agent</strong>
+          <div class="agent-row">
+            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
+            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
+          </div>
+          <div class="install-line"><code>Install dayonebuilder/dob-impermanent-loss-calculator by Ben Ison.</code></div>
+          <div class="cta-row" style="margin-top: 14px;">
+            <button class="cta" data-copy="Install dayonebuilder/dob-impermanent-loss-calculator by Ben Ison.">Copy install phrase</button>
+            <a class="secondary-link" href="https://github.com/DayOneBuilder/dob-impermanent-loss-calculator">Open GitHub repo</a>
+            <a class="ghost-button" href="/downloads/dayonebuilder-impermanent-loss-calculator.zip">Download ZIP</a>
+          </div>
+          <p style="margin-top: 14px;">If your CLI wants explicit steps, use the repo README. The quiet paths are: run Codex inside the repo, run Claude Code with <code>--plugin-dir .</code>, or use <code>./install.sh</code> for a personal install.</p>
+          <p style="margin-top: 14px;">Honest fallback if your agent does not infer the install steps yet:</p>
+          <pre><code>git clone https://github.com/DayOneBuilder/dob-impermanent-loss-calculator.git
+cd dob-impermanent-loss-calculator
+./install.sh</code></pre>
+        </div>
+
+        <section class="calculator-section">
+          <div class="section-heading">
+            <h2>Run the numbers</h2>
+            <p>Assumes a 50/50 constant-product pool. Token A moves against token B. Token B is the quote side for the dollar view.</p>
+          </div>
+
+          <div class="calculator-shell">
+            <div class="calc-grid">
+              <label class="field">
+                <span>Initial capital</span>
+                <input id="capitalInput" type="number" min="0" step="0.01" value="10000" />
+                <small>Quoted in dollars or the quote token you use to think about value.</small>
+              </label>
+
+              <label class="field">
+                <span>Price move input</span>
+                <select id="modeSelect">
+                  <option value="percent">Percent change</option>
+                  <option value="ratio">Final price ratio</option>
+                </select>
+                <small>Use percent when you think in moves. Use ratio when you already know the final multiple.</small>
+              </label>
+
+              <label class="field" id="percentField">
+                <span>Token A price change</span>
+                <input id="percentInput" type="number" step="0.01" value="100" />
+                <small>`100` means token A doubled. `-50` means it was cut in half.</small>
+              </label>
+
+              <label class="field is-hidden" id="ratioField">
+                <span>Final price ratio</span>
+                <input id="ratioInput" type="number" min="0.0001" step="0.0001" value="2" />
+                <small>`2` means token A ends at 2x its starting price relative to token B.</small>
+              </label>
+
+              <label class="field">
+                <span>Fee and incentive income</span>
+                <input id="feeInput" type="number" step="0.01" value="0" />
+                <small>Optional manual offset in dollars.</small>
+              </label>
+            </div>
+
+            <div class="example-row">
+              <button class="example-chip" type="button" data-mode="percent" data-value="-50">-50%</button>
+              <button class="example-chip" type="button" data-mode="percent" data-value="25">+25%</button>
+              <button class="example-chip" type="button" data-mode="percent" data-value="100">+100%</button>
+              <button class="example-chip" type="button" data-mode="ratio" data-value="0.5">0.50x</button>
+              <button class="example-chip" type="button" data-mode="ratio" data-value="2">2.00x</button>
+              <button class="example-chip" type="button" data-mode="ratio" data-value="4">4.00x</button>
+            </div>
+
+            <div class="ratio-preview" id="ratioPreview"></div>
+
+            <div class="results-grid">
+              <article class="stat">
+                <span class="stat-label">Hold value</span>
+                <strong class="stat-value" id="holdValue">$0.00</strong>
+                <span class="stat-note">Spot exposure held outside the LP.</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">LP value before fees</span>
+                <strong class="stat-value" id="lpBeforeFees">$0.00</strong>
+                <span class="stat-note">Pure pool value after rebalancing.</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">LP value after fees</span>
+                <strong class="stat-value" id="lpAfterFees">$0.00</strong>
+                <span class="stat-note">Pool value plus your manual fee offset.</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">Impermanent loss</span>
+                <strong class="stat-value" id="ilPercent">0.00%</strong>
+                <span class="stat-note" id="ilDollar">$0.00 behind hold</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">Net vs hold after fees</span>
+                <strong class="stat-value" id="netVsHold">$0.00</strong>
+                <span class="stat-note">Positive means fees fully covered the gap.</span>
+              </article>
+              <article class="stat">
+                <span class="stat-label">Fees needed to break even</span>
+                <strong class="stat-value" id="breakevenFees">$0.00</strong>
+                <span class="stat-note">This is the gap between hold and LP before fees.</span>
+              </article>
+            </div>
+
+            <div class="summary" id="explanation"></div>
+
+            <div class="assumptions">
+              <p><strong>Scope:</strong> 50/50 constant-product only. No concentrated liquidity, range exits, compounding, gas, or tax treatment.</p>
+              <p class="formula-line">Formula: IL% = 1 - (2 * sqrt(r) / (1 + r))</p>
+            </div>
+          </div>
+        </section>
+
+        <h2>Where this helps</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>You are staring at a volatile pair and fee APR is clouding the picture</strong>
+            <p>This shows the damage from the price move first, then lets you add the fee estimate you think is real.</p>
+          </div>
+          <div class="card">
+            <strong>You want a fast before-entry check</strong>
+            <p>Sometimes the cleanest trade is admitting the LP needs more fee flow than the pair is likely to produce.</p>
+          </div>
+          <div class="card">
+            <strong>You already farmed the pair and want the honest post-move answer</strong>
+            <p>Plug in the move, add the fees you collected, and see whether the pool still kept up with hold.</p>
+          </div>
+          <div class="card">
+            <strong>You need one clean explanation for yourself or a teammate</strong>
+            <p>The output gives the math and a short plain-English summary instead of making you defend the formula from memory.</p>
+          </div>
+        </div>
+
+        <h2>Assumptions worth keeping in view</h2>
+        <div class="grid">
+          <div class="card">
+            <strong>It is a 50/50 constant-product model</strong>
+            <p>This is the classic LP math. If you are using concentrated liquidity or custom weights, use a more specific tool.</p>
+          </div>
+          <div class="card">
+            <strong>Fee input is manual on purpose</strong>
+            <p>The calculator does not invent fee income for you. Put in the number you actually expect or already earned.</p>
+          </div>
+          <div class="card">
+            <strong>It keeps the dollar view simple</strong>
+            <p>Token B is treated as the quote side for the value comparison so the hold and LP lines stay readable.</p>
+          </div>
+          <div class="card">
+            <strong>It does not touch gas or taxes</strong>
+            <p>Those matter. They are separate from the hold-vs-LP comparison, so this page leaves them out instead of pretending otherwise.</p>
+          </div>
+        </div>
+
+        <div class="footer-note">
+          This is a decision aid, not tax, legal, or yield advice. If it saves you from talking yourself into a bad LP entry, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/impermanent-loss-calculator">support future updates here</a>. If not, keep using it.
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
