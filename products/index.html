@@ -5,8 +5,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Crypto tools you can hand to your agent | DayOneBuilder</title>
-    <meta name="description" content="Eight small crypto tools. Each one does one job." />
+    <title>Active crypto workflow tools | DayOneBuilder</title>
+    <meta name="description" content="The DayOneBuilder tools currently visible for active validation." />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -86,6 +86,20 @@
         flex-wrap: wrap;
         gap: 10px;
       }
+      .shelf {
+        margin-top: 28px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+      }
+      .shelf-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .shelf-list a {
+        color: var(--muted);
+        text-decoration: none;
+      }
       .button,
       .ghost {
         display: inline-flex;
@@ -116,40 +130,10 @@
   <body>
     <div class="wrap">
       <a class="back" href="/">← Back to DayOneBuilder</a>
-      <h1>One tool. One job.</h1>
-      <p>Each product solves one recurring crypto mess. Pick the page that matches the problem in front of you.</p>
+      <h1>Active focus.</h1>
+      <p>The front shelf is intentionally small while the rest of the catalog is revalidated.</p>
 
       <div class="grid">
-        <article class="card">
-          <div class="price">Research prompts</div>
-          <h2>50 AI Prompts for Crypto Research</h2>
-          <p>Stop starting token research from a blank chat.</p>
-          <div class="phrase"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
-          <div class="button-row" style="margin-top: 16px;">
-            <button class="button" data-copy="Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="/products/crypto-prompt-pack/">Product page</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="price">Portfolio ledger</div>
-          <h2>Crypto Portfolio Tracker</h2>
-          <p>Track crypto without breaking your numbers.</p>
-          <div class="phrase"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
-          <div class="button-row" style="margin-top: 16px;">
-            <button class="button" data-copy="Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="/products/crypto-portfolio-tracker/">Product page</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="price">Research workflow</div>
-          <h2>Crypto Research Copilot Starter</h2>
-          <p>Give your agent a better first pass.</p>
-          <div class="phrase"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
-          <div class="button-row" style="margin-top: 16px;">
-            <button class="button" data-copy="Install dayonebuilder/dob-crypto-research-copilot by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="/products/crypto-research-copilot/">Product page</a>
-          </div>
-        </article>
         <article class="card">
           <div class="price">Prompt guardrail</div>
           <h2>Prompt Buddy</h2>
@@ -161,45 +145,28 @@
           </div>
         </article>
         <article class="card">
-          <div class="price">Airdrop records</div>
-          <h2>Airdrop Tracker + DeFi Tax Template</h2>
-          <p>Keep the airdrop trail from claim to sale.</p>
-          <div class="phrase"><code>Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison.</code></div>
-          <div class="button-row" style="margin-top: 16px;">
-            <button class="button" data-copy="Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="/products/airdrop-tracker-tax-template/">Product page</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="price">LP check</div>
-          <h2>Impermanent Loss Calculator</h2>
-          <p>See if LP fees actually beat impermanent loss.</p>
-          <div class="phrase"><code>Live calculator + standalone ZIP download</code></div>
-          <div class="button-row" style="margin-top: 16px;">
-            <a class="button" href="/downloads/dayonebuilder-impermanent-loss-calculator.zip">Download ZIP</a>
-            <a class="ghost" href="/products/impermanent-loss-calculator/">Product page</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="price">Tax records</div>
-          <h2>DeFi Tax Prep Guide 2026</h2>
-          <p>Get your DeFi records straight before tax prep.</p>
-          <div class="phrase"><code>Guide bundle + checklist + event matrix + inventory starter</code></div>
-          <div class="button-row" style="margin-top: 16px;">
-            <a class="button" href="/downloads/dayonebuilder-defi-tax-prep-guide-2026.zip">Download ZIP</a>
-            <a class="ghost" href="/products/defi-tax-prep-guide-2026/">Product page</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="price">Wallet P&amp;L</div>
+          <div class="price">Wallet P&amp;L validation</div>
           <h2>Wallet P&amp;L Calculator</h2>
-          <p>See what a wallet actually made.</p>
+          <p>Estimate what a crypto wallet actually made while this path is being validated.</p>
           <div class="phrase"><code>Live calculator + standalone ZIP download</code></div>
           <div class="button-row" style="margin-top: 16px;">
             <a class="button" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">Download ZIP</a>
             <a class="ghost" href="/products/wallet-pnl-calculator/">Product page</a>
           </div>
         </article>
+      </div>
+
+      <div class="shelf">
+        <h2>Validation shelf</h2>
+        <p>These older pages stay reachable while demand is checked, but they are not active front-shelf products.</p>
+        <div class="shelf-list">
+          <a href="/products/crypto-prompt-pack/">50 AI Prompts for Crypto Research</a>
+          <a href="/products/crypto-portfolio-tracker/">Crypto Portfolio Tracker</a>
+          <a href="/products/crypto-research-copilot/">Crypto Research Copilot Starter</a>
+          <a href="/products/airdrop-tracker-tax-template/">Airdrop Tracker + DeFi Tax Template</a>
+          <a href="/products/impermanent-loss-calculator/">Impermanent Loss Calculator</a>
+          <a href="/products/defi-tax-prep-guide-2026/">DeFi Tax Prep Guide 2026</a>
+        </div>
       </div>
     </div>
   </body>
