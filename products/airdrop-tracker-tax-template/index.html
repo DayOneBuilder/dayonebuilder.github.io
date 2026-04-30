@@ -6,32 +6,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Airdrop Tracker + DeFi Tax Template | DayOneBuilder</title>
-    <meta name="robots" content="noindex, follow" />
     <meta name="description" content="Airdrop record tracker for keeping the trail from campaign and claim through receipt value and later sale." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://dayonebuilder.online/products/airdrop-tracker-tax-template/" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
-
-      async function copyPhrase(button) {
-        const text = button.getAttribute("data-copy");
-        const original = button.dataset.original || button.textContent;
-        button.dataset.original = original;
-        try {
-          await navigator.clipboard.writeText(text);
-          button.textContent = "Copied";
-        } catch (err) {
-          button.textContent = "Copy failed";
-        }
-        setTimeout(() => {
-          button.textContent = original;
-        }, 1600);
-      }
     </script>
     <style>
-
       :root {
         --bg: #07131a;
         --ink: #eff8f5;
@@ -49,7 +34,11 @@
         background: linear-gradient(180deg, #07131a 0%, #0a171d 100%);
         font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
       }
-      .wrap { width: min(calc(100% - 32px), 960px); margin: 0 auto; padding: 28px 0 60px; }
+      .wrap {
+        width: min(calc(100% - 32px), 960px);
+        margin: 0 auto;
+        padding: 28px 0 60px;
+      }
       .panel {
         margin-top: 18px;
         padding: 28px;
@@ -57,8 +46,7 @@
         border: 1px solid var(--line);
         background: var(--panel);
       }
-      a { color: inherit; text-decoration: none; }
-      .back { color: var(--muted); }
+      .back { color: var(--muted); text-decoration: none; }
       h1, h2 { line-height: 1.06; }
       h1 { font-size: clamp(2rem, 5vw, 4rem); margin: 12px 0; }
       h2 { font-size: clamp(1.35rem, 3vw, 2rem); margin-top: 30px; }
@@ -81,57 +69,21 @@
         color: var(--muted);
       }
       .install-box,
-      .note {
+      .note,
+      .offer,
+      .section-block {
         margin-top: 18px;
         padding: 18px;
         border-radius: 18px;
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
-      .agent-row,
       .cta-row {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
       }
-      .agent-row { margin-top: 12px; }
-      .agent-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        min-height: 38px;
-        padding: 0 12px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.03);
-        color: var(--ink);
-        font-weight: 700;
-      }
-      .agent-mark {
-        display: inline-flex;
-        width: 18px;
-        height: 18px;
-        border-radius: 999px;
-        align-items: center;
-        justify-content: center;
-        font-size: 11px;
-        font-weight: 700;
-      }
-      .codex .agent-mark { background: linear-gradient(135deg, #c6ff72, #73f1be); color: #04100a; }
-      .claude .agent-mark { background: linear-gradient(135deg, #f7d49c, #ffc3a3); color: #20110a; }
-      .install-line,
-      pre {
-        margin: 12px 0 0;
-        padding: 14px 16px;
-        border-radius: 16px;
-        border: 1px solid var(--line);
-        background: rgba(0, 0, 0, 0.24);
-        overflow: auto;
-        white-space: pre-wrap;
-        word-break: break-word;
-      }
-      code { font-family: "IBM Plex Mono", monospace; }
-      .cta, .secondary-link, .ghost-button {
+      .cta {
         display: inline-flex;
         min-height: 48px;
         align-items: center;
@@ -140,18 +92,25 @@
         border-radius: 999px;
         font-weight: 700;
         border: 1px solid transparent;
-      }
-      .cta {
         background: linear-gradient(135deg, var(--mint), var(--sand));
         color: #04100a;
+        text-decoration: none;
         cursor: pointer;
       }
       .secondary-link,
       .ghost-button {
-        border-color: var(--line);
+        display: inline-flex;
+        min-height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
         color: var(--ink);
+        text-decoration: none;
+        font-weight: 700;
       }
-      button.cta { font: inherit; }
+      button.cta { font: inherit; border: none; }
       .grid {
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -164,6 +123,7 @@
         border: 1px solid var(--line);
         background: rgba(255, 255, 255, 0.03);
       }
+      .offer p { margin: 8px 0 0; }
       .soft-link {
         color: var(--sand);
         text-decoration: underline;
@@ -180,40 +140,74 @@
       <div class="panel">
         <div class="price">Airdrop records</div><span class="label">Installable repo + direct workbook</span>
         <h1>Airdrop Tracker + DeFi Tax Template</h1>
-        <p><strong>Keep the airdrop trail from claim to sale.</strong></p>
-        <p>Use it to track campaign status, wallet, claim details, receipt value, and later disposals in one place.</p>
+        <p><strong>Keep the airdrop trail from campaign to sale.</strong></p>
+        <p>Track campaign status, wallet, claim details, receipt value, and later disposals in one place, with an aligned basis and disposal starter.</p>
 
         <div class="install-box">
-          <strong>Install it</strong>
-          <div class="agent-row">
-            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
-            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
-          </div>
-          <div class="install-line"><code>Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison.</code></div>
+          <strong>Get started now</strong>
           <div class="cta-row" style="margin-top: 14px;">
-            <button class="cta" data-copy="Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="secondary-link" href="https://github.com/DayOneBuilder/dob-airdrop-tracker-tax-template">Open GitHub repo</a>
-            <a class="ghost-button" href="/downloads/dayonebuilder-airdrop-tracker-tax-template.zip" download>Direct workbook</a>
+            <a class="cta" href="/airdrop-tax-template-calculator/">Try the calculator</a>
+            <a class="secondary-link" href="/downloads/dayonebuilder-airdrop-tracker-tax-template.zip" download>Download free template</a>
+            <a class="ghost-button" href="https://github.com/DayOneBuilder/dob-airdrop-tracker-tax-template">Open GitHub repo</a>
           </div>
-          <p style="margin-top: 14px;">Open the workbook locally if you want the fastest start. Use the repo if you want a fresh clean copy on demand.</p>
+        </div>
+
+        <div class="offer">
+          <strong>Need a paid upgrade path?</strong>
+          <p>
+            The <strong>Airdrop Tax Template Pack</strong> adds a cleaner paid workflow and immediate file handoff at <strong>$9</strong>.
+          </p>
+          <a id="airdrop-tax-template-pack-cta" class="cta" href="https://checkout.dayonebuilder.online/buy/airdrop-tracker-tax-template-pack/?utm_source=dayonebuilder&utm_medium=products_page&utm_campaign=airdrop_offer&utm_content=product_offer" data-offer-slug="airdrop-tracker-tax-template-pack" data-offer-location="product-page" data-price-usd="9">
+            Get the Airdrop Tax Template Pack
+          </a>
         </div>
 
         <h2>Use it when</h2>
         <div class="grid">
-          <div class="card"><strong>You remember the protocol, not the wallet</strong><p>Airdrop history disappears fast when the wallet trail is loose.</p></div>
-          <div class="card"><strong>Claims land without a value note</strong><p>Receipt date and value are the details people forget first.</p></div>
-          <div class="card"><strong>Later sales lose the original lot</strong><p>The disposal should stay tied to the receipt that created it.</p></div>
+          <div class="card"><strong>You track multiple airdrop campaigns</strong><p>You need one place for claim date, protocol, and wallet mapping.</p></div>
+          <div class="card"><strong>Claim values are fuzzy</strong><p>Receipt valuation gets lost quickly after claiming days and multiple wallets.</p></div>
+          <div class="card"><strong>You sell later, not at claim</strong><p>Later disposal events need to be tied back to the original lot.</p></div>
         </div>
 
         <h2>What you get</h2>
         <div class="grid">
-          <div class="card"><strong>Workbook tabs for the full trail</strong><p>Instructions, Airdrops, Tax Lots, Disposals, and Summary.</p></div>
-          <div class="card"><strong>A cleaner tax record starter</strong><p>Enough structure to keep the story intact without buying a platform.</p></div>
-          <div class="card"><strong>Direct workbook or repo install</strong><p>Use the format that matches your workflow.</p></div>
+          <div class="card"><strong>Workbook tabs for the full trail</strong><p>Instructions, airdrops, tax lots, disposals, and summary.</p></div>
+          <div class="card"><strong>A cleaner starter structure</strong><p>Enough order and basis tracking to keep workflow records consistent.</p></div>
+          <div class="card"><strong>Local-first usage</strong><p>Use the workbook in Excel, LibreOffice, or Numbers without a paid app.</p></div>
         </div>
 
-        <div class="note">If it helps you keep the airdrop mess under control, you can <a class="soft-link" href="https://checkout.dayonebuilder.online/donate/airdrop-tracker-tax-template">support future updates here</a>. If not, keep the workbook.</div>
+        <div class="note">
+          Keep records with your own source links and notes, then keep the calculator close so you can check disposal math in under a minute.
+        </div>
       </div>
     </div>
+
+    <script>
+      function trackOffer(payload) {
+        if (typeof gtag !== "function") {
+          return;
+        }
+        const offerPayload = {
+          offer_slug: payload.offerSlug,
+          offer_location: payload.offerLocation,
+          price_usd: payload.priceUsd,
+          payment_type: "checkout_product_page",
+        };
+
+        gtag("event", "airdrop_tax_template_paid_cta_click", offerPayload);
+        gtag("event", "airdrop_tax_template_checkout_start", offerPayload);
+      }
+
+      const cta = document.getElementById("airdrop-tax-template-pack-cta");
+      if (cta) {
+        cta.addEventListener("click", () => {
+          trackOffer({
+            offerSlug: cta.dataset.offerSlug || "airdrop-tracker-tax-template-pack",
+            offerLocation: cta.dataset.offerLocation || "product-page",
+            priceUsd: Number(cta.dataset.priceUsd || 9),
+          });
+        });
+      }
+    </script>
   </body>
 </html>

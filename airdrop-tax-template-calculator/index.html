@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Airdrop Tax Template Calculator | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Use this airdrop tax template calculator to compute airdrop basis, gains, and disposal impact fast, then export cleaner records for filing cleanup."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://dayonebuilder.online/airdrop-tax-template-calculator/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #07131a;
+        --ink: #eff8f5;
+        --muted: #b7ccc6;
+        --panel: rgba(10, 31, 33, 0.88);
+        --line: rgba(191, 245, 221, 0.16);
+        --mint: #9ef0c0;
+        --sand: #f7d49c;
+      }
+      * { box-sizing: border-box; }
+      html {
+        max-width: 100%;
+        overflow-x: hidden;
+        background: #07131a;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        max-width: 100%;
+        overflow-x: hidden;
+        color: var(--ink);
+        background: linear-gradient(180deg, #07131a 0%, #0a171d 100%);
+        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+      .wrap {
+        width: auto;
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 28px 16px 60px;
+      }
+      .panel {
+        margin-top: 16px;
+        padding: 28px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+      .back {
+        color: var(--muted);
+        text-decoration: none;
+      }
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(215, 255, 100, 0.24);
+        color: #d7ff64;
+        font-size: 12px;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 14px 0;
+        max-width: 14ch;
+        line-height: 1.1;
+        font-size: 4rem;
+      }
+      h2 {
+        margin: 28px 0 10px;
+        font-size: 1.8rem;
+      }
+      p, li, code {
+        color: var(--muted);
+        overflow-wrap: anywhere;
+      }
+      a {
+        color: inherit;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 0;
+        padding: 14px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      label {
+        font-weight: 700;
+        color: var(--ink);
+      }
+      input {
+        width: 100%;
+        min-width: 0;
+        height: 44px;
+        padding: 0 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--ink);
+        font: inherit;
+      }
+      small {
+        color: var(--muted);
+      }
+      .results {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .result {
+        padding: 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .result-label {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .result-value {
+        color: var(--mint);
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 6px 0 0;
+      }
+      .cta,
+      .ghost {
+        appearance: none;
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 18px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .cta {
+        background: linear-gradient(135deg, var(--mint), var(--sand));
+        color: #04100a;
+      }
+      .ghost {
+        border-color: var(--line);
+        color: var(--ink);
+        background: transparent;
+      }
+      .summary {
+        margin-top: 14px;
+        padding: 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .summary-box {
+        margin-top: 10px;
+        max-height: 170px;
+        overflow: auto;
+        white-space: pre-wrap;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.22);
+        font-family: "IBM Plex Mono", monospace;
+      }
+      .example-row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .example-chip {
+        appearance: none;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        padding: 12px;
+        cursor: pointer;
+      }
+      .notice {
+        margin-top: 14px;
+        padding: 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .offer {
+        margin-top: 10px;
+        padding: 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .offer p {
+        margin: 8px 0;
+      }
+      @media (max-width: 960px) {
+        .grid,
+        .results,
+        .example-row {
+          grid-template-columns: 1fr;
+        }
+        .panel {
+          padding: 20px;
+          border-radius: 18px;
+        }
+        h1 {
+          font-size: clamp(2rem, 9vw, 2.8rem);
+          max-width: 12ch;
+        }
+      }
+      @media (max-width: 520px) {
+        .wrap {
+          padding: 20px 12px 48px;
+        }
+        h1 {
+          font-size: 2rem;
+          max-width: 11ch;
+        }
+        .panel {
+          padding: 16px;
+          border-radius: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/products/airdrop-tracker-tax-template/">← Back to the airdrop template</a>
+      <div class="panel">
+        <div class="eyebrow">airdrop tax</div>
+        <h1>Airdrop Tax Template Calculator</h1>
+        <p>
+          Add your receipt and sale numbers and get a fast baseline for basis, realized gains, and what stays open for follow up.
+        </p>
+
+        <div class="grid" id="calculatorFields">
+          <label class="field">
+            <span>Airdrop quantity</span>
+            <input id="quantity" type="number" min="0" step="0.00000001" value="100" />
+            <small>Tokens you claimed in total.</small>
+          </label>
+          <label class="field">
+            <span>Claim value at receipt (USD)</span>
+            <input id="claimValue" type="number" min="0" step="0.01" value="800" />
+            <small>Fair value when the airdrop was claimable.</small>
+          </label>
+          <label class="field">
+            <span>Disposed quantity</span>
+            <input id="disposedQty" type="number" min="0" step="0.00000001" value="0" />
+            <small>Sold or swapped amount from this airdrop lot.</small>
+          </label>
+          <label class="field">
+            <span>Disposal price per token (USD)</span>
+            <input id="disposalPrice" type="number" min="0" step="0.01" value="0" />
+            <small>Price at disposal for the lot sold.</small>
+          </label>
+          <label class="field">
+            <span>Disposal fees (USD)</span>
+            <input id="fees" type="number" min="0" step="0.01" value="0" />
+            <small>Gas, bridge, and spread costs for the disposal.</small>
+          </label>
+          <label class="field">
+            <span>What you want to export</span>
+            <input id="fileToken" type="text" value="Airdrop Tax Template" />
+            <small>Used in CSV summary name, keep it short.</small>
+          </label>
+        </div>
+
+        <div class="example-row">
+          <button class="example-chip" type="button" data-qty="100" data-claim="900" data-disposed="30" data-price="4.2" data-fee="4.5">Small partial sale</button>
+          <button class="example-chip" type="button" data-qty="120" data-claim="1800" data-disposed="120" data-price="18" data-fee="12">Full disposal</button>
+          <button class="example-chip" type="button" data-qty="250" data-claim="2500" data-disposed="60" data-price="2.5" data-fee="0">Partial cleanup</button>
+        </div>
+
+        <div class="results" aria-live="polite">
+          <article class="result">
+            <div class="result-label">Total claim basis</div>
+            <strong class="result-value" id="basisValue">$0.00</strong>
+          </article>
+          <article class="result">
+            <div class="result-label">Remaining quantity</div>
+            <strong class="result-value" id="remainingQty">0.00000000</strong>
+          </article>
+          <article class="result">
+            <div class="result-label">Disposal proceeds</div>
+            <strong class="result-value" id="disposalProceeds">$0.00</strong>
+          </article>
+          <article class="result">
+            <div class="result-label">Realized impact (after fees)</div>
+            <strong class="result-value" id="netGain">$0.00</strong>
+          </article>
+          <article class="result">
+            <div class="result-label">Remaining basis</div>
+            <strong class="result-value" id="remainingBasis">$0.00</strong>
+          </article>
+          <article class="result">
+            <div class="result-label">Disposal gain per token</div>
+            <strong class="result-value" id="perTokenGain">$0.00</strong>
+          </article>
+        </div>
+
+        <div class="offer">
+          <strong>Need a full template and cleaner filing structure?</strong>
+          <p>
+            Get the Airdrop Tax Template Pack for <strong>$9</strong> and use the same format in a workbook-ready flow.
+          </p>
+          <a id="airdrop-tax-template-pack-cta" class="cta" href="https://checkout.dayonebuilder.online/buy/airdrop-tracker-tax-template-pack/?utm_source=dayonebuilder&utm_medium=airdrop_calculator&utm_campaign=airdrop_pack&utm_content=calculator_cta" data-offer-slug="airdrop-tracker-tax-template-pack" data-offer-location="calculator-page" data-price-usd="9">
+            Buy Airdrop Tax Template Pack
+          </a>
+        </div>
+
+        <div class="summary">
+          <strong>Copy-ready summary</strong>
+          <div class="summary-box" id="summaryText">Enter values to build a summary.</div>
+          <div class="row" style="margin-top: 10px;">
+            <button class="ghost" id="copySummary" type="button">Copy summary</button>
+            <button class="ghost" id="downloadSummary" type="button">Download summary CSV</button>
+            <a class="cta" href="/products/airdrop-tracker-tax-template/">Open the airdrop template</a>
+          </div>
+        </div>
+
+        <div class="notice">
+          This calculator is a practical starting signal for repeat airdrops. Keep transaction-level evidence and fee notes with your own records.
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const fmt = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+      const qtyEl = document.getElementById("quantity");
+      const claimValueEl = document.getElementById("claimValue");
+      const disposedQtyEl = document.getElementById("disposedQty");
+      const disposalPriceEl = document.getElementById("disposalPrice");
+      const feesEl = document.getElementById("fees");
+      const fileTokenEl = document.getElementById("fileToken");
+      const summaryText = document.getElementById("summaryText");
+
+      const basisValueEl = document.getElementById("basisValue");
+      const remainingQtyEl = document.getElementById("remainingQty");
+      const disposalProceedsEl = document.getElementById("disposalProceeds");
+      const netGainEl = document.getElementById("netGain");
+      const remainingBasisEl = document.getElementById("remainingBasis");
+      const perTokenGainEl = document.getElementById("perTokenGain");
+      const cta = document.getElementById("airdrop-tax-template-pack-cta");
+      const copyBtn = document.getElementById("copySummary");
+      const csvBtn = document.getElementById("downloadSummary");
+
+      const fmtQty = (value) => Number(value || 0).toFixed(8);
+
+      function parseMoney(value) {
+        const parsed = Number.parseFloat(value);
+        return Number.isFinite(parsed) ? Math.max(0, parsed) : NaN;
+      }
+
+      function formatNumber(value) {
+        if (!Number.isFinite(value)) {
+          return "--";
+        }
+        return value.toFixed(8);
+      }
+
+      function update() {
+        const quantity = parseMoney(qtyEl.value);
+        const claimValue = parseMoney(claimValueEl.value);
+        const disposedQty = parseMoney(disposedQtyEl.value);
+        const disposalPrice = parseMoney(disposalPriceEl.value);
+        const fees = parseMoney(feesEl.value);
+
+        if (![quantity, claimValue, disposedQty, disposalPrice, fees].every((value) => Number.isFinite(value))) {
+          summaryText.textContent = "Use valid positive numbers in all inputs.";
+          [basisValueEl, remainingQtyEl, disposalProceedsEl, netGainEl, remainingBasisEl, perTokenGainEl].forEach((el) => {
+            el.textContent = "--";
+          });
+          return;
+        }
+
+        if (disposedQty > quantity) {
+          summaryText.textContent = "Disposed quantity cannot exceed total quantity.";
+          [basisValueEl, remainingQtyEl, disposalProceedsEl, netGainEl, remainingBasisEl, perTokenGainEl].forEach((el) => {
+            el.textContent = "--";
+          });
+          return;
+        }
+
+        const basisPerToken = quantity === 0 ? 0 : claimValue / quantity;
+        const disposedBasis = basisPerToken * disposedQty;
+        const disposalProceeds = disposedQty * disposalPrice;
+        const grossGain = disposalProceeds - disposedBasis;
+        const netGain = grossGain - fees;
+        const remainingQty = Math.max(0, quantity - disposedQty);
+        const remainingBasis = Math.max(0, claimValue - disposedBasis);
+        const perTokenGain = disposedQty === 0 ? 0 : netGain / disposedQty;
+
+        basisValueEl.textContent = fmt.format(claimValue);
+        remainingQtyEl.textContent = formatNumber(remainingQty);
+        disposalProceedsEl.textContent = fmt.format(disposalProceeds);
+        netGainEl.textContent = fmt.format(netGain);
+        remainingBasisEl.textContent = fmt.format(remainingBasis);
+        perTokenGainEl.textContent = fmt.format(perTokenGain);
+
+        const rows = [
+          ["Airdrop quantity", quantity.toFixed(8)],
+          ["Airdrop claim value", claimValue.toFixed(2)],
+          ["Disposed quantity", disposedQty.toFixed(8)],
+          ["Disposal price per token", disposalPrice.toFixed(2)],
+          ["Disposal proceeds", disposalProceeds.toFixed(2)],
+          ["Disposal fees", fees.toFixed(2)],
+          ["Total claim basis", claimValue.toFixed(2)],
+          ["Remaining quantity", remainingQty.toFixed(8)],
+          ["Remaining basis", remainingBasis.toFixed(2)],
+          ["Realized gain (gross)", grossGain.toFixed(2)],
+          ["Realized gain (net)", netGain.toFixed(2)],
+          ["Gain per disposed token", perTokenGain.toFixed(8)],
+        ];
+
+        const csv = ["Metric,Value", ...rows.map((row) => `${row[0]},${row[1]}`)].join("\n");
+        const text = [
+          `Airdrop quantity: ${formatNumber(quantity)}`,
+          `Airdrop claim value: ${fmt.format(claimValue)}`,
+          `Disposed quantity: ${formatNumber(disposedQty)}`,
+          `Disposal proceeds: ${fmt.format(disposalProceeds)}`,
+          `Disposal fees: ${fmt.format(fees)}`,
+          `Remaining quantity: ${formatNumber(remainingQty)}`,
+          `Remaining basis: ${fmt.format(remainingBasis)}`,
+          `Realized gain (gross): ${fmt.format(grossGain)}`,
+          `Realized gain (net): ${fmt.format(netGain)}`,
+          `Per-token realized impact: ${fmt.format(perTokenGain)}`,
+          "",
+          `Context file token: ${fileTokenEl.value || "Airdrop Tax Template"}`,
+        ].join("\n");
+
+        summaryText.dataset.csv = csv;
+        summaryText.textContent = text;
+      }
+
+      function trackOffer(payload) {
+        if (typeof gtag !== "function") {
+          return;
+        }
+
+        const offerPayload = {
+          offer_slug: payload.offerSlug,
+          offer_location: payload.offerLocation,
+          price_usd: payload.priceUsd,
+          payment_type: "checkout_product_page",
+        };
+
+        gtag("event", "airdrop_tax_template_paid_cta_click", offerPayload);
+        gtag("event", "airdrop_tax_template_checkout_start", offerPayload);
+      }
+
+      [qtyEl, claimValueEl, disposedQtyEl, disposalPriceEl, feesEl].forEach((input) => {
+        input.addEventListener("input", update);
+        input.addEventListener("change", update);
+      });
+
+      document.querySelectorAll(".example-chip").forEach((button) => {
+        button.addEventListener("click", () => {
+          qtyEl.value = button.dataset.qty;
+          claimValueEl.value = button.dataset.claim;
+          disposedQtyEl.value = button.dataset.disposed;
+          disposalPriceEl.value = button.dataset.price;
+          feesEl.value = button.dataset.fee;
+          update();
+        });
+      });
+
+      if (cta) {
+        cta.addEventListener("click", () => {
+          trackOffer({
+            offerSlug: cta.dataset.offerSlug || "airdrop-tracker-tax-template-pack",
+            offerLocation: cta.dataset.offerLocation || "calculator",
+            priceUsd: Number(cta.dataset.priceUsd || 9),
+          });
+        });
+      }
+
+      if (copyBtn) {
+        copyBtn.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(summaryText.textContent || "");
+            copyBtn.textContent = "Copied";
+          } catch (_error) {
+            copyBtn.textContent = "Copy failed";
+          }
+          setTimeout(() => {
+            copyBtn.textContent = "Copy summary";
+          }, 1200);
+        });
+      }
+
+      if (csvBtn) {
+        csvBtn.addEventListener("click", () => {
+          const csv = summaryText.dataset.csv || "Metric,Value\nNo results yet";
+          const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+          const downloadUrl = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          const label = (fileTokenEl.value || "airdrop-tax-template").replace(/[^a-z0-9-_]+/gi, "-");
+          link.href = downloadUrl;
+          link.download = `${label}-summary.csv`;
+          link.click();
+          URL.revokeObjectURL(downloadUrl);
+        });
+      }
+
+      update();
+    </script>
+  </body>
+</html>
