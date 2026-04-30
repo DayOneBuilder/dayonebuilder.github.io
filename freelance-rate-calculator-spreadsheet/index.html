@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Freelance Rate Calculator Spreadsheet | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Calculate a freelance hourly rate, day rate, and project baseline, then export the result into a spreadsheet-style worksheet and proposal snippet."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/freelance-rate-calculator-spreadsheet/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #07131a;
+        --ink: #eef8f5;
+        --muted: #b8d0ca;
+        --panel: rgba(10, 31, 33, 0.88);
+        --line: rgba(191, 245, 221, 0.2);
+        --mint: #9ef0c0;
+        --sand: #f7d49c;
+        --accent: #d7ff64;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: linear-gradient(180deg, #07131a 0%, #0a171d 100%);
+        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+
+      .wrap {
+        width: min(calc(100% - 32px), 980px);
+        margin: 0 auto;
+        padding: 28px 0 60px;
+      }
+
+      .panel {
+        margin-top: 16px;
+        padding: 26px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .back {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(215, 255, 100, 0.24);
+        color: var(--accent);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.1;
+        margin: 0.2rem 0 0.75rem;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+      }
+
+      h2 {
+        font-size: clamp(1.35rem, 3vw, 2rem);
+      }
+
+      p,
+      li {
+        color: var(--muted);
+      }
+
+      .tag {
+        color: var(--ink);
+        background: rgba(158, 240, 192, 0.12);
+        border: 1px solid rgba(158, 240, 192, 0.36);
+        border-radius: 999px;
+        display: inline-flex;
+        padding: 6px 12px;
+        margin-bottom: 10px;
+      }
+
+      .grid {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-width: 0;
+        padding: 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      label {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      small {
+        color: var(--muted);
+      }
+
+      input {
+        width: 100%;
+        height: 44px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        font: inherit;
+        padding: 0 12px;
+      }
+
+      input:focus {
+        outline: 1px solid var(--mint);
+      }
+
+      .examples {
+        margin-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .example {
+        appearance: none;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        padding: 8px 12px;
+        font: inherit;
+      }
+
+      .results,
+      .offer,
+      .cta-card,
+      .summary-card {
+        margin-top: 16px;
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .result-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .result {
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .result-label {
+        color: var(--muted);
+      }
+
+      .result-value {
+        margin-top: 6px;
+        display: block;
+        color: var(--mint);
+        font-size: 1.55rem;
+        font-weight: 700;
+      }
+
+      .cta,
+      .copy-btn,
+      .ghost {
+        display: inline-flex;
+        min-height: 46px;
+        align-items: center;
+        justify-content: center;
+        padding: 11px 16px;
+        border-radius: 999px;
+        border: 1px solid transparent;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .cta {
+        background: linear-gradient(135deg, var(--mint), var(--sand));
+        color: #04100a;
+        cursor: pointer;
+      }
+
+      .ghost {
+        border-color: var(--line);
+        color: var(--ink);
+      }
+
+      .copy-btn {
+        border-color: var(--line);
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .summary-box {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 10px 0;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.2);
+        max-height: 220px;
+        overflow: auto;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .note {
+        color: var(--sand);
+        margin-top: 10px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      @media (max-width: 960px) {
+        .grid,
+        .result-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .wrap {
+          width: min(calc(100% - 16px), 980px);
+        }
+      }
+
+      @media (max-width: 560px) {
+        .panel {
+          padding: 18px;
+          border-radius: 18px;
+        }
+
+        .button-row,
+        .examples {
+          justify-content: stretch;
+        }
+
+        .example,
+        .cta,
+        .ghost,
+        .copy-btn {
+          width: 100%;
+        }
+      }
+    </style>
+
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Freelance Rate Calculator Spreadsheet",
+          "url": "https://dayonebuilder.online/freelance-rate-calculator-spreadsheet/",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Freelance Rate Calculator Spreadsheet",
+          "url": "https://dayonebuilder.online/freelance-rate-calculator-spreadsheet/",
+          "description": "Calculator for freelance rates and a proposal-ready worksheet export.",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any"
+        }
+      ]
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <div class="panel">
+        <span class="eyebrow">freelance pricing tool</span>
+        <h1>Freelance Rate Calculator Spreadsheet</h1>
+        <p>
+          Fill the 7 inputs, and the calculator gives you a minimum hourly rate, daily rate, and project baseline.
+          It also builds copy-ready proposal wording and lets you export the result as a CSV-style worksheet.
+        </p>
+
+        <div class="grid" id="inputGrid">
+          <label class="field">
+            <span>Desired annual income (USD)</span>
+            <input id="annualIncome" type="number" min="0" step="1" value="90000" inputmode="decimal" />
+            <small>How much you want to take home in a year.</small>
+          </label>
+          <label class="field">
+            <span>Weekly billable hours</span>
+            <input id="weeklyHours" type="number" min="1" step="1" value="25" inputmode="decimal" />
+            <small>Hours you invoice, not total working hours.</small>
+          </label>
+          <label class="field">
+            <span>Weeks off per year</span>
+            <input id="weeksOff" type="number" min="0" max="52" step="1" value="4" inputmode="decimal" />
+            <small>Vacations, breaks, and holiday blocks.</small>
+          </label>
+          <label class="field">
+            <span>Monthly business expenses (USD)</span>
+            <input id="monthlyExpenses" type="number" min="0" step="1" value="1200" inputmode="decimal" />
+            <small>Tools, software, subscriptions, admin overhead.</small>
+          </label>
+          <label class="field">
+            <span>Tax buffer %</span>
+            <input id="taxBuffer" type="number" min="0" max="60" step="0.1" value="25" inputmode="decimal" />
+            <small>Optional buffer for tax and social cost.</small>
+          </label>
+          <label class="field">
+            <span>Profit / safety buffer %</span>
+            <input id="profitBuffer" type="number" min="0" max="60" step="0.1" value="20" inputmode="decimal" />
+            <small>Extra buffer for slower months or bad sales mix.</small>
+          </label>
+          <label class="field">
+            <span>Average project hours</span>
+            <input id="averageProjectHours" type="number" min="1" step="1" value="20" inputmode="decimal" />
+            <small>Use this to get a realistic baseline quote.</small>
+          </label>
+        </div>
+
+        <div class="examples" aria-label="Example scenarios">
+          <button class="example" data-scenario='{"annualIncome":60000,"weeklyHours":20,"weeksOff":6,"monthlyExpenses":800,"taxBuffer":20,"profitBuffer":15,"averageProjectHours":12}'>Part-time solo</button>
+          <button class="example" data-scenario='{"annualIncome":90000,"weeklyHours":30,"weeksOff":4,"monthlyExpenses":1200,"taxBuffer":25,"profitBuffer":20,"averageProjectHours":20}'>Balanced freelancer</button>
+          <button class="example" data-scenario='{"annualIncome":120000,"weeklyHours":35,"weeksOff":5,"monthlyExpenses":1500,"taxBuffer":30,"profitBuffer":18,"averageProjectHours":28}'>Growth phase</button>
+        </div>
+
+        <div class="results" id="resultSection">
+          <h2>Your rate outputs</h2>
+          <div class="result-grid">
+            <div class="result">
+              <div class="result-label">Minimum hourly rate</div>
+              <strong id="hourlyRate" class="result-value">$0.00</strong>
+              <div class="result-label">Gross minimum needed per invoice hour.</div>
+            </div>
+            <div class="result">
+              <div class="result-label">Estimated day rate</div>
+              <strong id="dailyRate" class="result-value">$0.00</strong>
+              <div class="result-label">Using a 5-day working week.</div>
+            </div>
+            <div class="result">
+              <div class="result-label">Project quote baseline</div>
+              <strong id="projectQuote" class="result-value">$0.00</strong>
+              <div class="result-label">For an average project duration.</div>
+            </div>
+            <div class="result">
+              <div class="result-label">Monthly revenue target</div>
+              <strong id="monthlyTarget" class="result-value">$0.00</strong>
+              <div class="result-label">What your rate implies each month.</div>
+            </div>
+          </div>
+        </div>
+
+        <section class="summary-card">
+          <h2>Copyable output</h2>
+          <p>
+            This is a short proposal snippet you can paste into an email, discovery note, or project brief.
+          </p>
+          <div class="summary-box" id="proposalText">
+            Set your numbers first to generate a proposal snippet.
+          </div>
+          <div class="button-row">
+            <button id="copySummary" class="copy-btn">Copy proposal wording</button>
+            <button id="downloadCsv" class="ghost">Download CSV worksheet</button>
+          </div>
+        </section>
+
+        <section class="offer cta-card" aria-label="Paid worksheet offer">
+          <h2>Want a ready-to-fill worksheet pack?</h2>
+          <p>
+            The <strong>Freelance Rate Worksheet Pack ($9)</strong> saves you time with two ready-to-edit CSV files and
+            a plain-English setup guide.
+          </p>
+          <a id="freelance-rate-cta" class="cta" href="https://checkout.dayonebuilder.online/products/freelance-rate-worksheet-pack?utm_source=dayonebuilder&utm_medium=freelance_rate_calculator&utm_campaign=rate_workflow&utm_content=top_cta" data-offer="freelance-rate-worksheet-pack" data-offer-location="tool_page" data-price-usd="9">
+            Buy the worksheet pack
+          </a>
+          <p class="note">Delivery is a ZIP with editable CSV files and a short instructions guide.</p>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const USD = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 2,
+      });
+
+      const fields = {
+        annualIncome: document.getElementById("annualIncome"),
+        weeklyHours: document.getElementById("weeklyHours"),
+        weeksOff: document.getElementById("weeksOff"),
+        monthlyExpenses: document.getElementById("monthlyExpenses"),
+        taxBuffer: document.getElementById("taxBuffer"),
+        profitBuffer: document.getElementById("profitBuffer"),
+        averageProjectHours: document.getElementById("averageProjectHours"),
+      };
+
+      const hourlyRateEl = document.getElementById("hourlyRate");
+      const dailyRateEl = document.getElementById("dailyRate");
+      const projectQuoteEl = document.getElementById("projectQuote");
+      const monthlyTargetEl = document.getElementById("monthlyTarget");
+      const proposalTextEl = document.getElementById("proposalText");
+
+      const copySummaryButton = document.getElementById("copySummary");
+      const downloadCsvButton = document.getElementById("downloadCsv");
+      const cta = document.getElementById("freelance-rate-cta");
+
+      function format(value) {
+        return USD.format(value);
+      }
+
+      function toNumber(node) {
+        const value = Number(node.value);
+        return Number.isFinite(value) ? value : 0;
+      }
+
+      function setTextWithCopyState(button, state) {
+        button.textContent = state;
+        setTimeout(() => {
+          button.textContent = "Copy proposal wording";
+        }, 1400);
+      }
+
+      function calculate() {
+        const annualIncome = Math.max(0, toNumber(fields.annualIncome));
+        const weeklyHours = Math.max(1, toNumber(fields.weeklyHours));
+        const weeksOff = Math.min(52, Math.max(0, toNumber(fields.weeksOff)));
+        const monthlyExpenses = Math.max(0, toNumber(fields.monthlyExpenses));
+        const taxBuffer = Math.max(0, toNumber(fields.taxBuffer) / 100);
+        const profitBuffer = Math.max(0, toNumber(fields.profitBuffer) / 100);
+        const averageProjectHours = Math.max(1, toNumber(fields.averageProjectHours));
+
+        const workingWeeks = Math.max(1, 52 - weeksOff);
+        const annualBillableHours = weeklyHours * workingWeeks;
+        const yearlyExpenses = monthlyExpenses * 12;
+
+        let annualNeed = annualIncome + yearlyExpenses;
+        if (taxBuffer < 0.95) {
+          annualNeed /= 1 - taxBuffer;
+        } else {
+          annualNeed *= 1.95;
+        }
+        annualNeed *= (1 + profitBuffer);
+
+        const hourlyRate = annualNeed / annualBillableHours;
+        const dailyRate = hourlyRate * Math.max(1, weeklyHours / 5);
+        const projectQuote = hourlyRate * averageProjectHours;
+        const monthlyTarget = annualNeed / 12;
+
+        hourlyRateEl.textContent = format(hourlyRate);
+        dailyRateEl.textContent = format(dailyRate);
+        projectQuoteEl.textContent = format(projectQuote);
+        monthlyTargetEl.textContent = format(monthlyTarget);
+
+        const csvSummary = [
+          "Metric,Value",
+          `Minimum hourly rate,${hourlyRate.toFixed(2)}`,
+          `Estimated day rate,${dailyRate.toFixed(2)}`,
+          `Project quote baseline,${projectQuote.toFixed(2)}`,
+          `Monthly revenue target,${monthlyTarget.toFixed(2)}`,
+          `Annual billable hours,${annualBillableHours.toFixed(2)}`,
+          `Working weeks,${workingWeeks.toFixed(0)}`,
+          `Inputs annual income,${annualIncome.toFixed(2)}`,
+          `Inputs weekly billable hours,${weeklyHours.toFixed(2)}`,
+          `Inputs weeks off,${weeksOff.toFixed(2)}`,
+          `Inputs monthly expenses,${monthlyExpenses.toFixed(2)}`,
+          `Inputs tax buffer %,${(taxBuffer * 100).toFixed(1)}`,
+          `Inputs profit/safety buffer %,${(profitBuffer * 100).toFixed(1)}`,
+          `Inputs average project hours,${averageProjectHours.toFixed(2)}`,
+        ];
+
+        const proposal = [
+          `Hi there,\n`,
+          `Here is my rate plan for this scope of work:`,
+          `- Minimum hourly rate: ${format(hourlyRate)}.`,
+          `- Daily working rate: ${format(dailyRate)} (using a 5-hourly-billed week structure).`,
+          `- Estimated quote for a ${averageProjectHours}h project: ${format(projectQuote)}.`,
+          `- Monthly revenue target for the plan: ${format(monthlyTarget)}.`,
+          `If you want, we can reduce project scope to match your timeline before finalizing the quote.`,
+        ].join("\n");
+
+        proposalTextEl.textContent = proposal;
+
+        proposalTextEl.dataset.csv = csvSummary.join("\n");
+        proposalTextEl.dataset.summary = [
+          `minimum_hourly_rate,${hourlyRate.toFixed(2)}`,
+          `daily_rate,${dailyRate.toFixed(2)}`,
+          `project_quote_baseline,${projectQuote.toFixed(2)}`,
+          `monthly_revenue_target,${monthlyTarget.toFixed(2)}`,
+          `inputs_annual_income,${annualIncome.toFixed(2)}`,
+          `inputs_weekly_billable_hours,${weeklyHours.toFixed(2)}`,
+          `inputs_weeks_off,${weeksOff.toFixed(2)}`,
+          `inputs_monthly_expenses,${monthlyExpenses.toFixed(2)}`,
+          `inputs_tax_buffer_percent,${(taxBuffer * 100).toFixed(1)}`,
+          `inputs_profit_buffer_percent,${(profitBuffer * 100).toFixed(1)}`,
+          `inputs_average_project_hours,${averageProjectHours.toFixed(2)}`,
+          `proposal_snippet,"${proposal.replace(/"/g, '""')}"`,
+        ].join("\n");
+      }
+
+      function trackPaidOfferEvent(name, params = {}) {
+        if (typeof gtag !== "function") {
+          return;
+        }
+
+        gtag("event", name, Object.assign({
+          event_category: "freelance_rate_worksheet_pack",
+          offer_slug: params.offerSlug,
+          offer_location: params.offerLocation,
+          price_usd: params.priceUsd,
+        }, params));
+      }
+
+      if (cta) {
+        cta.addEventListener("click", function () {
+          const offerSlug = this.dataset.offer || "freelance-rate-worksheet-pack";
+          const offerLocation = this.dataset.offerLocation || "tool_page";
+          const priceUsd = Number(this.dataset.priceUsd || 9);
+
+          trackPaidOfferEvent("freelance_rate_paid_cta_click", {
+            offerSlug,
+            offerLocation,
+            priceUsd,
+          });
+
+          trackPaidOfferEvent("freelance_rate_checkout_start", {
+            offerSlug,
+            offerLocation,
+            priceUsd,
+            paymentType: "checkout_product_page",
+          });
+        });
+      }
+
+      copySummaryButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(proposalTextEl.textContent || "");
+          setTextWithCopyState(copySummaryButton, "Copied");
+        } catch (_error) {
+          setTextWithCopyState(copySummaryButton, "Copy failed");
+        }
+      });
+
+      downloadCsvButton.addEventListener("click", () => {
+        const csvData = proposalTextEl.dataset.csv || "metric,value\nno-data,0";
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "freelance-rate-worksheet.csv";
+        link.click();
+        URL.revokeObjectURL(url);
+      });
+
+      Object.values(fields).forEach((field) => {
+        field.addEventListener("input", calculate);
+      });
+
+      document.querySelectorAll(".example").forEach((button) => {
+        button.addEventListener("click", () => {
+          const scenario = JSON.parse(button.getAttribute("data-scenario") || "{}");
+          fields.annualIncome.value = scenario.annualIncome;
+          fields.weeklyHours.value = scenario.weeklyHours;
+          fields.weeksOff.value = scenario.weeksOff;
+          fields.monthlyExpenses.value = scenario.monthlyExpenses;
+          fields.taxBuffer.value = scenario.taxBuffer;
+          fields.profitBuffer.value = scenario.profitBuffer;
+          fields.averageProjectHours.value = scenario.averageProjectHours;
+          calculate();
+        });
+      });
+
+      calculate();
+    </script>
+  </body>
+</html>
