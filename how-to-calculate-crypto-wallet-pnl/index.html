@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>How to Calculate Crypto Wallet P&amp;L | DayOneBuilder</title>
+    <title>How to Calculate Crypto Wallet P&amp;L | Wallet P&amp;L Calculator</title>
     <meta
       name="description"
-      content="A practical guide to calculating crypto wallet P&L without getting lost in deposits, withdrawals, current holdings, and rough realized versus unrealized gains."
+      content="Calculate crypto wallet profit and loss, separate transfers from gains, and test a simple Wallet P&L Cleanup Pack for spreadsheet-first tracking."
     />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
@@ -82,6 +82,18 @@
         color: #04100a;
         font-weight: 700;
         text-decoration: none;
+      }
+      .cta:disabled {
+        cursor: not-allowed;
+        opacity: 0.75;
+      }
+      .offer-note {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .offer-note code {
+        word-break: break-all;
       }
       @media (max-width: 760px) {
         .grid { grid-template-columns: 1fr; }
@@ -161,15 +173,64 @@
           </div>
         </div>
 
-        <div class="note">
+        <section class="note" aria-label="Wallet P&L Cleanup Pack offer">
+          <h2>Need the sheet version instead of doing this by hand?</h2>
+          <p>
+            The <strong>Wallet P&amp;L Cleanup Pack</strong> is a small template for people who need a rough wallet cleanup before tax-lot accounting.
+            It includes a wallet inventory sheet, capital in / capital out tracking, transfer neutralization, and a realized vs unrealized split workflow.
+          </p>
+          <p>Starting price: <strong>$19</strong>.</p>
+          <button id="wallet-pnl-cleanup-pack-cta-howto" class="cta" type="button" data-offer="wallet-pnl-cleanup-pack" data-offer-location="how-to-page" data-price-usd="19">
+            Get the Wallet P&amp;L Cleanup Pack
+          </button>
+          <p class="offer-note">
+            Checkout blocker: no existing paid checkout route is live for this offer yet.
+            Expected route is <code>https://checkout.dayonebuilder.online/products/wallet-pnl-cleanup-pack</code>.
+          </p>
+        </section>
+
+        <section class="note">
           <strong>Practical next step</strong>
           <p>
             If you want to run those inputs without building your own sheet first, use the live <a href="/products/wallet-pnl-calculator/">Wallet P&amp;L Calculator</a>.
             It gives you a fast wallet-level sanity check for total, realized, and unrealized picture.
           </p>
           <a class="cta" href="/products/wallet-pnl-calculator/">Open the calculator</a>
-        </div>
+        </section>
       </article>
     </div>
+    <script>
+      function trackPaidOfferEvent(name, params = {}) {
+        if (typeof window === "undefined" || typeof gtag !== "function") {
+          return;
+        }
+        gtag("event", name, params);
+      }
+
+      const howtoOfferCta = document.getElementById("wallet-pnl-cleanup-pack-cta-howto");
+      if (howtoOfferCta) {
+        howtoOfferCta.addEventListener("click", function () {
+          const checkoutUrl = this.getAttribute("data-checkout-url");
+          const payload = {
+            event_category: "wallet_pnl_cleanup_pack",
+            event_label: this.getAttribute("data-offer"),
+            offer_location: this.getAttribute("data-offer-location"),
+            price_usd: Number(this.dataset.priceUsd || 19)
+          };
+
+          trackPaidOfferEvent("wallet_pnl_paid_cta_click", payload);
+
+          if (checkoutUrl) {
+            trackPaidOfferEvent("wallet_pnl_checkout_start", {
+              event_category: "wallet_pnl_cleanup_pack",
+              event_label: this.getAttribute("data-offer"),
+              offer_location: this.getAttribute("data-offer-location"),
+              payment_type: "checkout"
+            });
+            window.location.href = checkoutUrl;
+          }
+        });
+      }
+    </script>
   </body>
 </html>

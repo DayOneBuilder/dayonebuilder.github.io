@@ -119,6 +119,23 @@
               <p><strong>Scope:</strong> rough wallet-level only. No tax lots, gas, staking accrual detail, or transfers between wallets you still control.</p>
               <p class="formula-line">Formula: total P&amp;L = withdrawals + current holdings value - deposits</p>
             </div>
+
+            <section class="offer-box" aria-label="Wallet P&L Cleanup Pack offer">
+              <div>
+                <strong>Need more than a quick calculator?</strong>
+                <p>
+                  Use the free calculator for a fast signal. If you need a quick template workflow for cleanup, the Wallet P&amp;L Cleanup Pack is built for rough wallet-level cleanup before deeper tax prep.
+                </p>
+              </div>
+              <p>Starting price: <strong>$19</strong>.</p>
+              <button id="wallet-pnl-cleanup-pack-cta-product" class="cta" type="button" data-offer="wallet-pnl-cleanup-pack" data-offer-location="product-page" data-price-usd="19">
+                Open the Cleanup Pack
+              </button>
+              <p class="offer-note">
+                Checkout blocker: no existing paid checkout route is live for this offer yet.
+                Expected route is <code>https://checkout.dayonebuilder.online/products/wallet-pnl-cleanup-pack</code>.
+              </p>
+            </section>
           </div>
         </section>
 
@@ -139,5 +156,39 @@
         <div class="footer-note">This is a rough decision aid, not tax or legal advice. Take the calculator and use it for the quick read.</div>
       </section>
     </div>
+    <script>
+      function trackWalletOfferEvent(name, params = {}) {
+        if (typeof window === "undefined" || typeof gtag !== "function") {
+          return;
+        }
+
+        gtag("event", name, params);
+      }
+
+      const productOfferCta = document.getElementById("wallet-pnl-cleanup-pack-cta-product");
+      if (productOfferCta) {
+        productOfferCta.addEventListener("click", function () {
+          const checkoutUrl = this.getAttribute("data-checkout-url");
+          const payload = {
+            event_category: "wallet_pnl_cleanup_pack",
+            event_label: this.getAttribute("data-offer"),
+            offer_location: this.getAttribute("data-offer-location"),
+            price_usd: Number(this.dataset.priceUsd || 19)
+          };
+
+          trackWalletOfferEvent("wallet_pnl_paid_cta_click", payload);
+
+          if (checkoutUrl) {
+            trackWalletOfferEvent("wallet_pnl_checkout_start", {
+              event_category: "wallet_pnl_cleanup_pack",
+              event_label: this.getAttribute("data-offer"),
+              offer_location: this.getAttribute("data-offer-location"),
+              payment_type: "checkout"
+            });
+            window.location.href = checkoutUrl;
+          }
+        });
+      }
+    </script>
   </body>
 </html>
