@@ -84,7 +84,10 @@
       h3 {
         margin: 10px 0 6px;
       }
-      p, li, code { color: var(--muted); }
+      p, li, code {
+        color: var(--muted);
+        overflow-wrap: break-word;
+      }
       .row {
         display: flex;
         flex-wrap: wrap;
@@ -215,7 +218,7 @@
         .panel { padding: 20px; }
         h1 {
           font-size: 2.35rem;
-          max-width: 100%;
+          max-width: 11ch;
         }
         h2 {
           font-size: 1.5rem;
@@ -231,6 +234,7 @@
         }
         h1 {
           font-size: 2rem;
+          max-width: 11ch;
         }
       }
     </style>
