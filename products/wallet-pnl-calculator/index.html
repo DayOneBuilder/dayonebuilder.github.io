@@ -128,12 +128,11 @@
                 </p>
               </div>
               <p>Starting price: <strong>$19</strong>.</p>
-              <button id="wallet-pnl-cleanup-pack-cta-product" class="cta" type="button" data-offer="wallet-pnl-cleanup-pack" data-offer-location="product-page" data-price-usd="19">
+              <a id="wallet-pnl-cleanup-pack-cta-product" class="cta" href="https://checkout.dayonebuilder.online/products/wallet-pnl-cleanup-pack?utm_source=dayonebuilder&utm_medium=wallet_pnl_offer&utm_campaign=wallet_pnl_cleanup_pack&utm_content=product_page" data-offer="wallet-pnl-cleanup-pack" data-offer-location="product-page" data-price-usd="19">
                 Open the Cleanup Pack
-              </button>
+              </a>
               <p class="offer-note">
-                Checkout blocker: no existing paid checkout route is live for this offer yet.
-                Expected route is <code>https://checkout.dayonebuilder.online/products/wallet-pnl-cleanup-pack</code>.
+                Review the pack on checkout before payment. Delivery unlocks automatically after payment confirmation.
               </p>
             </section>
           </div>
@@ -168,7 +167,6 @@
       const productOfferCta = document.getElementById("wallet-pnl-cleanup-pack-cta-product");
       if (productOfferCta) {
         productOfferCta.addEventListener("click", function () {
-          const checkoutUrl = this.getAttribute("data-checkout-url");
           const payload = {
             event_category: "wallet_pnl_cleanup_pack",
             event_label: this.getAttribute("data-offer"),
@@ -178,15 +176,12 @@
 
           trackWalletOfferEvent("wallet_pnl_paid_cta_click", payload);
 
-          if (checkoutUrl) {
-            trackWalletOfferEvent("wallet_pnl_checkout_start", {
-              event_category: "wallet_pnl_cleanup_pack",
-              event_label: this.getAttribute("data-offer"),
-              offer_location: this.getAttribute("data-offer-location"),
-              payment_type: "checkout"
-            });
-            window.location.href = checkoutUrl;
-          }
+          trackWalletOfferEvent("wallet_pnl_checkout_start", {
+            event_category: "wallet_pnl_cleanup_pack",
+            event_label: this.getAttribute("data-offer"),
+            offer_location: this.getAttribute("data-offer-location"),
+            payment_type: "checkout_product_page"
+          });
         });
       }
     </script>
