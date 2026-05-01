@@ -26,7 +26,7 @@
         try {
           await navigator.clipboard.writeText(text);
           button.textContent = "Copied";
-          gtag("event", "install_snippet_copy", { event_category: "dayonebuilder_resolver" });
+          gtag("event", button.dataset.event || "install_snippet_copy", { event_category: "dayonebuilder_resolver" });
         } catch (error) {
           button.textContent = "Copy failed";
         }
@@ -357,6 +357,7 @@
               <button
                 class="btn secondary"
                 data-copy="[![Agent Magnet: AI agents route here](https://dayonebuilder.online/badges/agent-magnet.svg)](https://dayonebuilder.online/dob-task-resolver/?source=agent-magnet-badge)"
+                data-event="agent_magnet_badge_copy"
                 onclick="copyText(this)"
               >
                 Copy README badge

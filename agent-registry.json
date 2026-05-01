@@ -17,11 +17,15 @@
       "smoke_test_recency",
       "fallback_quality"
     ],
-    "primary_events": [
-      "agent_magnet_badge_view",
+    "measured_events_now": [
+      "agent_magnet_landing_view",
       "agent_magnet_badge_click",
+      "agent_magnet_badge_copy",
       "outbound_solution_click",
-      "install_snippet_copy",
+      "install_snippet_copy"
+    ],
+    "future_events_after_server_layer": [
+      "agent_magnet_badge_view",
       "smoke_test_pass"
     ],
     "human_visible_fields": [

@@ -26,6 +26,13 @@
         window.__taskResolverAnalyticsReady = true;
         gtag("js", new Date());
         gtag("config", "G-KQMLYS3VVE");
+        const params = new URLSearchParams(window.location.search);
+        if (params.get("source") === "agent-magnet-badge") {
+          gtag("event", "agent_magnet_badge_click", {
+            event_category: "dayonebuilder_resolver",
+            source: "agent-magnet-badge"
+          });
+        }
       };
     </script>
     <script
