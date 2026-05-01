@@ -1,12 +1,20 @@
 <!doctype html>
 <!-- public-copy-allow: Ben Ison -->
-<!-- public-copy-allow: Codex -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Active crypto workflow tools | DayOneBuilder</title>
-    <meta name="description" content="The DayOneBuilder tools currently visible for active validation." />
+    <title>DayOneBuilder Modules | Agent-ready registry entries</title>
+    <meta
+      name="description"
+      content="Browse DayOneBuilder modules with task phrases, install paths, repos, downloads, and trust notes for agents and builders."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/products/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
+    <link rel="alternate" type="application/json" href="/agent-registry.json" title="DayOneBuilder agent registry" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,152 +22,351 @@
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
 
-      async function copyPhrase(button) {
+      async function copyText(button) {
         const text = button.getAttribute("data-copy");
         const original = button.dataset.original || button.textContent;
         button.dataset.original = original;
         try {
           await navigator.clipboard.writeText(text);
           button.textContent = "Copied";
-        } catch (err) {
+        } catch (error) {
           button.textContent = "Copy failed";
         }
-        setTimeout(() => {
-          button.textContent = original;
-        }, 1600);
+        setTimeout(() => { button.textContent = original; }, 1400);
       }
     </script>
     <style>
       :root {
-        --bg: #081118;
-        --ink: #edf7f3;
-        --muted: #a9c1ba;
-        --panel: rgba(12, 34, 36, 0.88);
-        --line: rgba(191, 245, 221, 0.16);
-        --mint: #9ef0c0;
-        --acid: #d7ff64;
-        --sand: #f7d49c;
+        --bg: #08090a;
+        --surface: #0e0e10;
+        --surface-2: #141416;
+        --ink: #f7f8f8;
+        --text: #c9ccd1;
+        --muted: #8a8f98;
+        --line: rgba(255,255,255,0.08);
+        --line-strong: rgba(255,255,255,0.14);
+        --green: #34d399;
+        --blue: #60a5fa;
+        --amber: #fbbf24;
+        --max: 1120px;
       }
       * { box-sizing: border-box; }
       body {
         margin: 0;
-        color: var(--ink);
-        background: linear-gradient(180deg, #081118 0%, #0b171d 100%);
-        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
-      .wrap { width: min(calc(100% - 32px), 1080px); margin: 0 auto; padding: 28px 0 56px; }
-      .back { color: var(--muted); text-decoration: none; }
-      h1 { font-size: clamp(2rem, 5vw, 3.6rem); margin: 16px 0 8px; }
-      h2 { margin: 10px 0 8px; line-height: 1.08; }
-      p, code { color: var(--muted); }
+      a { color: inherit; text-decoration: none; }
+      code {
+        color: #e0e1e3;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 0.92em;
+      }
+      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand { color: var(--ink); font-weight: 700; }
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .hero { padding: 46px 0 24px; }
+      .eyebrow {
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.1; }
+      h1 { max-width: 13ch; margin-top: 12px; font-size: clamp(2.2rem, 5vw, 4rem); }
+      h2 { font-size: clamp(1.4rem, 3vw, 2.1rem); }
+      h3 { font-size: 1.05rem; }
+      p { margin: 0; color: var(--muted); }
+      .lead { max-width: 68ch; margin-top: 16px; color: #d9dcdf; font-size: 1.06rem; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+      .btn, .small-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        font: inherit;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      .btn { min-height: 44px; padding: 0 16px; background: #f7f8f8; color: #08090a; }
+      .btn.secondary { background: rgba(255,255,255,0.04); color: var(--ink); }
+      .small-link { min-height: 36px; padding: 0 12px; color: var(--ink); font-size: 13px; }
+      .filters {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin: 28px 0 18px;
+      }
+      .filter {
+        padding: 13px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+      .filter strong { display: block; color: var(--ink); }
+      .filter span { color: var(--muted); font-size: 13px; }
       .grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 24px;
+        gap: 12px;
+        padding-bottom: 42px;
       }
       .card {
-        padding: 24px;
-        border-radius: 22px;
-        border: 1px solid var(--line);
-        background: var(--panel);
-      }
-      .price {
-        display: inline-flex;
-        margin-top: 12px;
-        padding: 7px 12px;
-        border-radius: 999px;
-        background: rgba(215, 255, 100, 0.12);
-        color: var(--acid);
-        font-weight: 700;
-      }
-      .phrase {
-        margin-top: 14px;
-        padding: 12px 14px;
-        border-radius: 16px;
-        border: 1px solid var(--line);
-        background: rgba(0, 0, 0, 0.24);
-      }
-      code { font-family: "IBM Plex Mono", monospace; }
-      .button-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .shelf {
-        margin-top: 28px;
-        padding-top: 24px;
-        border-top: 1px solid var(--line);
-      }
-      .shelf-list {
         display: grid;
-        gap: 10px;
-        margin-top: 14px;
+        gap: 14px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
       }
-      .shelf-list a {
-        color: var(--muted);
-        text-decoration: none;
+      .card-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 14px;
       }
-      .button,
-      .ghost {
+      .badge {
         display: inline-flex;
-        min-height: 46px;
         align-items: center;
-        justify-content: center;
-        padding: 0 16px;
-        border-radius: 999px;
-        font-weight: 700;
-        border: 1px solid transparent;
+        height: 28px;
+        padding: 0 9px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: var(--amber);
+        font-size: 12px;
+        font-weight: 650;
+        white-space: nowrap;
       }
-      .button {
-        background: linear-gradient(135deg, var(--mint), var(--acid));
-        color: #03110c;
-        cursor: pointer;
+      .meta {
+        display: grid;
+        grid-template-columns: 110px 1fr;
+        gap: 8px 12px;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255,255,255,0.03);
+        font-size: 13px;
       }
-      .ghost {
-        border-color: var(--line);
-        color: var(--ink);
-        text-decoration: none;
+      .meta span:nth-child(odd) { color: var(--muted); }
+      .meta span:nth-child(even) { color: #d9dcdf; }
+      .path {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #0b0c0e;
+        overflow-wrap: anywhere;
       }
-      button.button { font: inherit; }
-      @media (max-width: 860px) {
-        .grid { grid-template-columns: 1fr; }
+      .button-row { display: flex; flex-wrap: wrap; gap: 8px; }
+      footer {
+        padding: 24px 0 42px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+      }
+      @media (max-width: 900px) {
+        .grid, .filters { grid-template-columns: 1fr; }
+        .nav { flex-direction: column; }
+      }
+      @media (max-width: 560px) {
+        .wrap { width: min(calc(100% - 24px), var(--max)); }
+        .card-head { flex-direction: column; }
+        .meta { grid-template-columns: 1fr; }
       }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <a class="back" href="/">← Back to DayOneBuilder</a>
-      <h1>Active focus.</h1>
-      <p>The front shelf is intentionally small while the rest of the catalog is revalidated.</p>
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="/">DayOneBuilder Resolver</a>
+        <div class="nav-links">
+          <a href="/resolver/">Resolver</a>
+          <a href="/agent-registry.json">Registry JSON</a>
+          <a href="/llms.txt">llms.txt</a>
+          <a href="https://github.com/DayOneBuilder">GitHub</a>
+        </div>
+      </nav>
 
-      <div class="grid">
-        <article class="card">
-          <div class="price">Prompt guardrail</div>
-          <h2>Prompt Buddy</h2>
-          <p>Catch weak prompts before they waste a run.</p>
-          <div class="phrase"><code>Install dayonebuilder/dob-prompt-buddy by Ben Ison.</code></div>
-          <div class="button-row" style="margin-top: 16px;">
-            <button class="button" data-copy="Install dayonebuilder/dob-prompt-buddy by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-            <a class="ghost" href="/products/prompt-buddy/">Product page</a>
+      <main>
+        <section class="hero">
+          <span class="eyebrow">Module registry</span>
+          <h1>Modules agents can inspect before they act.</h1>
+          <p class="lead">
+            These are the current DayOneBuilder modules. Some are ready to install, some are validation lanes, and some will be rebuilt or archived as the resolver gets stricter.
+          </p>
+          <div class="actions">
+            <a class="btn" href="/agent-registry.json">Open machine registry</a>
+            <a class="btn secondary" href="/resolver/">Read resolver contract</a>
           </div>
-        </article>
-        <article class="card">
-          <div class="price">Wallet P&amp;L validation</div>
-          <h2>Wallet P&amp;L Calculator</h2>
-          <p>Estimate what a crypto wallet actually made while this path is being validated.</p>
-          <div class="phrase"><code>Live calculator + standalone ZIP download</code></div>
-          <div class="button-row" style="margin-top: 16px;">
-            <a class="button" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">Download ZIP</a>
-            <a class="ghost" href="/products/wallet-pnl-calculator/">Product page</a>
+          <div class="filters" aria-label="Registry summary">
+            <div class="filter"><strong>Installable</strong><span>repo or bundle path exists</span></div>
+            <div class="filter"><strong>No-login basics</strong><span>agents can inspect before trust</span></div>
+            <div class="filter"><strong>Trust evidence</strong><span>examples, source, or tests required</span></div>
+            <div class="filter"><strong>Data driven</strong><span>weak modules lose placement</span></div>
           </div>
-        </article>
-      </div>
+        </section>
 
-      <div class="shelf">
-        <h2>Archive</h2>
-        <p>Older tools are off the public shelf until real search demand, useful sessions, or earned revenue justifies bringing one back.</p>
-      </div>
+        <section class="grid" aria-label="DayOneBuilder modules">
+          <article class="card">
+            <div class="card-head">
+              <div><h2>Prompt Buddy</h2><p>Prompt review workflow for stronger agent task framing.</p></div>
+              <span class="badge">rebuild priority</span>
+            </div>
+            <div class="meta">
+              <span>Task phrase</span><span>Review a prompt before an expensive or high-context agent run.</span>
+              <span>Artifact</span><span>Agent skill/repo bundle</span>
+              <span>Trust</span><span>Needs rebuild to match intended product quality.</span>
+            </div>
+            <div class="path"><code>Install dayonebuilder/dob-prompt-buddy by Ben Ison.</code></div>
+            <div class="button-row">
+              <button class="btn secondary" data-copy="Install dayonebuilder/dob-prompt-buddy by Ben Ison." onclick="copyText(this)">Copy phrase</button>
+              <a class="small-link" href="/products/prompt-buddy/">Page</a>
+              <a class="small-link" href="https://github.com/DayOneBuilder/dob-prompt-buddy">Repo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div><h2>Crypto Research Copilot Starter</h2><p>Reusable token, wallet, and yield research workflow.</p></div>
+              <span class="badge">installable</span>
+            </div>
+            <div class="meta">
+              <span>Task phrase</span><span>Start a structured crypto research session with checks and notes.</span>
+              <span>Artifact</span><span>Repo bundle</span>
+              <span>Trust</span><span>Source repo and downloadable starter bundle.</span>
+            </div>
+            <div class="path"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
+            <div class="button-row">
+              <button class="btn secondary" data-copy="Install dayonebuilder/dob-crypto-research-copilot by Ben Ison." onclick="copyText(this)">Copy phrase</button>
+              <a class="small-link" href="/products/crypto-research-copilot/">Page</a>
+              <a class="small-link" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">Repo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div><h2>Crypto Portfolio Tracker</h2><p>Workbook for wallets, transfers, rewards, and cost basis.</p></div>
+              <span class="badge">installable</span>
+            </div>
+            <div class="meta">
+              <span>Task phrase</span><span>Set up a crypto portfolio tracker that survives real wallet activity.</span>
+              <span>Artifact</span><span>Workbook repo and ZIP</span>
+              <span>Trust</span><span>Source repo plus direct bundle.</span>
+            </div>
+            <div class="path"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
+            <div class="button-row">
+              <button class="btn secondary" data-copy="Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison." onclick="copyText(this)">Copy phrase</button>
+              <a class="small-link" href="/products/crypto-portfolio-tracker/">Page</a>
+              <a class="small-link" href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">Repo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div><h2>50 AI Prompts for Crypto Research</h2><p>Reusable prompt pack for diligence and comparison work.</p></div>
+              <span class="badge">installable</span>
+            </div>
+            <div class="meta">
+              <span>Task phrase</span><span>Run a more complete crypto research pass from a clean checklist.</span>
+              <span>Artifact</span><span>Markdown file and repo</span>
+              <span>Trust</span><span>Direct file, source repo, and visible scope.</span>
+            </div>
+            <div class="path"><code>Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.</code></div>
+            <div class="button-row">
+              <button class="btn secondary" data-copy="Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison." onclick="copyText(this)">Copy phrase</button>
+              <a class="small-link" href="/products/crypto-prompt-pack/">Page</a>
+              <a class="small-link" href="https://github.com/DayOneBuilder/dob-crypto-prompt-pack">Repo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div><h2>Airdrop Tracker + DeFi Tax Template</h2><p>Workbook for token receipts, claim notes, and disposal context.</p></div>
+              <span class="badge">installable</span>
+            </div>
+            <div class="meta">
+              <span>Task phrase</span><span>Keep airdrop records ready for later review and cleanup.</span>
+              <span>Artifact</span><span>Workbook repo and ZIP</span>
+              <span>Trust</span><span>Source repo plus direct workbook bundle.</span>
+            </div>
+            <div class="path"><code>Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison.</code></div>
+            <div class="button-row">
+              <button class="btn secondary" data-copy="Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison." onclick="copyText(this)">Copy phrase</button>
+              <a class="small-link" href="/products/airdrop-tracker-tax-template/">Page</a>
+              <a class="small-link" href="https://github.com/DayOneBuilder/dob-airdrop-tracker-tax-template">Repo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div><h2>Wallet P&amp;L Calculator</h2><p>Browser calculator and ZIP for wallet profit/loss checks.</p></div>
+              <span class="badge">validation lane</span>
+            </div>
+            <div class="meta">
+              <span>Task phrase</span><span>Calculate wallet P&amp;L from user-provided values.</span>
+              <span>Artifact</span><span>Browser calculator and ZIP</span>
+              <span>Trust</span><span>Formula examples and direct bundle.</span>
+            </div>
+            <div class="path"><code>Use /products/wallet-pnl-calculator/ or download the standalone ZIP.</code></div>
+            <div class="button-row">
+              <a class="btn secondary" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">Download ZIP</a>
+              <a class="small-link" href="/products/wallet-pnl-calculator/">Page</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div><h2>Impermanent Loss Calculator</h2><p>LP decision aid for comparing hold versus pool outcomes.</p></div>
+              <span class="badge">validation lane</span>
+            </div>
+            <div class="meta">
+              <span>Task phrase</span><span>Check whether LP fees overcome impermanent loss assumptions.</span>
+              <span>Artifact</span><span>Browser calculator and ZIP</span>
+              <span>Trust</span><span>Formula surface and direct bundle.</span>
+            </div>
+            <div class="path"><code>Use /products/impermanent-loss-calculator/ or download the standalone ZIP.</code></div>
+            <div class="button-row">
+              <a class="btn secondary" href="/downloads/dayonebuilder-impermanent-loss-calculator.zip">Download ZIP</a>
+              <a class="small-link" href="/products/impermanent-loss-calculator/">Page</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-head">
+              <div><h2>DeFi Tax Prep Guide 2026</h2><p>Record checklist and event matrix for DeFi tax prep.</p></div>
+              <span class="badge">high-trust topic</span>
+            </div>
+            <div class="meta">
+              <span>Task phrase</span><span>Organize DeFi records before professional tax review.</span>
+              <span>Artifact</span><span>Guide bundle and checklist</span>
+              <span>Trust</span><span>Needs conservative sourcing and review before stronger placement.</span>
+            </div>
+            <div class="path"><code>Download the guide bundle and review limitations before use.</code></div>
+            <div class="button-row">
+              <a class="btn secondary" href="/downloads/dayonebuilder-defi-tax-prep-guide-2026.zip">Download ZIP</a>
+              <a class="small-link" href="/products/defi-tax-prep-guide-2026/">Page</a>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer>
+        <a href="/">DayOneBuilder Resolver</a> / <a href="/llms.txt">llms.txt</a> / <a href="/agent-registry.json">registry JSON</a>
+      </footer>
     </div>
   </body>
 </html>

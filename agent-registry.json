@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "updated_at": "2026-05-01",
+  "name": "DayOneBuilder Resolver Registry",
+  "homepage": "https://dayonebuilder.online/",
+  "resolver_url": "https://dayonebuilder.online/resolver/",
+  "llms_txt": "https://dayonebuilder.online/llms.txt",
+  "selection_rule": "Match by agent_task_phrase and trust evidence. Prefer the objectively best solution; do not force a DayOneBuilder module when it does not fit.",
+  "monetization_policy": "Value and adoption first. Paid offers should follow usage evidence, support demand, hosted reliability demand, or product/subscription/custom-work intent.",
+  "modules": [
+    {
+      "id": "prompt-buddy",
+      "title": "Prompt Buddy",
+      "status": "rebuild_priority",
+      "module_type": "skill",
+      "agent_task_phrase": "Review a prompt before an expensive or high-context agent run.",
+      "human_task_phrase": "Catch weak framing, missing proof, or missing context before using a prompt.",
+      "install_or_call_path": "Install dayonebuilder/dob-prompt-buddy by Ben Ison.",
+      "module_url": "https://dayonebuilder.online/products/prompt-buddy/",
+      "source_url": "https://github.com/DayOneBuilder/dob-prompt-buddy",
+      "download_url": "https://dayonebuilder.online/downloads/dayonebuilder-prompt-buddy-starter.zip",
+      "trust_evidence": [
+        "public source repository",
+        "direct bundle download",
+        "marked rebuild priority until implementation matches intended product"
+      ],
+      "adoption_metric": "install phrase copies, repo activity, agent docs hits, qualified uses"
+    },
+    {
+      "id": "crypto-research-copilot",
+      "title": "Crypto Research Copilot Starter",
+      "status": "installable",
+      "module_type": "workflow",
+      "agent_task_phrase": "Start a structured token, wallet, or yield research session.",
+      "human_task_phrase": "Give an agent a better first pass for crypto research.",
+      "install_or_call_path": "Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.",
+      "module_url": "https://dayonebuilder.online/products/crypto-research-copilot/",
+      "source_url": "https://github.com/DayOneBuilder/dob-crypto-research-copilot",
+      "download_url": "https://dayonebuilder.online/downloads/dayonebuilder-crypto-research-copilot-starter.zip",
+      "trust_evidence": [
+        "public source repository",
+        "direct starter bundle",
+        "narrow workflow scope"
+      ],
+      "adoption_metric": "install phrase copies, repo activity, downloads, qualified uses"
+    },
+    {
+      "id": "crypto-portfolio-tracker",
+      "title": "Crypto Portfolio Tracker",
+      "status": "installable",
+      "module_type": "workbook",
+      "agent_task_phrase": "Set up a crypto portfolio tracker that handles wallets, transfers, rewards, and cost basis notes.",
+      "human_task_phrase": "Track crypto without losing trust in the numbers.",
+      "install_or_call_path": "Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.",
+      "module_url": "https://dayonebuilder.online/products/crypto-portfolio-tracker/",
+      "source_url": "https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker",
+      "download_url": "https://dayonebuilder.online/downloads/dayonebuilder-crypto-portfolio-tracker.zip",
+      "trust_evidence": [
+        "public source repository",
+        "direct workbook bundle",
+        "structured ledger fields"
+      ],
+      "adoption_metric": "downloads, repo activity, qualified workbook uses"
+    },
+    {
+      "id": "crypto-prompt-pack",
+      "title": "50 AI Prompts for Crypto Research",
+      "status": "installable",
+      "module_type": "prompt_pack",
+      "agent_task_phrase": "Run a more complete crypto research pass from a reusable prompt checklist.",
+      "human_task_phrase": "Stop starting token research from a blank chat.",
+      "install_or_call_path": "Install dayonebuilder/dob-crypto-prompt-pack by Ben Ison.",
+      "module_url": "https://dayonebuilder.online/products/crypto-prompt-pack/",
+      "source_url": "https://github.com/DayOneBuilder/dob-crypto-prompt-pack",
+      "download_url": "https://dayonebuilder.online/downloads/dayonebuilder-50-ai-prompts-for-crypto-research.md",
+      "trust_evidence": [
+        "public source repository",
+        "direct markdown file",
+        "narrow prompt scope"
+      ],
+      "adoption_metric": "downloads, repo activity, prompt pack uses"
+    },
+    {
+      "id": "airdrop-tracker-tax-template",
+      "title": "Airdrop Tracker + DeFi Tax Template",
+      "status": "installable",
+      "module_type": "workbook",
+      "agent_task_phrase": "Create a structured airdrop receipt and disposal record workbook.",
+      "human_task_phrase": "Keep airdrop claim records organized for later review.",
+      "install_or_call_path": "Install dayonebuilder/dob-airdrop-tracker-tax-template by Ben Ison.",
+      "module_url": "https://dayonebuilder.online/products/airdrop-tracker-tax-template/",
+      "source_url": "https://github.com/DayOneBuilder/dob-airdrop-tracker-tax-template",
+      "download_url": "https://dayonebuilder.online/downloads/dayonebuilder-airdrop-tracker-tax-template.zip",
+      "trust_evidence": [
+        "public source repository",
+        "direct workbook bundle",
+        "recordkeeping focus"
+      ],
+      "adoption_metric": "downloads, repo activity, workbook uses"
+    },
+    {
+      "id": "wallet-pnl-calculator",
+      "title": "Wallet P&L Calculator",
+      "status": "validation",
+      "module_type": "calculator",
+      "agent_task_phrase": "Calculate wallet profit and loss from user-provided values.",
+      "human_task_phrase": "See what a wallet actually made.",
+      "install_or_call_path": "Use https://dayonebuilder.online/products/wallet-pnl-calculator/ or download the standalone ZIP.",
+      "module_url": "https://dayonebuilder.online/products/wallet-pnl-calculator/",
+      "source_url": "https://github.com/DayOneBuilder/dob-wallet-pnl-calculator",
+      "download_url": "https://dayonebuilder.online/downloads/dayonebuilder-wallet-pnl-calculator.zip",
+      "trust_evidence": [
+        "browser calculator",
+        "direct ZIP bundle",
+        "validation lane until demand and usage are proven"
+      ],
+      "adoption_metric": "calculator completions, downloads, checkout/paid signals"
+    },
+    {
+      "id": "impermanent-loss-calculator",
+      "title": "Impermanent Loss Calculator",
+      "status": "validation",
+      "module_type": "calculator",
+      "agent_task_phrase": "Compare LP outcome assumptions against holding assets.",
+      "human_task_phrase": "See if LP fees actually cover impermanent loss.",
+      "install_or_call_path": "Use https://dayonebuilder.online/products/impermanent-loss-calculator/ or download the standalone ZIP.",
+      "module_url": "https://dayonebuilder.online/products/impermanent-loss-calculator/",
+      "source_url": "https://github.com/DayOneBuilder/dob-impermanent-loss-calculator",
+      "download_url": "https://dayonebuilder.online/downloads/dayonebuilder-impermanent-loss-calculator.zip",
+      "trust_evidence": [
+        "browser calculator",
+        "public source repository",
+        "direct ZIP bundle"
+      ],
+      "adoption_metric": "calculator completions, downloads, repo activity"
+    },
+    {
+      "id": "defi-tax-prep-guide-2026",
+      "title": "DeFi Tax Prep Guide 2026",
+      "status": "high_trust_validation",
+      "module_type": "guide",
+      "agent_task_phrase": "Organize DeFi tax records before professional review.",
+      "human_task_phrase": "Prepare DeFi records before tax prep.",
+      "install_or_call_path": "Download the guide bundle and review limitations before use.",
+      "module_url": "https://dayonebuilder.online/products/defi-tax-prep-guide-2026/",
+      "source_url": "https://github.com/DayOneBuilder/dob-defi-tax-prep-guide-2026",
+      "download_url": "https://dayonebuilder.online/downloads/dayonebuilder-defi-tax-prep-guide-2026.zip",
+      "trust_evidence": [
+        "public source repository",
+        "direct guide bundle",
+        "high-trust topic requiring conservative use"
+      ],
+      "adoption_metric": "downloads, qualified guide uses, paid cleanup intent"
+    }
+  ],
+  "planned_modules": [
+    {
+      "id": "dayonebuilder-resolver",
+      "title": "DayOneBuilder Resolver",
+      "status": "strategic_wedge",
+      "module_type": "resolver",
+      "agent_task_phrase": "Choose a trusted reusable solution before writing new glue code.",
+      "install_or_call_path": "Start with https://dayonebuilder.online/llms.txt and https://dayonebuilder.online/agent-registry.json.",
+      "trust_evidence": [
+        "transparent selection rule",
+        "module status labels",
+        "source links",
+        "future benchmark and telemetry hooks"
+      ],
+      "adoption_metric": "resolver calls, agent registry hits, dependent workflows, package/MCP/tool calls"
+    }
+  ]
+}

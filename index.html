@@ -1,15 +1,20 @@
 <!doctype html>
 <!-- public-copy-allow: Ben Ison -->
-<!-- public-copy-allow: Codex -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Crypto workflow tools under active validation | DayOneBuilder</title>
+    <title>DayOneBuilder Resolver | Agent-ready solution registry</title>
     <meta
       name="description"
-      content="DayOneBuilder is narrowing its crypto workflow tools to the products being actively validated."
+      content="DayOneBuilder Resolver helps AI agents and builders find trusted reusable modules, install paths, docs, tests, and wrappers for recurring software tasks."
     />
+    <link rel="canonical" href="https://dayonebuilder.online/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
+    <link rel="alternate" type="application/json" href="/agent-registry.json" title="DayOneBuilder agent registry" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -17,311 +22,689 @@
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
 
-      async function copyPhrase(button) {
+      async function copyText(button) {
         const text = button.getAttribute("data-copy");
         const original = button.dataset.original || button.textContent;
         button.dataset.original = original;
         try {
           await navigator.clipboard.writeText(text);
           button.textContent = "Copied";
-        } catch (err) {
+        } catch (error) {
           button.textContent = "Copy failed";
         }
-        setTimeout(() => {
-          button.textContent = original;
-        }, 1600);
+        setTimeout(() => { button.textContent = original; }, 1400);
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "DataCatalog",
+        "name": "DayOneBuilder Resolver",
+        "url": "https://dayonebuilder.online/",
+        "description": "Agent-ready registry of reusable modules, wrappers, docs, install paths, and trust evidence for recurring software tasks.",
+        "license": "https://dayonebuilder.online/llms.txt",
+        "hasPart": [
+          {"@type": "SoftwareSourceCode", "name": "Prompt Buddy", "codeRepository": "https://github.com/DayOneBuilder/dob-prompt-buddy"},
+          {"@type": "SoftwareSourceCode", "name": "Crypto Research Copilot Starter", "codeRepository": "https://github.com/DayOneBuilder/dob-crypto-research-copilot"},
+          {"@type": "SoftwareSourceCode", "name": "Crypto Portfolio Tracker", "codeRepository": "https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker"},
+          {"@type": "SoftwareSourceCode", "name": "Crypto Prompt Pack", "codeRepository": "https://github.com/DayOneBuilder/dob-crypto-prompt-pack"}
+        ]
       }
     </script>
     <style>
       :root {
-        --bg: #07131a;
-        --ink: #eff8f5;
-        --muted: #b7ccc6;
-        --panel: rgba(10, 31, 33, 0.86);
-        --panel-2: rgba(14, 44, 47, 0.88);
-        --line: rgba(191, 245, 221, 0.16);
-        --mint: #9ef0c0;
-        --acid: #d7ff64;
-        --sand: #f7d49c;
+        --bg: #08090a;
+        --surface: #0e0e10;
+        --surface-2: #141416;
+        --surface-3: #191a1d;
+        --ink: #f7f8f8;
+        --text: #c9ccd1;
+        --muted: #8a8f98;
+        --dim: #5c5f66;
+        --line: rgba(255, 255, 255, 0.08);
+        --line-strong: rgba(255, 255, 255, 0.14);
+        --green: #34d399;
+        --blue: #60a5fa;
+        --amber: #fbbf24;
         --max: 1180px;
-        --radius: 24px;
       }
+
       * { box-sizing: border-box; }
+
       html { scroll-behavior: smooth; }
+
       body {
         margin: 0;
-        color: var(--ink);
-        background:
-          radial-gradient(circle at 20% 0%, rgba(158, 240, 192, 0.16), transparent 28%),
-          radial-gradient(circle at 90% 10%, rgba(215, 255, 100, 0.14), transparent 22%),
-          linear-gradient(180deg, #07131a 0%, #08171d 52%, #061116 100%);
-        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", "Segoe UI", sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
+
       a { color: inherit; text-decoration: none; }
-      code { font-family: "IBM Plex Mono", monospace; color: var(--muted); }
-      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+
+      code {
+        color: #e0e1e3;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 0.92em;
+      }
+
+      .wrap {
+        width: min(calc(100% - 32px), var(--max));
+        margin: 0 auto;
+      }
+
       .nav {
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding: 24px 0 18px;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 22px 0;
+        border-bottom: 1px solid var(--line);
       }
+
       .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
         font-weight: 700;
-        letter-spacing: 0.03em;
-        text-transform: uppercase;
       }
-      .button,
-      .ghost,
-      .copy-button {
+
+      .mark {
+        width: 26px;
+        height: 26px;
+        border: 1px solid var(--line-strong);
+        border-radius: 6px;
+        background: linear-gradient(135deg, #f7f8f8, #9ca0a8);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .nav-links a:hover { color: var(--ink); }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.04fr) minmax(340px, 0.96fr);
+        gap: 24px;
+        padding: 54px 0 34px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        margin-bottom: 16px;
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        color: var(--ink);
+        line-height: 1.08;
+        font-weight: 650;
+      }
+
+      h1 {
+        max-width: 12ch;
+        font-size: clamp(2.4rem, 6vw, 4.8rem);
+      }
+
+      h2 {
+        font-size: clamp(1.6rem, 3vw, 2.3rem);
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+
+      p { margin: 0; }
+
+      .lead {
+        max-width: 64ch;
+        margin-top: 18px;
+        color: #d9dcdf;
+        font-size: 1.08rem;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 28px;
+      }
+
+      .metric,
+      .panel,
+      .module,
+      .row-card,
+      .code-panel {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .metric {
+        padding: 14px;
+      }
+
+      .metric strong {
+        display: block;
+        color: var(--ink);
+        font-size: 1.25rem;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 26px;
+      }
+
+      .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 48px;
-        padding: 0 18px;
-        border-radius: 999px;
-        font-weight: 700;
-        border: 1px solid transparent;
-      }
-      .button,
-      .copy-button {
-        background: linear-gradient(135deg, var(--mint), var(--acid));
-        color: #03110c;
+        min-height: 44px;
+        padding: 0 16px;
+        border: 1px solid var(--line-strong);
+        border-radius: 8px;
+        background: #f7f8f8;
+        color: #08090a;
+        font: inherit;
+        font-weight: 650;
         cursor: pointer;
       }
-      .ghost {
-        border-color: var(--line);
-        background: rgba(255, 255, 255, 0.03);
+
+      .btn.secondary {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--ink);
       }
-      button.copy-button { font: inherit; }
-      .hero {
-        display: grid;
-        grid-template-columns: 1.1fr 0.9fr;
-        gap: 22px;
-        padding: 30px 0 22px;
+
+      .btn:hover { filter: brightness(0.96); }
+
+      .code-panel {
+        overflow: hidden;
+        background: #0b0c0e;
       }
-      .card,
-      .hero-copy,
-      .hero-side {
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: var(--panel);
-        backdrop-filter: blur(10px);
-      }
-      .hero-copy { padding: 36px; }
-      .hero-side {
-        padding: 28px;
-        background:
-          linear-gradient(180deg, rgba(14, 44, 47, 0.92), rgba(8, 22, 23, 0.96)),
-          var(--panel-2);
-      }
-      .eyebrow {
-        display: inline-flex;
-        padding: 7px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(215, 255, 100, 0.24);
-        color: var(--acid);
-        font-size: 13px;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        margin-bottom: 18px;
-      }
-      h1, h2, h3 { margin: 0 0 14px; line-height: 1.05; }
-      h1 { font-size: clamp(2.6rem, 6vw, 5rem); max-width: 12ch; }
-      h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); }
-      p { margin: 0 0 16px; color: var(--muted); }
-      .lead { font-size: 1.08rem; max-width: 58ch; }
-      .actions,
-      .agent-row,
-      .actions-inline {
+
+      .code-head {
         display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .actions { margin: 24px 0 22px; }
-      .stats, .products, .steps {
-        display: grid;
+        align-items: center;
+        justify-content: space-between;
         gap: 16px;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
       }
-      .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .mini, .product, .step, .note {
-        padding: 20px;
-        border-radius: 20px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.035);
-      }
-      .mini strong, .product strong { display: block; margin-bottom: 6px; font-size: 1.05rem; }
-      .price {
-        display: inline-flex;
-        margin-top: 12px;
-        padding: 7px 12px;
-        border-radius: 999px;
-        background: rgba(215, 255, 100, 0.12);
-        color: var(--acid);
-        font-weight: 700;
-      }
-      .agent-pill {
+
+      .status {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        min-height: 36px;
-        padding: 0 12px;
-        border-radius: 999px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.03);
-        color: var(--ink);
-        font-weight: 700;
+        color: #d5fbe9;
+        font-weight: 600;
       }
-      .agent-mark {
-        display: inline-flex;
-        width: 18px;
-        height: 18px;
-        border-radius: 999px;
-        align-items: center;
-        justify-content: center;
-        font-size: 11px;
-        font-weight: 700;
+
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 99px;
+        background: var(--green);
       }
-      .codex .agent-mark { background: linear-gradient(135deg, #c6ff72, #73f1be); color: #04100a; }
-      .claude .agent-mark { background: linear-gradient(135deg, #f7d49c, #ffc3a3); color: #20110a; }
-      .phrase {
-        margin-top: 14px;
-        padding: 12px 14px;
-        border-radius: 16px;
-        border: 1px solid var(--line);
-        background: rgba(0, 0, 0, 0.24);
+
+      pre {
+        margin: 0;
+        padding: 18px;
+        overflow-x: auto;
+        color: #e0e1e3;
+        font-size: 13px;
+        line-height: 1.55;
       }
-      section { padding: 26px 0; }
-      footer {
-        padding: 34px 0 52px;
+
+      .section {
+        padding: 34px 0;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 16px;
+      }
+
+      .section-head p {
+        max-width: 56ch;
         color: var(--muted);
       }
-      .footer-panel {
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .panel,
+      .module,
+      .row-card {
+        padding: 18px;
+      }
+
+      .panel p,
+      .module p,
+      .row-card p {
+        margin-top: 8px;
+        color: var(--muted);
+      }
+
+      .label {
+        display: inline-flex;
+        margin-bottom: 12px;
+        color: var(--blue);
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .module {
+        display: grid;
+        gap: 14px;
+      }
+
+      .module-top {
+        display: flex;
+        align-items: start;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        min-height: 28px;
+        padding: 0 9px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: var(--amber);
+        font-size: 12px;
+        font-weight: 650;
+        white-space: nowrap;
+      }
+
+      .path {
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.03);
+        overflow-wrap: anywhere;
+      }
+
+      .module-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .small-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 650;
+      }
+
+      .resolver-table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+
+      .resolver-table th,
+      .resolver-table td {
+        padding: 13px 14px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .resolver-table th {
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .resolver-table td {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .resolver-table tr:last-child td { border-bottom: 0; }
+
+      footer {
+        margin-top: 34px;
+        padding: 26px 0 46px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+      }
+
+      .footer-row {
         display: flex;
         justify-content: space-between;
         gap: 16px;
-        padding: 20px 22px;
-        border-radius: 20px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.03);
       }
-      @media (max-width: 960px) {
+
+      @media (max-width: 920px) {
         .hero,
-        .stats,
-        .products,
-        .steps { grid-template-columns: 1fr; }
+        .grid-2,
+        .grid-3,
+        .summary {
+          grid-template-columns: 1fr;
+        }
+
+        .section-head,
+        .footer-row {
+          align-items: start;
+          flex-direction: column;
+        }
+
+        .nav {
+          align-items: start;
+          flex-direction: column;
+        }
+
+        .nav-links {
+          flex-wrap: wrap;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .wrap { width: min(calc(100% - 24px), var(--max)); }
+        .hero { padding-top: 34px; }
+        .resolver-table {
+          display: block;
+          overflow: visible;
+          border: 0;
+          background: transparent;
+        }
+        .resolver-table thead {
+          display: none;
+        }
+        .resolver-table tbody,
+        .resolver-table tr,
+        .resolver-table td {
+          display: block;
+          width: 100%;
+        }
+        .resolver-table tr {
+          margin-bottom: 10px;
+          border: 1px solid var(--line);
+          border-radius: 8px;
+          background: var(--surface);
+          overflow: hidden;
+        }
+        .resolver-table td {
+          border-bottom: 1px solid var(--line);
+          white-space: normal;
+        }
+        .resolver-table td:last-child {
+          border-bottom: 0;
+        }
+        .resolver-table td::before {
+          content: attr(data-label);
+          display: block;
+          margin-bottom: 4px;
+          color: var(--ink);
+          font-size: 12px;
+          font-weight: 700;
+        }
       }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <nav class="nav">
-        <div class="brand">DayOneBuilder</div>
-        <a class="ghost" href="/products/">Browse tools</a>
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="/">
+          <span class="mark" aria-hidden="true"></span>
+          <span>DayOneBuilder Resolver</span>
+        </a>
+        <div class="nav-links">
+          <a href="/resolver/">Resolver</a>
+          <a href="/agent-registry.json">Registry JSON</a>
+          <a href="/llms.txt">llms.txt</a>
+          <a href="/products/">Modules</a>
+          <a href="https://github.com/DayOneBuilder">GitHub</a>
+        </div>
       </nav>
 
-      <section class="hero">
-        <div class="hero-copy">
-          <div class="eyebrow">Crypto workflow tools</div>
-          <h1>Your agent should not have to start from zero every time.</h1>
-          <p class="lead">
-            DayOneBuilder is narrowing down small crypto workflow tools until the useful ones prove real demand.
-          </p>
-          <p>
-            The current focus is simple: keep Prompt Buddy visible, validate one wallet P&amp;L path, and let demand decide what earns front-page space.
-          </p>
-          <p>
-            If your CLI wants explicit steps instead of a shorthand phrase, the repo README now gives the quiet paths: Codex inside the repo, Claude Code with <code>--plugin-dir .</code>, then <code>./install.sh</code> only as a fallback.
-          </p>
-          <div class="actions">
-            <a class="button" href="/products/">See the active focus</a>
-            <a class="ghost" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">Open a repo</a>
-          </div>
-          <div class="stats">
-            <div class="mini">
-              <strong>1 keeper under rebuild</strong>
-              Prompt Buddy stays visible while it is rebuilt around the workflow it was meant to support.
+      <main>
+        <section class="hero">
+          <div>
+            <span class="eyebrow">Agent-native solution platform</span>
+            <h1>Trusted building blocks for agents.</h1>
+            <p class="lead">
+              DayOneBuilder packages narrow, reusable solutions so AI agents can find the right tool, inspect the contract, run the test path, and use it without rebuilding the same boring code from scratch.
+            </p>
+            <div class="actions">
+              <a class="btn" href="/resolver/">Open resolver</a>
+              <a class="btn secondary" href="/agent-registry.json">Read registry JSON</a>
+              <button
+                class="btn secondary"
+                data-copy="Read https://dayonebuilder.online/llms.txt, then choose a module from https://dayonebuilder.online/agent-registry.json that matches the task."
+                onclick="copyText(this)"
+              >
+                Copy agent entrypoint
+              </button>
             </div>
-            <div class="mini">
-              <strong>1 validation path</strong>
-              Wallet P&amp;L is being tested as a search-demand path before it earns a bigger surface.
-            </div>
-            <div class="mini">
-              <strong>Low-signal tools hidden</strong>
-              Older tools stay reachable by URL, but the public shelf stays focused on active validation.
+            <div class="summary" aria-label="Platform status">
+              <div class="metric">
+                <strong>8</strong>
+                <span>live modules and bundles</span>
+              </div>
+              <div class="metric">
+                <strong>5</strong>
+                <span>agent-installable repo artifacts</span>
+              </div>
+              <div class="metric">
+                <strong>0</strong>
+                <span>required accounts for basic use</span>
+              </div>
             </div>
           </div>
-        </div>
-        <aside class="hero-side">
-          <h2>Works with</h2>
-          <div class="agent-row">
-            <span class="agent-pill codex"><span class="agent-mark">◎</span>Codex</span>
-            <span class="agent-pill claude"><span class="agent-mark">✦</span>Claude Code</span>
-          </div>
-          <div class="note" style="margin-top: 18px;">
-            <strong>The faster path</strong>
-            <p style="margin-top: 10px;">
-              Open the product page, copy the install phrase, paste it to your agent, and move on. If you only want the raw file, the direct download is still there.
+
+          <aside class="code-panel" aria-label="Agent quick entrypoint">
+            <div class="code-head">
+              <span>agent-entrypoint.txt</span>
+              <span class="status"><span class="dot"></span>live</span>
+            </div>
+            <pre><code>{
+  "resolver": "https://dayonebuilder.online/resolver/",
+  "registry": "https://dayonebuilder.online/agent-registry.json",
+  "llms": "https://dayonebuilder.online/llms.txt",
+  "selection_rule": "prefer tested, no-login, narrow modules",
+  "current_wedge": "agent-readable wrappers for recurring tasks"
+}</code></pre>
+          </aside>
+        </section>
+
+        <section class="section" aria-labelledby="why-agents">
+          <div class="section-head">
+            <div>
+              <span class="label">Why this exists</span>
+              <h2 id="why-agents">Agents should reuse boring reliable code.</h2>
+            </div>
+            <p>
+              The most used code is usually not glamorous. It is parsers, checklists, wrappers, templates, tests, schemas, and small calculators that unblock a larger job.
             </p>
           </div>
-        </aside>
-      </section>
+          <div class="grid-3">
+            <article class="panel">
+              <h3>Discover</h3>
+              <p>Agents get a single registry with task phrases, module types, links, install paths, and trust notes.</p>
+            </article>
+            <article class="panel">
+              <h3>Verify</h3>
+              <p>Each useful module should expose examples, tests, source links, limitations, and a clear no-login path.</p>
+            </article>
+            <article class="panel">
+              <h3>Compose</h3>
+              <p>Modules are meant to become steps inside larger workflows, not isolated pages that die after one visit.</p>
+            </article>
+          </div>
+        </section>
 
-      <section>
-        <h2>Active focus</h2>
-        <div class="products">
-          <article class="product">
-            <strong>Prompt Buddy</strong>
-            For crypto prompts where a side observer should catch weak framing, missing proof, or missing context before you hand them to an agent.
-            <div class="price">Installable repo</div>
-            <div class="actions-inline" style="margin-top: 14px;">
-              <button class="copy-button" data-copy="Install dayonebuilder/dob-prompt-buddy by Ben Ison." onclick="copyPhrase(this)">Copy install phrase</button>
-              <a class="ghost" href="/products/prompt-buddy/">Product page</a>
+        <section class="section" aria-labelledby="modules">
+          <div class="section-head">
+            <div>
+              <span class="label">Registry preview</span>
+              <h2 id="modules">Useful now, stricter every day.</h2>
             </div>
-          </article>
-          <article class="product">
-            <strong>Wallet P&amp;L Calculator</strong>
-            A narrow validation path for people trying to estimate what a crypto wallet actually made.
-            <div class="price">Under validation</div>
-            <div class="actions-inline" style="margin-top: 14px;">
-              <a class="button" href="/products/wallet-pnl-calculator/">Open calculator</a>
-              <a class="ghost" href="/how-to-calculate-crypto-wallet-pnl/">Read the method</a>
-            </div>
-          </article>
-          <article class="product">
-            <strong>What matters next</strong>
-            Search impressions, qualified visits, tool starts, and real purchases. Tools that do not earn those signals stay off the main surface.
-            <div class="price">Demand first</div>
-          </article>
-        </div>
-      </section>
+            <p>
+              Current modules are being migrated into the resolver contract. Weak modules will be archived or rebuilt when metrics and research say they do not deserve primary placement.
+            </p>
+          </div>
+          <div class="grid-2">
+            <article class="module">
+              <div class="module-top">
+                <div>
+                  <h3>Prompt Buddy</h3>
+                  <p>Prompt review workflow for agents that need stronger task framing before a run.</p>
+                </div>
+                <span class="badge">rebuild priority</span>
+              </div>
+              <div class="path"><code>Install dayonebuilder/dob-prompt-buddy by Ben Ison.</code></div>
+              <div class="module-actions">
+                <a class="small-link" href="/products/prompt-buddy/">Page</a>
+                <a class="small-link" href="https://github.com/DayOneBuilder/dob-prompt-buddy">Repo</a>
+              </div>
+            </article>
 
-      <section>
-        <h2>What kind of problems these are built for</h2>
-        <div class="steps">
-          <div class="step">
-            <strong>Research pain</strong>
-            You are doing real work, but the first frame is weak, scattered, and too easy to derail.
+            <article class="module">
+              <div class="module-top">
+                <div>
+                  <h3>Crypto Research Copilot Starter</h3>
+                  <p>Reusable research workflow starter for token, wallet, and yield checks.</p>
+                </div>
+                <span class="badge">installable</span>
+              </div>
+              <div class="path"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
+              <div class="module-actions">
+                <a class="small-link" href="/products/crypto-research-copilot/">Page</a>
+                <a class="small-link" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">Repo</a>
+              </div>
+            </article>
+
+            <article class="module">
+              <div class="module-top">
+                <div>
+                  <h3>Crypto Portfolio Tracker</h3>
+                  <p>Workbook module for wallets, transfers, cost basis, and P&amp;L records.</p>
+                </div>
+                <span class="badge">installable</span>
+              </div>
+              <div class="path"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
+              <div class="module-actions">
+                <a class="small-link" href="/products/crypto-portfolio-tracker/">Page</a>
+                <a class="small-link" href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">Repo</a>
+              </div>
+            </article>
+
+            <article class="module">
+              <div class="module-top">
+                <div>
+                  <h3>Wallet P&amp;L Calculator</h3>
+                  <p>Browser calculator and ZIP bundle for wallet profit/loss checks.</p>
+                </div>
+                <span class="badge">validation lane</span>
+              </div>
+              <div class="path"><code>Use /products/wallet-pnl-calculator/ or download the standalone ZIP.</code></div>
+              <div class="module-actions">
+                <a class="small-link" href="/products/wallet-pnl-calculator/">Page</a>
+                <a class="small-link" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">ZIP</a>
+              </div>
+            </article>
           </div>
-          <div class="step">
-            <strong>Tracker pain</strong>
-            Your sheet behaves until real crypto activity hits it, then the ledger logic starts leaking.
+        </section>
+
+        <section class="section" aria-labelledby="contract">
+          <div class="section-head">
+            <div>
+              <span class="label">Resolver contract</span>
+              <h2 id="contract">What an agent should expect.</h2>
+            </div>
+            <p>
+              A module graduates when it can prove a task, expose a safe path, and leave telemetry that tells Startaper whether agents and people actually use it.
+            </p>
           </div>
-          <div class="step">
-            <strong>Workflow pain</strong>
-            The agent can help, but only if you stop making it rediscover the same useful structure every session.
-          </div>
-        </div>
-      </section>
+          <table class="resolver-table">
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Requirement</th>
+                <th>Why it matters</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-label="Field"><code>agent_task_phrase</code></td>
+                <td data-label="Requirement">Plain-language task the agent is trying to finish.</td>
+                <td data-label="Why it matters">Stops the registry from becoming another vague catalog.</td>
+              </tr>
+              <tr>
+                <td data-label="Field"><code>install_or_call_path</code></td>
+                <td data-label="Requirement">Repo, download, command, URL, or API path with basic no-login use.</td>
+                <td data-label="Why it matters">Lets an agent act immediately when the module fits.</td>
+              </tr>
+              <tr>
+                <td data-label="Field"><code>trust_evidence</code></td>
+                <td data-label="Requirement">Tests, examples, source, license, known limits, benchmark, or review state.</td>
+                <td data-label="Why it matters">Makes selection safer than copying random snippets.</td>
+              </tr>
+              <tr>
+                <td data-label="Field"><code>adoption_metric</code></td>
+                <td data-label="Requirement">Resolver calls, downloads, repo activity, docs hits, completions, or paid signal.</td>
+                <td data-label="Why it matters">Keeps the platform improving from evidence, not taste.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
 
       <footer>
-        <div class="footer-panel">
-          <div>DayOneBuilder</div>
+        <div class="footer-row">
+          <div>DayOneBuilder Resolver</div>
           <div>
-            <a href="/products/">Products</a> ·
-            <a href="https://github.com/DayOneBuilder">GitHub</a>
+            <a href="/products/">Modules</a> / <a href="/resolver/">Resolver</a> / <a href="/llms.txt">llms.txt</a> / <a href="https://github.com/DayOneBuilder">GitHub</a>
           </div>
         </div>
       </footer>

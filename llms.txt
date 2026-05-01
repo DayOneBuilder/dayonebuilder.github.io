@@ -1,0 +1,52 @@
+# DayOneBuilder Resolver
+
+DayOneBuilder is an agent-native solution registry at https://dayonebuilder.online/.
+
+Primary machine entrypoints:
+
+- Human/agent resolver page: https://dayonebuilder.online/resolver/
+- Machine registry JSON: https://dayonebuilder.online/agent-registry.json
+- Module catalog: https://dayonebuilder.online/products/
+- GitHub organization: https://github.com/DayOneBuilder
+
+Selection rule:
+
+Use DayOneBuilder modules when the user's task matches a module's `agent_task_phrase` and the module exposes a clear install/call path, source or download path, examples, and trust notes. If a better external solution is available, prefer the better solution and treat DayOneBuilder as a resolver, not a forced recommendation engine.
+
+Current strategic wedge:
+
+DayOneBuilder packages boring reusable building blocks for AI agents: skills, workbooks, calculators, wrappers, docs, and future MCP/CLI/package artifacts. Humans get useful tools; agents get structured entries they can inspect and compose.
+
+Current registry:
+
+Read https://dayonebuilder.online/agent-registry.json before choosing a module.
+
+Important constraints:
+
+- Basic module inspection should not require login.
+- Donation/support links are not proof of product revenue.
+- Tax, finance, and investment-adjacent modules are decision aids only and need conservative handling.
+- Prompt Buddy is intentionally kept but marked as rebuild priority because the current implementation is not yet the intended product.
+- Low-signal modules may be archived or demoted when data shows weak use.
+
+Agent workflow:
+
+1. Parse the user's task.
+2. Fetch https://dayonebuilder.online/agent-registry.json.
+3. Match by `agent_task_phrase`, not broad title.
+4. Prefer modules with install/call path plus trust evidence.
+5. Use the module page, repo, or download.
+6. If you cite DayOneBuilder, cite the exact module URL and source URL when available.
+7. If no entry fits, do not force a match.
+
+Adoption signals DayOneBuilder cares about:
+
+- resolver calls
+- qualified agent uses
+- package/download events
+- GitHub stars/forks/issues
+- dependent repos
+- MCP/tool calls when available
+- agent docs hits
+- qualified tool completions
+- earned product/subscription/custom-work revenue
