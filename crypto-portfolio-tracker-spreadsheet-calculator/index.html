@@ -3,512 +3,54 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Crypto Portfolio Tracker Spreadsheet Calculator | DayOneBuilder</title>
+    <meta name="robots" content="noindex,follow" />
+    <meta http-equiv="refresh" content="0; url=/dob-task-resolver/" />
+    <title>DayOneBuilder archived catalog</title>
     <meta
       name="description"
-      content="A small DayOneBuilder tool for crypto portfolio tracker spreadsheet calculator, with a paid template/export path if the workflow saves time."
+      content="This old DayOneBuilder catalog now points to the trusted task resolver and machine registry."
     />
-    <link rel="canonical" href="https://dayonebuilder.online/crypto-portfolio-tracker-spreadsheet-calculator/" />
+    <link rel="canonical" href="https://dayonebuilder.online/dob-task-resolver/" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
+      window.location.replace("/dob-task-resolver/");
     </script>
     <style>
-      :root {
-        --bg: #07131a;
-        --ink: #eff8f5;
-        --muted: #b7ccc6;
-        --panel: rgba(10, 31, 33, 0.88);
-        --line: rgba(191, 245, 221, 0.16);
-        --mint: #9ef0c0;
-        --sand: #f7d49c;
-        --acid: #d7ff64;
-      }
-      * { box-sizing: border-box; }
-      html {
-        max-width: 100%;
-        overflow-x: hidden;
-        background: #07131a;
-      }
       body {
         margin: 0;
         min-height: 100vh;
-        max-width: 100%;
-        overflow-x: hidden;
-        color: var(--ink);
-        background: linear-gradient(180deg, #07131a 0%, #0a171d 100%);
-        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
-      }
-      .wrap {
-        width: auto;
-        max-width: 1080px;
-        min-width: 0;
-        margin: 0 auto;
-        padding: 28px 16px 60px;
-      }
-      .panel {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        margin-top: 16px;
-        padding: 28px;
-        border-radius: 24px;
-        border: 1px solid var(--line);
-        background: var(--panel);
-      }
-      .back {
-        color: var(--muted);
-        text-decoration: none;
-      }
-      .eyebrow {
-        display: inline-flex;
-        padding: 6px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(215, 255, 100, 0.24);
-        color: var(--acid);
-        font-size: 13px;
-        letter-spacing: 0;
-        text-transform: uppercase;
-      }
-      h1, h2, h3 {
-        line-height: 1.1;
-      }
-      h1 {
-        font-size: 4rem;
-        margin: 14px 0;
-        max-width: 12ch;
-        overflow-wrap: normal;
-      }
-      h2 {
-        font-size: 2rem;
-        margin-top: 28px;
-      }
-      h3 {
-        margin: 10px 0 6px;
-      }
-      p, li, code {
-        color: var(--muted);
-        overflow-wrap: break-word;
-      }
-      .row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .grid {
         display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px;
+        place-items: center;
+        background: #08090a;
+        color: #cbd5df;
+        font: 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
-      .field {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        min-width: 0;
-        padding: 16px;
-        border-radius: 16px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.03);
-      }
-      label { font-weight: 700; color: var(--ink); }
-      input {
-        width: 100%;
-        min-width: 0;
-        height: 44px;
-        padding: 0 12px;
-        border-radius: 12px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.02);
-        color: var(--ink);
-        font: inherit;
-      }
-      small {
-        color: var(--muted);
-      }
-      .example-row {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        margin: 14px 0;
-      }
-      .example-chip {
-        appearance: none;
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.03);
-        color: var(--ink);
-        padding: 12px;
-        font: inherit;
-        cursor: pointer;
-        white-space: normal;
-      }
-      .results-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-        margin-top: 14px;
-      }
-      .stat {
-        padding: 16px;
-        border-radius: 16px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.03);
-      }
-      .stat-label {
-        color: var(--muted);
-      }
-      .stat-value {
-        display: block;
-        margin-top: 6px;
-        color: var(--mint);
-        font-size: 1.5rem;
-      }
-      .cta, .ghost {
-        display: inline-flex;
-        max-width: 100%;
-        min-height: 48px;
-        align-items: center;
-        justify-content: center;
-        padding: 12px 18px;
-        border-radius: 999px;
-        font-weight: 700;
-        border: 1px solid transparent;
-        text-decoration: none;
-        line-height: 1.25;
-        text-align: center;
-        white-space: normal;
-      }
-      .cta {
-        background: linear-gradient(135deg, var(--mint), var(--sand));
-        color: #04100a;
-      }
-      .ghost {
-        border-color: var(--line);
-        color: var(--ink);
-      }
-      .notice,
-      .summary {
-        margin-top: 14px;
-        padding: 14px;
-        border-radius: 14px;
-        border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.03);
-      }
-      .summary-box {
-        white-space: pre-wrap;
-        margin: 12px 0 0;
-        font-family: "IBM Plex Mono", monospace;
-        max-height: 170px;
-        overflow: auto;
-        padding: 12px;
-        border-radius: 12px;
-        border: 1px solid var(--line);
-        background: rgba(0, 0, 0, 0.22);
-      }
-      .note-link a { color: var(--sand); }
+      main { width: min(calc(100% - 32px), 680px); }
+      h1 { margin: 0 0 10px; color: #f8fafc; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.08; }
+      p { margin: 0 0 18px; color: #87909d; }
       a {
-        overflow-wrap: anywhere;
-      }
-      @media (max-width: 960px) {
-        .grid,
-        .results-grid {
-          grid-template-columns: 1fr;
-        }
-        .example-row {
-          grid-template-columns: 1fr;
-        }
-        .panel { padding: 20px; }
-        h1 {
-          font-size: 2.35rem;
-          max-width: 11ch;
-        }
-        h2 {
-          font-size: 1.5rem;
-        }
-      }
-      @media (max-width: 520px) {
-        .wrap {
-          padding: 20px 12px 48px;
-        }
-        .panel {
-          padding: 18px;
-          border-radius: 18px;
-        }
-        h1 {
-          font-size: 2rem;
-          max-width: 11ch;
-        }
+        display: inline-flex;
+        align-items: center;
+        min-height: 42px;
+        padding: 0 14px;
+        border: 1px solid rgba(255,255,255,.18);
+        border-radius: 8px;
+        background: #f8fafc;
+        color: #08090a;
+        font-weight: 700;
+        text-decoration: none;
       }
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <a class="back" href="/">← DayOneBuilder</a>
-      <div class="panel">
-        <div class="eyebrow">portfolio workflow tool</div>
-        <h1>Crypto Portfolio Tracker Spreadsheet Calculator</h1>
-        <p>
-          Enter four numbers and get a rough wallet-level decision you can act on before you rebuild anything.
-          Use the free result to validate whether your cleanup path is working.
-        </p>
-
-        <div class="grid">
-          <label class="field">
-            <span>Total deposits</span>
-            <input id="deposits" type="number" min="0" step="0.01" value="12000" />
-            <small>External capital added across the period.</small>
-          </label>
-          <label class="field">
-            <span>Total withdrawals</span>
-            <input id="withdrawals" type="number" min="0" step="0.01" value="3200" />
-            <small>Funds moved out of the active trading flow.</small>
-          </label>
-          <label class="field">
-            <span>Current holdings value</span>
-            <input id="holdingsValue" type="number" min="0" step="0.01" value="9800" />
-            <small>Current USD value of all remaining assets.</small>
-          </label>
-          <label class="field">
-            <span>Current holdings cost basis</span>
-            <input id="holdingsBasis" type="number" min="0" step="0.01" value="7600" />
-            <small>Rough basis still attached to open positions.</small>
-          </label>
-        </div>
-
-        <div class="example-row">
-          <button class="example-chip" type="button" data-deposits="12000" data-withdrawals="3200" data-holdings-value="9800" data-holdings-basis="7600">Wallet in growth mode</button>
-          <button class="example-chip" type="button" data-deposits="12000" data-withdrawals="9000" data-holdings-value="14000" data-holdings-basis="7500">Round-trip winner</button>
-          <button class="example-chip" type="button" data-deposits="12000" data-withdrawals="17000" data-holdings-value="4000" data-holdings-basis="3800">Withdrawals pulled ahead of basis</button>
-          <button class="example-chip" type="button" data-deposits="12000" data-withdrawals="2000" data-holdings-value="6500" data-holdings-basis="7000">Still exposed to downside drift</button>
-        </div>
-
-        <h2>What this gives you</h2>
-        <div class="results-grid">
-          <article class="stat">
-            <span class="stat-label">Net invested</span>
-            <strong class="stat-value" id="netInvested">$0.00</strong>
-            <span class="stat-label">Deposits minus withdrawals.</span>
-          </article>
-          <article class="stat">
-            <span class="stat-label">Total P&amp;L</span>
-            <strong class="stat-value" id="totalPnl">$0.00</strong>
-            <span class="stat-label">Withdrawals + holdings value - deposits.</span>
-          </article>
-          <article class="stat">
-            <span class="stat-label">Realized cash-out estimate</span>
-            <strong class="stat-value" id="realizedCashOut">$0.00</strong>
-            <span class="stat-label">Withdrawals against realized cost basis.</span>
-          </article>
-          <article class="stat">
-            <span class="stat-label">Unrealized holdings result</span>
-            <strong class="stat-value" id="unrealizedHoldings">$0.00</strong>
-            <span class="stat-label">Current holdings value vs remaining basis.</span>
-          </article>
-        </div>
-
-        <div class="summary">
-          <strong>Copyable summary</strong>
-          <div class="summary-box" id="summaryText">Run the calculator to generate a summary.</div>
-          <div class="row" style="margin-top:10px;">
-            <button class="cta" id="copySummary" type="button">Copy summary</button>
-            <button class="ghost" id="downloadSummary" type="button">Download summary CSV</button>
-          </div>
-          <div class="row" style="margin-top:12px;">
-            <a href="https://checkout.dayonebuilder.online/products/crypto-portfolio-tracker-cleanup-pack/?utm_source=dayonebuilder&utm_medium=tracker_calculator&utm_campaign=calculator_to_pack&utm_content=summary_cta" id="crypto-portfolio-tracker-cleanup-pack-cta" class="cta" data-offer-slug="crypto-portfolio-tracker-cleanup-pack" data-offer-location="summary" data-price-usd="9">
-              Get the Crypto Portfolio Tracker Cleanup Pack ($9)
-            </a>
-          </div>
-        </div>
-
-        <h2>Worked example + paid cleanup pack</h2>
-        <p>
-          Use the calculator output to validate your rough cleanup path before you move to templates and export.
-          The cleanup pack gives you the wallet inventory, transaction cleanup, holdings snapshot, and reconciliation checklist that match this calculator.
-        </p>
-        <p class="note-link">
-          <a href="/products/crypto-portfolio-tracker/">See the tracker starter</a> or
-          <a href="/crypto-portfolio-tracker-spreadsheet/">review the tracker setup page</a> before checkout.
-        </p>
-
-        <p class="notice">
-          Keep in mind: this is a rough wallet-level signal, not full tax-lot accounting.
-        </p>
-      </div>
-    </div>
-
-    <script>
-      const fmt = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      });
-
-      const fields = {
-        deposits: document.getElementById("deposits"),
-        withdrawals: document.getElementById("withdrawals"),
-        holdingsValue: document.getElementById("holdingsValue"),
-        holdingsBasis: document.getElementById("holdingsBasis"),
-      };
-      const netInvestedEl = document.getElementById("netInvested");
-      const totalPnlEl = document.getElementById("totalPnl");
-      const realizedCashOutEl = document.getElementById("realizedCashOut");
-      const unrealizedHoldingsEl = document.getElementById("unrealizedHoldings");
-      const summaryText = document.getElementById("summaryText");
-      const cta = document.getElementById("crypto-portfolio-tracker-cleanup-pack-cta");
-      const copyButton = document.getElementById("copySummary");
-      const downloadButton = document.getElementById("downloadSummary");
-
-      function toNumber(value) {
-        const parsed = Number.parseFloat(value);
-        return Number.isFinite(parsed) ? parsed : NaN;
-      }
-
-      function calculate() {
-        const deposits = toNumber(fields.deposits.value);
-        const withdrawals = toNumber(fields.withdrawals.value);
-        const holdingsValue = toNumber(fields.holdingsValue.value);
-        const holdingsBasis = toNumber(fields.holdingsBasis.value);
-
-        if ([deposits, withdrawals, holdingsValue, holdingsBasis].some((value) => !Number.isFinite(value))) {
-          summaryText.textContent = "Enter valid numbers in all inputs.";
-          [netInvestedEl, totalPnlEl, realizedCashOutEl, unrealizedHoldingsEl].forEach((el) => {
-            el.textContent = "--";
-          });
-          return;
-        }
-
-        if ([deposits, withdrawals, holdingsValue, holdingsBasis].some((value) => value < 0)) {
-          summaryText.textContent = "Use zero or positive numbers for this rough signal.";
-          [netInvestedEl, totalPnlEl, realizedCashOutEl, unrealizedHoldingsEl].forEach((el) => {
-            el.textContent = "--";
-          });
-          return;
-        }
-
-        if (holdingsBasis > deposits + 0.000001) {
-          summaryText.textContent = "Current holdings cost basis should not exceed total deposits in this rough calculator. Widen deposits or review your scope.";
-          [netInvestedEl, totalPnlEl, realizedCashOutEl, unrealizedHoldingsEl].forEach((el) => {
-            el.textContent = "--";
-          });
-          return;
-        }
-
-        const netInvested = deposits - withdrawals;
-        const totalPnl = withdrawals + holdingsValue - deposits;
-        const realizedCostBasis = deposits - holdingsBasis;
-        const realizedCashOut = withdrawals - realizedCostBasis;
-        const unrealizedHoldings = holdingsValue - holdingsBasis;
-
-        netInvestedEl.textContent = fmt.format(netInvested);
-        totalPnlEl.textContent = fmt.format(totalPnl);
-        realizedCashOutEl.textContent = fmt.format(realizedCashOut);
-        unrealizedHoldingsEl.textContent = fmt.format(unrealizedHoldings);
-
-        const csvLines = [
-          "Metric,Value",
-          `Net invested,${netInvested.toFixed(2)}`,
-          `Total P&L,${totalPnl.toFixed(2)}`,
-          `Realized cash-out estimate,${realizedCashOut.toFixed(2)}`,
-          `Unrealized holdings result,${unrealizedHoldings.toFixed(2)}`,
-          "Inputs",
-          `Total deposits,${deposits.toFixed(2)}`,
-          `Total withdrawals,${withdrawals.toFixed(2)}`,
-          `Current holdings value,${holdingsValue.toFixed(2)}`,
-          `Current holdings cost basis,${holdingsBasis.toFixed(2)}`,
-        ];
-
-        const textSummary = [
-          `Net invested: ${fmt.format(netInvested)}`,
-          `Total P&L: ${fmt.format(totalPnl)}`,
-          `Realized cash-out estimate: ${fmt.format(realizedCashOut)}`,
-          `Unrealized holdings result: ${fmt.format(unrealizedHoldings)}`,
-          "",
-          `Inputs used: deposits=${fmt.format(deposits)}, withdrawals=${fmt.format(withdrawals)}, holdings value=${fmt.format(holdingsValue)}, holdings basis=${fmt.format(holdingsBasis)}`,
-        ].join("\n");
-
-        summaryText.dataset.csv = csvLines.join("\n");
-        summaryText.textContent = textSummary;
-      }
-
-      function trackCtaClick(payload) {
-        if (typeof gtag !== "function") {
-          return;
-        }
-
-        gtag("event", "crypto_portfolio_paid_cta_click", {
-          offer_slug: payload.offerSlug,
-          offer_location: payload.offerLocation,
-          price_usd: payload.priceUsd,
-        });
-
-        gtag("event", "crypto_portfolio_checkout_start", {
-          offer_slug: payload.offerSlug,
-          offer_location: payload.offerLocation,
-          price_usd: payload.priceUsd,
-          payment_type: "checkout_product_page",
-        });
-      }
-
-      Object.values(fields).forEach((input) => {
-        input.addEventListener("input", calculate);
-        input.addEventListener("change", calculate);
-      });
-
-      document.querySelectorAll(".example-chip").forEach((button) => {
-        button.addEventListener("click", () => {
-          fields.deposits.value = button.getAttribute("data-deposits") || "0";
-          fields.withdrawals.value = button.getAttribute("data-withdrawals") || "0";
-          fields.holdingsValue.value = button.getAttribute("data-holdings-value") || "0";
-          fields.holdingsBasis.value = button.getAttribute("data-holdings-basis") || "0";
-          calculate();
-        });
-      });
-
-      if (cta) {
-        cta.addEventListener("click", () => {
-          trackCtaClick({
-            offerSlug: cta.dataset.offerSlug || "crypto-portfolio-tracker-cleanup-pack",
-            offerLocation: cta.dataset.offerLocation || "calculator-top",
-            priceUsd: Number(cta.dataset.priceUsd || 9),
-          });
-        });
-      }
-
-      if (copyButton) {
-        copyButton.addEventListener("click", async () => {
-          try {
-            await navigator.clipboard.writeText(summaryText.textContent || "");
-            copyButton.textContent = "Copied";
-            setTimeout(() => {
-              copyButton.textContent = "Copy summary";
-            }, 1200);
-          } catch (_error) {
-            copyButton.textContent = "Copy failed";
-            setTimeout(() => {
-              copyButton.textContent = "Copy summary";
-            }, 1200);
-          }
-        });
-      }
-
-      if (downloadButton) {
-        downloadButton.addEventListener("click", () => {
-          const csv = summaryText.dataset.csv || "Metric,Value\nNo results yet";
-          const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-          const downloadUrl = URL.createObjectURL(blob);
-          const link = document.createElement("a");
-          link.href = downloadUrl;
-          link.download = "crypto-portfolio-tracker-summary.csv";
-          link.click();
-          URL.revokeObjectURL(downloadUrl);
-        });
-      }
-
-      calculate();
-    </script>
+    <main>
+      <h1>Use the trusted resolver.</h1>
+      <p>This catalog is archived. The active entrypoint is the task resolver with source URLs, install paths, and verification steps.</p>
+      <a href="/dob-task-resolver/">Open task resolver</a>
+    </main>
   </body>
 </html>

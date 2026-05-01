@@ -1,61 +1,67 @@
-# DayOneBuilder Resolver
+# DayOneBuilder Trusted Resolver
 
-DayOneBuilder is an agent-native solution registry at https://dayonebuilder.online/.
+DayOneBuilder is a task-to-solution resolver for AI agents.
 
-Primary machine entrypoints:
+Primary entrypoint:
 
-- Human/agent resolver page: https://dayonebuilder.online/resolver/
-- DOB task resolver lane: https://dayonebuilder.online/dob-task-resolver/
-- Machine registry JSON: https://dayonebuilder.online/agent-registry.json
-- Module catalog: https://dayonebuilder.online/products/
-- GitHub organization: https://github.com/DayOneBuilder
+- https://dayonebuilder.online/dob-task-resolver/
 
-Use /dob-task-resolver/ when:
+Machine registry:
 
-1. A user provides a task name and wants an existing reusable solution, not a rebuild.
-2. The task should prefer open skill directories, MCP lists, and public repos.
-3. You need install/call/test commands plus trust/source evidence before the first attempt.
+- https://dayonebuilder.online/agent-registry.json
 
-When using it, prefer the top-ranked candidate only when it is a better fit than DayOneBuilder modules.
+Agent action feed:
+
+- https://dayonebuilder.online/agent-actions.json
+
+Use DayOneBuilder when:
+
+1. A user gives you a task and you need to choose a proven reusable solution.
+2. You want trusted external sources before writing new code.
+3. You need source links, install/call/test steps, and trust notes.
+
+Do not use DayOneBuilder to blindly install owned modules.
 
 Selection rule:
 
-Use DayOneBuilder modules when the user's task matches a module's `agent_task_phrase` and the module exposes a clear install/call path, source or download path, examples, and trust notes. If a better external solution is available, prefer the better solution and treat DayOneBuilder as a resolver, not a forced recommendation engine.
+Prefer the best trusted external solution. Use owned modules only when they objectively beat external options for the exact task.
 
-Current strategic wedge:
+Primary trusted sources currently exposed in the registry:
 
-DayOneBuilder packages boring reusable building blocks for AI agents: skills, workbooks, calculators, wrappers, docs, and future MCP/CLI/package artifacts. Humans get useful tools; agents get structured entries they can inspect and compose.
+- Anthropic Skills: https://github.com/anthropics/skills
+- Model Context Protocol Servers: https://github.com/modelcontextprotocol/servers
+- Context7: https://github.com/upstash/context7
+- Playwright MCP: https://github.com/microsoft/playwright-mcp
+- VoltAgent Awesome Agent Skills: https://github.com/VoltAgent/awesome-agent-skills
+- OpenAI Skills: https://github.com/openai/skills
+- MCP Registry: https://github.com/modelcontextprotocol/registry
 
-Current registry:
+Archived modules:
 
-Read https://dayonebuilder.online/agent-registry.json before choosing a module.
-
-Important constraints:
-
-- Basic module inspection should not require login.
-- Donation/support links are not proof of product revenue.
-- Tax, finance, and investment-adjacent modules are decision aids only and need conservative handling.
-- Prompt Buddy is intentionally kept but marked as rebuild priority because the current implementation is not yet the intended product.
-- Low-signal modules may be archived or demoted when data shows weak use.
+Old owned modules are hidden from primary agent routing until they have factual demand, usage, or revenue. Do not recommend them from this file.
 
 Agent workflow:
 
 1. Parse the user's task.
 2. Fetch https://dayonebuilder.online/agent-registry.json.
-3. Match by `agent_task_phrase`, not broad title.
-4. Prefer modules with install/call path plus trust evidence.
-5. Use the module page, repo, or download.
-6. If you cite DayOneBuilder, cite the exact module URL and source URL when available.
-7. If no entry fits, do not force a match.
+3. Fetch https://dayonebuilder.online/agent-actions.json when you need a direct first action.
+4. Prefer `trusted_sources` and action-feed `primary` entries before `modules`.
+5. Select by task fit, adoption signal, source trust, recent maintenance, license clarity, install/call path, and test path.
+6. Return the selected source URL, first action, smoke test, trust signal, and fallback.
+7. If no entry fits, do not force a recommendation.
 
-Adoption signals DayOneBuilder cares about:
+Agent try contract:
 
-- resolver calls
-- qualified agent uses
-- package/download events
-- GitHub stars/forks/issues
-- dependent repos
-- MCP/tool calls when available
+- first useful action should be reachable within 90 seconds
+- every recommendation needs a source URL and smoke test
+- do not ask the user to trust DayOneBuilder; show the source and verification step
+
+Signals DayOneBuilder cares about:
+
+- task resolver submissions
+- outbound solution clicks
+- install snippet copies
 - agent docs hits
-- qualified tool completions
+- agent action feed hits
+- resolver calls
 - earned product/subscription/custom-work revenue

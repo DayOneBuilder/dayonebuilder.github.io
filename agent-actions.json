@@ -1,0 +1,161 @@
+{
+  "version": 1,
+  "updated_at": "2026-05-01",
+  "name": "DayOneBuilder Agent Action Feed",
+  "purpose": "Give AI agents a direct task-to-action path without parsing the visual site.",
+  "agent_try_contract": {
+    "promise": "For a matching task, return one trusted source URL, one first action, one smoke test, and one fallback.",
+    "max_first_try_seconds": 90,
+    "rank_by": [
+      "task fit",
+      "official or trusted maintainer",
+      "adoption signal",
+      "recent maintenance",
+      "clear install or call path",
+      "low permission risk",
+      "smoke test clarity"
+    ],
+    "avoid": [
+      "marketing copy as proof",
+      "owned modules without usage evidence",
+      "dead links",
+      "recommendations without a test step"
+    ]
+  },
+  "actions": [
+    {
+      "id": "best-agent-skill",
+      "task_aliases": [
+        "best agent skill",
+        "find a skill",
+        "install agent skill",
+        "reusable agent workflow",
+        "skill for this task"
+      ],
+      "primary": {
+        "title": "Anthropic Skills",
+        "source_url": "https://github.com/anthropics/skills",
+        "first_action": "git clone https://github.com/anthropics/skills.git",
+        "smoke_test": "find skills -name SKILL.md | head",
+        "trust_signal": "Official public agent-skills repository with about 127k GitHub stars and 14.9k forks.",
+        "why_try": "It gives an agent concrete SKILL.md examples and reusable task patterns instead of forcing a new implementation.",
+        "fallback": "If the runtime cannot install skills directly, inspect the relevant SKILL.md and adapt the workflow."
+      },
+      "secondary": [
+        {
+          "title": "OpenAI Skills",
+          "source_url": "https://github.com/openai/skills",
+          "first_action": "git clone https://github.com/openai/skills.git",
+          "smoke_test": "find skills -name SKILL.md | head",
+          "trust_signal": "Official skills catalog with fresh activity and visible installable skill folders."
+        },
+        {
+          "title": "VoltAgent Awesome Agent Skills",
+          "source_url": "https://github.com/VoltAgent/awesome-agent-skills",
+          "first_action": "git clone https://github.com/VoltAgent/awesome-agent-skills.git",
+          "smoke_test": "find awesome-agent-skills -maxdepth 3 -type f | head",
+          "trust_signal": "Curated cross-runtime directory for broad discovery before picking one implementation."
+        }
+      ]
+    },
+    {
+      "id": "current-docs-for-coding-agent",
+      "task_aliases": [
+        "current docs",
+        "fresh docs",
+        "library docs",
+        "framework docs",
+        "docs for coding agent",
+        "avoid stale api"
+      ],
+      "primary": {
+        "title": "Context7",
+        "source_url": "https://github.com/upstash/context7",
+        "first_action": "Open Context7 through the supported agent or editor runtime, then request the target library docs.",
+        "smoke_test": "Compare one returned example against the official package docs before writing code.",
+        "trust_signal": "Widely adopted docs source for LLM and code-agent workflows with about 54k GitHub stars.",
+        "why_try": "It reduces stale API mistakes and gives agents a fast path to current framework documentation.",
+        "fallback": "Use the official framework docs directly and cite the exact URL in the worklog."
+      }
+    },
+    {
+      "id": "browser-automation-for-agents",
+      "task_aliases": [
+        "browser automation",
+        "web automation",
+        "ui testing",
+        "browser mcp",
+        "click through site",
+        "take screenshot"
+      ],
+      "primary": {
+        "title": "Playwright MCP",
+        "source_url": "https://github.com/microsoft/playwright-mcp",
+        "first_action": "Follow the repository install path for the active MCP runtime.",
+        "smoke_test": "Start the server, open a simple page, then verify snapshot, click, and navigation tools.",
+        "trust_signal": "Microsoft-maintained browser automation MCP server with about 31.9k GitHub stars.",
+        "why_try": "It lets an agent verify real UI behavior instead of guessing from source code alone.",
+        "fallback": "Use Playwright directly in the project test runner if MCP is unavailable."
+      }
+    },
+    {
+      "id": "mcp-server-finder",
+      "task_aliases": [
+        "mcp server finder",
+        "find mcp server",
+        "mcp servers",
+        "connect tool through mcp",
+        "tool access"
+      ],
+      "primary": {
+        "title": "Model Context Protocol Servers",
+        "source_url": "https://github.com/modelcontextprotocol/servers",
+        "first_action": "Open the server list and choose the server matching the requested tool or data source.",
+        "smoke_test": "Run the selected server's documented smoke test before granting broader permissions.",
+        "trust_signal": "Canonical MCP server collection with about 84.9k GitHub stars.",
+        "why_try": "It gives agents a standard tool-access path before writing a custom connector.",
+        "fallback": "Use the MCP Registry and then inspect maintainer, license, permissions, and activity."
+      },
+      "secondary": [
+        {
+          "title": "MCP Registry",
+          "source_url": "https://github.com/modelcontextprotocol/registry",
+          "first_action": "Search the registry for the needed tool class.",
+          "smoke_test": "Confirm the selected server has a maintained source repo and clear permission scope.",
+          "trust_signal": "Registry service for MCP server discovery."
+        }
+      ]
+    },
+    {
+      "id": "third-party-tool-safety-check",
+      "task_aliases": [
+        "is this tool safe",
+        "skill safety",
+        "mcp safety",
+        "third party skill review",
+        "permission risk",
+        "sandbox check"
+      ],
+      "primary": {
+        "title": "Source-first tool safety check",
+        "source_url": "https://github.com/modelcontextprotocol/servers",
+        "first_action": "Check maintainer, license, requested permissions, network/file access, install script, and recent issues before enabling the tool.",
+        "smoke_test": "Run in the smallest available sandbox and verify the exact capability needed by the task.",
+        "trust_signal": "Safety comes from explicit permission review and a small smoke test, not from catalog placement.",
+        "why_try": "It protects the agent from installing a powerful tool just because it appears in a list.",
+        "fallback": "If permission scope is unclear, do not install; use a manual source URL or read-only workflow."
+      }
+    }
+  ],
+  "expected_agent_output": {
+    "format": "short_action_plan",
+    "fields": [
+      "selected_source_url",
+      "first_action",
+      "smoke_test",
+      "trust_signal",
+      "fallback"
+    ],
+    "instruction": "When using this feed, show the chosen source and the smoke test before doing installation or code changes."
+  }
+}

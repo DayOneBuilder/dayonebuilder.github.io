@@ -1,5 +1,4 @@
 <!doctype html>
-<!-- public-copy-allow: Ben Ison -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -10,6 +9,7 @@
       content="Give DayOneBuilder a task name and get the best reusable skill, MCP server, package, CLI, or module with source links and install steps."
     />
     <link rel="canonical" href="https://dayonebuilder.online/dob-task-resolver/" />
+    <link rel="alternate" type="application/json" href="/agent-actions.json" title="DayOneBuilder agent action feed" />
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
@@ -80,11 +80,8 @@
       }
       .nav-links a:hover { color: var(--ink); }
       .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
-        gap: 20px;
+        max-width: 780px;
         padding: 48px 0 30px;
-        max-width: 100%;
       }
       .hero > * { min-width: 0; }
       .eyebrow {
@@ -290,17 +287,35 @@
         padding: 16px;
       }
       .support p { margin-top: 8px; }
+      .agent-panel { margin-top: 16px; }
+      .endpoint-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .endpoint-links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 0 9px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .endpoint-links a:hover { color: var(--ink); border-color: var(--line-strong); }
       footer { margin: 24px 0 44px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); }
       .footer-row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
       @media (max-width: 940px) {
-        .hero { grid-template-columns: 1fr; }
         .form { grid-template-columns: 1fr; }
       }
       @media (max-width: 600px) {
         .wrap { width: min(calc(100% - 24px), var(--max)); }
         .nav, .status-bar, .footer-row { flex-direction: column; align-items: start; }
         .nav-links { gap: 9px 12px; }
-        .form, .lead, .muted-note, .section, .tag-row { max-width: calc(100vw - 24px); }
+        .form, .section, .tag-row { max-width: calc(100vw - 24px); }
+        .lead, .muted-note, .panel p { max-width: 34ch; }
         .btn { width: 100%; white-space: normal; }
         .chip { min-width: 0; }
         .panel { padding: 14px; }
@@ -313,66 +328,45 @@
         <nav class="nav" aria-label="Primary">
         <a class="brand" href="/">DayOneBuilder</a>
         <div class="nav-links">
-          <a href="/resolver/">Resolver</a>
+          <a href="/">Home</a>
           <a href="/dob-task-resolver/">DOB Task Resolver</a>
-          <a href="/agent-registry.json">Registry</a>
-          <a href="/llms.txt">llms.txt</a>
-          <a href="/products/">Products</a>
+          <a href="https://github.com/DayOneBuilder">GitHub</a>
         </div>
       </nav>
 
       <main>
         <section class="hero">
-          <div>
-            <span class="eyebrow">DOB Task Resolver</span>
-            <h1>Find the best reusable path for your task</h1>
-            <p class="lead">
-              Enter a task name and get ranked, external-first recommendations with source links, trust notes, install or call commands, and a copyable instruction an AI agent can run.
-            </p>
-            <p class="lead" style="margin-top: 10px; font-size: 0.96rem; color: var(--muted)">Source list first, then pick the best existing solution. No login is required for the resolver itself.</p>
+          <span class="eyebrow">DOB Task Resolver</span>
+          <h1>Find the best reusable path for your task</h1>
+          <p class="lead">
+            Enter a task name and get ranked recommendations with source links, trust notes, install or call commands, and a copyable instruction an AI agent can run.
+          </p>
+          <p class="lead" style="margin-top: 10px; font-size: 0.96rem; color: var(--muted)">Source list first, then pick the best existing solution. No login is required for the resolver itself.</p>
 
-            <form id="resolver-form" class="form" autocomplete="off">
-              <label class="sr-only" for="resolver-input" style="display:none">Task</label>
-              <input id="resolver-input" name="task" placeholder="Example: best agent skill" />
-              <button class="btn" type="submit">Find best solution</button>
-            </form>
+          <form id="resolver-form" class="form" autocomplete="off">
+            <label class="sr-only" for="resolver-input" style="display:none">Task</label>
+            <input id="resolver-input" name="task" placeholder="Example: best agent skill" />
+            <button class="btn" type="submit">Find best solution</button>
+          </form>
 
-            <div class="tag-row" aria-label="Example tasks">
-              <button class="chip" data-task="best agent skill">best agent skill</button>
-              <button class="chip" data-task="skill safety checker">skill safety checker</button>
-              <button class="chip" data-task="MCP server finder">MCP server finder</button>
-              <button class="chip" data-task="skill pack manager">skill pack manager</button>
-              <button class="chip" data-task="DOB task resolver">DOB task resolver</button>
-            </div>
-
-            <section class="section" aria-live="polite">
-              <h2>How ranking works</h2>
-              <p class="muted-note">
-                Score uses source transparency, explicit install path, trust note quality, and maintenance freshness. If two options are close, we prefer official sources and clear test paths.
-              </p>
-              <div class="meta">
-                <span>Free-first</span>
-                <span>Basic use does not require an account</span>
-                <span>Source/license links remain visible</span>
-              </div>
-            </section>
+          <div class="tag-row" aria-label="Example tasks">
+            <button class="chip" data-task="best agent skill">best agent skill</button>
+            <button class="chip" data-task="current docs for coding agent">current docs</button>
+            <button class="chip" data-task="browser automation for agents">browser automation</button>
+            <button class="chip" data-task="MCP server finder">MCP server finder</button>
           </div>
 
-          <aside class="panel" aria-label="Resolver entrypoint">
-            <h2 style="font-size: 1.1rem">Use this module</h2>
-            <p>
-              This module is for task-to-tool selection. It returns the likely best existing tool instead of forcing a DayOneBuilder product.
+          <section class="section" aria-live="polite">
+            <h2>How ranking works</h2>
+            <p class="muted-note">
+              Score uses source transparency, explicit install path, trust note quality, and maintenance freshness. If two options are close, we prefer official sources and clear test paths.
             </p>
-            <div class="command">GET /dob-task-resolver/?task={name}</div>
-            <div class="actions" style="margin-top: 12px;">
-              <a class="btn secondary" href="/agent-registry.json">Open registry JSON</a>
-              <button id="copy-entrypoint" class="btn secondary" type="button" data-copy="Use this resolver entry:
-- Resolver URL: https://dayonebuilder.online/dob-task-resolver/
-- Registry: https://dayonebuilder.online/agent-registry.json
-- llms: https://dayonebuilder.online/llms.txt
-- Rule: prefer existing external solution when better, then share install/call/test path and trust note.">Copy resolver entrypoint</button>
+            <div class="meta">
+              <span>Free-first</span>
+              <span>Basic use does not require an account</span>
+              <span>Source/license links remain visible</span>
             </div>
-          </aside>
+          </section>
         </section>
 
         <section class="section" aria-live="polite">
@@ -398,12 +392,33 @@
             </a>
           </div>
         </section>
+
+        <aside class="panel agent-panel" aria-label="Agent entrypoints">
+          <h2 style="font-size: 1.1rem">For agents</h2>
+          <p>
+            Machine-readable entrypoints are available for automated use.
+          </p>
+          <div class="command">GET /dob-task-resolver/?task={name}</div>
+          <div class="endpoint-links" aria-label="Machine endpoints">
+            <a href="/llms.txt">llms.txt</a>
+            <a href="/agent-registry.json">registry</a>
+            <a href="/agent-actions.json">actions</a>
+          </div>
+          <div class="actions" style="margin-top: 12px;">
+            <button id="copy-entrypoint" class="btn secondary" type="button" data-copy="Use this resolver entry:
+- Resolver URL: https://dayonebuilder.online/dob-task-resolver/
+- Registry: https://dayonebuilder.online/agent-registry.json
+- Actions: https://dayonebuilder.online/agent-actions.json
+- llms: https://dayonebuilder.online/llms.txt
+- Rule: prefer existing external solution when better, then share install/call/test path and trust note.">Copy resolver entrypoint</button>
+          </div>
+        </aside>
       </main>
 
       <footer>
         <div class="footer-row">
           <span>DayOneBuilder Resolver</span>
-          <span><a href="/resolver/">Resolver</a> / <a href="/llms.txt">llms.txt</a></span>
+          <span><a href="/llms.txt">llms.txt</a> / <a href="/agent-registry.json">registry</a> / <a href="/agent-actions.json">actions</a></span>
         </div>
       </footer>
     </div>
@@ -415,39 +430,79 @@
         {
           id: "best-agent-skill",
           aliases: ["best agent skill", "find a skill", "best skill", "agent skill"],
-          summary: "Good default choice when you want a curated agent skill source first.",
+          summary: "Use official and high-adoption skill sources before any internal module.",
           solutions: [
             {
+              id: "anthropic-skills",
+              title: "Anthropic Skills",
+              sourceLinks: [
+                "https://github.com/anthropics/skills",
+                "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
+              ],
+              trustScore: 96,
+              trustNotes: "126k+ GitHub stars and public official skill source. Start here when the task is a reusable agent skill.",
+              installCommand: "git clone https://github.com/anthropics/skills.git",
+              testCommand: "find skills -name SKILL.md | head",
+              fallback: "If your runtime cannot install skills directly, inspect the SKILL.md file and adapt the documented workflow.",
+              callPath: "https://github.com/anthropics/skills",
+              category: "skill",
+              sourceStatus: "official repo"
+            },
+            {
               id: "openai-skills",
-              title: "OpenAI skill packages",
+              title: "OpenAI Skills",
               sourceLinks: [
                 "https://github.com/openai/skills",
                 "https://github.com/VoltAgent/awesome-agent-skills"
               ],
               trustScore: 92,
-              trustNotes: "Official skill catalog and curated community list with open references. Check each skill folder for LICENSE and scope before use.",
-              installCommand: "$skill-installer gh-address-comments",
-              testCommand: "$skill-installer gh-address-comments; ls -la ~/.openai-skills 2>/dev/null | head",
-              fallback: "If install is unavailable in your agent runtime, clone https://github.com/openai/skills and run the skill manually from the readme.",
-              callPath: "https://dayonebuilder.online/agent-registry.json",
+              trustNotes: "Official Skills Catalog for OpenAI-compatible agent runtimes with fresh repo activity.",
+              installCommand: "git clone https://github.com/openai/skills.git",
+              testCommand: "find skills -name SKILL.md | head",
+              fallback: "If direct skill install support is available in your runtime, install only the exact skill folder you need.",
+              callPath: "https://github.com/openai/skills",
               category: "skill",
-              sourceStatus: "repo: MIT / mixed"
-            },
+              sourceStatus: "official repo"
+            }
+          ]
+        },
+        {
+          id: "current-docs",
+          aliases: ["current docs", "current docs for coding agent", "fresh docs", "library docs", "framework docs", "documentation"],
+          summary: "Use when an agent needs current framework docs before coding.",
+          solutions: [
             {
-              id: "anthropic-skills",
-              title: "Anthropic skills catalog",
-              sourceLinks: [
-                "https://github.com/anthropics/skills",
-                "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
-              ],
-              trustScore: 89,
-              trustNotes: "Source-available and Apache-licensed examples, with plugin install command examples in README. Validate plugin compatibility in your runtime.",
-              installCommand: "/plugin install document-skills@anthropic-agent-skills",
-              testCommand: "/plugin install document-skills@anthropic-agent-skills && /plugin list",
-              fallback: "If plugin install fails, open the repo and follow per-skill `SKILL.md` docs.",
-              callPath: "https://dayonebuilder.online/llms.txt",
-              category: "skill",
-              sourceStatus: "source available"
+              id: "context7",
+              title: "Context7",
+              sourceLinks: ["https://github.com/upstash/context7"],
+              trustScore: 94,
+              trustNotes: "54k+ GitHub stars, MIT license, and active maintenance for up-to-date documentation in LLM/code editor workflows.",
+              installCommand: "Use Context7 in the supported agent/editor runtime or inspect https://github.com/upstash/context7",
+              testCommand: "Open the target library docs through Context7, then verify code examples against the official package docs.",
+              fallback: "If Context7 is unavailable, use the official framework docs directly and cite the exact URL.",
+              callPath: "https://github.com/upstash/context7",
+              category: "docs",
+              sourceStatus: "MIT repo"
+            }
+          ]
+        },
+        {
+          id: "browser-automation",
+          aliases: ["browser automation", "browser automation for agents", "web automation", "ui testing", "playwright mcp"],
+          summary: "Use when an agent needs browser control through a trusted MCP path.",
+          solutions: [
+            {
+              id: "playwright-mcp",
+              title: "Playwright MCP",
+              sourceLinks: ["https://github.com/microsoft/playwright-mcp"],
+              trustScore: 93,
+              trustNotes: "31k+ GitHub stars, Microsoft-maintained, Apache-2.0 license, fresh activity.",
+              installCommand: "Follow https://github.com/microsoft/playwright-mcp for runtime-specific MCP install.",
+              testCommand: "Start the MCP server, open a simple page, and verify snapshot/click/navigation tools work.",
+              fallback: "If MCP is unavailable, use Playwright directly in the project test runner.",
+              callPath: "https://github.com/microsoft/playwright-mcp",
+              category: "browser",
+              sourceStatus: "Apache-2.0 repo"
             }
           ]
         },
@@ -457,50 +512,37 @@
           summary: "Use for source-first safety and sandbox checks before enabling third-party skills.",
           solutions: [
             {
-              id: "mcp-security",
-              title: "MCP hardening checks from awesome MCP list",
-              sourceLinks: ["https://github.com/appcypher/awesome-mcp-servers", "https://modelcontextprotocol.io/quickstart"],
-              trustScore: 84,
-              trustNotes: "High-signal list with explicit security guidance sections. Good first pass for server review and permission decisions.",
-              installCommand: "git clone https://github.com/appcypher/awesome-mcp-servers.git && cd awesome-mcp-servers",
-              testCommand: "rg -n \"Security\|sandbox\|permission\" README.md | head",
-              fallback: "Add a short-lived sandbox and minimum-permission policy before installing any MCP server.",
+              id: "source-first-tool-safety",
+              title: "Source-first tool safety check",
+              sourceLinks: ["https://github.com/modelcontextprotocol/servers", "https://github.com/modelcontextprotocol/registry"],
+              trustScore: 88,
+              trustNotes: "Use canonical MCP sources, then inspect maintainer, license, requested permissions, install script, and recent issues before enabling a server.",
+              installCommand: "Open the selected MCP server source and review permissions before installing.",
+              testCommand: "Run the selected server in the smallest available sandbox and verify only the needed capability.",
+              fallback: "If permission scope is unclear, do not install; use a manual source URL or read-only workflow.",
               callPath: "https://github.com/modelcontextprotocol/servers",
               category: "safety",
-              sourceStatus: "license: varies by listed server"
-            },
-            {
-              id: "arxiv-260416911",
-              title: "Research paper on tool trust signals (arXiv)",
-              sourceLinks: ["https://arxiv.org/abs/2604.16911"],
-              trustScore: 80,
-              trustNotes: "Reference for evaluation logic and evidence design. Not a direct install, but useful for checklists and benchmark criteria.",
-              installCommand: "curl -L https://arxiv.org/abs/2604.16911 | head",
-              testCommand: "curl -L https://arxiv.org/abs/2604.16911 | rg -n \"method\|evaluation\|metric\"",
-              fallback: "Pair with practical security review steps before production use.",
-              callPath: "https://arxiv.org/abs/2604.16911",
-              category: "research",
-              sourceStatus: "paper"
+              sourceStatus: "canonical MCP source"
             }
           ]
         },
         {
           id: "mcp-server-finder",
           aliases: ["mcp server finder", "find mcp server", "mcp servers", "mcp"],
-          summary: "Point directly to known MCP collections and quick-start host docs.",
+          summary: "Use canonical MCP sources before third-party lists.",
           solutions: [
             {
-              id: "mcp-servers",
-              title: "Awesome MCP server directory",
-              sourceLinks: ["https://github.com/appcypher/awesome-mcp-servers", "https://awesomeagentskills.dev/", "https://www.awesomeskills.dev/"],
-              trustScore: 91,
-              trustNotes: "Large curation set with category tags and official docs links. Review maintenance and permissions for each candidate before use.",
-              installCommand: "git clone https://github.com/appcypher/awesome-mcp-servers.git",
-              testCommand: 'rg -n "server|Official" README.md | head -n 5',
-              fallback: "Filter by official markers and verify server docs before first run.",
+              id: "modelcontextprotocol-servers",
+              title: "Model Context Protocol Servers",
+              sourceLinks: ["https://github.com/modelcontextprotocol/servers", "https://github.com/modelcontextprotocol/registry"],
+              trustScore: 95,
+              trustNotes: "84k+ GitHub stars on the canonical server collection and a separate registry service.",
+              installCommand: "Open https://github.com/modelcontextprotocol/servers and choose the server matching the task.",
+              testCommand: "Run the selected server's documented smoke test before granting broader permissions.",
+              fallback: "If no canonical server fits, use the MCP registry and then inspect maintainer, permissions, and license.",
               callPath: "https://github.com/modelcontextprotocol/servers",
               category: "mcp",
-              sourceStatus: "license: varies by server"
+              sourceStatus: "canonical MCP source"
             }
           ]
         },
@@ -512,12 +554,12 @@
             {
               id: "openai-skill-pack",
               title: "OpenAI skill package manager path",
-              sourceLinks: ["https://github.com/openai/skills", "https://openai.com/index/"],
+              sourceLinks: ["https://github.com/openai/skills"],
               trustScore: 86,
               trustNotes: "Cataloged structure supports namespaced install paths; commands include restart and scope checks in docs.",
-              installCommand: "$skill-installer install https://github.com/openai/skills/tree/main/skills/.experimental/create-plan",
-              testCommand: "ls ~/.openai-skills 2>/dev/null | head",
-              fallback: "If command fails in your runner, copy the exact tree URL into your own skill install flow.",
+              installCommand: "git clone https://github.com/openai/skills.git",
+              testCommand: "find skills -name SKILL.md | head",
+              fallback: "Use this as a catalog path; install only after checking the target runtime's documented skill layout.",
               callPath: "https://github.com/openai/skills/tree/main/skills/.experimental",
               category: "skill-management",
               sourceStatus: "repo-defined licenses"
@@ -525,7 +567,7 @@
             {
               id: "awesome-agent-skills",
               title: "Awesome Agent Skills index",
-              sourceLinks: ["https://github.com/VoltAgent/awesome-agent-skills", "https://awesomeagentskills.dev/", "https://www.awesomeskills.dev/"],
+              sourceLinks: ["https://github.com/VoltAgent/awesome-agent-skills"],
               trustScore: 83,
               trustNotes: "Directory-style list to identify mature packs quickly. Keep per-item source checks for license and installation path.",
               installCommand: "git clone https://github.com/VoltAgent/awesome-agent-skills.git",

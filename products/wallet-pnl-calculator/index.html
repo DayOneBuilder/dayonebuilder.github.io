@@ -1,191 +1,56 @@
 <!doctype html>
-<!-- public-copy-allow: Ben Ison -->
-<!-- public-copy-allow: Codex -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Crypto Wallet P&amp;L Calculator | DayOneBuilder</title>
-    <meta name="description" content="Crypto wallet P&amp;L calculator for a rough deposits, withdrawals, current value, cost basis, realized, and unrealized profit/loss check." />
-    <link rel="canonical" href="https://dayonebuilder.online/products/wallet-pnl-calculator/" />
+    <meta name="robots" content="noindex,follow" />
+    <meta http-equiv="refresh" content="0; url=/dob-task-resolver/" />
+    <title>DayOneBuilder archived catalog</title>
+    <meta
+      name="description"
+      content="This old DayOneBuilder catalog now points to the trusted task resolver and machine registry."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/dob-task-resolver/" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
+      window.location.replace("/dob-task-resolver/");
     </script>
-    <link rel="stylesheet" href="./calculator.css" />
-    <script defer src="./calculator.js"></script>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #08090a;
+        color: #cbd5df;
+        font: 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      main { width: min(calc(100% - 32px), 680px); }
+      h1 { margin: 0 0 10px; color: #f8fafc; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.08; }
+      p { margin: 0 0 18px; color: #87909d; }
+      a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 42px;
+        padding: 0 14px;
+        border: 1px solid rgba(255,255,255,.18);
+        border-radius: 8px;
+        background: #f8fafc;
+        color: #08090a;
+        font-weight: 700;
+        text-decoration: none;
+      }
+    </style>
   </head>
   <body>
-    <div class="wrap">
-      <a class="back" href="/products/">← Back to products</a>
-      <section class="panel">
-        <div class="hero">
-          <div class="price">Wallet P&amp;L</div><span class="label">Free browser calculator + ZIP</span>
-          <h1>Wallet P&amp;L Calculator</h1>
-          <p class="lede"><strong>See what a wallet actually made.</strong></p>
-          <p>Add deposits, withdrawals, current value, and remaining cost basis. You get a rough total, realized, and unrealized split fast.</p>
-        </div>
-
-        <div class="install-box">
-          <strong>Use it now</strong>
-          <div class="install-line"><code>Live browser tool + standalone ZIP download</code></div>
-          <div class="cta-row" style="margin-top: 14px;">
-            <a class="cta" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">Download ZIP</a>
-
-          </div>
-          <p style="margin-top: 14px;">Use the browser tool for a quick answer. Download the ZIP if you want the same calculator offline.</p>
-        </div>
-
-<section class="calculator-section">
-          <div class="section-heading">
-            <h2>Run the numbers</h2>
-            <p>Use external capital in and out. Leave out transfers between your own wallets or the result gets noisy fast.</p>
-          </div>
-
-          <div class="calculator-shell">
-            <div class="calc-grid">
-              <label class="field">
-                <span>Total deposits / capital in</span>
-                <input id="depositsInput" type="number" min="0" step="0.01" value="10000" />
-                <small>Total external capital added to the wallet for the period you care about.</small>
-              </label>
-
-              <label class="field">
-                <span>Total withdrawals / capital out</span>
-                <input id="withdrawalsInput" type="number" min="0" step="0.01" value="2500" />
-                <small>Total value already taken out of the wallet.</small>
-              </label>
-
-              <label class="field">
-                <span>Current holdings value</span>
-                <input id="holdingsValueInput" type="number" min="0" step="0.01" value="9200" />
-                <small>What the wallet still holds right now at current prices.</small>
-              </label>
-
-              <label class="field">
-                <span>Current holdings cost basis</span>
-                <input id="holdingsBasisInput" type="number" min="0" step="0.01" value="7000" />
-                <small>The basis still attached to the open position that remains in the wallet.</small>
-              </label>
-            </div>
-
-            <div class="example-row">
-              <button class="example-chip" type="button" data-deposits="10000" data-withdrawals="1000" data-holdings="14000" data-basis="9000">Mostly unrealized</button>
-              <button class="example-chip" type="button" data-deposits="10000" data-withdrawals="6000" data-holdings="7000" data-basis="4000">Round trip winner</button>
-              <button class="example-chip" type="button" data-deposits="10000" data-withdrawals="12000" data-holdings="1500" data-basis="500">Pulled profit</button>
-              <button class="example-chip" type="button" data-deposits="10000" data-withdrawals="2000" data-holdings="5000" data-basis="6000">Still underwater</button>
-            </div>
-
-            <div class="ratio-preview" id="consistencyNote"></div>
-
-            <div class="results-grid">
-              <article class="stat">
-                <span class="stat-label">Total P&amp;L</span>
-                <strong class="stat-value" id="totalPnl">$0.00</strong>
-                <span class="stat-note">Withdrawals plus current holdings minus deposits.</span>
-              </article>
-              <article class="stat">
-                <span class="stat-label">Total return</span>
-                <strong class="stat-value" id="totalReturnPct">0.00%</strong>
-                <span class="stat-note" id="returnNote">Relative to total deposits.</span>
-              </article>
-              <article class="stat">
-                <span class="stat-label">Net capital still in play</span>
-                <strong class="stat-value tone-neutral" id="netCapital">$0.00</strong>
-                <span class="stat-note">Deposits minus withdrawals.</span>
-              </article>
-              <article class="stat">
-                <span class="stat-label">Realized cost basis</span>
-                <strong class="stat-value tone-neutral" id="realizedBasis">$0.00</strong>
-                <span class="stat-note">Deposits minus the basis still sitting in the wallet.</span>
-              </article>
-              <article class="stat">
-                <span class="stat-label">Realized P&amp;L</span>
-                <strong class="stat-value" id="realizedPnl">$0.00</strong>
-                <span class="stat-note">Withdrawals minus realized cost basis.</span>
-              </article>
-              <article class="stat">
-                <span class="stat-label">Unrealized P&amp;L</span>
-                <strong class="stat-value" id="unrealizedPnl">$0.00</strong>
-                <span class="stat-note">Current holdings value minus current holdings cost basis.</span>
-              </article>
-            </div>
-
-            <div class="summary" id="explanation"></div>
-
-            <div class="assumptions">
-              <p><strong>Scope:</strong> rough wallet-level only. No tax lots, gas, staking accrual detail, or transfers between wallets you still control.</p>
-              <p class="formula-line">Formula: total P&amp;L = withdrawals + current holdings value - deposits</p>
-              <p>Need the method before using the tool? Read <a href="/how-to-calculate-crypto-wallet-pnl/">how to calculate crypto wallet P&amp;L</a> first.</p>
-            </div>
-
-            <section class="offer-box" aria-label="Wallet P&L Cleanup Pack offer">
-              <div>
-                <strong>Need more than a quick calculator?</strong>
-                <p>
-                  Use the free calculator for a fast signal. If you need a quick template workflow for cleanup, the Wallet P&amp;L Cleanup Pack is built for rough wallet-level cleanup before deeper tax prep.
-                </p>
-              </div>
-              <p>Starting price: <strong>$19</strong>.</p>
-              <a id="wallet-pnl-cleanup-pack-cta-product" class="cta" href="https://checkout.dayonebuilder.online/products/wallet-pnl-cleanup-pack?utm_source=dayonebuilder&utm_medium=wallet_pnl_offer&utm_campaign=wallet_pnl_cleanup_pack&utm_content=product_page" data-offer="wallet-pnl-cleanup-pack" data-offer-location="product-page" data-price-usd="19">
-                Open the Cleanup Pack
-              </a>
-              <p class="offer-note">
-                Review the pack on checkout before payment. Delivery unlocks automatically after payment confirmation.
-              </p>
-            </section>
-          </div>
-        </section>
-
-        <h2>Use it when</h2>
-        <div class="grid">
-          <div class="card"><strong>A wallet feels profitable but the math does not land</strong><p>This gives you one clean frame for the rough answer.</p></div>
-          <div class="card"><strong>You need realized versus unrealized fast</strong><p>Get the split before you rebuild the whole spreadsheet.</p></div>
-          <div class="card"><strong>You want a quick sanity check before deeper cleanup</strong><p>Use it to pressure-test the story your notes are telling.</p></div>
-        </div>
-
-        <h2>Keep in mind</h2>
-        <div class="grid">
-          <div class="card"><strong>Use external flows only</strong><p>Transfers between your own wallets will distort the result.</p></div>
-          <div class="card"><strong>Remaining basis drives the split</strong><p>If that input is sloppy, realized and unrealized will be sloppy too.</p></div>
-          <div class="card"><strong>This is wallet-level math</strong><p>It is a rough check, not full tax-lot accounting.</p></div>
-        </div>
-
-        <div class="footer-note">This is a rough decision aid, not tax or legal advice. Take the calculator and use it for the quick read.</div>
-      </section>
-    </div>
-    <script>
-      function trackWalletOfferEvent(name, params = {}) {
-        if (typeof window === "undefined" || typeof gtag !== "function") {
-          return;
-        }
-
-        gtag("event", name, params);
-      }
-
-      const productOfferCta = document.getElementById("wallet-pnl-cleanup-pack-cta-product");
-      if (productOfferCta) {
-        productOfferCta.addEventListener("click", function () {
-          const payload = {
-            event_category: "wallet_pnl_cleanup_pack",
-            event_label: this.getAttribute("data-offer"),
-            offer_location: this.getAttribute("data-offer-location"),
-            price_usd: Number(this.dataset.priceUsd || 19)
-          };
-
-          trackWalletOfferEvent("wallet_pnl_paid_cta_click", payload);
-
-          trackWalletOfferEvent("wallet_pnl_checkout_start", {
-            event_category: "wallet_pnl_cleanup_pack",
-            event_label: this.getAttribute("data-offer"),
-            offer_location: this.getAttribute("data-offer-location"),
-            payment_type: "checkout_product_page"
-          });
-        });
-      }
-    </script>
+    <main>
+      <h1>Use the trusted resolver.</h1>
+      <p>This catalog is archived. The active entrypoint is the task resolver with source URLs, install paths, and verification steps.</p>
+      <a href="/dob-task-resolver/">Open task resolver</a>
+    </main>
   </body>
 </html>

@@ -1,9 +1,11 @@
 User-agent: *
 Allow: /
+Disallow: /downloads/
 
 Sitemap: https://dayonebuilder.online/sitemap.xml
 
 # Agent-readable entrypoints
 # llms.txt: https://dayonebuilder.online/llms.txt
 # registry: https://dayonebuilder.online/agent-registry.json
-# resolver: https://dayonebuilder.online/resolver/
+# actions: https://dayonebuilder.online/agent-actions.json
+# resolver: https://dayonebuilder.online/dob-task-resolver/
