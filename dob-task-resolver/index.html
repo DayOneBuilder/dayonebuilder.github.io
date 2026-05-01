@@ -1,0 +1,748 @@
+<!doctype html>
+<!-- public-copy-allow: Ben Ison -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DOB Task Resolver | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Give DayOneBuilder a task name and get the best reusable skill, MCP server, package, CLI, or module with source links and install steps."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/dob-task-resolver/" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      window.__taskResolverAnalyticsReady = false;
+
+      window.__taskResolverTrack = function trackEvent(eventName, params = {}) {
+        if (!window.__taskResolverAnalyticsReady || typeof window.gtag !== "function") {
+          return;
+        }
+        window.gtag("event", eventName, params);
+      };
+
+      window.__initDobResolverAnalytics = function initDobResolverAnalytics() {
+        window.__taskResolverAnalyticsReady = true;
+        gtag("js", new Date());
+        gtag("config", "G-KQMLYS3VVE");
+      };
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"
+      onload="__initDobResolverAnalytics()"
+      onerror="window.__taskResolverAnalyticsReady = false"
+    ></script>
+    <style>
+      :root {
+        --bg: #08090a;
+        --surface: #0e0e10;
+        --ink: #f7f8f8;
+        --text: #c9ccd1;
+        --muted: #8a8f98;
+        --line: rgba(255, 255, 255, 0.09);
+        --line-strong: rgba(255, 255, 255, 0.18);
+        --green: #34d399;
+        --blue: #60a5fa;
+        --amber: #fbbf24;
+        --max: 1160px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--bg);
+        font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      a { color: inherit; text-decoration: none; }
+      .wrap {
+        width: min(calc(100% - 32px), var(--max));
+        margin: 0 auto;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand { color: var(--ink); font-weight: 700; }
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .nav-links a:hover { color: var(--ink); }
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+        gap: 20px;
+        padding: 48px 0 30px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        margin-bottom: 14px;
+        color: var(--green);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.08; }
+      h1 {
+        max-width: 14ch;
+        font-size: clamp(2rem, 6vw, 3.8rem);
+      }
+      h2 { font-size: 1.35rem; }
+      h3 { font-size: 1rem; }
+      p { margin: 0; color: var(--muted); }
+      .lead { margin-top: 14px; max-width: 70ch; }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 18px;
+        background: #0c0d0f;
+      }
+      .panel p { margin-top: 10px; }
+      .form {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        margin-top: 18px;
+      }
+      input {
+        width: 100%;
+        min-height: 46px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 0 14px;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.03);
+        font: inherit;
+      }
+      input:focus { outline: 1px solid var(--blue); }
+      .btn {
+        border: 1px solid var(--line-strong);
+        background: #f7f8f8;
+        color: #08090a;
+        border-radius: 10px;
+        min-height: 46px;
+        padding: 0 18px;
+        font: inherit;
+        font-weight: 650;
+        cursor: pointer;
+      }
+      .btn:hover { filter: brightness(0.96); }
+      .btn.secondary {
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.05);
+      }
+      .tag-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 13px;
+        color: var(--text);
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .chip.active, .chip:hover { border-color: #5ab0ff; }
+      .section {
+        margin-top: 20px;
+        display: grid;
+        gap: 12px;
+      }
+      .status-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        gap: 12px;
+      }
+      .muted-note { color: var(--muted); font-size: 14px; }
+      .results {
+        display: grid;
+        gap: 12px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        background: #0d0e10;
+      }
+      .card-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .rank {
+        min-width: 34px;
+        height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--amber);
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .title-group {
+        flex: 1;
+        min-width: 0;
+      }
+      .score {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        color: var(--green);
+        font-size: 13px;
+        margin-top: 7px;
+      }
+      .score-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: var(--green);
+      }
+      .meta {
+        margin-top: 8px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .meta span {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 9px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .copy-instruction {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 10px;
+        padding: 12px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 13px;
+        line-height: 1.45;
+        word-break: break-word;
+        margin-top: 10px;
+      }
+      .command {
+        margin-top: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        padding: 10px 12px;
+        color: #f2f4f7;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+        font-size: 13px;
+        overflow-wrap: anywhere;
+      }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+      .source-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .small-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 34px;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        padding: 0 10px;
+        font-size: 13px;
+        color: var(--ink);
+      }
+      .small-link:hover { border-color: #6ab2ff; }
+      .support {
+        margin-top: 24px;
+        border: 1px dashed var(--line);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .support p { margin-top: 8px; }
+      footer { margin: 24px 0 44px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); }
+      .footer-row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+      @media (max-width: 940px) {
+        .hero { grid-template-columns: 1fr; }
+        .form { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 600px) {
+        .wrap { width: min(calc(100% - 24px), var(--max)); }
+        .nav, .status-bar, .footer-row { flex-direction: column; align-items: start; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+        <nav class="nav" aria-label="Primary">
+        <a class="brand" href="/">DayOneBuilder</a>
+        <div class="nav-links">
+          <a href="/resolver/">Resolver</a>
+          <a href="/dob-task-resolver/">DOB Task Resolver</a>
+          <a href="/agent-registry.json">Registry</a>
+          <a href="/llms.txt">llms.txt</a>
+          <a href="/products/">Products</a>
+        </div>
+      </nav>
+
+      <main>
+        <section class="hero">
+          <div>
+            <span class="eyebrow">DOB Task Resolver</span>
+            <h1>Find the best reusable path for your task</h1>
+            <p class="lead">
+              Enter a task name and get ranked, external-first recommendations with source links, trust notes, install or call commands, and a copyable instruction an AI agent can run.
+            </p>
+            <p class="lead" style="margin-top: 10px; font-size: 0.96rem; color: var(--muted)">Source list first, then pick the best existing solution. No login is required for the resolver itself.</p>
+
+            <form id="resolver-form" class="form" autocomplete="off">
+              <label class="sr-only" for="resolver-input" style="display:none">Task</label>
+              <input id="resolver-input" name="task" placeholder="Example: best agent skill" />
+              <button class="btn" type="submit">Find best solution</button>
+            </form>
+
+            <div class="tag-row" aria-label="Example tasks">
+              <button class="chip" data-task="best agent skill">best agent skill</button>
+              <button class="chip" data-task="skill safety checker">skill safety checker</button>
+              <button class="chip" data-task="MCP server finder">MCP server finder</button>
+              <button class="chip" data-task="skill pack manager">skill pack manager</button>
+              <button class="chip" data-task="DOB task resolver">DOB task resolver</button>
+            </div>
+
+            <section class="section" aria-live="polite">
+              <h2>How ranking works</h2>
+              <p class="muted-note">
+                Score uses source transparency, explicit install path, trust note quality, and maintenance freshness. If two options are close, we prefer official sources and clear test paths.
+              </p>
+              <div class="meta">
+                <span>Free-first</span>
+                <span>Basic use does not require an account</span>
+                <span>Source/license links remain visible</span>
+              </div>
+            </section>
+          </div>
+
+          <aside class="panel" aria-label="Resolver entrypoint">
+            <h2 style="font-size: 1.1rem">Use this module</h2>
+            <p>
+              This module is for task-to-tool selection. It returns the likely best existing tool instead of forcing a DayOneBuilder product.
+            </p>
+            <div class="command">GET /dob-task-resolver/?task={name}</div>
+            <div class="actions" style="margin-top: 12px;">
+              <a class="btn secondary" href="/agent-registry.json">Open registry JSON</a>
+              <button id="copy-entrypoint" class="btn secondary" type="button" data-copy="Use this resolver entry:
+- Resolver URL: https://dayonebuilder.online/dob-task-resolver/
+- Registry: https://dayonebuilder.online/agent-registry.json
+- llms: https://dayonebuilder.online/llms.txt
+- Rule: prefer existing external solution when better, then share install/call/test path and trust note.">Copy resolver entrypoint</button>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" aria-live="polite">
+          <div class="status-bar">
+            <div>
+              <h2>Ranked recommendations</h2>
+              <p id="status-text" class="muted-note">Enter a task to load ranked recommendations.</p>
+            </div>
+          </div>
+          <div id="results" class="results"></div>
+        </section>
+
+        <section class="support">
+          <h2>Need team support?</h2>
+          <p class="muted-note">If your team needs help wiring this resolver into an internal workflow, share your use case and current stack.</p>
+          <div class="actions">
+            <a
+              class="small-link"
+              id="support-link"
+              href="mailto:hello@dayonebuilder.online?subject=DOB%20Task%20Resolver%20Support"
+            >
+              Request team support
+            </a>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <div class="footer-row">
+          <span>DayOneBuilder Resolver</span>
+          <span><a href="/resolver/">Resolver</a> / <a href="/llms.txt">llms.txt</a></span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const SUPPORT_PATH = "mailto:hello@dayonebuilder.online?subject=DOB%20Task%20Resolver%20Support";
+
+      const seedLibrary = [
+        {
+          id: "best-agent-skill",
+          aliases: ["best agent skill", "find a skill", "best skill", "agent skill"],
+          summary: "Good default choice when you want a curated agent skill source first.",
+          solutions: [
+            {
+              id: "openai-skills",
+              title: "OpenAI skill packages",
+              sourceLinks: [
+                "https://github.com/openai/skills",
+                "https://github.com/VoltAgent/awesome-agent-skills"
+              ],
+              trustScore: 92,
+              trustNotes: "Official skill catalog and curated community list with open references. Check each skill folder for LICENSE and scope before use.",
+              installCommand: "$skill-installer gh-address-comments",
+              testCommand: "$skill-installer gh-address-comments; ls -la ~/.openai-skills 2>/dev/null | head",
+              fallback: "If install is unavailable in your agent runtime, clone https://github.com/openai/skills and run the skill manually from the readme.",
+              callPath: "https://dayonebuilder.online/agent-registry.json",
+              category: "skill",
+              sourceStatus: "repo: MIT / mixed"
+            },
+            {
+              id: "anthropic-skills",
+              title: "Anthropic skills catalog",
+              sourceLinks: [
+                "https://github.com/anthropics/skills",
+                "https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills"
+              ],
+              trustScore: 89,
+              trustNotes: "Source-available and Apache-licensed examples, with plugin install command examples in README. Validate plugin compatibility in your runtime.",
+              installCommand: "/plugin install document-skills@anthropic-agent-skills",
+              testCommand: "/plugin install document-skills@anthropic-agent-skills && /plugin list",
+              fallback: "If plugin install fails, open the repo and follow per-skill `SKILL.md` docs.",
+              callPath: "https://dayonebuilder.online/llms.txt",
+              category: "skill",
+              sourceStatus: "source available"
+            }
+          ]
+        },
+        {
+          id: "skill-safety-checker",
+          aliases: ["skill safety checker", "safety checker", "safe skill", "risk checker"],
+          summary: "Use for source-first safety and sandbox checks before enabling third-party skills.",
+          solutions: [
+            {
+              id: "mcp-security",
+              title: "MCP hardening checks from awesome MCP list",
+              sourceLinks: ["https://github.com/appcypher/awesome-mcp-servers", "https://modelcontextprotocol.io/quickstart"],
+              trustScore: 84,
+              trustNotes: "High-signal list with explicit security guidance sections. Good first pass for server review and permission decisions.",
+              installCommand: "git clone https://github.com/appcypher/awesome-mcp-servers.git && cd awesome-mcp-servers",
+              testCommand: "rg -n \"Security\|sandbox\|permission\" README.md | head",
+              fallback: "Add a short-lived sandbox and minimum-permission policy before installing any MCP server.",
+              callPath: "https://github.com/modelcontextprotocol/servers",
+              category: "safety",
+              sourceStatus: "license: varies by listed server"
+            },
+            {
+              id: "arxiv-260416911",
+              title: "Research paper on tool trust signals (arXiv)",
+              sourceLinks: ["https://arxiv.org/abs/2604.16911"],
+              trustScore: 80,
+              trustNotes: "Reference for evaluation logic and evidence design. Not a direct install, but useful for checklists and benchmark criteria.",
+              installCommand: "curl -L https://arxiv.org/abs/2604.16911 | head",
+              testCommand: "curl -L https://arxiv.org/abs/2604.16911 | rg -n \"method\|evaluation\|metric\"",
+              fallback: "Pair with practical security review steps before production use.",
+              callPath: "https://arxiv.org/abs/2604.16911",
+              category: "research",
+              sourceStatus: "paper"
+            }
+          ]
+        },
+        {
+          id: "mcp-server-finder",
+          aliases: ["mcp server finder", "find mcp server", "mcp servers", "mcp"],
+          summary: "Point directly to known MCP collections and quick-start host docs.",
+          solutions: [
+            {
+              id: "mcp-servers",
+              title: "Awesome MCP server directory",
+              sourceLinks: ["https://github.com/appcypher/awesome-mcp-servers", "https://awesomeagentskills.dev/", "https://www.awesomeskills.dev/"],
+              trustScore: 91,
+              trustNotes: "Large curation set with category tags and official docs links. Review maintenance and permissions for each candidate before use.",
+              installCommand: "git clone https://github.com/appcypher/awesome-mcp-servers.git",
+              testCommand: 'rg -n "server|Official" README.md | head -n 5',
+              fallback: "Filter by official markers and verify server docs before first run.",
+              callPath: "https://github.com/modelcontextprotocol/servers",
+              category: "mcp",
+              sourceStatus: "license: varies by server"
+            }
+          ]
+        },
+        {
+          id: "skill-pack-manager",
+          aliases: ["skill pack manager", "manage skill pack", "skill pack"],
+          summary: "Best path for managing reusable agent skill bundles.",
+          solutions: [
+            {
+              id: "openai-skill-pack",
+              title: "OpenAI skill package manager path",
+              sourceLinks: ["https://github.com/openai/skills", "https://openai.com/index/"],
+              trustScore: 86,
+              trustNotes: "Cataloged structure supports namespaced install paths; commands include restart and scope checks in docs.",
+              installCommand: "$skill-installer install https://github.com/openai/skills/tree/main/skills/.experimental/create-plan",
+              testCommand: "ls ~/.openai-skills 2>/dev/null | head",
+              fallback: "If command fails in your runner, copy the exact tree URL into your own skill install flow.",
+              callPath: "https://github.com/openai/skills/tree/main/skills/.experimental",
+              category: "skill-management",
+              sourceStatus: "repo-defined licenses"
+            },
+            {
+              id: "awesome-agent-skills",
+              title: "Awesome Agent Skills index",
+              sourceLinks: ["https://github.com/VoltAgent/awesome-agent-skills", "https://awesomeagentskills.dev/", "https://www.awesomeskills.dev/"],
+              trustScore: 83,
+              trustNotes: "Directory-style list to identify mature packs quickly. Keep per-item source checks for license and installation path.",
+              installCommand: "git clone https://github.com/VoltAgent/awesome-agent-skills.git",
+              testCommand: "ls -1 awesome-agent-skills | head",
+              fallback: "Treat this as discovery-first; install only from repositories with clear setup instructions.",
+              callPath: "https://github.com/VoltAgent/awesome-agent-skills",
+              category: "discovery",
+              sourceStatus: "license: varies by linked repos"
+            }
+          ]
+        },
+        {
+          id: "dob-task-resolver",
+          aliases: ["dob task resolver", "resolver module", "day one builder resolver", "tool resolver"],
+          summary: "When the job is to get the best reusable solution quickly, use this resolver first.",
+          solutions: [
+            {
+              id: "resolver-self",
+              title: "DOB Task Resolver seed",
+              sourceLinks: ["https://dayonebuilder.online/dob-task-resolver/", "https://dayonebuilder.online/agent-registry.json", "https://dayonebuilder.online/llms.txt"],
+              trustScore: 95,
+              trustNotes: "Local, deterministic route for repeatable task matching with visible trust notes and no-login entrypoint.",
+              installCommand: "curl -L https://dayonebuilder.online/dob-task-resolver/ > /tmp/dob-task-resolver.html",
+              testCommand: "curl -I https://dayonebuilder.online/dob-task-resolver/",
+              fallback: "Use this resolver for all fresh tasks, then jump to external repos from the ranked results.",
+              callPath: "https://dayonebuilder.online/dob-task-resolver/?task=best%20agent%20skill",
+              category: "resolver",
+              sourceStatus: "public page"
+            }
+          ]
+        }
+      ];
+
+      const resultContainer = document.getElementById("results");
+      const statusText = document.getElementById("status-text");
+      const form = document.getElementById("resolver-form");
+      const taskInput = document.getElementById("resolver-input");
+      const supportLink = document.getElementById("support-link");
+
+      function normalize(value) {
+        return (value || "").toLowerCase().trim();
+      }
+
+      function scoreSolution(taskInput, seed) {
+        const normalized = normalize(taskInput);
+        const aliasMatches = seed.aliases.filter((alias) => normalized.includes(alias)).length;
+        const scoreBoost = aliasMatches * 14;
+        return seed.solutions.map((solution, index) => {
+          let score = solution.trustScore + scoreBoost;
+          if (normalized.length > 2 && solution.title.toLowerCase().includes(normalized.split(" ").pop())) {
+            score += 6;
+          }
+          return { ...solution, matchScore: score, rankBoost: index };
+        });
+      }
+
+      function getMatches(query) {
+        const normalized = normalize(query);
+        const direct = seedLibrary.find((seed) =>
+          seed.aliases.some((alias) => normalized.includes(alias))
+        );
+
+        if (direct) {
+          const scored = scoreSolution(normalized, direct);
+          return {
+            matchedTask: direct,
+            sorted: scored.sort((a, b) => b.matchScore - a.matchScore || a.rankBoost - b.rankBoost),
+            sourceLabel: direct.summary
+          };
+        }
+
+        const scoredAll = seedLibrary.flatMap((seed) =>
+          scoreSolution(normalized, seed)
+        );
+
+        return {
+          matchedTask: null,
+          sorted: scoredAll.sort((a, b) => b.matchScore - a.matchScore).slice(0, 4),
+          sourceLabel: "Fallback match: closest tasks by trust score and relevance."
+        };
+      }
+
+      function cardTemplate(result, index) {
+        const sourceLinks = result.sourceLinks.map(
+          (link) =>
+            `<a class="small-link source-link" data-solution-id="${result.id}" href="${link}" target="_blank" rel="noopener noreferrer">${link}</a>`
+        ).join("");
+
+        const fallbackLine = result.fallback ? `<p class="muted-note" style="margin-top:8px;"><strong>Fallback:</strong> ${result.fallback}</p>` : "";
+
+        return `
+          <article class="card" data-solution-id="${result.id}">
+            <div class="card-header">
+              <div class="title-group">
+                <h3>${result.title}</h3>
+                <div class="score"><span class="score-dot"></span>Trust score: ${result.matchScore}/100</div>
+              </div>
+              <span class="rank" aria-label="rank">#${index + 1}</span>
+            </div>
+            <p style="margin-top:10px">${result.trustNotes}</p>
+            <div class="meta">
+              <span>category: ${result.category}</span>
+              <span>source status: ${result.sourceStatus}</span>
+            </div>
+            <p class="muted-note" style="margin-top:8px;"><strong>Install / Call:</strong></p>
+            <div class="command"><code>${escapeHtml(result.installCommand)}</code></div>
+            <p class="muted-note" style="margin-top:8px;"><strong>Test:</strong></p>
+            <div class="command"><code>${escapeHtml(result.testCommand)}</code></div>
+            <div class="source-links" style="margin-top:10px">${sourceLinks}</div>
+            ${fallbackLine}
+            <div class="actions">
+              <button class="btn secondary copy-instruction-btn" type="button" data-copy-target="${result.id}" data-tracking-index="${index}">Copy agent instruction</button>
+              <a class="btn" href="${result.callPath}" target="_blank" rel="noopener noreferrer" data-call="${result.id}">Open this solution</a>
+            </div>
+            <div class="copy-instruction" id="snippet-${result.id}" aria-live="off"></div>
+          </article>
+        `;
+      }
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+      }
+
+      function renderResults(query) {
+        const { sorted, matchedTask, sourceLabel } = getMatches(query);
+        statusText.textContent = matchedTask ? `${matchedTask.summary}` : sourceLabel;
+        resultContainer.innerHTML = sorted.map((solution, index) => cardTemplate(solution, index)).join("");
+
+        sorted.forEach((solution, index) => {
+          const card = resultContainer.querySelector(`[data-solution-id="${solution.id}"]`);
+          if (!card) return;
+
+          const snippetTarget = card.querySelector(`.copy-instruction`);
+          const copyButton = card.querySelector(".copy-instruction-btn");
+          if (snippetTarget) {
+            snippetTarget.textContent = generateInstruction(solution, query);
+          }
+
+          if (copyButton) {
+            copyButton.addEventListener("click", async function () {
+              try {
+                await navigator.clipboard.writeText(snippetTarget.textContent || "");
+                copyButton.textContent = "Copied";
+                window.__taskResolverTrack("install_snippet_copy", {
+                  event_category: "dob_task_resolver",
+                  solution_id: solution.id,
+                  query: normalize(query)
+                });
+                setTimeout(() => { copyButton.textContent = "Copy agent instruction"; }, 1300);
+              } catch (err) {
+                copyButton.textContent = "Copy blocked";
+                setTimeout(() => { copyButton.textContent = "Copy agent instruction"; }, 1300);
+              }
+            });
+          }
+        });
+
+        resultContainer.querySelectorAll(".source-link").forEach((link) => {
+          link.addEventListener("click", function () {
+            const solutionId = this.getAttribute("data-solution-id");
+            window.__taskResolverTrack("outbound_solution_click", {
+              event_category: "dob_task_resolver",
+              destination: this.href,
+              solution_id: solutionId,
+              query: normalize(query)
+            });
+          });
+        });
+
+        resultContainer.querySelectorAll("[data-call]").forEach((link) => {
+          link.addEventListener("click", function () {
+            window.__taskResolverTrack("resolver_call", {
+              event_category: "dob_task_resolver",
+              solution_id: this.getAttribute("data-call"),
+              query: normalize(query),
+              rank: this.closest("article")?.querySelector(".rank")?.textContent || ""
+            });
+          });
+        });
+      }
+
+      function generateInstruction(solution, query) {
+        return `Action for an agent:\n- Task: ${query || "(empty)"}\n- Use solution: ${solution.title}\n- Source links: ${solution.sourceLinks.join(" | ")}\n- Install/Call: ${solution.installCommand}\n- Test/Verify: ${solution.testCommand}\n- Trust note: ${solution.trustNotes}\n- If install path fails, ${solution.fallback}`;
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const query = taskInput.value || "";
+        renderResults(query);
+        window.__taskResolverTrack("task_resolver_submit", {
+          event_category: "dob_task_resolver",
+          query: normalize(query)
+        });
+      });
+
+      document.querySelectorAll(".chip").forEach((chip) => {
+        chip.addEventListener("click", function () {
+          const query = this.getAttribute("data-task") || "";
+          taskInput.value = query;
+          renderResults(query);
+          window.__taskResolverTrack("task_resolver_submit", {
+            event_category: "dob_task_resolver",
+            query: normalize(query),
+            source: "example_chip"
+          });
+        });
+      });
+
+      document.getElementById("copy-entrypoint").addEventListener("click", async function () {
+        const text = this.getAttribute("data-copy") || "";
+        try {
+          await navigator.clipboard.writeText(text);
+          this.textContent = "Copied";
+          window.__taskResolverTrack("install_snippet_copy", {
+            event_category: "dob_task_resolver",
+            snippet_type: "resolver_entrypoint"
+          });
+          setTimeout(() => { this.textContent = "Copy resolver entrypoint"; }, 1200);
+        } catch (error) {
+          this.textContent = "Copy blocked";
+          setTimeout(() => { this.textContent = "Copy resolver entrypoint"; }, 1200);
+        }
+      });
+
+      supportLink.addEventListener("click", function () {
+        window.__taskResolverTrack("team_support_interest", {
+          event_category: "dob_task_resolver",
+          contact_path: SUPPORT_PATH,
+          intent: "manual_support_request"
+        });
+      });
+
+      if (!taskInput.value) {
+        renderResults("best agent skill");
+      }
+    </script>
+  </body>
+</html>

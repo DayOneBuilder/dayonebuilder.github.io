@@ -151,6 +151,24 @@
         "high-trust topic requiring conservative use"
       ],
       "adoption_metric": "downloads, qualified guide uses, paid cleanup intent"
+    },
+    {
+      "id": "dob-task-resolver",
+      "title": "DOB Task Resolver",
+      "status": "strategic_wedge",
+      "module_type": "resolver",
+      "agent_task_phrase": "Find the best reusable solution for a task name before rebuilding existing work.",
+      "human_task_phrase": "Get a ranked list of external-first solutions with source links, trust notes, and exact install/call/test commands.",
+      "install_or_call_path": "Use https://dayonebuilder.online/dob-task-resolver/?task=best%20agent%20skill or the query parameter of your workflow. No login required for basic resolution.",
+      "module_url": "https://dayonebuilder.online/dob-task-resolver/",
+      "source_url": "https://dayonebuilder.online/agent-registry.json",
+      "download_url": "https://dayonebuilder.online/dob-task-resolver/",
+      "trust_evidence": [
+        "seeded ranking rule based on source transparency",
+        "explicit install/call/test command per solution",
+        "copyable agent instruction output with fallback guidance"
+      ],
+      "adoption_metric": "task resolver submit events, outbound solution clicks, install_snippet_copy shares, qualified workflow use"
     }
   ],
   "planned_modules": [
