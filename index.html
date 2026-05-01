@@ -1,27 +1,24 @@
 <!doctype html>
-<!-- public-copy-allow: Ben Ison -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DayOneBuilder Resolver | Agent-ready solution registry</title>
+    <title>DayOneBuilder | Agent Magnet resolver</title>
     <meta
       name="description"
-      content="DayOneBuilder Resolver helps AI agents and builders find trusted reusable modules, install paths, docs, tests, and wrappers for recurring software tasks."
+      content="Task in, source URL and verification step out. DayOneBuilder routes agents to proven skills, MCP servers, docs, and automation repos before rebuilding from scratch, then turns repeated use into a visible Agent Pull badge."
     />
     <link rel="canonical" href="https://dayonebuilder.online/" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
     <link rel="alternate" type="application/json" href="/agent-registry.json" title="DayOneBuilder agent registry" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="alternate" type="application/json" href="/agent-actions.json" title="DayOneBuilder agent action feed" />
+    <link rel="alternate" type="image/svg+xml" href="/badges/agent-magnet.svg" title="DayOneBuilder Agent Magnet badge" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
-
       async function copyText(button) {
         const text = button.getAttribute("data-copy");
         const original = button.dataset.original || button.textContent;
@@ -29,6 +26,7 @@
         try {
           await navigator.clipboard.writeText(text);
           button.textContent = "Copied";
+          gtag("event", button.dataset.event || "install_snippet_copy", { event_category: "dayonebuilder_resolver" });
         } catch (error) {
           button.textContent = "Copy failed";
         }
@@ -39,636 +37,385 @@
       {
         "@context": "https://schema.org",
         "@type": "DataCatalog",
-        "name": "DayOneBuilder Resolver",
+        "name": "DayOneBuilder Agent Magnet Resolver",
         "url": "https://dayonebuilder.online/",
-        "description": "Agent-ready registry of reusable modules, wrappers, docs, install paths, and trust evidence for recurring software tasks.",
-        "license": "https://dayonebuilder.online/llms.txt",
+        "description": "Resolver and Agent Magnet badge lab for AI agents that need proven skills, MCP servers, docs, and automation repositories.",
         "hasPart": [
-          {"@type": "SoftwareSourceCode", "name": "Prompt Buddy", "codeRepository": "https://github.com/DayOneBuilder/dob-prompt-buddy"},
-          {"@type": "SoftwareSourceCode", "name": "Crypto Research Copilot Starter", "codeRepository": "https://github.com/DayOneBuilder/dob-crypto-research-copilot"},
-          {"@type": "SoftwareSourceCode", "name": "Crypto Portfolio Tracker", "codeRepository": "https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker"},
-          {"@type": "SoftwareSourceCode", "name": "Crypto Prompt Pack", "codeRepository": "https://github.com/DayOneBuilder/dob-crypto-prompt-pack"}
+          {"@type": "SoftwareSourceCode", "name": "Anthropic Skills", "codeRepository": "https://github.com/anthropics/skills"},
+          {"@type": "SoftwareSourceCode", "name": "Model Context Protocol Servers", "codeRepository": "https://github.com/modelcontextprotocol/servers"},
+          {"@type": "SoftwareSourceCode", "name": "Context7", "codeRepository": "https://github.com/upstash/context7"},
+          {"@type": "SoftwareSourceCode", "name": "Playwright MCP", "codeRepository": "https://github.com/microsoft/playwright-mcp"},
+          {"@type": "SoftwareSourceCode", "name": "OpenAI Skills", "codeRepository": "https://github.com/openai/skills"}
         ]
       }
     </script>
     <style>
       :root {
         --bg: #08090a;
-        --surface: #0e0e10;
-        --surface-2: #141416;
-        --surface-3: #191a1d;
-        --ink: #f7f8f8;
-        --text: #c9ccd1;
-        --muted: #8a8f98;
-        --dim: #5c5f66;
-        --line: rgba(255, 255, 255, 0.08);
-        --line-strong: rgba(255, 255, 255, 0.14);
+        --surface: #0d0e10;
+        --surface-2: #141517;
+        --ink: #f8fafc;
+        --text: #cbd5df;
+        --muted: #87909d;
+        --line: rgba(255,255,255,.1);
+        --strong: rgba(255,255,255,.18);
         --green: #34d399;
-        --blue: #60a5fa;
+        --blue: #7dd3fc;
         --amber: #fbbf24;
-        --max: 1180px;
+        --max: 1120px;
       }
-
       * { box-sizing: border-box; }
-
-      html { scroll-behavior: smooth; }
-
+      html, body { overflow-x: hidden; }
       body {
         margin: 0;
         color: var(--text);
         background: var(--bg);
-        font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
-
       a { color: inherit; text-decoration: none; }
-
-      code {
-        color: #e0e1e3;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-        font-size: 0.92em;
-      }
-
-      .wrap {
-        width: min(calc(100% - 32px), var(--max));
-        margin: 0 auto;
-      }
-
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
       .nav {
         display: flex;
-        align-items: center;
         justify-content: space-between;
-        gap: 16px;
-        padding: 22px 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--ink);
-        font-weight: 700;
-      }
-
-      .mark {
-        width: 26px;
-        height: 26px;
-        border: 1px solid var(--line-strong);
-        border-radius: 6px;
-        background: linear-gradient(135deg, #f7f8f8, #9ca0a8);
-      }
-
-      .nav-links {
-        display: flex;
         align-items: center;
         gap: 18px;
-        color: var(--muted);
-        font-size: 14px;
-        font-weight: 500;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--line);
       }
-
-      .nav-links a:hover { color: var(--ink); }
-
+      .brand { color: var(--ink); font-weight: 750; letter-spacing: .01em; }
+      .links { display: flex; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: 13px; }
+      .links a:hover { color: var(--ink); }
       .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.04fr) minmax(340px, 0.96fr);
-        gap: 24px;
-        padding: 54px 0 34px;
+        max-width: 780px;
+        padding: 52px 0 30px;
       }
-
-      .eyebrow {
-        display: inline-flex;
-        margin-bottom: 16px;
-        color: var(--green);
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-      }
-
-      h1,
-      h2,
-      h3 {
-        margin: 0;
-        color: var(--ink);
-        line-height: 1.08;
-        font-weight: 650;
-      }
-
-      h1 {
-        max-width: 12ch;
-        font-size: clamp(2.4rem, 6vw, 4.8rem);
-      }
-
-      h2 {
-        font-size: clamp(1.6rem, 3vw, 2.3rem);
-      }
-
-      h3 {
-        font-size: 1rem;
-      }
-
+      .eyebrow { color: var(--green); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+      h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.08; }
+      h1 { margin-top: 14px; max-width: 11ch; font-size: clamp(2.35rem, 7vw, 5rem); }
+      h2 { font-size: clamp(1.45rem, 3vw, 2.2rem); }
+      h3 { font-size: 1rem; }
       p { margin: 0; }
-
-      .lead {
-        max-width: 64ch;
-        margin-top: 18px;
-        color: #d9dcdf;
-        font-size: 1.08rem;
-      }
-
-      .summary {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 28px;
-      }
-
-      .metric,
-      .panel,
-      .module,
-      .row-card,
-      .code-panel {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--surface);
-      }
-
-      .metric {
-        padding: 14px;
-      }
-
-      .metric strong {
-        display: block;
-        color: var(--ink);
-        font-size: 1.25rem;
-      }
-
-      .metric span {
-        color: var(--muted);
-        font-size: 13px;
-      }
-
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 26px;
-      }
-
+      .lead { margin-top: 18px; max-width: 62ch; color: #dce2e8; font-size: 1.05rem; overflow-wrap: anywhere; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
       .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-height: 44px;
-        padding: 0 16px;
-        border: 1px solid var(--line-strong);
+        min-height: 42px;
+        padding: 0 14px;
         border-radius: 8px;
-        background: #f7f8f8;
+        border: 1px solid var(--strong);
+        background: var(--ink);
         color: #08090a;
         font: inherit;
-        font-weight: 650;
+        font-weight: 700;
         cursor: pointer;
       }
-
-      .btn.secondary {
-        background: rgba(255, 255, 255, 0.04);
-        color: var(--ink);
-      }
-
-      .btn:hover { filter: brightness(0.96); }
-
-      .code-panel {
-        overflow: hidden;
-        background: #0b0c0e;
-      }
-
-      .code-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding: 12px 14px;
-        border-bottom: 1px solid var(--line);
-        color: var(--muted);
-        font-size: 13px;
-      }
-
-      .status {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        color: #d5fbe9;
-        font-weight: 600;
-      }
-
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 99px;
-        background: var(--green);
-      }
-
-      pre {
-        margin: 0;
-        padding: 18px;
-        overflow-x: auto;
-        color: #e0e1e3;
-        font-size: 13px;
-        line-height: 1.55;
-      }
-
-      .section {
-        padding: 34px 0;
-      }
-
-      .section-head {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 24px;
-        margin-bottom: 16px;
-      }
-
-      .section-head p {
-        max-width: 56ch;
-        color: var(--muted);
-      }
-
-      .grid-3 {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 12px;
-      }
-
-      .grid-2 {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
-      }
-
-      .panel,
-      .module,
-      .row-card {
-        padding: 18px;
-      }
-
-      .panel p,
-      .module p,
-      .row-card p {
-        margin-top: 8px;
-        color: var(--muted);
-      }
-
-      .label {
-        display: inline-flex;
-        margin-bottom: 12px;
-        color: var(--blue);
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-      }
-
-      .module {
-        display: grid;
-        gap: 14px;
-      }
-
-      .module-top {
-        display: flex;
-        align-items: start;
-        justify-content: space-between;
-        gap: 14px;
-      }
-
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        min-height: 28px;
-        padding: 0 9px;
-        border: 1px solid var(--line);
-        border-radius: 6px;
-        color: var(--amber);
-        font-size: 12px;
-        font-weight: 650;
-        white-space: nowrap;
-      }
-
-      .path {
-        padding: 12px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: rgba(255, 255, 255, 0.03);
-        overflow-wrap: anywhere;
-      }
-
-      .module-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .small-link {
-        display: inline-flex;
-        align-items: center;
-        min-height: 36px;
-        padding: 0 12px;
-        border: 1px solid var(--line);
-        border-radius: 6px;
-        color: var(--ink);
-        font-size: 13px;
-        font-weight: 650;
-      }
-
-      .resolver-table {
-        width: 100%;
-        border-collapse: collapse;
-        overflow: hidden;
+      .btn.secondary { background: transparent; color: var(--ink); }
+      .panel, .pick, .contract {
         border: 1px solid var(--line);
         border-radius: 8px;
         background: var(--surface);
       }
-
-      .resolver-table th,
-      .resolver-table td {
-        padding: 13px 14px;
-        border-bottom: 1px solid var(--line);
-        text-align: left;
-        vertical-align: top;
+      .stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 24px; }
+      .stat { padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+      .stat strong { display: block; color: var(--ink); font-size: 1.35rem; }
+      .stat span { color: var(--muted); font-size: 12px; }
+      .section { padding: 28px 0; }
+      .section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 14px; }
+      .section-head p { max-width: 58ch; color: var(--muted); }
+      .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .pick { padding: 16px; display: grid; gap: 12px; }
+      .pick-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
+      .pick-mark {
+        color: var(--green);
+        border: 1px solid rgba(52,211,153,.35);
+        border-radius: 999px;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: 750;
+        white-space: nowrap;
       }
-
-      .resolver-table th {
-        color: var(--ink);
-        font-size: 13px;
-        font-weight: 700;
+      .meta { display: flex; flex-wrap: wrap; gap: 8px; }
+      .meta span { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; color: var(--muted); font-size: 12px; }
+      .path { padding: 10px 12px; border: 1px dashed var(--line); border-radius: 8px; overflow-wrap: anywhere; color: #eef2f7; background: rgba(255,255,255,.03); }
+      .contract { padding: 16px; }
+      .contract p, .pick p { color: var(--muted); }
+      .badge-lab {
+        display: grid;
+        grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
+        gap: 12px;
+        align-items: stretch;
       }
-
-      .resolver-table td {
-        color: var(--muted);
-        font-size: 14px;
+      .readme-card {
+        position: relative;
+        overflow: hidden;
+        padding: 18px;
+        min-height: 270px;
+        border: 1px solid var(--strong);
+        border-radius: 8px;
+        background:
+          radial-gradient(circle at 85% 15%, rgba(52,211,153,.2), transparent 28%),
+          linear-gradient(135deg, #111827 0%, #0b0d10 58%, #121212 100%);
       }
-
-      .resolver-table tr:last-child td { border-bottom: 0; }
-
-      footer {
-        margin-top: 34px;
-        padding: 26px 0 46px;
-        border-top: 1px solid var(--line);
-        color: var(--muted);
+      .readme-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+        background-size: 22px 22px;
+        mask-image: linear-gradient(135deg, rgba(0,0,0,.6), transparent 75%);
+        pointer-events: none;
       }
-
-      .footer-row {
+      .readme-card > * { position: relative; }
+      .badge-strip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        max-width: 100%;
+        margin-bottom: 18px;
+        padding: 6px 10px;
+        border: 1px solid rgba(52,211,153,.42);
+        border-radius: 999px;
+        background: rgba(52,211,153,.08);
+        color: #d1fae5;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 99px;
+        background: var(--green);
+        box-shadow: 0 0 18px rgba(52,211,153,.8);
+      }
+      .readme-card h3 { max-width: 18ch; font-size: 1.9rem; }
+      .readme-card p { max-width: 48ch; margin-top: 10px; color: #d7dde5; }
+      .pull-score {
         display: flex;
-        justify-content: space-between;
-        gap: 16px;
+        align-items: end;
+        gap: 12px;
+        margin-top: 14px;
       }
-
-      @media (max-width: 920px) {
-        .hero,
-        .grid-2,
-        .grid-3,
-        .summary {
-          grid-template-columns: 1fr;
-        }
-
-        .section-head,
-        .footer-row {
-          align-items: start;
-          flex-direction: column;
-        }
-
-        .nav {
-          align-items: start;
-          flex-direction: column;
-        }
-
-        .nav-links {
-          flex-wrap: wrap;
-        }
+      .pull-score strong {
+        color: var(--ink);
+        font-size: clamp(3.4rem, 8vw, 5rem);
+        line-height: .86;
       }
-
+      .pull-score span {
+        max-width: 12ch;
+        color: #d1fae5;
+        font-size: .86rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+      .formula {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .signal-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .signal {
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: 8px;
+        background: rgba(255,255,255,.04);
+      }
+      .signal span {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+      .signal strong {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink);
+        font-size: 1rem;
+      }
+      .copy-box {
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+      .copy-box pre {
+        margin: 0;
+        padding: 12px;
+        overflow-x: auto;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        color: #e5edf6;
+        background: rgba(255,255,255,.03);
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .endpoint-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .endpoint-links a {
+        border: 1px solid var(--line);
+        border-radius: 7px;
+        padding: 5px 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .endpoint-links a:hover { color: var(--ink); border-color: var(--strong); }
+      footer { margin-top: 26px; padding: 24px 0 40px; border-top: 1px solid var(--line); color: var(--muted); }
+      .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
+      @media (max-width: 860px) {
+        .grid, .stats, .badge-lab { grid-template-columns: 1fr; }
+        .nav, .section-head { align-items: start; flex-direction: column; }
+        .links { width: 100%; }
+      }
       @media (max-width: 560px) {
         .wrap { width: min(calc(100% - 24px), var(--max)); }
         .hero { padding-top: 34px; }
-        .resolver-table {
-          display: block;
-          overflow: visible;
-          border: 0;
-          background: transparent;
+        .links {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 8px 14px;
         }
-        .resolver-table thead {
-          display: none;
-        }
-        .resolver-table tbody,
-        .resolver-table tr,
-        .resolver-table td {
-          display: block;
-          width: 100%;
-        }
-        .resolver-table tr {
-          margin-bottom: 10px;
-          border: 1px solid var(--line);
-          border-radius: 8px;
-          background: var(--surface);
-          overflow: hidden;
-        }
-        .resolver-table td {
-          border-bottom: 1px solid var(--line);
-          white-space: normal;
-        }
-        .resolver-table td:last-child {
-          border-bottom: 0;
-        }
-        .resolver-table td::before {
-          content: attr(data-label);
-          display: block;
-          margin-bottom: 4px;
-          color: var(--ink);
-          font-size: 12px;
-          font-weight: 700;
-        }
+        .lead, .section-head p, .pick p, .contract p { max-width: 34ch; }
+        .btn { width: 100%; white-space: normal; }
+        .pick-head { flex-direction: column; }
+        .pick-mark { white-space: normal; }
+        .signal-grid { grid-template-columns: 1fr; }
       }
     </style>
   </head>
   <body>
     <div class="wrap">
       <nav class="nav" aria-label="Primary">
-        <a class="brand" href="/">
-          <span class="mark" aria-hidden="true"></span>
-          <span>DayOneBuilder Resolver</span>
-        </a>
-        <div class="nav-links">
+        <a class="brand" href="/">DayOneBuilder</a>
+        <div class="links">
           <a href="/dob-task-resolver/">Task Resolver</a>
-          <a href="/resolver/">Resolver contract</a>
-          <a href="/agent-registry.json">Registry JSON</a>
-          <a href="/llms.txt">llms.txt</a>
-          <a href="/products/">Modules</a>
+          <a href="#route-candidates">Route Candidates</a>
           <a href="https://github.com/DayOneBuilder">GitHub</a>
         </div>
       </nav>
 
       <main>
         <section class="hero">
-          <div>
-            <span class="eyebrow">Agent-native solution platform</span>
-            <h1>Trusted building blocks for agents.</h1>
-            <p class="lead">
-              DayOneBuilder packages narrow, reusable solutions so AI agents can find the right tool, inspect the contract, run the test path, and use it without rebuilding the same boring code from scratch.
-            </p>
-            <div class="actions">
-              <a class="btn" href="/dob-task-resolver/">Open task resolver</a>
-              <a class="btn secondary" href="/agent-registry.json">Read registry JSON</a>
+          <span class="eyebrow">Agent-native resolver</span>
+          <h1>Task in. Route out.</h1>
+          <p class="lead">
+            Give it a task. It returns a source URL, install or call path, verification step, and proof signal from repos and registries agents already use.
+          </p>
+          <div class="actions">
+            <a class="btn" href="/dob-task-resolver/">Resolve a task</a>
+            <a class="btn secondary" href="#route-candidates">Browse route candidates</a>
+          </div>
+          <div class="stats" aria-label="Resolver contract">
+            <div class="stat"><strong>Source</strong><span>primary repo stays visible</span></div>
+            <div class="stat"><strong>Action</strong><span>one install, call, or open step</span></div>
+            <div class="stat"><strong>Proof</strong><span>smoke test or fallback required</span></div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="badge-lab">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Agent Magnet lab</span>
+              <h2 id="badge-lab">Make agents visibly choose you.</h2>
+            </div>
+            <p>Star charts work because they turn momentum into status. DayOneBuilder should do that for agent usefulness: one glance shows whether agents route there, copy the install path, and pass the smoke test.</p>
+          </div>
+          <div class="badge-lab">
+            <article class="readme-card" aria-label="DayOneBuilder Agent Magnet badge preview">
+              <div class="badge-strip"><span class="badge-dot"></span> DayOneBuilder Agent Magnet</div>
+              <h3>Agent Pull Score</h3>
+              <div class="pull-score"><strong>Live</strong><span>score only after measured routes</span></div>
+              <p>A passive aura for useful repos: task rank, agent routes, install-copy intent, and smoke-test state compressed into one visible status once there is measured demand.</p>
+              <div class="signal-grid">
+                <div class="signal"><span>Task rank</span><strong>per exact query</strong></div>
+                <div class="signal"><span>30d routes</span><strong>measured events</strong></div>
+                <div class="signal"><span>Install intent</span><strong>copy events</strong></div>
+                <div class="signal"><span>Proof</span><strong>smoke test required</strong></div>
+              </div>
+            </article>
+            <article class="copy-box">
+              <h3>README embed candidate</h3>
+              <p>The badge should pay both sides: repo owners get visible status, DayOneBuilder gets referral traffic, and agents get a live task card with the exact next action.</p>
+              <p class="formula">Agent Pull Score = task rank + 30d agent routes + install-copy intent + smoke-test recency. No long research required.</p>
+              <pre><code>[![Agent Magnet: AI agents route here](https://dayonebuilder.online/badges/agent-magnet.svg)](https://dayonebuilder.online/dob-task-resolver/?source=agent-magnet-badge)</code></pre>
               <button
                 class="btn secondary"
-                data-copy="Read https://dayonebuilder.online/llms.txt, then choose a module from https://dayonebuilder.online/agent-registry.json that matches the task."
+                data-copy="[![Agent Magnet: AI agents route here](https://dayonebuilder.online/badges/agent-magnet.svg)](https://dayonebuilder.online/dob-task-resolver/?source=agent-magnet-badge)"
+                data-event="agent_magnet_badge_copy"
                 onclick="copyText(this)"
               >
-                Copy agent entrypoint
+                Copy README badge
               </button>
-            </div>
-            <div class="summary" aria-label="Platform status">
-              <div class="metric">
-                <strong>8</strong>
-                <span>live modules and bundles</span>
-              </div>
-              <div class="metric">
-                <strong>5</strong>
-                <span>agent-installable repo artifacts</span>
-              </div>
-              <div class="metric">
-                <strong>0</strong>
-                <span>required accounts for basic use</span>
-              </div>
-            </div>
-          </div>
-
-          <aside class="code-panel" aria-label="Agent quick entrypoint">
-            <div class="code-head">
-              <span>agent-entrypoint.txt</span>
-              <span class="status"><span class="dot"></span>live</span>
-            </div>
-            <pre><code>{
-  "resolver": "https://dayonebuilder.online/dob-task-resolver/",
-  "resolver_contract": "https://dayonebuilder.online/resolver/",
-  "registry": "https://dayonebuilder.online/agent-registry.json",
-  "llms": "https://dayonebuilder.online/llms.txt",
-  "selection_rule": "prefer tested, no-login, narrow modules",
-  "current_wedge": "task routing before agents reinvent a solution"
-}</code></pre>
-          </aside>
-        </section>
-
-        <section class="section" aria-labelledby="why-agents">
-          <div class="section-head">
-            <div>
-              <span class="label">Why this exists</span>
-              <h2 id="why-agents">Agents should reuse boring reliable code.</h2>
-            </div>
-            <p>
-              The most used code is usually not glamorous. It is parsers, checklists, wrappers, templates, tests, schemas, and small calculators that unblock a larger job.
-            </p>
-          </div>
-          <div class="grid-3">
-            <article class="panel">
-              <h3>Discover</h3>
-              <p>Agents get a single registry with task phrases, module types, links, install paths, and trust notes.</p>
-            </article>
-            <article class="panel">
-              <h3>Verify</h3>
-              <p>Each useful module should expose examples, tests, source links, limitations, and a clear no-login path.</p>
-            </article>
-            <article class="panel">
-              <h3>Compose</h3>
-              <p>Modules are meant to become steps inside larger workflows, not isolated pages that die after one visit.</p>
             </article>
           </div>
         </section>
 
-        <section class="section" aria-labelledby="modules">
+        <section class="section" aria-labelledby="route-candidates">
           <div class="section-head">
             <div>
-              <span class="label">Registry preview</span>
-              <h2 id="modules">Useful now, stricter every day.</h2>
+              <span class="eyebrow">Current route candidates</span>
+              <h2 id="route-candidates">Badge candidates, not a star table.</h2>
             </div>
-            <p>
-              Current modules are being migrated into the resolver contract. Weak modules will be archived or rebuilt when metrics and research say they do not deserve primary placement.
-            </p>
+            <p>Each pick needs a task, action path, and reason an agent can use immediately. Popularity can help discovery, but it is not the product.</p>
           </div>
-          <div class="grid-2">
-            <article class="module">
-              <div class="module-top">
-                <div>
-                  <h3>DOB Task Resolver</h3>
-                  <p>Routes coding and automation tasks to the best existing skill pack, directory, or resolver module.</p>
-                </div>
-                <span class="badge">new resolver lane</span>
-              </div>
-              <div class="path"><code>Use /dob-task-resolver/ to rank external options before installing anything.</code></div>
-              <div class="module-actions">
-                <a class="small-link" href="/dob-task-resolver/">Page</a>
-                <a class="small-link" href="/agent-registry.json">Registry</a>
-              </div>
+          <div class="grid">
+            <article class="pick">
+              <div class="pick-head"><h3>Anthropic Skills</h3><span class="pick-mark">badge candidate</span></div>
+              <p>Public agent skill repository.</p>
+              <div class="path"><code>https://github.com/anthropics/skills</code></div>
+              <div class="meta"><span>agent skills</span><span>official source</span><span>active ecosystem</span></div>
+              <a class="btn secondary" href="https://github.com/anthropics/skills">Open source</a>
             </article>
-
-            <article class="module">
-              <div class="module-top">
-                <div>
-                  <h3>Prompt Buddy</h3>
-                  <p>Prompt review workflow for agents that need stronger task framing before a run.</p>
-                </div>
-                <span class="badge">rebuild priority</span>
-              </div>
-              <div class="path"><code>Install dayonebuilder/dob-prompt-buddy by Ben Ison.</code></div>
-              <div class="module-actions">
-                <a class="small-link" href="/products/prompt-buddy/">Page</a>
-                <a class="small-link" href="https://github.com/DayOneBuilder/dob-prompt-buddy">Repo</a>
-              </div>
+            <article class="pick">
+              <div class="pick-head"><h3>Model Context Protocol Servers</h3><span class="pick-mark">agent infrastructure</span></div>
+              <p>Canonical MCP server collection.</p>
+              <div class="path"><code>https://github.com/modelcontextprotocol/servers</code></div>
+              <div class="meta"><span>MCP</span><span>tool access</span><span>agent infrastructure</span></div>
+              <a class="btn secondary" href="https://github.com/modelcontextprotocol/servers">Open source</a>
             </article>
-
-            <article class="module">
-              <div class="module-top">
-                <div>
-                  <h3>Crypto Research Copilot Starter</h3>
-                  <p>Reusable research workflow starter for token, wallet, and yield checks.</p>
-                </div>
-                <span class="badge">installable</span>
-              </div>
-              <div class="path"><code>Install dayonebuilder/dob-crypto-research-copilot by Ben Ison.</code></div>
-              <div class="module-actions">
-                <a class="small-link" href="/products/crypto-research-copilot/">Page</a>
-                <a class="small-link" href="https://github.com/DayOneBuilder/dob-crypto-research-copilot">Repo</a>
-              </div>
+            <article class="pick">
+              <div class="pick-head"><h3>Context7</h3><span class="pick-mark">docs path</span></div>
+              <p>Up-to-date docs for LLMs and code agents.</p>
+              <div class="path"><code>https://github.com/upstash/context7</code></div>
+              <div class="meta"><span>docs</span><span>coding agents</span><span>MIT</span></div>
+              <a class="btn secondary" href="https://github.com/upstash/context7">Open source</a>
             </article>
-
-            <article class="module">
-              <div class="module-top">
-                <div>
-                  <h3>Crypto Portfolio Tracker</h3>
-                  <p>Workbook module for wallets, transfers, cost basis, and P&amp;L records.</p>
-                </div>
-                <span class="badge">installable</span>
-              </div>
-              <div class="path"><code>Install dayonebuilder/dob-crypto-portfolio-tracker by Ben Ison.</code></div>
-              <div class="module-actions">
-                <a class="small-link" href="/products/crypto-portfolio-tracker/">Page</a>
-                <a class="small-link" href="https://github.com/DayOneBuilder/dob-crypto-portfolio-tracker">Repo</a>
-              </div>
+            <article class="pick">
+              <div class="pick-head"><h3>Playwright MCP</h3><span class="pick-mark">call path</span></div>
+              <p>Browser automation through MCP.</p>
+              <div class="path"><code>https://github.com/microsoft/playwright-mcp</code></div>
+              <div class="meta"><span>browser</span><span>MCP</span><span>Apache-2.0</span></div>
+              <a class="btn secondary" href="https://github.com/microsoft/playwright-mcp">Open source</a>
             </article>
-
-            <article class="module">
-              <div class="module-top">
-                <div>
-                  <h3>Wallet P&amp;L Calculator</h3>
-                  <p>Browser calculator and ZIP bundle for wallet profit/loss checks.</p>
-                </div>
-                <span class="badge">validation lane</span>
-              </div>
-              <div class="path"><code>Use /products/wallet-pnl-calculator/ or download the standalone ZIP.</code></div>
-              <div class="module-actions">
-                <a class="small-link" href="/products/wallet-pnl-calculator/">Page</a>
-                <a class="small-link" href="/downloads/dayonebuilder-wallet-pnl-calculator.zip">ZIP</a>
-              </div>
+            <article class="pick">
+              <div class="pick-head"><h3>VoltAgent Awesome Agent Skills</h3><span class="pick-mark">directory</span></div>
+              <p>Curated cross-runtime agent skill directory.</p>
+              <div class="path"><code>https://github.com/VoltAgent/awesome-agent-skills</code></div>
+              <div class="meta"><span>skills</span><span>directory</span><span>MIT</span></div>
+              <a class="btn secondary" href="https://github.com/VoltAgent/awesome-agent-skills">Open source</a>
+            </article>
+            <article class="pick">
+              <div class="pick-head"><h3>OpenAI Skills</h3><span class="pick-mark">runtime fit</span></div>
+              <p>Skills catalog for OpenAI-compatible agent runtimes.</p>
+              <div class="path"><code>https://github.com/openai/skills</code></div>
+              <div class="meta"><span>OpenAI-compatible</span><span>skills</span><span>official source</span></div>
+              <a class="btn secondary" href="https://github.com/openai/skills">Open source</a>
             </article>
           </div>
         </section>
@@ -676,53 +423,25 @@
         <section class="section" aria-labelledby="contract">
           <div class="section-head">
             <div>
-              <span class="label">Resolver contract</span>
-              <h2 id="contract">What an agent should expect.</h2>
+              <span class="eyebrow">How DayOneBuilder earns routes</span>
+              <h2 id="contract">By making the next action obvious.</h2>
             </div>
-            <p>
-              A module graduates when it can prove a task, expose a safe path, and leave telemetry that tells Startaper whether agents and people actually use it.
-            </p>
+            <p>The resolver should feel useful before it asks anyone to believe it. A good recommendation is a card, badge, command, URL, and verification step.</p>
           </div>
-          <table class="resolver-table">
-            <thead>
-              <tr>
-                <th>Field</th>
-                <th>Requirement</th>
-                <th>Why it matters</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td data-label="Field"><code>agent_task_phrase</code></td>
-                <td data-label="Requirement">Plain-language task the agent is trying to finish.</td>
-                <td data-label="Why it matters">Stops the registry from becoming another vague catalog.</td>
-              </tr>
-              <tr>
-                <td data-label="Field"><code>install_or_call_path</code></td>
-                <td data-label="Requirement">Repo, download, command, URL, or API path with basic no-login use.</td>
-                <td data-label="Why it matters">Lets an agent act immediately when the module fits.</td>
-              </tr>
-              <tr>
-                <td data-label="Field"><code>trust_evidence</code></td>
-                <td data-label="Requirement">Tests, examples, source, license, known limits, benchmark, or review state.</td>
-                <td data-label="Why it matters">Makes selection safer than copying random snippets.</td>
-              </tr>
-              <tr>
-                <td data-label="Field"><code>adoption_metric</code></td>
-                <td data-label="Requirement">Resolver calls, downloads, repo activity, docs hits, completions, or paid signal.</td>
-                <td data-label="Why it matters">Keeps the platform improving from evidence, not taste.</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="grid">
+            <article class="contract"><h3>Agent Magnet proof</h3><p>A repo earns badge placement when agents repeatedly arrive, copy the install path, and pass a smoke test. The badge exposes those counters immediately.</p></article>
+            <article class="contract"><h3>Small action path</h3><p>Every recommendation needs a next command, URL, or verification step. Not a paragraph of persuasion.</p></article>
+            <article class="contract"><h3>Agent action feed</h3><p>Agents can fetch JSON with aliases, primary source, first action, smoke test, and fallback.</p></article>
+            <article class="contract"><h3>Owner loop</h3><p>If a badge drives clicks, copies, or agent usage, the next move is a respectful README PR that gives the owner visible status and sends us qualified traffic.</p></article>
+            <article class="contract"><h3>Telemetry loop</h3><p>The resolver watches task submissions, outbound clicks, badge copies, install snippet copies, docs hits, and revenue when it exists.</p></article>
+          </div>
         </section>
       </main>
 
       <footer>
         <div class="footer-row">
-          <div>DayOneBuilder Resolver</div>
-          <div>
-            <a href="/products/">Modules</a> / <a href="/dob-task-resolver/">Task Resolver</a> / <a href="/resolver/">Resolver contract</a> / <a href="/llms.txt">llms.txt</a> / <a href="https://github.com/DayOneBuilder">GitHub</a>
-          </div>
+          <span>DayOneBuilder Agent Magnet resolver</span>
+          <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/llms.txt">llms.txt</a> / <a href="/agent-registry.json">registry</a> / <a href="/agent-actions.json">actions</a></span>
         </div>
       </footer>
     </div>
