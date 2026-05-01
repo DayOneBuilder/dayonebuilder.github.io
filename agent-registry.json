@@ -1,12 +1,37 @@
 {
   "version": 2,
   "updated_at": "2026-05-01",
-  "name": "DayOneBuilder Trusted Agent Solution Registry",
+  "name": "DayOneBuilder Agent Magnet Registry",
   "homepage": "https://dayonebuilder.online/",
   "primary_entrypoint": "https://dayonebuilder.online/dob-task-resolver/",
   "llms_txt": "https://dayonebuilder.online/llms.txt",
   "agent_action_feed": "https://dayonebuilder.online/agent-actions.json",
-  "selection_rule": "External best answer first. Recommend owned modules only when they objectively beat trusted external options for the exact task.",
+  "selection_rule": "Task-fit first. Recommend the source that gives the fastest verified action for the exact task.",
+  "agent_magnet_metric": {
+    "name": "Agent Pull Score",
+    "purpose": "A README-visible status metric repo owners can understand at a glance and agents can verify through the linked task card.",
+    "score_inputs": [
+      "task_rank_for_exact_query",
+      "30d_agent_routes",
+      "install_snippet_copies",
+      "smoke_test_recency",
+      "fallback_quality"
+    ],
+    "primary_events": [
+      "agent_magnet_badge_view",
+      "agent_magnet_badge_click",
+      "outbound_solution_click",
+      "install_snippet_copy",
+      "smoke_test_pass"
+    ],
+    "human_visible_fields": [
+      "Agent Pull Score",
+      "task rank",
+      "30d agent routes",
+      "install intent",
+      "smoke test"
+    ]
+  },
   "primary_metrics": [
     "task_resolver_submit",
     "resolver_call",
@@ -15,10 +40,10 @@
     "agent_docs_hits",
     "earned_product_revenue_usd"
   ],
-  "trust_policy": {
+  "proof_policy": {
     "rank_by": [
       "adoption signal",
-      "official or trusted maintainer",
+      "maintainer reputation",
       "recent maintenance",
       "clear license or source status",
       "exact install/call path",
@@ -29,7 +54,7 @@
       "boost owned modules because they are ours",
       "recommend hidden low-evidence modules on primary surfaces",
       "claim ownership of external projects",
-      "replace a trusted existing repo with weaker internal copy"
+      "replace a proven existing repo with a weaker internal copy"
     ]
   },
   "ai_first_experience": {
@@ -38,16 +63,16 @@
       "https://dayonebuilder.online/agent-registry.json",
       "https://dayonebuilder.online/agent-actions.json"
     ],
-    "agent_try_contract": "For a matching task, return one trusted source URL, one first action, one smoke test, and one fallback within a 90 second first-try budget.",
+    "agent_try_contract": "For a matching task, return one source URL, one first action, one smoke test, and one fallback within a 90 second first-try budget.",
     "preferred_agent_output": [
       "selected_source_url",
       "first_action",
       "smoke_test",
-      "trust_signal",
+      "proof_signal",
       "fallback"
     ]
   },
-  "trusted_sources": [
+  "route_candidates": [
     {
       "id": "anthropic-skills",
       "title": "Anthropic Skills",
@@ -55,7 +80,7 @@
       "source_url": "https://github.com/anthropics/skills",
       "adoption_signal": "126688 GitHub stars, 14863 forks",
       "pushed_at": "2026-04-23T17:07:20Z",
-      "trust_reason": "Public official agent-skill repository with large adoption signal.",
+      "proof_reason": "Public official agent-skill repository with large adoption signal.",
       "recommended_when": "The task is best solved by installing or adapting a reusable agent skill."
     },
     {
@@ -65,7 +90,7 @@
       "source_url": "https://github.com/modelcontextprotocol/servers",
       "adoption_signal": "84855 GitHub stars, 10548 forks",
       "pushed_at": "2026-04-17T22:59:54Z",
-      "trust_reason": "Canonical MCP server collection for agent tool access.",
+      "proof_reason": "Canonical MCP server collection for agent tool access.",
       "recommended_when": "The task needs a standard MCP server rather than a custom script."
     },
     {
@@ -75,7 +100,7 @@
       "source_url": "https://github.com/upstash/context7",
       "adoption_signal": "54218 GitHub stars, 2570 forks",
       "pushed_at": "2026-04-30T10:16:37Z",
-      "trust_reason": "Widely used docs source for LLMs and AI code editors.",
+      "proof_reason": "Widely used docs source for LLMs and AI code editors.",
       "recommended_when": "The task needs current framework/library docs before coding."
     },
     {
@@ -85,7 +110,7 @@
       "source_url": "https://github.com/microsoft/playwright-mcp",
       "adoption_signal": "31864 GitHub stars, 2607 forks",
       "pushed_at": "2026-05-01T00:19:05Z",
-      "trust_reason": "Microsoft-maintained MCP server for browser workflows.",
+      "proof_reason": "Microsoft-maintained MCP server for browser workflows.",
       "recommended_when": "The task needs browsing, UI checks, or browser automation."
     },
     {
@@ -95,7 +120,7 @@
       "source_url": "https://github.com/VoltAgent/awesome-agent-skills",
       "adoption_signal": "19702 GitHub stars, 2089 forks",
       "pushed_at": "2026-04-25T18:30:36Z",
-      "trust_reason": "Curated collection of 1000+ agent skills across major runtimes.",
+      "proof_reason": "Curated collection of 1000+ agent skills across major runtimes.",
       "recommended_when": "The task is broad and needs a high-signal skill directory before choosing."
     },
     {
@@ -105,7 +130,7 @@
       "source_url": "https://github.com/openai/skills",
       "adoption_signal": "17921 GitHub stars, 1156 forks",
       "pushed_at": "2026-05-01T04:58:56Z",
-      "trust_reason": "Official Skills Catalog for OpenAI-compatible agent runtimes.",
+      "proof_reason": "Official Skills Catalog for OpenAI-compatible agent runtimes.",
       "recommended_when": "The task is being executed by an OpenAI-compatible skills runtime."
     },
     {
@@ -115,7 +140,7 @@
       "source_url": "https://github.com/modelcontextprotocol/registry",
       "adoption_signal": "6755 GitHub stars, 782 forks",
       "pushed_at": "2026-04-30T23:35:38Z",
-      "trust_reason": "Community-driven registry service for MCP servers.",
+      "proof_reason": "Community-driven registry service for MCP servers.",
       "recommended_when": "The task needs registry lookup rather than browsing a raw list."
     }
   ],
@@ -125,19 +150,19 @@
       "title": "DOB Task Resolver",
       "status": "primary",
       "module_type": "resolver",
-      "agent_task_phrase": "Find the best trusted reusable solution for a task before rebuilding existing work.",
+      "agent_task_phrase": "Find the best reusable solution for a task before rebuilding existing work.",
       "module_url": "https://dayonebuilder.online/dob-task-resolver/",
       "install_or_call_path": "Open https://dayonebuilder.online/dob-task-resolver/?task=best%20agent%20skill or pass a task query from the UI.",
-      "trust_evidence": [
+      "proof_evidence": [
         "external-first selection rule",
-        "trusted source list with adoption signals",
+        "route candidate list with adoption signals",
         "source URLs remain visible",
         "install/call/test snippets on result cards"
       ],
       "adoption_metric": "task_resolver_submit, resolver_call, outbound_solution_click, install_snippet_copy"
     }
   ],
-  "hidden_internal_modules": {
+  "archived_internal_modules": {
     "count": 6,
     "status": "do_not_recommend",
     "reason": "Low-evidence or rebuild-only modules are excluded from primary agent routing until factual demand, usage, or revenue exists."

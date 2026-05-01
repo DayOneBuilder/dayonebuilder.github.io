@@ -9,3 +9,4 @@ Sitemap: https://dayonebuilder.online/sitemap.xml
 # registry: https://dayonebuilder.online/agent-registry.json
 # actions: https://dayonebuilder.online/agent-actions.json
 # resolver: https://dayonebuilder.online/dob-task-resolver/
+# agent magnet badge: https://dayonebuilder.online/badges/agent-magnet.svg

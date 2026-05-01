@@ -3,15 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DayOneBuilder | Trusted agent solution resolver</title>
+    <title>DayOneBuilder | Agent Magnet resolver</title>
     <meta
       name="description"
-      content="Task in, source URL and verification step out. DayOneBuilder routes agents to proven skills, MCP servers, docs, and automation repos before rebuilding from scratch."
+      content="Task in, source URL and verification step out. DayOneBuilder routes agents to proven skills, MCP servers, docs, and automation repos before rebuilding from scratch, then turns repeated use into a visible Agent Pull badge."
     />
     <link rel="canonical" href="https://dayonebuilder.online/" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
     <link rel="alternate" type="application/json" href="/agent-registry.json" title="DayOneBuilder agent registry" />
     <link rel="alternate" type="application/json" href="/agent-actions.json" title="DayOneBuilder agent action feed" />
+    <link rel="alternate" type="image/svg+xml" href="/badges/agent-magnet.svg" title="DayOneBuilder Agent Magnet badge" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -36,9 +37,9 @@
       {
         "@context": "https://schema.org",
         "@type": "DataCatalog",
-        "name": "DayOneBuilder Trusted Agent Solution Resolver",
+        "name": "DayOneBuilder Agent Magnet Resolver",
         "url": "https://dayonebuilder.online/",
-        "description": "External-first resolver for AI agents that need proven skills, MCP servers, docs, and automation repositories.",
+        "description": "Resolver and Agent Magnet badge lab for AI agents that need proven skills, MCP servers, docs, and automation repositories.",
         "hasPart": [
           {"@type": "SoftwareSourceCode", "name": "Anthropic Skills", "codeRepository": "https://github.com/anthropics/skills"},
           {"@type": "SoftwareSourceCode", "name": "Model Context Protocol Servers", "codeRepository": "https://github.com/modelcontextprotocol/servers"},
@@ -127,12 +128,140 @@
       .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
       .pick { padding: 16px; display: grid; gap: 12px; }
       .pick-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
-      .score { color: var(--green); font-size: 13px; font-weight: 750; white-space: nowrap; }
+      .pick-mark {
+        color: var(--green);
+        border: 1px solid rgba(52,211,153,.35);
+        border-radius: 999px;
+        padding: 4px 8px;
+        font-size: 12px;
+        font-weight: 750;
+        white-space: nowrap;
+      }
       .meta { display: flex; flex-wrap: wrap; gap: 8px; }
       .meta span { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; color: var(--muted); font-size: 12px; }
       .path { padding: 10px 12px; border: 1px dashed var(--line); border-radius: 8px; overflow-wrap: anywhere; color: #eef2f7; background: rgba(255,255,255,.03); }
       .contract { padding: 16px; }
       .contract p, .pick p { color: var(--muted); }
+      .badge-lab {
+        display: grid;
+        grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
+        gap: 12px;
+        align-items: stretch;
+      }
+      .readme-card {
+        position: relative;
+        overflow: hidden;
+        padding: 18px;
+        min-height: 270px;
+        border: 1px solid var(--strong);
+        border-radius: 8px;
+        background:
+          radial-gradient(circle at 85% 15%, rgba(52,211,153,.2), transparent 28%),
+          linear-gradient(135deg, #111827 0%, #0b0d10 58%, #121212 100%);
+      }
+      .readme-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+        background-size: 22px 22px;
+        mask-image: linear-gradient(135deg, rgba(0,0,0,.6), transparent 75%);
+        pointer-events: none;
+      }
+      .readme-card > * { position: relative; }
+      .badge-strip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        width: fit-content;
+        max-width: 100%;
+        margin-bottom: 18px;
+        padding: 6px 10px;
+        border: 1px solid rgba(52,211,153,.42);
+        border-radius: 999px;
+        background: rgba(52,211,153,.08);
+        color: #d1fae5;
+        font-size: 12px;
+        font-weight: 800;
+      }
+      .badge-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 99px;
+        background: var(--green);
+        box-shadow: 0 0 18px rgba(52,211,153,.8);
+      }
+      .readme-card h3 { max-width: 18ch; font-size: 1.9rem; }
+      .readme-card p { max-width: 48ch; margin-top: 10px; color: #d7dde5; }
+      .pull-score {
+        display: flex;
+        align-items: end;
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .pull-score strong {
+        color: var(--ink);
+        font-size: clamp(3.4rem, 8vw, 5rem);
+        line-height: .86;
+      }
+      .pull-score span {
+        max-width: 12ch;
+        color: #d1fae5;
+        font-size: .86rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+      .formula {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .signal-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 18px;
+      }
+      .signal {
+        padding: 10px;
+        border: 1px solid rgba(255,255,255,.12);
+        border-radius: 8px;
+        background: rgba(255,255,255,.04);
+      }
+      .signal span {
+        display: block;
+        color: var(--muted);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: .06em;
+      }
+      .signal strong {
+        display: block;
+        margin-top: 4px;
+        color: var(--ink);
+        font-size: 1rem;
+      }
+      .copy-box {
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+      .copy-box pre {
+        margin: 0;
+        padding: 12px;
+        overflow-x: auto;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        color: #e5edf6;
+        background: rgba(255,255,255,.03);
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
       .endpoint-links {
         display: flex;
         flex-wrap: wrap;
@@ -147,11 +276,10 @@
         font-size: 12px;
       }
       .endpoint-links a:hover { color: var(--ink); border-color: var(--strong); }
-      .trusted-only { color: var(--amber); font-size: 13px; font-weight: 750; }
       footer { margin-top: 26px; padding: 24px 0 40px; border-top: 1px solid var(--line); color: var(--muted); }
       .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
       @media (max-width: 860px) {
-        .grid, .stats { grid-template-columns: 1fr; }
+        .grid, .stats, .badge-lab { grid-template-columns: 1fr; }
         .nav, .section-head { align-items: start; flex-direction: column; }
         .links { width: 100%; }
       }
@@ -166,7 +294,8 @@
         .lead, .section-head p, .pick p, .contract p { max-width: 34ch; }
         .btn { width: 100%; white-space: normal; }
         .pick-head { flex-direction: column; }
-        .score { white-space: normal; }
+        .pick-mark { white-space: normal; }
+        .signal-grid { grid-template-columns: 1fr; }
       }
     </style>
   </head>
@@ -176,75 +305,112 @@
         <a class="brand" href="/">DayOneBuilder</a>
         <div class="links">
           <a href="/dob-task-resolver/">Task Resolver</a>
-          <a href="#trusted-picks">Trusted Sources</a>
+          <a href="#route-candidates">Route Candidates</a>
           <a href="https://github.com/DayOneBuilder">GitHub</a>
         </div>
       </nav>
 
       <main>
         <section class="hero">
-          <span class="eyebrow">Trusted source resolver</span>
-          <h1>Task in. Trusted source out.</h1>
+          <span class="eyebrow">Agent-native resolver</span>
+          <h1>Task in. Route out.</h1>
           <p class="lead">
-            Give it a task. It returns a source URL, install or call path, verification step, and trust signal from repos and registries agents already use.
+            Give it a task. It returns a source URL, install or call path, verification step, and proof signal from repos and registries agents already use.
           </p>
           <div class="actions">
             <a class="btn" href="/dob-task-resolver/">Resolve a task</a>
-            <a class="btn secondary" href="#trusted-picks">Browse trusted sources</a>
+            <a class="btn secondary" href="#route-candidates">Browse route candidates</a>
           </div>
           <div class="stats" aria-label="Resolver signals">
-            <div class="stat"><strong>126k+</strong><span>stars on top source routed here</span></div>
-            <div class="stat"><strong>7</strong><span>primary public sources</span></div>
-            <div class="stat"><strong>0</strong><span>hidden internal boost</span></div>
+            <div class="stat"><strong>Magnet</strong><span>README badge for agent traffic</span></div>
+            <div class="stat"><strong>Route</strong><span>task to source to verification</span></div>
+            <div class="stat"><strong>Signal</strong><span>clicks, copies, docs hits, installs</span></div>
           </div>
         </section>
 
-        <section class="section" aria-labelledby="trusted-picks">
+        <section class="section" aria-labelledby="badge-lab">
           <div class="section-head">
             <div>
-              <span class="eyebrow">Current trusted picks</span>
-              <h2 id="trusted-picks">Useful links first. Explanation second.</h2>
+              <span class="eyebrow">Agent Magnet lab</span>
+              <h2 id="badge-lab">Make agents visibly choose you.</h2>
             </div>
-            <p>These are the sources agents should see before any owned module is considered.</p>
+            <p>Star charts work because they turn momentum into status. DayOneBuilder should do that for agent usefulness: one glance shows whether agents route there, copy the install path, and pass the smoke test.</p>
+          </div>
+          <div class="badge-lab">
+            <article class="readme-card" aria-label="DayOneBuilder Agent Magnet badge preview">
+              <div class="badge-strip"><span class="badge-dot"></span> DayOneBuilder Agent Magnet</div>
+              <h3>Agent Pull Score</h3>
+              <div class="pull-score"><strong>82</strong><span>visible in one glance</span></div>
+              <p>A passive aura for useful repos: task rank, 30-day agent routes, install-copy intent, and smoke-test state compressed into one visible score.</p>
+              <div class="signal-grid">
+                <div class="signal"><span>Task rank</span><strong>#1 for browser MCP</strong></div>
+                <div class="signal"><span>30d routes</span><strong>38 agent clicks</strong></div>
+                <div class="signal"><span>Install intent</span><strong>14 copies</strong></div>
+                <div class="signal"><span>Proof</span><strong>smoke test pass</strong></div>
+              </div>
+            </article>
+            <article class="copy-box">
+              <h3>README embed candidate</h3>
+              <p>The badge should pay both sides: repo owners get visible status, DayOneBuilder gets referral traffic, and agents get a live task card with the exact next action.</p>
+              <p class="formula">Agent Pull Score = task rank + 30d agent routes + install-copy intent + smoke-test recency. No long research required.</p>
+              <pre><code>[![Agent Magnet: AI agents route here](https://dayonebuilder.online/badges/agent-magnet.svg)](https://dayonebuilder.online/dob-task-resolver/?source=agent-magnet-badge)</code></pre>
+              <button
+                class="btn secondary"
+                data-copy="[![Agent Magnet: AI agents route here](https://dayonebuilder.online/badges/agent-magnet.svg)](https://dayonebuilder.online/dob-task-resolver/?source=agent-magnet-badge)"
+                onclick="copyText(this)"
+              >
+                Copy README badge
+              </button>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="route-candidates">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Current route candidates</span>
+              <h2 id="route-candidates">Badge candidates, not a star table.</h2>
+            </div>
+            <p>Each pick needs a task, action path, and reason an agent can use immediately. Popularity can help discovery, but it is not the product.</p>
           </div>
           <div class="grid">
             <article class="pick">
-              <div class="pick-head"><h3>Anthropic Skills</h3><span class="score">126,688 stars</span></div>
+              <div class="pick-head"><h3>Anthropic Skills</h3><span class="pick-mark">badge candidate</span></div>
               <p>Public agent skill repository.</p>
               <div class="path"><code>https://github.com/anthropics/skills</code></div>
               <div class="meta"><span>agent skills</span><span>official source</span><span>active ecosystem</span></div>
               <a class="btn secondary" href="https://github.com/anthropics/skills">Open source</a>
             </article>
             <article class="pick">
-              <div class="pick-head"><h3>Model Context Protocol Servers</h3><span class="score">84,855 stars</span></div>
+              <div class="pick-head"><h3>Model Context Protocol Servers</h3><span class="pick-mark">agent infrastructure</span></div>
               <p>Canonical MCP server collection.</p>
               <div class="path"><code>https://github.com/modelcontextprotocol/servers</code></div>
               <div class="meta"><span>MCP</span><span>tool access</span><span>agent infrastructure</span></div>
               <a class="btn secondary" href="https://github.com/modelcontextprotocol/servers">Open source</a>
             </article>
             <article class="pick">
-              <div class="pick-head"><h3>Context7</h3><span class="score">54,218 stars</span></div>
+              <div class="pick-head"><h3>Context7</h3><span class="pick-mark">docs path</span></div>
               <p>Up-to-date docs for LLMs and code agents.</p>
               <div class="path"><code>https://github.com/upstash/context7</code></div>
               <div class="meta"><span>docs</span><span>coding agents</span><span>MIT</span></div>
               <a class="btn secondary" href="https://github.com/upstash/context7">Open source</a>
             </article>
             <article class="pick">
-              <div class="pick-head"><h3>Playwright MCP</h3><span class="score">31,864 stars</span></div>
+              <div class="pick-head"><h3>Playwright MCP</h3><span class="pick-mark">call path</span></div>
               <p>Browser automation through MCP.</p>
               <div class="path"><code>https://github.com/microsoft/playwright-mcp</code></div>
               <div class="meta"><span>browser</span><span>MCP</span><span>Apache-2.0</span></div>
               <a class="btn secondary" href="https://github.com/microsoft/playwright-mcp">Open source</a>
             </article>
             <article class="pick">
-              <div class="pick-head"><h3>VoltAgent Awesome Agent Skills</h3><span class="score">19,702 stars</span></div>
+              <div class="pick-head"><h3>VoltAgent Awesome Agent Skills</h3><span class="pick-mark">directory</span></div>
               <p>Curated cross-runtime agent skill directory.</p>
               <div class="path"><code>https://github.com/VoltAgent/awesome-agent-skills</code></div>
               <div class="meta"><span>skills</span><span>directory</span><span>MIT</span></div>
               <a class="btn secondary" href="https://github.com/VoltAgent/awesome-agent-skills">Open source</a>
             </article>
             <article class="pick">
-              <div class="pick-head"><h3>OpenAI Skills</h3><span class="score">17,921 stars</span></div>
+              <div class="pick-head"><h3>OpenAI Skills</h3><span class="pick-mark">runtime fit</span></div>
               <p>Skills catalog for OpenAI-compatible agent runtimes.</p>
               <div class="path"><code>https://github.com/openai/skills</code></div>
               <div class="meta"><span>OpenAI-compatible</span><span>skills</span><span>official source</span></div>
@@ -256,24 +422,24 @@
         <section class="section" aria-labelledby="contract">
           <div class="section-head">
             <div>
-              <span class="eyebrow">How DayOneBuilder earns trust</span>
-              <h2 id="contract">By refusing bad recommendations.</h2>
+              <span class="eyebrow">How DayOneBuilder earns routes</span>
+              <h2 id="contract">By making the next action obvious.</h2>
             </div>
-            <p>No hidden boost for owned modules. If an external repo wins, the resolver sends the agent there.</p>
+            <p>The resolver should feel useful before it asks anyone to believe it. A good recommendation is a card, badge, command, URL, and verification step.</p>
           </div>
           <div class="grid">
-            <article class="contract"><h3>Evidence before ownership</h3><p>Stars, forks, maintenance, official status, install/test path, and source clarity outrank internal inventory.</p></article>
+            <article class="contract"><h3>Agent Magnet proof</h3><p>A repo earns badge placement when agents repeatedly arrive, copy the install path, and pass a smoke test. The badge exposes those counters immediately.</p></article>
             <article class="contract"><h3>Small action path</h3><p>Every recommendation needs a next command, URL, or verification step. Not a paragraph of persuasion.</p></article>
             <article class="contract"><h3>Agent action feed</h3><p>Agents can fetch JSON with aliases, primary source, first action, smoke test, and fallback.</p></article>
-            <article class="contract"><h3>Archive by default</h3><p>Unproven modules stay out of primary agent routing until demand and usage justify them.</p></article>
-            <article class="contract"><h3>Telemetry loop</h3><p>The resolver watches task submissions, outbound clicks, install snippet copies, docs hits, and revenue when it exists.</p></article>
+            <article class="contract"><h3>Owner loop</h3><p>If a badge drives clicks, copies, or agent usage, the next move is a respectful README PR that gives the owner visible status and sends us qualified traffic.</p></article>
+            <article class="contract"><h3>Telemetry loop</h3><p>The resolver watches task submissions, outbound clicks, badge copies, install snippet copies, docs hits, and revenue when it exists.</p></article>
           </div>
         </section>
       </main>
 
       <footer>
         <div class="footer-row">
-          <span>DayOneBuilder trusted resolver</span>
+          <span>DayOneBuilder Agent Magnet resolver</span>
           <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/llms.txt">llms.txt</a> / <a href="/agent-registry.json">registry</a> / <a href="/agent-actions.json">actions</a></span>
         </div>
       </footer>
