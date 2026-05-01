@@ -19,6 +19,12 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://dayonebuilder.online/repo/</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.98</priority>
+  </url>
+  <url>
     <loc>https://dayonebuilder.online/agent-registry.json</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>daily</changefreq>
@@ -31,10 +37,22 @@
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://dayonebuilder.online/badges/agent-magnet.svg</loc>
+    <loc>https://dayonebuilder.online/api/resolver.openapi.json</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://dayonebuilder.online/mcp/dayonebuilder-resolver.json</loc>
     <lastmod>2026-05-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md</loc>
+    <lastmod>2026-05-01</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://dayonebuilder.online/llms.txt</loc>

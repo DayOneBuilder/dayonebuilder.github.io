@@ -9,4 +9,7 @@ Sitemap: https://dayonebuilder.online/sitemap.xml
 # registry: https://dayonebuilder.online/agent-registry.json
 # actions: https://dayonebuilder.online/agent-actions.json
 # resolver: https://dayonebuilder.online/dob-task-resolver/
-# agent magnet badge: https://dayonebuilder.online/badges/agent-magnet.svg
+# repo report: https://dayonebuilder.online/repo/
+# api contract: https://dayonebuilder.online/api/resolver.openapi.json
+# mcp contract: https://dayonebuilder.online/mcp/dayonebuilder-resolver.json
+# skill: https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md

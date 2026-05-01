@@ -6,13 +6,12 @@
     <title>DayOneBuilder | Agent Magnet resolver</title>
     <meta
       name="description"
-      content="Task in, source URL and verification step out. DayOneBuilder routes agents to proven skills, MCP servers, docs, and automation repos before rebuilding from scratch, then turns repeated use into a visible Agent Pull badge."
+      content="Task in, best executor out. DayOneBuilder gives agents a resolver API, action feed, installable skill, and GitHub repo report before they rebuild from scratch."
     />
     <link rel="canonical" href="https://dayonebuilder.online/" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
     <link rel="alternate" type="application/json" href="/agent-registry.json" title="DayOneBuilder agent registry" />
     <link rel="alternate" type="application/json" href="/agent-actions.json" title="DayOneBuilder agent action feed" />
-    <link rel="alternate" type="image/svg+xml" href="/badges/agent-magnet.svg" title="DayOneBuilder Agent Magnet badge" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -32,21 +31,36 @@
         }
         setTimeout(() => { button.textContent = original; }, 1400);
       }
+      function normalizeRepoInput(value) {
+        const cleaned = String(value || "").trim();
+        if (!cleaned) return "";
+        const githubMatch = cleaned.match(/^https?:\/\/github\.com\/([^/?#]+)\/([^/?#]+)/i);
+        if (githubMatch) return `${githubMatch[1]}/${githubMatch[2].replace(/\.git$/i, "")}`;
+        const shortMatch = cleaned.match(/^([^/\s]+)\/([^/\s]+)$/);
+        if (shortMatch) return `${shortMatch[1]}/${shortMatch[2].replace(/\.git$/i, "")}`;
+        return "";
+      }
+      function openRepoReport(event) {
+        event.preventDefault();
+        const input = document.getElementById("repo-url");
+        const repo = normalizeRepoInput(input && input.value);
+        if (!repo) {
+          input.setAttribute("aria-invalid", "true");
+          input.focus();
+          return;
+        }
+        input.removeAttribute("aria-invalid");
+        gtag("event", "repo_report_submit", { event_category: "dayonebuilder_resolver", repo });
+        window.location.href = `/repo/?repo=${encodeURIComponent(repo)}`;
+      }
     </script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "DataCatalog",
-        "name": "DayOneBuilder Agent Magnet Resolver",
+        "@type": "WebApplication",
+        "name": "DayOneBuilder Resolver",
         "url": "https://dayonebuilder.online/",
-        "description": "Resolver and Agent Magnet badge lab for AI agents that need proven skills, MCP servers, docs, and automation repositories.",
-        "hasPart": [
-          {"@type": "SoftwareSourceCode", "name": "Anthropic Skills", "codeRepository": "https://github.com/anthropics/skills"},
-          {"@type": "SoftwareSourceCode", "name": "Model Context Protocol Servers", "codeRepository": "https://github.com/modelcontextprotocol/servers"},
-          {"@type": "SoftwareSourceCode", "name": "Context7", "codeRepository": "https://github.com/upstash/context7"},
-          {"@type": "SoftwareSourceCode", "name": "Playwright MCP", "codeRepository": "https://github.com/microsoft/playwright-mcp"},
-          {"@type": "SoftwareSourceCode", "name": "OpenAI Skills", "codeRepository": "https://github.com/openai/skills"}
-        ]
+        "description": "Agent-callable resolver for choosing the best reusable executor from GitHub repos, skills, MCP servers, and action feeds."
       }
     </script>
     <style>
@@ -98,6 +112,25 @@
       p { margin: 0; }
       .lead { margin-top: 18px; max-width: 62ch; color: #dce2e8; font-size: 1.05rem; overflow-wrap: anywhere; }
       .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+      .repo-form {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+        margin-top: 24px;
+        max-width: 720px;
+      }
+      .repo-form input {
+        min-height: 42px;
+        width: 100%;
+        border: 1px solid var(--strong);
+        border-radius: 8px;
+        background: var(--surface);
+        color: var(--ink);
+        font: inherit;
+        padding: 0 12px;
+      }
+      .repo-form input:focus { outline: 1px solid var(--blue); }
+      .repo-form input[aria-invalid="true"] { border-color: #f87171; }
       .btn {
         display: inline-flex;
         align-items: center;
@@ -142,6 +175,23 @@
       .path { padding: 10px 12px; border: 1px dashed var(--line); border-radius: 8px; overflow-wrap: anywhere; color: #eef2f7; background: rgba(255,255,255,.03); }
       .contract { padding: 16px; }
       .contract p, .pick p { color: var(--muted); }
+      .endpoint-card {
+        display: grid;
+        gap: 10px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+      .endpoint-card p { color: var(--muted); }
+      .command-line {
+        padding: 10px 12px;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        background: rgba(255,255,255,.03);
+        color: #e5edf6;
+        overflow-wrap: anywhere;
+      }
       .badge-lab {
         display: grid;
         grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
@@ -279,7 +329,7 @@
       footer { margin-top: 26px; padding: 24px 0 40px; border-top: 1px solid var(--line); color: var(--muted); }
       .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
       @media (max-width: 860px) {
-        .grid, .stats, .badge-lab { grid-template-columns: 1fr; }
+        .grid, .stats, .badge-lab, .repo-form { grid-template-columns: 1fr; }
         .nav, .section-head { align-items: start; flex-direction: column; }
         .links { width: 100%; }
       }
@@ -302,10 +352,12 @@
   <body>
     <div class="wrap">
       <nav class="nav" aria-label="Primary">
-        <a class="brand" href="/">DayOneBuilder</a>
-        <div class="links">
+          <a class="brand" href="/">DayOneBuilder</a>
+          <div class="links">
           <a href="/dob-task-resolver/">Task Resolver</a>
-          <a href="#route-candidates">Route Candidates</a>
+          <a href="/repo/">Repo Report</a>
+          <a href="/api/resolver.openapi.json">API</a>
+          <a href="/skills/dayonebuilder-resolver/SKILL.md">Skill</a>
           <a href="https://github.com/DayOneBuilder">GitHub</a>
         </div>
       </nav>
@@ -313,13 +365,18 @@
       <main>
         <section class="hero">
           <span class="eyebrow">Agent-native resolver</span>
-          <h1>Task in. Route out.</h1>
+          <h1>Task in. Executor out.</h1>
           <p class="lead">
-            Give it a task. It returns a source URL, install or call path, verification step, and proof signal from repos and registries agents already use.
+            Agents should call a resolver, not browse a homepage. DayOneBuilder returns the best source URL, install or call path, verification step, and fallback for the task.
           </p>
+          <form id="repo-form" class="repo-form" autocomplete="off" onsubmit="openRepoReport(event)">
+            <label class="sr-only" for="repo-url" style="display:none">GitHub repository URL</label>
+            <input id="repo-url" name="repo" placeholder="https://github.com/owner/repo" />
+            <button class="btn" type="submit">Analyze repo</button>
+          </form>
           <div class="actions">
             <a class="btn" href="/dob-task-resolver/">Resolve a task</a>
-            <a class="btn secondary" href="#route-candidates">Browse route candidates</a>
+            <a class="btn secondary" href="/agent-actions.json">Call action feed</a>
           </div>
           <div class="stats" aria-label="Resolver contract">
             <div class="stat"><strong>Source</strong><span>primary repo stays visible</span></div>
@@ -328,94 +385,56 @@
           </div>
         </section>
 
-        <section class="section" aria-labelledby="badge-lab">
+        <section class="section" aria-labelledby="agent-entrypoints">
           <div class="section-head">
             <div>
-              <span class="eyebrow">Agent Magnet lab</span>
-              <h2 id="badge-lab">Make agents visibly choose you.</h2>
+              <span class="eyebrow">Agent entrypoints</span>
+              <h2 id="agent-entrypoints">Install or call the resolver.</h2>
             </div>
-            <p>Star charts work because they turn momentum into status. DayOneBuilder should do that for agent usefulness: one glance shows whether agents route there, copy the install path, and pass the smoke test.</p>
-          </div>
-          <div class="badge-lab">
-            <article class="readme-card" aria-label="DayOneBuilder Agent Magnet badge preview">
-              <div class="badge-strip"><span class="badge-dot"></span> DayOneBuilder Agent Magnet</div>
-              <h3>Agent Pull Score</h3>
-              <div class="pull-score"><strong>Live</strong><span>score only after measured routes</span></div>
-              <p>A passive aura for useful repos: task rank, agent routes, install-copy intent, and smoke-test state compressed into one visible status once there is measured demand.</p>
-              <div class="signal-grid">
-                <div class="signal"><span>Task rank</span><strong>per exact query</strong></div>
-                <div class="signal"><span>30d routes</span><strong>measured events</strong></div>
-                <div class="signal"><span>Install intent</span><strong>copy events</strong></div>
-                <div class="signal"><span>Proof</span><strong>smoke test required</strong></div>
-              </div>
-            </article>
-            <article class="copy-box">
-              <h3>README embed candidate</h3>
-              <p>The badge should pay both sides: repo owners get visible status, DayOneBuilder gets referral traffic, and agents get a live task card with the exact next action.</p>
-              <p class="formula">Agent Pull Score = task rank + 30d agent routes + install-copy intent + smoke-test recency. No long research required.</p>
-              <pre><code>[![Agent Magnet: AI agents route here](https://dayonebuilder.online/badges/agent-magnet.svg)](https://dayonebuilder.online/dob-task-resolver/?source=agent-magnet-badge)</code></pre>
-              <button
-                class="btn secondary"
-                data-copy="[![Agent Magnet: AI agents route here](https://dayonebuilder.online/badges/agent-magnet.svg)](https://dayonebuilder.online/dob-task-resolver/?source=agent-magnet-badge)"
-                data-event="agent_magnet_badge_copy"
-                onclick="copyText(this)"
-              >
-                Copy README badge
-              </button>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" aria-labelledby="route-candidates">
-          <div class="section-head">
-            <div>
-              <span class="eyebrow">Current route candidates</span>
-              <h2 id="route-candidates">Badge candidates, not a star table.</h2>
-            </div>
-            <p>Each pick needs a task, action path, and reason an agent can use immediately. Popularity can help discovery, but it is not the product.</p>
+            <p>The homepage is only a doorway. The useful surface is the API-shaped resolver, repo report, action feed, and installable skill an agent can invoke during work.</p>
           </div>
           <div class="grid">
-            <article class="pick">
-              <div class="pick-head"><h3>Anthropic Skills</h3><span class="pick-mark">badge candidate</span></div>
-              <p>Public agent skill repository.</p>
-              <div class="path"><code>https://github.com/anthropics/skills</code></div>
-              <div class="meta"><span>agent skills</span><span>official source</span><span>active ecosystem</span></div>
-              <a class="btn secondary" href="https://github.com/anthropics/skills">Open source</a>
+            <article class="endpoint-card">
+              <h3>Task resolver</h3>
+              <p>Use when the agent has a task and needs the best executor.</p>
+              <div class="command-line"><code>GET /dob-task-resolver/?task=browser%20automation</code></div>
+              <a class="btn secondary" href="/dob-task-resolver/">Open resolver</a>
             </article>
-            <article class="pick">
-              <div class="pick-head"><h3>Model Context Protocol Servers</h3><span class="pick-mark">agent infrastructure</span></div>
-              <p>Canonical MCP server collection.</p>
-              <div class="path"><code>https://github.com/modelcontextprotocol/servers</code></div>
-              <div class="meta"><span>MCP</span><span>tool access</span><span>agent infrastructure</span></div>
-              <a class="btn secondary" href="https://github.com/modelcontextprotocol/servers">Open source</a>
+            <article class="endpoint-card">
+              <h3>GitHub repo report</h3>
+              <p>Use when the agent already has a repo and needs source-of-truth signals.</p>
+              <div class="command-line"><code>GET /repo/?repo=owner/name</code></div>
+              <a class="btn secondary" href="/repo/">Open repo report</a>
             </article>
-            <article class="pick">
-              <div class="pick-head"><h3>Context7</h3><span class="pick-mark">docs path</span></div>
-              <p>Up-to-date docs for LLMs and code agents.</p>
-              <div class="path"><code>https://github.com/upstash/context7</code></div>
-              <div class="meta"><span>docs</span><span>coding agents</span><span>MIT</span></div>
-              <a class="btn secondary" href="https://github.com/upstash/context7">Open source</a>
+            <article class="endpoint-card">
+              <h3>Installable skill</h3>
+              <p>Use inside an agent runtime to make resolver lookup a default step.</p>
+              <div class="command-line"><code>https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md</code></div>
+              <a class="btn secondary" href="/skills/dayonebuilder-resolver/SKILL.md">Open skill</a>
             </article>
-            <article class="pick">
-              <div class="pick-head"><h3>Playwright MCP</h3><span class="pick-mark">call path</span></div>
-              <p>Browser automation through MCP.</p>
-              <div class="path"><code>https://github.com/microsoft/playwright-mcp</code></div>
-              <div class="meta"><span>browser</span><span>MCP</span><span>Apache-2.0</span></div>
-              <a class="btn secondary" href="https://github.com/microsoft/playwright-mcp">Open source</a>
+            <article class="endpoint-card">
+              <h3>Action feed</h3>
+              <p>Machine-readable task aliases, first actions, smoke tests, and fallbacks.</p>
+              <div class="command-line"><code>GET /agent-actions.json</code></div>
+              <a class="btn secondary" href="/agent-actions.json">Open JSON</a>
             </article>
-            <article class="pick">
-              <div class="pick-head"><h3>VoltAgent Awesome Agent Skills</h3><span class="pick-mark">directory</span></div>
-              <p>Curated cross-runtime agent skill directory.</p>
-              <div class="path"><code>https://github.com/VoltAgent/awesome-agent-skills</code></div>
-              <div class="meta"><span>skills</span><span>directory</span><span>MIT</span></div>
-              <a class="btn secondary" href="https://github.com/VoltAgent/awesome-agent-skills">Open source</a>
+            <article class="endpoint-card">
+              <h3>Resolver API contract</h3>
+              <p>Callable service shape with a dependency-free Python reference implementation.</p>
+              <div class="command-line"><code>GET /api/recommend?task={task}</code></div>
+              <a class="btn secondary" href="/api/resolver.openapi.json">Open OpenAPI</a>
             </article>
-            <article class="pick">
-              <div class="pick-head"><h3>OpenAI Skills</h3><span class="pick-mark">runtime fit</span></div>
-              <p>Skills catalog for OpenAI-compatible agent runtimes.</p>
-              <div class="path"><code>https://github.com/openai/skills</code></div>
-              <div class="meta"><span>OpenAI-compatible</span><span>skills</span><span>official source</span></div>
-              <a class="btn secondary" href="https://github.com/openai/skills">Open source</a>
+            <article class="endpoint-card">
+              <h3>Local service</h3>
+              <p>Run this in the repo to give a coding agent a real endpoint.</p>
+              <div class="command-line"><code>python3 services/dob_resolver_api.py --site site --port 8787</code></div>
+              <a class="btn secondary" href="/README.md">Read service notes</a>
+            </article>
+            <article class="endpoint-card">
+              <h3>MCP adapter contract</h3>
+              <p>Tool shape for agents that call MCP instead of reading static feeds.</p>
+              <div class="command-line"><code>dob_recommend_executor(task)</code></div>
+              <a class="btn secondary" href="/mcp/dayonebuilder-resolver.json">Open MCP contract</a>
             </article>
           </div>
         </section>
@@ -429,19 +448,19 @@
             <p>The resolver should feel useful before it asks anyone to believe it. A good recommendation is a card, badge, command, URL, and verification step.</p>
           </div>
           <div class="grid">
-            <article class="contract"><h3>Agent Magnet proof</h3><p>A repo earns badge placement when agents repeatedly arrive, copy the install path, and pass a smoke test. The badge exposes those counters immediately.</p></article>
-            <article class="contract"><h3>Small action path</h3><p>Every recommendation needs a next command, URL, or verification step. Not a paragraph of persuasion.</p></article>
-            <article class="contract"><h3>Agent action feed</h3><p>Agents can fetch JSON with aliases, primary source, first action, smoke test, and fallback.</p></article>
-            <article class="contract"><h3>Owner loop</h3><p>If a badge drives clicks, copies, or agent usage, the next move is a respectful README PR that gives the owner visible status and sends us qualified traffic.</p></article>
-            <article class="contract"><h3>Telemetry loop</h3><p>The resolver watches task submissions, outbound clicks, badge copies, install snippet copies, docs hits, and revenue when it exists.</p></article>
+            <article class="contract"><h3>Best executor</h3><p>The resolver should choose the best external source for the task, not the best DayOneBuilder-owned page.</p></article>
+            <article class="contract"><h3>Repo URL in</h3><p>A GitHub URL opens a report page with public GitHub data and agent-usefulness checks.</p></article>
+            <article class="contract"><h3>API first</h3><p>Agents should call URLs and JSON feeds directly instead of reading marketing copy.</p></article>
+            <article class="contract"><h3>Skill packaging</h3><p>The skill makes this resolver a reusable agent habit: check source, action path, smoke test, fallback.</p></article>
+            <article class="contract"><h3>Telemetry loop</h3><p>The resolver watches task submissions, repo reports, outbound source clicks, install snippet copies, and repeat agent routes.</p></article>
           </div>
         </section>
       </main>
 
       <footer>
         <div class="footer-row">
-          <span>DayOneBuilder Agent Magnet resolver</span>
-          <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/llms.txt">llms.txt</a> / <a href="/agent-registry.json">registry</a> / <a href="/agent-actions.json">actions</a></span>
+          <span>DayOneBuilder Resolver</span>
+          <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/repo/">Repo Report</a> / <a href="/api/resolver.openapi.json">API</a> / <a href="/agent-actions.json">actions</a></span>
         </div>
       </footer>
     </div>

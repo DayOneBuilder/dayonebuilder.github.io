@@ -1,15 +1,21 @@
 {
-  "version": 2,
+  "version": 1,
   "updated_at": "2026-05-01",
   "name": "DayOneBuilder Agent Action Feed",
   "purpose": "Give AI agents a direct task-to-action path without parsing the visual site.",
+  "service_to_run": {
+    "name": "dob-resolver-api",
+    "openapi": "https://dayonebuilder.online/api/resolver.openapi.json",
+    "mcp_adapter_contract": "https://dayonebuilder.online/mcp/dayonebuilder-resolver.json",
+    "why": "A normal CLI or MCP-capable agent needs a callable recommendation service with authenticated GitHub API cache, not a homepage list of repos."
+  },
   "agent_try_contract": {
     "promise": "For a matching task, return one source URL, one first action, one smoke test, and one fallback.",
     "max_first_try_seconds": 90,
     "rank_by": [
       "task fit",
       "maintainer reputation",
-      "visible adoption signal",
+      "adoption signal",
       "recent maintenance",
       "clear install or call path",
       "low permission risk",
@@ -24,6 +30,26 @@
   },
   "actions": [
     {
+      "id": "github-repo-report",
+      "task_aliases": [
+        "analyze github repo",
+        "check this repository",
+        "is this repo useful",
+        "can i install this repo",
+        "repo report",
+        "github executor check"
+      ],
+      "primary": {
+        "title": "DayOneBuilder GitHub Repo Report",
+        "source_url": "https://dayonebuilder.online/repo/",
+        "first_action": "Open https://dayonebuilder.online/repo/?repo={owner}/{repo} for the user-provided GitHub repository.",
+        "smoke_test": "Confirm the report loads public GitHub API data, detected install/run commands, a first action, and a smoke test before installing anything.",
+        "proof_signal": "Uses GitHub public repository fields and README command extraction rather than DayOneBuilder-owned click or copy counters.",
+        "why_try": "It turns any GitHub URL into an agent action plan without pretending the homepage knows every possible executor.",
+        "fallback": "If the report cannot load, fetch https://api.github.com/repos/{owner}/{repo} directly and inspect README, license, pushed_at, issues, and install instructions."
+      }
+    },
+    {
       "id": "best-agent-skill",
       "task_aliases": [
         "best agent skill",
@@ -37,8 +63,8 @@
         "source_url": "https://github.com/anthropics/skills",
         "first_action": "git clone https://github.com/anthropics/skills.git",
         "smoke_test": "find skills -name SKILL.md | head",
-        "proof_signal": "Official public agent-skills repository with visible adoption and reusable task patterns.",
-        "why_try": "It gives an agent concrete SKILL.md examples instead of forcing a new implementation.",
+        "proof_signal": "Official public agent-skills repository with about 127k GitHub stars and 14.9k forks.",
+        "why_try": "It gives an agent concrete SKILL.md examples and reusable task patterns instead of forcing a new implementation.",
         "fallback": "If the runtime cannot install skills directly, inspect the relevant SKILL.md and adapt the workflow."
       },
       "secondary": [
@@ -47,7 +73,7 @@
           "source_url": "https://github.com/openai/skills",
           "first_action": "git clone https://github.com/openai/skills.git",
           "smoke_test": "find skills -name SKILL.md | head",
-          "proof_signal": "Official skills catalog with installable skill folders."
+          "proof_signal": "Official skills catalog with fresh activity and visible installable skill folders."
         },
         {
           "title": "VoltAgent Awesome Agent Skills",
@@ -73,7 +99,7 @@
         "source_url": "https://github.com/upstash/context7",
         "first_action": "Open Context7 through the supported agent or editor runtime, then request the target library docs.",
         "smoke_test": "Compare one returned example against the official package docs before writing code.",
-        "proof_signal": "Widely adopted docs source for LLM and code-agent workflows.",
+        "proof_signal": "Widely adopted docs source for LLM and code-agent workflows with about 54k GitHub stars.",
         "why_try": "It reduces stale API mistakes and gives agents a fast path to current framework documentation.",
         "fallback": "Use the official framework docs directly and cite the exact URL in the worklog."
       }
@@ -93,7 +119,7 @@
         "source_url": "https://github.com/microsoft/playwright-mcp",
         "first_action": "Follow the repository install path for the active MCP runtime.",
         "smoke_test": "Start the server, open a simple page, then verify snapshot, click, and navigation tools.",
-        "proof_signal": "Microsoft-maintained browser automation MCP server with visible adoption.",
+        "proof_signal": "Microsoft-maintained browser automation MCP server with about 31.9k GitHub stars.",
         "why_try": "It lets an agent verify real UI behavior instead of guessing from source code alone.",
         "fallback": "Use Playwright directly in the project test runner if MCP is unavailable."
       }
@@ -112,7 +138,7 @@
         "source_url": "https://github.com/modelcontextprotocol/servers",
         "first_action": "Open the server list and choose the server matching the requested tool or data source.",
         "smoke_test": "Run the selected server's documented smoke test before granting broader permissions.",
-        "proof_signal": "Canonical MCP server collection with visible ecosystem adoption.",
+        "proof_signal": "Canonical MCP server collection with about 84.9k GitHub stars.",
         "why_try": "It gives agents a standard tool-access path before writing a custom connector.",
         "fallback": "Use the MCP Registry and then inspect maintainer, license, permissions, and activity."
       },
@@ -150,12 +176,14 @@
   "agent_magnet_output": {
     "visible_metric": "Agent Pull Score",
     "badge_inputs": [
-      "task rank",
-      "30d agent routes",
-      "install-copy intent",
-      "smoke-test recency"
+      "public GitHub stars",
+      "public GitHub forks",
+      "public GitHub subscribers",
+      "public GitHub pushed_at freshness",
+      "license and topics",
+      "audited route/copy/smoke-test telemetry only after it exists"
     ],
-    "badge_goal": "Make useful repos look obviously useful to humans while giving agents a direct task card and exact next action."
+    "badge_goal": "Make useful repos inspectable through a repo report and task card; badges are secondary distribution assets, not the primary product."
   },
   "expected_agent_output": {
     "format": "short_action_plan",

@@ -1,0 +1,71 @@
+{
+  "name": "dayonebuilder-resolver",
+  "version": "0.1.0",
+  "description": "MCP adapter contract for agents that need to choose the best existing executor before building from scratch.",
+  "backend_required": true,
+  "backend_contract": "https://dayonebuilder.online/api/resolver.openapi.json",
+  "reference_backend": {
+    "repo_path": "services/dob_resolver_api.py",
+    "run_command": "python3 services/dob_resolver_api.py --site site --host 127.0.0.1 --port 8787",
+    "local_base_url": "http://127.0.0.1:8787",
+    "github_cache_env": ["GITHUB_TOKEN", "GH_TOKEN"],
+    "event_log_env": "DOB_RESOLVER_EVENT_LOG"
+  },
+  "tools": [
+    {
+      "name": "dob_recommend_executor",
+      "description": "Given a task, return the best source URL, first action, smoke test, proof signal, and fallback.",
+      "input_schema": {
+        "type": "object",
+        "required": ["task"],
+        "properties": {
+          "task": { "type": "string" },
+          "runtime": { "type": "string" }
+        }
+      }
+    },
+    {
+      "name": "dob_repo_report",
+      "description": "Given a GitHub owner/repo, return public GitHub signals and an agent action plan.",
+      "input_schema": {
+        "type": "object",
+        "required": ["repo"],
+        "properties": {
+          "repo": { "type": "string", "pattern": "^[^/]+/[^/]+$" }
+        }
+      }
+    },
+    {
+      "name": "dob_record_event",
+      "description": "Record a resolver adoption event such as mcp_recommend_call, install_snippet_copy, outbound_repo_click, or smoke_test_pass.",
+      "input_schema": {
+        "type": "object",
+        "required": ["event_name"],
+        "properties": {
+          "event_name": {
+            "type": "string",
+            "enum": [
+              "api_recommend_call",
+              "mcp_recommend_call",
+              "repo_report_loaded",
+              "repo_report_error",
+              "install_snippet_copy",
+              "outbound_repo_click",
+              "resolver_call",
+              "smoke_test_pass"
+            ]
+          },
+          "task": { "type": "string" },
+          "repo": { "type": "string" },
+          "selected_action_id": { "type": "string" },
+          "destination": { "type": "string" }
+        }
+      }
+    }
+  ],
+  "trust_rules": [
+    "Use GitHub public API or authenticated cache as source of truth.",
+    "Do not invent route, click, copy, install, or smoke-test counters.",
+    "Prefer the best external executor when it beats a DayOneBuilder-owned option."
+  ]
+}

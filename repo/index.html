@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DayOneBuilder Repo Report</title>
+    <meta
+      name="description"
+      content="Enter a GitHub repository URL and get public GitHub signals, install/run hints, and an agent action plan."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/repo/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
+    <link rel="alternate" type="application/json" href="/agent-actions.json" title="DayOneBuilder agent action feed" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #08090a;
+        --surface: #0d0e10;
+        --surface-2: #141517;
+        --ink: #f8fafc;
+        --text: #cbd5df;
+        --muted: #87909d;
+        --line: rgba(255,255,255,.1);
+        --strong: rgba(255,255,255,.18);
+        --green: #34d399;
+        --blue: #7dd3fc;
+        --red: #f87171;
+        --max: 1080px;
+      }
+      * { box-sizing: border-box; }
+      html, body { overflow-x: hidden; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: var(--bg);
+        font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      a { color: inherit; text-decoration: none; }
+      code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+        padding: 20px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand { color: var(--ink); font-weight: 750; }
+      .links { display: flex; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: 13px; }
+      .links a:hover { color: var(--ink); }
+      main { padding: 42px 0 52px; }
+      .eyebrow { color: var(--green); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+      h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.08; }
+      h1 { margin-top: 14px; max-width: 12ch; font-size: clamp(2.25rem, 7vw, 4.8rem); }
+      h2 { font-size: clamp(1.35rem, 3vw, 2rem); }
+      h3 { font-size: 1rem; }
+      p { margin: 0; }
+      .lead { margin-top: 18px; max-width: 64ch; color: #dce2e8; font-size: 1.03rem; }
+      .form {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 10px;
+        margin-top: 24px;
+        max-width: 760px;
+      }
+      input {
+        min-height: 44px;
+        width: 100%;
+        border: 1px solid var(--strong);
+        border-radius: 8px;
+        background: var(--surface);
+        color: var(--ink);
+        font: inherit;
+        padding: 0 12px;
+      }
+      input:focus { outline: 1px solid var(--blue); }
+      input[aria-invalid="true"] { border-color: var(--red); }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 14px;
+        border-radius: 8px;
+        border: 1px solid var(--strong);
+        background: var(--ink);
+        color: #08090a;
+        font: inherit;
+        font-weight: 750;
+        cursor: pointer;
+      }
+      .btn.secondary { background: transparent; color: var(--ink); }
+      .status {
+        margin-top: 14px;
+        min-height: 24px;
+        color: var(--muted);
+      }
+      .section { padding: 30px 0 0; }
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 18px;
+        margin-bottom: 14px;
+      }
+      .section-head p { color: var(--muted); max-width: 58ch; }
+      .panel, .stat, .plan, .command-box {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+      }
+      .panel { padding: 18px; }
+      .repo-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        gap: 18px;
+      }
+      .repo-title { display: grid; gap: 8px; }
+      .repo-title a { color: var(--blue); overflow-wrap: anywhere; }
+      .repo-desc { max-width: 72ch; color: var(--muted); }
+      .score {
+        min-width: 116px;
+        text-align: right;
+      }
+      .score strong { display: block; color: var(--ink); font-size: 2.5rem; line-height: .95; }
+      .score span { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .stat { padding: 14px; }
+      .stat strong { display: block; color: var(--ink); font-size: 1.25rem; overflow-wrap: anywhere; }
+      .stat span { color: var(--muted); font-size: 12px; }
+      .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+      .tag-row span {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 8px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+      .plan, .command-box { padding: 16px; display: grid; gap: 10px; }
+      .plan p, .command-box p { color: var(--muted); }
+      pre {
+        margin: 0;
+        padding: 12px;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        background: rgba(255,255,255,.03);
+        color: #e5edf6;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+      .empty {
+        margin-top: 24px;
+        padding: 16px;
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        color: var(--muted);
+        background: rgba(255,255,255,.025);
+      }
+      footer { padding: 24px 0 40px; border-top: 1px solid var(--line); color: var(--muted); }
+      .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
+      @media (max-width: 820px) {
+        .form, .grid, .stats { grid-template-columns: 1fr; }
+        .nav, .section-head, .repo-head { align-items: start; flex-direction: column; }
+        .score { text-align: left; }
+      }
+      @media (max-width: 560px) {
+        .wrap { width: min(calc(100% - 24px), var(--max)); }
+        .btn { width: 100%; white-space: normal; }
+        .links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="/">DayOneBuilder</a>
+        <div class="links">
+          <a href="/dob-task-resolver/">Task Resolver</a>
+          <a href="/agent-actions.json">Actions</a>
+          <a href="/skills/dayonebuilder-resolver/SKILL.md">Skill</a>
+          <a href="https://github.com/DayOneBuilder">GitHub</a>
+        </div>
+      </nav>
+
+      <main>
+        <section>
+          <span class="eyebrow">GitHub repo report</span>
+          <h1>Repo in. Signal out.</h1>
+          <p class="lead">Paste any public GitHub repository. This page fetches GitHub's public API, checks agent-usefulness signals, extracts likely install/run commands from the README, and returns a short action plan.</p>
+          <form id="repo-form" class="form" autocomplete="off">
+            <label class="sr-only" for="repo-input" style="display:none">GitHub repository URL</label>
+            <input id="repo-input" name="repo" placeholder="https://github.com/owner/repo" />
+            <button class="btn" type="submit">Analyze repo</button>
+          </form>
+          <p id="status" class="status" aria-live="polite"></p>
+        </section>
+
+        <div id="output" class="section"></div>
+      </main>
+
+      <footer>
+        <div class="footer-row">
+          <span>DayOneBuilder Repo Report</span>
+          <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/llms.txt">llms.txt</a> / <a href="/agent-actions.json">actions</a></span>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const form = document.getElementById("repo-form");
+      const input = document.getElementById("repo-input");
+      const statusEl = document.getElementById("status");
+      const output = document.getElementById("output");
+
+      function escapeHtml(value) {
+        return String(value == null ? "" : value)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
+
+      function normalizeRepo(value) {
+        const cleaned = String(value || "").trim();
+        const urlMatch = cleaned.match(/^https?:\/\/github\.com\/([^/?#]+)\/([^/?#]+)/i);
+        if (urlMatch) return `${urlMatch[1]}/${urlMatch[2].replace(/\.git$/i, "")}`;
+        const shortMatch = cleaned.match(/^([^/\s]+)\/([^/\s]+)$/);
+        if (shortMatch) return `${shortMatch[1]}/${shortMatch[2].replace(/\.git$/i, "")}`;
+        return "";
+      }
+
+      function formatCount(value) {
+        const number = Number(value || 0);
+        if (number >= 1000000) return `${(number / 1000000).toFixed(1).replace(".0", "")}m`;
+        if (number >= 1000) return `${(number / 1000).toFixed(1).replace(".0", "")}k`;
+        return String(number);
+      }
+
+      function daysSince(value) {
+        if (!value) return null;
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return null;
+        return Math.max(0, Math.floor((Date.now() - date.getTime()) / 86400000));
+      }
+
+      function freshnessLabel(days) {
+        if (days == null) return "unknown";
+        if (days === 0) return "today";
+        if (days === 1) return "1d ago";
+        if (days < 30) return `${days}d ago`;
+        return `${Math.max(1, Math.round(days / 30))}mo ago`;
+      }
+
+      function scoreRepo(repo, readmeCommands) {
+        const stars = Number(repo.stargazers_count || 0);
+        const forks = Number(repo.forks_count || repo.network_count || 0);
+        const watching = Number(repo.subscribers_count || 0);
+        const pushedDays = daysSince(repo.pushed_at);
+        const hasLicense = repo.license && repo.license.spdx_id && repo.license.spdx_id !== "NOASSERTION";
+        const topics = (repo.topics || []).join(" ").toLowerCase();
+        const searchable = `${repo.full_name || ""} ${repo.description || ""} ${topics}`.toLowerCase();
+        const agentFit = /(agent|agents|mcp|skill|llm|automation|api|cli|sdk|tool)/.test(searchable);
+        let freshness = 0;
+        if (pushedDays != null) {
+          if (pushedDays <= 7) freshness = 15;
+          else if (pushedDays <= 30) freshness = 11;
+          else if (pushedDays <= 90) freshness = 7;
+          else if (pushedDays <= 365) freshness = 3;
+        }
+        let score = 0;
+        score += Math.min(35, Math.log10(stars + 1) * 7.8);
+        score += Math.min(20, Math.log10(forks + 1) * 5.8);
+        score += Math.min(10, Math.log10(watching + 1) * 4.8);
+        score += freshness;
+        score += hasLicense ? 8 : 0;
+        score += agentFit ? 7 : 0;
+        score += readmeCommands.length ? 5 : 0;
+        if (repo.archived || repo.disabled) score -= 40;
+        return Math.max(0, Math.min(100, Math.round(score)));
+      }
+
+      function classify(repo, commands) {
+        const topics = (repo.topics || []).join(" ").toLowerCase();
+        const searchable = `${repo.full_name || ""} ${repo.description || ""} ${topics}`.toLowerCase();
+        if (searchable.includes("mcp")) {
+          return {
+            type: "MCP executor candidate",
+            firstAction: commands[0] || "Find the documented MCP install command, then run it in the target agent runtime.",
+            smokeTest: "Start the MCP server with the narrowest permissions and call one harmless tool.",
+          };
+        }
+        if (searchable.includes("skill")) {
+          return {
+            type: "Skill executor candidate",
+            firstAction: commands[0] || "Inspect the skill folder and install only the relevant SKILL.md into the agent runtime.",
+            smokeTest: "Run the skill on a small sample task and verify the output before broad use.",
+          };
+        }
+        if (commands.length) {
+          return {
+            type: "Installable repository candidate",
+            firstAction: commands[0],
+            smokeTest: "Run the repo's documented smoke test or the smallest safe example before using it in production work.",
+          };
+        }
+        return {
+          type: "Source review candidate",
+          firstAction: `git clone ${repo.clone_url || `https://github.com/${repo.full_name}.git`}`,
+          smokeTest: "Inspect README, license, recent issues, and test instructions before installing or running code.",
+        };
+      }
+
+      function extractCommands(markdown) {
+        const commands = [];
+        const lines = String(markdown || "").split(/\r?\n/);
+        for (const line of lines) {
+          const cleaned = line.replace(/^[$#>\s-]+/, "").trim();
+          if (/^(npm|npx|pnpm|yarn|pip|pipx|uvx|uv |python -m|docker|docker compose|cargo|go install|brew|git clone)\b/.test(cleaned)) {
+            if (!commands.includes(cleaned)) commands.push(cleaned);
+          }
+          if (commands.length >= 5) break;
+        }
+        return commands;
+      }
+
+      async function fetchJson(url) {
+        const response = await fetch(url, {
+          headers: {
+            "Accept": "application/vnd.github+json",
+            "X-GitHub-Api-Version": "2022-11-28",
+          },
+        });
+        if (!response.ok) {
+          let detail = "";
+          try {
+            const body = await response.json();
+            detail = body && body.message ? `: ${body.message}` : "";
+          } catch (error) {
+            detail = "";
+          }
+          throw new Error(`GitHub API returned ${response.status}${detail}`);
+        }
+        return response.json();
+      }
+
+      async function fetchReadme(repo) {
+        try {
+          const data = await fetchJson(`https://api.github.com/repos/${repo}/readme`);
+          if (!data.content) return "";
+          return atob(String(data.content).replace(/\n/g, ""));
+        } catch (error) {
+          return "";
+        }
+      }
+
+      function render(repo, commands) {
+        const pushedDays = daysSince(repo.pushed_at);
+        const freshness = freshnessLabel(pushedDays);
+        const license = repo.license && repo.license.spdx_id && repo.license.spdx_id !== "NOASSERTION"
+          ? repo.license.spdx_id
+          : "none";
+        const score = scoreRepo(repo, commands);
+        const plan = classify(repo, commands);
+        const taskUrl = `/dob-task-resolver/?task=${encodeURIComponent(`use ${repo.full_name}`)}`;
+        const agentInstruction = [
+          `Evaluate https://github.com/${repo.full_name} as a possible executor.`,
+          `Public GitHub signal: ${score}/100, ${repo.stargazers_count || 0} stars, ${repo.forks_count || 0} forks, ${repo.subscribers_count || 0} watchers, license ${license}, pushed ${freshness}.`,
+          `First action: ${plan.firstAction}`,
+          `Smoke test: ${plan.smokeTest}`,
+          "If a better maintained or safer repo exists for the exact task, prefer that repo instead.",
+        ].join("\n");
+        output.innerHTML = `
+          <section class="panel">
+            <div class="repo-head">
+              <div class="repo-title">
+                <span class="eyebrow">${escapeHtml(plan.type)}</span>
+                <h2>${escapeHtml(repo.full_name)}</h2>
+                <a href="${escapeHtml(repo.html_url)}">${escapeHtml(repo.html_url)}</a>
+                <p class="repo-desc">${escapeHtml(repo.description || "No GitHub description.")}</p>
+              </div>
+              <div class="score"><strong>${score}</strong><span>GitHub signal</span></div>
+            </div>
+            <div class="stats">
+              <div class="stat"><strong>${formatCount(repo.stargazers_count)}</strong><span>stars</span></div>
+              <div class="stat"><strong>${formatCount(repo.forks_count || repo.network_count)}</strong><span>forks</span></div>
+              <div class="stat"><strong>${formatCount(repo.subscribers_count)}</strong><span>watching</span></div>
+              <div class="stat"><strong>${escapeHtml(freshness)}</strong><span>pushed</span></div>
+              <div class="stat"><strong>${escapeHtml(license)}</strong><span>license</span></div>
+              <div class="stat"><strong>${formatCount(repo.open_issues_count)}</strong><span>open issues</span></div>
+              <div class="stat"><strong>${escapeHtml(repo.default_branch || "unknown")}</strong><span>default branch</span></div>
+              <div class="stat"><strong>${repo.archived ? "yes" : "no"}</strong><span>archived</span></div>
+            </div>
+            <div class="tag-row">${(repo.topics || []).slice(0, 12).map((topic) => `<span>${escapeHtml(topic)}</span>`).join("")}</div>
+            <div class="actions">
+              <a class="btn" href="${escapeHtml(repo.html_url)}" data-outbound="source">Open source</a>
+              <a class="btn secondary" href="${escapeHtml(taskUrl)}">Resolve this task</a>
+              <button class="btn secondary" type="button" id="copy-instruction">Copy agent instruction</button>
+            </div>
+          </section>
+          <section class="section">
+            <div class="grid">
+              <article class="plan">
+                <h3>Agent action plan</h3>
+                <p>First action</p>
+                <pre>${escapeHtml(plan.firstAction)}</pre>
+                <p>Smoke test</p>
+                <pre>${escapeHtml(plan.smokeTest)}</pre>
+              </article>
+              <article class="command-box">
+                <h3>Detected README commands</h3>
+                ${commands.length ? `<pre>${escapeHtml(commands.join("\n"))}</pre>` : "<p>No install/run command was detected in the README. Treat this as a source review, not an install recommendation.</p>"}
+              </article>
+            </div>
+          </section>
+        `;
+        document.getElementById("copy-instruction").addEventListener("click", async function () {
+          await navigator.clipboard.writeText(agentInstruction);
+          this.textContent = "Copied";
+          gtag("event", "repo_report_copy_instruction", { event_category: "dayonebuilder_resolver", repo: repo.full_name });
+          setTimeout(() => { this.textContent = "Copy agent instruction"; }, 1200);
+        });
+        output.querySelectorAll("[data-outbound]").forEach((link) => {
+          link.addEventListener("click", () => {
+            gtag("event", "outbound_repo_click", { event_category: "dayonebuilder_resolver", repo: repo.full_name });
+          });
+        });
+      }
+
+      async function load(repoName) {
+        const repo = normalizeRepo(repoName);
+        if (!repo) {
+          output.innerHTML = '<div class="empty">Enter a GitHub URL like <code>https://github.com/microsoft/playwright-mcp</code>.</div>';
+          return;
+        }
+        input.value = repo;
+        input.removeAttribute("aria-invalid");
+        statusEl.textContent = "Fetching GitHub public API...";
+        output.innerHTML = "";
+        try {
+          const [repoData, readme] = await Promise.all([
+            fetchJson(`https://api.github.com/repos/${repo}`),
+            fetchReadme(repo),
+          ]);
+          const commands = extractCommands(readme);
+          render(repoData, commands);
+          statusEl.textContent = `Loaded ${repoData.full_name} from GitHub public API.`;
+          gtag("event", "repo_report_loaded", { event_category: "dayonebuilder_resolver", repo: repoData.full_name });
+        } catch (error) {
+          statusEl.textContent = error.message || "GitHub API request failed.";
+          const githubUrl = `https://github.com/${repo}`;
+          output.innerHTML = `
+            <div class="empty">
+              Could not load that public GitHub repository from the browser. Do not invent stats. Open the source directly or use the authenticated DOB resolver API/cache when it is available.
+              <div class="actions">
+                <a class="btn secondary" href="${escapeHtml(githubUrl)}">Open GitHub source</a>
+                <a class="btn secondary" href="/api/resolver.openapi.json">Open API contract</a>
+              </div>
+            </div>
+          `;
+          gtag("event", "repo_report_error", { event_category: "dayonebuilder_resolver", repo });
+        }
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const repo = normalizeRepo(input.value);
+        if (!repo) {
+          input.setAttribute("aria-invalid", "true");
+          input.focus();
+          return;
+        }
+        history.pushState({}, "", `/repo/?repo=${encodeURIComponent(repo)}`);
+        load(repo);
+      });
+
+      const params = new URLSearchParams(window.location.search);
+      load(params.get("repo") || "");
+    </script>
+  </body>
+</html>
