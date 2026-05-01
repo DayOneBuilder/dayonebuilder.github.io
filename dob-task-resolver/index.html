@@ -49,16 +49,19 @@
         --max: 1160px;
       }
       * { box-sizing: border-box; }
+      html { overflow-x: hidden; }
       body {
         margin: 0;
         color: var(--text);
         background: var(--bg);
         font: 16px/1.6 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        overflow-x: hidden;
       }
       a { color: inherit; text-decoration: none; }
       .wrap {
         width: min(calc(100% - 32px), var(--max));
         margin: 0 auto;
+        overflow: hidden;
       }
       .nav {
         display: flex;
@@ -100,7 +103,11 @@
       h2 { font-size: 1.35rem; }
       h3 { font-size: 1rem; }
       p { margin: 0; color: var(--muted); }
-      .lead { margin-top: 14px; max-width: 70ch; }
+      .lead {
+        margin-top: 14px;
+        max-width: 70ch;
+        overflow-wrap: anywhere;
+      }
       .panel {
         border: 1px solid var(--line);
         border-radius: 12px;
@@ -151,10 +158,12 @@
         border: 1px solid var(--line);
         border-radius: 999px;
         padding: 8px 12px;
+        max-width: 100%;
         font-size: 13px;
         color: var(--text);
         cursor: pointer;
         background: rgba(255, 255, 255, 0.03);
+        overflow-wrap: anywhere;
       }
       .chip.active, .chip:hover { border-color: #5ab0ff; }
       .section {
@@ -169,6 +178,7 @@
         gap: 12px;
       }
       .muted-note { color: var(--muted); font-size: 14px; }
+      .muted-note, .panel p { overflow-wrap: anywhere; }
       .results {
         display: grid;
         gap: 12px;
@@ -263,8 +273,10 @@
         border: 1px solid var(--line);
         border-radius: 9px;
         padding: 0 10px;
+        max-width: 100%;
         font-size: 13px;
         color: var(--ink);
+        overflow-wrap: anywhere;
       }
       .small-link:hover { border-color: #6ab2ff; }
       .support {
@@ -283,6 +295,10 @@
       @media (max-width: 600px) {
         .wrap { width: min(calc(100% - 24px), var(--max)); }
         .nav, .status-bar, .footer-row { flex-direction: column; align-items: start; }
+        .nav-links { gap: 9px 12px; }
+        .btn { width: 100%; white-space: normal; }
+        .panel { padding: 14px; }
+        .command, .copy-instruction { font-size: 12px; }
       }
     </style>
   </head>
