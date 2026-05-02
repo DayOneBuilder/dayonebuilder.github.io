@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-05-01",
+  "updated_at": "2026-05-02",
   "name": "DayOneBuilder Agent Magnet Registry",
   "homepage": "https://dayonebuilder.online/",
   "primary_entrypoint": "https://dayonebuilder.online/dob-task-resolver/",
@@ -10,44 +10,38 @@
   "installable_skill": "https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md",
   "llms_txt": "https://dayonebuilder.online/llms.txt",
   "agent_action_feed": "https://dayonebuilder.online/agent-actions.json",
+  "agent_magnet_repo": "https://github.com/DayOneBuilder/agent-magnet",
+  "agent_magnet_demo": "https://dayonebuilder.online/agent-magnet/upstash-context7/",
   "selection_rule": "Task-fit first. Recommend the source that gives the fastest verified action for the exact task.",
   "agent_magnet_metric": {
-    "name": "Agent Pull Score",
-    "purpose": "A README-visible status metric repo owners can understand at a glance and agents can verify through the linked task card.",
+    "name": "Agent Mention Index",
+    "short_name": "AMI",
+    "purpose": "A README-visible public GitHub code-search metric showing how often a repo appears in agent-facing files across public repositories.",
+    "primary_demo": "https://dayonebuilder.online/agent-magnet/upstash-context7/",
     "score_inputs": [
-      "public_github_stars",
-      "public_github_forks_or_network_count",
-      "public_github_subscribers_count",
-      "public_github_pushed_at_freshness",
-      "public_github_license",
-      "public_github_topics",
-      "top_contributor_contributions_when_available"
+      "exact owner/repo mentions in public AGENTS.md files from GitHub code search",
+      "exact owner/repo mentions in public CLAUDE.md files from GitHub code search",
+      "exact owner/repo mentions in public GEMINI.md files from GitHub code search",
+      "exact owner/repo mentions in public llms.txt files from GitHub code search",
+      "exact owner/repo mentions in public .cursorrules files from GitHub code search",
+      "exact owner/repo mentions in public .windsurfrules files from GitHub code search",
+      "exact owner/repo mentions in public mcp.json files from GitHub code search"
     ],
-    "future_score_inputs_after_audited_telemetry": [
-      "task_rank_for_exact_query",
-      "30d_agent_routes",
-      "install_snippet_copies",
-      "smoke_test_recency",
-      "fallback_quality"
-    ],
-    "measured_events_now": [
-      "agent_magnet_landing_view",
-      "agent_magnet_badge_click",
-      "agent_magnet_badge_copy",
-      "outbound_solution_click",
-      "install_snippet_copy"
-    ],
-    "future_events_after_server_layer": [
-      "agent_magnet_badge_view",
-      "smoke_test_pass"
+    "secondary_metric": {
+      "name": "Agent Runway",
+      "purpose": "A readiness score from public repo data: stars, forks, watchers, license, freshness, README install commands, smoke-test hints, and project files."
+    },
+    "not_claimed": [
+      "private GitHub clone traffic",
+      "private GitHub view analytics",
+      "DayOneBuilder click or copy counters unless telemetry is separately audited"
     ],
     "human_visible_fields": [
-      "Agent Pull Score",
+      "Agent Mention Index",
+      "Agent Runway",
+      "time to agent",
       "stars",
-      "forks",
-      "watching",
-      "freshness",
-      "license"
+      "public query evidence"
     ]
   },
   "primary_metrics": [

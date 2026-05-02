@@ -10,6 +10,7 @@ Sitemap: https://dayonebuilder.online/sitemap.xml
 # actions: https://dayonebuilder.online/agent-actions.json
 # resolver: https://dayonebuilder.online/dob-task-resolver/
 # repo report: https://dayonebuilder.online/repo/
+# agent magnet demo: https://dayonebuilder.online/agent-magnet/upstash-context7/
 # api contract: https://dayonebuilder.online/api/resolver.openapi.json
 # mcp contract: https://dayonebuilder.online/mcp/dayonebuilder-resolver.json
 # skill: https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md

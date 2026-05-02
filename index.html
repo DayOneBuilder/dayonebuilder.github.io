@@ -312,6 +312,14 @@
         white-space: pre-wrap;
         overflow-wrap: anywhere;
       }
+      .agent-badge {
+        display: block;
+        width: 100%;
+        max-width: 760px;
+        border: 1px solid var(--strong);
+        border-radius: 14px;
+        background: var(--surface);
+      }
       .endpoint-links {
         display: flex;
         flex-wrap: wrap;
@@ -356,6 +364,7 @@
           <div class="links">
           <a href="/dob-task-resolver/">Task Resolver</a>
           <a href="/repo/">Repo Report</a>
+          <a href="/agent-magnet/upstash-context7/">Agent Magnet</a>
           <a href="/api/resolver.openapi.json">API</a>
           <a href="/skills/dayonebuilder-resolver/SKILL.md">Skill</a>
           <a href="https://github.com/DayOneBuilder">GitHub</a>
@@ -455,12 +464,36 @@
             <article class="contract"><h3>Telemetry loop</h3><p>The resolver watches task submissions, repo reports, outbound source clicks, install snippet copies, and repeat agent routes.</p></article>
           </div>
         </section>
+
+        <section class="section" aria-labelledby="agent-magnet">
+          <div class="section-head">
+            <div>
+              <span class="eyebrow">Agent Magnet badge</span>
+              <h2 id="agent-magnet">Show the public agent footprint.</h2>
+            </div>
+            <p>Agent Mention Index counts public GitHub code-search hits for exact repo mentions inside agent-facing files. It is a visible proxy for agent routing, not private GitHub traffic.</p>
+          </div>
+          <div class="badge-lab">
+            <a href="/agent-magnet/upstash-context7/" aria-label="Open Agent Magnet report for upstash/context7">
+              <img class="agent-badge" src="/badges/upstash-context7-agent-magnet.svg" alt="Agent Magnet badge for upstash/context7" />
+            </a>
+            <article class="copy-box">
+              <h3>README embed</h3>
+              <p>Use a badge only when it links to query evidence for that repository.</p>
+              <pre>[![Agent Magnet: Agent Mentions 1.5k](https://dayonebuilder.online/badges/upstash-context7-agent-magnet.svg)](https://dayonebuilder.online/agent-magnet/upstash-context7/)</pre>
+              <div class="actions">
+                <a class="btn secondary" href="/agent-magnet/upstash-context7/">Open evidence page</a>
+                <a class="btn secondary" href="https://github.com/DayOneBuilder/agent-magnet">Open GitHub repo</a>
+              </div>
+            </article>
+          </div>
+        </section>
       </main>
 
       <footer>
         <div class="footer-row">
           <span>DayOneBuilder Resolver</span>
-          <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/repo/">Repo Report</a> / <a href="/api/resolver.openapi.json">API</a> / <a href="/agent-actions.json">actions</a></span>
+          <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/repo/">Repo Report</a> / <a href="/agent-magnet/upstash-context7/">Agent Magnet</a> / <a href="/api/resolver.openapi.json">API</a> / <a href="/agent-actions.json">actions</a></span>
         </div>
       </footer>
     </div>

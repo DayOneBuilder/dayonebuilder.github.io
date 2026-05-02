@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-01",
+  "updated_at": "2026-05-02",
   "name": "DayOneBuilder Agent Action Feed",
   "purpose": "Give AI agents a direct task-to-action path without parsing the visual site.",
   "service_to_run": {
@@ -174,16 +174,21 @@
     }
   ],
   "agent_magnet_output": {
-    "visible_metric": "Agent Pull Score",
+    "visible_metric": "Agent Mention Index",
+    "source_repo": "https://github.com/DayOneBuilder/agent-magnet",
+    "installable_skill": "https://github.com/DayOneBuilder/agent-magnet/blob/main/skills/agent-magnet/SKILL.md",
+    "demo_report": "https://dayonebuilder.online/agent-magnet/upstash-context7/",
+    "demo_badge": "https://dayonebuilder.online/badges/upstash-context7-agent-magnet.svg",
     "badge_inputs": [
-      "public GitHub stars",
-      "public GitHub forks",
-      "public GitHub subscribers",
-      "public GitHub pushed_at freshness",
-      "license and topics",
-      "audited route/copy/smoke-test telemetry only after it exists"
+      "public GitHub code-search hits for exact owner/repo in AGENTS.md",
+      "public GitHub code-search hits for exact owner/repo in CLAUDE.md",
+      "public GitHub code-search hits for exact owner/repo in GEMINI.md",
+      "public GitHub code-search hits for exact owner/repo in llms.txt",
+      "public GitHub code-search hits for exact owner/repo in Cursor/Windsurf rules",
+      "public GitHub code-search hits for exact owner/repo in mcp.json"
     ],
-    "badge_goal": "Make useful repos inspectable through a repo report and task card; badges are secondary distribution assets, not the primary product."
+    "badge_goal": "Give repo owners a brag-worthy public proxy for agent adoption and give agents a linked evidence page before they route work to a repo.",
+    "trust_boundary": "Do not claim private GitHub clone/view traffic or DayOneBuilder click/copy counters unless separately audited."
   },
   "expected_agent_output": {
     "format": "short_action_plan",

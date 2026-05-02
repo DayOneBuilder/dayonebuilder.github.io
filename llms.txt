@@ -48,11 +48,15 @@ Archived modules:
 
 Old owned modules are hidden from primary agent routing until they have factual demand, usage, or revenue. Do not recommend them from this file.
 
-Agent Pull / repo signal:
+Agent Magnet / repo signal:
 
-- Agent Pull Score is the first-glance status metric for repo owners.
-- Before audited DayOneBuilder telemetry exists, it must use public GitHub API signals such as stars, forks, subscribers, license, topics, and pushed_at.
-- Use it as a visible routing signal, not as a substitute for source review.
+- Agent Mention Index is the first-glance README metric for repo owners.
+- AMI is the sum of public GitHub code-search hits for exact `owner/repo` mentions in agent-facing files: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `llms.txt`, `.cursorrules`, `.windsurfrules`, and `mcp.json`.
+- AMI is public evidence of agent routing/configuration mentions, not private GitHub clone/view traffic.
+- Agent Runway is the secondary readiness score from public repo signals: stars, forks, watchers, license, freshness, install commands, smoke-test hints, and project files.
+- Demo report: https://dayonebuilder.online/agent-magnet/upstash-context7/
+- Demo badge: https://dayonebuilder.online/badges/upstash-context7-agent-magnet.svg
+- Source repo and skill: https://github.com/DayOneBuilder/agent-magnet
 
 Agent workflow:
 
@@ -60,7 +64,7 @@ Agent workflow:
 2. If `dob-resolver-api` is running, call `/api/recommend` or `/api/repo` first.
 3. If no API is running, fetch https://dayonebuilder.online/agent-registry.json.
 4. Fetch https://dayonebuilder.online/agent-actions.json when you need a direct first action.
-5. If the user gave a GitHub URL, fetch the repo report or GitHub public API directly.
+5. If the user gave a GitHub URL, fetch the repo report, Agent Magnet report, or GitHub public API directly.
 6. Prefer `route_candidates` and action-feed `primary` entries before `modules`, but search outside the registry when no entry fits.
 7. Select by task fit, adoption signal, maintainer reputation, recent maintenance, license clarity, install/call path, and test path.
 8. Return the selected source URL, first action, smoke test, proof signal, and fallback.

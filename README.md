@@ -7,12 +7,14 @@ Static GitHub Pages bundle for the DayOneBuilder Agent Magnet resolver.
 - `/` - Agent Magnet resolver positioning page
 - `/dob-task-resolver/` - task-to-solution resolver
 - `/repo/` - GitHub repo report from public GitHub API signals
+- `/agent-magnet/upstash-context7/` - Agent Mention Index demo report from public GitHub code-search signals
 - `/api/resolver.openapi.json` - API contract for the authenticated resolver service to run
 - `/mcp/dayonebuilder-resolver.json` - MCP adapter contract for resolver tools
 - `/agent-registry.json` - machine-readable route candidate registry
 - `/agent-actions.json` - machine-readable first-action feed for agents
 - `/skills/dayonebuilder-resolver/SKILL.md` - installable resolver skill contract for agents
-- `/badges/agent-magnet.svg` - generated badge asset; not the primary homepage surface
+- `/badges/upstash-context7-agent-magnet.svg` - README badge for the demo report
+- `/badges/agent-magnet.svg` - generic alias for the current demo badge
 - `/llms.txt` - agent instructions
 - `/sitemap.xml` - primary crawl surface
 - old catalog and offer routes are archived and point to `/dob-task-resolver/`
@@ -38,7 +40,21 @@ Use `GITHUB_TOKEN` or `GH_TOKEN` for authenticated GitHub API/cache. The service
 - `DOB_RESOLVER_CACHE_DIR=/tmp/dayonebuilder-resolver-cache`
 - `DOB_RESOLVER_EVENT_LOG=/tmp/dayonebuilder-resolver-events.jsonl`
 
-Public badges must not show route/copy/smoke-test counts until telemetry collection is audited. Repo reports may show GitHub API/cache fields.
+Public badges must not show route/copy/smoke-test counts until telemetry collection is audited. Agent Magnet badges may show Agent Mention Index because it is generated from public GitHub code-search totals for exact `owner/repo` mentions in agent-facing files.
+
+## Agent Magnet Demo
+
+Source repo:
+
+- https://github.com/DayOneBuilder/agent-magnet
+
+Embed example:
+
+```markdown
+[![Agent Magnet: Agent Mentions 1.5k](https://dayonebuilder.online/badges/upstash-context7-agent-magnet.svg)](https://dayonebuilder.online/agent-magnet/upstash-context7/)
+```
+
+The badge links to a static report with query evidence and a small race board. It does not claim private GitHub clone or view traffic.
 
 ## Payment Note
 

@@ -1,0 +1,112 @@
+{
+  "agent_mention_index": 1548,
+  "agent_mentions": {
+    "agent_mention_index": 1548,
+    "breakdown": [
+      {
+        "incomplete_results": false,
+        "query": "\"upstash/context7\" filename:AGENTS.md",
+        "rate_limit_remaining": "6",
+        "total_count": 132
+      },
+      {
+        "incomplete_results": false,
+        "query": "\"upstash/context7\" filename:CLAUDE.md",
+        "rate_limit_remaining": "5",
+        "total_count": 188
+      },
+      {
+        "incomplete_results": false,
+        "query": "\"upstash/context7\" filename:GEMINI.md",
+        "rate_limit_remaining": "4",
+        "total_count": 14
+      },
+      {
+        "incomplete_results": false,
+        "query": "\"upstash/context7\" filename:llms.txt",
+        "rate_limit_remaining": "3",
+        "total_count": 12
+      },
+      {
+        "incomplete_results": false,
+        "query": "\"upstash/context7\" filename:.cursorrules",
+        "rate_limit_remaining": "2",
+        "total_count": 3
+      },
+      {
+        "incomplete_results": false,
+        "query": "\"upstash/context7\" filename:.windsurfrules",
+        "rate_limit_remaining": "1",
+        "total_count": 3
+      },
+      {
+        "incomplete_results": false,
+        "query": "\"upstash/context7\" filename:mcp.json",
+        "rate_limit_remaining": "9",
+        "total_count": 1196
+      }
+    ],
+    "definition": "Sum of public GitHub code-search hits for owner/repo in agent-facing files such as AGENTS.md, CLAUDE.md, GEMINI.md, llms.txt, Cursor/Windsurf rules, and MCP configs.",
+    "errors": [],
+    "trust_note": "This is public evidence of agent routing/configuration mentions, not private GitHub clone/view traffic."
+  },
+  "agent_runway_grade": "S",
+  "agent_runway_score": 97,
+  "description": "Context7 Platform -- Up-to-date code documentation for LLMs and AI code editors",
+  "estimated_time_to_agent_seconds": 45,
+  "generated_at": "2026-05-02T05:13:28Z",
+  "metric": {
+    "name": "Agent Mention Index",
+    "short_name": "AMI",
+    "value": 1548,
+    "why_it_matters": "Agent-facing repo mentions are a public proxy for whether coding agents and agent workspaces already route to this project."
+  },
+  "repo": "upstash/context7",
+  "repo_url": "https://github.com/upstash/context7",
+  "score_breakdown": {
+    "agent_mention_points": 35,
+    "demand_points": 20,
+    "time_to_agent_points": 17.0,
+    "trust_points": 25
+  },
+  "score_inputs": {
+    "forks": 2578,
+    "license": "MIT",
+    "pushed_at": "2026-05-01T23:22:51Z",
+    "pushed_days": 0,
+    "readme_install_command_hits": 3,
+    "readme_smoke_signal_hits": 1,
+    "release_downloads": {
+      "recent_release_count": 10,
+      "release_asset_downloads": 0
+    },
+    "root_files_seen": [
+      ".changeset",
+      ".claude-plugin",
+      ".github",
+      ".gitignore",
+      ".prettierignore",
+      "docs",
+      "eslint.config.js",
+      "gemini-extension.json",
+      "i18n",
+      "license",
+      "package.json",
+      "packages",
+      "plugins",
+      "pnpm-lock.yaml",
+      "pnpm-workspace.yaml",
+      "prettier.config.mjs",
+      "public",
+      "readme.md",
+      "rules",
+      "security.md",
+      "server.json",
+      "skills",
+      "tsconfig.json"
+    ],
+    "stars": 54257,
+    "subscribers_count": 151
+  },
+  "source": "github_public_api_and_github_code_search"
+}
