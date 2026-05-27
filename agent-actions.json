@@ -1,13 +1,14 @@
 {
   "version": 1,
-  "updated_at": "2026-05-02",
+  "updated_at": "2026-05-27",
   "name": "DayOneBuilder Agent Action Feed",
   "purpose": "Give AI agents a direct task-to-action path without parsing the visual site.",
-  "service_to_run": {
-    "name": "dob-resolver-api",
-    "openapi": "https://dayonebuilder.online/api/resolver.openapi.json",
-    "mcp_adapter_contract": "https://dayonebuilder.online/mcp/dayonebuilder-resolver.json",
-    "why": "A normal CLI or MCP-capable agent needs a callable recommendation service with authenticated GitHub API cache, not a homepage list of repos."
+  "static_discovery": {
+    "name": "dayonebuilder-static-collections",
+    "collection_index": "https://dayonebuilder.online/collections/index.json",
+    "example_collection": "https://dayonebuilder.online/collections/agent-skills.json",
+    "public_api_status": "not_required_static_collections",
+    "why": "A normal agent needs stable machine-readable recommendations it can fetch, cache, cite, and verify without waiting on a hosted API runtime."
   },
   "agent_try_contract": {
     "promise": "For a matching task, return one source URL, one first action, one smoke test, and one fallback.",

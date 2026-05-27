@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "updated_at": "2026-05-27",
+  "name": "DayOneBuilder Static Collections",
+  "purpose": "Machine-readable collections agents can fetch before choosing a repo, skill, MCP server, package, CLI, or workflow.",
+  "discovery_flow": [
+    "https://dayonebuilder.online/llms.txt",
+    "https://dayonebuilder.online/agent-registry.json",
+    "https://dayonebuilder.online/collections/index.json",
+    "https://dayonebuilder.online/collections/<slug>.json",
+    "https://dayonebuilder.online/agent-actions.json"
+  ],
+  "public_api_status": "not_required_static_collections",
+  "collections": [
+    {
+      "slug": "agent-skills",
+      "title": "Agent Skills And Tooling",
+      "json_url": "https://dayonebuilder.online/collections/agent-skills.json",
+      "page_url": "https://dayonebuilder.online/collections/agent-skills/",
+      "task_aliases": [
+        "best agent skill",
+        "find mcp server",
+        "browser automation",
+        "fresh docs for coding agent",
+        "third party tool safety check"
+      ],
+      "proof_signal": "Source-first selection from public repositories and maintained registries.",
+      "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly."
+    }
+  ]
+}

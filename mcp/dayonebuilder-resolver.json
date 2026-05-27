@@ -1,20 +1,15 @@
 {
   "name": "dayonebuilder-resolver",
-  "version": "0.1.0",
-  "description": "MCP adapter contract for agents that need to choose the best existing executor before building from scratch.",
-  "backend_required": true,
-  "backend_contract": "https://dayonebuilder.online/api/resolver.openapi.json",
-  "reference_backend": {
-    "repo_path": "services/dob_resolver_api.py",
-    "run_command": "python3 services/dob_resolver_api.py --site site --host 127.0.0.1 --port 8787",
-    "local_base_url": "http://127.0.0.1:8787",
-    "github_cache_env": ["GITHUB_TOKEN", "GH_TOKEN"],
-    "event_log_env": "DOB_RESOLVER_EVENT_LOG"
-  },
+  "version": "0.2.0",
+  "description": "Optional MCP adapter contract for agents that need to choose the best existing executor from static DayOneBuilder collections.",
+  "backend_required": false,
+  "public_api_status": "not_required_static_collections",
+  "collection_index": "https://dayonebuilder.online/collections/index.json",
+  "action_feed": "https://dayonebuilder.online/agent-actions.json",
   "tools": [
     {
       "name": "dob_recommend_executor",
-      "description": "Given a task, return the best source URL, first action, smoke test, proof signal, and fallback.",
+      "description": "Given a task, fetch static collections and return the best source URL, first action, smoke test, proof signal, and fallback.",
       "input_schema": {
         "type": "object",
         "required": ["task"],
@@ -37,7 +32,7 @@
     },
     {
       "name": "dob_record_event",
-      "description": "Record a resolver adoption event such as mcp_recommend_call, install_snippet_copy, outbound_repo_click, or smoke_test_pass.",
+      "description": "Record a resolver adoption event such as collection_json_hit, install_snippet_copy, outbound_repo_click, or smoke_test_pass when telemetry is available.",
       "input_schema": {
         "type": "object",
         "required": ["event_name"],
@@ -45,13 +40,13 @@
           "event_name": {
             "type": "string",
             "enum": [
-              "api_recommend_call",
-              "mcp_recommend_call",
+              "collection_index_hit",
+              "collection_json_hit",
+              "static_action_feed_hit",
               "repo_report_loaded",
               "repo_report_error",
               "install_snippet_copy",
               "outbound_repo_click",
-              "resolver_call",
               "smoke_test_pass"
             ]
           },
@@ -64,7 +59,7 @@
     }
   ],
   "trust_rules": [
-    "Use GitHub public API or authenticated cache as source of truth.",
+    "Use static collections, upstream source URLs, GitHub public API, or authenticated cache as source of truth.",
     "Do not invent route, click, copy, install, or smoke-test counters.",
     "Prefer the best external executor when it beats a DayOneBuilder-owned option."
   ]

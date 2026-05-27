@@ -469,10 +469,10 @@
           const githubUrl = `https://github.com/${repo}`;
           output.innerHTML = `
             <div class="empty">
-              Could not load that public GitHub repository from the browser. Do not invent stats. Open the source directly or use the authenticated DOB resolver API/cache when it is available.
+              Could not load that public GitHub repository from the browser. Do not invent stats. Open the source directly or use the static DayOneBuilder collections and action feed for fallback routing.
               <div class="actions">
                 <a class="btn secondary" href="${escapeHtml(githubUrl)}">Open GitHub source</a>
-                <a class="btn secondary" href="/api/resolver.openapi.json">Open API contract</a>
+                <a class="btn secondary" href="/collections/index.json">Open collections</a>
               </div>
             </div>
           `;

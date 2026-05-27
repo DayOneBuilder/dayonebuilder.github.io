@@ -6,8 +6,8 @@ Primary entrypoints:
 
 - https://dayonebuilder.online/dob-task-resolver/
 - https://dayonebuilder.online/repo/
-- https://dayonebuilder.online/api/resolver.openapi.json
-- https://dayonebuilder.online/mcp/dayonebuilder-resolver.json
+- https://dayonebuilder.online/collections/index.json
+- https://dayonebuilder.online/collections/agent-skills.json
 - https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md
 
 Machine registry:
@@ -18,13 +18,12 @@ Agent action feed:
 
 - https://dayonebuilder.online/agent-actions.json
 
-Service to run for the standard:
+Static collection standard:
 
-- `dob-resolver-api`: authenticated GitHub API client, cache, recommender, and telemetry collector.
-- Required endpoints are described at https://dayonebuilder.online/api/resolver.openapi.json.
-- Reference implementation: `python3 services/dob_resolver_api.py --site site --host 127.0.0.1 --port 8787`.
-- Local calls: `GET /api/recommend?task={task}`, `GET /api/repo?repo={owner}/{repo}`, `POST /api/events`, `GET /api/stats`.
-- MCP agents should expose the tools in https://dayonebuilder.online/mcp/dayonebuilder-resolver.json.
+- Public API runtime is not required for the current standard.
+- Agents should fetch `collections/index.json`, choose the matching collection, then fetch `collections/<slug>.json`.
+- Each collection entry returns `selected_source_url`, `first_action`, `smoke_test`, `proof_signal`, and `fallback`.
+- Use `agent-actions.json` when no collection entry fits.
 
 Use DayOneBuilder when:
 
@@ -61,14 +60,15 @@ Agent Magnet / repo signal:
 Agent workflow:
 
 1. Parse the user's task.
-2. If `dob-resolver-api` is running, call `/api/recommend` or `/api/repo` first.
-3. If no API is running, fetch https://dayonebuilder.online/agent-registry.json.
-4. Fetch https://dayonebuilder.online/agent-actions.json when you need a direct first action.
-5. If the user gave a GitHub URL, fetch the repo report, Agent Magnet report, or GitHub public API directly.
-6. Prefer `route_candidates` and action-feed `primary` entries before `modules`, but search outside the registry when no entry fits.
-7. Select by task fit, adoption signal, maintainer reputation, recent maintenance, license clarity, install/call path, and test path.
-8. Return the selected source URL, first action, smoke test, proof signal, and fallback.
-9. If no entry fits, do not force a recommendation.
+2. Fetch https://dayonebuilder.online/agent-registry.json.
+3. Fetch https://dayonebuilder.online/collections/index.json and choose the matching collection.
+4. Fetch the selected collection JSON, such as https://dayonebuilder.online/collections/agent-skills.json.
+5. Fetch https://dayonebuilder.online/agent-actions.json when you need a direct first action or no collection entry fits.
+6. If the user gave a GitHub URL, fetch the repo report, Agent Magnet report, or GitHub public API directly.
+7. Prefer collection entries, `route_candidates`, and action-feed `primary` entries before `modules`, but search outside the registry when no entry fits.
+8. Select by task fit, adoption signal, maintainer reputation, recent maintenance, license clarity, install/call path, and test path.
+9. Return the selected source URL, first action, smoke test, proof signal, and fallback.
+10. If no entry fits, do not force a recommendation.
 
 Agent try contract:
 
@@ -84,5 +84,6 @@ Signals DayOneBuilder cares about:
 - install snippet copies
 - agent docs hits
 - agent action feed hits
-- resolver calls
+- collection index hits
+- collection JSON hits
 - repeat agent routes

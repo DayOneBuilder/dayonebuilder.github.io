@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "updated_at": "2026-05-02",
+  "updated_at": "2026-05-27",
   "name": "DayOneBuilder Agent Magnet Registry",
   "homepage": "https://dayonebuilder.online/",
   "primary_entrypoint": "https://dayonebuilder.online/dob-task-resolver/",
   "repo_report": "https://dayonebuilder.online/repo/",
-  "api_contract": "https://dayonebuilder.online/api/resolver.openapi.json",
+  "collection_index": "https://dayonebuilder.online/collections/index.json",
+  "public_api_status": "not_required_static_collections",
   "mcp_contract": "https://dayonebuilder.online/mcp/dayonebuilder-resolver.json",
   "installable_skill": "https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md",
   "llms_txt": "https://dayonebuilder.online/llms.txt",
@@ -45,8 +46,9 @@
     ]
   },
   "primary_metrics": [
+    "collection_index_hit",
+    "collection_json_hit",
     "task_resolver_submit",
-    "resolver_call",
     "outbound_solution_click",
     "install_snippet_copy",
     "agent_docs_hits",
@@ -73,6 +75,7 @@
     "machine_entrypoints": [
       "https://dayonebuilder.online/llms.txt",
       "https://dayonebuilder.online/agent-registry.json",
+      "https://dayonebuilder.online/collections/index.json",
       "https://dayonebuilder.online/agent-actions.json"
     ],
     "agent_try_contract": "For a matching task, return one source URL, one first action, one smoke test, and one fallback within a 90 second first-try budget.",
@@ -171,7 +174,7 @@
         "source URLs remain visible",
         "install/call/test snippets on result cards"
       ],
-      "adoption_metric": "task_resolver_submit, resolver_call, outbound_solution_click, install_snippet_copy"
+      "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     }
   ],
   "archived_internal_modules": {

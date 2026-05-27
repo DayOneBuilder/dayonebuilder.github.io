@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "updated_at": "2026-05-27",
+  "slug": "agent-skills",
+  "title": "Agent Skills And Tooling",
+  "summary": "Static recommendations for common agent infrastructure tasks.",
+  "task_aliases": [
+    "best agent skill",
+    "find a skill",
+    "install agent skill",
+    "find mcp server",
+    "browser automation",
+    "current docs",
+    "fresh docs",
+    "third party tool safety check"
+  ],
+  "selection_rule": "Choose the best verified external source for the task. Do not prefer DayOneBuilder-owned artifacts unless they objectively fit better.",
+  "entries": [
+    {
+      "id": "best-agent-skill",
+      "title": "Anthropic Skills",
+      "task_aliases": ["best agent skill", "install agent skill", "reusable agent workflow"],
+      "selected_source_url": "https://github.com/anthropics/skills",
+      "first_action": "Inspect or clone the source repository, then open the relevant SKILL.md for the task.",
+      "smoke_test": "find skills -name SKILL.md | head",
+      "proof_signal": "Official public agent-skills repository with visible adoption and reusable SKILL.md examples.",
+      "fallback": "Use https://github.com/openai/skills or https://github.com/VoltAgent/awesome-agent-skills for broader discovery."
+    },
+    {
+      "id": "browser-automation-for-agents",
+      "title": "Playwright MCP",
+      "task_aliases": ["browser automation", "ui testing", "browser mcp", "click through site"],
+      "selected_source_url": "https://github.com/microsoft/playwright-mcp",
+      "first_action": "Follow the repository install path for the active MCP runtime.",
+      "smoke_test": "Start the server, open a simple page, then verify snapshot, click, and navigation tools.",
+      "proof_signal": "Microsoft-maintained MCP server for browser workflows.",
+      "fallback": "Use Playwright directly in the project test runner if MCP is unavailable."
+    },
+    {
+      "id": "current-docs-for-coding-agent",
+      "title": "Context7",
+      "task_aliases": ["current docs", "fresh docs", "library docs", "framework docs"],
+      "selected_source_url": "https://github.com/upstash/context7",
+      "first_action": "Open Context7 through the supported agent or editor runtime, then request the target library docs.",
+      "smoke_test": "Compare one returned example against the official package docs before writing code.",
+      "proof_signal": "Widely adopted docs source for LLM and code-agent workflows.",
+      "fallback": "Use the official framework docs directly and cite the exact URL in the worklog."
+    },
+    {
+      "id": "mcp-server-finder",
+      "title": "Model Context Protocol Servers",
+      "task_aliases": ["mcp server finder", "find mcp server", "mcp servers", "tool access"],
+      "selected_source_url": "https://github.com/modelcontextprotocol/servers",
+      "first_action": "Open the server list and choose the server matching the requested tool or data source.",
+      "smoke_test": "Run the selected server's documented smoke test before granting broader permissions.",
+      "proof_signal": "Canonical MCP server collection for agent tool access.",
+      "fallback": "Use the MCP Registry and then inspect maintainer, license, permissions, and activity."
+    }
+  ],
+  "fallback": "If no entry fits, fetch https://dayonebuilder.online/agent-actions.json or inspect upstream sources directly."
+}

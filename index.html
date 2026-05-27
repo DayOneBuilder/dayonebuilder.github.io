@@ -6,7 +6,7 @@
     <title>DayOneBuilder | Agent Magnet resolver</title>
     <meta
       name="description"
-      content="Task in, best executor out. DayOneBuilder gives agents a resolver API, action feed, installable skill, and GitHub repo report before they rebuild from scratch."
+      content="Task in, best executor out. DayOneBuilder gives agents static collections, an action feed, installable skill, and GitHub repo report before they rebuild from scratch."
     />
     <link rel="canonical" href="https://dayonebuilder.online/" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
@@ -60,7 +60,7 @@
         "@type": "WebApplication",
         "name": "DayOneBuilder Resolver",
         "url": "https://dayonebuilder.online/",
-        "description": "Agent-callable resolver for choosing the best reusable executor from GitHub repos, skills, MCP servers, and action feeds."
+        "description": "Static agent-readable resolver for choosing the best reusable executor from GitHub repos, skills, MCP servers, and action feeds."
       }
     </script>
     <style>
@@ -365,7 +365,7 @@
           <a href="/dob-task-resolver/">Task Resolver</a>
           <a href="/repo/">Repo Report</a>
           <a href="/agent-magnet/upstash-context7/">Agent Magnet</a>
-          <a href="/api/resolver.openapi.json">API</a>
+          <a href="/collections/index.json">Collections</a>
           <a href="/skills/dayonebuilder-resolver/SKILL.md">Skill</a>
           <a href="https://github.com/DayOneBuilder">GitHub</a>
         </div>
@@ -376,7 +376,7 @@
           <span class="eyebrow">Agent-native resolver</span>
           <h1>Task in. Executor out.</h1>
           <p class="lead">
-            Agents should call a resolver, not browse a homepage. DayOneBuilder returns the best source URL, install or call path, verification step, and fallback for the task.
+            Agents should fetch a resolver collection, not browse a homepage. DayOneBuilder returns the best source URL, install or call path, verification step, and fallback for the task.
           </p>
           <form id="repo-form" class="repo-form" autocomplete="off" onsubmit="openRepoReport(event)">
             <label class="sr-only" for="repo-url" style="display:none">GitHub repository URL</label>
@@ -398,9 +398,9 @@
           <div class="section-head">
             <div>
               <span class="eyebrow">Agent entrypoints</span>
-              <h2 id="agent-entrypoints">Install or call the resolver.</h2>
+              <h2 id="agent-entrypoints">Fetch the resolver.</h2>
             </div>
-            <p>The homepage is only a doorway. The useful surface is the API-shaped resolver, repo report, action feed, and installable skill an agent can invoke during work.</p>
+            <p>The homepage is only a doorway. The useful surface is the static collection resolver, repo report, action feed, and installable skill an agent can invoke during work.</p>
           </div>
           <div class="grid">
             <article class="endpoint-card">
@@ -422,22 +422,22 @@
               <a class="btn secondary" href="/skills/dayonebuilder-resolver/SKILL.md">Open skill</a>
             </article>
             <article class="endpoint-card">
+              <h3>Collections</h3>
+              <p>Machine-readable groups of source-first recommendations and fallbacks.</p>
+              <div class="command-line"><code>GET /collections/index.json</code></div>
+              <a class="btn secondary" href="/collections/index.json">Open collections</a>
+            </article>
+            <article class="endpoint-card">
               <h3>Action feed</h3>
               <p>Machine-readable task aliases, first actions, smoke tests, and fallbacks.</p>
               <div class="command-line"><code>GET /agent-actions.json</code></div>
               <a class="btn secondary" href="/agent-actions.json">Open JSON</a>
             </article>
             <article class="endpoint-card">
-              <h3>Resolver API contract</h3>
-              <p>Callable service shape with a dependency-free Python reference implementation.</p>
-              <div class="command-line"><code>GET /api/recommend?task={task}</code></div>
-              <a class="btn secondary" href="/api/resolver.openapi.json">Open OpenAPI</a>
-            </article>
-            <article class="endpoint-card">
-              <h3>Local service</h3>
-              <p>Run this in the repo to give a coding agent a real endpoint.</p>
-              <div class="command-line"><code>python3 services/dob_resolver_api.py --site site --port 8787</code></div>
-              <a class="btn secondary" href="/README.md">Read service notes</a>
+              <h3>Collection JSON</h3>
+              <p>Start with agent skills, MCP servers, browser automation, and fresh docs.</p>
+              <div class="command-line"><code>GET /collections/agent-skills.json</code></div>
+              <a class="btn secondary" href="/collections/agent-skills.json">Open collection</a>
             </article>
             <article class="endpoint-card">
               <h3>MCP adapter contract</h3>
@@ -459,7 +459,7 @@
           <div class="grid">
             <article class="contract"><h3>Best executor</h3><p>The resolver should choose the best external source for the task, not the best DayOneBuilder-owned page.</p></article>
             <article class="contract"><h3>Repo URL in</h3><p>A GitHub URL opens a report page with public GitHub data and agent-usefulness checks.</p></article>
-            <article class="contract"><h3>API first</h3><p>Agents should call URLs and JSON feeds directly instead of reading marketing copy.</p></article>
+            <article class="contract"><h3>Collections first</h3><p>Agents should fetch static JSON collections directly instead of reading marketing copy.</p></article>
             <article class="contract"><h3>Skill packaging</h3><p>The skill makes this resolver a reusable agent habit: check source, action path, smoke test, fallback.</p></article>
             <article class="contract"><h3>Telemetry loop</h3><p>The resolver watches task submissions, repo reports, outbound source clicks, install snippet copies, and repeat agent routes.</p></article>
           </div>
@@ -493,7 +493,7 @@
       <footer>
         <div class="footer-row">
           <span>DayOneBuilder Resolver</span>
-          <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/repo/">Repo Report</a> / <a href="/agent-magnet/upstash-context7/">Agent Magnet</a> / <a href="/api/resolver.openapi.json">API</a> / <a href="/agent-actions.json">actions</a></span>
+          <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/repo/">Repo Report</a> / <a href="/agent-magnet/upstash-context7/">Agent Magnet</a> / <a href="/collections/index.json">collections</a> / <a href="/agent-actions.json">actions</a></span>
         </div>
       </footer>
     </div>
