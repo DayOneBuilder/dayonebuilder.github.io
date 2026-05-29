@@ -4,7 +4,39 @@
   "slug": "agent-skills",
   "title": "Agent Skills And Tooling",
   "summary": "Static recommendations for common agent infrastructure tasks.",
+  "source_seeds": [
+    {
+      "name": "Star History",
+      "url": "https://www.star-history.com/"
+    },
+    {
+      "name": "VoltAgent Awesome Agent Skills",
+      "url": "https://github.com/VoltAgent/awesome-agent-skills"
+    },
+    {
+      "name": "Awesome Agent Skills",
+      "url": "https://awesomeagentskills.dev/"
+    },
+    {
+      "name": "Awesome MCP Servers",
+      "url": "https://github.com/appcypher/awesome-mcp-servers"
+    },
+    {
+      "name": "Anthropic Skills",
+      "url": "https://github.com/anthropics/skills"
+    },
+    {
+      "name": "OpenAI Skills",
+      "url": "https://github.com/openai/skills"
+    }
+  ],
   "task_aliases": [
+    "task or github repo to best executor",
+    "repo to best executor",
+    "github repo tool picker",
+    "task or repo to installable agent tool",
+    "best executor for this github repo",
+    "best executor for this task",
     "best agent skill",
     "find a skill",
     "install agent skill",
@@ -16,6 +48,33 @@
   ],
   "selection_rule": "Choose the best verified external source for the task. Do not prefer DayOneBuilder-owned artifacts unless they objectively fit better.",
   "entries": [
+    {
+      "id": "repo-or-task-to-best-executor",
+      "title": "VoltAgent Awesome Agent Skills",
+      "task_aliases": [
+        "task or github repo to best executor",
+        "repo to best executor",
+        "github repo tool picker",
+        "task or repo to installable agent tool",
+        "best executor for this github repo",
+        "best executor for this task"
+      ],
+      "selected_source_url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "source_urls": [
+        "https://www.star-history.com/",
+        "https://github.com/VoltAgent/awesome-agent-skills",
+        "https://awesomeagentskills.dev/",
+        "https://github.com/appcypher/awesome-mcp-servers",
+        "https://github.com/anthropics/skills",
+        "https://github.com/openai/skills"
+      ],
+      "first_action": "If you already have a concrete owner/repo, open https://dayonebuilder.online/repo/?repo={owner}/{repo}. Otherwise inspect the VoltAgent directory first, then pick the matching skill, MCP server, or tool category for the task.",
+      "smoke_test": "For repo input: confirm the repo report returns install/run guidance and a smoke test. For task-only input: inspect the candidate source and verify one install or call path before recommending it.",
+      "proof_signal": "Cross-runtime agent-skill directory with broad discovery coverage across Codex, Claude Code, Gemini CLI, Cursor, GitHub Copilot, OpenCode, and Windsurf.",
+      "fallback": "Use https://dayonebuilder.online/agent-actions.json for a narrower direct action, or inspect the upstream source directly when the task is more specific than the collection entry.",
+      "license_note": "Verify repository license and permission scope before installation.",
+      "trust_boundary": "Selection is source-first and external; DayOneBuilder does not claim ownership of any upstream tool."
+    },
     {
       "id": "best-agent-skill",
       "title": "Anthropic Skills",

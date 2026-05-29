@@ -10,6 +10,11 @@
     "https://dayonebuilder.online/collections/<slug>.json",
     "https://dayonebuilder.online/agent-actions.json"
   ],
+  "collection_events": [
+    "collection_index_hit",
+    "collection_json_hit",
+    "static_action_feed_hit"
+  ],
   "public_api_status": "not_required_static_collections",
   "collections": [
     {
@@ -18,6 +23,12 @@
       "json_url": "https://dayonebuilder.online/collections/agent-skills.json",
       "page_url": "https://dayonebuilder.online/collections/agent-skills/",
       "task_aliases": [
+        "task or github repo to best executor",
+        "repo to best executor",
+        "github repo tool picker",
+        "task or repo to installable agent tool",
+        "best executor for this github repo",
+        "best executor for this task",
         "best agent skill",
         "find mcp server",
         "browser automation",
@@ -25,7 +36,15 @@
         "third party tool safety check"
       ],
       "proof_signal": "Source-first selection from public repositories and maintained registries.",
-      "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly."
+      "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly.",
+      "selection_strategy": {
+        "description": "Use repo report for concrete owner/repo. For task-only input, route through the collection entry.",
+        "primary_rules": [
+          "If input is owner/repo, first open https://dayonebuilder.online/repo/?repo={owner}/{repo}.",
+          "For task-only input, choose the best matching collection entry.",
+          "If confidence is low, fall back to best matching agent-action."
+        ]
+      }
     }
   ]
 }

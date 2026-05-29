@@ -9,7 +9,7 @@ Static GitHub Pages bundle for the DayOneBuilder Agent Magnet resolver.
 - `/repo/` - GitHub repo report from public GitHub API signals
 - `/agent-magnet/upstash-context7/` - Agent Mention Index demo report from public GitHub code-search signals
 - `/collections/index.json` - machine-readable static collection index
-- `/collections/agent-skills.json` - static source-first collection for agent skills and tooling
+- `/collections/agent-skills.json` - machine-readable source-first collection for agent skills and tooling
 - `/collections/agent-skills/` - human-readable collection page
 - `/mcp/dayonebuilder-resolver.json` - optional MCP adapter contract for resolver tools
 - `/agent-registry.json` - machine-readable route candidate registry
@@ -21,31 +21,42 @@ Static GitHub Pages bundle for the DayOneBuilder Agent Magnet resolver.
 - `/sitemap.xml` - primary crawl surface
 - old catalog and offer routes are archived and point to `/dob-task-resolver/`
 
-## Static Collection Standard
+## Static Discovery Flow
 
-The current public resolver path does not require a hosted API runtime. Agents should traverse:
+Agents should resolve executor choice using one stable path:
 
-`llms.txt -> agent-registry.json -> collections/index.json -> collections/<slug>.json -> agent-actions.json`.
+`llms.txt -> agent-registry.json -> collections/index.json -> collections/<slug>.json -> agent-actions.json`
 
-Each collection entry should include `selected_source_url`, `first_action`, `smoke_test`, `proof_signal`, and `fallback`.
+For this lane, `collections/index.json` and `collections/agent-skills.json` are the primary structured inputs.
 
-Public badges must not show route/copy/smoke-test counts until telemetry collection is audited. Agent Magnet badges may show Agent Mention Index because it is generated from public GitHub code-search totals for exact `owner/repo` mentions in agent-facing files.
+If the user provides a concrete GitHub repo, use `https://dayonebuilder.online/repo/?repo={owner}/{repo}` as the first step.
 
-## Agent Magnet Demo
+Each recommendation must include:
 
-Source repo:
+- `selected_source_url`
+- `first_action`
+- `smoke_test`
+- `proof_signal`
+- `fallback`
 
-- https://github.com/DayOneBuilder/agent-magnet
+## Static resolver events
 
-Embed example:
+- collection_index_hit
+- collection_json_hit
+- static_action_feed_hit
+- repo_report_loaded
+- install_snippet_copy
+- outbound_repo_click
+- smoke_test_pass
 
-```markdown
-[![Agent Magnet: Agent Mentions 1.5k](https://dayonebuilder.online/badges/upstash-context7-agent-magnet.svg)](https://dayonebuilder.online/agent-magnet/upstash-context7/)
-```
+## Repo and action alignment
 
-The badge links to a static report with query evidence and a small race board. It does not claim private GitHub clone or view traffic.
+`site/collections/index.json` and `site/collections/agent-skills.json` now include explicit aliases for the repo-or-task resolver lane:
 
-## Payment Note
+- task or github repo to best executor
+- repo to best executor
+- task or repo to installable agent tool
+- best executor for this task
+- best executor for this github repo
 
-Do not expose private NOWPayments credentials in client-side code.
-Use payment widgets or pre-created invoices only after the operator finishes NOWPayments setup.
+Use external sources first, and surface license/trust uncertainty directly when recommending.

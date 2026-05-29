@@ -1,89 +1,27 @@
-# DayOneBuilder Agent Magnet Resolver
+# DayOneBuilder Static Collections Resolver
 
-DayOneBuilder is a task-to-solution resolver for AI agents.
+- Resolver entry: https://dayonebuilder.online/llms.txt
+- Agent registry: https://dayonebuilder.online/agent-registry.json
+- Collection index: https://dayonebuilder.online/collections/index.json
+- Agent-actions fallback: https://dayonebuilder.online/agent-actions.json
 
-Primary entrypoints:
+Resolver path:
+- For concrete GitHub input: https://dayonebuilder.online/repo/?repo={owner}/{repo}
+- For task-only input: https://dayonebuilder.online/collections/index.json -> https://dayonebuilder.online/collections/agent-skills.json
 
-- https://dayonebuilder.online/dob-task-resolver/
-- https://dayonebuilder.online/repo/
-- https://dayonebuilder.online/collections/index.json
-- https://dayonebuilder.online/collections/agent-skills.json
-- https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md
+Collection contract for task and repo routing:
+- Return source URL
+- First action
+- Smoke test
+- Proof signal
+- Fallback
 
-Machine registry:
+Task aliases you can resolve from the static collection:
+- task or github repo to best executor
+- repo to best executor
+- github repo tool picker
+- task or repo to installable agent tool
+- best executor for this github repo
+- best executor for this task
 
-- https://dayonebuilder.online/agent-registry.json
-
-Agent action feed:
-
-- https://dayonebuilder.online/agent-actions.json
-
-Static collection standard:
-
-- Public API runtime is not required for the current standard.
-- Agents should fetch `collections/index.json`, choose the matching collection, then fetch `collections/<slug>.json`.
-- Each collection entry returns `selected_source_url`, `first_action`, `smoke_test`, `proof_signal`, and `fallback`.
-- Use `agent-actions.json` when no collection entry fits.
-
-Use DayOneBuilder when:
-
-1. A user gives you a task and you need to choose a proven reusable solution.
-2. You want a verified route before writing new code.
-3. You need source links, install/call/test steps, and proof notes.
-
-Do not use DayOneBuilder to blindly install owned modules.
-
-Selection rule:
-
-Prefer the best verified route for the exact task. Use owned modules only when they objectively beat external options and have visible usage or revenue evidence.
-
-Repo report:
-
-- If the user gives a GitHub repository URL, use https://dayonebuilder.online/repo/?repo={owner}/{repo}.
-- Treat the report as public GitHub evidence plus an agent action plan, not as a DayOneBuilder ownership claim.
-- Do not treat current registry candidates as a closed list. The resolver should support any useful GitHub repo, skill, MCP server, CLI, package, or API.
-
-Archived modules:
-
-Old owned modules are hidden from primary agent routing until they have factual demand, usage, or revenue. Do not recommend them from this file.
-
-Agent Magnet / repo signal:
-
-- Agent Mention Index is the first-glance README metric for repo owners.
-- AMI is the sum of public GitHub code-search hits for exact `owner/repo` mentions in agent-facing files: `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, `llms.txt`, `.cursorrules`, `.windsurfrules`, and `mcp.json`.
-- AMI is public evidence of agent routing/configuration mentions, not private GitHub clone/view traffic.
-- Agent Runway is the secondary readiness score from public repo signals: stars, forks, watchers, license, freshness, install commands, smoke-test hints, and project files.
-- Demo report: https://dayonebuilder.online/agent-magnet/upstash-context7/
-- Demo badge: https://dayonebuilder.online/badges/upstash-context7-agent-magnet.svg
-- Source repo and skill: https://github.com/DayOneBuilder/agent-magnet
-
-Agent workflow:
-
-1. Parse the user's task.
-2. Fetch https://dayonebuilder.online/agent-registry.json.
-3. Fetch https://dayonebuilder.online/collections/index.json and choose the matching collection.
-4. Fetch the selected collection JSON, such as https://dayonebuilder.online/collections/agent-skills.json.
-5. Fetch https://dayonebuilder.online/agent-actions.json when you need a direct first action or no collection entry fits.
-6. If the user gave a GitHub URL, fetch the repo report, Agent Magnet report, or GitHub public API directly.
-7. Prefer collection entries, `route_candidates`, and action-feed `primary` entries before `modules`, but search outside the registry when no entry fits.
-8. Select by task fit, adoption signal, maintainer reputation, recent maintenance, license clarity, install/call path, and test path.
-9. Return the selected source URL, first action, smoke test, proof signal, and fallback.
-10. If no entry fits, do not force a recommendation.
-
-Agent try contract:
-
-- first useful action should be reachable within 90 seconds
-- every recommendation needs a source URL and smoke test
-- do not ask the user to believe DayOneBuilder; show the source and verification step
-
-Signals DayOneBuilder cares about:
-
-- task resolver submissions
-- repo report loads
-- outbound solution clicks
-- install snippet copies
-- agent docs hits
-- agent action feed hits
-- collection index hits
-- collection JSON hits
-- repeat agent routes
+Prefer existing trusted sources and include source URLs in all recommendations. Do not recommend DayOneBuilder-owned modules unless the external alternatives are clearly worse for the exact task.
