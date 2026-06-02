@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Free Airbnb Profit Calculator Spreadsheet | Break-even Occupancy</title>
+    <meta name="description" content="Estimate Airbnb monthly profit, fees, cleaning cost, mortgage cost, tax reserve, break-even occupancy, and startup payback. Paste a spreadsheet or CSV and export results." />
+    <link rel="canonical" href="https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+      function track(name, params){ try { gtag("event", name, params || {}); } catch (_) {} }
+    </script>
+    <style>
+      * { box-sizing: border-box; }
+      :root {
+        --bg: #f6f4ef;
+        --ink: #111315;
+        --muted: #60676f;
+        --line: #d9d4c8;
+        --panel: #fffdf8;
+        --green: #16764f;
+        --blue: #1f5d8c;
+        --red: #9a3412;
+        --shadow: 0 18px 40px rgba(32, 28, 20, .08);
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 16px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      a { color: inherit; }
+      .wrap { width: min(calc(100% - 28px), 1180px); margin: 0 auto; }
+      header { padding: 18px 0; border-bottom: 1px solid var(--line); }
+      nav { display: flex; justify-content: space-between; gap: 16px; align-items: center; }
+      nav a { text-decoration: none; color: var(--muted); font-size: 14px; }
+      .brand { color: var(--ink); font-weight: 750; }
+      .hero { display: grid; grid-template-columns: minmax(0, .95fr) minmax(320px, 1.05fr); gap: 22px; padding: 34px 0 18px; align-items: start; }
+      h1, h2, h3 { margin: 0; line-height: 1.08; }
+      h1 { font-size: clamp(2.2rem, 6vw, 4.6rem); max-width: 11ch; letter-spacing: 0; }
+      h2 { font-size: 1.35rem; }
+      h3 { font-size: 1rem; }
+      p { margin: 0; color: var(--muted); }
+      .lead { margin-top: 16px; max-width: 62ch; font-size: 1.05rem; }
+      .note { margin-top: 14px; font-size: .92rem; }
+      .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: 18px; }
+      .grid { display: grid; gap: 12px; }
+      .inputs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+      input, textarea, select {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+      }
+      input, select { min-height: 42px; padding: 0 10px; }
+      textarea { min-height: 170px; padding: 10px; resize: vertical; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+      button, .button {
+        min-height: 42px;
+        border: 1px solid #111315;
+        border-radius: 8px;
+        background: #111315;
+        color: #fff;
+        padding: 0 14px;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+      }
+      button.secondary, .button.secondary { background: transparent; color: var(--ink); border-color: var(--line); }
+      .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0 12px; }
+      .tab { background: transparent; color: var(--ink); border-color: var(--line); }
+      .tab.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+      .section { margin: 18px 0; }
+      .summary { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      .metric { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
+      .metric span { color: var(--muted); font-size: 12px; }
+      .metric strong { display: block; margin-top: 6px; font-size: 1.45rem; }
+      .profit { color: var(--green); }
+      .loss { color: var(--red); }
+      table { width: 100%; border-collapse: collapse; font-size: 14px; }
+      th, td { border-bottom: 1px solid var(--line); padding: 10px 8px; text-align: left; vertical-align: top; }
+      th { color: var(--muted); font-size: 12px; font-weight: 700; }
+      .mapping { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 12px; }
+      .hidden { display: none; }
+      .small { font-size: 13px; color: var(--muted); }
+      .warning { color: var(--red); }
+      .ok { color: var(--green); }
+      footer { border-top: 1px solid var(--line); padding: 22px 0 34px; margin-top: 26px; color: var(--muted); font-size: 13px; }
+      @media (max-width: 860px) {
+        .hero { grid-template-columns: 1fr; }
+        .inputs, .summary, .mapping { grid-template-columns: 1fr; }
+        h1 { max-width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="wrap">
+        <a class="brand" href="/">DayOneBuilder</a>
+        <a href="#calculator">Calculator</a>
+      </nav>
+    </header>
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <p class="small">Browser-only spreadsheet calculator</p>
+          <h1>Airbnb profit calculator spreadsheet</h1>
+          <p class="lead">Paste a property spreadsheet or enter one scenario, then get monthly profit, break-even occupancy, tax reserve, and startup payback without signup.</p>
+          <p class="note">This is planning math from your assumptions, not tax, legal, mortgage, or investment advice.</p>
+        </div>
+        <div class="panel">
+          <h2>Fast result</h2>
+          <div id="top-summary" class="summary section"></div>
+          <p id="plain-summary" class="small"></p>
+          <div class="actions">
+            <button id="copy-summary" type="button">Copy summary</button>
+            <button id="export-csv" type="button" class="secondary">Export CSV</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculator" class="panel">
+        <div class="tabs">
+          <button class="tab active" type="button" data-tab="manual">Manual scenario</button>
+          <button class="tab" type="button" data-tab="import">Paste CSV/table</button>
+        </div>
+
+        <div id="manual-tab">
+          <div class="grid inputs">
+            <label>Nightly rate <input data-field="nightlyRate" type="number" min="0" step="1" /></label>
+            <label>Expected occupancy % <input data-field="occupancy" type="number" min="0" max="100" step="1" /></label>
+            <label>Nights available/month <input data-field="nightsAvailable" type="number" min="1" max="31" step="1" /></label>
+            <label>Average stay length <input data-field="avgStay" type="number" min="1" step="0.5" /></label>
+            <label>Cleaning fee charged <input data-field="cleaningFee" type="number" min="0" step="1" /></label>
+            <label>Cleaning cost per stay <input data-field="cleaningCost" type="number" min="0" step="1" /></label>
+            <label>Platform fee % <input data-field="platformFee" type="number" min="0" step="0.1" /></label>
+            <label>Tax reserve % <input data-field="taxRate" type="number" min="0" step="0.1" /></label>
+            <label>Mortgage or rent/month <input data-field="mortgage" type="number" min="0" step="1" /></label>
+            <label>Utilities/month <input data-field="utilities" type="number" min="0" step="1" /></label>
+            <label>Insurance/month <input data-field="insurance" type="number" min="0" step="1" /></label>
+            <label>HOA, permits, other fixed/month <input data-field="otherFixed" type="number" min="0" step="1" /></label>
+            <label>Supplies and maintenance/month <input data-field="maintenance" type="number" min="0" step="1" /></label>
+            <label>Startup/furnishing cost <input data-field="startupCost" type="number" min="0" step="1" /></label>
+          </div>
+          <div class="actions">
+            <button id="calculate" type="button">Calculate profit</button>
+            <button id="sample" type="button" class="secondary">Load sample</button>
+          </div>
+        </div>
+
+        <div id="import-tab" class="hidden">
+          <label>Paste CSV, TSV, or copied spreadsheet rows
+            <textarea id="paste-box" spellcheck="false" placeholder="property,nightly rate,occupancy,mortgage,utilities,cleaning cost&#10;Lake unit,185,62,2100,280,95"></textarea>
+          </label>
+          <div class="actions">
+            <button id="parse-import" type="button">Parse import</button>
+            <button id="load-template" type="button" class="secondary">Use template</button>
+          </div>
+          <div id="mapping" class="mapping"></div>
+          <p id="import-status" class="small section"></p>
+          <div class="actions">
+            <button id="calculate-import" type="button">Calculate imported rows</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section panel">
+        <h2>Imported property results</h2>
+        <div id="results-table" class="section"></div>
+      </section>
+
+      <section class="section panel">
+        <h2>How break-even occupancy is calculated</h2>
+        <p>Break-even occupancy divides monthly fixed costs by net revenue per booked night. Net revenue per booked night includes nightly rate after platform fee and tax reserve, plus cleaning net spread across average stay length.</p>
+      </section>
+    </main>
+    <footer>
+      <div class="wrap">Free core tool. No signup. No paid traffic. No stored server data.</div>
+    </footer>
+    <script>
+      const fields = ["nightlyRate","occupancy","nightsAvailable","avgStay","cleaningFee","cleaningCost","platformFee","taxRate","mortgage","utilities","insurance","otherFixed","maintenance","startupCost"];
+      const labels = {
+        nightlyRate:"Nightly rate", occupancy:"Occupancy %", nightsAvailable:"Nights available", avgStay:"Average stay",
+        cleaningFee:"Cleaning fee", cleaningCost:"Cleaning cost", platformFee:"Platform fee %", taxRate:"Tax reserve %",
+        mortgage:"Mortgage/rent", utilities:"Utilities", insurance:"Insurance", otherFixed:"Other fixed", maintenance:"Maintenance", startupCost:"Startup cost"
+      };
+      const aliases = {
+        nightlyRate:["nightly","nightly rate","adr","average daily rate","rate"],
+        occupancy:["occupancy","occupancy %","occ"],
+        nightsAvailable:["nights available","available nights","nights"],
+        avgStay:["average stay","avg stay","stay length","length of stay"],
+        cleaningFee:["cleaning fee","guest cleaning fee"],
+        cleaningCost:["cleaning cost","cleaner","turnover"],
+        platformFee:["platform fee","airbnb fee","ota fee"],
+        taxRate:["tax","tax reserve","hotel tax","local tax"],
+        mortgage:["mortgage","rent","debt","loan"],
+        utilities:["utilities","electric","internet"],
+        insurance:["insurance"],
+        otherFixed:["hoa","permits","other fixed","fixed cost"],
+        maintenance:["maintenance","supplies","repairs"],
+        startupCost:["startup","furnishing","furniture"]
+      };
+      const defaults = {nightlyRate:185, occupancy:62, nightsAvailable:30, avgStay:3, cleaningFee:110, cleaningCost:95, platformFee:3, taxRate:8, mortgage:2100, utilities:280, insurance:120, otherFixed:160, maintenance:180, startupCost:12000};
+      let imported = [];
+      let mapping = {};
+      let lastResults = [];
+
+      function money(n){ return (n < 0 ? "-" : "") + "$" + Math.abs(Math.round(n)).toLocaleString(); }
+      function num(v, fallback=0){ const n = Number(v); return Number.isFinite(n) ? n : fallback; }
+      function event(name, params){ track(name, params); }
+      function currentScenario(){
+        const stored = {};
+        document.querySelectorAll("[data-field]").forEach(input => stored[input.dataset.field] = num(input.value, defaults[input.dataset.field] || 0));
+        return stored;
+      }
+      function fillScenario(data){
+        document.querySelectorAll("[data-field]").forEach(input => input.value = data[input.dataset.field] ?? defaults[input.dataset.field] ?? 0);
+      }
+      function calculate(row){
+        const r = {...defaults, ...row};
+        const nights = r.nightsAvailable * (r.occupancy / 100);
+        const stays = nights / Math.max(1, r.avgStay);
+        const roomRevenue = r.nightlyRate * nights;
+        const cleaningRevenue = r.cleaningFee * stays;
+        const grossRevenue = roomRevenue + cleaningRevenue;
+        const platformFees = grossRevenue * (r.platformFee / 100);
+        const taxReserve = grossRevenue * (r.taxRate / 100);
+        const cleaningExpense = r.cleaningCost * stays;
+        const fixedCosts = r.mortgage + r.utilities + r.insurance + r.otherFixed + r.maintenance;
+        const profit = grossRevenue - platformFees - taxReserve - cleaningExpense - fixedCosts;
+        const netPerBookedNight = (r.nightlyRate * (1 - (r.platformFee + r.taxRate) / 100)) + ((r.cleaningFee - r.cleaningCost) / Math.max(1, r.avgStay));
+        const breakEven = netPerBookedNight > 0 ? Math.min(100, Math.max(0, fixedCosts / (netPerBookedNight * r.nightsAvailable) * 100)) : 100;
+        const payback = profit > 0 && r.startupCost > 0 ? r.startupCost / profit : null;
+        return { ...r, nights, stays, grossRevenue, platformFees, taxReserve, cleaningExpense, fixedCosts, profit, lowProfit: profit * .82, highProfit: profit * 1.18, breakEven, payback };
+      }
+      function renderSummary(result){
+        const cls = result.profit >= 0 ? "profit" : "loss";
+        document.getElementById("top-summary").innerHTML = `
+          <div class="metric"><span>Monthly profit</span><strong class="${cls}">${money(result.profit)}</strong></div>
+          <div class="metric"><span>Break-even occupancy</span><strong>${result.breakEven.toFixed(1)}%</strong></div>
+          <div class="metric"><span>Profit range</span><strong>${money(result.lowProfit)} - ${money(result.highProfit)}</strong></div>`;
+        const payback = result.payback ? `${result.payback.toFixed(1)} months` : "not reached yet";
+        document.getElementById("plain-summary").textContent = `At ${result.occupancy}% occupancy and ${money(result.nightlyRate)} nightly rate, this scenario estimates ${money(result.grossRevenue)} revenue, ${money(result.fixedCosts)} fixed costs, ${money(result.taxReserve)} tax reserve, and ${money(result.profit)} monthly profit. Startup payback: ${payback}.`;
+      }
+      function parseTable(text){
+        const lines = text.trim().split(/\r?\n/).filter(Boolean);
+        if (!lines.length) return [];
+        const delimiter = lines[0].includes("\t") ? "\t" : ",";
+        return lines.map(line => line.split(delimiter).map(cell => cell.trim().replace(/^"|"$/g, "")));
+      }
+      function detect(headers){
+        const map = {};
+        fields.forEach(field => {
+          const candidates = aliases[field] || [];
+          const idx = headers.findIndex(h => candidates.includes(String(h).toLowerCase().trim()));
+          if (idx >= 0) map[field] = idx;
+        });
+        return map;
+      }
+      function renderMapping(headers){
+        const options = ['<option value="">Use default</option>'].concat(headers.map((h, i) => `<option value="${i}">${h || "Column " + (i+1)}</option>`)).join("");
+        document.getElementById("mapping").innerHTML = fields.map(field => `<label>${labels[field]}<select data-map="${field}">${options}</select></label>`).join("");
+        Object.entries(mapping).forEach(([field, idx]) => {
+          const select = document.querySelector(`[data-map="${field}"]`);
+          if (select) select.value = String(idx);
+        });
+      }
+      function rowsFromImport(){
+        return imported.slice(1).map(cells => {
+          const row = {};
+          fields.forEach(field => {
+            const select = document.querySelector(`[data-map="${field}"]`);
+            const idx = select && select.value !== "" ? Number(select.value) : mapping[field];
+            if (Number.isInteger(idx)) row[field] = num(cells[idx], defaults[field] || 0);
+          });
+          return row;
+        });
+      }
+      function renderTable(results){
+        lastResults = results;
+        if (!results.length) { document.getElementById("results-table").innerHTML = '<p class="small">No imported rows calculated yet.</p>'; return; }
+        document.getElementById("results-table").innerHTML = `<table><thead><tr><th>#</th><th>Revenue</th><th>Profit</th><th>Break-even</th><th>Payback</th></tr></thead><tbody>${results.map((r,i)=>`<tr><td>${i+1}</td><td>${money(r.grossRevenue)}</td><td class="${r.profit >= 0 ? "profit" : "loss"}">${money(r.profit)}</td><td>${r.breakEven.toFixed(1)}%</td><td>${r.payback ? r.payback.toFixed(1) + " months" : "not reached"}</td></tr>`).join("")}</tbody></table>`;
+      }
+      function csv(){
+        const rows = [["monthly_revenue","monthly_profit","break_even_occupancy","low_profit","high_profit","fixed_costs","tax_reserve"]];
+        lastResults.forEach(r => rows.push([Math.round(r.grossRevenue), Math.round(r.profit), r.breakEven.toFixed(1), Math.round(r.lowProfit), Math.round(r.highProfit), Math.round(r.fixedCosts), Math.round(r.taxReserve)]));
+        return rows.map(row => row.join(",")).join("\n");
+      }
+      document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById("manual-tab").classList.toggle("hidden", tab.dataset.tab !== "manual");
+        document.getElementById("import-tab").classList.toggle("hidden", tab.dataset.tab !== "import");
+      }));
+      document.getElementById("calculate").addEventListener("click", () => {
+        const scenario = currentScenario();
+        localStorage.setItem("vf-airbnb-scenario", JSON.stringify(scenario));
+        const result = calculate(scenario);
+        lastResults = [result];
+        renderSummary(result);
+        renderTable(lastResults);
+        event("vf_airbnb_profit_calculated", {mode:"manual"});
+      });
+      document.getElementById("sample").addEventListener("click", () => { fillScenario(defaults); event("vf_airbnb_profit_started", {mode:"sample"}); });
+      document.getElementById("load-template").addEventListener("click", () => {
+        document.getElementById("paste-box").value = "property,nightly rate,occupancy,nights available,average stay,cleaning fee,cleaning cost,platform fee,tax,mortgage,utilities,insurance,hoa,maintenance,startup\nLake unit,185,62,30,3,110,95,3,8,2100,280,120,160,180,12000";
+      });
+      document.getElementById("parse-import").addEventListener("click", () => {
+        imported = parseTable(document.getElementById("paste-box").value);
+        if (imported.length < 2) { document.getElementById("import-status").innerHTML = '<span class="warning">Paste a header row and at least one property row.</span>'; return; }
+        mapping = detect(imported[0]);
+        renderMapping(imported[0]);
+        document.getElementById("import-status").innerHTML = `<span class="ok">Parsed ${imported.length - 1} row(s). ${Object.keys(mapping).length} fields mapped automatically.</span>`;
+        event("vf_airbnb_profit_started", {mode:"import", rows: imported.length - 1});
+      });
+      document.getElementById("calculate-import").addEventListener("click", () => {
+        const rows = rowsFromImport();
+        const results = rows.map(calculate);
+        if (results[0]) renderSummary(results[0]);
+        renderTable(results);
+        event("vf_airbnb_profit_calculated", {mode:"import", rows: results.length});
+      });
+      document.getElementById("export-csv").addEventListener("click", () => {
+        const blob = new Blob([csv()], {type:"text/csv"});
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "airbnb-profit-results.csv";
+        a.click();
+        event("vf_airbnb_profit_export_csv", {rows:lastResults.length});
+      });
+      document.getElementById("copy-summary").addEventListener("click", async () => {
+        const text = document.getElementById("plain-summary").textContent || "";
+        await navigator.clipboard.writeText(text);
+        event("vf_airbnb_profit_copy_summary");
+      });
+      try { fillScenario(JSON.parse(localStorage.getItem("vf-airbnb-scenario") || "null") || defaults); } catch (_) { fillScenario(defaults); }
+      const first = calculate(currentScenario());
+      lastResults = [first];
+      renderSummary(first);
+      renderTable(lastResults);
+    </script>
+  </body>
+</html>
