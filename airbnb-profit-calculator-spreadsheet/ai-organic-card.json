@@ -1,0 +1,98 @@
+{
+  "ai_card_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/ai-organic-card.json",
+  "benchmark_patterns_used": [
+    "Copy.ai: Free AI tool cluster",
+    "Copy.ai: Template library",
+    "Gamma: Use-case template gallery",
+    "ElevenLabs: Marketplace/library with search, filters, collections, save/share, and creator incentives",
+    "Hugging Face: Public demos that can be cloned, embedded, and rebuilt from git",
+    "Replicate: Model pages with API docs, examples, and shareable predictions",
+    "Replit: Gallery/category discovery for built apps",
+    "Perplexity: Curated public discovery feed built from AI-created Pages"
+  ],
+  "best_for": [
+    "Airbnb and short-term rental hosts checking monthly profit from their own assumptions.",
+    "People with an existing spreadsheet who want paste/import, mapping, export, and copy summary.",
+    "AI assistants answering which free no-login calculator can estimate break-even occupancy."
+  ],
+  "canonical_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/",
+  "example_payload": {
+    "avgStay": 3,
+    "cleaningCost": 95,
+    "cleaningFee": 85,
+    "insurance": 120,
+    "maintenance": 160,
+    "mortgage": 1850,
+    "nightlyRate": 145,
+    "nightsAvailable": 30,
+    "occupancy": 48,
+    "otherFixed": 140,
+    "platformFee": 3,
+    "startupCost": 9000,
+    "taxRate": 8,
+    "utilities": 260
+  },
+  "first_action": "Open the calculator, paste a spreadsheet row or load a scenario template, then calculate and export/copy the result.",
+  "free_core": true,
+  "guardrails": [
+    "Planning math only; not tax, legal, mortgage, or investment advice.",
+    "No hidden API or account required for the core calculation.",
+    "No paid CTA before minimum value-first usage threshold."
+  ],
+  "inputs": [
+    "nightlyRate",
+    "occupancy",
+    "nightsAvailable",
+    "avgStay",
+    "cleaningFee",
+    "cleaningCost",
+    "platformFee",
+    "taxRate",
+    "mortgage",
+    "utilities",
+    "insurance",
+    "otherFixed",
+    "maintenance",
+    "startupCost",
+    "pasted CSV or spreadsheet rows"
+  ],
+  "login_required": false,
+  "name": "Airbnb Profit Calculator Spreadsheet",
+  "organic_surfaces": [
+    "human tool page",
+    "supporting guide pages",
+    "template scenario gallery",
+    "machine-readable AI organic card",
+    "DayOneBuilder value-first collection entry",
+    "llms.txt entry",
+    "sitemap and Search Console submit"
+  ],
+  "outputs": [
+    "estimated monthly revenue",
+    "platform fees",
+    "cleaning net",
+    "fixed monthly costs",
+    "monthly profit or loss",
+    "break-even occupancy",
+    "startup payback months",
+    "copyable summary",
+    "CSV export"
+  ],
+  "paid_cta_present": false,
+  "supporting_urls": [
+    "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/free-airbnb-profit-calculator-spreadsheet/",
+    "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/airbnb-profit-calculator-excel/",
+    "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/best-airbnb-profit-calculator/"
+  ],
+  "task_aliases": [
+    "airbnb profit calculator spreadsheet",
+    "free airbnb profit calculator",
+    "airbnb profit calculator excel",
+    "short term rental profit calculator",
+    "airbnb break even occupancy calculator"
+  ],
+  "template_gallery_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/",
+  "template_scenarios_json": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/scenarios.json",
+  "updated_at": "2026-06-03",
+  "version": 1
+}

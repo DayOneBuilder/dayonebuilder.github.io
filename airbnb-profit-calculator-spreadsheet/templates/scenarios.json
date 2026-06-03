@@ -1,0 +1,92 @@
+{
+  "ai_card_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/ai-organic-card.json",
+  "scenarios": [
+    {
+      "assumptions": {
+        "avgStay": 3,
+        "cleaningCost": 95,
+        "cleaningFee": 85,
+        "insurance": 120,
+        "maintenance": 160,
+        "mortgage": 1850,
+        "nightlyRate": 145,
+        "nightsAvailable": 30,
+        "occupancy": 48,
+        "otherFixed": 140,
+        "platformFee": 3,
+        "startupCost": 9000,
+        "taxRate": 8,
+        "utilities": 260
+      },
+      "best_for": "Aspiring hosts checking whether a first property survives conservative occupancy and normal fixed costs.",
+      "id": "new-host-conservative",
+      "name": "New host conservative estimate"
+    },
+    {
+      "assumptions": {
+        "avgStay": 2.5,
+        "cleaningCost": 115,
+        "cleaningFee": 105,
+        "insurance": 145,
+        "maintenance": 220,
+        "mortgage": 2450,
+        "nightlyRate": 205,
+        "nightsAvailable": 30,
+        "occupancy": 58,
+        "otherFixed": 260,
+        "platformFee": 3,
+        "startupCost": 14500,
+        "taxRate": 9,
+        "utilities": 320
+      },
+      "best_for": "Hosts comparing a furnished city condo with higher fixed costs but better nightly rate.",
+      "id": "city-condo-midmarket",
+      "name": "City condo mid-market"
+    },
+    {
+      "assumptions": {
+        "avgStay": 2,
+        "cleaningCost": 145,
+        "cleaningFee": 95,
+        "insurance": 130,
+        "maintenance": 240,
+        "mortgage": 2100,
+        "nightlyRate": 175,
+        "nightsAvailable": 30,
+        "occupancy": 55,
+        "otherFixed": 180,
+        "platformFee": 3,
+        "startupCost": 11000,
+        "taxRate": 8,
+        "utilities": 300
+      },
+      "best_for": "Hosts in markets where short stays and cleaner costs can erase profit.",
+      "id": "high-cleaning-cost-market",
+      "name": "High cleaning cost market"
+    },
+    {
+      "assumptions": {
+        "avgStay": 4,
+        "cleaningCost": 45,
+        "cleaningFee": 35,
+        "insurance": 35,
+        "maintenance": 60,
+        "mortgage": 450,
+        "nightlyRate": 78,
+        "nightsAvailable": 30,
+        "occupancy": 64,
+        "otherFixed": 30,
+        "platformFee": 3,
+        "startupCost": 1800,
+        "taxRate": 6,
+        "utilities": 90
+      },
+      "best_for": "Owner-occupiers checking whether a room rental covers incremental costs.",
+      "id": "room-rental-low-fixed",
+      "name": "Room rental low fixed cost"
+    }
+  ],
+  "tool_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/",
+  "updated_at": "2026-06-03",
+  "version": 1
+}

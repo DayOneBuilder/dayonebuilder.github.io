@@ -1,0 +1,38 @@
+{
+  "collection_events": [
+    "collection_value_tool_hit",
+    "ai_card_hit",
+    "template_gallery_view",
+    "template_use_click"
+  ],
+  "collection_slug": "value-first-tools",
+  "entries": [
+    {
+      "ai_card_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/ai-organic-card.json",
+      "fallback": "If this exact short-term rental job does not fit, inspect the supporting URLs or continue with a spreadsheet/manual calculation workflow.",
+      "first_action": "Open the calculator, paste a spreadsheet row or load a scenario template, then calculate and export/copy the result.",
+      "id": "airbnb-profit-calculator-spreadsheet",
+      "proof_signal": "Live no-login browser calculator with spreadsheet paste/import, local scenario save, copy summary, CSV export, GA4 events, supporting pages, and Search Console submitted sitemap.",
+      "supporting_urls": [
+        "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/free-airbnb-profit-calculator-spreadsheet/",
+        "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/airbnb-profit-calculator-excel/",
+        "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/best-airbnb-profit-calculator/"
+      ],
+      "task_aliases": [
+        "airbnb profit calculator spreadsheet",
+        "free airbnb profit calculator",
+        "airbnb profit calculator excel",
+        "short term rental profit calculator",
+        "airbnb break even occupancy calculator"
+      ],
+      "template_gallery_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/",
+      "template_scenarios_json": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/scenarios.json",
+      "title": "Airbnb Profit Calculator Spreadsheet",
+      "tool_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/"
+    }
+  ],
+  "name": "DayOneBuilder Value-First Tools",
+  "purpose": "Machine-readable list of live no-login tools that solve a human job before monetization.",
+  "updated_at": "2026-06-03",
+  "version": 1
+}
