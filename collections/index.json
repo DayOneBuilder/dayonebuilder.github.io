@@ -68,6 +68,6 @@
   "name": "DayOneBuilder Static Collections",
   "public_api_status": "not_required_static_collections",
   "purpose": "Machine-readable collections agents can fetch before choosing a repo, skill, MCP server, package, CLI, or workflow.",
-  "updated_at": "2026-06-03",
+  "updated_at": "2026-06-04",
   "version": 1
 }
