@@ -177,21 +177,20 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "car-loan-payoff-calculator",
-      "title": "Car Loan Payoff Calculator",
-      "status": "installable",
+      "id": "rental-property-cash-flow-calculator",
+      "title": "Rental Property Cash Flow Calculator",
+      "status": "active_validation",
       "module_type": "calculator",
-      "agent_task_phrase": "An AI agent needs a car loan payoff calculator without writing fragile one-off glue code.",
-      "human_task_phrase": "Estimate payoff date and interest savings for a car loan with optional extra payment.",
-      "install_or_call_path": "Open https://dayonebuilder.online/car-loan-payoff-calculator/, set Current balance, APR, Term, and Extra payment, then click Calculate. Optionally copy summary or download CSV.",
-      "source_url": "https://dayonebuilder.online/car-loan-payoff-calculator/",
-      "trust_evidence": [
-        "official CFPB and major comparison references in-page",
-        "GA-guarded qualified completion event",
-        "copy/download export path",
-        "explicit paid worksheet path"
+      "agent_task_phrase": "An AI agent needs a rental property cash flow calculator without writing one-off spreadsheets.",
+      "module_url": "https://dayonebuilder.online/rental-property-cash-flow-calculator/",
+      "install_or_call_path": "Open https://dayonebuilder.online/rental-property-cash-flow-calculator/, fill inputs, and click Calculate estimate.",
+      "proof_evidence": [
+        "exact-query landing page",
+        "static CSV export intent",
+        "official-source citation",
+        "GA4-safe qualified completion, export, and paid CTA events"
       ],
-      "adoption_metric": "collection_json_hit, qualified_agent_uses, collection_landing_visit, export_intent, paid_cta_click"
+      "adoption_metric": "collection_json_hit, collection_index_hit, install_snippet_copy, qualified_tool_completion, module_export_click, paid_offer_click"
     }
   ],
   "archived_internal_modules": {

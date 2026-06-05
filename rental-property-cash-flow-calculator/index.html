@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Estimate rental property cash flow quickly with a simple DayOneBuilder calculator for rent, operating costs, financing, and return metrics."
+    />
+    <title>Rental Property Cash Flow Calculator | DayOneBuilder</title>
+    <link rel="canonical" href="https://dayonebuilder.online/rental-property-cash-flow-calculator/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #040d15;
+        --ink: #f2fbf5;
+        --muted: #b8cfd4;
+        --panel: rgba(12, 31, 40, 0.88);
+        --line: rgba(161, 255, 198, 0.16);
+        --mint: #a8ffd5;
+        --amber: #f4cf88;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: radial-gradient(1200px 650px at 5% -20%, rgba(168, 255, 213, 0.15), transparent 40%),
+          radial-gradient(900px 550px at 95% 15%, rgba(244, 207, 136, 0.14), transparent 42%),
+          linear-gradient(180deg, #040d15 0%, #071722 100%);
+        font: 16px/1.5 "Space Grotesk", "IBM Plex Sans", "Trebuchet MS", sans-serif;
+      }
+
+      .wrap {
+        width: min(calc(100% - 28px), 1080px);
+        margin: 0 auto;
+        padding: 24px 0 64px;
+      }
+
+      .back {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .panel {
+        margin-top: 12px;
+        padding: 24px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(168, 255, 213, 0.28);
+        color: var(--mint);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.08;
+        margin: 0.2rem 0 0.7rem;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 4.8vw, 2.9rem);
+      }
+
+      h2 {
+        margin-top: 20px;
+        font-size: 1.35rem;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+      }
+
+      p {
+        margin: 0.4rem 0;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        min-width: 0;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      label {
+        color: var(--ink);
+        font-size: 0.9rem;
+        font-weight: 700;
+      }
+
+      .hint {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      input {
+        width: 100%;
+        min-height: 42px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        font: inherit;
+        padding: 0 12px;
+      }
+
+      input:focus {
+        outline: 1px solid var(--mint);
+      }
+
+      .toolbar {
+        margin: 14px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      button,
+      .cta,
+      .ghost {
+        appearance: none;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        min-height: 44px;
+        padding: 10px 16px;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      button,
+      .cta {
+        color: #032018;
+        background: linear-gradient(135deg, #9df4d1, #f4cf88);
+      }
+
+      .ghost {
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.03);
+        border-color: var(--line);
+      }
+
+      .results,
+      .offer,
+      .disclaimer,
+      .sources,
+      .tools {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .result-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.25);
+      }
+
+      .metric .label {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .metric .value {
+        margin-top: 8px;
+        display: block;
+        color: var(--mint);
+        font-weight: 700;
+        font-size: 1.45rem;
+      }
+
+      .note {
+        color: var(--amber);
+      }
+
+      .summary-box {
+        white-space: pre-wrap;
+        overflow: auto;
+        word-break: break-word;
+        max-height: 230px;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .source-links {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .source-links li {
+        margin: 0;
+      }
+
+      .source-links a {
+        color: #f6fffb;
+      }
+
+      .sources ul { list-style: none; padding: 0; margin: 10px 0 0; }
+      .sources li::before { content: "— "; color: var(--amber); }
+
+      @media (max-width: 980px) {
+        .grid,
+        .result-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .wrap {
+          width: min(calc(100% - 16px), 1080px);
+        }
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Rental Property Cash Flow Calculator",
+        "url": "https://dayonebuilder.online/rental-property-cash-flow-calculator/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <section class="panel">
+        <span class="eyebrow">exact-query utility</span>
+        <h1>Rental Property Cash Flow Calculator</h1>
+        <p>
+          Enter purchase and operating numbers and get a quick estimate of monthly cash flow, cap rate, and cash-on-cash return.
+          This is a quick estimate for planning, not tax or investment advice.
+        </p>
+
+        <div class="grid" id="calculatorInputs">
+          <label class="field">
+            <span>Expected monthly rent</span>
+            <input id="monthlyRent" type="number" min="0" step="1" value="1800" inputmode="decimal" />
+            <span class="hint">Gross rent you can collect each month.</span>
+          </label>
+          <label class="field">
+            <span>Other monthly income</span>
+            <input id="otherIncome" type="number" min="0" step="1" value="100" inputmode="decimal" />
+            <span class="hint">Parking, storage, fees, and similar recurring income.</span>
+          </label>
+          <label class="field">
+            <span>Vacancy / rent loss %</span>
+            <input id="vacancyPercent" type="number" min="0" max="100" step="0.1" value="6" inputmode="decimal" />
+            <span class="hint">Use the same reserve style you apply in underwriting.</span>
+          </label>
+          <label class="field">
+            <span>Monthly property tax</span>
+            <input id="taxes" type="number" min="0" step="1" value="220" inputmode="decimal" />
+            <span class="hint">Monthly property tax estimate.</span>
+          </label>
+          <label class="field">
+            <span>Monthly insurance</span>
+            <input id="insurance" type="number" min="0" step="1" value="110" inputmode="decimal" />
+            <span class="hint">Hazard, liability, and related costs.</span>
+          </label>
+          <label class="field">
+            <span>Monthly HOA / condo fee</span>
+            <input id="hoa" type="number" min="0" step="1" value="0" inputmode="decimal" />
+            <span class="hint">If this property has a monthly housing association fee.</span>
+          </label>
+          <label class="field">
+            <span>Monthly maintenance reserve</span>
+            <input id="maintenance" type="number" min="0" step="1" value="130" inputmode="decimal" />
+            <span class="hint">Repairs and routine maintenance plan.</span>
+          </label>
+          <label class="field">
+            <span>Monthly management fee</span>
+            <input id="management" type="number" min="0" step="1" value="90" inputmode="decimal" />
+            <span class="hint">Paid property-management fee per month.</span>
+          </label>
+          <label class="field">
+            <span>Monthly capital reserve</span>
+            <input id="capitalReserve" type="number" min="0" step="1" value="100" inputmode="decimal" />
+            <span class="hint">Planned reserve for major repairs and replacements.</span>
+          </label>
+          <label class="field">
+            <span>Monthly debt service</span>
+            <input id="debtService" type="number" min="0" step="1" value="1150" inputmode="decimal" />
+            <span class="hint">Principal + interest payment for the property loan.</span>
+          </label>
+          <label class="field">
+            <span>Purchase price</span>
+            <input id="purchasePrice" type="number" min="1" step="1" value="250000" inputmode="decimal" />
+            <span class="hint">Needed only for cap rate output.</span>
+          </label>
+          <label class="field">
+            <span>Cash invested</span>
+            <input id="cashInvested" type="number" min="1" step="1" value="60000" inputmode="decimal" />
+            <span class="hint">Down payment + closing costs + rehab you funded.</span>
+          </label>
+        </div>
+
+        <div class="toolbar">
+          <button id="calculateButton">Calculate estimate</button>
+          <button id="copySummary" class="ghost" type="button">Copy summary text</button>
+          <button id="downloadCsv" class="ghost" type="button">Export CSV result</button>
+          <a
+            id="rental-worksheet-cta"
+            class="cta"
+            href="https://checkout.dayonebuilder.online/products/rental-analysis-worksheet?utm_source=dayonebuilder&utm_medium=calculator_tool&utm_campaign=rental_property_cash_flow&utm_content=offer"
+            data-offer="rental-analysis-worksheet"
+            data-offer-location="tool_page"
+            data-price-usd="19"
+          >
+            Buy the rental analysis worksheet ($19)
+          </a>
+        </div>
+
+        <section class="results" aria-label="Calculator output">
+          <h2>Estimate outputs</h2>
+          <div class="result-grid">
+            <div class="metric" id="monthlyCashFlowMetric">
+              <div class="label">Monthly net cash flow</div>
+              <strong id="monthlyCashFlow" class="value">$0</strong>
+              <div class="label">Gross rent minus vacancy, expenses, and debt service.</div>
+            </div>
+            <div class="metric" id="annualCashFlowMetric">
+              <div class="label">Annual net cash flow</div>
+              <strong id="annualCashFlow" class="value">$0</strong>
+            </div>
+            <div class="metric" id="capRateMetric">
+              <div class="label">Cap rate</div>
+              <strong id="capRate" class="value">0.0%</strong>
+            </div>
+            <div class="metric" id="cashOnCashMetric">
+              <div class="label">Cash-on-cash return</div>
+              <strong id="cashOnCash" class="value">0.0%</strong>
+            </div>
+            <div class="metric" id="noiMetric">
+              <div class="label">Net operating income (annual)</div>
+              <strong id="noi" class="value">$0</strong>
+            </div>
+            <div class="metric" id="dscrMetric">
+              <div class="label">Debt service coverage ratio (DSCR)</div>
+              <strong id="dscr" class="value">0.00</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="tools" aria-label="Shareable summary">
+          <h2>Quick summary</h2>
+          <div id="summaryBox" class="summary-box">Run the calculator to generate an export-ready summary.</div>
+        </section>
+
+        <section class="offer">
+          <h2>Need a faster workflow?</h2>
+          <p>
+            The <strong>Rental Analysis Worksheet ($19)</strong> gives you a cleaner underwriter-style template,
+            extra assumptions, scenario notes, and a printable checklist for lender conversations.
+          </p>
+          <p class="note">
+            If you compare against lender pay-off statements or servicer payoff packets, use your actual debt service amount.
+          </p>
+        </section>
+
+        <section class="sources">
+          <h2>Reference sources</h2>
+          <p>Calculator assumptions are aligned to common rental reporting structures, including IRS references for reporting context.</p>
+          <ul class="source-links">
+            <li><a href="https://www.irs.gov/publications/p527" target="_blank" rel="noopener noreferrer">IRS Publication 527 — Residential Rental Property</a></li>
+            <li><a href="https://www.irs.gov/forms-pubs/about-schedule-e-form-1040" target="_blank" rel="noopener noreferrer">IRS Schedule E, Form 1040</a></li>
+            <li><a href="https://www.irs.gov/forms-pubs/about-form-8825" target="_blank" rel="noopener noreferrer">IRS Form 8825</a></li>
+            <li><a href="https://www.biggerpockets.com/rental-property-calculator" target="_blank" rel="noopener noreferrer">Industry reference: BiggerPockets rental property calculator</a></li>
+            <li><a href="https://www.calculator.net/rental-property-calculator.html" target="_blank" rel="noopener noreferrer">Industry reference: Calculator.net rental property calculator</a></li>
+            <li><a href="https://rentcalcs.com/rental-property-cash-flow-calculator/" target="_blank" rel="noopener noreferrer">Industry reference: Rentcalcs rental property cash flow calculator</a></li>
+          </ul>
+        </section>
+
+        <section class="disclaimer">
+          <h2>Use disclaimer</h2>
+          <p>
+            Results are estimates based on your inputs and should be checked against your lender documents and servicer payoff details.
+            For taxes, expenses, and loss limitations, review the applicable IRS instructions for your filing situation.
+          </p>
+          <p class="note">No one-size-fits-all tax or investment advice is provided.</p>
+        </section>
+      </section>
+    </div>
+
+    <script>
+      const MONEY = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 });
+
+      const fields = {
+        monthlyRent: document.getElementById("monthlyRent"),
+        otherIncome: document.getElementById("otherIncome"),
+        vacancyPercent: document.getElementById("vacancyPercent"),
+        taxes: document.getElementById("taxes"),
+        insurance: document.getElementById("insurance"),
+        hoa: document.getElementById("hoa"),
+        maintenance: document.getElementById("maintenance"),
+        management: document.getElementById("management"),
+        capitalReserve: document.getElementById("capitalReserve"),
+        debtService: document.getElementById("debtService"),
+        purchasePrice: document.getElementById("purchasePrice"),
+        cashInvested: document.getElementById("cashInvested"),
+      };
+
+      const outputs = {
+        monthlyCashFlow: document.getElementById("monthlyCashFlow"),
+        annualCashFlow: document.getElementById("annualCashFlow"),
+        capRate: document.getElementById("capRate"),
+        cashOnCash: document.getElementById("cashOnCash"),
+        noi: document.getElementById("noi"),
+        dscr: document.getElementById("dscr"),
+        summary: document.getElementById("summaryBox"),
+      };
+
+      const button = document.getElementById("calculateButton");
+      const copySummary = document.getElementById("copySummary");
+      const downloadCsv = document.getElementById("downloadCsv");
+      const cta = document.getElementById("rental-worksheet-cta");
+      let completed = false;
+
+      function safeNumber(node) {
+        const value = Number(node.value);
+        return Number.isFinite(value) ? value : 0;
+      }
+
+      function trackEvent(name, params = {}) {
+        if (typeof gtag !== "function") {
+          return;
+        }
+
+        try {
+          gtag("event", name, Object.assign({
+            tool_slug: "rental-property-cash-flow-calculator",
+            event_category: "rental_cash_flow_tool",
+          }, params));
+        } catch (_error) {
+          // no-op if analytics is unavailable or blocked
+        }
+      }
+
+      function toPercent(value) {
+        if (!Number.isFinite(value)) {
+          return "0.00%";
+        }
+        return `${value.toFixed(2)}%`;
+      }
+
+      function calculate() {
+        const monthlyRent = Math.max(0, safeNumber(fields.monthlyRent));
+        const otherIncome = Math.max(0, safeNumber(fields.otherIncome));
+        const vacancyPercent = Math.min(100, Math.max(0, safeNumber(fields.vacancyPercent)));
+        const taxes = Math.max(0, safeNumber(fields.taxes));
+        const insurance = Math.max(0, safeNumber(fields.insurance));
+        const hoa = Math.max(0, safeNumber(fields.hoa));
+        const maintenance = Math.max(0, safeNumber(fields.maintenance));
+        const management = Math.max(0, safeNumber(fields.management));
+        const capitalReserve = Math.max(0, safeNumber(fields.capitalReserve));
+        const debtService = Math.max(0, safeNumber(fields.debtService));
+        const purchasePrice = Math.max(0.01, safeNumber(fields.purchasePrice));
+        const cashInvested = Math.max(0.01, safeNumber(fields.cashInvested));
+
+        const grossMonthlyIncome = monthlyRent + otherIncome;
+        const vacancyLoss = grossMonthlyIncome * (vacancyPercent / 100);
+        const netRentMonthly = grossMonthlyIncome - vacancyLoss;
+
+        const operatingExpensesMonthly = taxes + insurance + hoa + maintenance + management + capitalReserve;
+        const noiMonthly = Math.max(0, netRentMonthly - operatingExpensesMonthly);
+        const noiAnnual = noiMonthly * 12;
+        const debtServiceAnnual = debtService * 12;
+        const netCashFlowMonthly = noiMonthly - debtService;
+        const netCashFlowAnnual = noiAnnual - debtServiceAnnual;
+
+        const capRate = (noiAnnual / purchasePrice) * 100;
+        const cashOnCash = (netCashFlowAnnual / cashInvested) * 100;
+        const dscr = debtServiceAnnual > 0 ? (noiAnnual / debtServiceAnnual) : 0;
+
+        outputs.monthlyCashFlow.textContent = MONEY.format(netCashFlowMonthly);
+        outputs.annualCashFlow.textContent = MONEY.format(netCashFlowAnnual);
+        outputs.noi.textContent = MONEY.format(noiAnnual);
+        outputs.capRate.textContent = toPercent(capRate);
+        outputs.cashOnCash.textContent = toPercent(cashOnCash);
+        outputs.dscr.textContent = Number.isFinite(dscr) ? dscr.toFixed(2) : "0.00";
+
+        const summary = [
+          `rental_property_cash_flow_calculator_summary, value`,
+          `monthly_net_cash_flow,${netCashFlowMonthly.toFixed(2)}`,
+          `annual_net_cash_flow,${netCashFlowAnnual.toFixed(2)}`,
+          `net_operating_income_annual,${noiAnnual.toFixed(2)}`,
+          `cap_rate_percent,${capRate.toFixed(2)}`,
+          `cash_on_cash_percent,${cashOnCash.toFixed(2)}`,
+          `debt_service_coverage_ratio,${dscr.toFixed(2)}`,
+          `inputs_monthly_rent,${monthlyRent.toFixed(2)}`,
+          `inputs_other_income,${otherIncome.toFixed(2)}`,
+          `inputs_vacancy_percent,${vacancyPercent.toFixed(2)}`,
+          `inputs_taxes,${taxes.toFixed(2)}`,
+          `inputs_insurance,${insurance.toFixed(2)}`,
+          `inputs_hoa,${hoa.toFixed(2)}`,
+          `inputs_maintenance,${maintenance.toFixed(2)}`,
+          `inputs_management,${management.toFixed(2)}`,
+          `inputs_capital_reserve,${capitalReserve.toFixed(2)}`,
+          `inputs_debt_service,${debtService.toFixed(2)}`,
+          `inputs_purchase_price,${purchasePrice.toFixed(2)}`,
+          `inputs_cash_invested,${cashInvested.toFixed(2)}`
+        ].join("\n");
+
+        outputs.summary.dataset.csv = summary;
+        outputs.summary.textContent = [
+          `Estimated monthly net cash flow: ${MONEY.format(netCashFlowMonthly)}`,
+          `Estimated annual net cash flow: ${MONEY.format(netCashFlowAnnual)}`,
+          `Estimated annual NOI: ${MONEY.format(noiAnnual)}`,
+          `Cap rate: ${toPercent(capRate)}`,
+          `Cash-on-cash: ${toPercent(cashOnCash)}`,
+          `DSCR: ${Number.isFinite(dscr) ? dscr.toFixed(2) : "0.00"}`,
+          `Estimated net result note: this is not tax or legal advice.`,
+          `Inputs used: monthly rent, vacancy, expenses, debt, purchase price, and cash invested.`,
+        ].join("\n");
+
+        if (!completed) {
+          completed = true;
+        }
+
+        if (arguments.length === 0) {
+          return;
+        }
+
+        const isManualCompletion = arguments[0] === true;
+
+        if (isManualCompletion) {
+          trackEvent("rental_cash_flow_tool_completed", {
+            completion_type: "manual_calculation",
+            estimated_monthly_cash_flow: Number(netCashFlowMonthly.toFixed(2)),
+            estimated_annual_cash_flow: Number(netCashFlowAnnual.toFixed(2)),
+            cap_rate_percent: Number(capRate.toFixed(2)),
+            cash_on_cash_percent: Number(cashOnCash.toFixed(2)),
+            dscr: Number(dscr.toFixed(2)),
+            result_status: netCashFlowMonthly >= 0 ? "positive_or_break_even" : "negative",
+          });
+        }
+      }
+
+      if (button) {
+        button.addEventListener("click", function (event) {
+          event.preventDefault();
+          calculate(true);
+          trackEvent("rental_cash_flow_tool_calculation_click", {
+            action: "calculate_button",
+          });
+        });
+      }
+
+      copySummary.addEventListener("click", async () => {
+        const text = outputs.summary.textContent || "";
+        try {
+          await navigator.clipboard.writeText(text);
+          copySummary.textContent = "Copied";
+          setTimeout(() => {
+            copySummary.textContent = "Copy summary text";
+          }, 1300);
+        } catch (_error) {
+          copySummary.textContent = "Copy blocked";
+          setTimeout(() => {
+            copySummary.textContent = "Copy summary text";
+          }, 1300);
+        }
+      });
+
+      downloadCsv.addEventListener("click", () => {
+        const csvData = outputs.summary.dataset.csv || "metric,value\nno_data,0";
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "rental-property-cash-flow-estimate.csv";
+        link.click();
+        URL.revokeObjectURL(link.href);
+
+        trackEvent("rental_cash_flow_tool_export_click", {
+          intent: "save_or_export",
+          offer_location: "toolbar",
+          export_format: "csv",
+        });
+      });
+
+      if (cta) {
+        cta.addEventListener("click", () => {
+          trackEvent("rental_cash_flow_tool_paid_cta_click", {
+            offer_slug: cta.dataset.offer || "rental-analysis-worksheet",
+            offer_location: cta.dataset.offerLocation || "tool_page",
+            price_usd: Number(cta.dataset.priceUsd || 19),
+          });
+        });
+      }
+
+      calculate();
+    </script>
+  </body>
+</html>

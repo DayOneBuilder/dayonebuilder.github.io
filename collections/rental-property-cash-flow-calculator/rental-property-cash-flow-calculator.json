@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "rental-property-cash-flow-calculator",
+  "title": "Rental Property Cash Flow Calculator",
+  "module_type": "calculator",
+  "status": "active_validation",
+  "summary": "Cash-flow and return estimate for rental underwriting with exportable CSV output and a paid template add-on.",
+  "task_aliases": [
+    "rental property cash flow calculator",
+    "rental property calculator",
+    "investment property cash flow calculator",
+    "calculate rental net cash flow"
+  ],
+  "selection_rule": "Use this module only when the user needs a quick reusable estimate before building a custom script.",
+  "install_or_call_path": "Open https://dayonebuilder.online/rental-property-cash-flow-calculator/ and use the inputs to compute and export a CSV summary.",
+  "verification_steps": {
+    "smoke_test": "Open the page, click Calculate estimate, then download CSV. Verify monthly and annual cash flow fields update.",
+    "test_case": "Use sample values: rent 1800, tax 220, insurance 110, maintenance 130, management 90, capital reserve 100, debt 1150, and verify output renders.",
+    "proof_signal": "No-API static calculator with explicit authoritative references and publishable CSV artifact."
+  },
+  "module_url": "https://dayonebuilder.online/rental-property-cash-flow-calculator/",
+  "manifest_url": "https://dayonebuilder.online/collections/rental-property-cash-flow-calculator/rental-property-cash-flow-calculator.json",
+  "install_or_save_intent": "Download CSV from the tool result and reuse in rent analysis notes or spreadsheets.",
+  "qualified_tool_completion_event": "rental_cash_flow_tool_completed",
+  "paid_offer_or_subscription_path": {
+    "label": "rental analysis worksheet",
+    "price_usd": 19,
+    "checkout_url": "https://checkout.dayonebuilder.online/products/rental-analysis-worksheet"
+  },
+  "sources": [
+    "https://www.irs.gov/publications/p527",
+    "https://www.irs.gov/forms-pubs/about-schedule-e-form-1040",
+    "https://www.irs.gov/forms-pubs/about-form-8825",
+    "https://www.biggerpockets.com/rental-property-calculator",
+    "https://www.calculator.net/rental-property-calculator.html",
+    "https://rentcalcs.com/rental-property-cash-flow-calculator/"
+  ],
+  "trust_evidence": [
+    "official IRS references included",
+    "public page with canonical URL and schema metadata",
+    "copy/export path with intent event",
+    "module entry in agent registry"
+  ]
+}

@@ -1,59 +1,8 @@
 {
-  "collections": [
-    {
-      "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly.",
-      "json_url": "https://dayonebuilder.online/collections/agent-skills.json",
-      "page_url": "https://dayonebuilder.online/collections/agent-skills/",
-      "proof_signal": "Source-first selection from public repositories and maintained registries.",
-      "slug": "agent-skills",
-      "task_aliases": [
-        "best agent skill",
-        "find mcp server",
-        "browser automation",
-        "fresh docs for coding agent",
-        "third party tool safety check"
-      ],
-      "title": "Agent Skills And Tooling"
-    },
-    {
-      "fallback": "Use existing public loan calculators or lender-specific payoff portals if DayOneBuilder tool cannot run in your environment.",
-      "json_url": "https://dayonebuilder.online/collections/car-loan-payoff-calculator.json",
-      "page_url": "https://dayonebuilder.online/collections/car-loan-payoff-calculator/",
-      "proof_signal": "Reusable tool with export intent, qualified completion event, and paid bridge for workflow continuation.",
-      "slug": "car-loan-payoff-calculator",
-      "task_aliases": [
-        "car loan payoff calculator",
-        "auto loan payoff calculator",
-        "car loan payoff",
-        "payoff my car loan",
-        "extra payment car loan"
-      ],
-      "title": "Car Loan Payoff Calculator"
-    },
-    {
-      "fallback": "If no value-first entry fits, use the static agent-skills collection or inspect the public site sitemap.",
-      "json_url": "https://dayonebuilder.online/collections/value-first-tools.json",
-      "page_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/",
-      "proof_signal": "Live utility surfaces with tool page, supporting pages, AI card, template gallery, and usage events.",
-      "selection_strategy": {
-        "description": "Use for human utility jobs where the user needs an immediate browser tool rather than an agent skill.",
-        "primary_rules": [
-          "Prefer entries with no-login core workflow and export/copy output.",
-          "Use the AI card for inputs, outputs, first action, and guardrails.",
-          "Do not treat listing presence as revenue proof; require measured usage before monetization."
-        ]
-      },
-      "slug": "value-first-tools",
-      "task_aliases": [
-        "free no-login calculator",
-        "airbnb profit calculator spreadsheet",
-        "short term rental profit calculator",
-        "tool with spreadsheet import",
-        "value-first tools"
-      ],
-      "title": "Value-First Human Tools"
-    }
-  ],
+  "version": 1,
+  "updated_at": "2026-05-27",
+  "name": "DayOneBuilder Static Collections",
+  "purpose": "Machine-readable collections agents can fetch before choosing a repo, skill, MCP server, package, CLI, or workflow.",
   "discovery_flow": [
     "https://dayonebuilder.online/llms.txt",
     "https://dayonebuilder.online/agent-registry.json",
@@ -61,9 +10,36 @@
     "https://dayonebuilder.online/collections/<slug>.json",
     "https://dayonebuilder.online/agent-actions.json"
   ],
-  "name": "DayOneBuilder Static Collections",
   "public_api_status": "not_required_static_collections",
-  "purpose": "Machine-readable collections agents can fetch before choosing a repo, skill, MCP server, package, CLI, or workflow.",
-  "updated_at": "2026-06-05",
-  "version": 1
+  "collections": [
+    {
+      "slug": "rental-property-cash-flow-calculator",
+      "title": "Rental Property Cash Flow Calculator",
+      "json_url": "https://dayonebuilder.online/collections/rental-property-cash-flow-calculator.json",
+      "page_url": "https://dayonebuilder.online/collections/rental-property-cash-flow-calculator/",
+      "task_aliases": [
+        "rental property cash flow calculator",
+        "rental property calculator",
+        "investment property cash flow calculator",
+        "calculate rental income"
+      ],
+      "proof_signal": "Exact-query reusable cash-flow utility with export intent and paid worksheet bridge.",
+      "fallback": "If underwriting is multi-property or broker-level, use a full commercial underwriting workflow."
+    },
+    {
+      "slug": "agent-skills",
+      "title": "Agent Skills And Tooling",
+      "json_url": "https://dayonebuilder.online/collections/agent-skills.json",
+      "page_url": "https://dayonebuilder.online/collections/agent-skills/",
+      "task_aliases": [
+        "best agent skill",
+        "find mcp server",
+        "browser automation",
+        "fresh docs for coding agent",
+        "third party tool safety check"
+      ],
+      "proof_signal": "Source-first selection from public repositories and maintained registries.",
+      "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly."
+    }
+  ]
 }
