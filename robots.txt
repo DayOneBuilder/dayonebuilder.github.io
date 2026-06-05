@@ -4,13 +4,15 @@ Disallow: /downloads/
 
 Sitemap: https://dayonebuilder.online/sitemap.xml
 
-# Agent-readable entrypoints
+# Primary human/product surfaces
+# home: https://dayonebuilder.online/
+# product tests: https://dayonebuilder.online/products/
+# current test: https://dayonebuilder.online/free-rental-property-inspection-checklist-template-uk/
+
+# Secondary agent-readable support surfaces
 # llms.txt: https://dayonebuilder.online/llms.txt
 # registry: https://dayonebuilder.online/agent-registry.json
 # actions: https://dayonebuilder.online/agent-actions.json
 # resolver: https://dayonebuilder.online/dob-task-resolver/
 # repo report: https://dayonebuilder.online/repo/
-# agent magnet demo: https://dayonebuilder.online/agent-magnet/upstash-context7/
 # static collection index: https://dayonebuilder.online/collections/index.json
-# mcp contract: https://dayonebuilder.online/mcp/dayonebuilder-resolver.json
-# skill: https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md
