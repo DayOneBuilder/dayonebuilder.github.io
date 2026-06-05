@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Weekly Dinner Menu Planner Template | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for a weekly dinner menu planner template, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/weekly-dinner-menu-planner-template/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.__d1bHasGtag = false;
+      window.trackDayOneBuilderEvent = function trackDayOneBuilderEvent(name, params = {}) {
+        if (!window.__d1bHasGtag || typeof window.gtag !== "function") {
+          return;
+        }
+        window.gtag("event", name, {
+          event_category: "dayonebuilder_template",
+          ...params,
+        });
+      };
+      (function initGtag() {
+        let tries = 0;
+        const tryEnable = () => {
+          if (typeof window.gtag === "function" && Array.isArray(window.dataLayer)) {
+            window.__d1bHasGtag = true;
+            window.gtag("js", new Date());
+            window.gtag("config", "G-KQMLYS3VVE");
+            return;
+          }
+          if (tries < 20) {
+            tries += 1;
+            setTimeout(tryEnable, 250);
+          }
+        };
+        tryEnable();
+      })();
+    </script>
+    <style>
+      :root {
+        --bg: #0a1512;
+        --panel: #0f1f1a;
+        --line: rgba(255, 255, 255, 0.14);
+        --ink: #f3f7f4;
+        --muted: #9bb0a7;
+        --green: #40d39d;
+        --blue: #7bc6ff;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: radial-gradient(circle at 20% 5%, #0f2a21 0%, #0a1512 45%, #08130f 100%);
+        color: var(--ink);
+        font: 15px/1.6 "Alegreya Sans", "Alegreya", "Avenir Next", "Trebuchet MS", sans-serif;
+      }
+      a { color: #c8f0de; }
+      .wrap { width: min(calc(100% - 30px), 1040px); margin: 0 auto; padding: 30px 0 54px; }
+      .top {
+        display: grid;
+        gap: 14px;
+      }
+      .eyebrow { color: var(--green); letter-spacing: .08em; text-transform: uppercase; font-size: 11px; font-weight: 750; }
+      h1 { font-size: clamp(2rem, 4.5vw, 3rem); margin: 0; line-height: 1.05; max-width: 14ch; }
+      .lead { color: var(--muted); margin: 8px 0 8px; max-width: 72ch; }
+      .grid {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: 1.05fr 1fr;
+        gap: 14px;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: color-mix(in srgb, var(--panel), black 4%);
+        padding: 18px;
+      }
+      h2 { margin: 0 0 10px; font-size: 1.12rem; }
+      .row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 10px;
+      }
+      label { display: grid; gap: 7px; font-weight: 600; color: #d9e8e2; }
+      input, select {
+        width: 100%;
+        min-height: 42px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #08130f;
+        color: var(--ink);
+        font: inherit;
+        padding: 8px 12px;
+      }
+      .btn {
+        min-height: 44px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #f5f5f5;
+        color: #062118;
+        font: inherit;
+        font-weight: 720;
+        padding: 0 14px;
+        cursor: pointer;
+      }
+      .btn.secondary { background: transparent; color: var(--ink); border-color: #2f4f43; }
+      .btn-wrap { display: flex; flex-wrap: wrap; gap: 10px; }
+      .result, .source-list {
+        margin-top: 14px;
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        padding: 14px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        overflow: hidden;
+      }
+      th, td {
+        border: 1px solid var(--line);
+        padding: 10px;
+        text-align: left;
+      }
+      th { color: #deefe8; font-weight: 700; }
+      .status { color: var(--muted); min-height: 24px; margin-top: 8px; }
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .meta span {
+        border: 1px solid #2f4f43;
+        border-radius: 999px;
+        padding: 5px 9px;
+        color: #c2e0d4;
+        font-size: 12px;
+      }
+      .disclaimer {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .paid {
+        background: linear-gradient(120deg, #173a30, #0f2a20);
+        border: 1px solid #3aa46f;
+      }
+      ul { margin: 8px 0 0; padding-left: 20px; }
+      a.button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #e8f8ef;
+        color: #0a1512;
+        padding: 0 14px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .muted-list { color: var(--muted); font-size: 13px; margin-top: 10px; }
+      .compact {
+        display: grid;
+        gap: 10px;
+      }
+      .footer {
+        margin-top: 22px;
+        border-top: 1px dashed var(--line);
+        padding-top: 14px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        border: 0;
+      }
+      @media (max-width: 940px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .row { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="top">
+        <span class="eyebrow">Template tool</span>
+        <h1>Weekly dinner menu planner template</h1>
+        <p class="lead">
+          Turn one weekly dinner planning session into a ready-to-download template in one pass.
+          Fill your inputs, generate a plan, then export it as CSV for any spreadsheet app.
+        </p>
+      </section>
+
+      <section class="grid" aria-label="Planner tool and results">
+        <article class="panel">
+          <h2>Plan this week</h2>
+          <div class="row" role="group" aria-label="Planner settings">
+            <label>
+              Household size
+              <input id="household" type="number" min="1" max="10" value="2" />
+            </label>
+            <label>
+              Weekly budget estimate, USD
+              <input id="budget" type="number" min="50" step="5" value="180" />
+            </label>
+            <label>
+              Dinner style
+              <select id="style">
+                <option value="any">Any</option>
+                <option value="quick">Fast (25 minutes)</option>
+                <option value="protein">Protein-forward</option>
+                <option value="budget">Budget-first</option>
+                <option value="family">Family-friendly</option>
+              </select>
+            </label>
+            <label>
+              Planning nights
+              <select id="days">
+                <option value="5">5 dinners</option>
+                <option value="6">6 dinners</option>
+                <option value="7" selected>7 dinners</option>
+                <option value="8">8 dinners</option>
+              </select>
+            </label>
+          </div>
+          <div class="btn-wrap" style="margin-top:12px">
+            <button id="build" class="btn" type="button">Generate weekly plan</button>
+            <button id="copyPlan" class="btn secondary" type="button">Copy plan text</button>
+          </div>
+          <p class="status" id="status">Set your settings and generate your plan.</p>
+
+          <section class="result" aria-live="polite" id="planSection" hidden>
+            <h3 style="margin:0 0 8px">Generated plan</h3>
+            <div id="planMeta" class="meta"></div>
+            <div style="overflow-x:auto">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Day</th>
+                    <th>Meal</th>
+                    <th>Prep</th>
+                    <th>Estimated cost</th>
+                  </tr>
+                </thead>
+                <tbody id="planRows"></tbody>
+              </table>
+            </div>
+            <p class="disclaimer" id="estimation"></p>
+            <p class="disclaimer">Estimated outputs are for planning only, not financial advice. Compare with your local prices and your own grocery receipts.</p>
+            <div class="btn-wrap" style="margin-top:12px">
+              <button id="download" class="btn" type="button">Download CSV artifact</button>
+    <a id="paid" class="button" href="https://checkout.dayonebuilder.online/?product=weekly-dinner-menu-planner-template" target="_blank" rel="noreferrer">Get $9 meal planning worksheet</a>
+            </div>
+          </section>
+        </article>
+
+        <article class="panel compact">
+          <h2>Why this module exists</h2>
+          <p class="lead" style="margin:0">
+            Targeted, reusable artifact for <strong>weekly dinner menu planner template</strong> search.
+            No signup, no scripts, no browser automation required.
+          </p>
+          <div class="meta" role="list" style="margin-top:12px">
+            <span>Installable artifact: CSV planner</span>
+            <span>Search intent: weekly dinner menu planning</span>
+            <span>Measurable event: completion/download/paid click</span>
+          </div>
+          <section class="source-list">
+            <h3>Useful reference sources</h3>
+            <ul class="muted-list">
+              <li><a href="https://onplanners.com/templates/weekly-meal-planner" target="_blank" rel="noreferrer">onplanners weekly meal template</a></li>
+              <li><a href="https://www.spreadsheet123.com/ExcelTemplates/meal-planner.html" target="_blank" rel="noreferrer">spreadsheet123 meal planner template</a></li>
+              <li><a href="https://www.zoho.com/sheet/free-spreadsheet-templates/meal-planner.html" target="_blank" rel="noreferrer">Zoho sheet meal planner templates</a></li>
+              <li><a href="https://www.etsy.com/market/meal_planner_template" target="_blank" rel="noreferrer">Etsy planner marketplace examples</a></li>
+              <li><a href="https://www.reddit.com/r/googlesheets/comments/1ejg9bl/creating_a_weekly_menu_planner_in_conjunction/" target="_blank" rel="noreferrer">Community discussion</a></li>
+            </ul>
+          </div>
+          <section class="paid panel paid" aria-label="Paid path">
+            <h2>Custom cleanup path</h2>
+            <p class="disclaimer">If you need a cleaned version with shopping formulas, saved pantry sets, and nutrition columns, the paid path is available for <strong>$9</strong>.</p>
+            <a id="paidInline" class="button" href="https://checkout.dayonebuilder.online/?product=weekly-dinner-menu-planner-template" target="_blank" rel="noreferrer">Choose $9 template export</a>
+          </section>
+        </article>
+      </section>
+
+      <p class="footer">
+        Use and copy only as needed. If your week already has leftovers and prep habits, keep those as editable rows and replace estimated costs with your local data.
+      </p>
+    </main>
+
+    <script>
+      (function () {
+        const catalog = [
+          { meal: "Sheet-pan chicken with potatoes", style: ["protein", "family", "quick"], prep: "35m", cost: 12 },
+          { meal: "Lentil chili with rice", style: ["budget", "quick", "any"], prep: "30m", cost: 9 },
+          { meal: "Baked salmon + asparagus", style: ["protein", "any"], prep: "25m", cost: 14 },
+          { meal: "Chickpea curry + rice", style: ["budget", "family", "quick"], prep: "40m", cost: 10 },
+          { meal: "Turkey taco bowls", style: ["family", "any"], prep: "28m", cost: 11 },
+          { meal: "One-pan lemon pasta", style: ["quick", "any"], prep: "22m", cost: 8 },
+          { meal: "Baked salmon bowls", style: ["protein", "family"], prep: "30m", cost: 13 },
+          { meal: "Vegetable stir-fry + noodles", style: ["budget", "any", "quick"], prep: "24m", cost: 9 },
+          { meal: "Meatballs + tomato sauce", style: ["family", "protein"], prep: "45m", cost: 12 },
+          { meal: "Stuffed bell peppers", style: ["any", "budget", "family"], prep: "50m", cost: 11 },
+        ];
+
+        const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon 2", "Tue 2"];
+
+        const state = {
+          rows: []
+        };
+
+        const el = {
+          build: document.getElementById("build"),
+          copyPlan: document.getElementById("copyPlan"),
+          download: document.getElementById("download"),
+          paid: document.getElementById("paid"),
+          paidInline: document.getElementById("paidInline"),
+          household: document.getElementById("household"),
+          budget: document.getElementById("budget"),
+          style: document.getElementById("style"),
+          days: document.getElementById("days"),
+          status: document.getElementById("status"),
+          planSection: document.getElementById("planSection"),
+          planRows: document.getElementById("planRows"),
+          planMeta: document.getElementById("planMeta"),
+          estimation: document.getElementById("estimation")
+        };
+
+        function formatMoney(value) {
+          return "$" + Number(value).toFixed(2);
+        }
+
+        function pickMeals(selectedStyle, count) {
+          const filtered = catalog.filter((item) => {
+            if (selectedStyle === "any") {
+              return true;
+            }
+            return item.style.includes(selectedStyle);
+          });
+          const source = [...filtered];
+          const output = [];
+
+          while (output.length < count) {
+            if (!source.length) {
+              source.push(...catalog);
+            }
+            const index = output.length % source.length;
+            const item = source[index];
+            output.push(item);
+          }
+
+          return output.slice(0, count);
+        }
+
+        function renderRows(rows) {
+          el.planRows.textContent = "";
+          rows.forEach((row) => {
+            const tr = document.createElement("tr");
+            [row.day, row.meal, row.prep, formatMoney(row.cost)]
+              .forEach((value) => {
+                const td = document.createElement("td");
+                td.textContent = value;
+                tr.appendChild(td);
+              });
+            el.planRows.appendChild(tr);
+          });
+        }
+
+        function buildPlan() {
+          const household = Math.max(1, Math.min(10, Number(el.household.value || 2)));
+          const budget = Number(el.budget.value || 0);
+          const selectedStyle = el.style.value;
+          const nightCount = Number(el.days.value || 7);
+          const meals = pickMeals(selectedStyle, nightCount);
+          const rows = meals.map((item, index) => {
+            const multiplier = Math.max(1, Math.round(household / 2));
+            return {
+              day: days[index],
+              meal: item.meal,
+              prep: item.prep,
+              cost: item.cost * multiplier,
+            };
+          });
+
+          const estimatedTotal = rows.reduce((sum, row) => sum + row.cost, 0);
+          const budgetMatch = budget > 0 ? ((budget - estimatedTotal) / budget) * 100 : 0;
+          const targetWithinBudget = budget > 0 && estimatedTotal <= budget;
+          state.rows = rows;
+
+          el.planMeta.innerHTML = "";
+          const status = document.createElement("span");
+          status.textContent = targetWithinBudget
+            ? `Estimated total ${formatMoney(estimatedTotal)} within your budget`
+            : `Estimated total ${formatMoney(estimatedTotal)} above budget by ${formatMoney(Math.abs(budget - estimatedTotal))}`;
+
+          const budgetChip = document.createElement("span");
+          budgetChip.textContent = `Household ${household} · ${nightCount} dinners`;
+          const styleChip = document.createElement("span");
+          styleChip.textContent = `Style: ${selectedStyle}`;
+          const fitChip = document.createElement("span");
+          fitChip.textContent = targetWithinBudget
+            ? "Estimated result fits budget"
+            : "Estimated result above budget";
+
+          el.planMeta.appendChild(budgetChip);
+          el.planMeta.appendChild(styleChip);
+          el.planMeta.appendChild(status);
+          el.planMeta.appendChild(fitChip);
+          renderRows(rows);
+          el.estimation.textContent = `This is an estimate from local defaults and your profile. Replace any amount with actual receipts before purchase planning.`;
+          el.status.textContent = "Plan generated.";
+          el.planSection.hidden = false;
+
+          trackDayOneBuilderEvent("qualified_tool_completion", {
+            module: "weekly-dinner-menu-planner-template",
+            household,
+            nights: nightCount,
+            style: selectedStyle,
+            estimated_total: estimatedTotal,
+            within_budget: targetWithinBudget,
+          });
+        }
+
+        function copyPlanText() {
+          if (!state.rows.length) {
+            el.status.textContent = "Generate a plan first.";
+            return;
+          }
+          const text = state.rows.map((row, index) => `${index + 1}. ${row.day}: ${row.meal} (${row.prep}) — ${formatMoney(row.cost)}`).join("\n");
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text)
+              .then(() => {
+                el.status.textContent = "Plan copied to clipboard.";
+                trackDayOneBuilderEvent("module_install_or_save_intent", {
+                  module: "weekly-dinner-menu-planner-template",
+                  intent: "copy_plan",
+                });
+              })
+              .catch(() => {
+                el.status.textContent = "Copy blocked. Use Download CSV instead.";
+              });
+          } else {
+            el.status.textContent = "Clipboard API not available.";
+          }
+        }
+
+        function toCsv(rows) {
+          const lines = [
+            "day,meal,prep_minutes,estimated_cost_usd,notes",
+          ];
+          rows.forEach((row) => {
+            const notes = row.meal.includes(" + ") ? "batch_optional" : "";
+            const safeMeal = `"${row.meal.replace(/"/g, '""')}"`;
+            lines.push(`${row.day},${safeMeal},${row.prep},${row.cost.toFixed(2)},${notes}`);
+          });
+          return lines.join("\n");
+        }
+
+        function downloadCsv() {
+          if (!state.rows.length) {
+            el.status.textContent = "Generate a plan first.";
+            return;
+          }
+          const csv = toCsv(state.rows);
+          const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = "weekly-dinner-menu-planner-template.csv";
+          a.style.display = "none";
+          document.body.appendChild(a);
+          a.click();
+          URL.revokeObjectURL(url);
+          a.remove();
+          el.status.textContent = "CSV downloaded.";
+          trackDayOneBuilderEvent("module_install_or_save_intent", {
+            module: "weekly-dinner-menu-planner-template",
+            intent: "download_csv",
+          });
+        }
+
+        function trackPaidClick() {
+          trackDayOneBuilderEvent("paid_cta_click", {
+            module: "weekly-dinner-menu-planner-template",
+            offer: "$9 meal planning worksheet",
+          });
+        }
+
+        el.build.addEventListener("click", buildPlan);
+        el.copyPlan.addEventListener("click", copyPlanText);
+        el.download.addEventListener("click", downloadCsv);
+        el.paid.addEventListener("click", trackPaidClick);
+        el.paidInline.addEventListener("click", trackPaidClick);
+      })();
+    </script>
+  </body>
+</html>
