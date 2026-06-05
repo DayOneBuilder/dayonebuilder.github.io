@@ -1,45 +1,354 @@
 {
-  "version": 1,
-  "updated_at": "2026-05-27",
-  "name": "DayOneBuilder Static Collections",
-  "purpose": "Machine-readable collections agents can fetch before choosing a repo, skill, MCP server, package, CLI, or workflow.",
+  "collections": [
+    {
+      "entry_count": 5,
+      "fallback": "If no entry fits, fetch https://dayonebuilder.online/agent-actions.json or inspect upstream sources directly.",
+      "json_url": "https://dayonebuilder.online/collections/agent-skills.json",
+      "kind": "agent_collection",
+      "page_url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "proof_signal": "Cross-runtime agent-skill directory with broad discovery coverage across Codex, Claude Code, Gemini CLI, Cursor, GitHub Copilot, OpenCode, and Windsurf.",
+      "slug": "agent-skills",
+      "task_aliases": [
+        "task or github repo to best executor",
+        "repo to best executor",
+        "github repo tool picker",
+        "task or repo to installable agent tool",
+        "best executor for this github repo",
+        "best executor for this task",
+        "best agent skill",
+        "find a skill",
+        "install agent skill",
+        "find mcp server",
+        "browser automation",
+        "current docs"
+      ],
+      "title": "Agent Skills And Tooling"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If this exact short-term rental job does not fit, inspect the supporting URLs or continue with a spreadsheet/manual calculation workflow.",
+      "json_url": "https://dayonebuilder.online/collections/value-first-tools.json",
+      "kind": "value_first_collection",
+      "page_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/",
+      "proof_signal": "Live no-login browser calculator with spreadsheet paste/import, local scenario save, copy summary, CSV export, GA4 events, supporting pages, and Search Console submitted sitemap.",
+      "slug": "value-first-tools",
+      "task_aliases": [
+        "airbnb profit calculator spreadsheet",
+        "free airbnb profit calculator",
+        "airbnb profit calculator excel",
+        "short term rental profit calculator",
+        "airbnb break even occupancy calculator"
+      ],
+      "title": "DayOneBuilder Value-First Tools"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "Use public references directly: https://finmasters.com/bill-tracker-template/, https://www.vertex42.com/ExcelTemplates/bill-tracker.html, https://www.financialaha.com/free-spreadsheet-templates/personal-budgeting/bill-tracker/ for template ideas.",
+      "json_url": "https://dayonebuilder.online/collections/bill-tracker-spreadsheet-template.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/bill-tracker-spreadsheet-template/",
+      "proof_signal": "Tool shows formula-based frequency normalization (weekly, biweekly, quarterly, annual to monthly) and generates a CSV export with the same row data.",
+      "slug": "bill-tracker-spreadsheet-template",
+      "task_aliases": [
+        "bill tracker spreadsheet template",
+        "bill tracker template",
+        "track recurring bills",
+        "monthly bill tracker",
+        "bill budget template",
+        "personal finance tracker"
+      ],
+      "title": "Bill Tracker Spreadsheet Template"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "Use another calculator source such as Calculator.net or NerdWallet if DayOneBuilder is unavailable.",
+      "json_url": "https://dayonebuilder.online/collections/car-loan-payoff-calculator.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/car-loan-payoff-calculator/",
+      "proof_signal": "No-login calculator with CFPB-grounded warnings, GA4-safe qualified completion event, export intent event, and paid worksheet bridge.",
+      "slug": "car-loan-payoff-calculator",
+      "task_aliases": [
+        "car loan payoff calculator",
+        "auto loan payoff calculator",
+        "payoff my car loan",
+        "car loan payoff",
+        "car loan extra payment"
+      ],
+      "title": "Car Loan Payoff Calculator"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "Use the task resolver path in /resolver/ to compare external alternatives.",
+      "json_url": "https://dayonebuilder.online/collections/cleaning-checklist-template.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/cleaning-checklist-template/",
+      "proof_signal": "No login workflow with copy/save/export telemetry and paid-path visibility.",
+      "slug": "cleaning-checklist-template",
+      "task_aliases": [
+        "cleaning checklist template",
+        "household cleaning checklist",
+        "weekly cleaning plan",
+        "cleaning template",
+        "home cleaning checklist"
+      ],
+      "title": "Cleaning checklist template"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "For a binding quote, compare multiple licensed movers and use consumer finance budgeting worksheets before signing a contract.",
+      "json_url": "https://dayonebuilder.online/collections/cost-of-moving-calculator.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/cost-of-moving-calculator/",
+      "proof_signal": "Includes official budgeting references, measurable completion/export events, and a paid checklist bridge.",
+      "slug": "cost-of-moving-calculator",
+      "task_aliases": [
+        "cost of moving calculator",
+        "move budget calculator",
+        "moving cost estimate",
+        "household move cost",
+        "diy moving budget",
+        "moving expense estimate"
+      ],
+      "title": "Cost of Moving Calculator"
+    },
+    {
+      "entry_count": 2,
+      "fallback": "Use Workforce and Reddit notes if one source cannot be opened, then use the local generated structure as a practical baseline.",
+      "json_url": "https://dayonebuilder.online/collections/employee-onboarding-checklist-template.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/employee-onboarding-checklist-template/",
+      "proof_signal": "Official templates are linked from Waybook and HRCloud; trusted references and task output are visible on the same page.",
+      "slug": "employee-onboarding-checklist-template",
+      "task_aliases": [
+        "employee onboarding checklist template",
+        "onboarding checklist",
+        "new hire checklist template",
+        "onboarding checklist for small business"
+      ],
+      "title": "Employee Onboarding Checklist Template"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If your process requires filing-specific tax rules, use the linked IRS Form 1040-ES guidance and then return to this module with verified values.",
+      "json_url": "https://dayonebuilder.online/collections/estimated-tax-payment-calculator.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/estimated-tax-payment-calculator/",
+      "proof_signal": "Static manifest plus clear IRS references and analytics hooks for qualified completion, save/install intent, and paid CTA interaction.",
+      "slug": "estimated-tax-payment-calculator",
+      "task_aliases": [
+        "estimated tax payment calculator",
+        "estimated tax calculator",
+        "quarterly estimated taxes",
+        "tax payment schedule",
+        "estimated tax worksheet"
+      ],
+      "title": "Estimated Tax Payment Calculator"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If this page is not usable for your habits, open one of the linked public template sources and adapt the format manually.",
+      "json_url": "https://dayonebuilder.online/collections/habit-tracker-spreadsheet-template.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/habit-tracker-spreadsheet-template/",
+      "proof_signal": "Qualified completion and export events are logged from local actions; no signup required; official template sources are linked for trust evidence.",
+      "slug": "habit-tracker-spreadsheet-template",
+      "task_aliases": [
+        "habit tracker spreadsheet template",
+        "habit tracker template",
+        "build habit tracker",
+        "habit tracker csv",
+        "habit tracking spreadsheet"
+      ],
+      "title": "Habit Tracker Spreadsheet Template"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "Use official template catalogs from Smartsheet or Microsoft Templates if you need pre-structured formats.",
+      "json_url": "https://dayonebuilder.online/collections/how-to-create-event-budget-template-in-excel.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/how-to-create-event-budget-template-in-excel/",
+      "proof_signal": "No-login budget calculator, export event and install intent events, and explicit paid option path for cleanup/export.",
+      "slug": "how-to-create-event-budget-template-in-excel",
+      "task_aliases": [
+        "how to create event budget template in excel",
+        "event budget template",
+        "create event budget template",
+        "excel event budget"
+      ],
+      "title": "Event Budget Template in Excel"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "Use the paid Grocery Budget Worksheet Pack for a cleaner starter file set if you want less setup.",
+      "json_url": "https://dayonebuilder.online/collections/how-to-make-a-grocery-budget-spreadsheet.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/",
+      "proof_signal": "Source links, explicit assumptions, no-login workflow, CSV/clipboard output, and measurable install-save and paid-intent events.",
+      "slug": "how-to-make-a-grocery-budget-spreadsheet",
+      "task_aliases": [
+        "how to make a grocery budget spreadsheet",
+        "grocery budget template",
+        "grocery spending spreadsheet",
+        "grocery budget worksheet"
+      ],
+      "title": "How To Make A Grocery Budget Spreadsheet"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If the page fails to load, use official sources directly from the listed invoice tool references.",
+      "json_url": "https://dayonebuilder.online/collections/how-to-use-invoice-template.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/how-to-use-invoice-template/",
+      "proof_signal": "Local-first template CSV output, explicit completion event, save intent event, and checkout click signal without account login.",
+      "slug": "how-to-use-invoice-template",
+      "task_aliases": [
+        "how to use invoice template",
+        "invoice template",
+        "invoice template calculator",
+        "small business invoices",
+        "invoice template download"
+      ],
+      "title": "Invoice Template Module"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If no fixed-rate payoff estimate is needed, prefer an external loan calculator with tax, insurance, and payment-profile controls.",
+      "json_url": "https://dayonebuilder.online/collections/mortgage-payoff-calculator-based-on-current-balance.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/mortgage-payoff-calculator-based-on-current-balance/",
+      "proof_signal": "Exact query-targeted calculator with CSV export, local save intent, and official-source grounding for payoff terminology.",
+      "slug": "mortgage-payoff-calculator-based-on-current-balance",
+      "task_aliases": [
+        "mortgage payoff calculator based on current balance",
+        "current balance mortgage payoff",
+        "how long to payoff mortgage"
+      ],
+      "title": "Mortgage Payoff Calculator Based On Current Balance"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "Use marketplace pet care planners only if the user needs a full external planner system.",
+      "json_url": "https://dayonebuilder.online/collections/pet-care-checklist-template.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/pet-care-checklist-template/",
+      "proof_signal": "No-login checklist generator with save/export telemetry and paid CTA visibility.",
+      "slug": "pet-care-checklist-template",
+      "task_aliases": [
+        "pet care checklist template",
+        "pet sitter handoff checklist",
+        "pet care checklist",
+        "pet care planning template"
+      ],
+      "title": "Pet Care Checklist Template"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "Use official source URLs directly if your lease demands a region- or landlord-specific template first.",
+      "json_url": "https://dayonebuilder.online/collections/rental-inspection-checklist-template.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/rental-inspection-checklist-template/",
+      "proof_signal": "Official checklist references are shown with transparent assumptions and measurable completion/export events.",
+      "slug": "rental-inspection-checklist-template",
+      "task_aliases": [
+        "rental inspection checklist template",
+        "rental inspection checklist",
+        "move in inspection checklist",
+        "move out inspection checklist"
+      ],
+      "title": "Rental Inspection Checklist Template"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If the property needs lender-grade underwriting or tax planning, use a full rental analysis worksheet or a professional review.",
+      "json_url": "https://dayonebuilder.online/collections/rental-property-cash-flow-calculator.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/rental-property-cash-flow-calculator/",
+      "proof_signal": "Cash-flow and return estimate for rental underwriting with exportable CSV output and a paid template add-on.",
+      "slug": "rental-property-cash-flow-calculator",
+      "task_aliases": [
+        "rental property cash flow calculator",
+        "rental property calculator",
+        "investment property cash flow calculator",
+        "calculate rental net cash flow"
+      ],
+      "title": "Rental Property Cash Flow Calculator"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "Use the official scholarship listing pages to verify eligibility and deadlines before submission.",
+      "json_url": "https://dayonebuilder.online/collections/scholarship-application-tracker-spreadsheet.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/scholarship-application-tracker-spreadsheet/",
+      "proof_signal": "Works entirely in browser and exports to a reusable tracker format with official links and local save intent.",
+      "slug": "scholarship-application-tracker-spreadsheet",
+      "task_aliases": [
+        "scholarship application tracker spreadsheet",
+        "scholarship tracker spreadsheet",
+        "scholarship application tracker",
+        "education scholarship tracker",
+        "scholarship deadline tracker"
+      ],
+      "title": "Scholarship Application Tracker Spreadsheet"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If this calculator does not fit the currency or planning constraints, review budget templates linked from CFPB/Jotform references.",
+      "json_url": "https://dayonebuilder.online/collections/travel-budget-calculator.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/travel-budget-calculator/",
+      "proof_signal": "CSV export, copyable summary, and analytics events for completion/export/save/purchase intent.",
+      "slug": "travel-budget-calculator",
+      "task_aliases": [
+        "travel budget calculator",
+        "trip budget",
+        "plan trip expenses",
+        "travel estimate"
+      ],
+      "title": "Travel Budget Calculator"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If this module does not match the task, route to a source-first search or a different collection entry from collections/index.json.",
+      "json_url": "https://dayonebuilder.online/collections/wedding-budget-calculator.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/wedding-budget-calculator/",
+      "proof_signal": "One page offers no-login estimate math, export intent events, and a checkout bridge for the paid workbook.",
+      "slug": "wedding-budget-calculator",
+      "task_aliases": [
+        "wedding budget calculator",
+        "how much does a wedding cost",
+        "wedding budget worksheet",
+        "wedding planning budget",
+        "wedding per guest budget"
+      ],
+      "title": "Wedding Budget Calculator"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If your workflow requires grocery category logic, nutrition scoring, or budget optimization, use a dedicated planning app for deeper automation.",
+      "json_url": "https://dayonebuilder.online/collections/weekly-dinner-menu-planner-template.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/weekly-dinner-menu-planner-template/",
+      "proof_signal": "Deterministic local behavior plus versioned manifest and event hooks for completion, save/install intent, and paid CTA click.",
+      "slug": "weekly-dinner-menu-planner-template",
+      "task_aliases": [
+        "weekly dinner menu planner template",
+        "weekly dinner plan template",
+        "dinner menu planner",
+        "meal planner template"
+      ],
+      "title": "Weekly Dinner Menu Planner Template"
+    }
+  ],
   "discovery_flow": [
     "https://dayonebuilder.online/llms.txt",
     "https://dayonebuilder.online/agent-registry.json",
     "https://dayonebuilder.online/collections/index.json",
-    "https://dayonebuilder.online/collections/<slug>.json",
-    "https://dayonebuilder.online/agent-actions.json"
+    "https://dayonebuilder.online/collections/<slug>.json"
   ],
+  "name": "DayOneBuilder Collections",
   "public_api_status": "not_required_static_collections",
-  "collections": [
-    {
-      "slug": "employee-onboarding-checklist-template",
-      "title": "Employee Onboarding Checklist Template",
-      "json_url": "https://dayonebuilder.online/collections/employee-onboarding-checklist-template.json",
-      "page_url": "https://dayonebuilder.online/employee-onboarding-checklist-template/",
-      "task_aliases": [
-        "employee onboarding checklist template",
-        "onboarding checklist",
-        "new hire checklist",
-        "onboarding template"
-      ],
-      "proof_signal": "Source-backed checklist output, copy/download path, and paid pack path are visible without login.",
-      "fallback": "Use the resolver and other onboarding references in the generated task summary when one source is unavailable."
-    },
-    {
-      "slug": "agent-skills",
-      "title": "Agent Skills And Tooling",
-      "json_url": "https://dayonebuilder.online/collections/agent-skills.json",
-      "page_url": "https://dayonebuilder.online/collections/agent-skills/",
-      "task_aliases": [
-        "best agent skill",
-        "find mcp server",
-        "browser automation",
-        "fresh docs for coding agent",
-        "third party tool safety check"
-      ],
-      "proof_signal": "Source-first selection from public repositories and maintained registries.",
-      "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly."
-    }
-  ]
+  "purpose": "Machine-readable index of useful DayOneBuilder product modules and agent-facing collections.",
+  "updated_at": "2026-06-05",
+  "version": 1
 }
