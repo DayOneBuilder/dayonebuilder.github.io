@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cost Of Moving Calculator | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for cost of moving calculator, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/cost-of-moving-calculator/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      if (window.dataLayer) {
+        gtag("js", new Date());
+        gtag("config", "G-KQMLYS3VVE");
+      }
+      function trackEvent(name, params) {
+        if (typeof gtag === "function" && window.dataLayer) {
+          gtag("event", name, params || {});
+        }
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --card: #ffffff;
+        --ink: #0d1521;
+        --muted: #536073;
+        --line: #dbe4ee;
+        --accent: #4b7bd8;
+        --accent-soft: #e9effa;
+        --radius: 14px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: radial-gradient(circle at 20% -10%, #edf3ff, #f4f7fb 45%, #edf2f7);
+        color: var(--ink);
+        font: 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      .wrap { width: min(980px, calc(100% - 28px)); margin: 0 auto; padding: 24px 0 56px; }
+      .hero {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 22px;
+      }
+      h1 { margin: 0.2rem 0 0.8rem; font-size: clamp(1.95rem, 4.5vw, 2.9rem); }
+      .kicker { color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: 12px; }
+      p { color: var(--muted); margin: 0; }
+      .grid {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 16px;
+      }
+      label {
+        display: inline-block;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      input, select {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font: inherit;
+        background: #fff;
+      }
+      .actions {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      button, .ghost, .primary, .paid {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 10px 16px;
+        font: inherit;
+        text-decoration: none;
+        background: #fff;
+        cursor: pointer;
+      }
+      .primary {
+        border-color: transparent;
+        color: #fff;
+        background: linear-gradient(120deg, #3b6ed7, #1ca9f8);
+      }
+      .primary:disabled { opacity: .65; cursor: not-allowed; }
+      .paid {
+        border-color: #dca63f;
+        color: #5a3f11;
+        background: #fff7e5;
+      }
+      .outcome {
+        margin-top: 14px;
+        display: grid;
+        gap: 10px;
+      }
+      .result {
+        background: var(--accent-soft);
+        border: 1px solid #cbdcff;
+        padding: 14px;
+        border-radius: 14px;
+      }
+      .result strong { font-size: 1.7rem; display: block; margin-top: 6px; }
+      .muted { color: var(--muted); font-size: 14px; }
+      .notice {
+        margin-top: 12px;
+        border-left: 3px solid #9db7ec;
+        padding-left: 12px;
+      }
+      .split {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .split .line {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px dashed var(--line);
+        padding: 6px 0;
+      }
+      .sources, .manifest {
+        margin-top: 16px;
+        display: grid;
+        gap: 10px;
+      }
+      code {
+        font-size: 13px;
+        background: #f5f8fc;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 8px 10px;
+        display: block;
+        white-space: pre-wrap;
+        color: #1a2642;
+      }
+      pre {
+        white-space: pre-wrap;
+        margin: 0;
+        font: 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      }
+      .small { font-size: 13px; }
+      a { color: #2f5ec0; }
+      @media (max-width: 840px) {
+        .grid, .split { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="hero" aria-labelledby="page-title">
+        <span class="kicker">Moving budget utility</span>
+        <h1 id="page-title">Cost Of Moving Calculator</h1>
+        <p>
+          Estimate your move budget in one pass. The calculator gives a quick range, not a final quote.
+          If you need to hand your family a clean checklist, use the paid template option after the result.
+        </p>
+
+        <div class="grid">
+          <label class="card">
+            <span>House size (rooms)</span>
+            <input id="rooms" type="number" inputmode="numeric" min="1" max="12" value="3" />
+          </label>
+          <label class="card">
+            <span>Move distance (miles)</span>
+            <input id="distance" type="number" inputmode="numeric" min="0" max="3000" value="120" />
+          </label>
+          <label class="card">
+            <span>Move model</span>
+            <select id="model">
+              <option value="professional">Professional movers</option>
+              <option value="diy">Do-it-yourself</option>
+            </select>
+          </label>
+          <label class="card">
+            <span>Move day workers (if hiring movers)</span>
+            <input id="workers" type="number" inputmode="numeric" min="1" max="8" value="3" />
+          </label>
+          <label class="card">
+            <span>Hourly mover rate (USD)</span>
+            <input id="hourlyRate" type="number" min="35" max="350" value="95" />
+          </label>
+          <label class="card">
+            <span>Estimated hours</span>
+            <input id="hours" type="number" min="2" max="24" value="8" />
+          </label>
+          <label class="card">
+            <span>Packing materials (USD)</span>
+            <input id="supplies" type="number" min="0" value="310" />
+          </label>
+          <label class="card">
+            <span>Other bills and setup costs (USD)</span>
+            <input id="extras" type="number" min="0" value="300" />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button class="primary" id="calculateBtn" type="button">Estimate cost now</button>
+          <button class="ghost" id="clearBtn" type="button">Clear</button>
+          <button class="ghost" id="exportBtn" type="button">Export CSV</button>
+          <a class="paid" id="paidBtn" href="https://checkout.dayonebuilder.online/products/move-budget-checklist">Get the $9 move budget checklist</a>
+        </div>
+
+        <div id="outcome" class="outcome" aria-live="polite" hidden>
+          <div class="result" id="summaryCard"></div>
+          <div class="split" id="lineItems"></div>
+          <p class="notice muted" id="sourceNote"></p>
+        </div>
+
+        <div class="sources">
+          <h2>Official starting points</h2>
+          <p class="small muted">
+            Reference budgets should be checked against official templates and local provider estimates.
+            CFPB and Consumer Affairs planning docs are good baselines:
+          </p>
+          <ul class="small">
+            <li><a href="https://files.consumerfinance.gov/f/documents/cfpb_ymyg-servicemembers-tool_planning-pcs-moving-expenses.pdf">CFPB planning worksheet (PDF)</a></li>
+            <li><a href="https://consumer.gov/system/files/consumer_gov/pdf/1041A_BudgetWorksheet-Fillable.pdf">Consumer budget worksheet (fillable PDF)</a></li>
+            <li><a href="https://www.consumerfinance.gov/documents/7276/cfpb_my-new-money-goal_worksheet.pdf">Consumer finance worksheet</a></li>
+          </ul>
+        </div>
+
+        <div class="manifest">
+          <h2>Module path for DayOneBuilder</h2>
+          <p class="small muted">
+            Use this module from agent workflows without account setup.
+            The same inputs can be passed manually from scripts or copied into a budget workflow.
+          </p>
+          <code>Install call: https://dayonebuilder.online/collections/cost-of-moving-calculator.json</code>
+          <code id="manifestSnippet">{
+  "name": "Cost Of Moving Calculator",
+  "type": "calculator",
+  "version": "1.0.0"
+}</code>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const USD = (value) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(Math.max(0, Math.round(value)));
+
+      const els = {
+        rooms: document.getElementById("rooms"),
+        distance: document.getElementById("distance"),
+        model: document.getElementById("model"),
+        workers: document.getElementById("workers"),
+        hourlyRate: document.getElementById("hourlyRate"),
+        hours: document.getElementById("hours"),
+        supplies: document.getElementById("supplies"),
+        extras: document.getElementById("extras"),
+        calculateBtn: document.getElementById("calculateBtn"),
+        clearBtn: document.getElementById("clearBtn"),
+        exportBtn: document.getElementById("exportBtn"),
+        paidBtn: document.getElementById("paidBtn"),
+        outcome: document.getElementById("outcome"),
+        summary: document.getElementById("summaryCard"),
+        lineItems: document.getElementById("lineItems"),
+        sourceNote: document.getElementById("sourceNote")
+      };
+
+      function calcLineItem(name, value) {
+        const item = document.createElement("div");
+        item.className = "line";
+        const label = document.createElement("span");
+        const amount = document.createElement("strong");
+        label.textContent = name;
+        amount.textContent = USD(value);
+        item.append(label, amount);
+        return item;
+      }
+
+      function safeNumber(v, fallback = 0) {
+        const n = Number(v);
+        return Number.isFinite(n) ? n : fallback;
+      }
+
+      function calculate() {
+        const rooms = safeNumber(els.rooms.value, 1);
+        const distance = safeNumber(els.distance.value, 0);
+        const isPro = els.model.value === "professional";
+        const workers = safeNumber(els.workers.value, 2);
+        const hourlyRate = safeNumber(els.hourlyRate.value, 0);
+        const hours = safeNumber(els.hours.value, 4);
+        const supplies = safeNumber(els.supplies.value, 0);
+        const extras = safeNumber(els.extras.value, 0);
+
+        const moversHours = Math.max(2, Math.round(rooms * (isPro ? 1.8 : 2.2)));
+        const laborMultiplier = isPro ? (workers * hourlyRate * Math.max(4, hours)) : 0;
+        const laborUsed = isPro ? Math.max(350, laborMultiplier) : 0;
+        const movingLabor = isPro ? laborUsed : 220;
+        const packingBase = Math.max(40, Math.round(rooms * 54 + 140));
+        const distanceFuel = distance > 75 ? Math.round((distance - 75) * 0.45) : 0;
+        const transport = isPro ? Math.round(distance * 0.5) : 0;
+        const contingency = Math.round((movingLabor + supplies + extras + distanceFuel + transport) * 0.08);
+        const total = movingLabor + supplies + extras + distanceFuel + transport + packingBase + moversHours * 0 + contingency;
+        const rangeLow = Math.max(0, total - Math.round(total * 0.12));
+        const rangeHigh = Math.max(0, total + Math.round(total * 0.18));
+
+        els.outcome.hidden = false;
+        els.summary.innerHTML = `
+          <p class="muted small">Estimated moving budget range</p>
+          <strong>${USD(rangeLow)} — ${USD(rangeHigh)}</strong>
+          <p class="small muted">Scenario based on ${Math.round(moversHours)} labor-hour anchor and entered inputs. Recheck major transport quotes before contract signing.</p>
+        `;
+        els.lineItems.innerHTML = "";
+        els.lineItems.append(
+          calcLineItem("Labor cost", movingLabor),
+          calcLineItem("Packing materials", supplies),
+          calcLineItem("Distance fuel", distanceFuel),
+          calcLineItem("Truck or transport fee", transport),
+          calcLineItem("Other setup and utility costs", extras),
+          calcLineItem("Contingency reserve", contingency),
+          calcLineItem("Packing-time buffer", packingBase),
+          calcLineItem("Midpoint estimate", (rangeLow + rangeHigh) / 2)
+        );
+        els.sourceNote.textContent = `Model: ${isPro ? "professional movers" : "DIY"} • Rooms: ${rooms} • Distance: ${distance} miles`;
+        trackEvent("moving_calculator_completed", {
+          event_category: "dayonebuilder_module",
+          module_id: "cost-of-moving-calculator",
+          is_professional_model: isPro ? "yes" : "no"
+        });
+      }
+
+      function clearAll() {
+        els.rooms.value = "3";
+        els.distance.value = "120";
+        els.model.value = "professional";
+        els.workers.value = "3";
+        els.hourlyRate.value = "95";
+        els.hours.value = "8";
+        els.supplies.value = "310";
+        els.extras.value = "300";
+        els.outcome.hidden = true;
+        els.lineItems.innerHTML = "";
+        els.summary.textContent = "";
+        els.sourceNote.textContent = "";
+      }
+
+      function exportCsv() {
+        const rows = [
+          ["field", "value"],
+          ["rooms", els.rooms.value],
+          ["distance_miles", els.distance.value],
+          ["model", els.model.value],
+          ["workers", els.workers.value],
+          ["hourly_rate", els.hourlyRate.value],
+          ["hours", els.hours.value],
+          ["supplies", els.supplies.value],
+          ["extras", els.extras.value]
+        ];
+        const line = rows.map((r) => r.join(",")).join("\n");
+        const blob = new Blob([line], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        link.href = url;
+        link.download = "cost-of-moving-calculator.csv";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+        trackEvent("moving_calculator_export", {
+          event_category: "dayonebuilder_module",
+          module_id: "cost-of-moving-calculator",
+          export_type: "csv"
+        });
+      }
+
+      els.calculateBtn.addEventListener("click", calculate);
+      els.clearBtn.addEventListener("click", clearAll);
+      els.exportBtn.addEventListener("click", exportCsv);
+      els.paidBtn.addEventListener("click", () => {
+        trackEvent("moving_calculator_paid_cta_click", {
+          event_category: "dayonebuilder_module",
+          module_id: "cost-of-moving-calculator",
+          cta: "move_budget_checklist"
+        });
+      });
+
+      els.paidBtn.href = "https://checkout.dayonebuilder.online/products/move-budget-checklist";
+      els.paidBtn.setAttribute("rel", "noopener noreferrer");
+      trackEvent("moving_calculator_view", { event_category: "dayonebuilder_module", module_id: "cost-of-moving-calculator" });
+      if (els.rooms.value) { /* noop, avoids linter false-positive from unused vars in strict mode */ }
+    </script>
+  </body>
+</html>

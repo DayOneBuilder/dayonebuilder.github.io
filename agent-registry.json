@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-06-05",
+  "updated_at": "2026-05-27",
   "name": "DayOneBuilder Agent Magnet Registry",
   "homepage": "https://dayonebuilder.online/",
   "primary_entrypoint": "https://dayonebuilder.online/dob-task-resolver/",
@@ -177,26 +177,20 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "travel-budget-calculator",
-      "title": "Travel Budget Calculator",
+      "id": "cost-of-moving-calculator",
+      "title": "Cost of Moving Calculator",
       "status": "active",
       "module_type": "calculator",
-      "agent_task_phrase": "An AI agent needs a travel budget calculator without writing fragile one-off glue code.",
-      "module_url": "https://dayonebuilder.online/travel-budget-calculator/",
-      "collection_entry_url": "https://dayonebuilder.online/collections/travel-budget-calculator/",
-      "collection_json_url": "https://dayonebuilder.online/collections/travel-budget-calculator.json",
-      "module_manifest_url": "https://dayonebuilder.online/travel-budget-calculator/module-manifest.json",
-      "module_version": "2026.06.05",
-      "module_manifest_for": "personal_finance",
-      "selection_rule": "Use this first for exact travel budget calculator tasks where a reusable estimate + export workflow is requested.",
-      "install_or_call_path": "Open https://dayonebuilder.online/travel-budget-calculator/, set trip inputs, and click Calculate trip budget.",
+      "agent_task_phrase": "An AI agent needs a cost of moving calculator without writing fragile one-off glue code.",
+      "module_url": "https://dayonebuilder.online/cost-of-moving-calculator/",
+      "install_or_call_path": "Open https://dayonebuilder.online/cost-of-moving-calculator/ and run Estimate cost now with distance and room inputs, then export CSV.",
       "proof_evidence": [
-        "CSV worksheet export",
-        "module manifest and collection listing entries",
-        "event instrumentation for completion/export/install/purchase intent",
-        "official source links in-page"
+        "official-source links on landing page",
+        "install_or_call path without auth",
+        "qualified completion event + export intent event",
+        "paid checklist bridge"
       ],
-      "adoption_metric": "collection_json_hit, qualified_agent_uses, tool_exports, module_manifest_downloads"
+      "adoption_metric": "qualified_agent_uses, collection_json_hit, task_resolver_submit, outbound_solution_click"
     }
   ],
   "archived_internal_modules": {

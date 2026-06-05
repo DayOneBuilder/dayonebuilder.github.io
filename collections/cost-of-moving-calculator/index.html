@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cost Of Moving Calculator | DayOneBuilder Collection</title>
+    <meta
+      name="description"
+      content="Static collection page for the moving budget calculator and exportable artifact path."
+    />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      if (window.dataLayer) {
+        gtag("js", new Date());
+        gtag("config", "G-KQMLYS3VVE");
+      }
+    </script>
+    <link rel="alternate" type="application/json" href="/collections/cost-of-moving-calculator.json" title="Cost of moving calculator JSON" />
+    <style>
+      :root {
+        --bg: #08090a;
+        --surface: #11131b;
+        --line: rgba(255,255,255,0.13);
+        --ink: #eef0f4;
+        --muted: #b5c0cd;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font: 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+      .wrap { width: min(980px, calc(100% - 28px)); margin: 0 auto; padding: 24px 0 46px; }
+      .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+      .eyebrow { color: #86b1ff; text-transform: uppercase; font-size: 12px; letter-spacing: .07em; }
+      h1 { margin: 0.2rem 0 0.8rem; }
+      p, li { color: var(--muted); }
+      code, pre {
+        white-space: pre-wrap;
+        color: #d8e2f2;
+        background: #0b1320;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        display: block;
+      }
+      a { color: #82adff; }
+      .links { margin-top: 12px; display: grid; gap: 8px; }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="panel">
+        <span class="eyebrow">Collection entry</span>
+        <h1>Cost Of Moving Calculator</h1>
+        <p>Small calculator module for move-budget planning with export and paid checklist bridge.</p>
+        <div class="links">
+          <a href="/collections/index.json">Collections index</a>
+          <a href="/collections/cost-of-moving-calculator.json">JSON manifest</a>
+          <a href="/cost-of-moving-calculator/">Calculator</a>
+        </div>
+        <pre><code>{
+  "id": "cost-of-moving-calculator",
+  "status": "installable",
+  "module_type": "calculator",
+  "install_or_call_path": "Open /cost-of-moving-calculator/ and use Export CSV for result reuse."
+}</code></pre>
+      </section>
+    </main>
+  </body>
+</html>

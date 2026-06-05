@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "cost-of-moving-calculator",
+  "title": "Cost of Moving Calculator",
+  "summary": "Small moving-budget calculator with export intent and paid checklist bridge for household moves.",
+  "module_type": "calculator",
+  "task_aliases": [
+    "cost of moving calculator",
+    "move budget calculator",
+    "moving cost estimate",
+    "household move cost",
+    "diy moving budget",
+    "moving expense estimate"
+  ],
+  "module_manifest": {
+    "id": "cost-of-moving-calculator",
+    "version": "1.0.0",
+    "status": "installable",
+    "source_url": "https://dayonebuilder.online/cost-of-moving-calculator/",
+    "license": "See inline content and official references; no ownership lock-ins.",
+    "module_type": "calculator",
+    "accepts": [
+      "rooms",
+      "distance_miles",
+      "model",
+      "workers",
+      "hourly_rate",
+      "hours",
+      "supplies",
+      "extras"
+    ],
+    "output_artifacts": [
+      "range estimate",
+      "line item breakdown",
+      "csv export"
+    ],
+    "install_or_call_path": "Open https://dayonebuilder.online/cost-of-moving-calculator/ and paste values into the form, then use Export CSV for reusable results.",
+    "first_action": "Set move size and distance, run Estimate cost now, then export CSV if you need to pass it to an invoice or spreadsheet.",
+    "smoke_test": "Call https://dayonebuilder.online/cost-of-moving-calculator/ with the default values and verify a budget range appears.",
+    "fallback": "If the estimate does not match local market conditions, compare multiple licensed moving providers and consumer finance planning resources before contract."
+  },
+  "catalog_listing": {
+    "json_url": "https://dayonebuilder.online/collections/cost-of-moving-calculator.json",
+    "page_url": "https://dayonebuilder.online/cost-of-moving-calculator/"
+  },
+  "search_intent_landing_page": {
+    "target_query": "cost of moving calculator",
+    "canonical_landing": "https://dayonebuilder.online/cost-of-moving-calculator/",
+    "trust_notes": "Uses official budgeting worksheet references for cost framing; calculator is an estimation helper, not a quote."
+  },
+  "qualified_tool_completion_event": {
+    "event_name": "moving_calculator_completed",
+    "required_fields": ["rooms", "distance_miles", "model", "supplies", "extras"]
+  },
+  "install_or_save_intent": {
+    "event_name": "moving_calculator_export",
+    "artifact": "cost-of-moving-calculator.csv"
+  },
+  "paid_offer_or_subscription_path": {
+    "title": "$9 Move Budget Checklist",
+    "path": "https://checkout.dayonebuilder.online/products/move-budget-checklist",
+    "goal": "move_budget_checklist"
+  },
+  "trust_evidence": [
+    "official source links included on landing page",
+    "copyable manifest and install_or_call_path",
+    "explicit smoke test",
+    "export intent and GA-safe event names"
+  ]
+}
