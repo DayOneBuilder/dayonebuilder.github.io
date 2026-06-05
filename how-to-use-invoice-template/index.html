@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A small DayOneBuilder tool for how to use invoice template, with a paid template/export path if the workflow saves time." />
+    <title>How To Use Invoice Template | DayOneBuilder</title>
+    <link rel="canonical" href="https://dayonebuilder.online/how-to-use-invoice-template/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
+    <link rel="alternate" type="application/json" href="/agent-registry.json" title="DayOneBuilder agent registry" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+
+      window.__invoiceTrack = function(eventName, eventData) {
+        if (typeof window.gtag !== "function") return;
+        try { gtag("event", eventName, eventData || {}); } catch (_) {}
+      };
+    </script>
+    <style>
+      :root {
+        --bg: #050812;
+        --panel: #0f1625;
+        --line: #20304a;
+        --text: #e7edf7;
+        --muted: #94a3b8;
+        --brand: #3b82f6;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at 12% 10%, #1a2a4f 0%, transparent 48%), radial-gradient(circle at 85% 15%, #2d184b 0%, transparent 44%), var(--bg);
+        color: var(--text);
+        font-family: "Nunito Sans", "Trebuchet MS", "Segoe UI", sans-serif;
+        min-height: 100vh;
+        padding: 24px;
+      }
+
+      .wrap {
+        width: min(980px, 100%);
+        margin: 0 auto;
+        display: grid;
+        gap: 16px;
+      }
+
+      .panel {
+        background: linear-gradient(180deg, rgba(15, 22, 37, 0.98), rgba(15, 22, 37, 0.85));
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px;
+      }
+
+      .title {
+        margin: 0;
+        font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+        line-height: 1.2;
+        letter-spacing: 0.01em;
+      }
+
+      .subtitle {
+        margin: 8px 0 16px;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #d4deee;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #33415d;
+        border-radius: 12px;
+        background: #0a1020;
+        color: var(--text);
+        font-size: 1rem;
+      }
+
+      .actions {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      button,
+      .btn {
+        border: 0;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button {
+        background: var(--brand);
+        color: #f8f9ff;
+      }
+
+      .btn.secondary {
+        background: #1e2a44;
+        color: #dbe7ff;
+        text-decoration: none;
+      }
+
+      .results {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .card {
+        border-radius: 12px;
+        border: 1px solid #2d3f5e;
+        background: #0a1020;
+        padding: 12px;
+      }
+
+      .card h3 {
+        margin: 0 0 5px;
+        color: #d5e3ff;
+        font-size: 0.9rem;
+      }
+
+      .card p {
+        margin: 0;
+        font-size: 1.15rem;
+      }
+
+      .ok {
+        color: #8de3b8;
+      }
+
+      .warn {
+        color: #f4a261;
+      }
+
+      .links {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .tiny {
+        font-size: 0.88rem;
+        color: var(--muted);
+      }
+
+      .list {
+        margin: 0;
+        padding-left: 18px;
+        color: #d5deea;
+      }
+
+      .pill {
+        display: inline-flex;
+        border: 1px solid #304466;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 0.8rem;
+        margin-right: 6px;
+        color: #b4c5e5;
+      }
+
+      code {
+        background: #0e1324;
+        border: 1px solid #24385b;
+        border-radius: 8px;
+        padding: 2px 7px;
+        word-break: break-all;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        background: #0a1020;
+        border: 1px solid #294062;
+        border-radius: 12px;
+        padding: 10px;
+        overflow: auto;
+      }
+
+      @media (max-width: 860px) {
+        .grid,
+        .results,
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="panel">
+        <h1 class="title">How To Use Invoice Template</h1>
+        <p class="subtitle">Build a ready invoice quickly. Enter your amounts, estimate the total, and get a clean template draft you can reuse right away.</p>
+
+        <div class="grid">
+          <div>
+            <label for="invoice-amount">Invoice subtotal</label>
+            <input id="invoice-amount" type="number" min="0" step="0.01" value="1200" />
+          </div>
+          <div>
+            <label for="tax-rate">Tax rate (%)</label>
+            <input id="tax-rate" type="number" min="0" step="0.01" value="0" />
+          </div>
+          <div>
+            <label for="discount-rate">Discount (%)</label>
+            <input id="discount-rate" type="number" min="0" max="100" step="0.01" value="0" />
+          </div>
+          <div>
+            <label for="invoice-date">Invoice date</label>
+            <input id="invoice-date" type="date" />
+          </div>
+          <div>
+            <label for="terms-days">Payment terms</label>
+            <select id="terms-days">
+              <option value="7">7 days (Net 7)</option>
+              <option value="14">14 days (Net 14)</option>
+              <option value="30" selected>30 days (Net 30)</option>
+              <option value="45">45 days (Net 45)</option>
+            </select>
+          </div>
+          <div>
+            <label for="late-days">Potential late days</label>
+            <input id="late-days" type="number" min="0" value="0" />
+          </div>
+          <div>
+            <label for="late-fee">Late fee (% monthly, estimate)</label>
+            <input id="late-fee" type="number" min="0" step="0.01" value="0" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="calculate-btn">Generate invoice estimate</button>
+          <a class="btn secondary" id="download-template-btn" href="/how-to-use-invoice-template/template/invoice-template.csv" download="invoice-template.csv">Download invoice template</a>
+          <a class="btn secondary" id="checkout-btn" href="https://checkout.dayonebuilder.online/products">Get the $9 invoice and payment tracker pack</a>
+        </div>
+
+        <p class="tiny" id="validation"></p>
+
+        <div class="results" id="result-area" hidden>
+          <div class="card">
+            <h3>Invoice amount</h3>
+            <p id="line-subtotal">$0.00</p>
+          </div>
+          <div class="card">
+            <h3>Tax total</h3>
+            <p id="line-tax">$0.00</p>
+          </div>
+          <div class="card">
+            <h3>Discount</h3>
+            <p id="line-discount">$0.00</p>
+          </div>
+          <div class="card">
+            <h3>Due amount</h3>
+            <p id="line-due" class="ok">$0.00</p>
+          </div>
+          <div class="card">
+            <h3>Due date</h3>
+            <p id="line-due-date">—</p>
+          </div>
+          <div class="card">
+            <h3>Late fee estimate</h3>
+            <p id="line-late" class="warn">$0.00</p>
+          </div>
+        </div>
+
+        <p class="tiny" id="disclaimer"></p>
+      </section>
+
+      <section class="panel">
+        <h2 style="margin-top: 0;">Installable path for agents</h2>
+        <div class="two-col">
+          <div>
+            <p>Use this exact flow for quick reuse in automation or scripts:</p>
+            <pre><code>curl -L https://dayonebuilder.online/how-to-use-invoice-template/template/invoice-template.csv -o invoice-template.csv
+sed -n '1,5p' invoice-template.csv
+</code></pre>
+            <p class="tiny">Smoke test: open the template in a spreadsheet app and check the columns include date, description, qty, unit price, total, tax, discount, due date, and status.</p>
+          </div>
+          <div>
+            <p>Source + trust notes:</p>
+            <ul class="list">
+              <li><a href="https://www.freshbooks.com/invoice-templates">FreshBooks invoice templates</a></li>
+              <li><a href="https://support.freshbooks.com/hc/en-us/articles/216631328-How-do-I-create-an-invoice">FreshBooks invoice guide</a></li>
+              <li><a href="https://my.squareup.com/help/us/en/article/7893-customize-square-invoices">Square invoice customization guide</a></li>
+            </ul>
+            <p class="tiny">This output is a practical estimate and not financial advice. For contract or lender terms, use your exact tax/legal or lender statements.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2 style="margin-top: 0;">Task aliases</h2>
+        <p class="tiny">
+          <span class="pill">how to use invoice template</span>
+          <span class="pill">invoice template maker</span>
+          <span class="pill">small business invoices</span>
+          <span class="pill">invoice payment tracker</span>
+        </p>
+        <p class="tiny">This module is built for fast setup and save/export usage before manual copy steps.</p>
+      </section>
+    </div>
+
+    <script>
+      (function() {
+        const fmt = (v) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(v);
+        const $ = (id) => document.getElementById(id);
+
+        const dateInput = $("invoice-date");
+        const today = new Date();
+        const yyyyMmDd = today.toISOString().slice(0, 10);
+        dateInput.value = yyyyMmDd;
+
+        const terms = {
+          7: 7,
+          14: 14,
+          30: 30,
+          45: 45
+        };
+
+        function setText(id, value) {
+          $(id).textContent = value;
+        }
+
+        function parseNum(id) {
+          return Number($(id).value || 0);
+        }
+
+        function updateEstimate() {
+          const subtotal = Math.max(0, parseNum("invoice-amount"));
+          const taxRate = Math.max(0, parseNum("tax-rate"));
+          const discountRate = Math.max(0, Math.min(100, parseNum("discount-rate")));
+          const lateRate = Math.max(0, parseNum("late-fee"));
+          const lateDays = Math.max(0, parseNum("late-days"));
+
+          const discountAmount = subtotal * (discountRate / 100);
+          const taxable = Math.max(0, subtotal - discountAmount);
+          const taxAmount = taxable * (taxRate / 100);
+          const dueAmount = taxable + taxAmount;
+          const dailyLateRate = (lateRate / 100) / 30;
+          const lateFee = dueAmount * dailyLateRate * lateDays;
+
+          const date = new Date(dateInput.value || new Date());
+          const termDays = terms[parseNum("terms-days")] || 30;
+          const dueDate = new Date(date);
+          dueDate.setDate(dueDate.getDate() + termDays);
+
+          setText("line-subtotal", fmt(subtotal));
+          setText("line-tax", fmt(taxAmount));
+          setText("line-discount", fmt(discountAmount));
+          setText("line-due", fmt(dueAmount));
+          setText("line-late", fmt(lateFee));
+          setText("line-due-date", dueDate.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }));
+
+          $("result-area").hidden = false;
+          $("validation").textContent = `Estimate saved. You can now download the template and replace values with your real terms.`;
+          $("disclaimer").textContent = "Estimate only. It should be checked against your payment terms and local tax requirements.";
+
+          window.__invoiceTrack("invoice_template_calculated", {
+            event_category: "invoice_template_module",
+            subtotal: subtotal.toFixed(2),
+            tax_rate: taxRate,
+            discount_rate: discountRate,
+            late_days: lateDays,
+            terms_days: termDays
+          });
+        }
+
+        $("calculate-btn").addEventListener("click", function(event) {
+          event.preventDefault();
+          updateEstimate();
+        });
+
+        $("download-template-btn").addEventListener("click", function() {
+          window.__invoiceTrack("invoice_template_save_intent", {
+            event_category: "invoice_template_module",
+            artifact: "csv_template",
+            template_version: "1"
+          });
+        });
+
+        $("checkout-btn").addEventListener("click", function() {
+          window.__invoiceTrack("invoice_template_paid_cta_click", {
+            event_category: "invoice_template_module",
+            cta: "invoice_tracker_pack_9_usd"
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
