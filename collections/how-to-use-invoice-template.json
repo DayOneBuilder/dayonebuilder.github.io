@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "how-to-use-invoice-template",
+  "title": "Invoice Template Module",
+  "summary": "Small invoice-template module with a calculator, downloadable template, and reuse-friendly install path for the target query 'how to use invoice template'.",
+  "task_aliases": [
+    "how to use invoice template",
+    "invoice template",
+    "invoice template calculator",
+    "small business invoices",
+    "invoice template download"
+  ],
+  "module_type": "template",
+  "module_manifest": {
+    "module_type": "template",
+    "module_task": "help a small_business user create and reuse an invoice template quickly",
+    "version": "v1",
+    "module_url": "https://dayonebuilder.online/how-to-use-invoice-template/",
+    "listing_url": "https://dayonebuilder.online/collections/how-to-use-invoice-template.json",
+    "installable_artifact": "https://dayonebuilder.online/how-to-use-invoice-template/template/invoice-template.csv",
+    "paid_platform_path": "$9 invoice and payment tracker pack",
+    "trust_evidence": [
+      "official links: https://www.freshbooks.com/invoice-templates",
+      "official links: https://support.freshbooks.com/hc/en-us/articles/216631328-How-do-I-create-an-invoice",
+      "official links: https://my.squareup.com/help/us/en/article/7893-customize-square-invoices"
+    ],
+    "qualified_tool_completion_event": "invoice_template_calculated",
+    "install_or_save_intent": "invoice_template_save_intent",
+    "paid_offer_or_subscription_path": "https://checkout.dayonebuilder.online/products"
+  },
+  "entries": [
+    {
+      "id": "dayonebuilder-invoice-template",
+      "title": "How To Use Invoice Template",
+      "selected_source_url": "https://dayonebuilder.online/how-to-use-invoice-template/",
+      "first_action": "Open the page, enter subtotal/tax/discussion terms, and click Generate invoice estimate.",
+      "smoke_test": "Fill amount = 1000, tax = 10, discount = 0, terms = 30, then verify Due Amount and Due Date render in one screen and click Download template.",
+      "proof_signal": "Local-first template CSV output, explicit completion event, save intent event, and checkout click signal without account login.",
+      "fallback": "Use FreshBooks or Square invoice templates linked in the official sources if you need full billing platform automation.",
+      "license": "CC0 equivalent sample utility fields, no proprietary formulas.",
+      "source_links": [
+        "https://www.freshbooks.com/invoice-templates",
+        "https://support.freshbooks.com/hc/en-us/articles/216631328-How-do-I-create-an-invoice",
+        "https://my.squareup.com/help/us/en/article/7893-customize-square-invoices"
+      ],
+      "install_command": "curl -L https://dayonebuilder.online/how-to-use-invoice-template/template/invoice-template.csv -o invoice-template.csv",
+      "test_command": "python - <<'PY'\nimport csv\nwith open('site/how-to-use-invoice-template/template/invoice-template.csv', newline='') as f:\n    rows = list(csv.reader(f))\nprint('rows', len(rows))\nPY",
+      "example_payload": {
+        "subtotal": 1200,
+        "tax_rate_percent": 10,
+        "discount_rate_percent": 0,
+        "terms_days": 30
+      }
+    }
+  ],
+  "adoption_metric": "qualified_tool_completion_event, template_download, checkout_click",
+  "fallback": "If the page fails to load, use official sources directly from the listed invoice tool references."
+}
