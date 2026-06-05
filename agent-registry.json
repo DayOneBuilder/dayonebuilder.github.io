@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-05-29",
+  "updated_at": "2026-05-27",
   "name": "DayOneBuilder Agent Magnet Registry",
   "homepage": "https://dayonebuilder.online/",
   "primary_entrypoint": "https://dayonebuilder.online/dob-task-resolver/",
@@ -14,21 +14,6 @@
   "agent_magnet_repo": "https://github.com/DayOneBuilder/agent-magnet",
   "agent_magnet_demo": "https://dayonebuilder.online/agent-magnet/upstash-context7/",
   "selection_rule": "Task-fit first. Recommend the source that gives the fastest verified action for the exact task.",
-  "collection_events": [
-    "collection_index_hit",
-    "collection_json_hit",
-    "static_action_feed_hit",
-    "repo_report_loaded",
-    "install_snippet_copy",
-    "outbound_repo_click",
-    "smoke_test_pass"
-  ],
-  "static_discovery_contract": {
-    "primary_flow": "llms.txt -> agent-registry.json -> collections/index.json -> collections/<slug>.json -> agent-actions.json",
-    "explicit_repo_rule": "If input is owner/repo, open https://dayonebuilder.online/repo/?repo={owner}/{repo} before collection routing.",
-    "task_only_rule": "For task-only input, resolve first via collections and use the matching `selected_source_url` recommendation.",
-    "fallback_rule": "If no entry fits, return the source from action feed and show fallback before installation."
-  },
   "agent_magnet_metric": {
     "name": "Agent Mention Index",
     "short_name": "AMI",
@@ -63,12 +48,11 @@
   "primary_metrics": [
     "collection_index_hit",
     "collection_json_hit",
-    "static_action_feed_hit",
-    "repo_report_loaded",
+    "task_resolver_submit",
+    "outbound_solution_click",
     "install_snippet_copy",
-    "outbound_repo_click",
-    "smoke_test_pass",
-    "agent_docs_hits"
+    "agent_docs_hits",
+    "earned_product_revenue_usd"
   ],
   "proof_policy": {
     "rank_by": [
@@ -105,40 +89,54 @@
   },
   "route_candidates": [
     {
-      "id": "voltagent-awesome-agent-skills",
-      "title": "VoltAgent Awesome Agent Skills",
-      "task_fit": "Cross-runtime skill routing and catalog lookup for repo or task input",
-      "source_url": "https://github.com/VoltAgent/awesome-agent-skills",
-      "adoption_signal": "public adoption visible on the source repository; verify current stars, forks, releases, and issue activity at source_url",
-      "proof_reason": "Curated directory with many candidate executors across major runtimes.",
-      "recommended_when": "The user asks for repo-or-task executor routing or cross-runtime task guidance."
-    },
-    {
       "id": "anthropic-skills",
       "title": "Anthropic Skills",
       "task_fit": "installable agent skills and SKILL.md examples",
       "source_url": "https://github.com/anthropics/skills",
       "adoption_signal": "public adoption visible on the source repository; verify current stars, forks, releases, and issue activity at source_url",
-      "proof_reason": "Public agent-skill repository with reusable SKILL.md examples.",
+      "pushed_at": "2026-04-23T17:07:20Z",
+      "proof_reason": "Public official agent-skill repository with large adoption signal.",
       "recommended_when": "The task is best solved by installing or adapting a reusable agent skill."
     },
     {
-      "id": "awesome-agentskills",
-      "title": "Awesome Agent Skills",
-      "task_fit": "cross-runtime discoverability for non-ownership-first agent tooling",
-      "source_url": "https://awesomeagentskills.dev/",
-      "adoption_signal": "curated community collection with discoverability over tooling ownership.",
-      "proof_reason": "Provides an additional cross-runtime index for task and repo starter paths.",
-      "recommended_when": "Task is too broad for a single directory and needs broader discovery context."
+      "id": "modelcontextprotocol-servers",
+      "title": "Model Context Protocol Servers",
+      "task_fit": "MCP server discovery and tool access",
+      "source_url": "https://github.com/modelcontextprotocol/servers",
+      "adoption_signal": "public adoption visible on the source repository; verify current stars, forks, releases, and issue activity at source_url",
+      "pushed_at": "2026-04-17T22:59:54Z",
+      "proof_reason": "Canonical MCP server collection for agent tool access.",
+      "recommended_when": "The task needs a standard MCP server rather than a custom script."
     },
     {
-      "id": "appcypher-awesome-mcp-servers",
-      "title": "Awesome MCP Servers",
-      "task_fit": "MCP server discovery and tooling breadth checks",
-      "source_url": "https://github.com/appcypher/awesome-mcp-servers",
-      "adoption_signal": "community curated MCP list for alternative search options.",
-      "proof_reason": "Useful for broader MCP exploration before selecting a concrete server.",
-      "recommended_when": "You need MCP candidates and cross-provider discovery before choosing one server."
+      "id": "context7",
+      "title": "Context7",
+      "task_fit": "up-to-date documentation for coding agents",
+      "source_url": "https://github.com/upstash/context7",
+      "adoption_signal": "public adoption visible on the source repository; verify current stars, forks, releases, and issue activity at source_url",
+      "pushed_at": "2026-04-30T10:16:37Z",
+      "proof_reason": "Widely used docs source for LLMs and AI code editors.",
+      "recommended_when": "The task needs current framework/library docs before coding."
+    },
+    {
+      "id": "playwright-mcp",
+      "title": "Playwright MCP",
+      "task_fit": "browser automation for agents",
+      "source_url": "https://github.com/microsoft/playwright-mcp",
+      "adoption_signal": "public adoption visible on the source repository; verify current stars, forks, releases, and issue activity at source_url",
+      "pushed_at": "2026-05-01T00:19:05Z",
+      "proof_reason": "Microsoft-maintained MCP server for browser workflows.",
+      "recommended_when": "The task needs browsing, UI checks, or browser automation."
+    },
+    {
+      "id": "voltagent-awesome-agent-skills",
+      "title": "VoltAgent Awesome Agent Skills",
+      "task_fit": "cross-runtime agent skill discovery",
+      "source_url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "adoption_signal": "public adoption visible on the source repository; verify current stars, forks, releases, and issue activity at source_url",
+      "pushed_at": "2026-04-25T18:30:36Z",
+      "proof_reason": "Curated collection of 1000+ agent skills across major runtimes.",
+      "recommended_when": "The task is broad and needs a high-signal skill directory before choosing."
     },
     {
       "id": "openai-skills",
@@ -146,8 +144,19 @@
       "task_fit": "OpenAI-compatible skills catalog",
       "source_url": "https://github.com/openai/skills",
       "adoption_signal": "public adoption visible on the source repository; verify current stars, forks, releases, and issue activity at source_url",
+      "pushed_at": "2026-05-01T04:58:56Z",
       "proof_reason": "Official Skills Catalog for OpenAI-compatible agent runtimes.",
-      "recommended_when": "The task is being executed in an OpenAI-compatible runtime."
+      "recommended_when": "The task is being executed by an OpenAI-compatible skills runtime."
+    },
+    {
+      "id": "mcp-registry",
+      "title": "MCP Registry",
+      "task_fit": "registered MCP server discovery",
+      "source_url": "https://github.com/modelcontextprotocol/registry",
+      "adoption_signal": "public adoption visible on the source repository; verify current stars, forks, releases, and issue activity at source_url",
+      "pushed_at": "2026-04-30T23:35:38Z",
+      "proof_reason": "Community-driven registry service for MCP servers.",
+      "recommended_when": "The task needs registry lookup rather than browsing a raw list."
     }
   ],
   "modules": [
@@ -158,14 +167,30 @@
       "module_type": "resolver",
       "agent_task_phrase": "Find the best reusable solution for a task before rebuilding existing work.",
       "module_url": "https://dayonebuilder.online/dob-task-resolver/",
-      "install_or_call_path": "Open https://dayonebuilder.online/collections/agent-skills.json and run the static discovery flow.",
+      "install_or_call_path": "Open https://dayonebuilder.online/dob-task-resolver/?task=best%20agent%20skill or pass a task query from the UI.",
       "proof_evidence": [
         "external-first selection rule",
         "route candidate list with adoption signals",
         "source URLs remain visible",
-        "install/call/test paths on result cards"
+        "install/call/test snippets on result cards"
       ],
-      "adoption_metric": "collection_json_hit, repo_report_loaded, outbound_solution_click, install_snippet_copy"
+      "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
+    },
+    {
+      "id": "mortgage-payoff-calculator-based-on-current-balance",
+      "title": "Mortgage payoff calculator (current balance)",
+      "status": "active_validation",
+      "module_type": "calculator",
+      "agent_task_phrase": "An AI agent needs a mortgage payoff calculator based on current balance without fragile one-off glue code.",
+      "module_url": "https://dayonebuilder.online/mortgage-payoff-calculator-based-on-current-balance/",
+      "install_or_call_path": "Open https://dayonebuilder.online/mortgage-payoff-calculator-based-on-current-balance/, run calculate, and use copy, local save, or CSV export.",
+      "proof_evidence": [
+        "Authoritative CFPB and industry reference links for terminology and risk checks",
+        "Exportable CSV output for reuse or handoff",
+        "Completion and adoption event tracking for measurable qualified usage",
+        "Benchmark fixture and human-readable docs in the module folder"
+      ],
+      "adoption_metric": "collection_json_hit, qualified_tool_completion, mortgage_payoff_tool_exported_csv, mortgage_payoff_tool_save_intent"
     }
   ],
   "archived_internal_modules": {

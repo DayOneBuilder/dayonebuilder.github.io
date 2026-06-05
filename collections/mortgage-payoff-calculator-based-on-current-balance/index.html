@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mortgage Payoff Calculator Collection | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Mortgage payoff estimator for the exact query mortgage payoff calculator based on current balance. Includes install path, smoke test, and export/save usage intent."
+    />
+    <link rel="alternate" type="application/json" href="/collections/mortgage-payoff-calculator-based-on-current-balance.json" title="Mortgage payoff collection JSON" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      body { margin: 0; font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #151515; background: #f7f5ef; }
+      main { max-width: 920px; margin: 0 auto; padding: 48px 20px 72px; }
+      h1 { font-size: clamp(1.8rem, 4vw, 3rem); margin: 6px 0 12px; }
+      p { max-width: 720px; line-height: 1.5; }
+      .eyebrow { color: #6a6255; font-size: 0.78rem; text-transform: uppercase; font-weight: 700; }
+      ul { margin: 18px 0 0; padding-left: 18px; }
+      a { color: #245b4f; }
+      .card { border: 1px solid #d8d0c1; background: #fffdf7; border-radius: 10px; padding: 14px; margin-top: 14px; }
+      .btn { display: inline-block; margin-top: 12px; border: 1px solid #d8d0c1; background: #faf6ea; color: #1f1b13; padding: 10px 14px; border-radius: 8px; text-decoration: none; }
+      .btn:hover { filter: brightness(0.97); }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; }
+      .grid p { margin-bottom: 0; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <span class="eyebrow">Mortgage payoff module</span>
+      <h1>Mortgage payoff calculator based on current balance</h1>
+      <p>
+        This collection points to the query-targeted DayOneBuilder calculator for users who need a direct
+        payoff estimate from a known balance, rate, and monthly payment without rebuilding glue code.
+      </p>
+      <div class="card">
+        <h2>Machine path</h2>
+        <ul>
+          <li><code>/collections/index.json</code></li>
+          <li><code>/collections/mortgage-payoff-calculator-based-on-current-balance.json</code></li>
+          <li><code>/mortgage-payoff-calculator-based-on-current-balance/</code></li>
+          <li><code>/collections/mortgage-payoff-calculator-based-on-current-balance.json</code> (source)</li>
+        </ul>
+      </div>
+      <section class="grid">
+        <article class="card">
+          <h2>Primary route</h2>
+          <p><strong>selected_source_url</strong>: <a href="/mortgage-payoff-calculator-based-on-current-balance/">built-in calculator</a></p>
+          <p><strong>first_action:</strong> Enter balance, APR, payment, and optional extra payment, then run calculate.</p>
+          <p><strong>smoke_test:</strong> page loads and displays “Current loan balance”.</p>
+        </article>
+        <article class="card">
+          <h2>Trust and adoption signals</h2>
+          <p>Qualify as usable when events fire and export/save intent is captured:
+            <code>mortgage_payoff_calculation_completed</code>, <code>mortgage_payoff_tool_exported_csv</code>, <code>mortgage_payoff_tool_save_intent</code>.</p>
+          <a class="btn" href="/mortgage-payoff-calculator-based-on-current-balance/fixture.json">View fixture</a>
+        </article>
+      </section>
+      <p style="margin-top: 16px;">
+        Fixture and README are in
+        <a href="/mortgage-payoff-calculator-based-on-current-balance/README.md">/mortgage-payoff-calculator-based-on-current-balance/README.md</a>.
+      </p>
+    </main>
+    <script>
+      if (typeof gtag === "function") {
+        gtag("event", "mortgage_payoff_collection_view", {
+          event_category: "mortgage_payoff_calculator",
+        });
+      }
+    </script>
+  </body>
+</html>

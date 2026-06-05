@@ -1,0 +1,27 @@
+{
+  "slug": "mortgage-payoff-calculator-based-on-current-balance",
+  "fixture_version": "1",
+  "input": {
+    "balance": 250000,
+    "annual_interest_rate": 5.25,
+    "scheduled_payment": 1450,
+    "extra_payment": 0
+  },
+  "output": {
+    "estimated_months_to_zero": 321.54,
+    "estimated_payoff_date_model": "current-date-plus-estimated-months",
+    "total_interest": 216238.61,
+    "total_paid": 466238.61,
+    "first_12_months_interest": 13020.62,
+    "first_12_months_remaining_balance": 245620.62,
+    "event_name": "mortgage_payoff_calculation_completed"
+  },
+  "notes": {
+    "formula": "fixed_rate_amortization",
+    "assumptions": [
+      "fixed APR",
+      "fixed payment amounts",
+      "no taxes, insurance, or PMI in the core estimate"
+    ]
+  }
+}

@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mortgage Payoff Calculator Based On Current Balance | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Calculate when a mortgage ends, total interest, and total cost using your current balance, APR, and monthly payment. Export a shareable CSV result and optional workbook offer." />
+    <link rel="canonical" href="https://dayonebuilder.online/mortgage-payoff-calculator-based-on-current-balance/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #040f1f;
+        --surface: #0d1b2e;
+        --ink: #eaf2ff;
+        --muted: #b4c4df;
+        --line: rgba(176, 198, 234, 0.2);
+        --mint: #82d7b5;
+        --sky: #8cc7ff;
+        --amber: #f2c14a;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: linear-gradient(165deg, #040f1f 0%, #0a1730 55%, #0d1b2e 100%);
+        font: 16px/1.55 Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      .wrap {
+        width: min(calc(100% - 28px), 1020px);
+        margin: 0 auto;
+        padding: 28px 0 52px;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: rgba(13, 27, 46, 0.8);
+        padding: 22px;
+        margin-top: 14px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        border: 1px solid rgba(130, 215, 181, 0.3);
+        border-radius: 999px;
+        padding: 6px 10px;
+        color: var(--mint);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      h1, h2, h3 {
+        margin: 0 0 10px;
+        line-height: 1.1;
+      }
+      h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); }
+      h2 { font-size: clamp(1.3rem, 3vw, 1.9rem); }
+      p { margin: 0; color: var(--muted); }
+      .lead { margin-top: 10px; max-width: 70ch; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 11px;
+        background: rgba(255, 255, 255, 0.02);
+      }
+      label {
+        font-weight: 650;
+        color: #d8e2f1;
+      }
+      input {
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        min-height: 40px;
+        padding: 0 10px;
+        font: inherit;
+        color: var(--ink);
+        background: rgba(0, 0, 0, 0.18);
+      }
+      .actions {
+        margin-top: 12px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 11px 14px;
+        background: #f2f5ff;
+        color: #06112b;
+        text-decoration: none;
+        font: inherit;
+        font-weight: 650;
+        min-height: 42px;
+        display: inline-flex;
+        align-items: center;
+      }
+      .btn:hover { filter: brightness(0.96); }
+      .btn.secondary {
+        background: rgba(255,255,255,0.02);
+        color: var(--ink);
+      }
+      .result-card {
+        margin-top: 14px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(5, 11, 29, 0.45);
+        padding: 14px;
+      }
+      .result-list {
+        margin: 8px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+      .result-item {
+        border: 1px dashed var(--line);
+        border-radius: 8px;
+        padding: 9px 11px;
+      }
+      .result-label {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .result-value {
+        display: block;
+        color: var(--mint);
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-top: 3px;
+      }
+      .notice {
+        color: var(--amber);
+        margin-top: 10px;
+      }
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 8px;
+      }
+      .cta-card {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(130, 215, 181, 0.11);
+        padding: 14px;
+        margin-top: 12px;
+      }
+      .cta-title {
+        margin-bottom: 8px;
+      }
+      .footer {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      a { color: inherit; }
+      .sources {
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        background: rgba(255,255,255,0.02);
+      }
+      .sources ul { margin: 8px 0 0; padding-left: 18px; }
+      .sources li { margin: 6px 0; }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .disclaimer {
+        margin-top: 10px;
+        padding: 12px;
+        border-left: 2px solid rgba(242, 193, 74, 0.6);
+        color: #e8dbbf;
+        background: rgba(242, 193, 74, 0.06);
+      }
+      .hidden { display: none; }
+      @media (max-width: 900px) {
+        .grid { grid-template-columns: 1fr; }
+        .wrap { width: min(calc(100% - 16px), 980px); }
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Mortgage Payoff Calculator Based On Current Balance",
+        "url": "https://dayonebuilder.online/mortgage-payoff-calculator-based-on-current-balance/",
+        "description": "Calculate mortgage payoff time, total interest, and total paid using current balance and monthly payment details.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="wrap">
+      <div class="panel">
+        <span class="eyebrow">Mortgage payoff</span>
+        <h1>Mortgage payoff calculator based on current balance</h1>
+        <p class="lead">
+          Enter the current mortgage balance, APR, and monthly payment to estimate when your loan finishes, what it will cost in total, and how much you are likely to pay in interest.
+          Results are kept locally and can be exported as a CSV.
+        </p>
+
+        <div class="grid" id="fields" aria-live="polite">
+          <label class="field">
+            <span>Current loan balance (USD)</span>
+            <input id="balance" type="number" min="1" step="1" value="250000" inputmode="decimal" />
+          </label>
+          <label class="field">
+            <span>Annual interest rate (APR %)</span>
+            <input id="rate" type="number" min="0.01" max="30" step="0.01" value="5.25" inputmode="decimal" />
+          </label>
+          <label class="field">
+            <span>Scheduled monthly payment (USD)</span>
+            <input id="payment" type="number" min="1" step="1" value="1450" inputmode="decimal" />
+          </label>
+          <label class="field">
+            <span>Extra monthly payment (USD)</span>
+            <input id="extra" type="number" min="0" step="1" value="0" inputmode="decimal" />
+          </label>
+        </div>
+
+        <div class="actions">
+          <button class="btn" id="calculateBtn">Calculate payoff</button>
+          <button class="btn secondary" id="copyBtn">Copy result</button>
+          <button class="btn secondary" id="saveBtn">Save plan intent</button>
+          <button class="btn secondary" id="downloadBtn">Download CSV</button>
+        </div>
+
+        <div class="result-card" id="resultCard" aria-live="polite">
+          <h2>Result</h2>
+          <ul class="result-list" id="results"></ul>
+          <div class="small" id="resultSummary"></div>
+          <div class="notice hidden" id="noPayoffNotice">Monthly payment does not cover interest. Increase the payment to see a payoff date.</div>
+        </div>
+
+        <section class="cta-card" aria-label="Paid template offer">
+          <h2 class="cta-title">Need a cleanup-ready amortization workbook?</h2>
+          <p>
+            The <strong>$9 Amortization Workbook</strong> template bundles a step-by-step payment template, a refinance check-list, and a script-ready CSV format.
+          </p>
+          <a class="btn" id="offerCta" href="https://checkout.dayonebuilder.online/products/mortgage-amortization-workbook?utm_source=dayonebuilder&utm_medium=tool&utm_campaign=mortgage_payoff_calculator" data-offer="mortgage-amortization-workbook" data-offer-location="calculator" data-price-usd="9">
+            Get the amortization workbook
+          </a>
+          <p class="small">No login is needed for this calculator, and the workbook stays available if you want a reusable workflow copy.</p>
+        </section>
+
+        <section class="sources">
+          <h2>Authoritative references</h2>
+          <ul>
+            <li>
+              <a href="https://www.consumerfinance.gov/ask-cfpb/what-is-a-payoff-amount-and-is-it-the-same-as-my-current-balance-en-205/">CFPB: payoff amount and current balance</a>
+            </li>
+            <li>
+              <a href="https://www.consumerfinance.gov/ask-cfpb/how-does-paying-down-a-mortgage-work-en-1943/">CFPB: how paying down a mortgage works</a>
+            </li>
+            <li>
+              <a href="https://www.consumerfinance.gov/ask-cfpb/what-is-a-prepayment-penalty-en-1957/">CFPB: prepayment penalties</a>
+            </li>
+            <li><a href="https://www.calculator.net/mortgage-payoff-calculator.html">calculator.net mortgage payoff calculator</a></li>
+          </ul>
+        </section>
+
+        <p class="disclaimer">
+          This is a planning estimate, not tax, legal, or credit advice. If your loan has taxes, insurance, or variable rates, verify exact numbers with your lender before you set payment schedules.
+        </p>
+      </div>
+      <p class="footer">Module intent: answer the exact query and make the result easy to save and share.</p>
+    </main>
+
+    <script>
+      const fields = {
+        balance: document.getElementById("balance"),
+        rate: document.getElementById("rate"),
+        payment: document.getElementById("payment"),
+        extra: document.getElementById("extra"),
+      };
+      const resultsEl = document.getElementById("results");
+      const summaryEl = document.getElementById("resultSummary");
+      const noticeEl = document.getElementById("noPayoffNotice");
+      const calculateBtn = document.getElementById("calculateBtn");
+      const copyBtn = document.getElementById("copyBtn");
+      const saveBtn = document.getElementById("saveBtn");
+      const downloadBtn = document.getElementById("downloadBtn");
+      const offerCta = document.getElementById("offerCta");
+
+      const USD = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 });
+      const state = {
+        lastPayload: null,
+        hasCompleted: false,
+      };
+
+      function toNum(node) {
+        const value = Number(node.value);
+        return Number.isFinite(value) ? Math.max(0, value) : 0;
+      }
+
+      function formatMonths(totalMonths) {
+        const rounded = Math.round(totalMonths);
+        const years = Math.floor(rounded / 12);
+        const months = rounded % 12;
+        if (years === 0) {
+          return `${months} month(s)`;
+        }
+        return `${years} year(s), ${months} month(s)`;
+      }
+
+      function estimatePayoff() {
+        const balance = toNum(fields.balance);
+        const rate = toNum(fields.rate);
+        const payment = toNum(fields.payment);
+        const extra = toNum(fields.extra);
+
+        const monthlyRate = Math.max(0, rate / 12 / 100);
+        const totalPayment = Math.max(0, payment + extra);
+        const minForInterestOnly = balance * monthlyRate;
+
+        if (balance <= 0 || totalPayment <= 0 || monthlyRate < 0) {
+          return {
+            ok: false,
+            message: "Balance and payment must be positive values."
+          };
+        }
+
+        if (totalPayment <= minForInterestOnly) {
+          return {
+            ok: false,
+            message: "Monthly payment is too low to reduce principal in this model."
+          };
+        }
+
+        const months = Math.log(totalPayment / (totalPayment - (balance * monthlyRate))) / Math.log(1 + monthlyRate);
+
+        if (!Number.isFinite(months) || months <= 0) {
+          return { ok: false, message: "Could not estimate the payoff with these values." };
+        }
+
+        const totalPaid = totalPayment * months;
+        const totalInterest = totalPaid - balance;
+        const payoffDate = new Date();
+        payoffDate.setMonth(payoffDate.getMonth() + Math.round(months));
+
+        const formattedPayoff = payoffDate.toLocaleDateString("en-US", {
+          month: "short",
+          year: "numeric",
+          day: "2-digit",
+        });
+
+        const sample = {
+          principal: balance,
+          annualRate: rate,
+          monthlyPayment: payment,
+          extraPayment: extra,
+          totalPayment,
+          monthlyRate,
+          months: months,
+          totalInterest,
+          totalPaid,
+          payoffDate: formattedPayoff,
+        };
+
+        let amortizedInterest = 0;
+        let remaining = balance;
+        const horizon = Math.min(12, Math.ceil(months));
+        const rows = [];
+        for (let month = 1; month <= horizon; month += 1) {
+          const interest = remaining * monthlyRate;
+          const principal = Math.min(remaining, Math.max(0, totalPayment - interest));
+          remaining = Math.max(0, remaining - principal);
+          amortizedInterest += interest;
+          rows.push({
+            month,
+            interest,
+            principal,
+            remaining,
+          });
+        }
+
+        return {
+          ok: true,
+          sample,
+          rows,
+          completion: {
+            payoffMonths: months,
+            payoffDate: formattedPayoff,
+            totalInterest,
+            totalPaid,
+            firstYearInterest: amortizedInterest,
+            firstYearBalance: rows[rows.length - 1]?.remaining || 0,
+          },
+        };
+      }
+
+      function setResult(items) {
+        resultsEl.innerHTML = "";
+        if (items.length === 0) {
+          return;
+        }
+        for (const item of items) {
+          const li = document.createElement("li");
+          li.className = "result-item";
+          li.innerHTML = `<span class="result-label">${item.label}</span><span class="result-value">${item.value}</span>`;
+          resultsEl.appendChild(li);
+        }
+      }
+
+      function track(name, params = {}) {
+        if (typeof gtag !== "function") {
+          return;
+        }
+        gtag("event", name, Object.assign({
+          event_category: "mortgage_payoff_calculator",
+          event_label: "mortgage_payoff_calculator_based_on_current_balance",
+        }, params));
+      }
+
+      function calculateAndRender() {
+        const outcome = estimatePayoff();
+        noticeEl.classList.add("hidden");
+        summaryEl.textContent = "";
+
+        if (!outcome.ok) {
+          setResult([{ label: "Status", value: outcome.message }]);
+          noticeEl.textContent = outcome.message;
+          noticeEl.classList.remove("hidden");
+          state.lastPayload = null;
+          state.hasCompleted = false;
+          return;
+        }
+
+        const { sample, rows, completion } = outcome;
+        setResult([
+          { label: "Estimated payoff time", value: formatMonths(completion.payoffMonths) },
+          { label: "Approximate payoff date", value: completion.payoffDate },
+          { label: "Total paid", value: USD.format(completion.totalPaid) },
+          { label: "Estimated total interest", value: USD.format(completion.totalInterest) },
+          { label: "First 12-month remaining balance", value: USD.format(completion.firstYearBalance) },
+          { label: "First 12-month interest paid", value: USD.format(completion.firstYearInterest) },
+        ]);
+
+        summaryEl.innerHTML = `
+          <strong>How this is calculated:</strong> Payment first covers monthly interest, then principal.
+          Remaining loan declines with each payment until zero. Assumes fixed APR and fixed monthly payment.
+        `;
+
+        const csvRows = [
+          ["field", "value"],
+          ["current_balance", sample.principal.toFixed(2)],
+          ["annual_rate_percent", sample.annualRate.toFixed(4)],
+          ["scheduled_monthly_payment", sample.monthlyPayment.toFixed(2)],
+          ["extra_monthly_payment", sample.extraPayment.toFixed(2)],
+          ["effective_monthly_payment", sample.totalPayment.toFixed(2)],
+          ["estimated_months_to_zero", completion.payoffMonths.toFixed(2)],
+          ["estimated_payoff_date", completion.payoffDate],
+          ["total_interest", completion.totalInterest.toFixed(2)],
+          ["total_paid", completion.totalPaid.toFixed(2)],
+          ["first_12_months_interest", completion.firstYearInterest.toFixed(2)],
+          ["first_12_months_balance_remaining", completion.firstYearBalance.toFixed(2)],
+        ];
+
+        state.lastPayload = {
+          raw: outcome,
+          csvText: csvRows.map((row) => row.map((value) => `"${String(value).replace(/"/g, '""')}"`).join(",")).join("\n"),
+        };
+        state.hasCompleted = true;
+
+        track("mortgage_payoff_calculation_completed", {
+          payoff_months: Number(completion.payoffMonths.toFixed(2)),
+          total_interest: Number(completion.totalInterest.toFixed(2)),
+          total_paid: Number(completion.totalPaid.toFixed(2)),
+          source: "calculator_page",
+        });
+      }
+
+      calculateBtn.addEventListener("click", calculateAndRender);
+
+      copyBtn.addEventListener("click", async () => {
+        if (!state.lastPayload) {
+          calculateAndRender();
+        }
+        if (!state.lastPayload || !state.lastPayload.csvText) {
+          return;
+        }
+        const text = `Mortgage payoff calculator output\n${state.lastPayload.csvText}`;
+        try {
+          await navigator.clipboard.writeText(text);
+          copyBtn.textContent = "Copied";
+          setTimeout(() => (copyBtn.textContent = "Copy result"), 1200);
+          track("mortgage_payoff_tool_copy_result", {
+            payload_size_chars: state.lastPayload.csvText.length,
+            payment_complete: state.hasCompleted,
+          });
+        } catch (_error) {
+          copyBtn.textContent = "Copy blocked";
+          setTimeout(() => (copyBtn.textContent = "Copy result"), 1200);
+        }
+      });
+
+      saveBtn.addEventListener("click", () => {
+        if (!state.lastPayload) {
+          calculateAndRender();
+        }
+        if (!state.lastPayload) {
+          return;
+        }
+        const fixture = {
+          saved_at: new Date().toISOString(),
+          input: {
+            balance: toNum(fields.balance),
+            annual_rate: toNum(fields.rate),
+            payment: toNum(fields.payment),
+            extra_payment: toNum(fields.extra),
+          },
+          output: state.lastPayload.raw.completion,
+          source: "dayonebuilder_calculator_page",
+          benchmark: "mortgage_payoff_20260605",
+        };
+        try {
+          localStorage.setItem("mortgage_payoff_plan", JSON.stringify(fixture));
+          track("mortgage_payoff_tool_save_intent", {
+            payment_complete: state.hasCompleted,
+            payoff_months: Number(state.lastPayload.raw.completion.payoffMonths.toFixed(2)),
+          });
+          saveBtn.textContent = "Saved in browser";
+          setTimeout(() => (saveBtn.textContent = "Save plan intent"), 1300);
+        } catch (_error) {
+          saveBtn.textContent = "Save blocked";
+          setTimeout(() => (saveBtn.textContent = "Save plan intent"), 1300);
+        }
+      });
+
+      downloadBtn.addEventListener("click", () => {
+        if (!state.lastPayload) {
+          calculateAndRender();
+        }
+        if (!state.lastPayload) {
+          return;
+        }
+        const blob = new Blob([state.lastPayload.csvText], { type: "text/csv;charset=utf-8;" });
+        const href = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = "mortgage-payoff-plan.csv";
+        link.click();
+        URL.revokeObjectURL(href);
+
+        track("mortgage_payoff_tool_exported_csv", {
+          event_category: "mortgage_payoff_tool", 
+          export_format: "csv",
+          payment_complete: state.hasCompleted,
+          offer_path: "none",
+        });
+      });
+
+      offerCta.addEventListener("click", () => {
+        const offerSlug = offerCta.dataset.offer || "mortgage-amortization-workbook";
+        const offerLocation = offerCta.dataset.offerLocation || "calculator";
+        const priceUsd = Number(offerCta.dataset.priceUsd || 9);
+        track("mortgage_payoff_paid_offer_click", {
+          offer_slug: offerSlug,
+          offer_location: offerLocation,
+          price_usd: priceUsd,
+        });
+        track("mortgage_payoff_checkout_start", {
+          offer_slug: offerSlug,
+          offer_location: offerLocation,
+          price_usd: priceUsd,
+          payment_type: "checkout_product_page",
+        });
+      });
+
+      calculateAndRender();
+    </script>
+  </body>
+</html>
