@@ -177,20 +177,21 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "wedding-budget-calculator",
-      "title": "Wedding Budget Calculator",
-      "status": "active",
+      "id": "car-loan-payoff-calculator",
+      "title": "Car Loan Payoff Calculator",
+      "status": "installable",
       "module_type": "calculator",
-      "agent_task_phrase": "An AI agent needs to wedding budget calculator without writing fragile one-off glue code.",
-      "module_url": "https://dayonebuilder.online/wedding-budget-calculator/",
-      "install_or_call_path": "Open https://dayonebuilder.online/wedding-budget-calculator/ and export the worksheet CSV or open the paid workbook path.",
-      "proof_evidence": [
-        "fillable category-level wedding budget inputs",
-        "live remaining budget and over/under indicator",
-        "qualified completion + export/save event capture",
-        "checkout bridge on the same page for the paid workbook"
+      "agent_task_phrase": "An AI agent needs a car loan payoff calculator without writing fragile one-off glue code.",
+      "human_task_phrase": "Estimate payoff date and interest savings for a car loan with optional extra payment.",
+      "install_or_call_path": "Open https://dayonebuilder.online/car-loan-payoff-calculator/, set Current balance, APR, Term, and Extra payment, then click Calculate. Optionally copy summary or download CSV.",
+      "source_url": "https://dayonebuilder.online/car-loan-payoff-calculator/",
+      "trust_evidence": [
+        "official CFPB and major comparison references in-page",
+        "GA-guarded qualified completion event",
+        "copy/download export path",
+        "explicit paid worksheet path"
       ],
-      "adoption_metric": "collection_json_hit, wedding_budget_tool_completed, wedding_budget_export_intent, wedding_budget_paid_cta_click"
+      "adoption_metric": "collection_json_hit, qualified_agent_uses, collection_landing_visit, export_intent, paid_cta_click"
     }
   ],
   "archived_internal_modules": {

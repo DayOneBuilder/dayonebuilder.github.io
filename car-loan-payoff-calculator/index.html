@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Car Loan Payoff Calculator | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Estimate car loan payoff time, total interest, and savings if you add an extra monthly payment. Download a worksheet and keep a CSV trail."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/car-loan-payoff-calculator/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #06111a;
+        --ink: #f2f5f7;
+        --muted: #b3c5d2;
+        --line: rgba(163, 193, 216, 0.22);
+        --panel: rgba(11, 28, 39, 0.9);
+        --teal: #72ecdd;
+        --amber: #ffd37a;
+        --accent: #9bfccf;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font: 16px/1.55 "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: linear-gradient(180deg, #06111a 0%, #081722 100%);
+        color: var(--ink);
+      }
+
+      .wrap {
+        width: min(calc(100% - 32px), 1060px);
+        margin: 0 auto;
+        padding: 22px 0 60px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .top {
+        margin-bottom: 16px;
+        color: var(--muted);
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+        padding: 20px;
+        margin-top: 14px;
+      }
+
+      .eyebrow {
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--amber);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0.2rem 0 0.75rem;
+      }
+
+      h1 {
+        font-size: clamp(1.9rem, 4.6vw, 3rem);
+      }
+
+      .subtitle {
+        max-width: 68ch;
+        color: var(--muted);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      input,
+      button {
+        height: 44px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        font: inherit;
+      }
+
+      input {
+        padding: 0 12px;
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+      }
+
+      input:focus {
+        outline: 1px solid var(--teal);
+      }
+
+      small {
+        color: var(--muted);
+      }
+
+      button {
+        appearance: none;
+        width: fit-content;
+        padding: 0 16px;
+        cursor: pointer;
+        background: linear-gradient(135deg, #0be4c8, #b5f7a9);
+        color: #07231a;
+        font-weight: 700;
+        border-color: transparent;
+      }
+
+      .ghost {
+        background: transparent;
+        color: var(--ink);
+        border-color: var(--line);
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 12px;
+      }
+
+      .results {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .result {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .result-label {
+        color: var(--muted);
+      }
+
+      .result-value {
+        font-size: 1.45rem;
+        color: var(--teal);
+        margin-top: 6px;
+        font-weight: 700;
+      }
+
+      .sources,
+      .offer,
+      .copyblock {
+        margin-top: 12px;
+      }
+
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .summary {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 10px 0;
+        border: 1px dashed var(--line);
+        padding: 12px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.02);
+        max-height: 220px;
+        overflow: auto;
+      }
+
+      ul {
+        margin-top: 8px;
+      }
+
+      li {
+        margin: 0 0 8px;
+      }
+
+      .muted-note {
+        color: var(--muted);
+      }
+
+      .error {
+        color: #ffce7c;
+      }
+
+      @media (max-width: 980px) {
+        .grid,
+        .results {
+          grid-template-columns: 1fr;
+        }
+
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+
+        .wrap {
+          width: min(calc(100% - 16px), 1060px);
+        }
+      }
+    </style>
+
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Car Loan Payoff Calculator",
+          "url": "https://dayonebuilder.online/car-loan-payoff-calculator/",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any",
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Car Loan Payoff Calculator",
+          "operatingSystem": "Any",
+          "applicationCategory": "FinanceApplication",
+          "description": "A tiny calculator that estimates payoff time and interest with optional extra monthly payments."
+        }
+      ]
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top"><a href="/" class="muted-note">← DayOneBuilder</a></div>
+      <div class="panel">
+        <span class="eyebrow">Calculator</span>
+        <h1>Car Loan Payoff Calculator</h1>
+        <p class="subtitle">
+          Enter your balance, APR, and term. Then run a scenario with an optional extra monthly payment.
+          The tool shows estimated completion time and interest savings and creates a copyable summary.
+        </p>
+
+        <div class="grid" aria-label="calculator inputs">
+          <label>
+            <span>Current balance (USD)</span>
+            <input id="balance" type="number" inputmode="decimal" min="1" step="0.01" value="22000" />
+            <small>Use your actual loan balance.</small>
+          </label>
+          <label>
+            <span>APR (%)</span>
+            <input id="apr" type="number" inputmode="decimal" min="0" max="40" step="0.01" value="6.75" />
+            <small>Your contract APR from lender disclosures.</small>
+          </label>
+          <label>
+            <span>Term (months)</span>
+            <input id="termMonths" type="number" inputmode="decimal" min="1" max="960" step="1" value="60" />
+            <small>Total original term from your contract.</small>
+          </label>
+          <label>
+            <span>Extra monthly payment (USD)</span>
+            <input id="extraPayment" type="number" inputmode="decimal" min="0" step="0.01" value="100" />
+            <small>Optional regular extra amount.</small>
+          </label>
+        </div>
+
+        <div class="row" style="margin-top: 12px">
+          <button id="recalculate">Calculate payoff plan</button>
+          <span class="error" id="errorState"></span>
+        </div>
+
+        <div class="two-col">
+          <div class="panel" style="padding: 14px">
+            <h2>Estimated outputs</h2>
+            <div class="results">
+              <div class="result">
+                <div class="result-label">Scheduled monthly payment</div>
+                <strong id="scheduledPayment" class="result-value">$0.00</strong>
+              </div>
+              <div class="result">
+                <div class="result-label">Scheduled total interest</div>
+                <strong id="scheduledInterest" class="result-value">$0.00</strong>
+              </div>
+              <div class="result">
+                <div class="result-label">Payoff months (with extra)</div>
+                <strong id="payoffMonths" class="result-value">0</strong>
+                <small class="muted-note">Estimated from payment schedule.</small>
+              </div>
+              <div class="result">
+                <div class="result-label">Interest with extra</div>
+                <strong id="extraInterest" class="result-value">$0.00</strong>
+              </div>
+            </div>
+            <div class="results">
+              <div class="result">
+                <div class="result-label">Estimated payoff date</div>
+                <strong id="payoffDate" class="result-value">—</strong>
+              </div>
+              <div class="result">
+                <div class="result-label">Interest saved vs scheduled</div>
+                <strong id="interestSaved" class="result-value">$0.00</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel" style="padding: 14px">
+            <h2>Copy and export</h2>
+            <p class="muted-note">
+              Keep a quick worksheet for your records. This is an estimate only and not legal, tax, or legal advice.
+            </p>
+            <div class="summary" id="summaryText"></div>
+            <div class="row">
+              <button id="copySummary" class="ghost">Copy payoff summary</button>
+              <button id="downloadCsv" class="ghost">Download CSV</button>
+            </div>
+            <p class="muted-note" id="copyStatus"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel sources">
+        <h2>Official references</h2>
+        <p>
+          For high-trust details, these references explain prepayment rules and interest calculations:
+        </p>
+        <ul>
+          <li>
+            <a href="https://www.consumerfinance.gov/ask-cfpb/can-i-prepay-my-loan-at-any-time-without-penalty-en-843/" rel="noopener noreferrer" target="_blank">
+              CFPB: Can I prepay my loan at any time without a penalty
+            </a>
+          </li>
+          <li>
+            <a href="https://www.consumerfinance.gov/ask-cfpb/whats-the-difference-between-a-simple-interest-rate-and-precomputed-interest-on-an-auto-loan-en-841/" rel="noopener noreferrer" target="_blank">
+              CFPB: Simple vs precomputed interest on an auto loan
+            </a>
+          </li>
+          <li>
+            <a href="https://www.consumerfinance.gov/ask-cfpb/is-it-better-to-pay-off-the-interest-or-principal-on-my-auto-loan-en-845/" rel="noopener noreferrer" target="_blank">
+              CFPB: Principal-first vs interest-first strategy context
+            </a>
+          </li>
+          <li>
+            <a href="https://www.bankrate.com/loans/auto-loans/early-payment-payoff-calculator-old/" rel="noopener noreferrer" target="_blank">
+              Bankrate auto loan payoff calculator
+            </a>
+          </li>
+          <li>
+            <a href="https://www.nerdwallet.com/auto-loans/calculators/auto-loan-calculator" rel="noopener noreferrer" target="_blank">
+              NerdWallet auto loan calculator
+            </a>
+          </li>
+          <li>
+            <a href="https://www.calculator.net/auto-loan-calculator.html" rel="noopener noreferrer" target="_blank">
+              Calculator.net auto loan calculator
+            </a>
+          </li>
+        </ul>
+        <p class="muted-note">
+          Ask your lender or servicer for the exact payoff amount before paying early. Some loans may have payoff fees or schedule changes.
+        </p>
+      </div>
+
+      <div class="panel offer">
+        <h2>Need a formatted workflow?</h2>
+        <p class="muted-note">
+          The <strong>$9 Car Loan Payoff Worksheet</strong> gives a ready-to-edit template and payment tracker you can reuse for multiple loans.
+        </p>
+        <a
+          id="paidOffer"
+          href="https://checkout.dayonebuilder.online/products/car-loan-payoff-worksheet?utm_source=dayonebuilder&utm_medium=tool_page&utm_campaign=calculator_workflow"
+          class="ghost"
+          style="display: inline-flex; text-decoration: none;"
+          data-offer="car-loan-payoff-worksheet"
+          data-offer-location="tool_page"
+          data-price-usd="9"
+        >Buy the worksheet</a>
+      </div>
+    </div>
+
+    <script>
+      const money = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 2,
+      });
+
+      const balanceInput = document.getElementById("balance");
+      const aprInput = document.getElementById("apr");
+      const termInput = document.getElementById("termMonths");
+      const extraInput = document.getElementById("extraPayment");
+      const recalcButton = document.getElementById("recalculate");
+      const copyButton = document.getElementById("copySummary");
+      const downloadButton = document.getElementById("downloadCsv");
+      const offerButton = document.getElementById("paidOffer");
+      const errorState = document.getElementById("errorState");
+      const copyStatus = document.getElementById("copyStatus");
+
+      const scheduledPaymentEl = document.getElementById("scheduledPayment");
+      const scheduledInterestEl = document.getElementById("scheduledInterest");
+      const payoffMonthsEl = document.getElementById("payoffMonths");
+      const extraInterestEl = document.getElementById("extraInterest");
+      const payoffDateEl = document.getElementById("payoffDate");
+      const interestSavedEl = document.getElementById("interestSaved");
+      const summaryText = document.getElementById("summaryText");
+
+      const MODULE_SLUG = "car-loan-payoff-calculator";
+      let lastSummaryText = "Fill the fields and calculate.";
+      let lastCsv = "metric,value\nresult,not_calculated\n";
+
+      function trackEvent(name, params = {}) {
+        if (typeof gtag !== "function") {
+          return;
+        }
+        gtag("event", name, Object.assign({
+          event_category: MODULE_SLUG,
+          tool_slug: MODULE_SLUG
+        }, params));
+      }
+
+      function numberOrZero(value) {
+        const parsed = Number(value);
+        return Number.isFinite(parsed) ? parsed : 0;
+      }
+
+      function clamp(value, min, max) {
+        if (value < min) return min;
+        if (value > max) return max;
+        return value;
+      }
+
+      function calculateScheduledPayment(principal, monthlyRate, months) {
+        if (months <= 0 || principal <= 0) return 0;
+        if (monthlyRate <= 0) {
+          return principal / months;
+        }
+        const compound = Math.pow(1 + monthlyRate, months);
+        return principal * (monthlyRate * compound) / (compound - 1);
+      }
+
+      function simulatePayoff(principal, monthlyRate, monthlyPayment) {
+        const rows = [];
+        let remaining = Math.max(0, principal);
+        let month = 0;
+        let totalInterest = 0;
+
+        while (remaining > 0.0001 && month < 2400) {
+          month += 1;
+          const interest = remaining * monthlyRate;
+          const principalPaid = Math.max(0, monthlyPayment - interest);
+          if (principalPaid <= 0.0001) {
+            return {
+              months: null,
+              totalInterest,
+              rows,
+            };
+          }
+
+          const principalAfter = remaining - principalPaid;
+          rows.push([
+            month,
+            remaining,
+            interest,
+            principalPaid,
+            Math.max(0, principalAfter),
+          ]);
+          totalInterest += interest;
+          remaining = Math.max(0, principalAfter);
+        }
+
+        if (remaining > 0.0001) {
+          return {
+            months: null,
+            totalInterest,
+            rows,
+          };
+        }
+
+        return { months: month, totalInterest, rows };
+      }
+
+      function estimatePayoffDate(monthsFromNow) {
+        if (!Number.isFinite(monthsFromNow) || monthsFromNow <= 0) return "—";
+        const today = new Date();
+        const month = today.getMonth() + monthsFromNow;
+        const year = today.getFullYear() + Math.floor(month / 12);
+        const zeroBasedMonth = ((month % 12) + 12) % 12;
+        const date = new Date(year, zeroBasedMonth, Math.min(28, today.getDate()));
+        return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+      }
+
+      function buildSummary(data) {
+        return [
+          "Car Loan Payoff Calculator output (estimate):",
+          `Current balance: ${money.format(data.balance)}`,
+          `APR: ${data.apr.toFixed(2)}%`,
+          `Term: ${data.termMonths} months`,
+          `Extra monthly payment: ${money.format(data.extraPayment)}`,
+          `Scheduled monthly payment: ${money.format(data.scheduledPayment)}`,
+          `Estimated scheduled interest: ${money.format(data.scheduledInterest)}`,
+          `Estimated payoff with extra: ${data.acceleratedMonths} months`,
+          `Estimated payoff date: ${data.payoffDate}`,
+          `Estimated interest with extra: ${money.format(data.extraInterest)}`,
+          `Estimated interest saved: ${money.format(Math.max(0, data.scheduledInterest - data.extraInterest))}`,
+          "Disclaimer: estimate only; verify with lender payoff quote.",
+        ].join("\n");
+      }
+
+      function calculate() {
+        errorState.textContent = "";
+        const balance = Math.max(0.01, numberOrZero(balanceInput.value));
+        const apr = Math.max(0, numberOrZero(aprInput.value));
+        const termMonths = clamp(Math.round(numberOrZero(termInput.value)), 1, 960);
+        const extraPayment = Math.max(0, numberOrZero(extraInput.value));
+
+        const monthlyRate = apr / 1200;
+        const scheduledPayment = calculateScheduledPayment(balance, monthlyRate, termMonths);
+
+        if (!Number.isFinite(scheduledPayment) || scheduledPayment <= 0) {
+          errorState.textContent = "Invalid loan setup. Check inputs and try again.";
+          return;
+        }
+
+        const scheduledTotalInterest = scheduledPayment * termMonths - balance;
+        const acceleratePayment = scheduledPayment + extraPayment;
+        const accelerated = simulatePayoff(balance, monthlyRate, acceleratePayment);
+
+        if (accelerated.months === null) {
+          errorState.textContent = "Extra payment is too small for the selected APR and term.";
+          return;
+        }
+
+        const payoffDate = estimatePayoffDate(accelerated.months);
+        const monthRows = accelerated.rows;
+
+        const totalInterestExtra = accelerated.totalInterest;
+        const interestSaved = Math.max(0, scheduledTotalInterest - totalInterestExtra);
+
+        const data = {
+          balance,
+          apr,
+          termMonths,
+          extraPayment,
+          scheduledPayment,
+          scheduledInterest: scheduledTotalInterest,
+          acceleratedMonths: accelerated.months,
+          extraInterest: totalInterestExtra,
+          payoffDate,
+          interestSaved,
+        };
+
+        scheduledPaymentEl.textContent = money.format(scheduledPayment);
+        scheduledInterestEl.textContent = money.format(scheduledTotalInterest);
+        payoffMonthsEl.textContent = accelerated.months.toLocaleString("en-US");
+        extraInterestEl.textContent = money.format(totalInterestExtra);
+        payoffDateEl.textContent = payoffDate;
+        interestSavedEl.textContent = money.format(interestSaved);
+
+        const output = buildSummary(data);
+        lastSummaryText = output;
+        summaryText.textContent = output;
+
+        const csvRows = [
+          ["metric", "value"],
+          ["current_balance", balance.toFixed(2)],
+          ["apr_percent", apr.toFixed(4)],
+          ["term_months", termMonths.toFixed(0)],
+          ["extra_monthly_payment", extraPayment.toFixed(2)],
+          ["scheduled_monthly_payment", scheduledPayment.toFixed(2)],
+          ["scheduled_total_interest", scheduledTotalInterest.toFixed(2)],
+          ["payoff_months_with_extra", accelerated.months.toFixed(0)],
+          ["extra_total_interest", totalInterestExtra.toFixed(2)],
+          ["estimated_interest_saved", interestSaved.toFixed(2)],
+        ];
+
+        const scheduleHeader = ["month", "balance_before", "interest", "principal", "balance_after"];
+        const csvSchedule = monthRows.slice(0, Math.min(monthRows.length, 120)).map((row) => row.map((value) => value.toFixed(2)));
+        const csvText = [
+          csvRows.map((row) => row.join(",")).join("\n"),
+          "",
+          scheduleHeader.join(","),
+          ...csvSchedule.map((row) => row.join(",")),
+          "",
+          "Note,",
+          "Estimate uses fixed APR and regular extra payment; verify with your lender.",
+        ].join("\n");
+        lastCsv = csvText;
+
+        copyStatus.textContent = "";
+
+        trackEvent("car_loan_payoff_tool_completion", {
+          payoff_months: accelerated.months,
+          has_extra_payment: extraPayment > 0,
+          interest_saved: Number(interestSaved.toFixed(2)),
+          scheduled_payment: Number(scheduledPayment.toFixed(2)),
+          event_category: "calculator_qualified_completion",
+        });
+      }
+
+      recalcButton.addEventListener("click", () => {
+        calculate();
+      });
+
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(lastSummaryText || "");
+          copyStatus.textContent = "Summary copied.";
+          trackEvent("car_loan_payoff_export_intent", {
+            export_type: "summary_copy",
+            action: "copy_summary",
+          });
+        } catch (_err) {
+          copyStatus.textContent = "Copy blocked in this browser.";
+        }
+      });
+
+      downloadButton.addEventListener("click", () => {
+        const blob = new Blob([lastCsv], {
+          type: "text/csv;charset=utf-8;",
+        });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "car-loan-payoff-plan.csv";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        trackEvent("car_loan_payoff_export_intent", {
+          export_type: "csv_download",
+          action: "download_csv",
+        });
+      });
+
+      offerButton.addEventListener("click", () => {
+        const offerSlug = offerButton.dataset.offer || "car-loan-payoff-worksheet";
+        const offerLocation = offerButton.dataset.offerLocation || "tool_page";
+        const priceUsd = Number(offerButton.dataset.priceUsd || 9);
+        trackEvent("car_loan_payoff_paid_offer_click", {
+          offer_slug: offerSlug,
+          offer_location: offerLocation,
+          price_usd: priceUsd,
+        });
+      });
+
+      calculate();
+    </script>
+  </body>
+</html>

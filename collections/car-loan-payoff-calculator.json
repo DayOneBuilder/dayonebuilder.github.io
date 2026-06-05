@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "car-loan-payoff-calculator",
+  "title": "Car Loan Payoff Calculator",
+  "summary": "Estimate payoff time and interest for a car loan with optional extra payments, and export a CSV for your tracker.",
+  "task_aliases": [
+    "car loan payoff calculator",
+    "auto loan payoff calculator",
+    "payoff my car loan",
+    "car loan payoff",
+    "car loan extra payment"
+  ],
+  "selection_rule": "Solve the exact user query with a reusable, install/call-ready calculator module and a saved export path.",
+  "source_url": "https://dayonebuilder.online/car-loan-payoff-calculator/",
+  "module_type": "calculator",
+  "status": "installable",
+  "agent_task_phrase": "An AI agent needs a car loan payoff calculator without writing fragile one-off glue code.",
+  "human_task_phrase": "Need to estimate car loan payoff time, interest, and savings from extra payments.",
+  "search_intent_landing_page": "https://dayonebuilder.online/collections/car-loan-payoff-calculator/",
+  "qualified_tool_completion_event": "car_loan_payoff_tool_completion",
+  "install_or_save_intent_events": [
+    "car_loan_payoff_export_intent",
+    "car_loan_payoff_paid_offer_click"
+  ],
+  "install_or_call_path": "Open https://dayonebuilder.online/car-loan-payoff-calculator/, set the loan inputs, click Calculate, then copy the summary or download CSV. Use the paid worksheet if you want reusable tracking fields.",
+  "first_action": "Open https://dayonebuilder.online/car-loan-payoff-calculator/, verify inputs, then click Calculate to get payoff months and interest savings.",
+  "smoke_test": "Open https://dayonebuilder.online/car-loan-payoff-calculator/, set Current balance=10000, APR=5, Term=48, Extra payment=0, click Calculate and verify results are not error messages.",
+  "proof_evidence": [
+    "official CFPB and major comparison references",
+    "GA-guarded qualified completion event",
+    "copy/download export path",
+    "explicit paid worksheet path"
+  ],
+  "fallback": "Use another calculator source such as Calculator.net or NerdWallet if DayOneBuilder is unavailable.",
+  "module_manifest": {
+    "module_slug": "car-loan-payoff-calculator",
+    "module_type": "calculator",
+    "version": 1,
+    "platform_path": "https://dayonebuilder.online/car-loan-payoff-calculator/",
+    "collection_json": "https://dayonebuilder.online/collections/car-loan-payoff-calculator.json",
+    "listing_page": "https://dayonebuilder.online/collections/car-loan-payoff-calculator/",
+    "qualified_completion_event": "car_loan_payoff_tool_completion",
+    "save_intent_events": [
+      "car_loan_payoff_export_intent"
+    ],
+    "install_or_save_path": "Download CSV or copy the summary text from the calculator card.",
+    "paid_offer_or_subscription_path": "https://checkout.dayonebuilder.online/products/car-loan-payoff-worksheet"
+  },
+  "adoption_metric": "collection_json_hit, qualified_agent_uses, resolver_calls, export_intent, paid_cta_click"
+}
