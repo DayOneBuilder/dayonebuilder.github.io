@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "habit-tracker-spreadsheet-template",
+  "title": "Habit Tracker Spreadsheet Template",
+  "summary": "Generate and export a custom habit tracker CSV in minutes, then copy/save or move to a paid workbook flow.",
+  "task_aliases": [
+    "habit tracker spreadsheet template",
+    "habit tracker template",
+    "build habit tracker",
+    "habit tracker csv",
+    "habit tracking spreadsheet"
+  ],
+  "selection_rule": "Prefer a verified source-first link for established templates, then use the DayOneBuilder generator for a custom no-signup path.",
+  "entries": [
+    {
+      "id": "habit-tracker-spreadsheet-template",
+      "title": "Habit Tracker Spreadsheet Template",
+      "task_aliases": [
+        "habit tracker spreadsheet template",
+        "habit tracker template",
+        "build habit tracker template"
+      ],
+      "selected_source_url": "https://dayonebuilder.online/habit-tracker-spreadsheet-template/",
+      "first_action": "Open the page, paste habits in `habit, times/week, minutes` format, set weeks, and click Build tracker template.",
+      "smoke_test": "Build at least one template, copy CSV or download it, and confirm output has habit_name, target_per_week, and week columns.",
+      "proof_signal": "Qualified completion and export events are logged from local actions; no signup required; official template sources are linked for trust evidence.",
+      "fallback": "If you prefer a prebuilt spreadsheet, use Vertex42 or SpreadsheetClass as linked from the page before exporting your copy.",
+      "module_type": "template",
+      "module_manifest_url": "https://dayonebuilder.online/collections/habit-tracker-spreadsheet-template.json",
+      "module_url": "https://dayonebuilder.online/habit-tracker-spreadsheet-template/",
+      "paid_offer_path": "https://checkout.dayonebuilder.online/products/habit-tracker-workbook",
+      "adoption_metric": "organic click, qualified completion, copy/download, paid offer click, checkout start"
+    }
+  ],
+  "fallback": "If this page is not usable for your habits, open one of the linked public template sources and adapt the format manually."
+}

@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Habit Tracker Spreadsheet Template | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for habit tracker spreadsheet template, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/habit-tracker-spreadsheet-template/" />
+    <link rel="alternate" type="application/json" href="/collections/habit-tracker-spreadsheet-template.json" title="Habit tracker module JSON" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE" onload="__initHabitTrackerAnalytics()" onerror="window.__habitTrackerAnalyticsReady = false"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.__habitTrackerAnalyticsReady = false;
+
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+
+      function trackHabitTrackerEvent(name, params = {}) {
+        if (!window.__habitTrackerAnalyticsReady || typeof window.gtag !== "function") {
+          return;
+        }
+
+        gtag("event", name, Object.assign({
+          event_category: "habit_tracker_template",
+        }, params));
+      }
+
+      function __initHabitTrackerAnalytics() {
+        window.__habitTrackerAnalyticsReady = true;
+        gtag("js", new Date());
+        gtag("config", "G-KQMLYS3VVE");
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #f7f6ef;
+        --panel: #ffffff;
+        --line: #d9d4c6;
+        --ink: #201f1d;
+        --muted: #635f58;
+        --link: #1e4d8b;
+        --ok: #2b805f;
+        --accent: #153f6c;
+        --max: 1020px;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: linear-gradient(180deg, #f7f6ef 0%, #ece9e0 100%);
+        font: 16px/1.55 "IBM Plex Sans", "Inter", "Segoe UI", sans-serif;
+      }
+
+      .wrap {
+        width: min(calc(100% - 28px), var(--max));
+        margin: 0 auto;
+        padding: 24px 0 56px;
+      }
+
+      .top-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .top-nav a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .panel {
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--panel);
+        padding: 18px;
+      }
+
+      .badge {
+        display: inline-flex;
+        border: 1px solid var(--line);
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--ok);
+      }
+
+      h1, h2, h3 {
+        line-height: 1.1;
+        margin: 0.2rem 0 0.75rem;
+      }
+
+      h1 { font-size: clamp(2rem, 5vw, 3.1rem); }
+      h2 { margin-top: 1.1rem; }
+
+      .lead {
+        color: var(--muted);
+        margin-top: 10px;
+        max-width: 68ch;
+      }
+
+      .field {
+        margin-top: 12px;
+      }
+
+      label {
+        display: block;
+        font-weight: 700;
+      }
+
+      textarea, input, select, button {
+        width: 100%;
+        margin-top: 8px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+        font: inherit;
+        color: var(--ink);
+        background: #fff;
+      }
+
+      textarea:focus, input:focus, select:focus, button:focus {
+        outline: 2px solid #4a78b5;
+      }
+
+      textarea {
+        min-height: 170px;
+        resize: vertical;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      button {
+        width: auto;
+        border-color: var(--accent);
+        background: var(--accent);
+        color: white;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .ghost {
+        background: #fff;
+        color: var(--ink);
+        border-color: var(--line);
+      }
+
+      .actions {
+        margin-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .cta {
+        display: inline-flex;
+        min-height: 44px;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: #fff;
+        padding: 10px 16px;
+        font-weight: 700;
+      }
+
+      .cta.ghost {
+        background: transparent;
+        color: var(--ink);
+      }
+
+      .status {
+        margin-top: 10px;
+        color: var(--muted);
+      }
+
+      .summary {
+        margin-top: 16px;
+        padding: 12px;
+        background: #f9f8f2;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .stat {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px 12px;
+      }
+
+      .stat-value {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-top: 6px;
+      }
+
+      .preview {
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        max-height: 240px;
+        overflow: auto;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        background: #fff;
+        white-space: pre;
+      }
+
+      table {
+        margin-top: 12px;
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 700px;
+      }
+
+      th, td {
+        border: 1px solid var(--line);
+        padding: 8px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      th { background: #f5f2ea; }
+
+      .panel-foot {
+        margin-top: 14px;
+      }
+
+      .panel-foot ul { padding-left: 18px; margin: 10px 0 0; color: var(--muted); }
+
+      .panel-foot a {
+        color: var(--link);
+        text-decoration-color: rgba(30, 77, 139, .35);
+      }
+
+      .notice {
+        margin-top: 10px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 860px) {
+        .row { grid-template-columns: 1fr; }
+        .summary-grid { grid-template-columns: 1fr; }
+        table { min-width: 560px; }
+      }
+
+      @media (max-width: 640px) {
+        .wrap { width: min(calc(100% - 18px), var(--max)); }
+        .top-nav { gap: 8px; }
+        .panel { padding: 14px; border-radius: 12px; }
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Habit Tracker Spreadsheet Template",
+        "url": "https://dayonebuilder.online/habit-tracker-spreadsheet-template/",
+        "description": "Build and export a ready-to-use habit tracker CSV or copy-ready template in minutes.",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        }
+      }
+    </script>
+
+    <script type="application/json" id="module-manifest">
+      {
+        "module_version": "1.0.0",
+        "module_type": "template",
+        "slug": "habit-tracker-spreadsheet-template",
+        "target_query": "habit tracker spreadsheet template",
+        "platform_path": "https://dayonebuilder.online/habit-tracker-spreadsheet-template/",
+        "reusable_artifact": "downloadable CSV template",
+        "paid_offer_path": "https://checkout.dayonebuilder.online/products/habit-tracker-workbook",
+        "usage_event": "habit_tracker_template_completion",
+        "install_or_save_intent_event": "habit_tracker_template_export",
+        "paid_path_event": "habit_tracker_paid_offer_click",
+        "external_authoritative_sources": [
+          "https://www.vertex42.com/ExcelTemplates/habit-tracker.html",
+          "https://www.spreadsheetclass.com/habit-tracker-templates-google-sheets/",
+          "https://www.etsy.com/market/habit_tracker_spreadsheet"
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="top-nav">
+        <a href="/">← DayOneBuilder</a>
+        <a href="/collections/habit-tracker-spreadsheet-template.json">Machine-readable module JSON</a>
+        <a href="/collections/index.json">Collection index</a>
+      </nav>
+
+      <section class="panel">
+        <span class="badge">habit tracker template tool</span>
+        <h1>Habit Tracker Spreadsheet Template</h1>
+        <p class="lead">
+          Add your habits once, set target frequency, then export one CSV you can open in Excel or Google Sheets.
+          No signup is required and no account data is collected.
+        </p>
+
+        <div class="field">
+          <label for="habitList">Habit list</label>
+          <textarea id="habitList">
+Read 20 pages,3,15
+Walk 30 min,5,30
+Drink water,7,5
+Sleep before 11:00 PM,7,60</textarea>
+          <span class="notice">Format per line: habit, target times per week, minutes per occurrence.</span>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="weekCount">Tracking weeks</label>
+            <select id="weekCount">
+              <option value="2">2 weeks</option>
+              <option value="4" selected>4 weeks</option>
+              <option value="6">6 weeks</option>
+              <option value="8">8 weeks</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="startDate">Start date</label>
+            <input id="startDate" type="date" />
+          </div>
+          <div class="field">
+            <label for="reminderTime">Daily reminder target</label>
+            <input id="reminderTime" type="time" value="21:00" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="generateBtn" type="button">Build tracker template</button>
+          <button id="copyBtn" class="ghost" type="button">Copy CSV to clipboard</button>
+          <button id="downloadBtn" class="ghost" type="button">Download CSV</button>
+        </div>
+
+        <p id="status" class="status" role="status">Set values and click Build tracker template.</p>
+
+        <section class="summary">
+          <h2>Template summary</h2>
+          <div class="summary-grid">
+            <div class="stat">
+              <div>Habits</div>
+              <div id="habitCount" class="stat-value">0</div>
+            </div>
+            <div class="stat">
+              <div>Weekly target minutes</div>
+              <div id="weeklyMinutes" class="stat-value">0</div>
+            </div>
+            <div class="stat">
+              <div>Template version</div>
+              <div id="templateVersion" class="stat-value">1.0.0</div>
+            </div>
+          </div>
+          <div class="preview" id="preview">No output yet.</div>
+          <div class="actions">
+            <a id="paidOfferCta" class="cta" href="https://checkout.dayonebuilder.online/products/habit-tracker-workbook?utm_source=dayonebuilder&utm_medium=habit_tracker_template&utm_campaign=template_export" data-offer="habit-tracker-workbook" data-offer-location="tool_page" data-price-usd="9">
+              Get the finished $9 workbook
+            </a>
+            <a id="openWorksheetGuide" class="cta ghost" href="https://www.vertex42.com/ExcelTemplates/habit-tracker.html" target="_blank" rel="noopener noreferrer">Open official Excel habit tracker</a>
+          </div>
+        </section>
+      </section>
+
+      <section class="panel panel-foot">
+        <h2>Sources and install path</h2>
+        <p class="lead">
+          If you prefer a prebuilt visual template, use one of these references first.
+          This tool gives you a custom CSV you can save immediately.
+        </p>
+        <ul>
+          <li><a href="https://www.vertex42.com/ExcelTemplates/habit-tracker.html" target="_blank" rel="noopener noreferrer">Vertex42 habit tracker template</a></li>
+          <li><a href="https://www.spreadsheetclass.com/habit-tracker-templates-google-sheets/" target="_blank" rel="noopener noreferrer">SpreadsheetClass Google Sheets habit trackers</a></li>
+          <li><a href="https://www.etsy.com/market/habit_tracker_spreadsheet" target="_blank" rel="noopener noreferrer">Etsy habit tracker spreadsheet market</a></li>
+        </ul>
+        <p class="notice">
+          Trusted path: search the official sources first, then use this page to build a template that fits your habits and timeline.
+        </p>
+      </section>
+    </div>
+
+    <script>
+      const TEMPLATE_VERSION = "1.0.0";
+      const DEFAULT_HABITS = [
+        { name: "Read 20 pages", timesPerWeek: 3, minutes: 15 },
+        { name: "Walk 30 min", timesPerWeek: 5, minutes: 30 },
+        { name: "Drink water", timesPerWeek: 7, minutes: 5 },
+      ];
+      const manifestEl = document.getElementById("module-manifest");
+      const manifest = (() => {
+        try {
+          return JSON.parse(manifestEl?.textContent || "{}");
+        } catch (_err) {
+          return {};
+        }
+      })();
+
+      const habitList = document.getElementById("habitList");
+      const weekCount = document.getElementById("weekCount");
+      const startDate = document.getElementById("startDate");
+      const reminderTime = document.getElementById("reminderTime");
+      const generateBtn = document.getElementById("generateBtn");
+      const copyBtn = document.getElementById("copyBtn");
+      const downloadBtn = document.getElementById("downloadBtn");
+      const status = document.getElementById("status");
+      const preview = document.getElementById("preview");
+      const habitCountEl = document.getElementById("habitCount");
+      const weeklyMinutesEl = document.getElementById("weeklyMinutes");
+      const templateVersionEl = document.getElementById("templateVersion");
+      const paidOfferCta = document.getElementById("paidOfferCta");
+      const actionButtons = [generateBtn, copyBtn, downloadBtn];
+
+      let outputRows = [];
+
+      templateVersionEl.textContent = TEMPLATE_VERSION;
+
+      function escCsv(value) {
+        const stringValue = String(value ?? "");
+        if (/[",\n\r]/.test(stringValue)) {
+          return `"${stringValue.replace(/"/g, '""')}"`;
+        }
+        return stringValue;
+      }
+
+      function clampPositiveInteger(value, fallback) {
+        const parsed = Number.parseInt(value, 10);
+        if (!Number.isFinite(parsed) || parsed < 1) {
+          return fallback;
+        }
+        return parsed;
+      }
+
+      function toISODate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      function buildOutput() {
+        const lines = habitList.value.split("\n").map((line) => line.trim()).filter(Boolean);
+        const items = lines.length ? [] : DEFAULT_HABITS.map((item) => ({ ...item }));
+        const weeks = Number.parseInt(weekCount.value, 10) || 4;
+
+        lines.forEach((line) => {
+          const parts = line.split(",").map((part) => part.trim());
+          const name = parts[0] || "Habit";
+          const timesPerWeek = clampPositiveInteger(parts[1], 3);
+          const minutes = clampPositiveInteger(parts[2], 10);
+          items.push({
+            name,
+            timesPerWeek,
+            minutes,
+          });
+        });
+
+        const start = new Date(startDate.value || new Date());
+        const startText = toISODate(start);
+        const reminder = (reminderTime.value || "21:00").trim();
+        const header = ["habit_name", "target_per_week", "minutes_per_occurrence", "weekly_minutes", "reminder_time", ...Array.from({ length: weeks }, (_, i) => `week_${i + 1}`)];
+
+        const rowsForExport = [];
+        const csvLines = [];
+        let totalWeeklyMinutes = 0;
+
+        items.forEach((item) => {
+          const weeklyMinutes = item.timesPerWeek * item.minutes;
+          totalWeeklyMinutes += weeklyMinutes;
+
+          const date = new Date(start);
+          const columns = [];
+          for (let index = 0; index < weeks; index += 1) {
+            const weekDate = new Date(date);
+            weekDate.setDate(date.getDate() + index * 7);
+            const day = toISODate(weekDate);
+            columns.push(`${item.name} target ${item.timesPerWeek}x per week on ${day} at ${reminder}`);
+          }
+
+          rowsForExport.push([
+            item.name,
+            item.timesPerWeek,
+            item.minutes,
+            weeklyMinutes,
+            reminder,
+            ...columns,
+          ]);
+          csvLines.push([
+            escCsv(item.name),
+            escCsv(item.timesPerWeek),
+            escCsv(item.minutes),
+            escCsv(weeklyMinutes),
+            escCsv(reminder),
+            ...columns.map((col) => escCsv(col)),
+          ].join(","));
+        });
+
+        const metaRows = [
+          ["module_version", TEMPLATE_VERSION],
+          ["target_query", manifest.target_query || "habit tracker spreadsheet template"],
+          ["start_date", startText],
+          ["tracking_weeks", weeks],
+        ];
+
+        const csvData = [
+          header.map(escCsv).join(","),
+          ...csvLines,
+          "",
+          "# meta",
+          ...metaRows.map((row) => row.map(escCsv).join(",")),
+        ].join("\n");
+
+        outputRows = rowsForExport;
+        habitCountEl.textContent = String(items.length);
+        weeklyMinutesEl.textContent = String(totalWeeklyMinutes);
+        status.textContent = `Template ready. ${items.length} habits for ${weeks} weeks.`;
+        preview.textContent = csvData;
+
+        trackHabitTrackerEvent("habit_tracker_template_completion", {
+          habit_count: items.length,
+          tracking_weeks: weeks,
+          module_version: TEMPLATE_VERSION,
+          reminder_time: reminder,
+          use_path: "no_login_generation",
+        });
+      }
+
+      function setLoading(button, nextText, doneText) {
+        button.disabled = true;
+        const original = button.textContent;
+        button.textContent = nextText;
+        setTimeout(() => {
+          button.textContent = original;
+          button.disabled = false;
+        }, 900);
+      }
+
+      function copyCsv() {
+        if (!preview.textContent || preview.textContent === "No output yet.") {
+          status.textContent = "Generate a template first.";
+          return;
+        }
+        navigator.clipboard.writeText(preview.textContent).then(() => {
+          setLoading(copyBtn, "Copied", "Copy CSV to clipboard");
+          trackHabitTrackerEvent("habit_tracker_template_export", { intent: "copy_csv", habit_count: outputRows.length });
+        }).catch(() => {
+          status.textContent = "Copy blocked by browser. Use download instead.";
+        });
+      }
+
+      function downloadCsv() {
+        if (!preview.textContent || preview.textContent === "No output yet.") {
+          status.textContent = "Generate a template first.";
+          return;
+        }
+        const blob = new Blob([preview.textContent], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "habit-tracker-template.csv";
+        link.click();
+        URL.revokeObjectURL(url);
+        trackHabitTrackerEvent("habit_tracker_template_export", {
+          intent: "download_csv",
+          habit_count: outputRows.length,
+          tracking_weeks: Number.parseInt(weekCount.value || "4", 10),
+          template_version: TEMPLATE_VERSION,
+        });
+      }
+
+      function trackPaidClick() {
+        const offerSlug = paidOfferCta.getAttribute("data-offer") || "habit-tracker-workbook";
+        const offerLocation = paidOfferCta.getAttribute("data-offer-location") || "tool_page";
+        const priceUsd = Number(paidOfferCta.getAttribute("data-price-usd") || 9);
+        trackHabitTrackerEvent("habit_tracker_paid_offer_click", {
+          offer_slug: offerSlug,
+          offer_location: offerLocation,
+          price_usd: priceUsd,
+          payment_type: "checkout_product",
+        });
+        trackHabitTrackerEvent("habit_tracker_checkout_start", {
+          offer_slug: offerSlug,
+          offer_location: offerLocation,
+          price_usd: priceUsd,
+        });
+      }
+
+      if (!startDate.value) {
+        const now = new Date();
+        startDate.value = toISODate(now);
+      }
+
+      generateBtn.addEventListener("click", function () {
+        setLoading(generateBtn, "Building", "Build tracker template");
+        buildOutput();
+      });
+      copyBtn.addEventListener("click", copyCsv);
+      downloadBtn.addEventListener("click", downloadCsv);
+      paidOfferCta.addEventListener("click", trackPaidClick);
+
+      actionButtons.forEach((button) => {
+        if (button !== null && button !== paidOfferCta) {
+          button.setAttribute("aria-label", "Action button");
+        }
+      });
+
+      habitList.value = [
+        "Read 20 pages,3,15",
+        "Walk 30 min,5,30",
+        "Drink water,7,5",
+      ].join("\n");
+    </script>
+  </body>
+</html>

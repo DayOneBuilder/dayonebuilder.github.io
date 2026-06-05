@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-06-05",
+  "updated_at": "2026-05-27",
   "name": "DayOneBuilder Agent Magnet Registry",
   "homepage": "https://dayonebuilder.online/",
   "primary_entrypoint": "https://dayonebuilder.online/dob-task-resolver/",
@@ -161,23 +161,6 @@
   ],
   "modules": [
     {
-      "id": "event-budget-template-excel",
-      "title": "Event Budget Template In Excel",
-      "status": "installable",
-      "module_type": "workbook",
-      "agent_task_phrase": "Build an event budget template in Excel with totals, assumptions, and export steps.",
-      "human_task_phrase": "I need an event budget template in Excel.",
-      "install_or_call_path": "Open https://dayonebuilder.online/how-to-create-event-budget-template-in-excel/, enter your rows, generate a summary, then download the CSV for Excel.",
-      "source_url": "https://dayonebuilder.online/how-to-create-event-budget-template-in-excel/",
-      "trust_evidence": [
-        "official template source links for baseline reference",
-        "versioned module manifest",
-        "explicit calculation assumptions on the page",
-        "qualified completion and export/save events"
-      ],
-      "adoption_metric": "event_budget_tool_completion, event_budget_export_intent, checkout_starts, paid_cta_click"
-    },
-    {
       "id": "dob-task-resolver",
       "title": "DOB Task Resolver",
       "status": "primary",
@@ -194,25 +177,20 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "pet-care-checklist-template",
-      "title": "Pet Care Checklist Template",
-      "status": "primary",
+      "id": "habit-tracker-spreadsheet-template",
+      "title": "Habit Tracker Spreadsheet Template",
+      "status": "secondary",
       "module_type": "template",
-      "agent_task_phrase": "Create a usable pet care checklist template for handoff, sitter shifts, or travel care.",
-      "module_url": "https://dayonebuilder.online/pet-care-checklist-template/",
-      "module_manifest": "https://dayonebuilder.online/collections/pet-care-checklist-template.json",
-      "install_or_call_path": "Open https://dayonebuilder.online/pet-care-checklist-template/, fill the form, then copy or download the checklist.",
+      "agent_task_phrase": "Create a habit tracker spreadsheet template and export/share it quickly.",
+      "module_url": "https://dayonebuilder.online/habit-tracker-spreadsheet-template/",
+      "install_or_call_path": "Open https://dayonebuilder.online/habit-tracker-spreadsheet-template/, set your habit lines, click Build tracker template, then Download CSV or copy the CSV output.",
       "proof_evidence": [
-        "source-first references for pet care task structure",
-        "in-page generated checklist output",
-        "save/export and install intent telemetry",
-        "paid CTA path and click event"
+        "No-login template generation on page",
+        "official template references linked as source checks",
+        "copy/download events for install/save intent",
+        "paid workbook checkout CTA exposed from the module page"
       ],
-      "paid_path": {
-        "title": "$9 pet care handoff checklist",
-        "checkout_url": "https://checkout.dayonebuilder.online/products"
-      },
-      "adoption_metric": "qualified completion, save_or_export_click, paid_cta_click, returning use"
+      "adoption_metric": "collection_json_hit, habit_tracker_template_completion, habit_tracker_template_export, habit_tracker_paid_offer_click, habit_tracker_checkout_start"
     }
   ],
   "archived_internal_modules": {
