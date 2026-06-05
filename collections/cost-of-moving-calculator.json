@@ -5,17 +5,34 @@
   "title": "Cost of Moving Calculator",
   "summary": "Small moving-budget calculator with export intent and paid checklist bridge for household moves.",
   "module_type": "calculator",
-  "task_aliases": [
-    "cost of moving calculator",
-    "move budget calculator",
-    "moving cost estimate",
-    "household move cost",
-    "diy moving budget",
-    "moving expense estimate"
-  ],
-  "module_manifest": {
-    "id": "cost-of-moving-calculator",
-    "version": "1.0.0",
+    "task_aliases": [
+        "cost of moving calculator",
+        "move budget calculator",
+        "moving cost estimate",
+        "household move cost",
+        "diy moving budget",
+        "moving expense estimate"
+    ],
+    "entries": [
+        {
+            "id": "cost-of-moving-calculator",
+            "title": "Cost of Moving Calculator",
+            "task_aliases": [
+                "cost of moving calculator",
+                "move budget calculator",
+                "moving expense estimate",
+                "moving checklist budget"
+            ],
+            "selected_source_url": "https://dayonebuilder.online/cost-of-moving-calculator/",
+            "first_action": "Open the calculator, enter room count, distance, move model, labor, supplies, and setup costs, then run Estimate cost now.",
+            "smoke_test": "Use the default values and verify that a budget range, line-item breakdown, and Export CSV action appear.",
+            "proof_signal": "Includes official budgeting references, measurable completion/export events, and a paid checklist bridge.",
+            "fallback": "For a binding quote, compare multiple licensed movers and use consumer finance budgeting worksheets before signing a contract."
+        }
+    ],
+    "module_manifest": {
+        "id": "cost-of-moving-calculator",
+        "version": "1.0.0",
     "status": "installable",
     "source_url": "https://dayonebuilder.online/cost-of-moving-calculator/",
     "license": "See inline content and official references; no ownership lock-ins.",
