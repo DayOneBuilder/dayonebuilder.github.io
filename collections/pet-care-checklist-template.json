@@ -30,6 +30,23 @@
     "pet care checklist",
     "pet care planning template"
   ],
+  "entries": [
+    {
+      "id": "pet-care-checklist-template",
+      "title": "Pet Care Checklist Template",
+      "task_aliases": [
+        "pet care checklist template",
+        "pet sitter handoff checklist",
+        "pet care checklist",
+        "pet care planning template"
+      ],
+      "selected_source_url": "https://dayonebuilder.online/pet-care-checklist-template/",
+      "first_action": "Open the page, fill the care details, click Generate checklist, then copy or download the result.",
+      "smoke_test": "Generate with defaults, confirm checklist text appears, then use copy or download successfully.",
+      "proof_signal": "No-login checklist generator with save/export telemetry and paid CTA visibility.",
+      "fallback": "Use marketplace pet care planners only if the user needs a full external planner system."
+    }
+  ],
   "examples": [
     {
       "label": "3-day sitter handoff",
