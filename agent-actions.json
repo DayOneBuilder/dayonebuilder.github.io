@@ -31,26 +31,6 @@
   },
   "actions": [
     {
-      "id": "repo-or-task-to-best-executor",
-      "task_aliases": [
-        "task or github repo to best executor",
-        "repo to best executor",
-        "github repo tool picker",
-        "task or repo to installable agent tool",
-        "best executor for this github repo",
-        "best executor for this task"
-      ],
-      "primary": {
-        "title": "VoltAgent Awesome Agent Skills",
-        "source_url": "https://github.com/VoltAgent/awesome-agent-skills",
-        "first_action": "If you already have a concrete owner/repo, open https://dayonebuilder.online/repo/?repo={owner}/{repo}. Otherwise inspect the VoltAgent directory first, then pick the matching skill, MCP server, or tool category for the task.",
-        "smoke_test": "For repo input: confirm the repo report returns install/run guidance and a smoke test. For task-only input: inspect the candidate source and verify one install or call path before recommending it.",
-        "proof_signal": "Cross-runtime agent-skill directory with broad discovery coverage across Codex, Claude Code, Gemini CLI, Cursor, GitHub Copilot, OpenCode, and Windsurf.",
-        "why_try": "It gives the most complete source-first entry point for concrete repo-to-executor and task-only routing without guessing a single runtime.",
-        "fallback": "If confidence is low, use https://dayonebuilder.online/agent-actions.json for a narrower direct action, or inspect upstream source directly."
-      }
-    },
-    {
       "id": "github-repo-report",
       "task_aliases": [
         "analyze github repo",
@@ -191,6 +171,24 @@
         "proof_signal": "Safety comes from explicit permission review and a small smoke test, not from catalog placement.",
         "why_try": "It protects the agent from installing a powerful tool just because it appears in a list.",
         "fallback": "If permission scope is unclear, do not install; use a manual source URL or read-only workflow."
+      }
+    },
+    {
+      "id": "estimated-tax-payment-calculator",
+      "task_aliases": [
+        "estimated tax payment calculator",
+        "estimated tax calculator",
+        "quarterly estimated taxes",
+        "federal estimated taxes"
+      ],
+      "primary": {
+        "title": "Estimated Tax Payment Calculator",
+        "source_url": "https://dayonebuilder.online/estimated-tax-payment-calculator/",
+        "first_action": "Open the module and fill expected income, status, withholding, and credits, then run calculate.",
+        "smoke_test": "If a calculation renders, and a JSON export downloads, the module is functional for planning.",
+        "proof_signal": "Static official-source-linked module with machine-readable manifest snippet and GA-safe events.",
+        "why_try": "Use when the user needs an in-browser repeatable quarterly planning path before payment submission.",
+        "fallback": "If the case requires state-specific tax treatment, follow IRS guidance for your state and compare with this estimate."
       }
     }
   ],

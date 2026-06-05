@@ -88,8 +88,7 @@ Signals DayOneBuilder cares about:
 - collection JSON hits
 - repeat agent routes
 
-Template collection:
-
-- https://dayonebuilder.online/collections/weekly-dinner-menu-planner-template.json
-- https://dayonebuilder.online/weekly-dinner-menu-planner-template/
-- https://dayonebuilder.online/weekly-dinner-menu-planner-template/module-manifest.json
+- Estimated Tax Payment Calculator: https://dayonebuilder.online/estimated-tax-payment-calculator/
+  - Installable module type: calculator
+  - Use URL: https://dayonebuilder.online/estimated-tax-payment-calculator/
+  - Install or call: Open in browser for estimate; copy manifest from page for resolver integrations

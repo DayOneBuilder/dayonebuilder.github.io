@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "estimated-tax-payment-calculator",
+  "title": "Estimated Tax Payment Calculator",
+  "summary": "Small reusable module for tax-focused estimated payment planning with export/save intent and optional paid worksheet path.",
+  "task_aliases": [
+    "estimated tax payment calculator",
+    "estimated tax calculator",
+    "quarterly estimated taxes",
+    "tax payment schedule",
+    "estimated tax worksheet"
+  ],
+  "selection_rule": "Use this module when a user needs an in-browser estimated quarterly federal tax planner without writing custom glue code.",
+  "entries": [
+    {
+      "id": "estimated-tax-payment-calculator-module",
+      "title": "Estimated Tax Payment Calculator",
+      "task_aliases": [
+        "estimated tax payment calculator",
+        "quarterly estimated taxes",
+        "federal estimated tax tool"
+      ],
+      "selected_source_url": "https://dayonebuilder.online/estimated-tax-payment-calculator/",
+      "first_action": "Open https://dayonebuilder.online/estimated-tax-payment-calculator/ and run the tool with expected annual income, withholdings, and credits.",
+      "smoke_test": "Fill inputs and verify the estimate and quarterly schedule render; then export JSON and confirm download starts.",
+      "proof_signal": "Static manifest plus clear IRS references and analytics hooks for qualified completion, save/install intent, and paid CTA interaction.",
+      "fallback": "If your process requires filing-specific tax rules, use the linked IRS Form 1040-ES guidance and then return to this module with verified values.",
+      "module_type": "calculator",
+      "install_or_call_path": "Use https://dayonebuilder.online/collections/estimated-tax-payment-calculator.json and copy module_manifest to your resolver layer.",
+      "manifest": {
+        "id": "estimated-tax-payment-calculator",
+        "version": "1.0.0",
+        "module_type": "calculator",
+        "title": "Estimated Tax Payment Calculator",
+        "entrypoint_url": "https://dayonebuilder.online/estimated-tax-payment-calculator/",
+        "agent_task_phrase": "An AI agent needs estimated tax payment calculator without writing fragile one-off glue code.",
+        "status": "primary",
+        "adoption_metric": "qualified_agent_uses, resolver_calls, package_downloads",
+        "paid_offer_or_subscription_path": "https://checkout.dayonebuilder.online/products/estimated-tax-worksheet",
+        "proof_evidence": [
+          "official_sources",
+          "qualified_completion_event",
+          "export_save_events",
+          "paid_cta_path"
+        ]
+      }
+    }
+  ]
+}

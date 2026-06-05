@@ -28,18 +28,18 @@
       "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly."
     },
     {
-      "slug": "weekly-dinner-menu-planner-template",
-      "title": "Weekly Dinner Menu Planner Template",
-      "json_url": "https://dayonebuilder.online/collections/weekly-dinner-menu-planner-template.json",
-      "page_url": "https://dayonebuilder.online/weekly-dinner-menu-planner-template/",
+      "slug": "estimated-tax-payment-calculator",
+      "title": "Estimated Tax Payment Calculator",
+      "json_url": "https://dayonebuilder.online/collections/estimated-tax-payment-calculator.json",
+      "page_url": "https://dayonebuilder.online/collections/estimated-tax-payment-calculator/",
       "task_aliases": [
-        "weekly dinner menu planner template",
-        "weekly dinner planner template",
-        "meal planning template",
-        "dinner menu planner"
+        "estimated tax payment calculator",
+        "estimated tax calculator",
+        "estimated quarterly taxes",
+        "quarterly tax payment calculator"
       ],
-      "proof_signal": "Direct local planner output plus explicit artifact/copy/click intent events and versioned manifest.",
-      "fallback": "If spreadsheet-native workflows are required, use official planner templates from Zoho, Spreadsheet123, or similar."
+      "proof_signal": "Use when the task requires a reusable estimated-tax planning module with export and saved path.",
+      "fallback": "If no estimated tax module fits, use agent-actions and the resolver workflow directly."
     }
   ]
 }

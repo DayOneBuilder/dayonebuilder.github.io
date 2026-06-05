@@ -177,20 +177,26 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "weekly-dinner-menu-planner-template",
-      "title": "Weekly Dinner Menu Planner Template",
-      "status": "installable",
-      "module_type": "template",
-      "agent_task_phrase": "An AI agent needs to weekly dinner menu planner template without writing fragile one-off glue code.",
-      "module_url": "https://dayonebuilder.online/weekly-dinner-menu-planner-template/",
-      "install_or_call_path": "Open https://dayonebuilder.online/weekly-dinner-menu-planner-template/, set inputs, generate plan, and download CSV to export the artifact.",
+      "id": "estimated-tax-payment-calculator",
+      "title": "Estimated Tax Payment Calculator",
+      "status": "primary",
+      "module_type": "calculator",
+      "agent_task_phrase": "An AI agent needs estimated tax payment calculator without writing fragile one-off glue code.",
+      "module_url": "https://dayonebuilder.online/estimated-tax-payment-calculator/",
+      "install_or_call_path": "Use https://dayonebuilder.online/estimated-tax-payment-calculator/?income={annual_income}&status={filing_status} and export JSON for downstream workflow steps. No account/login needed for basic use.",
       "proof_evidence": [
-        "versioned manifest file",
-        "measurable completion/download events",
-        "discoverable collection JSON entry",
-        "visible paid template/export path"
+        "official IRS references are linked on the page",
+        "qualified completion event with non-null income and status",
+        "export/save/install intent events",
+        "paid template checkout path for optional workflow upgrade"
       ],
-      "adoption_metric": "collection_json_hit, qualified_tool_completion, module_install_or_save_intent, paid_cta_click"
+      "adoption_metric": "qualified_agent_uses, resolver_calls, package_downloads, dependent_repos",
+      "primary_metrics": [
+        "qualified_tool_completion",
+        "tool_export_intent",
+        "tool_save_intent",
+        "tool_paid_cta_click"
+      ]
     }
   ],
   "archived_internal_modules": {

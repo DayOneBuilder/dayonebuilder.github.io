@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Estimated Tax Payment Calculator | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for estimated tax payment calculator, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/estimated-tax-payment-calculator/" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      window.__taxToolAnalyticsReady = false;
+
+      window.__taxToolTrack = function trackTaxToolEvent(eventName, params = {}) {
+        if (!window.__taxToolAnalyticsReady || typeof window.gtag !== "function") {
+          return;
+        }
+        window.gtag("event", eventName, params);
+      };
+
+      function initTaxToolAnalytics() {
+        window.__taxToolAnalyticsReady = true;
+        gtag("js", new Date());
+        gtag("config", "G-KQMLYS3VVE");
+        __taxToolTrack("estimated_tax_tool_open", {
+          event_category: "dayonebuilder_tool",
+          tool_name: "estimated_tax_payment_calculator",
+          source: "public_page"
+        });
+      }
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"
+      onload="initTaxToolAnalytics()"
+      onerror="window.__taxToolAnalyticsReady = false"
+    ></script>
+
+    <style>
+      :root {
+        --bg: #0a0f1a;
+        --surface: rgba(14, 20, 38, 0.8);
+        --line: rgba(255, 255, 255, 0.14);
+        --ink: #edf2f7;
+        --muted: #b3bed1;
+        --accent: #7dc4ff;
+        --accent-2: #5ee6cc;
+        --danger: #ff7f84;
+        --radius: 16px;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background: radial-gradient(1400px 720px at 12% -10%, #173056 0%, transparent 52%),
+          radial-gradient(1200px 700px at 85% 4%, #1f2550 0%, transparent 50%),
+          linear-gradient(135deg, #04080f, #0f1728 40%, #05080f);
+        font-family: "Poppins", "Avenir Next", "Trebuchet MS", sans-serif;
+        line-height: 1.5;
+      }
+
+      .wrap {
+        width: min(1100px, calc(100% - 2.25rem));
+        margin: 0 auto;
+        padding: 20px 0 44px;
+      }
+
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 22px;
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      .topline a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: clamp(16px, 3vw, 28px);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 20px 45px rgba(3, 8, 18, 0.35);
+      }
+
+      .hero { margin-bottom: 14px; }
+      h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        line-height: 1.05;
+      }
+
+      .sub {
+        margin-top: 10px;
+        color: var(--muted);
+        max-width: 68ch;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 14px;
+        margin-top: 18px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      .row-two {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      label {
+        display: block;
+        color: #dae2ee;
+        font-size: 0.92rem;
+        margin: 0 0 6px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--ink);
+        padding: 10px 12px;
+        min-height: 42px;
+        font: inherit;
+      }
+
+      input:focus,
+      select:focus {
+        outline: 2px solid rgba(125, 196, 255, 0.45);
+      }
+
+      .helper {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.84rem;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+
+      button,
+      .ghost-link {
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 10px 14px;
+        font: inherit;
+        font-weight: 600;
+        color: #06080d;
+        background: #eef4ff;
+        cursor: pointer;
+      }
+
+      .ghost-link {
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--ink);
+      }
+
+      .muted-btn {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--ink);
+      }
+
+      .result {
+        display: grid;
+        gap: 12px;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .metric h2 {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .metric p {
+        margin: 8px 0 0;
+        color: var(--muted);
+      }
+
+      .big {
+        color: var(--accent-2);
+        font-size: 2rem;
+        margin-top: 6px;
+        display: inline-block;
+      }
+
+      .schedule {
+        margin-top: 4px;
+        width: 100%;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.93rem;
+      }
+
+      th, td {
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        padding: 8px 4px;
+      }
+
+      th {
+        color: #dfe8f2;
+        font-size: 0.84rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+
+      td { color: #ebeff8; }
+
+      .footer-note {
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .source-list {
+        margin-top: 12px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .source-list a {
+        color: #9cc9ff;
+        text-decoration: none;
+        word-break: break-word;
+      }
+
+      .fade-in {
+        animation: fadeIn 400ms ease both;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .stamp {
+        animation: glow 2.4s ease-in-out infinite alternate;
+        border: 1px solid rgba(94, 230, 204, 0.45);
+        border-radius: 12px;
+        padding: 10px;
+        background: rgba(94, 230, 204, 0.08);
+      }
+
+      @keyframes glow {
+        from { box-shadow: 0 0 0 rgba(94, 230, 204, 0.12); }
+        to { box-shadow: 0 0 12px rgba(94, 230, 204, 0.25); }
+      }
+
+      @media (max-width: 980px) {
+        .layout { grid-template-columns: 1fr; }
+        .topline { flex-direction: column; }
+        .row-two { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="topline">
+        <a href="/">DayOneBuilder</a>
+        <span><strong>Exact target:</strong> estimated tax payment calculator</span>
+      </div>
+
+      <main class="card hero fade-in">
+        <p class="helper" style="margin: 0 0 8px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.73rem;">Estimated Tax Planner</p>
+        <h1>Estimated tax payment calculator</h1>
+        <p class="sub">
+          Enter your expected income, withholdings, and tax credits to estimate federal estimated tax owed and quarter-by-quarter payment plan. This is a planning estimate only.
+          For official filing math, verify against IRS form instructions before payment.
+        </p>
+
+        <div class="layout">
+          <section class="grid card" style="padding: 16px;" aria-labelledby="inputs-title">
+            <h2 id="inputs-title">Inputs</h2>
+            <label for="status">Filing status</label>
+            <select id="status" aria-label="Filing status">
+              <option value="single">Single</option>
+              <option value="married">Married filing jointly</option>
+              <option value="hoh">Head of household</option>
+              <option value="mfs">Married filing separately</option>
+            </select>
+
+            <div class="row-two">
+              <div>
+                <label for="income">Expected annual income ($)</label>
+                <input id="income" inputmode="decimal" type="number" min="0" step="0.01" value="120000" />
+                <p class="helper">Total expected AGI for the tax year.</p>
+              </div>
+              <div>
+                <label for="deductions">Estimated tax-deductible deductions beyond standard ($)</label>
+                <input id="deductions" inputmode="decimal" type="number" min="0" step="0.01" value="0" />
+                <p class="helper">Student loan interest, charitable carryover, etc.</p>
+              </div>
+            </div>
+
+            <div class="row-two">
+              <div>
+                <label for="withholding">Federal withholding to date ($)</label>
+                <input id="withholding" inputmode="decimal" type="number" min="0" step="0.01" value="12000" />
+                <p class="helper">Payroll withholding already in the year.</p>
+              </div>
+              <div>
+                <label for="payments">Other payments made this year ($)</label>
+                <input id="payments" inputmode="decimal" type="number" min="0" step="0.01" value="0" />
+                <p class="helper">Include any quarterly estimates already submitted.</p>
+              </div>
+            </div>
+
+            <div class="row-two">
+              <div>
+                <label for="credits">Estimated non-refundable credits ($)</label>
+                <input id="credits" inputmode="decimal" type="number" min="0" step="0.01" value="0" />
+                <p class="helper">Child, education, or other credits you can reasonably expect.</p>
+              </div>
+              <div>
+                <label for="priorTax">Prior-year total tax (optional, $)</label>
+                <input id="priorTax" inputmode="decimal" type="number" min="0" step="0.01" value="0" />
+                <p class="helper">Used only for safe-harbor check in planning.</p>
+              </div>
+            </div>
+
+            <div class="row-two">
+              <div>
+                <label for="currentQuarter">Current quarter</label>
+                <select id="currentQuarter" aria-label="Current quarter">
+                  <option value="1">1 (Q1)</option>
+                  <option value="2">2 (Q2)</option>
+                  <option value="3">3 (Q3)</option>
+                  <option value="4" selected>4 (Q4)</option>
+                </select>
+                <p class="helper">Use current quarter to adjust remaining payment guidance.</p>
+              </div>
+              <div>
+                <label for="asOf">Tax year</label>
+                <input id="asOf" type="number" min="2024" step="1" value="2026" />
+                <p class="helper">Only for label/date rendering.</p>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button id="run-calc" type="button">Calculate estimate</button>
+              <button id="copy-manifest" class="muted-btn" type="button">Copy module manifest</button>
+              <button id="export-result" class="muted-btn" type="button">Export JSON</button>
+            </div>
+            <p class="helper" id="validationHint"></p>
+          </section>
+
+          <section class="result fade-in" aria-live="polite">
+            <article class="metric">
+              <h2>Estimated annual federal tax</h2>
+              <p class="big" id="estTax">$0.00</p>
+              <p id="taxMethod" class="footer-note"></p>
+            </article>
+
+            <article class="metric">
+              <h2>Remaining estimated tax to pay</h2>
+              <p class="big" id="remainingTax">$0.00</p>
+              <p class="footer-note">If safe-harbor is enabled, this value uses the larger of annual estimate and prior-year-based fallback.</p>
+            </article>
+
+            <article class="metric">
+              <h2>Recommended schedule</h2>
+              <p class="helper">Rough quarterly targets based on your current inputs. Round up to the nearest dollar before payment submission.</p>
+              <div class="schedule">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Due date</th>
+                      <th>Quarter</th>
+                      <th>Estimated payment</th>
+                    </tr>
+                  </thead>
+                  <tbody id="scheduleBody"></tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="metric stamp">
+              <h2>Important</h2>
+              <p id="notice">Use IRS forms and due dates for your exact filing year before paying.</p>
+              <p class="footer-note">This output is a planning estimate and not tax advice. Use it only as a starting point.</p>
+            </article>
+          </section>
+        </div>
+
+        <section class="card" style="margin-top: 16px;" aria-labelledby="paid-paths-title">
+          <h2 id="paid-paths-title">Need faster workflow setup?</h2>
+          <p class="sub">
+            Use the $9 estimated-tax worksheet for a reusable template with pre-filled filing-status fields and notes. This is for users who want a faster repeatable process.
+          </p>
+          <div class="actions">
+            <a id="paidCta" class="ghost-link" href="https://checkout.dayonebuilder.online/products/estimated-tax-worksheet" target="_blank" rel="noopener noreferrer">Get paid template</a>
+            <button id="save-intent" class="muted-btn" type="button">Save install intent</button>
+          </div>
+        </section>
+
+        <section class="card" style="margin-top: 16px;" aria-labelledby="sources-title">
+          <h2 id="sources-title">Source references</h2>
+          <p class="sub">For high-trust tax computations, we linked these authoritative references:</p>
+          <div class="source-list">
+            <a href="https://www.irs.gov/forms-pubs/about-form-1040-es" target="_blank" rel="noopener noreferrer">About Form 1040-ES</a>
+            <a href="https://www.irs.gov/businesses/small-businesses-self-employed/estimated-taxes" target="_blank" rel="noopener noreferrer">IRS Estimated taxes</a>
+            <a href="https://www.irs.gov/pub/irs-pdf/f1040es.pdf" target="_blank" rel="noopener noreferrer">IRS Form 1040-ES PDF</a>
+            <a href="https://support.taxslayerpro.com/hc/en-us/articles/9446205909530-ProWeb-IRS-Form-1040-ES-Estimated-Payments-Calculator" target="_blank" rel="noopener noreferrer">TaxSlayer Pro payment guidance</a>
+            <a href="https://taxquarterly.com/" target="_blank" rel="noopener noreferrer">Tax Quarterly workflow reference</a>
+            <a href="https://www.reddit.com/r/tax/comments/1rf7rx1/estimated_quarterly_tax_payment_confusion/" target="_blank" rel="noopener noreferrer">Tax payer discussion</a>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script type="application/json" id="module-manifest">
+      {
+        "id": "estimated-tax-payment-calculator",
+        "version": "1.0.0",
+        "module_type": "calculator",
+        "title": "Estimated Tax Payment Calculator",
+        "status": "primary",
+        "slug": "estimated-tax-payment-calculator",
+        "entrypoint_url": "https://dayonebuilder.online/estimated-tax-payment-calculator/",
+        "agent_task_phrase": "An AI agent needs estimated tax payment calculator without writing fragile one-off glue code.",
+        "install_or_call_path": "Open https://dayonebuilder.online/estimated-tax-payment-calculator/?income={annual_income}&status={filing_status} and use it directly, or copy the page manifest into your resolver docs. No account needed for basic use.",
+        "proof_evidence": [
+          "Official IRS references are linked in source references",
+          "Manifest fields are static and machine-readable",
+          "Qualified completion and export/save events are implemented for platform analytics"
+        ],
+        "license": "MIT",
+        "pricing": {
+          "trial": "free_estimate",
+          "paid_upgrade": "https://checkout.dayonebuilder.online/products/estimated-tax-worksheet",
+          "paid_path_type": "template"
+        }
+      }
+    </script>
+
+    <script>
+      const TAX_BRACKETS = {
+        single: [
+          [11600, 0.10],
+          [47150, 0.12],
+          [100525, 0.22],
+          [191950, 0.24],
+          [243725, 0.32],
+          [609350, 0.35],
+          [Infinity, 0.37]
+        ],
+        married: [
+          [23200, 0.10],
+          [94300, 0.12],
+          [201050, 0.22],
+          [383900, 0.24],
+          [487450, 0.32],
+          [731200, 0.35],
+          [Infinity, 0.37]
+        ],
+        hoh: [
+          [16550, 0.10],
+          [63100, 0.12],
+          [100500, 0.22],
+          [191950, 0.24],
+          [243700, 0.32],
+          [609350, 0.35],
+          [Infinity, 0.37]
+        ],
+        mfs: [
+          [11600, 0.10],
+          [47150, 0.12],
+          [100525, 0.22],
+          [191950, 0.24],
+          [243725, 0.32],
+          [365100, 0.35],
+          [Infinity, 0.37]
+        ]
+      };
+
+      const STANDARD_DEDUCTION = {
+        single: 14600,
+        married: 29200,
+        hoh: 21900,
+        mfs: 14600
+      };
+
+      const STATUS_TEXT = {
+        single: "Single",
+        married: "Married filing jointly",
+        hoh: "Head of household",
+        mfs: "Married filing separately"
+      };
+
+      const dueDateLabel = (quarter, year) => {
+        const map = {
+          1: `April 15, ${year}`,
+          2: `June 15, ${year}`,
+          3: `September 15, ${year}`,
+          4: `January 15, ${Number(year) + 1}`
+        };
+        return map[quarter] || "TBD";
+      };
+
+      const taxInputFields = [
+        "income",
+        "deductions",
+        "withholding",
+        "payments",
+        "credits",
+        "priorTax"
+      ];
+
+      const money = (value) => `$${(Number(value) || 0).toFixed(2)}`;
+
+      const calculateTax = (income, status) => {
+        const brackets = TAX_BRACKETS[status] || TAX_BRACKETS.single;
+        let taxable = Math.max(0, income);
+        let tax = 0;
+        let floor = 0;
+
+        for (const [cap, rate] of brackets) {
+          const taxableInBracket = Math.max(0, Math.min(taxable, cap - floor));
+          tax += taxableInBracket * rate;
+          floor = cap;
+          if (income <= cap) {
+            break;
+          }
+        }
+
+        return Math.max(0, tax);
+      };
+
+      const buildSchedule = (remainingTax, currentQuarter, year, paidSoFar) => {
+        const cumulativePercent = [0.25, 0.5, 0.75, 1];
+        const remainingByQuarter = [];
+        let paid = Number(paidSoFar) || 0;
+        for (let i = 0; i < 4; i++) {
+          const targetQuarter = i + 1;
+          const cumulativeTarget = remainingTax * cumulativePercent[i];
+          const cumulativeNeed = Math.max(0, cumulativeTarget - paid);
+          let previous = i === 0 ? 0 : remainingByQuarter[i - 1].cumulativeRemaining;
+          const dueThisQuarter = Math.max(0, cumulativeNeed - previous);
+          remainingByQuarter.push({
+            quarter: targetQuarter,
+            date: dueDateLabel(targetQuarter, year),
+            due: dueThisQuarter,
+            cumulativeRemaining: cumulativeNeed
+          });
+          paid += dueThisQuarter;
+        }
+
+        return remainingByQuarter.filter(item => item.quarter >= Number(currentQuarter));
+      };
+
+      const showValidation = (message = "") => {
+        const validationEl = document.getElementById("validationHint");
+        validationEl.textContent = message;
+        validationEl.style.color = message ? "var(--danger)" : "var(--muted)";
+      };
+
+      const runCalculation = () => {
+        const parsed = {};
+        for (const field of taxInputFields) {
+          const raw = Number(document.getElementById(field).value);
+          if (Number.isNaN(raw) || raw < 0) {
+            showValidation("Please fill all numeric fields with non-negative values.");
+            return;
+          }
+          parsed[field] = raw;
+        }
+
+        const status = document.getElementById("status").value;
+        const income = Number(parsed.income || 0);
+        const deductions = Number(parsed.deductions || 0);
+        const withholding = Number(parsed.withholding || 0);
+        const payments = Number(parsed.payments || 0);
+        const credits = Number(parsed.credits || 0);
+        const priorTax = Number(parsed.priorTax || 0);
+        const quarter = Number(document.getElementById("currentQuarter").value || 4);
+        const year = Number(document.getElementById("asOf").value || new Date().getFullYear());
+
+        if (income <= 0) {
+          showValidation("Income must be greater than 0 to calculate a meaningful estimate.");
+          return;
+        }
+
+        showValidation("");
+
+        const standardDeduction = STANDARD_DEDUCTION[status] || STANDARD_DEDUCTION.single;
+        const taxableBase = Math.max(0, income - standardDeduction - deductions);
+        const rawTax = calculateTax(taxableBase, status);
+        const afterCredits = Math.max(0, rawTax - credits);
+        const requiredBaseline = Math.max(0, afterCredits - withholding - payments);
+
+        const priorYearSafety = priorTax > 0 ? Math.max(0, priorTax * 0.9) : 0;
+        const finalRemaining = Math.max(requiredBaseline, priorYearSafety);
+        const schedule = buildSchedule(finalRemaining, quarter, year, 0);
+
+        const table = document.getElementById("scheduleBody");
+        table.innerHTML = "";
+
+        for (const row of schedule) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${row.date}</td><td>Q${row.quarter}</td><td>${money(row.due)}</td>`;
+          table.appendChild(tr);
+        }
+
+        document.getElementById("estTax").textContent = money(rawTax);
+        document.getElementById("remainingTax").textContent = money(finalRemaining);
+        document.getElementById("taxMethod").textContent =
+          `Using ${STATUS_TEXT[status] || "selected"} brackets + standard deduction ${money(standardDeduction)} minus deductions/credits.`;
+
+        const noticeText =
+          `Due date schedule is a planning template. Exact IRS due dates and penalty rules can change by year and taxpayer profile. Verify quarterly timing on the IRS official pages above.`;
+        document.getElementById("notice").textContent = noticeText;
+
+        window.__taxToolTrack("qualified_tool_completion", {
+          event_category: "estimated_tax_module",
+          qualified: income > 0 && withholding >= 0,
+          filing_status: status,
+          estimated_tax: Math.round(rawTax),
+          final_required_tax: Math.round(requiredBaseline),
+          safe_harbor_applied: requiredBaseline < finalRemaining
+        });
+
+        // keep current calculation for export actions
+        const payload = {
+          inputs: {
+            status,
+            income,
+            deductions,
+            withholding,
+            payments,
+            credits,
+            priorTax,
+            quarter,
+            year
+          },
+          outputs: {
+            taxableBase,
+            estimatedAnnualTax: rawTax,
+            remainingEstimate: finalRemaining,
+            safeHarborUsed: requiredBaseline < finalRemaining,
+            schedule
+          }
+        };
+        window.__taxToolLatestResult = payload;
+      };
+
+      const copyManifest = async () => {
+        const manifest = document.getElementById("module-manifest").textContent.trim();
+        try {
+          await navigator.clipboard.writeText(manifest);
+          showValidation("Module manifest copied to clipboard.");
+          window.__taxToolTrack("tool_install_intent", {
+            event_category: "estimated_tax_module",
+            intent: "copy_manifest"
+          });
+        } catch {
+          showValidation("Manifest copy blocked by browser; open page source to copy manually.");
+        }
+      };
+
+      const exportResult = () => {
+        if (!window.__taxToolLatestResult) {
+          runCalculation();
+        }
+        const payload = window.__taxToolLatestResult;
+        if (!payload) {
+          showValidation("Run calculation first before export.");
+          return;
+        }
+
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+        const anchor = document.createElement("a");
+        anchor.href = URL.createObjectURL(blob);
+        anchor.download = "estimated-tax-payment-result.json";
+        anchor.click();
+        URL.revokeObjectURL(anchor.href);
+        window.__taxToolTrack("tool_export_intent", {
+          event_category: "estimated_tax_module",
+          export_format: "json"
+        });
+      };
+
+      const saveIntent = () => {
+        window.__taxToolTrack("tool_save_intent", {
+          event_category: "estimated_tax_module",
+          intent: "save_to_workflow"
+        });
+        showValidation("Save intent recorded. Add this module URL in your workflow docs or resolver list.");
+      };
+
+      const paidCta = document.getElementById("paidCta");
+      paidCta.addEventListener("click", () => {
+        window.__taxToolTrack("tool_paid_cta_click", {
+          event_category: "estimated_tax_module",
+          cta: "estimated_tax_worksheet_9"
+        });
+      });
+
+      document.getElementById("run-calc").addEventListener("click", runCalculation);
+      document.getElementById("copy-manifest").addEventListener("click", copyManifest);
+      document.getElementById("export-result").addEventListener("click", exportResult);
+      document.getElementById("save-intent").addEventListener("click", saveIntent);
+
+      document.getElementById("status").addEventListener("change", runCalculation);
+      for (const field of taxInputFields) {
+        document.getElementById(field).addEventListener("input", runCalculation);
+      }
+      document.getElementById("currentQuarter").addEventListener("change", runCalculation);
+      document.getElementById("asOf").addEventListener("input", runCalculation);
+
+      runCalculation();
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Estimated Tax Payment Calculator",
+        "url": "https://dayonebuilder.online/estimated-tax-payment-calculator/",
+        "description": "A planning calculator for estimated federal tax payments with export and safe harbor context.",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web",
+        "publisher": {
+          "@type": "Organization",
+          "name": "DayOneBuilder"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+  </body>
+</html>
