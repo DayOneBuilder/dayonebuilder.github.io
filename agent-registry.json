@@ -177,21 +177,26 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "scholarship-application-tracker-spreadsheet",
-      "title": "Scholarship Application Tracker Spreadsheet",
-      "status": "primary",
-      "module_type": "template",
-      "agent_task_phrase": "An AI agent needs to scholarship application tracker spreadsheet without writing fragile one-off glue code.",
-      "module_url": "https://dayonebuilder.online/scholarship-application-tracker-spreadsheet/",
-      "module_manifest_url": "https://dayonebuilder.online/collections/scholarship-application-tracker-spreadsheet.json",
-      "install_or_call_path": "Download /scholarship-application-tracker-spreadsheet/scholarship-tracker-template.csv and import into Google Sheets or your spreadsheet app.",
+      "id": "travel-budget-calculator",
+      "title": "Travel Budget Calculator",
+      "status": "active",
+      "module_type": "calculator",
+      "agent_task_phrase": "An AI agent needs a travel budget calculator without writing fragile one-off glue code.",
+      "module_url": "https://dayonebuilder.online/travel-budget-calculator/",
+      "collection_entry_url": "https://dayonebuilder.online/collections/travel-budget-calculator/",
+      "collection_json_url": "https://dayonebuilder.online/collections/travel-budget-calculator.json",
+      "module_manifest_url": "https://dayonebuilder.online/travel-budget-calculator/module-manifest.json",
+      "module_version": "2026.06.05",
+      "module_manifest_for": "personal_finance",
+      "selection_rule": "Use this first for exact travel budget calculator tasks where a reusable estimate + export workflow is requested.",
+      "install_or_call_path": "Open https://dayonebuilder.online/travel-budget-calculator/, set trip inputs, and click Calculate trip budget.",
       "proof_evidence": [
-        "official source links in the public copy",
-        "downloadable template artifact",
-        "save/export and paid-path telemetry",
-        "qualified completion event"
+        "CSV worksheet export",
+        "module manifest and collection listing entries",
+        "event instrumentation for completion/export/install/purchase intent",
+        "official source links in-page"
       ],
-      "adoption_metric": "collection_json_hit, collection_index_hit, qualified_agent_uses"
+      "adoption_metric": "collection_json_hit, qualified_agent_uses, tool_exports, module_manifest_downloads"
     }
   ],
   "archived_internal_modules": {

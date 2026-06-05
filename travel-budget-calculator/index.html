@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Travel Budget Calculator | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Use a fast travel budget calculator to estimate total trip cost and daily spending with a quick downloadable worksheet and a premium template option."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/travel-budget-calculator/" />
+    <link rel="alternate" type="application/json" href="/travel-budget-calculator/module-manifest.json" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      window.__travelBudgetAnalyticsReady = false;
+      window.trackTravelBudgetEvent = function trackTravelBudgetEvent(eventName, params = {}) {
+        if (!window.__travelBudgetAnalyticsReady || typeof window.gtag !== "function") {
+          return;
+        }
+        window.gtag("event", eventName, Object.assign({
+          event_category: "travel_budget_calculator",
+          page: "travel-budget-calculator"
+        }, params));
+      };
+      window.__initTravelBudgetAnalytics = function initTravelBudgetAnalytics() {
+        window.__travelBudgetAnalyticsReady = true;
+        gtag("js", new Date());
+        gtag("config", "G-KQMLYS3VVE");
+      };
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"
+      onload="__initTravelBudgetAnalytics()"
+      onerror="window.__travelBudgetAnalyticsReady = false"
+    ></script>
+    <style>
+      :root {
+        --bg: #070f16;
+        --ink: #ecf7ff;
+        --muted: #9eb3c8;
+        --panel: rgba(10, 24, 35, 0.85);
+        --line: rgba(191, 230, 255, 0.2);
+        --mint: #93f4ce;
+        --amber: #ffd97d;
+        --max: 1020px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: linear-gradient(180deg, #070f16 0%, #071525 45%, #06131e 100%);
+        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+
+      .wrap {
+        width: min(calc(100% - 32px), var(--max));
+        margin: 0 auto;
+        padding: 24px 0 54px;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .back {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .panel {
+        margin-top: 16px;
+        padding: 22px;
+        border-radius: 20px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        min-height: 30px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(147, 244, 206, 0.34);
+        color: var(--mint);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 8px 0 12px;
+        line-height: 1.1;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.2rem);
+      }
+
+      h2 {
+        font-size: 1.45rem;
+      }
+
+      p,
+      li {
+        color: var(--muted);
+      }
+
+      .grid {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      label {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      input {
+        height: 44px;
+        width: 100%;
+        border-radius: 9px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        font: inherit;
+        padding: 0 11px;
+      }
+
+      input:focus {
+        outline: 1px solid var(--mint);
+      }
+
+      .small {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .button-row {
+        margin-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn,
+      .ghost,
+      .copy-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        border-radius: 999px;
+        padding: 0 16px;
+        border: 1px solid transparent;
+        font: inherit;
+        font-weight: 700;
+      }
+
+      .btn {
+        background: linear-gradient(135deg, var(--mint), #c6f7a1);
+        color: #061722;
+        cursor: pointer;
+      }
+
+      .ghost {
+        border-color: var(--line);
+        color: var(--ink);
+        background: transparent;
+      }
+
+      .copy-btn {
+        border-color: var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+      }
+
+      .results {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .result,
+      .offer,
+      .summary,
+      .trust {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 14px;
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .result {
+        min-width: 0;
+      }
+
+      .result-label {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .result-value {
+        color: var(--mint);
+        font-size: 1.8rem;
+        margin-top: 6px;
+        font-weight: 700;
+      }
+
+      .summary-text {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 10px 0 0;
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        background: rgba(0, 0, 0, 0.22);
+        padding: 12px;
+        color: var(--ink);
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .meta span {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 10px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .section-list {
+        margin: 14px 0 0;
+        padding-left: 18px;
+      }
+
+      .section-list li {
+        margin-bottom: 8px;
+      }
+
+      .muted-note {
+        color: var(--amber);
+      }
+
+      @media (max-width: 960px) {
+        .grid,
+        .results {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .wrap {
+          width: min(calc(100% - 16px), var(--max));
+        }
+
+        .panel {
+          padding: 18px;
+          border-radius: 16px;
+        }
+
+        .button-row,
+        .meta,
+        .field {
+          width: 100%;
+        }
+
+        .button-row .btn,
+        .button-row .ghost,
+        .button-row .copy-btn {
+          width: 100%;
+        }
+      }
+    </style>
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Travel Budget Calculator",
+          "url": "https://dayonebuilder.online/travel-budget-calculator/",
+          "applicationCategory": "TravelApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Travel Budget Calculator",
+          "url": "https://dayonebuilder.online/travel-budget-calculator/",
+          "applicationCategory": "TravelApplication",
+          "operatingSystem": "Any",
+          "featureList": [
+            "Trip budget estimation",
+            "CSV worksheet export",
+            "Copyable output summary"
+          ]
+        }
+      ]
+    </script>
+  </head>
+  <body>
+    <main class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <section class="panel" aria-labelledby="calculator-title">
+        <span class="eyebrow">travel budget tool</span>
+        <h1 id="calculator-title">Travel Budget Calculator</h1>
+        <p>
+          Add your trip inputs, get an estimate, then export a worksheet you can paste into your planner.
+          The result is a planning estimate, not financial advice.
+        </p>
+        <div class="meta">
+          <span>Use case: budget planning</span>
+          <span>Goal: faster trip estimate</span>
+          <span>Output: estimated total + CSV</span>
+        </div>
+
+        <div class="grid" aria-label="Travel budget inputs">
+          <label class="field">
+            <span>Travel days</span>
+            <input id="tripDays" type="number" min="1" step="1" value="7" />
+            <small class="small">Number of overnight days for the trip.</small>
+          </label>
+          <label class="field">
+            <span>Travellers</span>
+            <input id="travellers" type="number" min="1" step="1" value="2" />
+            <small class="small">People travelling together.</small>
+          </label>
+          <label class="field">
+            <span>Accommodation per night (USD)</span>
+            <input id="accommodation" type="number" min="0" step="1" value="280" />
+            <small class="small">Hotel/apartment total for the night.</small>
+          </label>
+          <label class="field">
+            <span>Food per person per day (USD)</span>
+            <input id="food" type="number" min="0" step="1" value="45" />
+            <small class="small">Dining, snacks, and drinks.</small>
+          </label>
+          <label class="field">
+            <span>Transport per day (USD)</span>
+            <input id="transport" type="number" min="0" step="1" value="22" />
+            <small class="small">Local rides, parking, transit cards.</small>
+          </label>
+          <label class="field">
+            <span>Activities and entries (USD)</span>
+            <input id="activities" type="number" min="0" step="1" value="190" />
+            <small class="small">Tours, tickets, museum entries.</small>
+          </label>
+          <label class="field">
+            <span>Visa / insurance / fees (USD)</span>
+            <input id="fees" type="number" min="0" step="1" value="85" />
+            <small class="small">Passport fees, travel docs, fixed extras.</small>
+          </label>
+          <label class="field">
+            <span>Contingency buffer (%)</span>
+            <input id="buffer" type="number" min="0" max="50" step="0.1" value="12" />
+            <small class="small">Buffer for cancellations and currency swings.</small>
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button id="calculateBtn" class="btn" type="button">Calculate trip budget</button>
+          <button id="copySummaryBtn" class="copy-btn" type="button">Copy summary text</button>
+          <button id="downloadCsvBtn" class="ghost" type="button">Download CSV worksheet</button>
+          <button id="downloadManifestBtn" class="ghost" type="button">Save module manifest</button>
+        </div>
+
+        <div class="results" aria-label="Budget summary">
+          <article class="result">
+            <div class="result-label">Estimated total budget</div>
+            <strong id="totalBudget" class="result-value">$0.00</strong>
+            <div class="result-label">Includes contingency amount below.</div>
+          </article>
+          <article class="result">
+            <div class="result-label">Estimated per person</div>
+            <strong id="perPerson" class="result-value">$0.00</strong>
+            <div class="result-label">Estimated by splitting total equally.</div>
+          </article>
+          <article class="result">
+            <div class="result-label">Estimated per day budget</div>
+            <strong id="perDay" class="result-value">$0.00</strong>
+            <div class="result-label">Divide total by trip days.</div>
+          </article>
+          <article class="result">
+            <div class="result-label">Contingency amount</div>
+            <strong id="contingencyAmount" class="result-value">$0.00</strong>
+            <div class="result-label">Additional reserve before checkout.</div>
+          </article>
+        </div>
+
+        <section class="summary" aria-label="Copyable output">
+          <h2>Copyable summary</h2>
+          <div id="summaryText" class="summary-text">Set values and run calculation to generate summary text.</div>
+        </section>
+
+        <section class="offer" aria-labelledby="paid-offer-title">
+          <h2 id="paid-offer-title">Need a ready trip budget sheet?</h2>
+          <p>
+            The <strong>Trip Budget Sheet ($9)</strong> is a packaged template for trip planners who want preformatted
+            fields, category tabs, and a clean printable worksheet.
+          </p>
+          <a
+            id="paidCta"
+            class="btn"
+            href="https://checkout.dayonebuilder.online/products/trip-budget-sheet?utm_source=dayonebuilder&utm_medium=travel_budget_calculator&utm_campaign=trip_budget_workflow&utm_content=tool_page"
+            data-offer="trip-budget-sheet"
+            data-offer-location="tool_page"
+            data-price-usd="9"
+          >
+            Buy trip budget sheet
+          </a>
+          <p class="small muted-note">For planning support and custom setup, use checkout support contact on the product page.</p>
+        </section>
+
+        <section class="trust" aria-labelledby="sources-title">
+          <h2 id="sources-title">Reference sources used</h2>
+          <ul class="section-list">
+            <li><a href="https://consumer.gov/system/files/consumer_gov/pdf/1041A_BudgetWorksheet-Fillable.pdf">Consumer.Gov budget worksheet</a></li>
+            <li><a href="https://www.consumerfinance.gov/documents/7276/cfpb_my-new-money-goal_worksheet.pdf">CFPB money goal worksheet</a></li>
+            <li><a href="https://files.consumerfinance.gov/f/documents/cfpb_building_block_activities_analyzing-budgets_guide.pdf">ConsumerFinance.gov budget planning guide</a></li>
+          </ul>
+          <p class="small">
+            We also reference travel budget patterns from public spreadsheet templates (for layout inspiration only).
+          </p>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const currency = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 2,
+      });
+
+      const fields = {
+        tripDays: document.getElementById("tripDays"),
+        travellers: document.getElementById("travellers"),
+        accommodation: document.getElementById("accommodation"),
+        food: document.getElementById("food"),
+        transport: document.getElementById("transport"),
+        activities: document.getElementById("activities"),
+        fees: document.getElementById("fees"),
+        buffer: document.getElementById("buffer"),
+      };
+
+      const elements = {
+        total: document.getElementById("totalBudget"),
+        perPerson: document.getElementById("perPerson"),
+        perDay: document.getElementById("perDay"),
+        contingencyAmount: document.getElementById("contingencyAmount"),
+        summaryText: document.getElementById("summaryText"),
+      };
+
+      const calculateBtn = document.getElementById("calculateBtn");
+      const copySummaryBtn = document.getElementById("copySummaryBtn");
+      const downloadCsvBtn = document.getElementById("downloadCsvBtn");
+      const downloadManifestBtn = document.getElementById("downloadManifestBtn");
+      const paidCta = document.getElementById("paidCta");
+
+      const moduleManifest = {
+        module_id: "travel-budget-calculator",
+        title: "Travel Budget Calculator",
+        version: "2026.06.05",
+        module_type: "calculator",
+        module_manifest_for: "travel budget query",
+        status: "installable",
+        task_match: [
+          "travel budget calculator",
+          "trip budget",
+          "plan trip expenses",
+          "travel estimate"
+        ],
+        install_or_save_intent: "Download module manifest or worksheet export from the tool UI.",
+        qualified_tool_completion_event: "travel_budget_tool_completed",
+        events: {
+          qualified_completion: "travel_budget_tool_completed",
+          save_or_install_intent: "travel_budget_save_manifest_intent",
+          export_intent: "travel_budget_export_csv_intent",
+          paid_cta_click: "travel_budget_paid_cta_click",
+          version: "2026-06-05"
+        },
+        trusted_sources: [
+          "https://consumer.gov/system/files/consumer_gov/pdf/1041A_BudgetWorksheet-Fillable.pdf",
+          "https://www.consumerfinance.gov/documents/7276/cfpb_my-new-money-goal_worksheet.pdf",
+          "https://files.consumerfinance.gov/f/documents/cfpb_building_block_activities_analyzing-budgets_guide.pdf"
+        ],
+        paid_path: {
+          title: "Trip Budget Sheet",
+          price_usd: 9,
+          path: "https://checkout.dayonebuilder.online/products/trip-budget-sheet",
+          event: "travel_budget_paid_cta_click"
+        }
+      };
+
+      let lastCalculation;
+
+      function toNumber(node) {
+        const value = Number(node.value);
+        return Number.isFinite(value) ? Math.max(0, value) : 0;
+      }
+
+      function createSummary(data) {
+        return [
+          "Travel Budget Calculator Outputs",
+          `Trip Days,${data.tripDays}`,
+          `Travellers,${data.travellers}`,
+          `Accommodation total (USD),${data.accommodationTotal.toFixed(2)}`,
+          `Food total (USD),${data.foodTotal.toFixed(2)}`,
+          `Transport total (USD),${data.transportTotal.toFixed(2)}`,
+          `Activities total (USD),${data.activities.toFixed(2)}`,
+          `Fees total (USD),${data.fees.toFixed(2)}`,
+          `Subtotal (USD),${data.subtotal.toFixed(2)}`,
+          `Buffer %,${data.bufferPercent.toFixed(2)}`,
+          `Contingency amount (USD),${data.contingency.toFixed(2)}`,
+          `Estimated total (USD),${data.total.toFixed(2)}`,
+          `Estimated per-person (USD),${data.perPerson.toFixed(2)}`,
+          `Estimated per-day (USD),${data.perDay.toFixed(2)}`,
+        ].join("\n");
+      }
+
+      function calculateBudget(options = { trackCompletion: false }) {
+        const tripDays = Math.max(1, toNumber(fields.tripDays));
+        const travellers = Math.max(1, toNumber(fields.travellers));
+        const accommodationPerNight = toNumber(fields.accommodation);
+        const foodPerPersonPerDay = toNumber(fields.food);
+        const transportPerDay = toNumber(fields.transport);
+        const activities = toNumber(fields.activities);
+        const fees = toNumber(fields.fees);
+        const bufferPercent = toNumber(fields.buffer) / 100;
+
+        const accommodationTotal = accommodationPerNight * tripDays;
+        const foodTotal = foodPerPersonPerDay * travellers * tripDays;
+        const transportTotal = transportPerDay * tripDays;
+        const subtotal = accommodationTotal + foodTotal + transportTotal + activities + fees;
+        const contingency = subtotal * bufferPercent;
+        const total = subtotal + contingency;
+        const perPerson = total / travellers;
+        const perDay = total / tripDays;
+
+        lastCalculation = {
+          tripDays,
+          travellers,
+          accommodationTotal,
+          foodTotal,
+          transportTotal,
+          activities,
+          fees,
+          subtotal,
+          bufferPercent: bufferPercent * 100,
+          contingency,
+          total,
+          perPerson,
+          perDay,
+        };
+
+        elements.total.textContent = currency.format(total);
+        elements.perPerson.textContent = currency.format(perPerson);
+        elements.perDay.textContent = currency.format(perDay);
+        elements.contingencyAmount.textContent = currency.format(contingency);
+
+        const summary = `Trip estimate summary:\n- Total: ${currency.format(total)}\n- Per person: ${currency.format(perPerson)}\n- Per day: ${currency.format(perDay)}\n- Contingency (${(lastCalculation.bufferPercent).toFixed(1)}%): ${currency.format(contingency)}\n- Source framing: CFPB worksheets as planning references.`;
+        elements.summaryText.textContent = summary;
+        elements.summaryText.dataset.csv = createSummary(lastCalculation);
+
+        if (options.trackCompletion) {
+          window.trackTravelBudgetEvent("travel_budget_tool_completed", {
+            event_category: "travel_budget_calculator",
+            trip_days: tripDays,
+            travellers,
+            currency: "USD",
+            total_estimate_usd: Number(total.toFixed(2)),
+            buffer_percent: Number(lastCalculation.bufferPercent.toFixed(2))
+          });
+        }
+      }
+
+      function downloadBlob(filename, data, mimeType) {
+        const blob = new Blob([data], { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = filename;
+        anchor.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function setButtonState(button, label) {
+        const original = button.textContent;
+        button.textContent = label;
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1300);
+      }
+
+      function copySummary() {
+        const summary = elements.summaryText.textContent || "";
+        navigator.clipboard.writeText(summary).then(() => {
+          setButtonState(copySummaryBtn, "Copied");
+        }).catch(() => {
+          setButtonState(copySummaryBtn, "Copy failed");
+        });
+      }
+
+      calculateBtn.addEventListener("click", () => calculateBudget({ trackCompletion: true }));
+      copySummaryBtn.addEventListener("click", copySummary);
+
+      downloadCsvBtn.addEventListener("click", () => {
+        if (!lastCalculation) {
+          return;
+        }
+        downloadBlob("travel-budget-worksheet.csv", elements.summaryText.dataset.csv || "metric,value\n", "text/csv;charset=utf-8;");
+        trackTravelBudgetEvent("travel_budget_export_csv_intent", {
+          event_category: "travel_budget_calculator",
+          format: "csv",
+        });
+      });
+
+      downloadManifestBtn.addEventListener("click", () => {
+        const manifestText = JSON.stringify(moduleManifest, null, 2);
+        downloadBlob("travel-budget-calculator-manifest.json", manifestText, "application/json;charset=utf-8;");
+        trackTravelBudgetEvent("travel_budget_save_manifest_intent", {
+          event_category: "travel_budget_calculator",
+          install_path: "/travel-budget-calculator/module-manifest.json",
+          format: "json"
+        });
+      });
+
+      paidCta.addEventListener("click", () => {
+        trackTravelBudgetEvent("travel_budget_paid_cta_click", {
+          event_category: "travel_budget_calculator",
+          offer_slug: paidCta.dataset.offer || "trip-budget-sheet",
+          offer_location: paidCta.dataset.offerLocation || "tool_page",
+          price_usd: Number(paidCta.dataset.priceUsd || 9),
+        });
+      });
+
+      Object.values(fields).forEach((field) => {
+        field.addEventListener("input", () => calculateBudget({ trackCompletion: false }));
+      });
+
+      calculateBudget({ trackCompletion: false });
+    </script>
+  </body>
+</html>

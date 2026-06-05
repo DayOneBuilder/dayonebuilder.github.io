@@ -1,0 +1,94 @@
+{
+  "module_id": "travel-budget-calculator",
+  "slug": "travel-budget-calculator",
+  "title": "Travel Budget Calculator",
+  "version": "2026.06.05",
+  "status": "active",
+  "module_type": "calculator",
+  "task_match": [
+    "travel budget calculator",
+    "trip budget",
+    "travel cost estimate",
+    "plan trip expenses",
+    "travel budget worksheet"
+  ],
+  "module_manifest_for": "personal_finance",
+  "module_url": "https://dayonebuilder.online/travel-budget-calculator/",
+  "module_json_url": "https://dayonebuilder.online/travel-budget-calculator/module-manifest.json",
+  "module_type_compatibility": ["web", "agent-workflows", "resolver"],
+  "reusable_primitives": [
+    "module_manifest",
+    "catalog_listing",
+    "search_intent_landing_page",
+    "qualified_tool_completion_event",
+    "install_or_save_intent",
+    "paid_offer_or_subscription_path"
+  ],
+  "qualified_tool_completion_event": "travel_budget_tool_completed",
+  "qualified_tool_completion_requirements": {
+    "action": "press Calculate trip budget",
+    "fields": [
+      "travelDays",
+      "travellers",
+      "accommodation",
+      "food",
+      "transport",
+      "activities",
+      "fees",
+      "buffer"
+    ]
+  },
+  "events": {
+    "qualified_completion": "travel_budget_tool_completed",
+    "save_or_install_intent": "travel_budget_save_manifest_intent",
+    "export_intent": "travel_budget_export_csv_intent",
+    "paid_cta_click": "travel_budget_paid_cta_click"
+  },
+  "install_or_save_intent": {
+    "label": "Save module manifest",
+    "action": "download",
+    "path": "/travel-budget-calculator/module-manifest.json"
+  },
+  "paid_offer": {
+    "title": "Trip Budget Sheet",
+    "price_usd": 9,
+    "cta_url": "https://checkout.dayonebuilder.online/products/trip-budget-sheet?utm_source=dayonebuilder&utm_medium=travel_budget_calculator&utm_campaign=trip_budget_workflow&utm_content=module_manifest",
+    "event": "travel_budget_paid_cta_click"
+  },
+  "trusted_sources": [
+    {
+      "name": "Consumer.gov budget worksheet",
+      "url": "https://consumer.gov/system/files/consumer_gov/pdf/1041A_BudgetWorksheet-Fillable.pdf"
+    },
+    {
+      "name": "CFPB money goal worksheet",
+      "url": "https://www.consumerfinance.gov/documents/7276/cfpb_my-new-money-goal_worksheet.pdf"
+    },
+    {
+      "name": "CFPB budget planning guide",
+      "url": "https://files.consumerfinance.gov/f/documents/cfpb_building_block_activities_analyzing-budgets_guide.pdf"
+    },
+    {
+      "name": "Jotform travel budget template",
+      "url": "https://www.jotform.com/table-templates/travel-budget-template"
+    },
+    {
+      "name": "TripCostGuides travel calculator",
+      "url": "https://tripcostguides.com/pages/trip-budget-calculator"
+    }
+  ],
+  "agent_task_phrase": "An AI agent needs a travel budget calculator without writing fragile one-off glue code.",
+  "adoption_metric": [
+    "qualified_agent_uses",
+    "resolver_calls",
+    "package_downloads",
+    "agent_docs_hits",
+    "agent_task_success"
+  ],
+  "proof_evidence": [
+    "task-specific outputs with explicit estimates",
+    "export/download manifest and CSV worksheet",
+    "GA event tracking for completion/export/save/pay intents",
+    "public module manifest + listing entries"
+  ]
+}

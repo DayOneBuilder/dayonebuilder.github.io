@@ -55,22 +55,34 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://dayonebuilder.online/collections/travel-budget-calculator.json</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://dayonebuilder.online/collections/travel-budget-calculator/</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://dayonebuilder.online/collections/agent-skills/</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://dayonebuilder.online/collections/scholarship-application-tracker-spreadsheet.json</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.84</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/scholarship-application-tracker-spreadsheet/</loc>
+    <loc>https://dayonebuilder.online/travel-budget-calculator/</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>daily</changefreq>
-    <priority>0.92</priority>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://dayonebuilder.online/travel-budget-calculator/module-manifest.json</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://dayonebuilder.online/mcp/dayonebuilder-resolver.json</loc>

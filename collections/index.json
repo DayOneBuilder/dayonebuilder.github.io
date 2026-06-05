@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-06-05",
+  "updated_at": "2026-05-27",
   "name": "DayOneBuilder Static Collections",
   "purpose": "Machine-readable collections agents can fetch before choosing a repo, skill, MCP server, package, CLI, or workflow.",
   "discovery_flow": [
@@ -28,18 +28,19 @@
       "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly."
     },
     {
-      "slug": "scholarship-application-tracker-spreadsheet",
-      "title": "Scholarship Application Tracker Spreadsheet",
-      "json_url": "https://dayonebuilder.online/collections/scholarship-application-tracker-spreadsheet.json",
-      "page_url": "https://dayonebuilder.online/scholarship-application-tracker-spreadsheet/",
+      "slug": "travel-budget-calculator",
+      "title": "Travel Budget Calculator",
+      "json_url": "https://dayonebuilder.online/collections/travel-budget-calculator.json",
+      "page_url": "https://dayonebuilder.online/collections/travel-budget-calculator/",
       "task_aliases": [
-        "scholarship application tracker spreadsheet",
-        "scholarship tracker spreadsheet",
-        "scholarship deadline tracker",
-        "education scholarship tracker"
+        "travel budget calculator",
+        "trip budget",
+        "travel budget worksheet",
+        "plan trip expenses",
+        "travel estimate"
       ],
-      "proof_signal": "Template-first workflow where local editing beats broad content links, with save/export events and paid cleanup path.",
-      "fallback": "If the user only needs a single list, open the official scholarship directories and create a local note."
+      "proof_signal": "Installable calculator with export path and paid upgrade path.",
+      "fallback": "If the trip has unusual taxes, per-country pricing, or custom constraints, export results and use a financial professional for jurisdiction-specific planning."
     }
   ]
 }

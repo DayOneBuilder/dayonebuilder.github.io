@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "travel-budget-calculator",
+  "title": "Travel Budget Calculator",
+  "summary": "Estimate trip costs by person and day, export a planning worksheet, and bridge to a paid Trip Budget Sheet.",
+  "task_aliases": [
+    "travel budget calculator",
+    "trip budget",
+    "plan trip expenses",
+    "travel estimate"
+  ],
+  "selection_rule": "Use this when the task is exact trip budget calculation with reusable planner output, not a one-off article.",
+  "entries": [
+    {
+      "id": "travel-budget-calculator",
+      "title": "Travel Budget Calculator (DayOneBuilder)",
+      "task_aliases": [
+        "travel budget calculator",
+        "trip budget",
+        "plan trip expenses",
+        "travel budget worksheet"
+      ],
+      "selected_source_url": "https://dayonebuilder.online/travel-budget-calculator/",
+      "first_action": "Open the calculator, enter travel inputs, and click Calculate trip budget.",
+      "smoke_test": "Enter sample values and verify total budget output appears and CSV can be downloaded.",
+      "proof_signal": "CSV export, copyable summary, and analytics events for completion/export/save/purchase intent.",
+      "fallback": "If this calculator does not fit the currency or planning constraints, review budget templates linked from CFPB/Jotform references.",
+      "module_manifest_url": "https://dayonebuilder.online/travel-budget-calculator/module-manifest.json",
+      "module_task_match": [
+        "travel budget calculator",
+        "trip budget"
+      ],
+      "qualified_tool_completion_event": "travel_budget_tool_completed",
+      "install_or_save_intent": "travel_budget_save_manifest_intent",
+      "export_intent": "travel_budget_export_csv_intent",
+      "paid_path": {
+        "title": "Trip Budget Sheet",
+        "price_usd": 9,
+        "offer_path": "https://checkout.dayonebuilder.online/products/trip-budget-sheet",
+        "event": "travel_budget_paid_cta_click"
+      }
+    }
+  ],
+  "module_listing_metadata": {
+    "module_id": "travel-budget-calculator",
+    "module_type": "calculator",
+    "risk": "low",
+    "platform_fit": "yes",
+    "module_version": "2026.06.05"
+  },
+  "install_or_call_path": "Open https://dayonebuilder.online/travel-budget-calculator/ and click Calculate trip budget, or download module-manifest.json from the page."
+}
