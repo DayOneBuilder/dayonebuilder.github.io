@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>How To Make A Grocery Budget Spreadsheet | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for how to make a grocery budget spreadsheet, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/" />
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+    </script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"
+      onload="window.__groceryTrackerReady = true; gtag('js', new Date()); gtag('config', 'G-KQMLYS3VVE');"
+      onerror="window.__groceryTrackerReady = false"
+    ></script>
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "How to Make a Grocery Budget Spreadsheet",
+          "url": "https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Grocery Budget Spreadsheet Helper",
+          "url": "https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Any"
+        }
+      ]
+    </script>
+    <style>
+      :root {
+        --bg: #081019;
+        --bg-soft: #101a23;
+        --panel: #0f1723;
+        --text: #ecf0f3;
+        --muted: #94a3b8;
+        --line: rgba(148, 163, 184, 0.25);
+        --mint: #3dd89f;
+        --amber: #f6cf73;
+        --violet: #8cb8ff;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: linear-gradient(180deg, var(--bg), #070d14 40%, #070b10);
+        font: 16px/1.55 "IBM Plex Sans", "Inter", "Segoe UI", sans-serif;
+      }
+      .wrap {
+        width: min(calc(100% - 28px), 980px);
+        margin: 0 auto;
+        padding: 28px 0 44px;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 18px;
+        background: rgba(16, 24, 35, 0.86);
+        margin-top: 14px;
+      }
+      .back {
+        color: var(--muted);
+        text-decoration: none;
+      }
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(140, 184, 255, 0.38);
+        color: var(--violet);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 12px;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0 0 0.7rem;
+        line-height: 1.12;
+      }
+      h1 {
+        font-size: clamp(2rem, 6vw, 3rem);
+      }
+      h2 {
+        font-size: 1.35rem;
+      }
+      p {
+        color: var(--muted);
+      }
+      .lead {
+        margin-top: 8px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px;
+      }
+      label {
+        font-weight: 650;
+      }
+      input {
+        min-height: 42px;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text);
+        padding: 0 10px;
+        font: inherit;
+      }
+      input:focus {
+        outline: 1px solid var(--mint);
+      }
+      .tool-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--text);
+        font: inherit;
+        min-height: 44px;
+        padding: 10px 14px;
+        cursor: pointer;
+      }
+      .btn.primary {
+        border: none;
+        color: #082016;
+        background: linear-gradient(135deg, var(--mint), var(--amber));
+        font-weight: 700;
+      }
+      .category-table {
+        margin-top: 10px;
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+      }
+      table {
+        width: 100%;
+        min-width: 540px;
+        border-collapse: collapse;
+        background: rgba(0, 0, 0, 0.15);
+      }
+      th,
+      td {
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        padding: 10px;
+        vertical-align: top;
+      }
+      th {
+        font-size: 13px;
+        color: #d1dfe7;
+        background: rgba(255, 255, 255, 0.03);
+      }
+      td input {
+        width: 130px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .stat {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .stat-label {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .stat-value {
+        margin-top: 6px;
+        display: block;
+        font-size: 1.42rem;
+        font-weight: 700;
+        color: var(--mint);
+      }
+      .insight {
+        margin-top: 10px;
+        border: 1px dashed var(--line);
+        border-radius: 10px;
+        padding: 12px;
+      }
+      .links,
+      .offer,
+      .output,
+      .notes {
+        margin-top: 14px;
+      }
+      .note-list {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+      .note-list li {
+        margin: 8px 0;
+      }
+      .small {
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .source {
+        color: var(--violet);
+        text-decoration: none;
+        display: inline-flex;
+        padding: 6px 10px;
+        margin-right: 6px;
+        margin-bottom: 6px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+      }
+      .source:hover {
+        border-color: var(--violet);
+      }
+      .output-box {
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px;
+        max-height: 220px;
+        overflow: auto;
+        white-space: pre-wrap;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 44px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        color: #082016;
+        background: linear-gradient(135deg, #3dd89f, #f6cf73);
+        border: none;
+        text-decoration: none;
+        font-weight: 700;
+        margin-top: 8px;
+      }
+      @media (max-width: 940px) {
+        .grid,
+        .stats {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <section class="panel">
+        <span class="eyebrow">Household tool</span>
+        <h1>How to make a grocery budget spreadsheet</h1>
+        <p class="lead">
+          Build a copy-ready grocery budget plan in one screen: set household context, split categories, compare planned vs actual,
+          and export a CSV that you can save directly into Google Sheets or Excel.
+        </p>
+
+        <section class="panel" aria-label="Input block">
+          <h2>Core inputs</h2>
+          <div class="grid">
+            <label class="field">
+              <span>Household size</span>
+              <input id="householdSize" type="number" min="1" max="20" step="1" value="3" />
+            </label>
+            <label class="field">
+              <span>Monthly net income (USD)</span>
+              <input id="monthlyIncome" type="number" min="0" step="1" value="4500" />
+            </label>
+            <label class="field">
+              <span>Monthly grocery budget target (USD)</span>
+              <input id="targetBudget" type="number" min="0" step="1" value="900" />
+            </label>
+            <label class="field">
+              <span>Weeks in month</span>
+              <input id="weeksInMonth" type="number" min="4" max="6" step="1" value="4.33" />
+            </label>
+          </div>
+
+          <div class="tool-actions">
+            <button id="rebaseRows" class="btn">Rebalance plan from grocery target</button>
+            <button id="generate" class="btn primary">Generate worksheet</button>
+            <button id="copyRows" class="btn">Copy worksheet</button>
+            <button id="downloadCsv" class="btn">Download CSV template</button>
+          </div>
+        </section>
+
+        <section class="panel" aria-label="Category planning">
+          <h2>Planned vs actual table</h2>
+          <p>Enter planned and actual spend for each category. The tool tracks category and grocery-level variance.</p>
+          <div class="category-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Planned (USD)</th>
+                  <th>Actual (USD)</th>
+                  <th>Variance (actual - planned)</th>
+                </tr>
+              </thead>
+              <tbody id="rows"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel" aria-live="polite">
+          <h2>Results</h2>
+          <div class="stats" id="stats">
+            <div class="stat">
+              <span class="stat-label">Total planned</span>
+              <strong class="stat-value" id="totalPlanned">$0.00</strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Total actual</span>
+              <strong class="stat-value" id="totalActual">$0.00</strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Difference</span>
+              <strong class="stat-value" id="totalDelta">$0.00</strong>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Target usage</span>
+              <strong class="stat-value" id="targetRatio">0%</strong>
+            </div>
+          </div>
+          <div class="insight" id="insight"></div>
+          <p class="small">Generated CSV includes category totals plus summary assumptions and can be copied or downloaded.</p>
+        </section>
+
+        <section class="panel output">
+          <h2>Copyable worksheet text</h2>
+          <p class="small">Use this if you want a no-signup, no-friction working copy.</p>
+          <pre class="output-box" id="worksheetText">Press Generate worksheet to build your template text.</pre>
+        </section>
+
+        <section class="panel offer">
+          <h2>Save time with the finished template</h2>
+          <p>
+            If this saves you time, the <strong>Grocery Budget Worksheet Pack ($9)</strong> includes a cleaner starter workbook,
+            weekly copy sheet, and a checklist for grocery-day controls.
+          </p>
+          <a
+            id="paidOffer"
+            class="cta"
+            href="https://checkout.dayonebuilder.online/products/grocery-budget-worksheet?utm_source=dayonebuilder&utm_medium=module&utm_campaign=grocery_budget_sheet&utm_content=primary_cta"
+            data-offer="grocery-budget-worksheet"
+            data-offer-location="tool_page"
+            data-price-usd="9"
+          >
+            Buy the worksheet pack
+          </a>
+          <p class="small">
+            Delivery is usually a ZIP with ready-to-load CSV/worksheet files plus a quick setup note.
+          </p>
+        </section>
+
+        <section class="panel notes">
+          <h2>Trust and comparison sources</h2>
+          <p class="small">Use these sources while planning your grocery budget assumptions:</p>
+          <div>
+            <a class="source" href="https://www.usa.gov/budgeting" target="_blank" rel="noopener noreferrer">USA.gov budget guidance</a>
+            <a class="source" href="https://www.consumer.ftc.gov/articles/how-to-build-a-budget" target="_blank" rel="noopener noreferrer">Consumer Financial Protection Bureau</a>
+            <a class="source" href="https://sheetrix.com/templates/grocery-budget-spreadsheet/" target="_blank" rel="noopener noreferrer">Sheetrix grocery template</a>
+            <a class="source" href="https://groceriestracker.com/grocery-spending-spreadsheet" target="_blank" rel="noopener noreferrer">Groceries Tracker template</a>
+            <a class="source" href="https://www.etsy.com/market/grocery_budget" target="_blank" rel="noopener noreferrer">Marketplace alternatives</a>
+          </div>
+          <ul class="note-list">
+            <li>No login is required to use this core workflow.</li>
+            <li>Use the calculator output as a first draft, then tune each category for your local prices and habits.</li>
+            <li>This tool uses your entered values as assumptions and is not a finance compliance instrument.</li>
+          </ul>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      window.__groceryTrackerReady = false;
+
+      const BASELINE_CATEGORIES = [
+        { key: "produce", name: "Produce & frozen", share: 0.22 },
+        { key: "protein", name: "Protein", share: 0.18 },
+        { key: "dairy", name: "Dairy / eggs", share: 0.12 },
+        { key: "pantry", name: "Pantry", share: 0.17 },
+        { key: "household", name: "Household essentials", share: 0.1 },
+        { key: "snacks", name: "Snacks / drinks", share: 0.11 },
+        { key: "outside", name: "Takeout / eat out", share: 0.1 },
+      ];
+
+      const fmt = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 });
+
+      const rowsContainer = document.getElementById("rows");
+      const totalPlannedEl = document.getElementById("totalPlanned");
+      const totalActualEl = document.getElementById("totalActual");
+      const totalDeltaEl = document.getElementById("totalDelta");
+      const targetRatioEl = document.getElementById("targetRatio");
+      const insightEl = document.getElementById("insight");
+      const worksheetText = document.getElementById("worksheetText");
+
+      const householdSizeInput = document.getElementById("householdSize");
+      const monthlyIncomeInput = document.getElementById("monthlyIncome");
+      const targetBudgetInput = document.getElementById("targetBudget");
+      const weeksInput = document.getElementById("weeksInMonth");
+
+      const rebaseRowsButton = document.getElementById("rebaseRows");
+      const generateButton = document.getElementById("generate");
+      const copyRowsButton = document.getElementById("copyRows");
+      const downloadButton = document.getElementById("downloadCsv");
+      const paidOffer = document.getElementById("paidOffer");
+
+      let completedOnce = false;
+
+      function trackEvent(name, params = {}) {
+        if (!window.__groceryTrackerReady || typeof gtag !== "function") {
+          return;
+        }
+        gtag("event", name, Object.assign({ event_category: "grocery_budget_sheet" }, params));
+      }
+
+      function toNumber(node) {
+        const raw = Number(node.value);
+        return Number.isFinite(raw) ? Math.max(0, raw) : 0;
+      }
+
+      function createRow(category) {
+        const row = document.createElement("tr");
+        const plannedDefault = Math.round(category.planned * 100) / 100;
+
+        row.innerHTML = `
+          <td>${category.name}</td>
+          <td><input class="plannedInput" data-key="${category.key}" type="number" min="0" step="0.01" value="${plannedDefault.toFixed(2)}" /></td>
+          <td><input class="actualInput" data-key="${category.key}" type="number" min="0" step="0.01" value="0" /></td>
+          <td class="deltaCell" data-key="${category.key}">$0.00</td>
+        `;
+        return row;
+      }
+
+      function seedRows() {
+        const targetBudget = toNumber(targetBudgetInput);
+        rowsContainer.innerHTML = "";
+        const sum = BASELINE_CATEGORIES.reduce((acc, c) => acc + c.share, 0);
+        BASELINE_CATEGORIES.forEach((category) => {
+          const planned = targetBudget > 0 ? targetBudget * (category.share / sum) : 0;
+          category.planned = planned;
+          rowsContainer.appendChild(createRow(category));
+        });
+        calculate();
+      }
+
+      function parseRows() {
+        const rows = [];
+        const plannedInputs = Array.from(document.querySelectorAll(".plannedInput"));
+        const actualInputs = Array.from(document.querySelectorAll(".actualInput"));
+        const byKey = {};
+        plannedInputs.forEach((input) => {
+          const key = input.dataset.key;
+          byKey[key] = { key, planned: toNumber(input), name: categoryNameByKey(key) };
+        });
+        actualInputs.forEach((input) => {
+          const key = input.dataset.key;
+          if (!byKey[key]) {
+            byKey[key] = { key, planned: 0, name: categoryNameByKey(key) };
+          }
+          byKey[key].actual = toNumber(input);
+        });
+        return Object.values(byKey);
+      }
+
+      function categoryNameByKey(key) {
+        const found = BASELINE_CATEGORIES.find((item) => item.key === key);
+        return found ? found.name : key;
+      }
+
+      function calculate() {
+        const householdSize = Math.max(1, toNumber(householdSizeInput));
+        const monthlyIncome = toNumber(monthlyIncomeInput);
+        const targetBudget = toNumber(targetBudgetInput);
+        const weeksInMonth = Math.max(1, toNumber(weeksInMonthInput));
+        const rows = parseRows();
+
+        let planned = 0;
+        let actual = 0;
+
+        rows.forEach((row) => {
+          const delta = (row.actual || 0) - (row.planned || 0);
+          row.delta = delta;
+          planned += row.planned || 0;
+          actual += row.actual || 0;
+          const deltaCell = rowsContainer.querySelector(`.deltaCell[data-key="${row.key}"]`);
+          if (deltaCell) {
+            deltaCell.textContent = fmt.format(delta);
+            deltaCell.style.color = delta <= 0 ? "#9ef0c0" : "#f6cf73";
+          }
+        });
+
+        const delta = actual - planned;
+        const ratio = planned > 0 ? (actual / planned) * 100 : 0;
+        const weeklyBudget = weeklyBudgetFromMonthly(targetBudget, weeksInMonth);
+        const dailyBudget = Math.max(0, (targetBudget / 30));
+        const recommendedByIncome = Math.max(1, householdSize) * (monthlyIncome * 0.12);
+        const incomeHealth = targetBudget > 0 ? Math.abs((targetBudget - recommendedByIncome) / recommendedByIncome) * 100 : 0;
+
+        const status = actual <= planned ? "within plan" : "over plan";
+        totalPlannedEl.textContent = fmt.format(planned);
+        totalActualEl.textContent = fmt.format(actual);
+        totalDeltaEl.textContent = fmt.format(delta);
+        targetRatioEl.textContent = `${Math.round(ratio * 100) / 100}%`;
+
+        insightEl.innerHTML = `
+          <p>
+            You budget ${fmt.format(targetBudget)} for groceries each month and plan ${fmt.format(planned)}. Current status is <strong>${status}</strong>.
+            Weekly target is ${fmt.format(weeklyBudget)} and estimated daily budget is ${fmt.format(dailyBudget)}.
+            Compared against a simple ${fmt.format(recommendedByIncome)} household benchmark, the current target is ${incomeHealth > 15 ? "far from" : "close to"} your income proportion.
+          </p>
+        `;
+
+        const csvRows = [
+          ["Category", "Planned USD", "Actual USD", "Variance USD"],
+          ...rows.map((row) => [row.name, row.planned.toFixed(2), row.actual.toFixed(2), row.delta.toFixed(2)]),
+          ["TOTAL", planned.toFixed(2), actual.toFixed(2), delta.toFixed(2)],
+          [],
+          ["Household Size", householdSize],
+          ["Monthly Income", monthlyIncome.toFixed(2)],
+          ["Planned Monthly Grocery Budget", targetBudget.toFixed(2)],
+          ["Weeks per month", weeksInMonth.toFixed(2)],
+          ["Target usage %", ratio.toFixed(2)]
+        ];
+        worksheetText.dataset.csv = csvRows.map((line) => line.join(",")).join("\n");
+        worksheetText.textContent = csvRows.slice(0, 2).concat(csvRows.slice(2)).map((line) => line.join(" | ")).join("\n");
+
+        if (!completedOnce && planned > 0 && actual > 0) {
+          completedOnce = true;
+          trackEvent("grocery_budget_qualified_completion", {
+            event_name: "grocery_budget_qualified_completion",
+            target_budget: targetBudget,
+            planned_total: planned,
+            actual_total: actual,
+            household_size: householdSize
+          });
+        }
+      }
+
+      function weeklyBudgetFromMonthly(monthlyValue, weeksInMonth) {
+        return weeksInMonth > 0 ? monthlyValue / weeksInMonth : 0;
+      }
+
+      function bindInputs() {
+        document.querySelectorAll(".plannedInput, .actualInput").forEach((input) => {
+          input.addEventListener("input", calculate);
+        });
+      }
+
+      function downloadCsv() {
+        const csvData = worksheetText.dataset.csv || "";
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "grocery-budget-worksheet.csv";
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      rebaseRowsButton.addEventListener("click", () => {
+        seedRows();
+        trackEvent("grocery_budget_rebalance_click");
+      });
+
+      generateButton.addEventListener("click", () => {
+        calculate();
+        trackEvent("grocery_budget_generate_click", {
+          source: "tool_controls",
+          household_size: Math.max(1, toNumber(householdSizeInput)),
+          monthly_income: toNumber(monthlyIncomeInput)
+        });
+      });
+
+      copyRowsButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(worksheetText.textContent || "");
+          trackEvent("grocery_budget_export_copy", {
+            intent: "save_or_copy"
+          });
+          trackEvent("grocery_budget_install_intent", {
+            intent_type: "save_to_spreadsheet",
+            format: "clipboard"
+          });
+        } catch (_error) {
+          // copy blocked - no-op aside from user fallback
+        }
+      });
+
+      downloadButton.addEventListener("click", () => {
+        downloadCsv();
+        trackEvent("grocery_budget_export_click", {
+          format: "csv_download"
+        });
+        trackEvent("grocery_budget_install_intent", {
+          intent_type: "save_to_spreadsheet",
+          format: "csv"
+        });
+      });
+
+      paidOffer.addEventListener("click", function () {
+        trackEvent("grocery_budget_paid_cta_click", {
+          offer_slug: this.dataset.offer,
+          offer_location: this.dataset.offerLocation,
+          price_usd: Number(this.dataset.priceUsd || 9)
+        });
+        trackEvent("grocery_budget_checkout_start", {
+          offer_slug: this.dataset.offer,
+          offer_location: this.dataset.offerLocation,
+          price_usd: Number(this.dataset.priceUsd || 9)
+        });
+      });
+
+      seedRows();
+      bindInputs();
+      calculate();
+      if (typeof gtag === "function") {
+        trackEvent("grocery_budget_page_view", {
+          tool_slug: "how-to-make-a-grocery-budget-spreadsheet"
+        });
+      }
+    </script>
+  </body>
+</html>

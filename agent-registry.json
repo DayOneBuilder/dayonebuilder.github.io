@@ -161,6 +161,25 @@
   ],
   "modules": [
     {
+      "id": "grocery-budget-spreadsheet",
+      "title": "Grocery Budget Spreadsheet",
+      "status": "primary",
+      "module_type": "template",
+      "agent_task_phrase": "Build a practical grocery budget spreadsheet workflow with no login and immediate copy/download output.",
+      "module_url": "https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/",
+      "module_version": "1.0.0",
+      "install_or_call_path": "Open https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/ and use the planner to generate or rebalance a grocery budget.",
+      "paid_template_path": "https://checkout.dayonebuilder.online/products/grocery-budget-worksheet",
+      "proof_evidence": [
+        "No-login planner above the fold",
+        "Visible source links and conservative assumption notes",
+        "Qualified completion, export/save intent, and paid intent events",
+        "Installable paid template path exposed with tracking"
+      ],
+      "adoption_metric": "qualified_tool_completion, export_copy, export_download, paid_cta_click, checkout_start",
+      "platform_fit": "household_template"
+    },
+    {
       "id": "dob-task-resolver",
       "title": "DOB Task Resolver",
       "status": "primary",
@@ -175,22 +194,6 @@
         "install/call/test snippets on result cards"
       ],
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
-    },
-    {
-      "id": "habit-tracker-spreadsheet-template",
-      "title": "Habit Tracker Spreadsheet Template",
-      "status": "secondary",
-      "module_type": "template",
-      "agent_task_phrase": "Create a habit tracker spreadsheet template and export/share it quickly.",
-      "module_url": "https://dayonebuilder.online/habit-tracker-spreadsheet-template/",
-      "install_or_call_path": "Open https://dayonebuilder.online/habit-tracker-spreadsheet-template/, set your habit lines, click Build tracker template, then Download CSV or copy the CSV output.",
-      "proof_evidence": [
-        "No-login template generation on page",
-        "official template references linked as source checks",
-        "copy/download events for install/save intent",
-        "paid workbook checkout CTA exposed from the module page"
-      ],
-      "adoption_metric": "collection_json_hit, habit_tracker_template_completion, habit_tracker_template_export, habit_tracker_paid_offer_click, habit_tracker_checkout_start"
     }
   ],
   "archived_internal_modules": {
