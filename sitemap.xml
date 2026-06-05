@@ -25,12 +25,6 @@
     <priority>0.98</priority>
   </url>
   <url>
-    <loc>https://dayonebuilder.online/how-to-create-event-budget-template-in-excel/</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.96</priority>
-  </url>
-  <url>
     <loc>https://dayonebuilder.online/agent-magnet/upstash-context7/</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>daily</changefreq>
@@ -61,28 +55,22 @@
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://dayonebuilder.online/collections/how-to-create-event-budget-template-in-excel.json</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
     <loc>https://dayonebuilder.online/collections/agent-skills/</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://dayonebuilder.online/collections/pet-care-checklist-template.json</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/pet-care-checklist-template/</loc>
+    <loc>https://dayonebuilder.online/bill-tracker-spreadsheet-template/</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.98</priority>
+  </url>
+  <url>
+    <loc>https://dayonebuilder.online/collections/bill-tracker-spreadsheet-template.json</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://dayonebuilder.online/mcp/dayonebuilder-resolver.json</loc>
@@ -101,47 +89,5 @@
     <lastmod>2026-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/free-airbnb-profit-calculator-spreadsheet/</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.78</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/airbnb-profit-calculator-excel/</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.78</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/best-airbnb-profit-calculator/</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.78</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.82</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/ai-organic-card.json</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.74</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/scenarios.json</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/collections/value-first-tools.json</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.82</priority>
   </url>
 </urlset>

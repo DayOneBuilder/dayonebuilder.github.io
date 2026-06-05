@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bill Tracker Spreadsheet Template | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Build a practical bill tracker spreadsheet in under a minute, calculate monthly and annual totals, and export the worksheet copy without signing up."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/bill-tracker-spreadsheet-template/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #070d14;
+        --panel: rgba(12, 23, 31, 0.92);
+        --line: rgba(170, 232, 219, 0.2);
+        --ink: #edf6ff;
+        --muted: #a6bfcc;
+        --brand: #8fe7bf;
+        --amber: #f6d18f;
+        --accent: #d8ff64;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(900px 500px at 15% 0%, rgba(143, 231, 191, 0.12), transparent 48%),
+          radial-gradient(800px 500px at 90% 10%, rgba(216, 255, 100, 0.08), transparent 52%),
+          linear-gradient(180deg, #070d14 0%, #050d13 100%);
+        font: 16px/1.55 "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
+      }
+
+      .wrap {
+        width: min(calc(100% - 32px), 1080px);
+        margin: 0 auto;
+        padding: 28px 0 60px;
+      }
+
+      .panel {
+        margin-top: 16px;
+        padding: 26px;
+        border-radius: 24px;
+        border: 1px solid var(--line);
+        background: var(--panel);
+      }
+
+      .back {
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0.1rem 0 0.8rem;
+        line-height: 1.1;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 5.5vw, 3.4rem);
+      }
+
+      p,
+      li {
+        color: var(--muted);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(216, 255, 100, 0.26);
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-size: 12px;
+      }
+
+      .top-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .inputs,
+      .results {
+        display: grid;
+        gap: 12px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 16px;
+        padding: 16px;
+      }
+
+      .field-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(140px, 190px);
+        gap: 10px;
+      }
+
+      .field,
+      .bill-row,
+      .metric {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      label {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      input,
+      select,
+      button,
+      a {
+        border-radius: 10px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        height: 42px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--ink);
+        font: inherit;
+        padding: 0 11px;
+      }
+
+      input:focus,
+      select:focus {
+        outline: 1px solid var(--brand);
+      }
+
+      .bill-header {
+        margin: 12px 0 8px;
+        color: #d6e7f0;
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .bill-table {
+        display: grid;
+        gap: 10px;
+      }
+
+      .bill-row {
+        display: grid;
+        grid-template-columns: minmax(140px, 1.6fr) minmax(120px, 1fr) minmax(145px, 1fr);
+        gap: 10px;
+      }
+
+      .bill-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .button,
+      .ghost,
+      .cta {
+        min-height: 44px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+        padding: 10px 14px;
+        font: inherit;
+        font-weight: 700;
+      }
+
+      .button {
+        border-color: var(--line);
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .cta {
+        background: linear-gradient(135deg, var(--brand), var(--amber));
+        color: #041018;
+      }
+
+      .ghost {
+        border-color: var(--line);
+        color: var(--ink);
+        background: transparent;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.24);
+        padding: 12px;
+      }
+
+      .metric-label {
+        color: var(--muted);
+      }
+
+      .metric-value {
+        margin-top: 6px;
+        display: block;
+        color: var(--brand);
+        font-size: 1.45rem;
+        font-weight: 700;
+      }
+
+      .summary {
+        margin-top: 12px;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px dashed var(--line);
+        background: rgba(0, 0, 0, 0.2);
+        color: #eef6fb;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .card {
+        margin-top: 16px;
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        padding: 16px;
+      }
+
+      .links {
+        margin-top: 10px;
+        display: grid;
+        gap: 8px;
+      }
+
+      .links a {
+        color: #d1f3ff;
+      }
+
+      .note {
+        color: var(--amber);
+      }
+
+      .mini {
+        margin-top: 10px;
+        color: #bcd0dc;
+        font-size: 14px;
+      }
+
+      code {
+        font-family: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+      }
+
+      @media (max-width: 960px) {
+        .top-grid,
+        .field-row,
+        .bill-row {
+          grid-template-columns: 1fr;
+        }
+
+        .bill-table {
+          gap: 12px;
+        }
+
+        .panel {
+          padding: 18px;
+          border-radius: 18px;
+        }
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Bill Tracker Spreadsheet Template",
+        "url": "https://dayonebuilder.online/bill-tracker-spreadsheet-template/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <div class="panel">
+        <span class="eyebrow">personal finance utility</span>
+        <h1>Bill Tracker Spreadsheet Template</h1>
+        <p>
+          Add recurring bills once, and this tool builds monthly and annual totals you can copy into a spreadsheet.
+          It is designed to save setup time before you start tracking cash flow.
+        </p>
+
+        <div class="top-grid">
+          <section class="inputs" aria-label="Bill inputs">
+            <h2>Your inputs</h2>
+            <p class="mini">
+              Use one row for each recurring bill. Frequency can be monthly, weekly, biweekly, quarterly, or annual.
+            </p>
+            <div class="field-row">
+              <label class="field">
+                <span>Monthly take-home (USD)</span>
+                <input id="monthlyIncome" type="number" min="0" step="1" value="4200" inputmode="decimal" />
+                <small>Optional: helps show budget room after bills.</small>
+              </label>
+              <label class="field">
+                <span>Savings goal (%)</span>
+                <input id="savingsGoal" type="number" min="0" max="80" step="0.5" value="15" inputmode="decimal" />
+                <small>Target minimum savings rate from income.</small>
+              </label>
+            </div>
+
+            <div class="bill-header">
+              <strong>Bill lines</strong>
+              <div class="bill-actions">
+                <button id="addBill" class="button" type="button">+ Add bill</button>
+                <button id="clearBills" class="button" type="button">Clear all entries</button>
+              </div>
+            </div>
+
+            <div id="billRows" class="bill-table" aria-label="Recurring bills"></div>
+
+            <div class="button-row bill-actions">
+              <button id="calculate" class="cta" type="button">Recalculate</button>
+            </div>
+
+            <p class="mini">
+              Quick reference (high-trust templates):
+              <a href="https://finmasters.com/bill-tracker-template/">FinMasters</a>,
+              <a href="https://www.vertex42.com/ExcelTemplates/bill-tracker.html">Vertex42</a>,
+              <a href="https://www.financialaha.com/free-spreadsheet-templates/personal-budgeting/bill-tracker/">FinancialAha</a>.
+            </p>
+          </section>
+
+          <section class="results" aria-label="Bill results">
+            <h2>What you get</h2>
+            <p>These results are calculated from your current table in this session and can be exported to CSV.</p>
+            <div class="field">
+              <div class="metric">
+                <span class="metric-label">Monthly bill total</span>
+                <strong id="monthlyTotal" class="metric-value">$0.00</strong>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Annual bill total</span>
+                <strong id="annualTotal" class="metric-value">$0.00</strong>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Estimated budget remaining</span>
+                <strong id="budgetRemaining" class="metric-value">$0.00</strong>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Savings gap</span>
+                <strong id="savingsGap" class="metric-value">$0.00</strong>
+              </div>
+            </div>
+
+            <h3>Copyable summary</h3>
+            <div id="summaryOutput" class="summary"></div>
+
+            <div class="bill-actions">
+              <button id="copySummary" class="ghost" type="button">Copy summary text</button>
+              <button id="downloadCsv" class="ghost" type="button">Download CSV template</button>
+            </div>
+
+            <p id="summaryMessage" class="note"></p>
+          </section>
+        </div>
+
+        <section class="card">
+          <h2>Get the editable workbook pack</h2>
+          <p>
+            If you want a cleaner starting workbook with formatting and helper checks, there is an optional paid upgrade
+            for a polished template pack.
+          </p>
+          <a
+            id="bill-tracker-cta"
+            class="cta"
+            href="https://checkout.dayonebuilder.online/products/bill-tracker-workbook?utm_source=dayonebuilder&utm_medium=bill_tracker_template&utm_campaign=template_workflow&utm_content=top_cta"
+            data-offer="bill-tracker-workbook"
+            data-offer-location="tool_page"
+            data-price-usd="9"
+          >
+            Get the $9 bill tracker workbook
+          </a>
+          <p class="mini">
+            This is optional. The free workflow on this page still gives you a ready CSV output.
+          </p>
+        </section>
+
+        <section class="card">
+          <h2>How this is built</h2>
+          <ul>
+            <li>No account required and no API keys.</li>
+            <li>Use the table above and keep one bill per line with a frequency.</li>
+            <li>Copy or download immediately when it is complete.</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const CURRENCY = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 2,
+      });
+
+      const frequencies = [
+        { key: "weekly", label: "Weekly", factor: 4.3333 },
+        { key: "biweekly", label: "Biweekly", factor: 2.1667 },
+        { key: "monthly", label: "Monthly", factor: 1 },
+        { key: "quarterly", label: "Quarterly", factor: 1 / 3 },
+        { key: "annual", label: "Annual", factor: 1 / 12 },
+      ];
+
+      const billRows = document.getElementById("billRows");
+      const monthlyIncome = document.getElementById("monthlyIncome");
+      const savingsGoal = document.getElementById("savingsGoal");
+      const monthlyTotalEl = document.getElementById("monthlyTotal");
+      const annualTotalEl = document.getElementById("annualTotal");
+      const budgetRemainingEl = document.getElementById("budgetRemaining");
+      const savingsGapEl = document.getElementById("savingsGap");
+      const summaryOutput = document.getElementById("summaryOutput");
+      const summaryMessage = document.getElementById("summaryMessage");
+      const copySummaryButton = document.getElementById("copySummary");
+      const downloadCsvButton = document.getElementById("downloadCsv");
+      const calculateButton = document.getElementById("calculate");
+      const addBillButton = document.getElementById("addBill");
+      const clearBillsButton = document.getElementById("clearBills");
+      const cta = document.getElementById("bill-tracker-cta");
+
+      let completionTracked = false;
+
+      function safeTrack(name, params = {}) {
+        try {
+          if (typeof gtag !== "function") {
+            return;
+          }
+          gtag("event", name, Object.assign({
+            event_category: "bill_tracker_template",
+          }, params));
+        } catch (_error) {
+          // analytics no-op if unavailable
+        }
+      }
+
+      function createBillRow(name = "", amount = "", frequency = "monthly") {
+        const row = document.createElement("div");
+        row.className = "bill-row";
+        row.dataset.billRow = "true";
+
+        const billName = document.createElement("input");
+        billName.type = "text";
+        billName.placeholder = "e.g., Rent";
+        billName.value = name;
+
+        const amountInput = document.createElement("input");
+        amountInput.type = "number";
+        amountInput.min = "0";
+        amountInput.step = "0.01";
+        amountInput.inputMode = "decimal";
+        amountInput.value = amount;
+
+        const frequencySelect = document.createElement("select");
+        frequencies.forEach((freq) => {
+          const option = document.createElement("option");
+          option.value = freq.key;
+          option.textContent = freq.label;
+          option.selected = freq.key === frequency;
+          frequencySelect.appendChild(option);
+        });
+
+        row.appendChild(billName);
+        row.appendChild(amountInput);
+        row.appendChild(frequencySelect);
+        billRows.appendChild(row);
+        return row;
+      }
+
+      function getFrequencyFactor(key) {
+        const found = frequencies.find((f) => f.key === key);
+        return found ? found.factor : 1;
+      }
+
+      function calculateFromRows() {
+        const rows = Array.from(document.querySelectorAll("[data-bill-row]"));
+        let totalMonthly = 0;
+        let csvRows = [
+          "bill_name,amount,freq,monthly_equivalent,annual_equivalent",
+        ];
+        let rowCount = 0;
+
+        rows.forEach((row) => {
+          const [nameField, amountField, freqField] = row.children;
+          const name = (nameField.value || "").trim() || "Unnamed bill";
+          const amount = Math.max(0, Number(amountField.value || 0));
+          const factor = getFrequencyFactor(freqField.value);
+
+          if (amount > 0) {
+            rowCount += 1;
+          }
+
+          const monthly = amount * factor;
+          const annual = monthly * 12;
+          totalMonthly += monthly;
+          csvRows.push(`${JSON.stringify(name)},${amount.toFixed(2)},${freqField.value},${monthly.toFixed(2)},${annual.toFixed(2)}`);
+        });
+
+        const monthlyIncomeVal = Math.max(0, Number(monthlyIncome.value || 0));
+        const savingsGoalPct = Math.max(0, Math.min(80, Number(savingsGoal.value || 0))) / 100;
+        const annualizedIncome = monthlyIncomeVal * 12;
+        const annualBills = totalMonthly * 12;
+        const savingsTarget = annualizedIncome * savingsGoalPct;
+        const budgetRemaining = monthlyIncomeVal - totalMonthly;
+        const savingsGap = Math.max(0, savingsTarget - Math.max(0, monthlyIncomeVal - totalMonthly) * 12);
+
+        const summaryLines = [
+          "Bill Tracker Summary",
+          `Monthly income: ${formatCurrency(monthlyIncomeVal)}`,
+          `Monthly bills: ${formatCurrency(totalMonthly)}`,
+          `Annual bills: ${formatCurrency(annualBills)}`,
+          `Estimated remaining after bills: ${formatCurrency(budgetRemaining)}`,
+          `Savings target (${(savingsGoalPct * 100).toFixed(1)}%): ${formatCurrency(savingsTarget)}`,
+          `Savings gap (annual): ${formatCurrency(savingsGap)}`,
+          `Rows with amount: ${rowCount}`,
+        ];
+
+        monthlyTotalEl.textContent = formatCurrency(totalMonthly);
+        annualTotalEl.textContent = formatCurrency(annualBills);
+        budgetRemainingEl.textContent = formatCurrency(budgetRemaining);
+        savingsGapEl.textContent = formatCurrency(savingsGap);
+        summaryOutput.textContent = summaryLines.join("\n");
+        summaryOutput.dataset.csv = csvRows.join("\n");
+        summaryOutput.dataset.rowCount = String(rowCount);
+
+        if (rowCount > 0) {
+          if (!completionTracked) {
+            safeTrack("bill_tracker_tool_completed", {
+              monthly_total: totalMonthly,
+              annual_total: annualBills,
+              rows_with_amount: rowCount,
+              has_income_input: monthlyIncomeVal > 0 ? 1 : 0,
+            });
+            completionTracked = true;
+          }
+          summaryMessage.textContent = "Looks ready. Copy summary or download CSV to use in a spreadsheet.";
+        } else {
+          completionTracked = false;
+          summaryMessage.textContent = "Add at least one bill amount to see completion metrics.";
+        }
+      }
+
+      function formatCurrency(value) {
+        return CURRENCY.format(value || 0);
+      }
+
+      function clearSummaryActionState(label = "Copy summary text") {
+        copySummaryButton.textContent = label;
+      }
+
+      calculateButton.addEventListener("click", calculateFromRows);
+
+      copySummaryButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(summaryOutput.textContent || "");
+          safeTrack("bill_tracker_export_or_save_intent", {
+            intent: "copy_summary",
+            event_value: Number(summaryOutput.dataset.rowCount || 0),
+          });
+          copySummaryButton.textContent = "Copied";
+          setTimeout(() => clearSummaryActionState("Copy summary text"), 1300);
+        } catch (_error) {
+          copySummaryButton.textContent = "Copy failed";
+          setTimeout(() => clearSummaryActionState("Copy summary text"), 1200);
+        }
+      });
+
+      downloadCsvButton.addEventListener("click", () => {
+        const csvData = summaryOutput.dataset.csv || "bill_name,amount,freq,monthly_equivalent,annual_equivalent\n";
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "bill-tracker-template.csv";
+        link.click();
+        URL.revokeObjectURL(url);
+
+        safeTrack("bill_tracker_export_or_save_intent", {
+          intent: "download_csv",
+          row_count: Number(summaryOutput.dataset.rowCount || 0),
+        });
+      });
+
+      addBillButton.addEventListener("click", () => {
+        createBillRow();
+        safeTrack("bill_tracker_add_bill_row");
+      });
+
+      clearBillsButton.addEventListener("click", () => {
+        billRows.innerHTML = "";
+        createBillRow("Rent", "", "monthly");
+        createBillRow("Utilities", "", "monthly");
+        createBillRow("Phone", "", "monthly");
+        createBillRow("Internet", "", "monthly");
+        summaryMessage.textContent = "";
+        calculateFromRows();
+      });
+
+      if (cta) {
+        cta.addEventListener("click", function () {
+          const offerSlug = this.dataset.offer || "bill-tracker-workbook";
+          const offerLocation = this.dataset.offerLocation || "tool_page";
+          const priceUsd = Number(this.dataset.priceUsd || 9);
+          safeTrack("bill_tracker_paid_cta_click", {
+            offer_slug: offerSlug,
+            offer_location: offerLocation,
+            price_usd: priceUsd,
+          });
+          safeTrack("bill_tracker_checkout_start", {
+            offer_slug: offerSlug,
+            offer_location: offerLocation,
+            price_usd: priceUsd,
+          });
+        });
+      }
+
+      billRows.addEventListener("input", calculateFromRows);
+      monthlyIncome.addEventListener("input", calculateFromRows);
+      savingsGoal.addEventListener("input", calculateFromRows);
+
+      createBillRow("Rent", "900", "monthly");
+      createBillRow("Utilities", "190", "monthly");
+      createBillRow("Phone", "55", "monthly");
+      calculateFromRows();
+    </script>
+  </body>
+</html>

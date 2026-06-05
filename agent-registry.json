@@ -161,25 +161,6 @@
   ],
   "modules": [
     {
-      "id": "grocery-budget-spreadsheet",
-      "title": "Grocery Budget Spreadsheet",
-      "status": "primary",
-      "module_type": "template",
-      "agent_task_phrase": "Build a practical grocery budget spreadsheet workflow with no login and immediate copy/download output.",
-      "module_url": "https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/",
-      "module_version": "1.0.0",
-      "install_or_call_path": "Open https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/ and use the planner to generate or rebalance a grocery budget.",
-      "paid_template_path": "https://checkout.dayonebuilder.online/products/grocery-budget-worksheet",
-      "proof_evidence": [
-        "No-login planner above the fold",
-        "Visible source links and conservative assumption notes",
-        "Qualified completion, export/save intent, and paid intent events",
-        "Installable paid template path exposed with tracking"
-      ],
-      "adoption_metric": "qualified_tool_completion, export_copy, export_download, paid_cta_click, checkout_start",
-      "platform_fit": "household_template"
-    },
-    {
       "id": "dob-task-resolver",
       "title": "DOB Task Resolver",
       "status": "primary",
@@ -194,6 +175,23 @@
         "install/call/test snippets on result cards"
       ],
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
+    },
+    {
+      "id": "bill-tracker-spreadsheet-template",
+      "title": "Bill Tracker Spreadsheet Template",
+      "status": "active",
+      "module_type": "template",
+      "agent_task_phrase": "Build a bill tracker spreadsheet for recurring expenses with a copy/export workflow.",
+      "module_url": "https://dayonebuilder.online/bill-tracker-spreadsheet-template/",
+      "module_manifest_url": "https://dayonebuilder.online/bill-tracker-spreadsheet-template/module-manifest.json",
+      "collection_json_url": "https://dayonebuilder.online/collections/bill-tracker-spreadsheet-template.json",
+      "install_or_call_path": "Open the page, add bills + frequency, click Recalculate, then copy summary or download CSV.",
+      "proof_evidence": [
+        "frequency normalization from weekly/biweekly/monthly/quarterly/annual into monthly totals",
+        "CSV export and copy intent events in client-side workflow",
+        "versioned collection entry and module manifest"
+      ],
+      "adoption_metric": "organic clicks, qualified tool completions, exports/copies/saves, paid CTA clicks, checkout starts, purchases, repeat use"
     }
   ],
   "archived_internal_modules": {

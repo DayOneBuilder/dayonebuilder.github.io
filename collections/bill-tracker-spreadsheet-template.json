@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "bill-tracker-spreadsheet-template",
+  "title": "Bill Tracker Spreadsheet Template",
+  "summary": "A no-login bill-tracking workflow that returns monthly and annual totals and exports a copy-ready CSV.",
+  "selection_rule": "Use this module when the user query is about a bill tracker template and wants a usable spreadsheet flow quickly.",
+  "task_aliases": [
+    "bill tracker spreadsheet template",
+    "bill tracker template",
+    "track recurring bills",
+    "monthly bill tracker",
+    "bill budget template",
+    "personal finance tracker"
+  ],
+  "entries": [
+    {
+      "id": "bill-tracker-spreadsheet-template",
+      "title": "Bill Tracker Spreadsheet Template",
+      "selected_source_url": "https://dayonebuilder.online/bill-tracker-spreadsheet-template/",
+      "first_action": "Open the page, add your recurring bills with frequency, then click Recalculate and review monthly/annual totals.",
+      "smoke_test": "Add at least one bill with amount, click Recalculate, and download CSV; verify totals and monthly-equivalent rows are present.",
+      "proof_signal": "Tool shows formula-based frequency normalization (weekly, biweekly, quarterly, annual to monthly) and generates a CSV export with the same row data.",
+      "fallback": "Use public references directly: https://finmasters.com/bill-tracker-template/, https://www.vertex42.com/ExcelTemplates/bill-tracker.html, https://www.financialaha.com/free-spreadsheet-templates/personal-budgeting/bill-tracker/ for template ideas.",
+      "module_url": "https://dayonebuilder.online/bill-tracker-spreadsheet-template/",
+      "adoption_metric": "organic clicks, qualified tool completions, exports/copies/saves, paid CTA clicks, checkout starts, purchases, and repeat use"
+    }
+  ]
+}

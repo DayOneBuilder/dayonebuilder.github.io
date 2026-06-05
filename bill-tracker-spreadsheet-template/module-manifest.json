@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "slug": "bill-tracker-spreadsheet-template",
+  "title": "Bill Tracker Spreadsheet Template",
+  "status": "active",
+  "module_type": "template",
+  "task_phrase": "A person searching bill tracker spreadsheet template needs a useful answer-first bill tracker with export, without signup.",
+  "agent_task_phrase": "Build and export a practical bill tracker spreadsheet for recurring bill management.",
+  "module_url": "https://dayonebuilder.online/bill-tracker-spreadsheet-template/",
+  "module_category": "finance",
+  "primary_offer": {
+    "slug": "bill-tracker-workbook",
+    "price_usd": 9,
+    "display_name": "Bill Tracker Workbook",
+    "checkout_url": "https://checkout.dayonebuilder.online/products/bill-tracker-workbook"
+  },
+  "adoption_metric": "organic clicks, qualified tool completions, exports/copies/saves, paid CTA clicks, checkout starts, purchases, and repeat use",
+  "instrumentation": {
+    "qualified_completion_event": "bill_tracker_tool_completed",
+    "export_or_install_events": [
+      "bill_tracker_export_or_save_intent",
+      "bill_tracker_add_bill_row"
+    ],
+    "paid_path_events": [
+      "bill_tracker_paid_cta_click",
+      "bill_tracker_checkout_start"
+    ]
+  },
+  "install_or_call_path": "Open https://dayonebuilder.online/bill-tracker-spreadsheet-template/ and enter bill lines, then use Copy summary text or Download CSV.",
+  "trust_evidence": [
+    "official/authoritative references listed on-page",
+    "frequency normalization and export CSV generated client-side",
+    "versioned module listing and registry record"
+  ],
+  "smoke_test": "Fill one bill row (amount+frequency), click Recalculate, then download CSV and confirm a saved file with totals appears."
+}
