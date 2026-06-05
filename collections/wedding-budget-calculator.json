@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "wedding-budget-calculator",
+  "title": "Wedding Budget Calculator",
+  "summary": "Small wedding budget calculator with exportable result and a paid workbook bridge for teams that want to speed up planning.",
+  "task_aliases": [
+    "wedding budget calculator",
+    "how much does a wedding cost",
+    "wedding budget worksheet",
+    "wedding planning budget",
+    "wedding per guest budget"
+  ],
+  "selection_rule": "Use this module when the user wants to estimate wedding costs quickly with editable line items and a shareable worksheet output.",
+  "module_manifest": {
+    "module_type": "calculator",
+    "module_url": "https://dayonebuilder.online/wedding-budget-calculator/",
+    "qualified_completion_event": "wedding_budget_tool_completed",
+    "install_or_save_intent_events": [
+      "wedding_budget_export_intent",
+      "wedding_budget_save_intent"
+    ],
+    "paid_offer_events": [
+      "wedding_budget_paid_cta_click",
+      "wedding_budget_checkout_start"
+    ]
+  },
+  "entries": [
+    {
+      "id": "wedding-budget-calculator",
+      "title": "Wedding Budget Calculator",
+      "task_aliases": [
+        "wedding budget calculator",
+        "wedding budget estimate",
+        "wedding planning budget tool"
+      ],
+      "selected_source_url": "https://dayonebuilder.online/wedding-budget-calculator/",
+      "first_action": "Open the calculator, enter total budget and category spend, then copy or download the worksheet output.",
+      "smoke_test": "Fill all fields and verify remaining budget, spend %, and per-guest average update; then download CSV and confirm a file is created.",
+      "proof_signal": "One page offers no-login estimate math, export intent events, and a checkout bridge for the paid workbook.",
+      "fallback": "Use official planning references such as Zola, The Knot, and NerdWallet to align assumptions before finalizing vendor orders."
+    }
+  ],
+  "fallback": "If this module does not match the task, route to a source-first search or a different collection entry from collections/index.json."
+}

@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wedding Budget Calculator | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for wedding budget calculator, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/wedding-budget-calculator/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #090f17;
+        --ink: #f2f8ff;
+        --muted: #b6c0d1;
+        --panel: rgba(8, 18, 34, 0.9);
+        --line: rgba(162, 186, 220, 0.18);
+        --brand: #c4f6ff;
+        --mint: #9df0c6;
+        --peach: #ffd4a7;
+        --gold: #ffda6f;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: radial-gradient(circle at 20% -10%, #102a4f 0%, transparent 45%),
+          radial-gradient(circle at 90% 0%, #2a2444 0%, transparent 36%), var(--bg);
+        font: 16px/1.6 "Space Grotesk", "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+      }
+
+      .wrap {
+        width: min(calc(100% - 28px), 1020px);
+        margin: 0 auto;
+        padding: 28px 0 52px;
+      }
+
+      .top {
+        margin-bottom: 14px;
+      }
+
+      .back {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--panel);
+        padding: 20px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(196, 246, 255, 0.25);
+        color: var(--brand);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1, h2, h3 {
+        margin: 0.2rem 0 0.7rem;
+        line-height: 1.1;
+      }
+
+      h1 { font-size: clamp(2rem, 5vw, 3rem); }
+      h2 { font-size: clamp(1.2rem, 3vw, 1.8rem); }
+      p, li, small { color: var(--muted); }
+
+      .grid {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        min-width: 0;
+      }
+
+      label { color: var(--ink); font-weight: 700; }
+
+      input {
+        width: 100%;
+        height: 44px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        font: inherit;
+        padding: 0 12px;
+      }
+
+      input:focus { outline: 1px solid var(--mint); }
+
+      .result {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.2);
+      }
+
+      .metric-value {
+        margin-top: 6px;
+        display: block;
+        color: var(--mint);
+        font-size: 1.45rem;
+        font-weight: 700;
+      }
+
+      .actions {
+        margin-top: 14px;
+        padding: 16px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 12px;
+      }
+
+      .button,
+      .cta {
+        appearance: none;
+        border-radius: 999px;
+        min-height: 44px;
+        border: 1px solid transparent;
+        padding: 11px 14px;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+        color: #041024;
+        cursor: pointer;
+      }
+
+      .button {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--line);
+        color: var(--ink);
+      }
+
+      .cta {
+        background: linear-gradient(140deg, #ffe59f, #a7f4ff);
+      }
+
+      .summary {
+        margin-top: 12px;
+        white-space: pre-wrap;
+        word-break: break-word;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.2);
+        max-height: 190px;
+        overflow: auto;
+      }
+
+      .section {
+        margin-top: 14px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .links {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .disclaimer {
+        margin-top: 10px;
+        color: var(--peach);
+      }
+
+      .status-pill {
+        margin-top: 8px;
+        display: inline-flex;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--ink);
+      }
+
+      .status-pill.warning { color: #ffd5a8; }
+      .status-pill.ok { color: #9af1bf; }
+      .status-pill.critical { color: #ff9393; }
+
+      .muted-note { margin: 0; }
+
+      @media (max-width: 960px) {
+        .result { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+
+      @media (max-width: 640px) {
+        .wrap { width: calc(100% - 14px); padding-top: 16px; }
+        .grid,
+        .result { grid-template-columns: 1fr; }
+        .cta,
+        .button { width: 100%; }
+      }
+    </style>
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Wedding Budget Calculator",
+          "url": "https://dayonebuilder.online/wedding-budget-calculator/",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "name": "Free wedding budget calculator"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Wedding Budget Calculator",
+          "url": "https://dayonebuilder.online/wedding-budget-calculator/",
+          "description": "Quick wedding budget breakdown estimator with exportable CSV worksheet and paid workbook bridge.",
+          "applicationCategory": "FinanceApplication",
+          "operatingSystem": "Any"
+        }
+      ]
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <a class="back" href="/">← DayOneBuilder</a>
+      </div>
+
+      <div class="panel">
+        <span class="eyebrow">wedding budgeting tool</span>
+        <h1>Wedding Budget Calculator</h1>
+        <p>
+          Enter your wedding costs once, and the calculator gives you a live remaining budget,
+          per-guest spend, and a simple worksheet snapshot you can export right away.
+          This is an estimate, not financial advice.
+        </p>
+
+        <div class="grid" id="inputs">
+          <label class="field">
+            <span>Total wedding budget (USD)</span>
+            <input id="totalBudget" type="number" min="0" step="1" value="18000" inputmode="decimal" />
+            <small>Choose a target you can hold to.</small>
+          </label>
+          <label class="field">
+            <span>Guest count</span>
+            <input id="guestCount" type="number" min="0" step="1" value="80" inputmode="decimal" />
+            <small>Used for per-guest average calculations.</small>
+          </label>
+          <label class="field">
+            <span>Venue and ceremony (USD)</span>
+            <input id="venue" type="number" min="0" step="1" value="6500" inputmode="decimal" />
+            <small>Rent, rental deposit, and ceremony-related costs.</small>
+          </label>
+          <label class="field">
+            <span>Catering and drinks (USD)</span>
+            <input id="catering" type="number" min="0" step="1" value="4200" inputmode="decimal" />
+            <small>Food, drinks, cake, and service staff.</small>
+          </label>
+          <label class="field">
+            <span>Photography and video (USD)</span>
+            <input id="media" type="number" min="0" step="1" value="1600" inputmode="decimal" />
+            <small>Coverage, album, and editing options.</small>
+          </label>
+          <label class="field">
+            <span>Attire and beauty (USD)</span>
+            <input id="attire" type="number" min="0" step="1" value="1100" inputmode="decimal" />
+            <small>Dress, suit, fitting, styling, and makeup.</small>
+          </label>
+          <label class="field">
+            <span>Decor and flowers (USD)</span>
+            <input id="decor" type="number" min="0" step="1" value="1800" inputmode="decimal" />
+            <small>Backdrop, flowers, signage, candles, lighting.</small>
+          </label>
+          <label class="field">
+            <span>Music and entertainment (USD)</span>
+            <input id="music" type="number" min="0" step="1" value="900" inputmode="decimal" />
+            <small>DJ, band, performance, or playlist services.</small>
+          </label>
+          <label class="field">
+            <span>Stationery, gifts, and misc (USD)</span>
+            <input id="misc" type="number" min="0" step="1" value="800" inputmode="decimal" />
+            <small>Invites, favors, transport, emergency spend.</small>
+          </label>
+        </div>
+
+        <section class="result" id="resultArea" aria-live="polite">
+          <div class="metric">
+            <div>Total planned spend</div>
+            <strong id="totalSpend" class="metric-value">$0.00</strong>
+            <div class="status-pill" id="spendStatus">Fill in amounts to calculate.</div>
+          </div>
+          <div class="metric">
+            <div>Remaining budget</div>
+            <strong id="remaining" class="metric-value">$0.00</strong>
+            <div>How much is left or over budget.</div>
+          </div>
+          <div class="metric">
+            <div>Budget used</div>
+            <strong id="usedPercent" class="metric-value">0%</strong>
+            <div>Share of your target used.</div>
+          </div>
+          <div class="metric">
+            <div>Average per guest</div>
+            <strong id="perGuest" class="metric-value">$0.00</strong>
+            <div>Budget efficiency check by headcount.</div>
+          </div>
+        </section>
+
+        <section class="actions">
+          <h2>Export or copy your result</h2>
+          <p class="muted-note">Use this result for planning notes and checklist sharing.</p>
+          <div class="summary" id="summaryText">Set your amounts to build a quick budget summary.</div>
+          <div class="buttons">
+            <button class="button" id="copySummary" type="button">Copy summary text</button>
+            <button class="button" id="downloadCsv" type="button">Download CSV worksheet</button>
+            <a
+              id="weddingWorkbookCta"
+              class="cta"
+              href="https://checkout.dayonebuilder.online/products/wedding-budget-workbook?utm_source=dayonebuilder&utm_medium=calculator&utm_campaign=wedding_budget&utm_content=tool_top_cta"
+              data-offer="wedding-budget-workbook"
+              data-offer-location="wedding_budget_tool"
+              data-price-usd="9"
+            >
+              Get the $9 Wedding Budget Workbook
+            </a>
+          </div>
+          <p class="disclaimer">
+            This is an estimate only and should be updated against signed venue, vendor, and payment plans.
+            For any loan or financing context, always use lender statements and payout terms from the source.
+          </p>
+        </section>
+
+        <section class="section">
+          <h2>Reference benchmarks</h2>
+          <p class="muted-note">Useful planning references for baseline percentages and wedding cost structure:</p>
+          <ul class="links">
+            <li><a href="https://www.zola.com/wedding-budget">Zola Wedding Budget</a></li>
+            <li><a href="https://www.theknot.com/budget-advisor">The Knot Budget Advisor</a></li>
+            <li><a href="https://www.nerdwallet.com/finance/learn/wedding-budget-cost-calculator">NerdWallet wedding budget calculator guide</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const USD = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 2,
+      });
+
+      const fields = {
+        totalBudget: document.getElementById("totalBudget"),
+        guestCount: document.getElementById("guestCount"),
+        venue: document.getElementById("venue"),
+        catering: document.getElementById("catering"),
+        media: document.getElementById("media"),
+        attire: document.getElementById("attire"),
+        decor: document.getElementById("decor"),
+        music: document.getElementById("music"),
+        misc: document.getElementById("misc"),
+      };
+
+      const nodes = {
+        totalSpend: document.getElementById("totalSpend"),
+        remaining: document.getElementById("remaining"),
+        usedPercent: document.getElementById("usedPercent"),
+        perGuest: document.getElementById("perGuest"),
+        spendStatus: document.getElementById("spendStatus"),
+        summaryText: document.getElementById("summaryText"),
+      };
+
+      const copySummaryButton = document.getElementById("copySummary");
+      const downloadCsvButton = document.getElementById("downloadCsv");
+      const cta = document.getElementById("weddingWorkbookCta");
+      let completionTracked = false;
+
+      function trackWeddingEvent(eventName, params = {}) {
+        if (!window.dataLayer) {
+          return;
+        }
+
+        const payload = Object.assign(
+          {
+            event_category: "wedding_budget_calculator",
+            measured_value: Number(params.measuredValue || 0),
+          },
+          params,
+        );
+
+        if (typeof gtag === "function") {
+          gtag("event", eventName, payload);
+        } else {
+          window.dataLayer.push({ event: eventName, ...payload });
+        }
+      }
+
+      function numberValue(node) {
+        const value = Number(node.value);
+        return Number.isFinite(value) ? value : 0;
+      }
+
+      function asMoney(value) {
+        return USD.format(value);
+      }
+
+      function setCopyButtonText(button, state) {
+        const original = button.textContent;
+        button.textContent = state;
+        setTimeout(() => {
+          button.textContent = original;
+        }, 1400);
+      }
+
+      function setStatusNode(node, className, text) {
+        node.className = `status-pill ${className}`;
+        node.textContent = text;
+      }
+
+      function buildSummary(totalBudget, totalSpend, remaining, usedPercent, perGuest, guestCount) {
+        return [
+          `Wedding budget: ${asMoney(totalBudget)}`,
+          `Planned spend: ${asMoney(totalSpend)}`,
+          `Remaining: ${asMoney(remaining)}`,
+          `Budget used: ${usedPercent.toFixed(1)}%`,
+          `Avg spend per guest: ${asMoney(perGuest)} (${guestCount} guests)`,
+          "",
+          "Use this with your signed contracts and vendor quotes before purchase.",
+        ].join("\n");
+      }
+
+      function calculate() {
+        const totalBudget = Math.max(0, numberValue(fields.totalBudget));
+        const guestCount = Math.max(0, numberValue(fields.guestCount));
+
+        const costs = [
+          numberValue(fields.venue),
+          numberValue(fields.catering),
+          numberValue(fields.media),
+          numberValue(fields.attire),
+          numberValue(fields.decor),
+          numberValue(fields.music),
+          numberValue(fields.misc),
+        ];
+
+        const totalSpend = costs.reduce((sum, value) => sum + Math.max(0, value), 0);
+        const remaining = totalBudget - totalSpend;
+        const usedPercent = totalBudget > 0 ? (totalSpend / totalBudget) * 100 : 0;
+        const perGuest = guestCount > 0 ? totalSpend / guestCount : 0;
+
+        nodes.totalSpend.textContent = asMoney(totalSpend);
+        nodes.remaining.textContent = asMoney(remaining);
+        nodes.usedPercent.textContent = `${usedPercent.toFixed(1)}%`;
+        nodes.perGuest.textContent = asMoney(perGuest);
+
+        const summary = buildSummary(totalBudget, totalSpend, remaining, usedPercent, perGuest, guestCount);
+        nodes.summaryText.textContent = summary;
+        nodes.summaryText.dataset.csv = [
+          "Metric,Value",
+          `total_budget_usd,${totalBudget.toFixed(2)}`,
+          `guest_count,${guestCount.toFixed(0)}`,
+          `total_planned_spend_usd,${totalSpend.toFixed(2)}`,
+          `remaining_budget_usd,${remaining.toFixed(2)}`,
+          `budget_used_percent,${usedPercent.toFixed(2)}`,
+          `average_spend_per_guest_usd,${perGuest.toFixed(2)}`,
+          `venue_ceremony_usd,${numberValue(fields.venue).toFixed(2)}`,
+          `catering_drinks_usd,${numberValue(fields.catering).toFixed(2)}`,
+          `media_usd,${numberValue(fields.media).toFixed(2)}`,
+          `attire_beauty_usd,${numberValue(fields.attire).toFixed(2)}`,
+          `decor_flowers_usd,${numberValue(fields.decor).toFixed(2)}`,
+          `music_entertainment_usd,${numberValue(fields.music).toFixed(2)}`,
+          `miscellaneous_usd,${numberValue(fields.misc).toFixed(2)}`,
+        ].join("\n");
+
+        if (totalSpend <= totalBudget && totalBudget > 0) {
+          setStatusNode(nodes.spendStatus, "ok", `On track: ${asMoney(remaining)} remaining.`);
+        } else if (totalSpend > totalBudget && totalBudget > 0) {
+          setStatusNode(nodes.spendStatus, "critical", `Over budget by ${asMoney(totalSpend - totalBudget)}.`);
+        } else {
+          setStatusNode(nodes.spendStatus, "warning", "Set a budget and costs to see status.");
+        }
+
+        if (!completionTracked && guestCount >= 1 && totalBudget >= 1 && totalSpend > 0) {
+          completionTracked = true;
+          trackWeddingEvent("wedding_budget_tool_completed", {
+            completionType: "qualified",
+            budgetUsd: totalBudget,
+            spendUsd: totalSpend,
+            guestCount,
+            remainingUsd: remaining,
+            overBudgetUsd: Math.max(0, totalSpend - totalBudget),
+            measuredValue: usedPercent,
+          });
+        }
+      }
+
+      function trackExportIntent(kind) {
+        trackWeddingEvent("wedding_budget_export_intent", {
+          exportType: kind,
+          measuredValue: 1,
+        });
+      }
+
+      copySummaryButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(nodes.summaryText.textContent || "");
+          trackWeddingEvent("wedding_budget_save_intent", {
+            saveType: "summary_copy",
+            measuredValue: 1,
+          });
+          setCopyButtonText(copySummaryButton, "Copied");
+        } catch (_error) {
+          setCopyButtonText(copySummaryButton, "Copy failed");
+        }
+      });
+
+      downloadCsvButton.addEventListener("click", () => {
+        const csvData = nodes.summaryText.dataset.csv || "metric,value\nnone,0";
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "wedding-budget-worksheet.csv";
+        link.click();
+        URL.revokeObjectURL(url);
+
+        trackExportIntent("csv_download");
+      });
+
+      if (cta) {
+        cta.addEventListener("click", function () {
+          const offerSlug = this.dataset.offer || "wedding-budget-workbook";
+          const offerLocation = this.dataset.offerLocation || "wedding_budget_tool";
+          const priceUsd = Number(this.dataset.priceUsd || 9);
+
+          trackWeddingEvent("wedding_budget_paid_cta_click", {
+            offerSlug,
+            offerLocation,
+            priceUsd,
+            measuredValue: priceUsd,
+          });
+
+          trackWeddingEvent("wedding_budget_checkout_start", {
+            offerSlug,
+            offerLocation,
+            priceUsd,
+            paymentType: "checkout_product_page",
+            measuredValue: 1,
+          });
+        });
+      }
+
+      Object.values(fields).forEach((field) => {
+        field.addEventListener("input", calculate);
+      });
+
+      calculate();
+    </script>
+  </body>
+</html>

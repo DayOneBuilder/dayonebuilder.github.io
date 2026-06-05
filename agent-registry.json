@@ -177,20 +177,20 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "mortgage-payoff-calculator-based-on-current-balance",
-      "title": "Mortgage payoff calculator (current balance)",
-      "status": "active_validation",
+      "id": "wedding-budget-calculator",
+      "title": "Wedding Budget Calculator",
+      "status": "active",
       "module_type": "calculator",
-      "agent_task_phrase": "An AI agent needs a mortgage payoff calculator based on current balance without fragile one-off glue code.",
-      "module_url": "https://dayonebuilder.online/mortgage-payoff-calculator-based-on-current-balance/",
-      "install_or_call_path": "Open https://dayonebuilder.online/mortgage-payoff-calculator-based-on-current-balance/, run calculate, and use copy, local save, or CSV export.",
+      "agent_task_phrase": "An AI agent needs to wedding budget calculator without writing fragile one-off glue code.",
+      "module_url": "https://dayonebuilder.online/wedding-budget-calculator/",
+      "install_or_call_path": "Open https://dayonebuilder.online/wedding-budget-calculator/ and export the worksheet CSV or open the paid workbook path.",
       "proof_evidence": [
-        "Authoritative CFPB and industry reference links for terminology and risk checks",
-        "Exportable CSV output for reuse or handoff",
-        "Completion and adoption event tracking for measurable qualified usage",
-        "Benchmark fixture and human-readable docs in the module folder"
+        "fillable category-level wedding budget inputs",
+        "live remaining budget and over/under indicator",
+        "qualified completion + export/save event capture",
+        "checkout bridge on the same page for the paid workbook"
       ],
-      "adoption_metric": "collection_json_hit, qualified_tool_completion, mortgage_payoff_tool_exported_csv, mortgage_payoff_tool_save_intent"
+      "adoption_metric": "collection_json_hit, wedding_budget_tool_completed, wedding_budget_export_intent, wedding_budget_paid_cta_click"
     }
   ],
   "archived_internal_modules": {
