@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index,follow" />
+    <title>Cleaning Checklist Template | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for cleaning checklist template, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/cleaning-checklist-template/" />
+    <link rel="alternate" type="application/ld+json" href="/collections/cleaning-checklist-template.json" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #0a1117;
+        --text: #ecf5ff;
+        --muted: #a8bdcc;
+        --line: rgba(255, 255, 255, 0.18);
+        --panel: rgba(11, 24, 34, 0.84);
+        --brand: #77d4ff;
+        --accent: #d7ff96;
+        --ink-soft: #bfd8ea;
+        --radius: 14px;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--text);
+        background: radial-gradient(circle at 10% 0%, #122235 0%, #0a1117 45%, #070c11 100%);
+        font: 16px/1.55 Inter, "Space Grotesk", "IBM Plex Sans", sans-serif;
+      }
+
+      .wrap {
+        width: min(1120px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 26px 0 58px;
+      }
+
+      .card {
+        margin-top: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--panel);
+        padding: 20px;
+      }
+
+      .top {
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .top a {
+        color: var(--brand);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .tag {
+        display: inline-block;
+        color: var(--accent);
+        background: rgba(215, 255, 150, 0.14);
+        border: 1px solid rgba(215, 255, 150, 0.28);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 12px;
+      }
+
+      h1 {
+        margin: 12px 0 14px;
+        font-size: clamp(2rem, 5vw, 3.1rem);
+        line-height: 1.1;
+      }
+
+      p, li { color: var(--muted); }
+      .muted { color: var(--ink-soft); }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: #e7f2fb;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      .field input,
+      .field select {
+        width: 100%;
+        min-height: 44px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text);
+        font: inherit;
+        padding: 0 12px;
+      }
+
+      .field input::placeholder { color: #7e93a4; }
+
+      .check-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 8px 0;
+      }
+
+      .actions {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      button, .cta {
+        appearance: none;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        min-height: 44px;
+        padding: 12px 16px;
+        font: inherit;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .primary {
+        background: linear-gradient(90deg, #79dcff, #80ffa7);
+        color: #09121a;
+      }
+
+      .secondary {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        border-color: var(--line);
+      }
+
+      .ghost {
+        background: transparent;
+        color: var(--text);
+        border: 1px dashed rgba(255, 255, 255, 0.22);
+      }
+
+      .result {
+        margin-top: 16px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 14px;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 0;
+        border: 1px dashed rgba(255, 255, 255, 0.2);
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.35);
+        max-height: 420px;
+        overflow: auto;
+      }
+
+      .result-summary {
+        color: #e8f4ff;
+        font-weight: 600;
+      }
+
+      .result-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .result-head h2 { margin: 0; }
+      .small { font-size: 14px; color: var(--muted); }
+      ul { margin: 0; padding-left: 18px; }
+      li { color: var(--muted); margin: 6px 0; }
+
+      .source-list a {
+        color: #caedff;
+      }
+
+      .message {
+        min-height: 21px;
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      .links {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 980px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <script type="application/ld+json">
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Cleaning Checklist Template",
+          "url": "https://dayonebuilder.online/cleaning-checklist-template/",
+          "applicationCategory": "UtilityApplication",
+          "operatingSystem": "Any",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Cleaning Checklist Template",
+          "url": "https://dayonebuilder.online/cleaning-checklist-template/",
+          "description": "Generate a ready-to-use household cleaning checklist from your home size and schedule.",
+          "applicationCategory": "ProductivityApplication",
+          "operatingSystem": "Any",
+          "featureList": [
+            "copy checklist",
+            "download CSV",
+            "browser-save template"
+          ]
+        }
+      ]
+    </script>
+  </head>
+  <body>
+    <main class="wrap">
+      <a href="/" class="top">← DayOneBuilder</a>
+      <span class="tag">household work tool</span>
+      <h1>Cleaning Checklist Template</h1>
+      <p class="muted">
+        Build a practical cleaning checklist in under a minute. Add your home size, cleaning depth, and weekly frequency, then export
+        a copyable template you can use today.
+      </p>
+
+      <section class="card">
+        <div class="grid">
+          <label class="field">
+            Home size
+            <select id="homeSize">
+              <option value="studio">Studio / 1 room</option>
+              <option value="1br">1 bedroom + living</option>
+              <option value="2br" selected>2 bedrooms</option>
+              <option value="3br">3 bedrooms</option>
+              <option value="4br">4+ bedrooms</option>
+            </select>
+          </label>
+
+          <label class="field">
+            Cleaning goal
+            <select id="cleaningGoal">
+              <option value="minimal">Quick tidy only</option>
+              <option value="standard" selected>Standard weekly clean</option>
+              <option value="deep">Deep fresh-clean pass</option>
+            </select>
+          </label>
+
+          <label class="field">
+            Days you can clean per week
+            <input id="daysPerWeek" type="number" min="1" max="7" step="1" value="2" />
+          </label>
+
+          <label class="field">
+            Minutes available each cleaning day
+            <input id="minutesPerSession" type="number" min="15" max="360" step="5" value="45" />
+          </label>
+
+          <label class="field">
+            Rooms used most
+            <input id="problemRooms" type="number" min="1" max="20" step="1" value="2" />
+          </label>
+
+          <div class="field">
+            <span style="font-weight: 600; color:#e7f2fb;">Pet and child items</span>
+            <label class="check-row">
+              <input id="extraPass" type="checkbox" />
+            Add pet/child hygiene and spill refresh pass
+            </label>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="generate" class="primary" type="button">Generate checklist</button>
+          <button id="copyChecklist" class="secondary" type="button">Copy checklist text</button>
+          <button id="downloadCsv" class="ghost" type="button">Download CSV</button>
+          <button id="saveTemplate" class="ghost" type="button">Save in browser</button>
+        </div>
+        <p class="message" id="message" role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="result">
+        <article class="panel">
+          <div class="result-head">
+            <h2 id="summaryTitle">Your generated checklist</h2>
+            <span class="small" id="timeEstimate"></span>
+          </div>
+          <p class="small" id="assumptions"></p>
+          <div id="outputs"></div>
+        </article>
+
+        <article class="panel">
+          <h2>Template text</h2>
+          <pre id="templateText">Set your inputs and click Generate checklist.</pre>
+          <div class="actions">
+            <a
+              id="paidCta"
+              class="cta primary"
+              href="https://checkout.dayonebuilder.online/products/cleaning-schedule-template?utm_source=dayonebuilder&utm_medium=tool_page&utm_campaign=cleaning_checklist_template"
+              rel="noopener noreferrer"
+              target="_blank"
+              data-offer-location="top_cta"
+              data-offer="cleaning-schedule-template"
+              data-price-usd="9"
+            >Get the paid template pack ($9)</a>
+          </div>
+          <p class="small">
+            Paid path includes a refillable grocery-friendly template pack with refill counters and a hardening checklist for weekly deep-refresh sessions.
+          </p>
+        </article>
+
+        <article class="panel source-list">
+          <h2>Reference templates reviewed</h2>
+          <ul>
+            <li><a href="https://www.canva.com/checklists/templates/cleaning/" target="_blank" rel="noopener noreferrer">Canva cleaning templates</a> (reference inspiration and structure)</li>
+            <li><a href="https://www.template.net/editable/checklists/cleaning" target="_blank" rel="noopener noreferrer">Template.net cleaning checklists</a> (reference examples)</li>
+            <li><a href="https://www.etsy.com/market/cleaning_checklist" target="_blank" rel="noopener noreferrer">Etsy cleaning checklist listings</a> (pricing and scope signals)</li>
+          </ul>
+          <p class="small">
+            We use these only as public examples for structure and naming patterns.
+          </p>
+        </article>
+      </section>
+    </main>
+
+    <script>
+      const profileMap = {
+        studio: { roomsWeight: 1, baseline: 35 },
+        "1br": { roomsWeight: 1.1, baseline: 42 },
+        "2br": { roomsWeight: 1.3, baseline: 55 },
+        "3br": { roomsWeight: 1.6, baseline: 68 },
+        "4br": { roomsWeight: 2.0, baseline: 85 },
+      };
+
+      const baseTasks = {
+        minimal: {
+          daily: [
+            ["Make beds", 6],
+            ["Put all clutter away", 8],
+            ["Wipe kitchen counters", 6],
+          ],
+          weekly: [
+            ["Quick floor vacuum or sweep in shared rooms", 18],
+            ["Refresh laundry area", 10],
+          ],
+          monthly: [["Dust fan/vents", 10]],
+        },
+        standard: {
+          daily: [
+            ["Make beds", 8],
+            ["Put all clutter away", 10],
+            ["Wipe kitchen counters and stovetop", 8],
+            ["Clean bathroom sink area", 7],
+            ["Take out trash if full", 5],
+          ],
+          weekly: [
+            ["Vacuum and mop all floors", 35],
+            ["Clean bathroom mirror and mirror-trim", 8],
+            ["Clean kitchen sink and stovetop", 10],
+            ["Dust open surfaces", 10],
+          ],
+          monthly: [
+            ["Wash windows or wipe sills", 18],
+            ["Change air-circulation filters if available", 12],
+          ],
+        },
+        deep: {
+          daily: [
+            ["Make beds", 8],
+            ["Put all clutter away", 12],
+            ["Kitchen counters, stovetop and table", 12],
+            ["Wipe entrances, cabinet fronts", 10],
+            ["Bathroom quick refresh (sink + toilet seat)", 10],
+          ],
+          weekly: [
+            ["Full vacuum + mop workflow", 45],
+            ["Mirror and tile edges", 12],
+            ["Bathroom deep wash: basin, mirror, toilet", 20],
+            ["Kitchen floor and sink edges", 18],
+            ["Laundry batch + linens", 15],
+          ],
+          monthly: [
+            ["Dust fan blades and hard-to-reach corners", 20],
+            ["Clean refrigerator and microwave", 20],
+            ["Deep scrub shower / tub area", 22],
+          ],
+        },
+      };
+
+      const output = document.getElementById("outputs");
+      const summaryTitle = document.getElementById("summaryTitle");
+      const assumptionsEl = document.getElementById("assumptions");
+      const templateText = document.getElementById("templateText");
+      const timeEstimate = document.getElementById("timeEstimate");
+      const message = document.getElementById("message");
+
+      const homeSizeEl = document.getElementById("homeSize");
+      const goalEl = document.getElementById("cleaningGoal");
+      const daysEl = document.getElementById("daysPerWeek");
+      const minutesEl = document.getElementById("minutesPerSession");
+      const roomsEl = document.getElementById("problemRooms");
+      const extraPassEl = document.getElementById("extraPass");
+      const cta = document.getElementById("paidCta");
+
+      const STORAGE_KEY = "cleaning-checklist-template:last-run";
+      let currentPayload = {
+        version: "1.0.0",
+        csv: "task_type,task,item_minutes\n",
+      };
+
+      function trackEvent(name, params = {}) {
+        if (typeof gtag !== "function") {
+          return;
+        }
+        gtag("event", name, Object.assign({
+          event_category: "cleaning_checklist_template",
+        }, params));
+      }
+
+      function toNumber(node) {
+        const value = Number(node.value);
+        return Number.isFinite(value) ? value : 0;
+      }
+
+      function safeTextLine(line) {
+        return line.replace(/\n/g, " ").replace(/"/g, '""');
+      }
+
+      function formatCurrency(value) {
+        return `$${value.toFixed(2)}`;
+      }
+
+      function formatMinutes(minutes) {
+        return `${Math.max(0, Math.round(minutes))} min`;
+      }
+
+      function buildChecklist(profile, goal, daysPerWeek, minutesPerSession, rooms, extraPass) {
+        const goalTasks = baseTasks[goal];
+        const profileScale = profileMap[profile] || profileMap["2br"];
+        const outputLines = [];
+        const csvRows = ["task_type,task,item_minutes"];
+        const sections = [];
+        let dailyMinutes = 0;
+        let weeklyMinutes = 0;
+        let monthlyMinutes = 0;
+
+        function scaleTask(item, minutes, type) {
+          const roomAdjust = Math.max(1, rooms * profileScale.roomsWeight);
+          const extra = type === "daily" ? 0.7 : type === "weekly" ? 1 : 1.15;
+          return Math.max(2, minutes * extra * roomAdjust);
+        }
+
+        function addSection(label, items, type) {
+          const tasks = items.map(([task, minutes]) => {
+            const adjusted = Math.round(scaleTask(task, minutes, type));
+            if (type === "daily") dailyMinutes += adjusted;
+            if (type === "weekly") weeklyMinutes += adjusted;
+            if (type === "monthly") monthlyMinutes += adjusted;
+            outputLines.push(`${label}: ${task} (${adjusted} min)`);
+            csvRows.push(`${label},${safeTextLine(task)},${adjusted}`);
+            return `<li>${task} <span class="small">(${formatMinutes(adjusted)})</span></li>`;
+          }).join("");
+          sections.push(`<h3 id="${label.toLowerCase().replace(/ /g, '-')}" class="result-summary">${label}</h3><ul>${tasks}</ul>`);
+        }
+
+        addSection("Daily", goalTasks.daily, "daily");
+        addSection("Weekly", goalTasks.weekly, "weekly");
+        addSection("Monthly", goalTasks.monthly, "monthly");
+
+        if (extraPass) {
+          const extra = [
+            ["Child-safe quick sweep", 10],
+            ["Pet corner refresh", 9],
+            ["Entryway spill/odors check", 7],
+          ];
+          addSection("Extra pass", extra, "weekly");
+        }
+
+        const totalEstimatedMinutes = Math.round((dailyMinutes * daysPerWeek) + weeklyMinutes + (monthlyMinutes / 4));
+        const budgetGap = Math.max(0, minutesPerSession - totalEstimatedMinutes);
+        const shortName = `~${goal} + ${profile}`;
+        return {
+          sections,
+          outputText: outputLines.join("\n"),
+          csvText: csvRows.join("\n"),
+          totalEstimatedMinutes,
+          budgetGap,
+          budgetSufficiency: minutesPerSession >= totalEstimatedMinutes ? "within" : "over",
+          profile,
+          goal,
+          tasksPerRun: outputLines.length,
+          assumptions: [
+            `Home profile: ${profile}`,
+            `Goal: ${goal} schedule`,
+            `Clean on ${daysPerWeek} day(s) weekly`,
+            `Target minutes per day: ${minutesPerSession}`,
+            `Room weighting factor: ${profileScale.roomsWeight}`,
+          ],
+          estimatePerPlanType: {
+            daily: dailyMinutes,
+            weekly: weeklyMinutes,
+            monthly: monthlyMinutes,
+          },
+          shortName,
+        };
+      }
+
+      function calculate() {
+        const profile = homeSizeEl.value;
+        const goal = goalEl.value;
+        const daysPerWeek = Math.min(7, Math.max(1, Math.round(toNumber(daysEl))));
+        const minutesPerSession = Math.max(15, Math.min(240, Math.round(toNumber(minutesEl))));
+        const rooms = Math.min(20, Math.max(1, Math.round(toNumber(roomsEl))));
+        const extraPass = extraPassEl.checked;
+
+        const result = buildChecklist(profile, goal, daysPerWeek, minutesPerSession, rooms, extraPass);
+        output.innerHTML = result.sections.join("");
+        summaryTitle.textContent = `Your generated checklist (${result.shortName})`;
+        assumptionsEl.textContent = `Assumptions: ${result.assumptions.join(" | ")}`;
+        const fitText = result.budgetSufficiency === "within"
+          ? `Target window is realistic.`
+          : `Target may overrun by about ${formatMinutes(Math.abs(result.budgetGap))}.`;
+        timeEstimate.textContent = `Estimated total: ${formatMinutes(result.totalEstimatedMinutes)} per 7-day cycle. ${fitText}`;
+        templateText.textContent = [
+          "Cleaning Checklist Template",
+          "Profile: " + result.shortName,
+          "Assumptions: " + result.assumptions.join(" | "),
+          "",
+          result.outputText,
+        ].join("\n");
+
+        currentPayload = {
+          version: "1.0.0",
+          profile,
+          goal,
+          daysPerWeek,
+          minutesPerSession,
+          rooms,
+          extraPass,
+          totalEstimatedMinutes: result.totalEstimatedMinutes,
+          tasksPerRun: result.tasksPerRun,
+          csv: result.csvText,
+          outputText: templateText.textContent,
+          assumptions: result.assumptions.join(" | "),
+        };
+
+        trackEvent("cleaning_checklist_template_qualified_completion", {
+          cleaning_goal: goal,
+          home_size: profile,
+          days_per_week: daysPerWeek,
+          budget_minutes: minutesPerSession,
+          room_weight: toNumber(roomsEl),
+          extra_pass: extraPass,
+          estimated_total_minutes: result.totalEstimatedMinutes,
+          tasks_count: result.tasksPerRun,
+        });
+
+        message.textContent = "Checklist generated. Copy, save, or download now.";
+        daysEl.value = String(daysPerWeek);
+        minutesEl.value = String(minutesPerSession);
+      }
+
+      function copyTemplate() {
+        const text = templateText.textContent || "";
+        if (!text || text === "Set your inputs and click Generate checklist.") {
+          message.textContent = "Generate a checklist first.";
+          return;
+        }
+        navigator.clipboard?.writeText(text).then(() => {
+          message.textContent = "Template copied.";
+          trackEvent("cleaning_checklist_template_install_or_save_intent", {
+            intent: "copy_text",
+            method: "browser_clipboard",
+            tasks_count: currentPayload.tasksPerRun || 0,
+          });
+        }).catch(() => {
+          message.textContent = "Copy blocked by browser. Use Download CSV.";
+        });
+      }
+
+      function downloadCsv() {
+        const csvData = currentPayload.csv || "task_type,task,item_minutes\nno_data,not_generated,0";
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+        const href = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = "cleaning-checklist-template.csv";
+        link.click();
+        URL.revokeObjectURL(href);
+        trackEvent("cleaning_checklist_template_export_save_intent", {
+          intent: "download_csv",
+          tasks_count: currentPayload.tasksPerRun || 0,
+        });
+      }
+
+      function saveTemplate() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(currentPayload));
+          message.textContent = "Template saved to this browser.";
+          trackEvent("cleaning_checklist_template_install_or_save_intent", {
+            intent: "browser_storage",
+            tasks_count: currentPayload.tasksPerRun || 0,
+            is_success: true,
+          });
+        } catch (_error) {
+          message.textContent = "Save unavailable in this browser mode.";
+        }
+      }
+
+      function hydrateFromSaved() {
+        let raw;
+        try {
+          raw = localStorage.getItem(STORAGE_KEY);
+        } catch (_error) {
+          raw = null;
+        }
+        if (!raw) {
+          return;
+        }
+        try {
+          const state = JSON.parse(raw);
+          homeSizeEl.value = state.profile || homeSizeEl.value;
+          goalEl.value = state.goal || goalEl.value;
+          daysEl.value = String(state.daysPerWeek || daysEl.value);
+          minutesEl.value = String(state.minutesPerSession || minutesEl.value);
+          roomsEl.value = String(state.rooms || roomsEl.value);
+          extraPassEl.checked = Boolean(state.extraPass);
+          calculate();
+          message.textContent = "Loaded your saved checklist setup.";
+        } catch (_error) {
+          // keep silent
+        }
+      }
+
+      document.getElementById("generate").addEventListener("click", calculate);
+      document.getElementById("copyChecklist").addEventListener("click", copyTemplate);
+      document.getElementById("downloadCsv").addEventListener("click", downloadCsv);
+      document.getElementById("saveTemplate").addEventListener("click", saveTemplate);
+
+      if (cta) {
+        cta.addEventListener("click", () => {
+          trackEvent("cleaning_checklist_template_paid_cta_click", {
+            offer_slug: cta.dataset.offer,
+            offer_location: cta.dataset.offerLocation,
+            price_usd: Number(cta.dataset.priceUsd || 0),
+          });
+          trackEvent("cleaning_checklist_template_checkout_start", {
+            offer_slug: cta.dataset.offer,
+            offer_location: cta.dataset.offerLocation,
+            payment_type: "checkout",
+          });
+        });
+      }
+
+      hydrateFromSaved();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "cleaning-checklist-template",
+  "title": "Cleaning checklist template",
+  "summary": "Generate a practical household cleaning checklist from home size, cleaning frequency, and minutes per session. Includes copy/save/export flow and a paid upgrade path.",
+  "selection_rule": "Deliver the lowest-friction household checklist first, then export path, save intent, and optional paid bundle.",
+  "task_phrase": "A person searching cleaning checklist template needs a useful answer without signup or fragile spreadsheet rebuild.",
+  "page_url": "https://dayonebuilder.online/cleaning-checklist-template/",
+  "json_url": "https://dayonebuilder.online/collections/cleaning-checklist-template.json",
+  "reference_sources": [
+    "https://www.canva.com/checklists/templates/cleaning/",
+    "https://www.template.net/editable/checklists/cleaning",
+    "https://www.etsy.com/market/cleaning_checklist"
+  ],
+  "module_manifest": {
+    "module_id": "cleaning-checklist-template",
+    "title": "Cleaning Checklist Template",
+    "module_type": "template",
+    "version": "2026.06.05",
+    "status": "active",
+    "module_url": "https://dayonebuilder.online/cleaning-checklist-template/",
+    "install_or_save_path": "Generate checklist, then use Copy/Save/Download CSV on the page without signup.",
+    "install_or_save_event": "cleaning_checklist_template_install_or_save_intent",
+    "qualified_completion_event": "cleaning_checklist_template_qualified_completion",
+    "export_event": "cleaning_checklist_template_export_save_intent",
+    "paid_offer_path": "https://checkout.dayonebuilder.online/products/cleaning-schedule-template",
+    "adoption_metric": "organic_clicks,qualified_tool_completions,exports_or_saves,paid_cta_clicks,checkout_starts,purchases,repeat_use",
+    "trust_evidence": [
+      "source references in public template marketplaces",
+      "visible scheduling assumptions",
+      "versioned module manifest",
+      "measurable completion and export events"
+    ]
+  },
+  "entries": [
+    {
+      "id": "cleaning-checklist-template",
+      "title": "Cleaning Checklist Template",
+      "task_aliases": [
+        "cleaning checklist template",
+        "household cleaning checklist",
+        "weekly cleaning plan",
+        "cleaning template",
+        "home cleaning checklist"
+      ],
+      "selected_source_url": "https://dayonebuilder.online/cleaning-checklist-template/",
+      "first_action": "Open the page, choose home profile and frequency, click Generate checklist, then copy or download the result.",
+      "smoke_test": "Generate with defaults, then confirm checklist text appears and CSV download works.",
+      "proof_signal": "No login workflow with copy/save/export telemetry and paid-path visibility.",
+      "fallback": "Use the task resolver path in /resolver/ to compare external alternatives."
+    }
+  ]
+}
