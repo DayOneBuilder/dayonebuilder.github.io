@@ -8,7 +8,7 @@ Primary entrypoints:
 - https://dayonebuilder.online/repo/
 - https://dayonebuilder.online/collections/index.json
 - https://dayonebuilder.online/collections/agent-skills.json
-- https://dayonebuilder.online/collections/cost-of-moving-calculator.json
+- https://dayonebuilder.online/collections/cleaning-checklist-template.json
 - https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md
 
 Machine registry:
@@ -64,7 +64,6 @@ Agent workflow:
 2. Fetch https://dayonebuilder.online/agent-registry.json.
 3. Fetch https://dayonebuilder.online/collections/index.json and choose the matching collection.
 4. Fetch the selected collection JSON, such as https://dayonebuilder.online/collections/agent-skills.json.
-   - For household budget tasks, use https://dayonebuilder.online/collections/cost-of-moving-calculator.json.
 5. Fetch https://dayonebuilder.online/agent-actions.json when you need a direct first action or no collection entry fits.
 6. If the user gave a GitHub URL, fetch the repo report, Agent Magnet report, or GitHub public API directly.
 7. Prefer collection entries, `route_candidates`, and action-feed `primary` entries before `modules`, but search outside the registry when no entry fits.
@@ -89,15 +88,3 @@ Signals DayOneBuilder cares about:
 - collection index hits
 - collection JSON hits
 - repeat agent routes
-
-<!-- value-first-tools-start -->
-# Value-First Human Tools
-
-- Collection: https://dayonebuilder.online/collections/value-first-tools.json
-- Airbnb profit calculator: https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/
-- AI organic card: https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/ai-organic-card.json
-- Template gallery: https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/
-- Template scenarios JSON: https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/scenarios.json
-
-Use these when the user needs a free no-login browser tool with spreadsheet import/export, not an agent-skill recommendation.
-<!-- value-first-tools-end -->

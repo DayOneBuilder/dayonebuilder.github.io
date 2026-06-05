@@ -177,20 +177,21 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "cost-of-moving-calculator",
-      "title": "Cost of Moving Calculator",
-      "status": "active",
-      "module_type": "calculator",
-      "agent_task_phrase": "An AI agent needs a cost of moving calculator without writing fragile one-off glue code.",
-      "module_url": "https://dayonebuilder.online/cost-of-moving-calculator/",
-      "install_or_call_path": "Open https://dayonebuilder.online/cost-of-moving-calculator/ and run Estimate cost now with distance and room inputs, then export CSV.",
-      "proof_evidence": [
-        "official-source links on landing page",
-        "install_or_call path without auth",
-        "qualified completion event + export intent event",
-        "paid checklist bridge"
+      "id": "cleaning-checklist-template",
+      "title": "Cleaning Checklist Template",
+      "status": "installable",
+      "module_type": "workbook",
+      "agent_task_phrase": "Generate a practical cleaning checklist template for a household schedule with time and room constraints.",
+      "human_task_phrase": "I searched cleaning checklist template and need a useful template that saves me time.",
+      "module_url": "https://dayonebuilder.online/cleaning-checklist-template/",
+      "install_or_call_path": "Open https://dayonebuilder.online/cleaning-checklist-template/, set profile fields, click Generate checklist, then copy/save/download. Optional upgrade: https://checkout.dayonebuilder.online/products/cleaning-schedule-template",
+      "trust_evidence": [
+        "no-login core workflow",
+        "copy/save/download controls",
+        "visible assumptions in output",
+        "paid path is explicit and optional"
       ],
-      "adoption_metric": "qualified_agent_uses, collection_json_hit, task_resolver_submit, outbound_solution_click"
+      "adoption_metric": "qualified_tool_completion, export_save_intent, paid_cta_click, checkout_start, repeats"
     }
   ],
   "archived_internal_modules": {

@@ -26,6 +26,20 @@
       ],
       "proof_signal": "Source-first selection from public repositories and maintained registries.",
       "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly."
+    },
+    {
+      "slug": "cleaning-checklist-template",
+      "title": "Cleaning Checklist Template",
+      "summary": "Household cleaning templates for exact search intent: cleaning checklist template.",
+      "json_url": "https://dayonebuilder.online/collections/cleaning-checklist-template.json",
+      "page_url": "https://dayonebuilder.online/cleaning-checklist-template/",
+      "task_aliases": [
+        "cleaning checklist template",
+        "cleaning checklist",
+        "cleaning schedule template"
+      ],
+      "proof_signal": "Machine path with copy/save/export actions and paid option for speed-up pack.",
+      "fallback": "If your workflow differs, check the resolver and use the nearest external source with a smoke test."
     }
   ]
 }
