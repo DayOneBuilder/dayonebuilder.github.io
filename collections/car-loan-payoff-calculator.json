@@ -11,6 +11,23 @@
     "car loan payoff",
     "car loan extra payment"
   ],
+  "entries": [
+    {
+      "id": "car-loan-payoff-calculator",
+      "title": "Car Loan Payoff Calculator",
+      "task_aliases": [
+        "car loan payoff calculator",
+        "auto loan payoff calculator",
+        "payoff my car loan",
+        "car loan extra payment"
+      ],
+      "selected_source_url": "https://dayonebuilder.online/car-loan-payoff-calculator/",
+      "first_action": "Open the calculator, enter current balance, APR, remaining term, monthly payment, and optional extra payment, then click Calculate payoff.",
+      "smoke_test": "Set Current balance=10000, APR=5, Remaining term=48, Extra payment=0, click Calculate payoff, and verify payoff months, estimated interest, and CSV export are available.",
+      "proof_signal": "No-login calculator with CFPB-grounded warnings, GA4-safe qualified completion event, export intent event, and paid worksheet bridge.",
+      "fallback": "Use Bankrate, NerdWallet, or Calculator.net auto-loan calculators if you need broader lender marketplace comparisons."
+    }
+  ],
   "selection_rule": "Solve the exact user query with a reusable, install/call-ready calculator module and a saved export path.",
   "source_url": "https://dayonebuilder.online/car-loan-payoff-calculator/",
   "module_type": "calculator",
