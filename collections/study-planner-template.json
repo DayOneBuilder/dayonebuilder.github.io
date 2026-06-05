@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "study-planner-template",
+  "title": "Study Planner Template",
+  "summary": "Generator and workbook template for people searching for a study planner template, with copy/export intent and paid-path handoff.",
+  "task_aliases": [
+    "study planner template",
+    "study plan template",
+    "create study planner",
+    "study planning spreadsheet"
+  ],
+  "selection_rule": "Choose this module for the exact no-login study planning workflow, then show plan build, export, and save intent immediately.",
+  "entries": [
+    {
+      "id": "study-planner-template-module",
+      "title": "Study Planner Template",
+      "selected_source_url": "https://dayonebuilder.online/study-planner-template/",
+      "first_action": "Open the page, set goal/target date, and click Build study plan.",
+      "smoke_test": "Open the same page and confirm totals, plan text, and workbook CSV export appear after click.",
+      "proof_signal": "Formula-based local calculations, explicit assumptions, visible save/export intent, and event hooks.",
+      "fallback": "Check external references: Etsy templates, Reddit study tips, and GoodNotes organization threads.",
+      "module_url": "https://dayonebuilder.online/study-planner-template/",
+      "adoption_metric": "organic clicks, qualified tool completions, exports/copies/saves, paid CTA clicks, checkout starts, purchases, and repeat use",
+      "task_phrase": "A person searching study planner template needs a working plan with zero signup friction.",
+      "module_type": "template",
+      "install_or_save_intent": "download workbook CSV or copy generated plan text",
+      "paid_offer_or_subscription_path": "https://checkout.dayonebuilder.online/products",
+      "qualified_tool_completion_event": "study_planner_tool_completion",
+      "resolver_registry_entry": {
+        "trust_evidence": [
+          "official or authoritative source links",
+          "visible calculation assumptions",
+          "local plan export for inspection",
+          "versioned module manifest"
+        ],
+        "install_or_call_path": "https://dayonebuilder.online/study-planner-template/",
+        "examples": [
+          "Build a 14-day plan for a 56-hour monthly goal",
+          "Export one CSV to Notion, OneNote, or Apple Notes",
+          "Copy plan text directly into a student message"
+        ],
+        "fallback": "Use external templates and community references if a strict syllabus-specific planner is required."
+      }
+    }
+  ],
+  "module_url": "https://dayonebuilder.online/study-planner-template/",
+  "module_manifest_url": "https://dayonebuilder.online/collections/study-planner-template.json",
+  "module_type": "template",
+  "search_intent_landing_page": "https://dayonebuilder.online/study-planner-template/",
+  "qualified_tool_completion_event": "study_planner_tool_completion",
+  "install_or_save_intent": "download workbook CSV or copy generated plan text",
+  "paid_offer_or_subscription_path": "https://checkout.dayonebuilder.online/products",
+  "fallback": "If the core schedule formula is not enough, use official course syllabi and one of the linked references first."
+}
