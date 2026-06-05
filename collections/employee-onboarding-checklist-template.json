@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "employee-onboarding-checklist-template",
+  "title": "Employee Onboarding Checklist Template",
+  "summary": "Build a practical onboarding checklist for small teams in minutes, then copy or download and use it immediately.",
+  "selection_rule": "Match the query first, then prefer official source-backed templates with no-signup-first output.",
+  "task_aliases": [
+    "employee onboarding checklist template",
+    "onboarding checklist",
+    "new hire checklist template",
+    "onboarding checklist for small business"
+  ],
+  "adoption_metric": "qualified_tool_completions | copies_or_downloads | paid_cta_clicks | repeat_use",
+  "entries": [
+    {
+      "id": "employee-onboarding-checklist-template-v1",
+      "title": "Employee onboarding checklist template builder",
+      "selected_source_url": "https://www.waybook.com/resources/onboarding-checklist",
+      "first_action": "Open the DayOneBuilder checklist builder, fill company/role/context fields, and click Generate checklist.",
+      "smoke_test": "Generate a checklist, confirm all 4 sections are present, then copy output in under 30 seconds.",
+      "proof_signal": "Official templates are linked from Waybook and HRCloud; trusted references and task output are visible on the same page.",
+      "fallback": "Use Workforce and Reddit notes if one source cannot be opened, then use the local generated structure as a practical baseline.",
+      "module_url": "https://dayonebuilder.online/employee-onboarding-checklist-template/",
+      "adoption_metric": "qualified_tool_completions"
+    },
+    {
+      "id": "employee-onboarding-checklist-template-export",
+      "title": "Export or save the generated onboarding checklist",
+      "selected_source_url": "https://dayonebuilder.online/employee-onboarding-checklist-template/",
+      "first_action": "After generation, click Copy checklist or Download .txt checklist to move it into your onboarding flow.",
+      "smoke_test": "Copy and download options both work without required account sign-in.",
+      "proof_signal": "Export actions are visible as one click actions in the same UI and are telemetry tracked as save/install intent.",
+      "fallback": "If export fails in the browser, copy text manually from the output panel.",
+      "module_url": "https://dayonebuilder.online/employee-onboarding-checklist-template/",
+      "adoption_metric": "save_or_install_intent"
+    }
+  ]
+}
+

@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Employee Onboarding Checklist Template | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for employee onboarding checklist template, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/employee-onboarding-checklist-template/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #061124;
+        --ink: #f4f7fb;
+        --muted: #c2cfdf;
+        --panel: rgba(16, 27, 46, 0.86);
+        --line: rgba(130, 172, 255, 0.2);
+        --accent: #6ce3ff;
+        --mint: #8ef0b6;
+        --amber: #ffcb73;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: linear-gradient(180deg, #061124 0%, #0a1733 100%);
+        color: var(--ink);
+        font: 15px/1.6 "Manrope", "Inter", "Segoe UI", sans-serif;
+      }
+
+      .wrap {
+        width: min(calc(100% - 32px), 980px);
+        margin: 0 auto;
+        padding: 28px 0 56px;
+      }
+
+      .back {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .hero {
+        margin-top: 16px;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--panel);
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        border: 1px solid rgba(110, 227, 255, 0.4);
+        color: var(--accent);
+        padding: 6px 12px;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0.25rem 0;
+      }
+
+      h1 {
+        font-size: clamp(1.9rem, 5vw, 3.1rem);
+        max-width: 17ch;
+      }
+
+      h2 {
+        font-size: clamp(1.25rem, 3.4vw, 1.65rem);
+      }
+
+      p,
+      li {
+        color: var(--muted);
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      .grid {
+        margin-top: 16px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .field {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      label {
+        color: var(--ink);
+        font-weight: 700;
+      }
+
+      input,
+      select {
+        height: 42px;
+        border-radius: 9px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        padding: 0 10px;
+        font: inherit;
+      }
+
+      .actions {
+        margin-top: 14px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .button,
+      .ghost {
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        border-radius: 999px;
+        min-height: 44px;
+        padding: 10px 16px;
+        background: transparent;
+        color: var(--ink);
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .button {
+        background: linear-gradient(135deg, var(--accent), var(--mint));
+        color: #071122;
+        border-color: transparent;
+      }
+
+      .block {
+        margin-top: 16px;
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--panel);
+      }
+
+      .source-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .source-list a {
+        display: inline-flex;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        padding: 6px 10px;
+        font-size: 0.92rem;
+        text-decoration: none;
+      }
+
+      .result-grid {
+        margin-top: 12px;
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .phase {
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 12px;
+        padding: 14px;
+        background: rgba(0, 0, 0, 0.24);
+      }
+
+      .phase h3 {
+        color: var(--mint);
+      }
+
+      .phase ul {
+        margin: 8px 0 0;
+        padding-left: 18px;
+      }
+
+      .mono {
+        white-space: pre-wrap;
+        word-break: break-word;
+        background: rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.17);
+        border-radius: 10px;
+        padding: 12px;
+        margin-top: 10px;
+        color: var(--ink);
+      }
+
+      .note {
+        color: var(--amber);
+      }
+
+      .status {
+        margin-top: 12px;
+        font-weight: 700;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .counter {
+        color: #d8e2f2;
+        margin-top: 8px;
+      }
+
+      @media (max-width: 920px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .result-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .wrap {
+          width: min(calc(100% - 16px), 980px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a class="back" href="/">← Back to DayOneBuilder</a>
+
+      <section class="hero" aria-labelledby="main-heading">
+        <span class="tag">small-business hiring</span>
+        <h1 id="main-heading">Employee Onboarding Checklist Template</h1>
+        <p>
+          Fill in role details and hiring context, then generate a practical checklist in one minute.
+          This tool gives you a practical output you can copy or download and use with your team right away.
+        </p>
+        <div class="source-list" aria-label="Trusted source list">
+          <a href="https://www.waybook.com/resources/onboarding-checklist" target="_blank" rel="noopener noreferrer">Waybook onboarding checklist</a>
+          <a href="https://www.hrcloud.com/resources/onboarding-checklists-templates/onboarding-checklist-template" target="_blank" rel="noopener noreferrer">HRCloud onboarding template</a>
+          <a href="https://workforce.com/news/employee-onboarding-checklist" target="_blank" rel="noopener noreferrer">Workforce insights</a>
+          <a href="https://www.reddit.com/r/sysadmin/comments/g5d82s" target="_blank" rel="noopener noreferrer">Operational onboarding notes</a>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Build the checklist</h2>
+        <div class="grid" id="toolInputs">
+          <label class="field">
+            <span>Company name</span>
+            <input id="companyName" type="text" placeholder="Acme Studio" />
+          </label>
+          <label class="field">
+            <span>New hire role</span>
+            <input id="role" type="text" placeholder="Accounts coordinator" />
+          </label>
+          <label class="field">
+            <span>Department</span>
+            <input id="team" type="text" placeholder="Operations" />
+          </label>
+          <label class="field">
+            <span>Start date</span>
+            <input id="startDate" type="date" />
+          </label>
+          <label class="field">
+            <span>Hiring size</span>
+            <select id="teamSize">
+              <option value="solo">Solo founder team (1–5)</option>
+              <option value="small">Small team (6–15)</option>
+              <option value="scaled">Scaled team (16+)</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Onboarding focus</span>
+            <select id="focus">
+              <option value="office">Office and systems</option>
+              <option value="remote">Remote-first setup</option>
+              <option value="hybrid">Hybrid setup</option>
+            </select>
+          </label>
+        </div>
+        <div class="actions">
+          <button class="button" id="generateBtn" type="button">Generate checklist</button>
+          <button class="ghost" id="clearBtn" type="button">Clear</button>
+        </div>
+        <p id="errorMessage" class="status hidden"></p>
+      </section>
+
+      <section class="block" id="resultBlock" aria-live="polite">
+        <h2>Generated output</h2>
+        <p id="resultMeta" class="counter">No checklist generated yet.</p>
+        <div class="result-grid" id="checklistGrid"></div>
+        <div class="mono" id="downloadText" aria-label="Export text">Generate a checklist to see your output here.</div>
+        <div class="actions">
+          <button class="button" id="copyBtn" type="button">Copy checklist</button>
+          <button class="ghost" id="downloadBtn" type="button">Download .txt checklist</button>
+        </div>
+      </section>
+
+      <section class="block" aria-labelledby="paid-offer-title">
+        <h2 id="paid-offer-title">Optional paid helper pack: $9 onboarding checklist pack</h2>
+        <p>
+          If you want a cleaner printable template and a pre-filled role matrix, upgrade to the paid pack.
+          It includes an editable workbook, role-specific examples, and a setup guide.
+        </p>
+        <a
+          id="paidCta"
+          class="button"
+          href="https://checkout.dayonebuilder.online/products/onboarding-checklist-pack?utm_source=dayonebuilder&utm_medium=onboarding_checker&utm_campaign=template"
+          data-offer="onboarding-checklist-pack"
+          data-price-usd="9"
+          data-offer-location="tool_page"
+        >
+          Get the onboarding checklist pack
+        </a>
+        <p class="note">Use this only after previewing your result and confirming the role context.</p>
+      </section>
+    </main>
+
+    <script>
+      const checklistProfiles = {
+        office: {
+          preStart: [
+            "Send role description, reporting chain, and hire approval documents.",
+            "Prepare laptop, Slack, email, and payroll access.",
+            "Draft first-week one-page plan for the new hire.",
+            "Create a manager checklist with goals for the first 30 days."
+          ],
+          dayOne: [
+            "Kickoff intro with direct manager and team lead.",
+            "Complete system access setup and emergency contacts.",
+            "Review role goals, KPIs, and communication norms.",
+            "Confirm equipment check and workspace readiness."
+          ],
+          weekOne: [
+            "Run role walk-through sessions (one day each core process).",
+            "Assign first short task and review by end of week.",
+            "Capture setup issues and blockers in one thread."
+          ],
+          monthOne: [
+            "Run a 30-day retro and confirm role outcomes.",
+            "Create a development plan with 2–3 milestones.",
+            "Decide if role has enough docs, templates, and ownership."
+          ],
+        },
+        remote: {
+          preStart: [
+            "Create remote tool access for VPN, password manager, ticket queue, and docs.",
+            "Send timezone and response expectations in one message.",
+            "Prepare a remote troubleshooting contact and fallback communication channel."
+          ],
+          dayOne: [
+            "Video onboarding session with manager and team.",
+            "Walk through asynchronous workflow and handoff process.",
+            "Share folder permissions, shared docs, and security guidelines."
+          ],
+          weekOne: [
+            "Run a short customer/support scenario exercise.",
+            "Review 3 example tickets or tasks from live backlog.",
+            "Complete remote safety and privacy checklist."
+          ],
+          monthOne: [
+            "Conduct remote performance checkpoint and coaching notes.",
+            "Add role-specific templates to the shared onboarding binder.",
+            "Confirm recurring meeting rhythm with the team."
+          ],
+        },
+        hybrid: {
+          preStart: [
+            "Prepare office + remote access details and parking/security info.",
+            "Share the first week office schedule and desk booking details.",
+            "Preload role folder with operating procedures and templates."
+          ],
+          dayOne: [
+            "Meet manager in person, then run office tour or hybrid workflow call.",
+            "Assign office and remote systems ownership map.",
+            "Confirm communication cadence with in-office and remote peers."
+          ],
+          weekOne: [
+            "Complete cross-functional intro round with on-site and remote teammates.",
+            "Review role-specific escalation path for office and remote requests.",
+            "Set working-location rhythm for the first 2 weeks."
+          ],
+          monthOne: [
+            "Check consistency of communication from both channels.",
+            "Adjust onboarding tasks and meeting slots for hybrid rhythm.",
+            "Confirm role access and compliance records for both environments."
+          ],
+        }
+      };
+
+      const roleExtras = {
+        sales: [
+          "Prepare CRM walkthrough and stage definitions.",
+          "Create account pipeline sandbox with one sample opportunity.",
+          "Assign target pipeline and reporting template."
+        ],
+        engineer: [
+          "Provision repo access and branch protections.",
+          "Grant internal service docs and runbook access.",
+          "Create a sample incident or ticket review session."
+        ],
+        marketing: [
+          "Grant campaign and brand asset library access.",
+          "Set analytics and approval workflow for creative assets.",
+          "Add first campaign playbook and posting calendar."
+        ],
+        finance: [
+          "Add billing, payroll, and compliance tool access.",
+          "Prepare approval paths for spend and invoice checks.",
+          "Create one-time expense setup review task."
+        ],
+      };
+
+      const companyInput = document.getElementById("companyName");
+      const roleInput = document.getElementById("role");
+      const teamInput = document.getElementById("team");
+      const startDateInput = document.getElementById("startDate");
+      const teamSizeInput = document.getElementById("teamSize");
+      const focusInput = document.getElementById("focus");
+      const generateBtn = document.getElementById("generateBtn");
+      const clearBtn = document.getElementById("clearBtn");
+      const copyBtn = document.getElementById("copyBtn");
+      const downloadBtn = document.getElementById("downloadBtn");
+      const paidCta = document.getElementById("paidCta");
+      const resultGrid = document.getElementById("checklistGrid");
+      const resultMeta = document.getElementById("resultMeta");
+      const errorMessage = document.getElementById("errorMessage");
+      const downloadText = document.getElementById("downloadText");
+
+      const todayISO = new Date().toISOString().slice(0, 10);
+      startDateInput.value = todayISO;
+
+      function trackEvent(name, params) {
+        try {
+          if (typeof window.gtag === "function") {
+            window.gtag("event", name, params);
+          }
+        } catch (_error) {
+          // no-op when analytics is blocked
+        }
+      }
+
+      function sanitizeText(value) {
+        return (value || "").trim() || "N/A";
+      }
+
+      function selectProfile(value) {
+        if (value === "remote") return checklistProfiles.remote;
+        if (value === "hybrid") return checklistProfiles.hybrid;
+        return checklistProfiles.office;
+      }
+
+      function inferRoleExtras(role) {
+        const lower = role.toLowerCase();
+        if (lower.includes("sales")) return roleExtras.sales;
+        if (lower.includes("engineer") || lower.includes("dev")) return roleExtras.engineer;
+        if (lower.includes("marketing")) return roleExtras.marketing;
+        if (lower.includes("finance") || lower.includes("account")) return roleExtras.finance;
+        return [
+          "Build a role-specific goal map with top 3 priorities.",
+          "Create a mentor assignment with one senior teammate."
+        ];
+      }
+
+      function buildChecklist() {
+        errorMessage.classList.add("hidden");
+        errorMessage.textContent = "";
+
+        const company = sanitizeText(companyInput.value);
+        const role = sanitizeText(roleInput.value);
+        const team = sanitizeText(teamInput.value);
+        const startDate = sanitizeText(startDateInput.value);
+        const teamSize = teamSizeInput.value;
+        const focus = focusInput.value;
+
+        if (company === "N/A" || role === "N/A" || team === "N/A") {
+          errorMessage.classList.remove("hidden");
+          errorMessage.textContent = "Company, role, and department are required.";
+          return;
+        }
+
+        const sizeMap = {
+          solo: "1-5 people",
+          small: "6-15 people",
+          scaled: "16+ people"
+        };
+        const profile = selectProfile(focus);
+        const extras = inferRoleExtras(role);
+        const sourceDate = new Date(startDate).toLocaleDateString("en-US");
+        const runDate = new Date().toLocaleDateString("en-US");
+
+        const sections = [
+          {
+            title: "Pre-start (7–14 days before start)",
+            tasks: profile.preStart
+          },
+          {
+            title: "Day one",
+            tasks: profile.dayOne
+          },
+          {
+            title: "First week",
+            tasks: profile.weekOne.concat(extras.slice(0, 2))
+          },
+          {
+            title: "First 30 days",
+            tasks: profile.monthOne
+          }
+        ];
+
+        const baseTasksCount = sections.reduce((sum, section) => sum + section.tasks.length, 0);
+        const adoptionText = `Generated checklist for ${company} (${team}, ${role}) on ${runDate} with ${baseTasksCount} base tasks.`;
+        resultMeta.textContent = adoptionText;
+
+        resultGrid.innerHTML = "";
+        sections.forEach((section) => {
+          const card = document.createElement("section");
+          card.className = "phase";
+          const title = document.createElement("h3");
+          title.textContent = section.title;
+          const list = document.createElement("ul");
+          section.tasks.forEach((task) => {
+            const item = document.createElement("li");
+            item.textContent = task;
+            list.appendChild(item);
+          });
+          const teamNote = document.createElement("p");
+          if (section.title.includes("Pre-start")) {
+            teamNote.className = "note";
+            teamNote.textContent = `Recommended for ${sizeMap[teamSize]} team context.`;
+          }
+          card.appendChild(title);
+          card.appendChild(list);
+          if (section.title.includes("Pre-start")) card.appendChild(teamNote);
+          resultGrid.appendChild(card);
+        });
+
+        const txt = [
+          `Employee Onboarding Checklist Template`,
+          `Company: ${company}`,
+          `Role: ${role}`,
+          `Department: ${team}`,
+          `Start date: ${sourceDate}`,
+          `Team size bracket: ${sizeMap[teamSize]}`,
+          `Generated: ${runDate}`,
+          "",
+          ...sections.map((section) => [
+            `## ${section.title}`,
+            ...section.tasks.map((task) => `- ${task}`),
+            ""
+          ].flat())
+        ].flat().join("\n");
+
+        downloadText.textContent = txt;
+
+        trackEvent("onboarding_checklist_tool_completion", {
+          event_category: "employee_onboarding_checklist_template",
+          completion_source: "in_browser_tool",
+          focus: focus,
+          team_size: teamSize,
+          tasks_count: baseTasksCount,
+        });
+      }
+
+      function clearTool() {
+        companyInput.value = "";
+        roleInput.value = "";
+        teamInput.value = "";
+        startDateInput.value = todayISO;
+        teamSizeInput.value = "solo";
+        focusInput.value = "office";
+        resultGrid.innerHTML = "";
+        resultMeta.textContent = "No checklist generated yet.";
+        downloadText.textContent = "Generate a checklist to see your output here.";
+        errorMessage.classList.add("hidden");
+        errorMessage.textContent = "";
+      }
+
+      function copyChecklist() {
+        const text = downloadText.textContent || "";
+        if (!text || text.startsWith("Generate")) {
+          errorMessage.classList.remove("hidden");
+          errorMessage.textContent = "Generate a checklist before copying.";
+          return;
+        }
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            trackEvent("onboarding_checklist_save_or_install_intent", {
+              event_category: "employee_onboarding_checklist_template",
+              intent_type: "copy",
+            });
+          })
+          .catch(() => {
+            errorMessage.classList.remove("hidden");
+            errorMessage.textContent = "Copy blocked by the browser. Download .txt instead.";
+          });
+      }
+
+      function downloadChecklist() {
+        const text = downloadText.textContent || "";
+        if (!text || text.startsWith("Generate")) {
+          errorMessage.classList.remove("hidden");
+          errorMessage.textContent = "Generate a checklist before downloading.";
+          return;
+        }
+        const blob = new Blob([text], { type: "text/plain;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "employee-onboarding-checklist.txt";
+        link.click();
+        URL.revokeObjectURL(url);
+        trackEvent("onboarding_checklist_save_or_install_intent", {
+          event_category: "employee_onboarding_checklist_template",
+          intent_type: "download_txt",
+          offer_test: "export_intent",
+        });
+      }
+
+      generateBtn.addEventListener("click", buildChecklist);
+      clearBtn.addEventListener("click", clearTool);
+      copyBtn.addEventListener("click", copyChecklist);
+      downloadBtn.addEventListener("click", downloadChecklist);
+      paidCta.addEventListener("click", () => {
+        const offerSlug = paidCta.dataset.offer || "onboarding-checklist-pack";
+        const offerLocation = paidCta.dataset.offerLocation || "tool_page";
+        const priceUsd = Number(paidCta.dataset.priceUsd || 9);
+        trackEvent("onboarding_checklist_paid_cta_click", {
+          event_category: "employee_onboarding_checklist_template",
+          offer_slug: offerSlug,
+          offer_location: offerLocation,
+          price_usd: priceUsd,
+        });
+      });
+    </script>
+  </body>
+</html>
