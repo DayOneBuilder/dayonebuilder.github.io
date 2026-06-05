@@ -10,6 +10,27 @@
     "grocery spending spreadsheet",
     "grocery budget worksheet"
   ],
+  "entries": [
+    {
+      "id": "how-to-make-a-grocery-budget-spreadsheet",
+      "title": "How To Make A Grocery Budget Spreadsheet",
+      "task_aliases": [
+        "how to make a grocery budget spreadsheet",
+        "grocery budget template",
+        "grocery spending spreadsheet"
+      ],
+      "selected_source_url": "https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/",
+      "first_action": "Open the page, enter your household size, monthly food target, and grocery categories, then generate the worksheet.",
+      "smoke_test": "Generate a worksheet, confirm planned versus actual rows appear, then copy or download the CSV output.",
+      "proof_signal": "No-login workflow, visible assumptions, source links, CSV/clipboard output, and tracked completion/export/paid-intent events.",
+      "fallback": "Use the linked grocery spreadsheet sources if you want an existing spreadsheet before customizing your own.",
+      "module_type": "template",
+      "module_manifest_url": "https://dayonebuilder.online/collections/how-to-make-a-grocery-budget-spreadsheet.json",
+      "module_url": "https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/",
+      "paid_offer_path": "https://checkout.dayonebuilder.online/products/grocery-budget-worksheet",
+      "adoption_metric": "organic click, qualified completion, copy/download, paid offer click, checkout start"
+    }
+  ],
   "selection_rule": "Give the user the working tool first. Recommend the paid pack only for users who want a cleaner ready-made file structure.",
   "search_intent_landing_page": "https://dayonebuilder.online/how-to-make-a-grocery-budget-spreadsheet/",
   "selected_source_url": "https://sheetrix.com/templates/grocery-budget-spreadsheet/",
