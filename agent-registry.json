@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-05-27",
+  "updated_at": "2026-06-05",
   "name": "DayOneBuilder Agent Magnet Registry",
   "homepage": "https://dayonebuilder.online/",
   "primary_entrypoint": "https://dayonebuilder.online/dob-task-resolver/",
@@ -177,26 +177,21 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "estimated-tax-payment-calculator",
-      "title": "Estimated Tax Payment Calculator",
+      "id": "scholarship-application-tracker-spreadsheet",
+      "title": "Scholarship Application Tracker Spreadsheet",
       "status": "primary",
-      "module_type": "calculator",
-      "agent_task_phrase": "An AI agent needs estimated tax payment calculator without writing fragile one-off glue code.",
-      "module_url": "https://dayonebuilder.online/estimated-tax-payment-calculator/",
-      "install_or_call_path": "Use https://dayonebuilder.online/estimated-tax-payment-calculator/?income={annual_income}&status={filing_status} and export JSON for downstream workflow steps. No account/login needed for basic use.",
+      "module_type": "template",
+      "agent_task_phrase": "An AI agent needs to scholarship application tracker spreadsheet without writing fragile one-off glue code.",
+      "module_url": "https://dayonebuilder.online/scholarship-application-tracker-spreadsheet/",
+      "module_manifest_url": "https://dayonebuilder.online/collections/scholarship-application-tracker-spreadsheet.json",
+      "install_or_call_path": "Download /scholarship-application-tracker-spreadsheet/scholarship-tracker-template.csv and import into Google Sheets or your spreadsheet app.",
       "proof_evidence": [
-        "official IRS references are linked on the page",
-        "qualified completion event with non-null income and status",
-        "export/save/install intent events",
-        "paid template checkout path for optional workflow upgrade"
+        "official source links in the public copy",
+        "downloadable template artifact",
+        "save/export and paid-path telemetry",
+        "qualified completion event"
       ],
-      "adoption_metric": "qualified_agent_uses, resolver_calls, package_downloads, dependent_repos",
-      "primary_metrics": [
-        "qualified_tool_completion",
-        "tool_export_intent",
-        "tool_save_intent",
-        "tool_paid_cta_click"
-      ]
+      "adoption_metric": "collection_json_hit, collection_index_hit, qualified_agent_uses"
     }
   ],
   "archived_internal_modules": {

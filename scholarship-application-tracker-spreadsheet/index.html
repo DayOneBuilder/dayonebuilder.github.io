@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Scholarship Application Tracker Spreadsheet | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for scholarship application tracker spreadsheet, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/scholarship-application-tracker-spreadsheet/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      if (typeof gtag === "function") {
+        gtag("js", new Date());
+        gtag("config", "G-KQMLYS3VVE");
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #f4f7fa;
+        --surface: #ffffff;
+        --ink: #0f172a;
+        --muted: #334155;
+        --line: #dbe2ea;
+        --accent: #4f46e5;
+        --accent-2: #22c55e;
+        --warning: #d97706;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: radial-gradient(circle at top, #ffffff 0, #eff4fb 55%, #f4f7fa 100%);
+        font: 16px/1.55 "Inter", "Segoe UI", sans-serif;
+      }
+
+      .wrap {
+        width: min(1100px, calc(100% - 32px));
+        margin: 24px auto 64px;
+        display: grid;
+        gap: 16px;
+      }
+
+      .top-nav {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .hero {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 18px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 5vw, 2.7rem);
+        line-height: 1.1;
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.25rem;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .badge {
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+        border: 1px solid #c7d2fe;
+        color: #4338ca;
+        background: #eef2ff;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+      }
+
+      .actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 12px 0 0;
+      }
+
+      .btn,
+      .ghost {
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        padding: 10px 14px;
+        min-height: 42px;
+        font: inherit;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .btn {
+        background: var(--accent);
+        color: #f8fafc;
+        border-color: transparent;
+        font-weight: 700;
+      }
+
+      .ghost {
+        background: #f8fafc;
+        color: var(--ink);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #f8faff;
+        padding: 12px;
+      }
+
+      .metric strong {
+        display: block;
+        color: #111827;
+        font-size: 1.5rem;
+      }
+
+      .metric span {
+        color: var(--muted);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 8px;
+        border-bottom: 1px solid var(--line);
+        border-right: 1px solid var(--line);
+      }
+
+      th {
+        background: #f8faff;
+        font-weight: 700;
+        color: #1e293b;
+      }
+
+      td:last-child,
+      th:last-child {
+        border-right: 0;
+      }
+
+      input,
+      select {
+        width: 100%;
+        border: 1px solid var(--line);
+        padding: 8px;
+        border-radius: 8px;
+        font: inherit;
+      }
+
+      input[type='number'] {
+        appearance: textfield;
+      }
+
+      .status {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .pill {
+        background: #ecfeff;
+        border: 1px solid #bae6fd;
+        color: #0369a1;
+        border-radius: 999px;
+        font-size: 12px;
+        padding: 3px 8px;
+      }
+
+      .muted {
+        color: var(--muted);
+        margin-top: 6px;
+      }
+
+      .source {
+        display: grid;
+        gap: 8px;
+      }
+
+      .source a {
+        color: #1d4ed8;
+      }
+
+      .offer {
+        border: 1px solid #c7f9cc;
+        background: #f0fdf4;
+        border-radius: 16px;
+        padding: 14px;
+      }
+
+      .offer a {
+        margin-top: 12px;
+        display: inline-block;
+      }
+
+      .offer p {
+        margin-top: 6px;
+      }
+
+      .footer {
+        margin-top: 10px;
+        color: #64748b;
+        font-size: 13px;
+      }
+
+      @media (max-width: 1000px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 640px) {
+        .wrap {
+          width: calc(100% - 16px);
+          margin: 12px auto 36px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .actions {
+          display: grid;
+          grid-template-columns: 1fr;
+        }
+
+        th:nth-child(6),
+        td:nth-child(6),
+        th:nth-child(7),
+        td:nth-child(7) {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <a class="top-nav" href="/">← DayOneBuilder</a>
+      <section class="hero">
+        <div class="badge">Scholarship workflow tool</div>
+        <h1>Scholarship Application Tracker Spreadsheet</h1>
+        <p>
+          Build a simple scholarship tracker in one minute. Add applications, set deadlines,
+          compare award values, and export an editable CSV with no signup.
+        </p>
+
+        <div class="actions">
+          <button class="btn" id="addRow">Add scholarship</button>
+          <button class="ghost" id="clearRows">Clear all</button>
+          <button class="ghost" id="snapshot">Generate tracker snapshot</button>
+          <button class="ghost" id="snapshotDownload" type="button">Download CSV snapshot</button>
+          <a id="templateDownload" class="ghost" href="/scholarship-application-tracker-spreadsheet/scholarship-tracker-template.csv" download>Download starter template</a>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="grid" id="summaryCards" aria-live="polite">
+          <div class="metric">
+            <span>Applications tracked</span>
+            <strong id="trackedCount">0</strong>
+            <small class="muted">Rows with a name or school field</small>
+          </div>
+          <div class="metric">
+            <span>Estimated total award</span>
+            <strong id="totalAward">$0</strong>
+            <small class="muted">Combined scholarship amount you entered</small>
+          </div>
+          <div class="metric">
+            <span>Due in 7 days</span>
+            <strong id="dueSoonCount">0</strong>
+            <small class="muted">Includes urgent applications</small>
+          </div>
+          <div class="metric">
+            <span>Overdue / missing actions</span>
+            <strong id="overdueCount">0</strong>
+            <small class="muted">Past deadlines with no submission status</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="rowsLabel">
+        <h2 id="rowsLabel">Applications</h2>
+        <div class="muted" id="rowHint">Start with 3 rows and fill as you go.</div>
+        <div style="overflow:auto; margin-top:10px;">
+          <table>
+            <thead>
+              <tr>
+                <th>Scholarship</th>
+                <th>School / Provider</th>
+                <th>Deadline</th>
+                <th>Award Amount</th>
+                <th>Status</th>
+                <th>Source URL</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="nextActions">
+        <h2 id="nextActions">Next best actions</h2>
+        <div id="urgency" class="status"></div>
+      </section>
+
+      <section class="panel offer">
+        <h2>Want a ready-to-fill workbook pack?</h2>
+        <p>
+          The <strong>$9 Scholarship Tracker cleanup pack</strong> adds a prebuilt checklist sheet,
+          reusable formulas, and a submission-readiness plan.
+        </p>
+        <a
+          id="paidCta"
+          class="btn"
+          href="https://checkout.dayonebuilder.online/products/scholarship-tracker-export-pack?utm_source=dayonebuilder&utm_medium=tool_page&utm_campaign=scholarship_tracker&utm_content=paid_cta"
+          data-offer="scholarship-tracker-export-pack"
+          data-offer-location="tool_page"
+          data-price-usd="9"
+        >
+          Continue with the cleanup pack
+        </a>
+        <p class="muted">No login required for the free tracker; paid export is available when you want a cleaner setup.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Trusted source links</h2>
+        <div class="source">
+          <a href="https://studentaid.gov/articles/scholarship-tips" target="_blank" rel="noopener">US Department of Education: Scholarship tips</a>
+          <a href="https://www.careeronestop.org/toolkit/training/find-scholarships.aspx" target="_blank" rel="noopener">CareerOneStop: Scholarships</a>
+          <a href="https://bigfuture.collegeboard.org/pay-for-college/scholarship-search" target="_blank" rel="noopener">College Board: Scholarship Search</a>
+          <a href="https://www.template.net/editable/133801/scholarship-application-tracker" target="_blank" rel="noopener">Template.net tracker example</a>
+          <a href="https://www.collegeknowledgefoundation.org/applicationscholarshiptracker" target="_blank" rel="noopener">College Knowledge Foundation tracker</a>
+          <a href="https://viete.ai/templates/scholarship-tracker/" target="_blank" rel="noopener">Viete scholarship tracker template</a>
+          <a href="https://fennecpress.com/products/scholarship-application-tracker" target="_blank" rel="noopener">Fennecpress scholarship tracker</a>
+          <a href="https://mapeshoanethato.gumroad.com/l/scholarship_tracker" target="_blank" rel="noopener">Gumroad scholarship tracker sample</a>
+          <a href="https://www.reddit.com/r/scholarships/comments/1p5fi86/how_do_you_guys_organize_all_your_scholarship/" target="_blank" rel="noopener">Community organization thread</a>
+        </div>
+      </section>
+
+      <footer class="footer">Built for scholarship applications with a save-first workflow. Data is stored locally in your browser only.</footer>
+    </main>
+
+    <script>
+      const LOCAL_STORAGE_KEY = "dob-scholarship-tracker-state";
+      const rowsContainer = document.getElementById("rows");
+      const trackedCountEl = document.getElementById("trackedCount");
+      const totalAwardEl = document.getElementById("totalAward");
+      const dueSoonCountEl = document.getElementById("dueSoonCount");
+      const overdueCountEl = document.getElementById("overdueCount");
+      const urgencyEl = document.getElementById("urgency");
+      const rowHint = document.getElementById("rowHint");
+      const addRowButton = document.getElementById("addRow");
+      const clearRowsButton = document.getElementById("clearRows");
+      const snapshotButton = document.getElementById("snapshot");
+      const snapshotDownloadButton = document.getElementById("snapshotDownload");
+      const templateDownloadButton = document.getElementById("templateDownload");
+      const paidCtaButton = document.getElementById("paidCta");
+
+      const statuses = [
+        "Not started",
+        "Profile + documents",
+        "Essay in progress",
+        "Ready to submit",
+        "Submitted",
+        "Awarded",
+      ];
+
+      function escapeFieldAttribute(value) {
+        return String(value || "").replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("'", "&#39;");
+      }
+
+      let tracker = [];
+      let hasTrackedCompletion = false;
+
+      function currency(value) {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+          maximumFractionDigits: 0,
+        }).format(value);
+      }
+
+      function trackEvent(name, payload = {}) {
+        if (typeof window.gtag !== "function") {
+          return;
+        }
+        gtag("event", name, Object.assign({
+          event_category: "scholarship_tracker",
+          page: "tool",
+        }, payload));
+      }
+
+      function rowTemplate(row = {}) {
+        return {
+          scholarship: "",
+          provider: "",
+          deadline: "",
+          amount: "",
+          status: "Not started",
+          source: "",
+          notes: "",
+          ...row,
+        };
+      }
+
+      function createRowElement(row, index) {
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td><input data-field="scholarship" type="text" value="${escapeFieldAttribute(row.scholarship)}" placeholder="Dean's List scholarship" /></td>
+          <td><input data-field="provider" type="text" value="${escapeFieldAttribute(row.provider)}" placeholder="University / Portal" /></td>
+          <td><input data-field="deadline" type="date" value="${escapeFieldAttribute(row.deadline)}" /></td>
+          <td><input data-field="amount" type="number" min="0" step="0.01" value="${escapeFieldAttribute(row.amount)}" placeholder="1200" /></td>
+          <td>
+            <select data-field="status">${statuses
+              .map((status) => {
+                const selected = status === row.status ? " selected" : "";
+                return `<option value="${status}"${selected}>${status}</option>`;
+              })
+              .join("")}
+            </select>
+          </td>
+          <td><input data-field="source" type="url" value="${escapeFieldAttribute(row.source)}" placeholder="https://..." /></td>
+          <td>
+            <button class="ghost" data-action="removeRow" type="button">Remove</button>
+            <button class="ghost" data-action="moveUp" type="button">Move up</button>
+          </td>
+        `;
+
+        tr.querySelectorAll("input, select").forEach((input) => {
+          input.addEventListener("input", () => {
+            const field = input.dataset.field;
+            const rowIndex = Number(input.closest("tr").dataset.index);
+            const value = input.type === "number" ? input.value : input.value;
+            tracker[rowIndex][field] = value;
+            syncTrackerState();
+            updateDashboard();
+          });
+        });
+
+        tr.querySelector("[data-action='removeRow']").addEventListener("click", () => {
+          const idx = Number(tr.dataset.index);
+          tracker.splice(idx, 1);
+          syncTrackerState();
+          renderRows();
+          updateDashboard();
+        });
+
+        tr.querySelector("[data-action='moveUp']").addEventListener("click", () => {
+          const idx = Number(tr.dataset.index);
+          if (idx === 0) {
+            return;
+          }
+          const current = tracker[idx - 1];
+          tracker[idx - 1] = tracker[idx];
+          tracker[idx] = current;
+          syncTrackerState();
+          renderRows();
+          updateDashboard();
+        });
+
+        return tr;
+      }
+
+      function renderRows() {
+        rowsContainer.innerHTML = "";
+
+        tracker.forEach((row, index) => {
+          const tr = createRowElement(row, index);
+          tr.dataset.index = String(index);
+          rowsContainer.appendChild(tr);
+        });
+      }
+
+      function parseDate(value) {
+        const millis = Date.parse(value);
+        if (Number.isNaN(millis)) {
+          return null;
+        }
+        return new Date(millis);
+      }
+
+      function daysTo(date) {
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
+        const target = new Date(date);
+        target.setHours(0, 0, 0, 0);
+        return Math.round((target - now) / 86400000);
+      }
+
+      function updateDashboard() {
+        const hasMeaningfulRows = tracker.filter((row) => row.scholarship || row.provider);
+        trackedCountEl.textContent = hasMeaningfulRows.length.toString();
+
+        let totalAward = 0;
+        let dueSoon = 0;
+        let overdue = 0;
+
+        hasMeaningfulRows.forEach((row) => {
+          const amount = Number.parseFloat(row.amount || "0");
+          if (Number.isFinite(amount)) {
+            totalAward += Math.max(0, amount);
+          }
+
+          if (row.deadline) {
+            const deadline = parseDate(row.deadline);
+            if (deadline) {
+              const diff = daysTo(deadline);
+              if (diff >= 0 && diff <= 7 && row.status !== "Awarded" && row.status !== "Submitted") {
+                dueSoon += 1;
+              }
+              if (diff < 0 && row.status !== "Submitted" && row.status !== "Awarded") {
+                overdue += 1;
+              }
+            }
+          }
+        });
+
+        totalAwardEl.textContent = currency(totalAward);
+        dueSoonCountEl.textContent = String(dueSoon);
+        overdueCountEl.textContent = String(overdue);
+
+        rowHint.textContent = hasMeaningfulRows.length
+          ? "Keep entries current and use Snapshot for your weekly review."
+          : "Start with 3 rows and fill as you go.";
+
+        const urgentRows = hasMeaningfulRows
+          .map((row, index) => {
+            const deadline = parseDate(row.deadline);
+            return {
+              index,
+              row,
+              deadline,
+              days: deadline ? daysTo(deadline) : null,
+            };
+          })
+          .filter((entry) => entry.deadline && Number.isFinite(entry.days))
+          .sort((a, b) => a.days - b.days)
+          .slice(0, 5);
+
+        urgencyEl.innerHTML = "";
+        if (urgentRows.length === 0) {
+          const span = document.createElement("span");
+          span.className = "pill";
+          span.textContent = "No deadline pressure yet.";
+          urgencyEl.appendChild(span);
+          return;
+        }
+
+        urgentRows.forEach((entry) => {
+          const isUrgent = entry.days <= 0 ? "Overdue" : `${entry.days} day(s)`;
+          const label = `${entry.row.scholarship || `Scholarship ${entry.index + 1}`} • ${entry.row.deadline} • ${isUrgent}`;
+          const pill = document.createElement("span");
+          pill.className = "pill";
+          pill.textContent = label;
+          urgencyEl.appendChild(pill);
+        });
+      }
+
+      function snapshotRows() {
+        const effectiveRows = tracker.filter((row) => row.scholarship || row.provider);
+        if (effectiveRows.length === 0) {
+          alert("Add at least one scholarship before generating a snapshot.");
+          return null;
+        }
+
+        const now = new Date().toISOString();
+        const lines = [
+          "scholarship_name,school_or_provider,deadline,status,estimated_award_usd,source_url",
+          ...effectiveRows.map((row) => [
+            row.scholarship,
+            row.provider,
+            row.deadline,
+            row.status,
+            row.amount,
+            row.source,
+          ]
+            .map((value) => `"${String(value || "").replaceAll('"', '""')}"`)
+            .join(",")),
+          `summary,totals,,,${effectiveRows.length},${effectiveRows.reduce((sum, row) => sum + Math.max(0, Number.parseFloat(row.amount || "0") || 0), 0).toFixed(2)}`,
+          `metadata,"saved_at","${now}",,,`,
+        ];
+
+        return lines.join("\n");
+      }
+
+      function downloadBlob(csvData, filename) {
+        if (!csvData) {
+          return;
+        }
+
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(link.href);
+      }
+
+      function syncTrackerState() {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(tracker));
+      }
+
+      function initializeTracker() {
+        const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            if (Array.isArray(parsed) && parsed.length) {
+              tracker = parsed.map(rowTemplate);
+            }
+          } catch (_err) {
+            tracker = [];
+          }
+        }
+
+        if (!tracker.length) {
+          tracker = [rowTemplate(), rowTemplate(), rowTemplate()];
+        }
+      }
+
+      function isQualifiedCompletion() {
+        const validRows = tracker.filter((row) => (row.scholarship || row.provider) && row.deadline);
+        return validRows.length >= 1;
+      }
+
+      addRowButton.addEventListener("click", () => {
+        tracker.push(rowTemplate());
+        syncTrackerState();
+        renderRows();
+        updateDashboard();
+      });
+
+      clearRowsButton.addEventListener("click", () => {
+        tracker = [rowTemplate(), rowTemplate(), rowTemplate()];
+        syncTrackerState();
+        hasTrackedCompletion = false;
+        renderRows();
+        updateDashboard();
+      });
+
+      snapshotButton.addEventListener("click", () => {
+        const csv = snapshotRows();
+        if (!csv) {
+          return;
+        }
+
+        if (!hasTrackedCompletion && isQualifiedCompletion()) {
+          hasTrackedCompletion = true;
+          trackEvent("scholarship_tracker_qualified_completion", {
+            tracked_rows: tracker.filter((row) => row.scholarship || row.provider).length,
+            completed_rows: tracker.filter((row) => (row.scholarship || row.provider) && row.deadline && row.status === "Submitted").length,
+            total_award_usd: tracker.reduce((sum, row) => sum + Math.max(0, Number.parseFloat(row.amount || "0") || 0), 0),
+          });
+        }
+
+        trackEvent("scholarship_tracker_snapshot_created", {
+          tracked_rows: tracker.filter((row) => row.scholarship || row.provider).length,
+          has_deadline_count: tracker.filter((row) => row.deadline).length,
+        });
+      });
+
+      snapshotDownloadButton.addEventListener("click", () => {
+        const csv = snapshotRows();
+        if (!csv) {
+          return;
+        }
+        downloadBlob(csv, "scholarship-tracker-snapshot.csv");
+        trackEvent("scholarship_tracker_save_intent", {
+          save_type: "csv_snapshot",
+          tracked_rows: tracker.filter((row) => row.scholarship || row.provider).length,
+        });
+      });
+
+      templateDownloadButton.addEventListener("click", () => {
+        trackEvent("scholarship_tracker_install_intent", {
+          install_type: "template_csv",
+          source_file: "scholarship-tracker-template.csv",
+        });
+      });
+
+      paidCtaButton.addEventListener("click", () => {
+        const offerLocation = paidCtaButton.dataset.offerLocation;
+        const offerSlug = paidCtaButton.dataset.offer;
+        const priceUsd = Number(paidCtaButton.dataset.priceUsd || 9);
+
+        trackEvent("scholarship_tracker_paid_cta_click", {
+          offer_slug: offerSlug,
+          offer_location: offerLocation,
+          price_usd: priceUsd,
+        });
+
+        trackEvent("scholarship_tracker_checkout_start", {
+          offer_slug: offerSlug,
+          offer_location: offerLocation,
+          price_usd: priceUsd,
+          payment_type: "checkout_product_page",
+        });
+      });
+
+      initializeTracker();
+      renderRows();
+      updateDashboard();
+    </script>
+  </body>
+</html>
