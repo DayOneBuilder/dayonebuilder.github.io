@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "slug": "weekly-dinner-menu-planner-template",
+  "title": "Weekly Dinner Menu Planner Template",
+  "summary": "Template-first module for weekly dinner menu planning without custom glue code.",
+  "task_aliases": [
+    "weekly dinner menu planner template",
+    "weekly dinner plan template",
+    "dinner menu planner",
+    "meal planner template"
+  ],
+  "selection_rule": "Prefer this module when the task is a planning workflow with one-click export and no account/login requirements.",
+  "entries": [
+    {
+      "id": "weekly-dinner-menu-planner-template",
+      "title": "Weekly Dinner Menu Planner Template",
+      "selected_source_url": "https://dayonebuilder.online/weekly-dinner-menu-planner-template/",
+      "first_action": "Open the page, set household size and weekly budget, then generate a plan and download the CSV artifact.",
+      "smoke_test": "Run Generate weekly plan and check that a table renders with at least five rows, then download CSV and confirm columns: day, meal, prep_minutes, estimated_cost_usd.",
+      "proof_signal": "Deterministic local behavior plus versioned manifest and event hooks for completion, save/install intent, and paid CTA click.",
+      "fallback": "Use the official public planning template sources if spreadsheet automation rules are different in your environment."
+    }
+  ],
+  "fallback": "If your workflow requires grocery category logic, nutrition scoring, or budget optimization, use a dedicated planning app for deeper automation."
+}

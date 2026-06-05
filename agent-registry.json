@@ -177,20 +177,20 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "rental-property-cash-flow-calculator",
-      "title": "Rental Property Cash Flow Calculator",
-      "status": "active_validation",
-      "module_type": "calculator",
-      "agent_task_phrase": "An AI agent needs a rental property cash flow calculator without writing one-off spreadsheets.",
-      "module_url": "https://dayonebuilder.online/rental-property-cash-flow-calculator/",
-      "install_or_call_path": "Open https://dayonebuilder.online/rental-property-cash-flow-calculator/, fill inputs, and click Calculate estimate.",
+      "id": "weekly-dinner-menu-planner-template",
+      "title": "Weekly Dinner Menu Planner Template",
+      "status": "installable",
+      "module_type": "template",
+      "agent_task_phrase": "An AI agent needs to weekly dinner menu planner template without writing fragile one-off glue code.",
+      "module_url": "https://dayonebuilder.online/weekly-dinner-menu-planner-template/",
+      "install_or_call_path": "Open https://dayonebuilder.online/weekly-dinner-menu-planner-template/, set inputs, generate plan, and download CSV to export the artifact.",
       "proof_evidence": [
-        "exact-query landing page",
-        "static CSV export intent",
-        "official-source citation",
-        "GA4-safe qualified completion, export, and paid CTA events"
+        "versioned manifest file",
+        "measurable completion/download events",
+        "discoverable collection JSON entry",
+        "visible paid template/export path"
       ],
-      "adoption_metric": "collection_json_hit, collection_index_hit, install_snippet_copy, qualified_tool_completion, module_export_click, paid_offer_click"
+      "adoption_metric": "collection_json_hit, qualified_tool_completion, module_install_or_save_intent, paid_cta_click"
     }
   ],
   "archived_internal_modules": {

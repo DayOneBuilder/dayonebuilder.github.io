@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "manifest_version": "2026.06",
+  "module_id": "weekly-dinner-menu-planner-template",
+  "slug": "weekly-dinner-menu-planner-template",
+  "status": "installable",
+  "module_type": "template",
+  "title": "Weekly Dinner Menu Planner Template",
+  "summary": "A practical weekly dinner planning template module with local generation, downloadable CSV artifact, and explicit install or copy path.",
+  "target_query": "weekly dinner menu planner template",
+  "agent_task_phrase": "An AI agent needs to weekly dinner menu planner template without writing fragile one-off glue code.",
+  "human_task_phrase": "Build a weekly dinner menu planner template fast without custom automation.",
+  "search_intent_landing_page": "https://dayonebuilder.online/weekly-dinner-menu-planner-template/",
+  "module_url": "https://dayonebuilder.online/weekly-dinner-menu-planner-template/",
+  "install_or_call_path": "Open /weekly-dinner-menu-planner-template/, set settings, generate plan, then click Download CSV Artifact.",
+  "qualified_tool_completion_event": "qualified_tool_completion",
+  "install_or_save_intent": {
+    "event_name": "module_install_or_save_intent",
+    "artifact": "/weekly-dinner-menu-planner-template/assets/weekly-dinner-menu-planner-template.csv"
+  },
+  "paid_offer_or_subscription_path": {
+    "label": "$9 meal planning worksheet",
+    "path": "https://checkout.dayonebuilder.online/?product=weekly-dinner-menu-planner-template"
+  },
+  "trust_evidence": [
+    "downloadable starter artifact",
+    "copy/install actions with clear intent events",
+    "references to public meal-planner sources",
+    "versioned JSON manifest with no-login usage"
+  ],
+  "adoption_metric": [
+    "qualified_tool_completion",
+    "module_install_or_save_intent",
+    "paid_cta_click"
+  ],
+  "source_links": [
+    "https://onplanners.com/templates/weekly-meal-planner",
+    "https://www.spreadsheet123.com/ExcelTemplates/meal-planner.html",
+    "https://www.zoho.com/sheet/free-spreadsheet-templates/meal-planner.html",
+    "https://www.etsy.com/market/meal_planner_template",
+    "https://www.reddit.com/r/googlesheets/comments/1ejg9bl/creating_a_weekly_menu_planner_in_conjunction/"
+  ]
+}
