@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Free rental property inspection checklist template (UK)</title>
+    <meta
+      name="description"
+      content="Create a landlord or renter property inspection checklist in minutes, track issue priority, and export a shareable checklist for UK-style move in/out checks."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/free-rental-property-inspection-checklist-template-uk/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+
+      function trackEvent(name, params = {}) {
+        if (typeof window.gtag !== "function") {
+          return;
+        }
+        gtag("event", name, Object.assign({
+          event_category: "rental_inspection_checklist",
+        }, params));
+      }
+    </script>
+
+    <style>
+      :root {
+        --bg: #f8f6ee;
+        --ink: #101d26;
+        --muted: #4e5f6c;
+        --card: #ffffff;
+        --line: #e0ddd5;
+        --accent: #1a7a5f;
+        --accent-2: #2f8b6e;
+        --warn: #a16b24;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font: 16px/1.5 "Trebuchet MS", "Fira Sans", "Segoe UI", Tahoma, sans-serif;
+        color: var(--ink);
+        background: radial-gradient(circle at top right, #e8f5ef, #f8f6ee 42%, #fff 95%);
+      }
+
+      .page {
+        width: min(1080px, 100% - 28px);
+        margin: 18px auto 40px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        color: #24323d;
+        margin-bottom: 14px;
+        font-size: 0.92rem;
+      }
+
+      .topbar a {
+        color: inherit;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+      }
+
+      .topbar a:hover {
+        border-bottom-color: #2b5f4b;
+      }
+
+      .panel {
+        border-radius: 16px;
+        border: 1px solid var(--line);
+        background: var(--card);
+        padding: 20px;
+        box-shadow: 0 22px 45px rgba(24, 45, 53, 0.08);
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        color: #2f7f63;
+        background: rgba(42, 122, 99, 0.13);
+        padding: 5px 10px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        font-size: 0.78rem;
+      }
+
+      h1 {
+        margin: 10px 0 8px;
+        font-size: clamp(1.7rem, 4vw, 2.6rem);
+        line-height: 1.1;
+      }
+
+      p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .grid {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 16px;
+      }
+
+      .section {
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fcfcfa;
+        padding: 16px;
+      }
+
+      .section h2 {
+        margin: 0 0 8px;
+        font-size: 1.1rem;
+      }
+
+      .field {
+        margin: 10px 0;
+        display: grid;
+        gap: 6px;
+      }
+
+      label {
+        color: #193242;
+        font-weight: 700;
+      }
+
+      input,
+      select,
+      textarea,
+      button {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        padding: 10px 12px;
+        font: inherit;
+        font-size: 0.98rem;
+      }
+
+      select {
+        background: white;
+      }
+
+      .table {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 10px;
+        background: #fff;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1.4fr 170px 1fr;
+        gap: 8px;
+        align-items: center;
+        border-top: 1px solid var(--line);
+        padding: 8px;
+      }
+
+      .row:first-child {
+        border-top: 0;
+        background: #f3f9f6;
+        color: #1b2f2a;
+        font-weight: 700;
+      }
+
+      .row div:nth-child(2),
+      .row div:nth-child(3) {
+        min-width: 0;
+      }
+
+      .row select,
+      .row textarea {
+        width: 100%;
+      }
+
+      .row .cell {
+        font-size: 0.92rem;
+      }
+
+      textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+      }
+
+      .btn,
+      .link-btn {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 10px 16px;
+        text-decoration: none;
+        color: inherit;
+        background: #fff;
+        cursor: pointer;
+        font: inherit;
+        text-align: center;
+      }
+
+      .btn-primary {
+        background: linear-gradient(180deg, #28ac7a, #19845c);
+        border-color: #19845c;
+        color: #f8fbf9;
+        font-weight: 700;
+      }
+
+      .btn-ghost {
+        background: #ffffff;
+      }
+
+      .status {
+        margin-top: 10px;
+        min-height: 1.2rem;
+        color: #2d4238;
+      }
+
+      .result-area {
+        margin-top: 12px;
+      }
+
+      #output {
+        background: #0f1d27;
+        color: #d8e9f0;
+        border-radius: 12px;
+        border: 1px solid #294a61;
+        min-height: 190px;
+        max-height: 260px;
+        overflow: auto;
+        padding: 10px;
+        font: 0.93rem/1.4 "SFMono-Regular", Menlo, monospace;
+      }
+
+      .meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .chip {
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        padding: 6px 10px;
+        color: #27445c;
+        background: #eef7f4;
+        font-size: 0.85rem;
+      }
+
+      .offer {
+        margin-top: 16px;
+        padding: 16px;
+        border-radius: 14px;
+        border: 1px dashed #b1d3c9;
+        background: #effbf6;
+      }
+
+      .offer h2 {
+        margin: 0 0 6px;
+        font-size: 1.1rem;
+      }
+
+      .offer p {
+        margin-bottom: 10px;
+      }
+
+      .sources {
+        margin-top: 14px;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .sources ul {
+        margin: 8px 0 0;
+        padding-left: 19px;
+        color: var(--muted);
+      }
+
+      .sources a {
+        color: #1a5d72;
+      }
+
+      .muted {
+        color: var(--muted);
+        font-size: 0.93rem;
+      }
+
+      @media (max-width: 960px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+
+        .row {
+          grid-template-columns: 1fr;
+        }
+
+        .row div {
+          margin-bottom: 6px;
+        }
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free rental property inspection checklist template (UK)",
+        "url": "https://dayonebuilder.online/free-rental-property-inspection-checklist-template-uk/",
+        "description": "A no-login tool for landlords and renters to build an inspection checklist, save or export results, and track issue priorities.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "inLanguage": "en-GB",
+        "offers": [
+          {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+          },
+          {
+            "@type": "Offer",
+            "name": "$9 rental inspection checklist",
+            "price": "9",
+            "priceCurrency": "USD",
+            "url": "https://checkout.dayonebuilder.online/products/rental-inspection-checklist"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <div class="page">
+      <div class="topbar">
+        <a href="/">← DayOneBuilder</a>
+        <span class="muted">Tool for landlord or renter condition checks</span>
+      </div>
+
+      <div class="panel">
+        <span class="eyebrow">free checklist tool</span>
+        <h1>Rental property inspection checklist template</h1>
+        <p>
+          Answer first: fill in the details, mark room condition, then save or export a clean checklist ready to send.
+          This is built for move-in and move-out workflows in one short pass.
+        </p>
+
+        <div class="grid">
+          <section class="section" aria-label="Template input">
+            <h2>1) Core details</h2>
+            <div class="field">
+              <label for="role">You are</label>
+              <select id="role">
+                <option value="Landlord">Landlord</option>
+                <option value="Tenant/Renter">Tenant or renter</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="propertyAddress">Property or unit</label>
+              <input id="propertyAddress" placeholder="Flat 12, Maple House, London" />
+            </div>
+
+            <div class="field">
+              <label for="inspectorName">Name</label>
+              <input id="inspectorName" placeholder="Inspector name" />
+            </div>
+
+            <div class="field">
+              <label for="inspectionDate">Inspection date</label>
+              <input id="inspectionDate" type="date" />
+            </div>
+
+            <div class="field">
+              <label for="inspectionType">Inspection type</label>
+              <select id="inspectionType">
+                <option value="Move-in">Move-in inspection</option>
+                <option value="Move-out">Move-out inspection</option>
+                <option value="Routine check">Routine check</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="notes">Context notes</label>
+              <textarea id="notes" placeholder="Lease reference, meter reads, lockbox details"></textarea>
+            </div>
+
+            <div class="meta" aria-live="polite">
+              <span class="chip">Qualified completion: all core fields + click Generate</span>
+              <span class="chip">Export intent: CSV download or copy</span>
+              <span class="chip">Save intent: local draft saved in browser</span>
+            </div>
+          </section>
+
+          <section class="section" aria-label="Inspection item list">
+            <h2>2) Condition checklist</h2>
+            <div class="table" role="table" aria-label="Checklist rows">
+              <div class="row" role="row">
+                <div class="cell" role="columnheader">Area / item</div>
+                <div class="cell" role="columnheader">Status</div>
+                <div class="cell" role="columnheader">Issue notes</div>
+              </div>
+              <div id="rows"></div>
+            </div>
+          </section>
+        </div>
+
+        <div class="actions">
+          <button id="buildChecklist" class="btn btn-primary">Generate checklist</button>
+          <button id="copyChecklist" class="btn btn-ghost">Copy checklist</button>
+          <button id="downloadChecklist" class="btn btn-ghost">Download CSV</button>
+          <button id="saveDraft" class="btn btn-ghost">Save draft locally</button>
+        </div>
+
+        <div class="status" id="statusText"></div>
+
+        <div class="result-area" aria-live="polite">
+          <label for="output"><strong>Generated checklist preview</strong></label>
+          <pre id="output">Fill the fields and click Generate checklist.</pre>
+        </div>
+
+        <section class="offer" aria-label="Paid upgrade path">
+          <h2>Need a polished, editable export pack?</h2>
+          <p>
+            A paid <strong>$9 rental inspection checklist</strong> pack includes a cleaner spreadsheet layout, a landlord handover letter template,
+            and a UK wording starter for issue notices.
+          </p>
+          <a
+            id="paidOfferCta"
+            class="btn btn-primary"
+            href="https://checkout.dayonebuilder.online/products/rental-inspection-checklist?utm_source=dayonebuilder&utm_medium=tool_page&utm_campaign=rental_inspection_checkout"
+            data-offer="rental-inspection-checklist"
+            data-offer-location="tool_page"
+            data-price-usd="9"
+          >View paid checklist pack</a>
+          <p class="muted">Your free template remains available and fully usable without signup.</p>
+        </section>
+
+        <section class="sources" aria-label="Sources">
+          <strong>Authoritative references</strong>
+          <ul>
+            <li><a href="https://www.irs.gov/publications/p527" target="_blank" rel="noopener noreferrer">IRS Publication 527</a></li>
+            <li><a href="https://www.irs.gov/forms-pubs/about-schedule-e-form-1040" target="_blank" rel="noopener noreferrer">Schedule E overview</a></li>
+            <li><a href="https://www.irs.gov/forms-pubs/about-form-8825" target="_blank" rel="noopener noreferrer">Form 8825 overview</a></li>
+            <li><a href="https://www.dwellfile.com/checklists/rental-inspection-template" target="_blank" rel="noopener noreferrer">DwellFile checklist template</a></li>
+            <li><a href="https://www.document.com/documents/rental-inspection-checklist" target="_blank" rel="noopener noreferrer">Document.com checklist template</a></li>
+            <li><a href="https://my.clevelandclinic.org/-/scassets/files/org/professionals/student-housing/rental-property-inspection-checklist.pdf?la=en" target="_blank" rel="noopener noreferrer">Cleveland Clinic rental inspection checklist PDF</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const checklistItems = [
+        "Main door and lock",
+        "Door frames",
+        "Walls and skirting",
+        "Flooring and floorboards",
+        "Kitchen appliances",
+        "Kitchen tap/pipework",
+        "Bathroom fittings",
+        "Bathroom tap/pipework",
+        "Radiators and heating",
+        "Windows and curtains",
+        "Light fittings",
+        "Smoke alarm and batteries",
+        "Garden and waste area"
+      ];
+
+      const rowsRoot = document.getElementById("rows");
+      const output = document.getElementById("output");
+      const statusText = document.getElementById("statusText");
+      const inspectionDate = document.getElementById("inspectionDate");
+      const roleEl = document.getElementById("role");
+      const propertyAddressEl = document.getElementById("propertyAddress");
+      const inspectorNameEl = document.getElementById("inspectorName");
+      const inspectionTypeEl = document.getElementById("inspectionType");
+      const notesEl = document.getElementById("notes");
+      const buildBtn = document.getElementById("buildChecklist");
+      const copyBtn = document.getElementById("copyChecklist");
+      const downloadBtn = document.getElementById("downloadChecklist");
+      const saveBtn = document.getElementById("saveDraft");
+      const paidCta = document.getElementById("paidOfferCta");
+
+      const draftStorageKey = "dob.rental-inspection-checklist.draft";
+
+      function toDateInputValue() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, "0");
+        const day = String(today.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      function buildRows() {
+        rowsRoot.innerHTML = "";
+        checklistItems.forEach((item, index) => {
+          const row = document.createElement("div");
+          row.className = "row";
+
+          const itemCell = document.createElement("div");
+          itemCell.className = "cell";
+          itemCell.textContent = item;
+
+          const statusCell = document.createElement("div");
+          const statusSelect = document.createElement("select");
+          statusSelect.dataset.statusFor = `${index}`;
+          statusSelect.innerHTML = `
+            <option value="OK">OK</option>
+            <option value="Issue">Issue</option>
+            <option value="Action needed">Action needed</option>
+            <option value="N/A">N/A</option>
+          `;
+          statusCell.appendChild(statusSelect);
+
+          const notesCell = document.createElement("div");
+          const noteArea = document.createElement("textarea");
+          noteArea.rows = 1;
+          noteArea.placeholder = "Optional notes for this item";
+          noteArea.dataset.noteFor = `${index}`;
+
+          notesCell.appendChild(noteArea);
+          row.append(itemCell, statusCell, notesCell);
+          rowsRoot.appendChild(row);
+        });
+      }
+
+      function collectRows() {
+        const statuses = Array.from(document.querySelectorAll("select[data-status-for]"));
+        const notes = Array.from(document.querySelectorAll("textarea[data-note-for]"));
+
+        return checklistItems.map((item, index) => {
+          const status = statuses[index] ? statuses[index].value : "OK";
+          const note = notes[index] ? (notes[index].value || "").trim() : "";
+          return {
+            item,
+            status,
+            note,
+          };
+        });
+      }
+
+      function csvEscape(value) {
+        const needs = value.includes(",") || value.includes("\"") || value.includes("\n");
+        const safe = value.replaceAll("\"", "\"\"");
+        return needs ? `"${safe}"` : safe;
+      }
+
+      function buildChecklistText(rows) {
+        const details = {
+          role: roleEl.value,
+          property: propertyAddressEl.value.trim() || "(not entered)",
+          inspector: inspectorNameEl.value.trim() || "(not entered)",
+          date: inspectionDate.value,
+          type: inspectionTypeEl.value,
+          notes: notesEl.value.trim() || "(none)",
+        };
+
+        const lines = [
+          "Rental property inspection checklist",
+          `Role: ${details.role}`,
+          `Date: ${details.date}`,
+          `Property: ${details.property}`,
+          `Inspector: ${details.inspector}`,
+          `Type: ${details.type}`,
+          `Context notes: ${details.notes}`,
+          "",
+          "Item,Status,Notes"
+        ];
+
+        rows.forEach((row) => {
+          lines.push(`${csvEscape(row.item)},${csvEscape(row.status)},${csvEscape(row.note)}`);
+        });
+
+        return lines.join("\n");
+      }
+
+      function buildChecklistCsv(rows) {
+        const headers = ["item", "status", "notes", "reported_by", "date", "inspection_type", "property"];
+        const csvRows = [
+          headers.map(csvEscape).join(",")
+        ];
+
+        rows.forEach((row) => {
+          csvRows.push([
+            csvEscape(row.item),
+            csvEscape(row.status),
+            csvEscape(row.note || ""),
+            csvEscape(inspectorNameEl.value.trim() || ""),
+            csvEscape(inspectionDate.value),
+            csvEscape(inspectionTypeEl.value),
+            csvEscape(propertyAddressEl.value.trim() || "")
+          ].join(","));
+        });
+
+        return csvRows.join("\n");
+      }
+
+      function setStatus(message) {
+        statusText.textContent = message;
+      }
+
+      function triggerQualifiedCompletionEvent(rows) {
+        const completedIssues = rows.filter((row) => row.status === "Issue" || row.status === "Action needed").length;
+        trackEvent("rental_inspection_qualified_completion", {
+          role: roleEl.value,
+          issues_count: completedIssues,
+          inspection_type: inspectionTypeEl.value,
+          total_items: rows.length,
+          page_slug: "free-rental-property-inspection-checklist-template-uk"
+        });
+      }
+
+      function triggerExportOrSaveIntent(type) {
+        trackEvent("rental_inspection_export_or_install_intent", {
+          intent_type: type,
+          role: roleEl.value,
+          inspection_type: inspectionTypeEl.value,
+          page_slug: "free-rental-property-inspection-checklist-template-uk"
+        });
+      }
+
+      function downloadFile(filename, text) {
+        const blob = new Blob([text], { type: "text/plain;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      }
+
+      buildRows();
+      inspectionDate.value = toDateInputValue();
+
+      buildBtn.addEventListener("click", () => {
+        const rows = collectRows();
+        const payload = buildChecklistText(rows);
+        output.textContent = payload;
+
+        triggerQualifiedCompletionEvent(rows);
+        trackEvent("rental_inspection_tool_action", {
+          action: "generate_checklist",
+          role: roleEl.value,
+          inspection_type: inspectionTypeEl.value,
+          item_count: rows.length,
+          page_slug: "free-rental-property-inspection-checklist-template-uk"
+        });
+        setStatus("Checklist generated. You can now copy, download, or save it locally.");
+      });
+
+      copyBtn.addEventListener("click", async () => {
+        const text = output.textContent || "";
+        if (!text || text.includes("Fill the fields")) {
+          setStatus("Generate the checklist before copying.");
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(text);
+          triggerExportOrSaveIntent("copy");
+          setStatus("Checklist copied to clipboard.");
+        } catch (_error) {
+          setStatus("Copy blocked by browser. Use the Download CSV button instead.");
+        }
+      });
+
+      downloadBtn.addEventListener("click", () => {
+        const rows = collectRows();
+        const csv = buildChecklistCsv(rows);
+        downloadFile("rental-inspection-checklist.csv", csv);
+        triggerExportOrSaveIntent("download_csv");
+        setStatus("CSV downloaded. Good for email and records.");
+      });
+
+      saveBtn.addEventListener("click", () => {
+        const payload = {
+          role: roleEl.value,
+          property: propertyAddressEl.value.trim(),
+          inspector: inspectorNameEl.value.trim(),
+          inspection_date: inspectionDate.value,
+          inspection_type: inspectionTypeEl.value,
+          notes: notesEl.value.trim(),
+          items: collectRows(),
+          generated: new Date().toISOString()
+        };
+
+        try {
+          localStorage.setItem(draftStorageKey, JSON.stringify(payload));
+          triggerExportOrSaveIntent("save_local_draft");
+          setStatus("Draft saved in your browser for this device.");
+        } catch (_error) {
+          setStatus("Browser storage blocked. Use Copy or Download.");
+        }
+      });
+
+      if (paidCta) {
+        paidCta.addEventListener("click", function () {
+          trackEvent("rental_inspection_paid_cta_click", {
+            offer_slug: this.dataset.offer || "rental-inspection-checklist",
+            offer_location: this.dataset.offerLocation || "tool_page",
+            price_usd: Number(this.dataset.priceUsd || 9),
+            event_category: "rental_inspection_checklist",
+          });
+
+          trackEvent("rental_inspection_checkout_start", {
+            offer_slug: this.dataset.offer || "rental-inspection-checklist",
+            offer_location: this.dataset.offerLocation || "tool_page",
+            price_usd: Number(this.dataset.priceUsd || 9),
+            payment_type: "checkout_product_page",
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
