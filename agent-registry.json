@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "updated_at": "2026-05-27",
+  "updated_at": "2026-06-05",
   "name": "DayOneBuilder Agent Magnet Registry",
   "homepage": "https://dayonebuilder.online/",
   "primary_entrypoint": "https://dayonebuilder.online/dob-task-resolver/",
@@ -177,21 +177,25 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "cleaning-checklist-template",
-      "title": "Cleaning Checklist Template",
-      "status": "installable",
-      "module_type": "workbook",
-      "agent_task_phrase": "Generate a practical cleaning checklist template for a household schedule with time and room constraints.",
-      "human_task_phrase": "I searched cleaning checklist template and need a useful template that saves me time.",
-      "module_url": "https://dayonebuilder.online/cleaning-checklist-template/",
-      "install_or_call_path": "Open https://dayonebuilder.online/cleaning-checklist-template/, set profile fields, click Generate checklist, then copy/save/download. Optional upgrade: https://checkout.dayonebuilder.online/products/cleaning-schedule-template",
-      "trust_evidence": [
-        "no-login core workflow",
-        "copy/save/download controls",
-        "visible assumptions in output",
-        "paid path is explicit and optional"
+      "id": "pet-care-checklist-template",
+      "title": "Pet Care Checklist Template",
+      "status": "primary",
+      "module_type": "template",
+      "agent_task_phrase": "Create a usable pet care checklist template for handoff, sitter shifts, or travel care.",
+      "module_url": "https://dayonebuilder.online/pet-care-checklist-template/",
+      "module_manifest": "https://dayonebuilder.online/collections/pet-care-checklist-template.json",
+      "install_or_call_path": "Open https://dayonebuilder.online/pet-care-checklist-template/, fill the form, then copy or download the checklist.",
+      "proof_evidence": [
+        "source-first references for pet care task structure",
+        "in-page generated checklist output",
+        "save/export and install intent telemetry",
+        "paid CTA path and click event"
       ],
-      "adoption_metric": "qualified_tool_completion, export_save_intent, paid_cta_click, checkout_start, repeats"
+      "paid_path": {
+        "title": "$9 pet care handoff checklist",
+        "checkout_url": "https://checkout.dayonebuilder.online/products"
+      },
+      "adoption_metric": "qualified completion, save_or_export_click, paid_cta_click, returning use"
     }
   ],
   "archived_internal_modules": {

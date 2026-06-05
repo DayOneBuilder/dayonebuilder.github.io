@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_at": "2026-05-27",
+  "updated_at": "2026-06-05",
   "name": "DayOneBuilder Static Collections",
   "purpose": "Machine-readable collections agents can fetch before choosing a repo, skill, MCP server, package, CLI, or workflow.",
   "discovery_flow": [
@@ -12,11 +12,11 @@
   ],
   "public_api_status": "not_required_static_collections",
   "collections": [
-    {
-      "slug": "agent-skills",
-      "title": "Agent Skills And Tooling",
-      "json_url": "https://dayonebuilder.online/collections/agent-skills.json",
-      "page_url": "https://dayonebuilder.online/collections/agent-skills/",
+  {
+    "slug": "agent-skills",
+    "title": "Agent Skills And Tooling",
+    "json_url": "https://dayonebuilder.online/collections/agent-skills.json",
+    "page_url": "https://dayonebuilder.online/collections/agent-skills/",
       "task_aliases": [
         "best agent skill",
         "find mcp server",
@@ -24,22 +24,22 @@
         "fresh docs for coding agent",
         "third party tool safety check"
       ],
-      "proof_signal": "Source-first selection from public repositories and maintained registries.",
-      "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly."
+    "proof_signal": "Source-first selection from public repositories and maintained registries.",
+    "fallback": "If no collection entry fits, use agent-actions.json or inspect the upstream source directly."
     },
     {
-      "slug": "cleaning-checklist-template",
-      "title": "Cleaning Checklist Template",
-      "summary": "Household cleaning templates for exact search intent: cleaning checklist template.",
-      "json_url": "https://dayonebuilder.online/collections/cleaning-checklist-template.json",
-      "page_url": "https://dayonebuilder.online/cleaning-checklist-template/",
+      "slug": "pet-care-checklist-template",
+      "title": "Pet Care Checklist Template",
+      "json_url": "https://dayonebuilder.online/collections/pet-care-checklist-template.json",
+      "page_url": "https://dayonebuilder.online/pet-care-checklist-template/",
       "task_aliases": [
-        "cleaning checklist template",
-        "cleaning checklist",
-        "cleaning schedule template"
+        "pet care checklist template",
+        "pet care handoff checklist",
+        "pet sitter checklist",
+        "pet care checklist"
       ],
-      "proof_signal": "Machine path with copy/save/export actions and paid option for speed-up pack.",
-      "fallback": "If your workflow differs, check the resolver and use the nearest external source with a smoke test."
+      "proof_signal": "No-login, source-linked checklist generator with explicit copy/download and checkout intent.",
+      "fallback": "If the user needs a full external planner system, check marketplace templates and compare setup cost."
     }
   ]
 }

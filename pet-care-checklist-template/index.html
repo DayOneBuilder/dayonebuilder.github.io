@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pet Care Checklist Template | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="A small DayOneBuilder tool for pet care checklist template, with a paid template/export path if the workflow saves time."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/pet-care-checklist-template/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+    <link rel="alternate" type="application/json" href="/collections/pet-care-checklist-template.json" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      window.__dobTracker = {
+        track: function (eventName, params) {
+          if (typeof window.gtag === "function") {
+            window.gtag("event", eventName, params || {});
+          }
+        },
+      };
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg-1: #0a0d16;
+        --bg-2: #1a1430;
+        --surface: rgba(8, 11, 18, 0.72);
+        --line: rgba(255, 255, 255, 0.12);
+        --ink: #eef2ff;
+        --muted: #9ca3af;
+        --accent: #22d3ee;
+        --accent-2: #a855f7;
+        --ok: #34d399;
+        --max: 1040px;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: #e5e7eb;
+        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        background: radial-gradient(circle at 15% 8%, #202042 0%, transparent 34%), radial-gradient(circle at 85% 20%, #1f1142 0%, transparent 32%), linear-gradient(140deg, var(--bg-1), var(--bg-2));
+        min-height: 100vh;
+      }
+      a { color: inherit; text-decoration: none; }
+      .wrap {
+        width: min(calc(100% - 28px), var(--max));
+        margin: 0 auto;
+        padding: 22px 0 30px;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        background: var(--surface);
+        backdrop-filter: blur(5px);
+        border-radius: 14px;
+      }
+      .top {
+        padding: 22px;
+      }
+      .title {
+        margin: 0;
+        color: var(--ink);
+        font-size: clamp(1.9rem, 5vw, 3rem);
+        line-height: 1.08;
+        letter-spacing: -0.02em;
+      }
+      .subtitle {
+        margin: 10px 0 0;
+        color: var(--muted);
+        max-width: 64ch;
+        font-size: 1rem;
+      }
+      .links {
+        margin-top: 10px;
+        color: #cbd5e1;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        font-size: 0.95rem;
+      }
+      .links a {
+        border-bottom: 1px dashed #d8b4fe;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+      .card {
+        padding: 18px;
+      }
+      .input-grid {
+        display: grid;
+        gap: 10px;
+        margin-top: 12px;
+      }
+      .label {
+        display: block;
+        color: var(--ink);
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+      }
+      input, select {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        height: 42px;
+        color: var(--ink);
+        padding: 0 12px;
+        background: rgba(8, 10, 18, 0.76);
+        font: inherit;
+      }
+      .hint {
+        color: #94a3b8;
+        margin-top: 4px;
+        font-size: 0.8rem;
+      }
+      .btn-group {
+        margin-top: 12px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .btn {
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 0 14px;
+        background: #111827;
+        color: #f9fafb;
+        cursor: pointer;
+        font: inherit;
+      }
+      .btn.primary {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        border-color: transparent;
+        color: #0f172a;
+        font-weight: 700;
+      }
+      .btn:disabled {
+        opacity: 0.55;
+        cursor: default;
+      }
+      .status {
+        margin-top: 12px;
+        color: #a1a1aa;
+        font-size: 0.9rem;
+        min-height: 1.1rem;
+      }
+      pre {
+        background: #05080f;
+        color: #e5e7eb;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .meta {
+        margin-top: 12px;
+        font-size: 0.9rem;
+        color: #a5b4fc;
+      }
+      .meta a { border-bottom: 1px solid #a5b4fc; }
+      .steps {
+        margin: 0;
+        padding-left: 18px;
+        line-height: 1.5;
+      }
+      .steps li { margin-bottom: 8px; }
+      .muted {
+        color: #9ca3af;
+      }
+      .section-title {
+        margin: 0;
+        color: var(--ink);
+        font-size: 1.15rem;
+      }
+      .metric {
+        display: inline-block;
+        margin-top: 10px;
+        border: 1px solid rgba(52, 211, 153, 0.4);
+        background: rgba(34, 211, 138, 0.14);
+        color: #d1fae5;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+      }
+      .actions {
+        margin-top: 12px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .inline-check {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        color: #d1d5db;
+      }
+      .task-list {
+        margin: 0;
+        padding: 0;
+      }
+      .task-list li {
+        list-style: none;
+        padding: 8px 0;
+        border-top: 1px dashed rgba(255,255,255,.13);
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+      }
+      .task-list li:first-child { border-top: none; }
+      .task-list input { width: auto; min-height: 18px; height: 18px; margin-top: 2px; }
+      .footer {
+        margin-top: 16px;
+        padding: 16px;
+        color: #94a3b8;
+        font-size: 0.9rem;
+      }
+      .source-list {
+        margin: 8px 0 0;
+        padding-left: 18px;
+      }
+      .source-list a { color: #ddd6fe; }
+      @media (max-width: 900px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 620px) {
+        .wrap { width: min(calc(100% - 14px), var(--max)); }
+        .links { gap: 8px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="panel top">
+        <h1 class="title">Create a Pet Care Checklist Template in seconds</h1>
+        <p class="subtitle">
+          Answer one small form, get a ready-to-save handoff checklist, and copy it into notes, a task manager, or a shared doc. The module stays no-login and download-ready.
+        </p>
+        <p class="links">
+          <a href="/llms.txt">LLM machine guide</a>
+          <a href="/collections/index.json">Collections index</a>
+          <a href="/agent-registry.json">Resolver registry</a>
+        </p>
+        <span class="metric">Trackable output: completion + save/export + paid CTA click</span>
+      </section>
+
+      <div class="grid">
+        <section class="panel card" aria-label="Checklist input">
+          <h2 class="section-title">Build your template</h2>
+          <div class="input-grid">
+            <div>
+              <label class="label" for="pet-name">Pet name</label>
+              <input id="pet-name" value="Biscuit" />
+              <p class="hint">Optional but kept in your checklist heading.</p>
+            </div>
+            <div>
+              <label class="label" for="pet-type">Pet type</label>
+              <select id="pet-type">
+                <option>dog</option>
+                <option>cat</option>
+                <option>bird</option>
+                <option>rabbit</option>
+                <option>other</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="handoff-time">Handoff window</label>
+              <select id="handoff-time">
+                <option value="overnight">Overnight sitter</option>
+                <option value="travel">Travel handoff (24-72h)</option>
+                <option value="daily-care">Daily home-care handoff</option>
+                <option value="emergency">Emergency shift</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="checklist-days">Number of care days</label>
+              <input id="checklist-days" type="number" min="1" max="14" value="3" />
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button id="generate-btn" class="btn primary" type="button">Generate checklist</button>
+            <button id="copy-btn" class="btn" type="button" disabled>Copy checklist</button>
+            <button id="export-btn" class="btn" type="button" disabled>Download .txt</button>
+          </div>
+          <p id="tool-status" class="status" aria-live="polite"></p>
+
+          <h3 class="section-title" style="margin-top: 14px; font-size: 1rem;">What to check off first</h3>
+          <p class="muted">If the job is for travel, mark tasks as complete in order and stop when each time block is done.</p>
+          <ul id="task-list" class="task-list"></ul>
+
+          <div class="actions">
+            <a id="paid-cta" class="btn primary" href="https://checkout.dayonebuilder.online/products" target="_blank" rel="noopener noreferrer">Get $9 cleanup export pack</a>
+            <button id="install-intent-btn" class="btn" type="button">Mark install/save intent</button>
+          </div>
+          <p class="meta">You can start with this free template and upgrade later only if you want a cleaner branded version with supplier-ready notes.</p>
+        </section>
+
+        <section class="panel card" aria-label="Checklist output and trust notes">
+          <h2 class="section-title">Generated output preview</h2>
+          <pre id="output-block">Fill the form and press Generate checklist.</pre>
+          <p class="meta" id="completion-meta">No completion event yet.</p>
+
+          <h3 class="section-title" style="margin-top: 14px; font-size: 1rem;">Evidence sources</h3>
+          <ul class="source-list">
+            <li><a href="https://www.rover.com/blog/pet-sitter-checklist/" target="_blank" rel="noopener noreferrer">Rover: pet sitter and handoff checklist guidance</a></li>
+            <li><a href="https://petdesk.com/blog/new-pet-owner-checklist/" target="_blank" rel="noopener noreferrer">Petdesk: new pet owner checklist fundamentals</a></li>
+            <li><a href="https://www.etsy.com/market/pet_care_planner" target="_blank" rel="noopener noreferrer">Etsy: examples of how people structure pet-care planners</a></li>
+          </ul>
+
+          <h3 class="section-title" style="margin-top: 14px; font-size: 1rem;">Install / call path for agents</h3>
+          <ol class="steps">
+            <li>Open this page and generate the checklist.</li>
+            <li>Copy text or download .txt.</li>
+            <li>Paste into your sitter handoff document and send it.</li>
+            <li>When available, use the paid cleanup pack for a branded editable master file.</li>
+          </ol>
+        </section>
+      </div>
+
+      <footer class="panel footer">
+        <p class="muted">
+          DayOneBuilder task-first rule: start from source links, then pick the option that is fastest, safest, and reusable.
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      const generateBtn = document.getElementById("generate-btn");
+      const copyBtn = document.getElementById("copy-btn");
+      const exportBtn = document.getElementById("export-btn");
+      const installIntentBtn = document.getElementById("install-intent-btn");
+      const outputBlock = document.getElementById("output-block");
+      const taskList = document.getElementById("task-list");
+      const statusEl = document.getElementById("tool-status");
+      const completionMeta = document.getElementById("completion-meta");
+      const paidCta = document.getElementById("paid-cta");
+      const petNameInput = document.getElementById("pet-name");
+      const petTypeInput = document.getElementById("pet-type");
+      const handoffTimeInput = document.getElementById("handoff-time");
+      const checklistDaysInput = document.getElementById("checklist-days");
+
+      const coreTasks = {
+        "overnight": [
+          "Feed plan for tonight and morning",
+          "Water amount and backup water setup",
+          "Medication timing with doses",
+          "Emergency contact cards in top drawer",
+          "Door locks and entry check",
+          "Behavior notes for guests and walking zone",
+        ],
+        "travel": [
+          "Day 1, 2, 3 sitter handoff entries",
+          "Food storage, portions, and feeding alarm",
+          "Walk or play schedule",
+          "Cleaning window and litter/waste plan",
+          "Vet info and vaccination card visibility",
+          "Emergency transport and backup caregiver",
+        ],
+        "daily-care": [
+          "Refresh the home-care routine for a fresh day",
+          "Supply check (food, waste, meds, litter)",
+        ],
+        "emergency": [
+          "Hospital and urgent contact numbers",
+          "Current medications + allergies",
+          "Latest feeding and hydration snapshot",
+          "Behavior changes to alert caregiver",
+          "Recovery-safe environment adjustments",
+        ],
+      };
+
+      const taskRows = [
+        "Upload a backup sitter note with allergies and medication names.",
+        "Record feeding window and portion size for each day in one place.",
+        "Plan one short walk/play block per day unless instructed otherwise by vet.",
+        "Check water bowl before every feeding.",
+      ];
+
+      let renderedChecklist = [];
+      let totalTasks = 0;
+      let completedTasks = 0;
+      let checklistRendered = false;
+
+      function slugify(value) {
+        return String(value || "").trim().toLowerCase().replace(/\s+/g, "-");
+      }
+
+      function track(eventName, params) {
+        window.__dobTracker.track(eventName, Object.assign({ event_category: "pet_care_checklist_tool" }, params || {}));
+      }
+
+      function clampDays() {
+        const parsed = Number(checklistDaysInput.value);
+        if (!Number.isFinite(parsed) || parsed < 1) return 1;
+        if (parsed > 14) return 14;
+        return Math.round(parsed);
+      }
+
+      function buildChecklistContent() {
+        const petName = petNameInput.value.trim() || "My Pet";
+        const petType = petTypeInput.value;
+        const handoffMode = handoffTimeInput.value;
+        const days = clampDays();
+        const dayLabel = handoffMode === "emergency" ? "Urgent handoff" : `${days}-day handoff`;
+        const title = `# ${petName} (${petType}) ${handoffMode.replace("-", " ")} checklist`;
+        const tasks = [
+          ...coreTasks[handoffMode],
+          ...taskRows,
+        ];
+        const dayHeader = [];
+        const unique = [];
+        for (const t of tasks) {
+          const normalized = t.trim();
+          if (!unique.includes(normalized)) unique.push(normalized);
+        }
+        for (let i = 1; i <= (handoffMode === "emergency" ? 1 : days); i++) {
+          dayHeader.push(`\n## Day ${i}`);
+          if (handoffMode === "emergency" && i > 1) break;
+          unique.forEach((task) => {
+            dayHeader.push(`- [ ] ${task}`);
+          });
+        }
+
+        return {
+          rawText: [title, `## ${dayLabel}`, dayHeader.join("\n"), "\n## Notes", "- Vet name: ", "- Vet contact: ", "- Vet reminder: "].join("\n"),
+          tasks: unique,
+          title,
+          handoffMode,
+        };
+      }
+
+      function renderTasks(items) {
+        taskList.innerHTML = "";
+        items.forEach((text, idx) => {
+          const li = document.createElement("li");
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.dataset.index = idx;
+          checkbox.addEventListener("change", onTaskChecked);
+          const label = document.createElement("span");
+          label.textContent = text;
+          li.appendChild(checkbox);
+          li.appendChild(label);
+          taskList.appendChild(li);
+        });
+        totalTasks = items.length;
+        completedTasks = 0;
+        completionMeta.textContent = `Completion: ${completedTasks}/${totalTasks}`;
+      }
+
+      function onTaskChecked(event) {
+        const isChecked = event.target.checked;
+        completedTasks += isChecked ? 1 : -1;
+        if (completedTasks < 0) completedTasks = 0;
+        if (completedTasks > totalTasks) completedTasks = totalTasks;
+        completionMeta.textContent = `Completion: ${completedTasks}/${totalTasks}`;
+        if (completedTasks === totalTasks && totalTasks > 0) {
+          track("pet_care_template_completion", {
+            pet_type: slugify(petTypeInput.value),
+            handoff_type: slugify(handoffTimeInput.value),
+            checklist_slug: renderedChecklist.slug,
+          });
+          completionMeta.textContent = "Completion: all core items checked (qualified completion recorded).";
+        }
+      }
+
+      function renderChecklist() {
+        const generated = buildChecklistContent();
+        const taskItems = generated.tasks;
+        renderedChecklist = {
+          slug: slugify(`${generated.title}-${generated.handoffMode}`),
+          content: generated.rawText,
+          title: generated.title,
+        };
+        outputBlock.textContent = generated.rawText;
+        renderTasks(taskItems);
+        copyBtn.disabled = false;
+        exportBtn.disabled = false;
+        checklistRendered = true;
+        statusEl.textContent = "Checklist generated. Check your core tasks, then export or copy.";
+        track("pet_care_template_generate", {
+          pet_type: slugify(petTypeInput.value),
+          handoff_type: slugify(handoffTimeInput.value),
+          days: clampDays(),
+        });
+      }
+
+      function copyChecklist() {
+        if (!checklistRendered) return;
+        const text = outputBlock.textContent || "";
+        const trackCopy = () => track("pet_care_template_save_intent", {
+          pet_type: slugify(petTypeInput.value),
+          export_mode: "copy",
+          checklist_slug: renderedChecklist.slug,
+        });
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(trackCopy).catch(() => {
+            fallbackCopy(text);
+            trackCopy();
+          });
+        } else {
+          fallbackCopy(text);
+          trackCopy();
+        }
+      }
+
+      function fallbackCopy(text) {
+        const temp = document.createElement("textarea");
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.focus();
+        temp.select();
+        document.execCommand("copy");
+        temp.remove();
+      }
+
+      function exportChecklist() {
+        if (!checklistRendered) return;
+        const blob = new Blob([outputBlock.textContent || ""], { type: "text/markdown;charset=utf-8" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `${renderedChecklist.slug || "pet-care-checklist"}.txt`;
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        setTimeout(() => {
+          URL.revokeObjectURL(link.href);
+          link.remove();
+        }, 250);
+        track("pet_care_template_save_intent", {
+          pet_type: slugify(petTypeInput.value),
+          export_mode: "download",
+          checklist_slug: renderedChecklist.slug,
+        });
+      }
+
+      function installIntent() {
+        track("pet_care_template_install_or_save", {
+          event_label: "save_intent_button",
+          pet_type: slugify(petTypeInput.value),
+          handoff_type: slugify(handoffTimeInput.value),
+        });
+        statusEl.textContent = "Install/save intent recorded.";
+      }
+
+      function trackPaidCta(event) {
+        event.preventDefault();
+        track("pet_care_template_paid_cta_click", {
+          click_target: paidCta.href,
+          pet_type: slugify(petTypeInput.value),
+          handoff_type: slugify(handoffTimeInput.value),
+        });
+        window.location.href = paidCta.href;
+      }
+
+      function init() {
+        generateBtn.addEventListener("click", renderChecklist);
+        copyBtn.addEventListener("click", copyChecklist);
+        exportBtn.addEventListener("click", exportChecklist);
+        installIntentBtn.addEventListener("click", installIntent);
+        paidCta.addEventListener("click", trackPaidCta);
+      }
+
+      init();
+    </script>
+  </body>
+</html>

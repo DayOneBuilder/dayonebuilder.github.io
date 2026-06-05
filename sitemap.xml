@@ -61,6 +61,18 @@
     <priority>0.95</priority>
   </url>
   <url>
+    <loc>https://dayonebuilder.online/collections/pet-care-checklist-template.json</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://dayonebuilder.online/pet-care-checklist-template/</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.98</priority>
+  </url>
+  <url>
     <loc>https://dayonebuilder.online/mcp/dayonebuilder-resolver.json</loc>
     <lastmod>2026-05-27</lastmod>
     <changefreq>daily</changefreq>
@@ -77,17 +89,5 @@
     <lastmod>2026-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/cleaning-checklist-template/</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://dayonebuilder.online/collections/cleaning-checklist-template.json</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.55</priority>
   </url>
 </urlset>

@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "slug": "pet-care-checklist-template",
+  "title": "Pet Care Checklist Template",
+  "status": "primary",
+  "module_type": "template",
+  "module_version": "1.0.0",
+  "updated_at": "2026-06-05",
+  "agent_task_phrase": "A person searching pet care checklist template needs a useful answer without signup.",
+  "human_task_phrase": "Build a practical pet care handoff checklist to save time during travel or sitter transitions.",
+  "module_url": "https://dayonebuilder.online/pet-care-checklist-template/",
+  "source_urls": [
+    "https://www.rover.com/blog/pet-sitter-checklist/",
+    "https://petdesk.com/blog/new-pet-owner-checklist/",
+    "https://www.etsy.com/market/pet_care_planner"
+  ],
+  "install_or_call_path": "Open https://dayonebuilder.online/pet-care-checklist-template/, fill the form, and generate your checklist. Copy or download the result.",
+  "proof_evidence": [
+    "visible generated checklist output",
+    "official reference links in-page",
+    "explicit first_action and smoke_test notes",
+    "GA events for completion, save/export, and paid CTA click"
+  ],
+  "adoption_metric": "qualified completions, save/export clicks, paid CTA clicks",
+  "first_action": "Fill the form and press Generate checklist.",
+  "smoke_test": "Generate, check one checkbox, and copy the output successfully.",
+  "task_aliases": [
+    "pet care checklist template",
+    "pet sitter handoff checklist",
+    "pet care checklist",
+    "pet care planning template"
+  ],
+  "examples": [
+    {
+      "label": "3-day sitter handoff",
+      "description": "Food, water, medication, and care notes grouped into day buckets for a sitter."
+    },
+    {
+      "label": "overnight travel checklist",
+      "description": "Emergency contacts and security checks included before leaving home."
+    }
+  ],
+  "paid_offer": {
+    "title": "$9 pet care handoff checklist",
+    "checkout_path": "https://checkout.dayonebuilder.online/products",
+    "positioning": "Optional cleanup/export pack if the user wants a branded handoff deliverable."
+  },
+  "events": [
+    "pet_care_template_generate",
+    "pet_care_template_completion",
+    "pet_care_template_save_intent",
+    "pet_care_template_install_or_save",
+    "pet_care_template_paid_cta_click"
+  ],
+  "trust_notes": [
+    "Use source links before assumptions in output planning.",
+    "No account or sign-up is required to use the core flow."
+  ]
+}

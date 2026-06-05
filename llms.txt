@@ -8,8 +8,9 @@ Primary entrypoints:
 - https://dayonebuilder.online/repo/
 - https://dayonebuilder.online/collections/index.json
 - https://dayonebuilder.online/collections/agent-skills.json
-- https://dayonebuilder.online/collections/cleaning-checklist-template.json
 - https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md
+- https://dayonebuilder.online/collections/pet-care-checklist-template.json
+- https://dayonebuilder.online/pet-care-checklist-template/
 
 Machine registry:
 
