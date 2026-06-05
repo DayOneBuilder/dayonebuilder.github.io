@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A small DayOneBuilder tool for rental inspection checklist template, with a paid template/export path if the workflow saves time." />
+    <title>Rental Inspection Checklist Template | DayOneBuilder</title>
+    <link rel="canonical" href="https://dayonebuilder.online/rental-inspection-checklist-template/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+    <style>
+      :root {
+        --bg: #0a1118;
+        --ink: #eff7fb;
+        --muted: #b6c4cf;
+        --panel: rgba(14, 24, 33, 0.95);
+        --line: rgba(168, 226, 255, 0.2);
+        --cyan: #8ef2ff;
+        --mint: #6ee7b7;
+        --sun: #ffd166;
+        --rose: #ff9aa2;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: linear-gradient(180deg, #09131d 0%, #090f16 100%);
+        font: 16px/1.55 "Space Grotesk", "IBM Plex Sans", "Trebuchet MS", sans-serif;
+      }
+      .wrap {
+        width: min(1020px, calc(100% - 28px));
+        margin: 0 auto;
+        padding: 28px 0 56px;
+      }
+      .back {
+        color: #9bb6cf;
+        text-decoration: none;
+      }
+      .panel {
+        margin-top: 16px;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: var(--panel);
+      }
+      .eyebrow {
+        display: inline-flex;
+        border: 1px solid rgba(110,231,183,0.35);
+        border-radius: 999px;
+        padding: 5px 10px;
+        color: var(--mint);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      h1 { font-size: clamp(1.8rem, 4.8vw, 2.8rem); margin: 10px 0; }
+      h2 { font-size: clamp(1.25rem, 3.2vw, 1.7rem); margin: 0 0 12px; }
+      p, li { color: var(--muted); }
+      .grid {
+        display: grid;
+        grid-template-columns: 1.08fr 1.12fr;
+        gap: 14px;
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 16px;
+        background: rgba(0, 0, 0, 0.22);
+      }
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+      }
+      input, select, textarea {
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--ink);
+        padding: 10px 12px;
+        font: inherit;
+      }
+      .field {
+        margin-bottom: 10px;
+      }
+      .actions {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      button, .button {
+        border: 0;
+        border-radius: 999px;
+        padding: 11px 14px;
+        min-height: 44px;
+        font: inherit;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .primary {
+        color: #051016;
+        background: linear-gradient(120deg, var(--mint), var(--cyan));
+      }
+      .ghost {
+        color: var(--ink);
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.03);
+      }
+      .mini {
+        margin-top: 10px;
+        font-size: 13px;
+        color: #9fb6c8;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        min-width: 300px;
+      }
+      th, td {
+        text-align: left;
+        border-top: 1px solid var(--line);
+        padding: 9px 0;
+        vertical-align: top;
+      }
+      thead th { color: #d6ebff; font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; }
+      .toolbar {
+        margin-top: 12px;
+        display: grid;
+        gap: 8px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .toolbar button, .toolbar a {
+        width: 100%;
+      }
+      .source-list {
+        margin: 0;
+        padding-left: 18px;
+      }
+      .source-list a { color: var(--sun); }
+      .note {
+        margin-top: 14px;
+        color: #ffd6a3;
+      }
+      .offer {
+        margin-top: 14px;
+        padding: 14px;
+        border: 1px solid rgba(255, 209, 102, 0.4);
+        border-radius: 14px;
+        background: rgba(255, 209, 102, 0.08);
+        color: #fdf6eb;
+      }
+      .offer .button {
+        display: inline-flex;
+        align-items: center;
+        margin-top: 10px;
+      }
+      pre#copyBlock {
+        margin: 10px 0 0;
+        max-height: 230px;
+        overflow: auto;
+        white-space: pre-wrap;
+        color: var(--muted);
+        background: rgba(0,0,0,0.24);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px;
+      }
+      @media (max-width: 920px) {
+        .grid { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 560px) {
+        .wrap { width: calc(100% - 16px); padding: 20px 0 40px; }
+        .panel { padding: 16px; border-radius: 16px; }
+        .toolbar { grid-template-columns: 1fr; }
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Rental Inspection Checklist Template",
+        "url": "https://dayonebuilder.online/rental-inspection-checklist-template/",
+        "applicationCategory": "BusinessApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Generate a practical rental inspection checklist for move-in/move-out and export/copy it."
+      }
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <a class="back" href="/">← DayOneBuilder</a>
+      <div class="panel">
+        <span class="eyebrow">rental inspection workflow tool</span>
+        <h1>Rental Inspection Checklist Template</h1>
+        <p>Build the checklist in one screen, copy it, or export it as CSV for a spreadsheet. No signup required. If you need a polished, printable package with more legal-ready wording, open the paid path below.</p>
+        <div class="grid">
+          <section class="card" aria-label="Checklist builder">
+            <div class="field">
+              <label for="propertyAddress">Property (optional)</label>
+              <input id="propertyAddress" placeholder="123 Main St, Unit 4" />
+            </div>
+            <div class="field">
+              <label for="inspectionType">Checklist intent</label>
+              <select id="inspectionType">
+                <option value="move-in">Move-in checklist</option>
+                <option value="move-out">Move-out checklist</option>
+                <option value="both">Move-in and move-out</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="propertyType">Property type</label>
+              <select id="propertyType">
+                <option value="apartment">Apartment / unit</option>
+                <option value="house">House / detached</option>
+                <option value="storage">Storage / shared unit</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="notes">Notes or specific concerns</label>
+              <textarea id="notes" rows="4" placeholder="e.g., pet clause, balcony railing, parking, HOA policy"></textarea>
+            </div>
+            <div class="actions">
+              <button id="buildButton" class="primary">Build checklist</button>
+              <button id="copyButton" class="ghost" disabled>Copy checklist</button>
+              <button id="saveButton" class="ghost" disabled>Save draft (.txt)</button>
+            </div>
+            <p class="mini">By default we only generate a tenant-use template. Always verify with your lease and local landlord-tenant law.</p>
+          </section>
+          <section class="card" aria-label="Checklist output">
+            <h2>Template output</h2>
+            <table>
+              <thead>
+                <tr><th>Section</th><th>Item</th></tr>
+              </thead>
+              <tbody id="checklistBody"></tbody>
+            </table>
+            <div id="countMeta" class="mini">0 items ready</div>
+            <div class="toolbar">
+              <button id="exportCsv" class="ghost" disabled>Download CSV</button>
+              <a id="installIntent" class="button ghost" role="button" href="/rental-inspection-checklist-template/" aria-disabled="true">Install / Save intent</a>
+              <a id="paidCta" class="button primary" href="https://checkout.dayonebuilder.online/products/rental-inspection-checklist-template" target="_blank" rel="noopener noreferrer">View paid cleanup/template pack</a>
+            </div>
+            <p class="note">Qualified completion = checklist generated with property context and selected mode.</p>
+            <pre id="copyBlock" aria-live="polite" aria-label="Generated checklist text">Complete the form and click Build checklist.</pre>
+          </section>
+        </div>
+      </div>
+      <div class="panel">
+        <h2>Official source references</h2>
+        <ul class="source-list">
+          <li><a href="https://www.dwellfile.com/checklists/rental-inspection-template" target="_blank" rel="noopener noreferrer">Dwellfile rental inspection checklist template</a></li>
+          <li><a href="https://www.document.com/documents/rental-inspection-checklist" target="_blank" rel="noopener noreferrer">Document.com rental inspection checklist</a></li>
+          <li><a href="https://my.clevelandclinic.org/-/scassets/files/org/professionals/student-housing/rental-property-inspection-checklist.pdf?la=en" target="_blank" rel="noopener noreferrer">Cleveland Clinic inspection checklist (reference)</a></li>
+        </ul>
+        <div class="offer">
+          <strong>Need a cleaner print-ready workflow?</strong>
+          <p class="mini">The paid package is a practical template extension with a cleanup/export bundle for landlords and property managers.</p>
+          <a id="paidCtaBottom" class="button primary" href="https://checkout.dayonebuilder.online/products/rental-inspection-checklist-template" target="_blank" rel="noopener noreferrer">Open paid template path</a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const BUILD_EVENT = "rental_inspection_checklist_completed";
+      const EXPORT_EVENT = "rental_inspection_checklist_export";
+      const INSTALL_INTENT_EVENT = "rental_inspection_checklist_install_intent";
+      const PAID_CTA_EVENT = "rental_inspection_paid_cta_click";
+      const CHECKOUT_START_EVENT = "rental_inspection_checkout_start";
+
+      const baseSections = {
+        apartment: [
+          ["Utilities", "Check water, gas, electricity, and HVAC at the time of inspection."],
+          ["Walls and ceilings", "Inspect for cracks, holes, water marks, peeling paint, and mold."],
+          ["Door and windows", "Check locks, handles, seals, and any damage around frames."],
+          ["Floors and baseboards", "Check major marks, cracks, stains, and carpet wear."],
+          ["Appliances", "Photo-document condition of included appliances and accessories."],
+          ["Safety", "Test lights, smoke alarms, and carbon monoxide detectors where present."]
+        ],
+        house: [
+          ["Exterior", "Inspect roof, siding, gutters, and drainage flow after heavy rain."],
+          ["Heating and cooling", "Check thermostat, vents, and obvious filter/airflow issues."],
+          ["Kitchen", "Check cabinets, countertops, stove, dishwasher, and visible plumbing lines."],
+          ["Bathroom", "Check toilet, sink, shower/tub fittings, and caulking."],
+          ["Electrical", "Test all outlets, switches, and GFCI devices if present."],
+          ["Safety", "Smoke alarms, carbon monoxide detectors, and gate/railing condition."]
+        ],
+        storage: [
+          ["Entry and access", "Check door lock, entry lock system, and camera placement notes if any."],
+          ["Electrical", "Document outlet condition and load limitations at time of handover."],
+          ["Water and climate", "Check if any leak signs are present in storage zones."],
+          ["Pest notes", "Record signs of pests and any existing damage around flooring seams."],
+          ["Pest notes", "Capture photos of existing wear before loading."],
+        ],
+      };
+
+      const moveInOnlyAdditions = [
+        ["Keys and access", "Confirm keys, mailbox access, alarm code, and security instructions."],
+        ["Cleaning", "Inspect for prior damages and unresolved stains requiring note."],
+      ];
+
+      const moveOutOnlyAdditions = [
+        ["Final deep check", "Verify all landlord request items in move-out instructions were completed."],
+        ["Waste and pest signs", "Document any debris, odor, or pest traces before final walk-through."],
+      ];
+
+      const state = {
+        items: [],
+      };
+
+      const propertyAddress = document.getElementById("propertyAddress");
+      const inspectionType = document.getElementById("inspectionType");
+      const propertyType = document.getElementById("propertyType");
+      const notes = document.getElementById("notes");
+      const buildButton = document.getElementById("buildButton");
+      const copyButton = document.getElementById("copyButton");
+      const saveButton = document.getElementById("saveButton");
+      const exportCsv = document.getElementById("exportCsv");
+      const installIntent = document.getElementById("installIntent");
+      const paidCta = document.getElementById("paidCta");
+      const paidCtaBottom = document.getElementById("paidCtaBottom");
+      const checklistBody = document.getElementById("checklistBody");
+      const copyBlock = document.getElementById("copyBlock");
+      const countMeta = document.getElementById("countMeta");
+
+      function safeTrack(name, params = {}) {
+        if (typeof window.gtag !== "function") {
+          return;
+        }
+        window.gtag("event", name, Object.assign({
+          event_category: "rental_inspection_tool",
+        }, params));
+      }
+
+      function setActionsEnabled(enabled) {
+        const state = enabled ? "auto" : "none";
+        copyButton.disabled = !enabled;
+        saveButton.disabled = !enabled;
+        exportCsv.disabled = !enabled;
+        installIntent.setAttribute("aria-disabled", String(!enabled));
+        if (enabled) {
+          installIntent.href = "data:text/plain;charset=utf-8," + encodeURIComponent(copyBlock.textContent || "");
+          installIntent.style.cursor = "pointer";
+          saveButton.textContent = "Save draft (.txt)";
+        } else {
+          installIntent.removeAttribute("href");
+          installIntent.href = "javascript:void(0)";
+          installIntent.style.cursor = "not-allowed";
+          saveButton.textContent = "Save draft (.txt)";
+        }
+      }
+
+      function buildChecklist() {
+        const mode = inspectionType.value;
+        const pType = propertyType.value;
+        const concern = notes.value.trim();
+        const address = propertyAddress.value.trim();
+
+        const lines = [];
+        const sourceTemplate = baseSections[pType] || baseSections.apartment;
+        sourceTemplate.forEach(([section, item]) => lines.push({section, item}));
+        if (mode === "move-in" || mode === "both") {
+          moveInOnlyAdditions.forEach(([section, item]) => lines.push({section, item}));
+        }
+        if (mode === "move-out" || mode === "both") {
+          moveOutOnlyAdditions.forEach(([section, item]) => lines.push({section, item}));
+        }
+        if (concern) {
+          lines.push({section: "Custom", item: concern});
+        }
+
+        state.items = lines;
+        renderChecklist(address, mode, lines);
+        const payload = {
+          address: address || "(not provided)",
+          inspectionType: mode,
+          propertyType: pType,
+          itemCount: lines.length,
+          hasCustomNotes: Boolean(concern),
+          source: "dayonebuilder_public"
+        };
+        safeTrack(BUILD_EVENT, payload);
+        setActionsEnabled(true);
+      }
+
+      function renderChecklist(address, mode, lines) {
+        const title = [
+          `Rental inspection checklist`,
+          address ? ` - ${address}` : "",
+          ` (${mode})`,
+        ].join("");
+        const plainLines = [`${title}`, "----------------------------------------"];
+        const rows = lines.map((entry) => {
+          const tr = document.createElement("tr");
+          const sectionCell = document.createElement("td");
+          const itemCell = document.createElement("td");
+          sectionCell.textContent = entry.section;
+          itemCell.textContent = entry.item;
+          tr.append(sectionCell, itemCell);
+          return tr;
+        });
+        checklistBody.replaceChildren(...rows);
+        countMeta.textContent = `${lines.length} checklist items prepared`;
+
+        plainLines.push(
+          "Section | Item",
+          ...lines.map((entry) => `${entry.section} | ${entry.item}`),
+          "",
+          "Tip: Add photos and date/time stamps in your notes app for repeat use.",
+          "Legal note: confirm local requirements and your lease before final handover.",
+        );
+        copyBlock.textContent = plainLines.join("\n");
+        copyBlock.dataset.csv = ["Section,Item", ...lines.map((entry) => {
+          const section = String(entry.section).replace(/"/g, '""');
+          const item = String(entry.item).replace(/"/g, '""');
+          return `"${section}","${item}"`;
+        })].join("\n");
+      }
+
+      buildButton.addEventListener("click", buildChecklist);
+
+      copyButton.addEventListener("click", async () => {
+        if (!state.items.length) return;
+        try {
+          await navigator.clipboard.writeText(copyBlock.textContent || "");
+          copyButton.textContent = "Copied";
+          setTimeout(() => (copyButton.textContent = "Copy checklist"), 1300);
+          safeTrack("rental_inspection_checklist_export", {
+            export_type: "copy",
+            item_count: state.items.length,
+          });
+        } catch (_error) {
+          copyButton.textContent = "Copy blocked";
+          setTimeout(() => (copyButton.textContent = "Copy checklist"), 1300);
+        }
+      });
+
+      saveButton.addEventListener("click", () => {
+        if (!state.items.length) return;
+        safeTrack(INSTALL_INTENT_EVENT, {
+          intent: "local_save_txt",
+          item_count: state.items.length,
+        });
+        installIntent.click();
+      });
+
+      exportCsv.addEventListener("click", () => {
+        if (!state.items.length) return;
+        const csv = copyBlock.dataset.csv || "section,item\n";
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "rental-inspection-checklist.csv";
+        link.click();
+        URL.revokeObjectURL(url);
+        safeTrack(EXPORT_EVENT, {
+          export_type: "download_csv",
+          item_count: state.items.length,
+        });
+      });
+
+      paidCta.addEventListener("click", () => {
+        safeTrack(PAID_CTA_EVENT, {
+          location: "header",
+          offer_slug: "rental_inspection_checklist_paid_pack",
+          price_usd: 9,
+        });
+        safeTrack(CHECKOUT_START_EVENT, {
+          location: "header",
+          offer_slug: "rental_inspection_checklist_paid_pack",
+          price_usd: 9,
+        });
+      });
+
+      paidCtaBottom.addEventListener("click", () => {
+        safeTrack(PAID_CTA_EVENT, {
+          location: "footer",
+          offer_slug: "rental_inspection_checklist_paid_pack",
+          price_usd: 9,
+        });
+        safeTrack(CHECKOUT_START_EVENT, {
+          location: "footer",
+          offer_slug: "rental_inspection_checklist_paid_pack",
+          price_usd: 9,
+        });
+      });
+
+      setActionsEnabled(false);
+    </script>
+  </body>
+</html>

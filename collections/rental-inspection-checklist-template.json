@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "updated_at": "2026-06-05",
+  "slug": "rental-inspection-checklist-template",
+  "title": "Rental Inspection Checklist Template",
+  "summary": "Build a practical rental inspection checklist in one step, copy/save it, and export a structured CSV.",
+  "entries": [
+    {
+      "id": "rental-inspection-checklist-template",
+      "title": "Rental inspection checklist template",
+      "task_aliases": [
+        "rental inspection checklist template",
+        "rental inspection checklist",
+        "move in inspection checklist",
+        "move out inspection checklist"
+      ],
+      "selected_source_url": "https://www.dwellfile.com/checklists/rental-inspection-template",
+      "first_action": "Open the page, enter property details, choose a check path, review the generated checklist, then copy or export it.",
+      "smoke_test": "Load https://dayonebuilder.online/rental-inspection-checklist-template/, click Build checklist, then click Copy checklist and Download CSV.",
+      "proof_signal": "Official checklist references are shown with transparent assumptions and measurable completion/export events.",
+      "fallback": "Use official source URLs directly if your lease demands a region- or landlord-specific template first.",
+      "module_url": "https://dayonebuilder.online/rental-inspection-checklist-template/",
+      "adoption_metric": "qualified_tool_completions, checklist_exports, paid_offer_clicks, checkout_starts, repeat_use",
+      "module_type": "template",
+      "install_or_save_intent": "Save the generated checklist text as a local draft or install/save event from the page action row.",
+      "qualified_tool_completion_event": "rental_inspection_checklist_completed",
+      "paid_offer_or_subscription_path": "https://checkout.dayonebuilder.online/products/rental-inspection-checklist-template"
+    }
+  ]
+}

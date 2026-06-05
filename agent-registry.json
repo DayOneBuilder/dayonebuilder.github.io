@@ -177,21 +177,20 @@
       "adoption_metric": "collection_json_hit, task_resolver_submit, outbound_solution_click, install_snippet_copy"
     },
     {
-      "id": "bill-tracker-spreadsheet-template",
-      "title": "Bill Tracker Spreadsheet Template",
-      "status": "active",
+      "id": "rental-inspection-checklist-template",
+      "title": "Rental Inspection Checklist Template",
+      "status": "primary",
       "module_type": "template",
-      "agent_task_phrase": "Build a bill tracker spreadsheet for recurring expenses with a copy/export workflow.",
-      "module_url": "https://dayonebuilder.online/bill-tracker-spreadsheet-template/",
-      "module_manifest_url": "https://dayonebuilder.online/bill-tracker-spreadsheet-template/module-manifest.json",
-      "collection_json_url": "https://dayonebuilder.online/collections/bill-tracker-spreadsheet-template.json",
-      "install_or_call_path": "Open the page, add bills + frequency, click Recalculate, then copy summary or download CSV.",
+      "agent_task_phrase": "Create a move-in/move-out rental inspection checklist without rebuilding a spreadsheet from scratch.",
+      "module_url": "https://dayonebuilder.online/rental-inspection-checklist-template/",
+      "install_or_call_path": "Open https://dayonebuilder.online/rental-inspection-checklist-template/, build the checklist, and copy/save/export the output. Optional paid path: https://checkout.dayonebuilder.online/products/rental-inspection-checklist-template",
       "proof_evidence": [
-        "frequency normalization from weekly/biweekly/monthly/quarterly/annual into monthly totals",
-        "CSV export and copy intent events in client-side workflow",
-        "versioned collection entry and module manifest"
+        "official checklist references are visible on the page",
+        "qualified tool completion event and export/save/install events are emitted",
+        "paid offer CTA and checkout-start tracking are available",
+        "collection entry provides source, first action, smoke test, and fallback"
       ],
-      "adoption_metric": "organic clicks, qualified tool completions, exports/copies/saves, paid CTA clicks, checkout starts, purchases, repeat use"
+      "adoption_metric": "rental_inspection_checklist_completed, rental_inspection_checklist_export, rental_inspection_checklist_install_intent, rental_inspection_paid_cta_click, rental_inspection_checkout_start"
     }
   ],
   "archived_internal_modules": {
