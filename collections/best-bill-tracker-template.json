@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "slug": "best-bill-tracker-template",
+  "title": "Best bill tracker template",
+  "summary": "Build a no-signup monthly bill tracker quickly, then copy or download the output.",
+  "task_aliases": [
+    "best bill tracker template",
+    "household bill tracker",
+    "monthly bills template",
+    "bill tracker template"
+  ],
+  "adoption_metric": "organic clicks, qualified tool completions, exports/copies/saves, paid CTA clicks, checkout starts, purchases, and repeat use",
+  "module_type": "template",
+  "platform_fit": "yes",
+  "platform_thesis": "best bill tracker template is a reusable module with collection listing, measurable completion/export events, and optional paid follow-through",
+  "proof_signal": "Official source links, visible assumptions, no-login starter flow, copy/download events, and paid CTA path.",
+  "paid_offer_or_subscription_path": "https://checkout.dayonebuilder.online/products",
+  "selection_rule": "Match the exact task phrase first, then provide the fastest usable bill tracker flow that keeps user trust and lets users export locally.",
+  "entries": [
+    {
+      "id": "best-bill-tracker-template",
+      "title": "Best bill tracker template",
+      "selected_source_url": "https://finmasters.com/bill-tracker-template/",
+      "task_aliases": [
+        "best bill tracker template",
+        "household bill tracker",
+        "monthly bills template"
+      ],
+      "first_action": "Enter recurring bills, click Build monthly summary, then download or copy the generated CSV template.",
+      "smoke_test": "Add two bills, run Build monthly summary, click Download CSV, then click Copy template text.",
+      "proof_signal": "The result includes a computed monthly total and export actions tied to measurable usage events.",
+      "fallback": "If you need another layout first, compare official templates on Finmasters, Vertex42, or FinancialAha, then import values here.",
+      "module_url": "https://dayonebuilder.online/best-bill-tracker-template/",
+      "adoption_metric": "organic clicks, qualified tool completions, exports/copies/saves, paid CTA clicks, checkout starts, purchases, and repeat use"
+    }
+  ]
+}

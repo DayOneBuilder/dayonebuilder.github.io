@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Best bill tracker template for household bills | DayOneBuilder</title>
+    <meta
+      name="description"
+      content="Build a practical monthly bill tracker in seconds, then copy or download a ready template without signup. Includes official template references and a paid cleanup path for faster setup."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/best-bill-tracker-template/" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      const trackEvent = (name, params = {}) => {
+        const payload = { event_category: "dayonebuilder_bill_tracker", ...params };
+        if (typeof window.gtag === "function") {
+          window.gtag("event", name, payload);
+          return;
+        }
+        window.dataLayer.push({ event: name, ...payload });
+      };
+    </script>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --surface: #ffffff;
+        --ink: #0f172a;
+        --muted: #4b5563;
+        --line: #dbe2ec;
+        --ring: #2563eb;
+        --accent: #111827;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: radial-gradient(circle at 0% 0%, #eef4ff 0%, #f4f7fb 46%, #eaf1ff 100%);
+        font: 16px/1.5 Inter, Arial, sans-serif;
+      }
+      .wrap {
+        width: min(1040px, 100% - 28px);
+        margin: 0 auto;
+        padding: 18px 0 34px;
+      }
+      .hero {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 16px;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(1.8rem, 4.2vw, 2.6rem);
+        color: #0b1220;
+        line-height: 1.1;
+      }
+      .lead {
+        margin-top: 10px;
+        margin-bottom: 12px;
+        color: var(--muted);
+        max-width: 68ch;
+      }
+      .note {
+        display: inline-block;
+        margin-top: 6px;
+        padding: 9px 11px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: #f8fbff;
+        color: #1e293b;
+        font-size: 0.95rem;
+      }
+      .tools {
+        display: grid;
+        grid-template-columns: 1fr 320px;
+        gap: 14px;
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+      }
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 1.13rem;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      label {
+        font-size: 0.87rem;
+        color: #334155;
+        display: block;
+        margin-bottom: 6px;
+      }
+      input {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 9px 10px;
+        font: inherit;
+      }
+      input:focus, button:focus {
+        outline: 2px solid var(--ring);
+        outline-offset: 1px;
+      }
+      button {
+        font: inherit;
+        border: 0;
+        cursor: pointer;
+        padding: 10px 12px;
+        border-radius: 10px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+        gap: 10px;
+        margin-bottom: 10px;
+        align-items: center;
+      }
+      .row button {
+        background: #111827;
+        color: #fff;
+        width: fit-content;
+        justify-self: end;
+      }
+      .btn {
+        display: inline-block;
+        background: #111827;
+        color: #fff;
+      }
+      .btn.alt {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: #111827;
+      }
+      .btn + .btn { margin-left: 8px; }
+      .actions {
+        margin-top: 10px;
+      }
+      .cta {
+        margin-top: 10px;
+        text-align: center;
+      }
+      .summary {
+        border-radius: 12px;
+        border: 1px solid var(--line);
+        padding: 12px;
+        background: #fdfefe;
+      }
+      .summary-line {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 8px;
+        color: #334155;
+      }
+      .summary-line strong {
+        color: #0b1220;
+      }
+      .preview {
+        margin-top: 12px;
+        width: 100%;
+        min-height: 160px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        white-space: pre;
+        overflow: auto;
+        background: #0f172a;
+        color: #e2e8f0;
+      }
+      .small {
+        color: #64748b;
+        font-size: 0.92rem;
+      }
+      a { color: #1d4ed8; }
+      .paid {
+        margin-top: 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 12px;
+        padding: 14px;
+        background: #fff7ed;
+      }
+      .paid strong {
+        color: #9a3412;
+      }
+      .muted { color: #64748b; }
+      .muted a { color: #334155; }
+      .footer {
+        margin-top: 16px;
+        color: #475569;
+        font-size: 0.93rem;
+      }
+      ul { margin: 0; padding: 0 0 0 18px; }
+      li { margin-bottom: 6px; }
+      @media (max-width: 900px) {
+        .tools { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 720px) {
+        .grid { grid-template-columns: 1fr; }
+        .actions { display: flex; flex-wrap: wrap; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="hero">
+        <h1>Best bill tracker template</h1>
+        <p class="lead">Get a practical, no-login bill tracking workflow in under a minute. Enter your recurring household bills, generate totals, then export or copy the starter template.</p>
+        <span class="note">Task target: household monthly bill tracking for practical spending control.</span>
+      </section>
+
+      <section class="tools" aria-label="Bill tracker builder">
+        <div class="card">
+          <h2>Build your tracker</h2>
+          <div id="bill-rows" aria-live="polite"></div>
+          <div class="actions">
+            <button id="add-row" type="button" class="btn alt">Add bill</button>
+            <button id="calculate" type="button" class="btn">Build monthly summary</button>
+            <button id="copy-template" type="button" class="btn alt">Copy template text</button>
+            <button id="download-csv" type="button" class="btn">Download CSV</button>
+            <button id="save-session" type="button" class="btn alt">Save draft locally</button>
+          </div>
+          <p class="small muted">Source-first links are below for trusted reference checks.</p>
+          <div class="summary" id="summary-box" aria-live="polite">
+            <div class="summary-line"><span>Monthly total</span><strong id="total">$0.00</strong></div>
+            <div class="summary-line"><span>Bills tracked</span><strong id="count">0</strong></div>
+            <div class="summary-line"><span>Average per week</span><strong id="weekly">$0.00</strong></div>
+          </div>
+          <label for="csv-output" style="margin-top:10px; display:block;">Template snapshot (copy or download)</label>
+          <textarea id="csv-output" class="preview" readonly></textarea>
+          <div id="status" class="small muted" role="status" aria-live="polite"></div>
+        </div>
+
+        <aside class="card">
+          <h2>Trusted references</h2>
+          <p class="small">Compare layout style before you copy your values.</p>
+          <div class="small">
+            <ul>
+              <li><a href="https://finmasters.com/bill-tracker-template/" target="_blank" rel="noopener noreferrer">Finmasters bill tracker template</a></li>
+              <li><a href="https://www.vertex42.com/ExcelTemplates/bill-tracker.html" target="_blank" rel="noopener noreferrer">Vertex42 Excel bill tracker template</a></li>
+              <li><a href="https://www.financialaha.com/free-spreadsheet-templates/personal-budgeting/bill-tracker/" target="_blank" rel="noopener noreferrer">FinancialAha bill tracker template</a></li>
+            </ul>
+          </div>
+
+          <div class="paid">
+            <p><strong>Need a cleaner paid setup?</strong></p>
+            <p class="muted small">Use the optional paid route for a cleanup/export pack version if you want a faster first use.</p>
+            <a
+              id="paid-cta"
+              class="btn"
+              href="https://checkout.dayonebuilder.online/products"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Open $9 bill tracker workbook path
+            </a>
+          </div>
+        </aside>
+      </section>
+
+      <p class="footer">
+        Trust note: this tracker is a simple budgeting aid and does not replace tax, banking, or legal advice.
+      </p>
+    </div>
+
+    <script>
+      const BILL_PREFIX = "bill-";
+      let rowIndex = 0;
+      const rowsRoot = document.getElementById("bill-rows");
+      const statusNode = document.getElementById("status");
+      const csvOutput = document.getElementById("csv-output");
+
+      function money(value) {
+        const num = Number(value);
+        if (!Number.isFinite(num) || num < 0) return "$0.00";
+        return num.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 });
+      }
+
+      function toCsvCell(value) {
+        const text = String(value ?? "").replaceAll(`"`, `""`);
+        return `"${text}"`;
+      }
+
+      function buildRowTemplate() {
+        const rowId = `${BILL_PREFIX}${rowIndex++}`;
+        const row = document.createElement("div");
+        row.className = "row";
+        row.innerHTML = `
+          <div class="grid">
+            <div>
+              <label for="name-${rowId}">Bill name</label>
+              <input id="name-${rowId}" name="name" placeholder="Rent or loan" />
+            </div>
+            <div>
+              <label for="amount-${rowId}">Monthly amount (USD)</label>
+              <input id="amount-${rowId}" name="amount" type="number" step="0.01" min="0" placeholder="980.00" />
+            </div>
+          </div>
+          <button type="button" data-remove="${rowId}">Remove</button>
+        `;
+        row.querySelector("[data-remove]").addEventListener("click", () => {
+          rowsRoot.removeChild(row);
+          trackEvent("bill_tracker_template_save_intent", { action: "remove_row" });
+          updateSummary();
+        });
+        rowsRoot.appendChild(row);
+      }
+
+      function collectRows() {
+        const rows = Array.from(rowsRoot.querySelectorAll(".row"));
+        const mapped = [];
+        rows.forEach((row) => {
+          const name = row.querySelector("[name='name']");
+          const amount = row.querySelector("[name='amount']");
+          const nameValue = String(name?.value || "").trim();
+          const amountValue = Number(String(amount?.value || "0").replace(/,/g, ""));
+          if (!nameValue && !(Number.isFinite(amountValue) && amountValue > 0)) {
+            return;
+          }
+          mapped.push({
+            name: nameValue || "Bill",
+            amount: Number.isFinite(amountValue) && amountValue > 0 ? amountValue : 0,
+          });
+        });
+        return mapped;
+      }
+
+      function updateSummary() {
+        const rows = collectRows();
+        const total = rows.reduce((sum, row) => sum + row.amount, 0);
+        document.getElementById("total").textContent = money(total);
+        document.getElementById("count").textContent = rows.length.toString();
+        document.getElementById("weekly").textContent = money(total / 4.345);
+        const lines = [
+          ["Bill Name", "Monthly Amount (USD)", "Frequency", "Notes"],
+          ...rows.map((row, index) => [
+            row.name,
+            row.amount.toFixed(2),
+            "monthly",
+            index === 0 ? "Primary monthly bill" : ""
+          ]),
+          ["Total", total.toFixed(2), "monthly", ""]
+        ];
+        csvOutput.value = lines.map((line) => line.map(toCsvCell).join(",")).join("\n");
+      }
+
+      function exportCsv() {
+        const rows = collectRows();
+        if (!rows.length) {
+          statusNode.textContent = "Add at least one bill before export.";
+          return;
+        }
+        updateSummary();
+        const csv = csvOutput.value;
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+        const href = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = `bill-tracker-template-${new Date().toISOString().slice(0, 10)}.csv`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+        statusNode.textContent = "CSV template downloaded.";
+        trackEvent("bill_tracker_template_export", { method: "csv", bill_count: rows.length });
+      }
+
+      function copyTemplate() {
+        if (!csvOutput.value.trim()) {
+          statusNode.textContent = "Build the summary first, then copy the template text.";
+          return;
+        }
+        navigator.clipboard.writeText(csvOutput.value)
+          .then(() => {
+            statusNode.textContent = "Template copied to clipboard.";
+            trackEvent("bill_tracker_template_export", { method: "copy", bill_count: collectRows().length });
+          })
+          .catch(() => {
+            statusNode.textContent = "Clipboard blocked by browser. Use Download CSV instead.";
+          });
+      }
+
+      function saveDraft() {
+        const rows = collectRows();
+        const payload = { rows, created_at: new Date().toISOString() };
+        localStorage.setItem("best-bill-tracker-draft", JSON.stringify(payload));
+        statusNode.textContent = "Draft saved in this browser for quick revisit.";
+        trackEvent("bill_tracker_template_save_intent", { action: "local_save", bill_count: rows.length });
+      }
+
+      document.getElementById("add-row").addEventListener("click", () => {
+        buildRowTemplate();
+        trackEvent("bill_tracker_template_row", { action: "add_row" });
+      });
+
+      document.getElementById("calculate").addEventListener("click", () => {
+        const rows = collectRows();
+        if (!rows.length) {
+          statusNode.textContent = "Add a bill name and amount before calculating.";
+          return;
+        }
+        updateSummary();
+        statusNode.textContent = "Monthly summary ready.";
+        trackEvent("bill_tracker_tool_completion", {
+          bill_count: rows.length,
+          total_amount: rows.reduce((sum, row) => sum + row.amount, 0),
+        });
+      });
+
+      document.getElementById("download-csv").addEventListener("click", () => {
+        exportCsv();
+      });
+
+      document.getElementById("copy-template").addEventListener("click", () => {
+        copyTemplate();
+      });
+
+      document.getElementById("save-session").addEventListener("click", () => {
+        saveDraft();
+      });
+
+      document.getElementById("paid-cta").addEventListener("click", () => {
+        trackEvent("paid_cta_click", { path: "checkout-products" });
+      });
+
+      buildRowTemplate();
+      buildRowTemplate();
+      buildRowTemplate();
+
+      const saved = localStorage.getItem("best-bill-tracker-draft");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed.rows) && parsed.rows.length) {
+            rowsRoot.innerHTML = "";
+            rowIndex = 0;
+            parsed.rows.forEach((row) => {
+              buildRowTemplate();
+              const last = rowsRoot.lastElementChild;
+              if (last) {
+                last.querySelector("[name='name']").value = row.name || "";
+                last.querySelector("[name='amount']").value = row.amount || "";
+              }
+            });
+            updateSummary();
+          }
+        } catch (_) {}
+      }
+
+      trackEvent("bill_tracker_page_view", { path: "best-bill-tracker-template" });
+      gtag("config", "G-KQMLYS3VVE");
+    </script>
+  </body>
+</html>
