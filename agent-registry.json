@@ -161,6 +161,23 @@
   ],
   "modules": [
     {
+      "id": "event-budget-template-excel",
+      "title": "Event Budget Template In Excel",
+      "status": "installable",
+      "module_type": "workbook",
+      "agent_task_phrase": "Build an event budget template in Excel with totals, assumptions, and export steps.",
+      "human_task_phrase": "I need an event budget template in Excel.",
+      "install_or_call_path": "Open https://dayonebuilder.online/how-to-create-event-budget-template-in-excel/, enter your rows, generate a summary, then download the CSV for Excel.",
+      "source_url": "https://dayonebuilder.online/how-to-create-event-budget-template-in-excel/",
+      "trust_evidence": [
+        "official template source links for baseline reference",
+        "versioned module manifest",
+        "explicit calculation assumptions on the page",
+        "qualified completion and export/save events"
+      ],
+      "adoption_metric": "event_budget_tool_completion, event_budget_export_intent, checkout_starts, paid_cta_click"
+    },
+    {
       "id": "dob-task-resolver",
       "title": "DOB Task Resolver",
       "status": "primary",

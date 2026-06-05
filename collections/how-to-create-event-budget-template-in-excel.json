@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "slug": "how-to-create-event-budget-template-in-excel",
+  "title": "Event Budget Template in Excel",
+  "summary": "A reusable no-login template tool for creating an event budget, with export and install intent.",
+  "task_aliases": [
+    "how to create event budget template in excel",
+    "event budget template",
+    "create event budget template",
+    "excel event budget"
+  ],
+  "selection_rule": "Use this module when the user asks for a practical event budget template in Excel. Prefer official template sources if the user needs a broader industry-specific pack.",
+  "selection_evidence": [
+    "no-login public tool first",
+    "qualified tool completion event",
+    "export/save intent event",
+    "paid CTA click event",
+    "copyable snippet for repeat use"
+  ],
+  "entries": [
+    {
+      "id": "dayonebuilder-event-budget-template",
+      "title": "How To Create Event Budget Template In Excel",
+      "task_aliases": [
+        "how to create event budget template in excel",
+        "create event budget template in excel"
+      ],
+      "selected_source_url": "https://dayonebuilder.online/how-to-create-event-budget-template-in-excel/",
+      "first_action": "Open the page, add income and expense rows, click Generate Budget Summary, then click Download CSV Template.",
+      "smoke_test": "Fill one income line and one expense line, then click Generate Budget Summary and Download CSV Template; confirm net and totals are visible.",
+      "proof_signal": "No-login budget calculator, export event and install intent events, and explicit paid option path for cleanup/export.",
+      "fallback": "Use official template catalogs from Smartsheet or Microsoft Templates if you need pre-structured formats.",
+      "install_or_save_path": "Download the generated CSV and open it in Excel for your event budget workbook."
+    }
+  ]
+}

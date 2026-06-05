@@ -6,11 +6,13 @@ Primary entrypoints:
 
 - https://dayonebuilder.online/dob-task-resolver/
 - https://dayonebuilder.online/repo/
+- https://dayonebuilder.online/how-to-create-event-budget-template-in-excel/
 - https://dayonebuilder.online/collections/index.json
 - https://dayonebuilder.online/collections/agent-skills.json
-- https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md
+- https://dayonebuilder.online/collections/how-to-create-event-budget-template-in-excel.json
 - https://dayonebuilder.online/collections/pet-care-checklist-template.json
 - https://dayonebuilder.online/pet-care-checklist-template/
+- https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md
 
 Machine registry:
 
