@@ -3,83 +3,43 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DayOneBuilder | Agent Magnet resolver</title>
+    <title>DayOneBuilder | Public product lab</title>
     <meta
       name="description"
-      content="Task in, best executor out. DayOneBuilder gives agents static collections, an action feed, installable skill, and GitHub repo report before they rebuild from scratch."
+      content="DayOneBuilder is a public product lab shipping small useful tools, then keeping only the ones that show real use, clear demand, and a believable paid artifact path."
     />
     <link rel="canonical" href="https://dayonebuilder.online/" />
-    <link rel="alternate" type="text/plain" href="/llms.txt" title="DayOneBuilder agent instructions" />
-    <link rel="alternate" type="application/json" href="/agent-registry.json" title="DayOneBuilder agent registry" />
-    <link rel="alternate" type="application/json" href="/agent-actions.json" title="DayOneBuilder agent action feed" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
+      function gtag() { window.dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
-      async function copyText(button) {
-        const text = button.getAttribute("data-copy");
-        const original = button.dataset.original || button.textContent;
-        button.dataset.original = original;
-        try {
-          await navigator.clipboard.writeText(text);
-          button.textContent = "Copied";
-          gtag("event", button.dataset.event || "install_snippet_copy", { event_category: "dayonebuilder_resolver" });
-        } catch (error) {
-          button.textContent = "Copy failed";
+      function trackLabClick(label) {
+        if (typeof window.gtag === "function") {
+          gtag("event", "product_lab_click", {
+            event_category: "dayonebuilder_product_lab",
+            link_label: label
+          });
         }
-        setTimeout(() => { button.textContent = original; }, 1400);
-      }
-      function normalizeRepoInput(value) {
-        const cleaned = String(value || "").trim();
-        if (!cleaned) return "";
-        const githubMatch = cleaned.match(/^https?:\/\/github\.com\/([^/?#]+)\/([^/?#]+)/i);
-        if (githubMatch) return `${githubMatch[1]}/${githubMatch[2].replace(/\.git$/i, "")}`;
-        const shortMatch = cleaned.match(/^([^/\s]+)\/([^/\s]+)$/);
-        if (shortMatch) return `${shortMatch[1]}/${shortMatch[2].replace(/\.git$/i, "")}`;
-        return "";
-      }
-      function openRepoReport(event) {
-        event.preventDefault();
-        const input = document.getElementById("repo-url");
-        const repo = normalizeRepoInput(input && input.value);
-        if (!repo) {
-          input.setAttribute("aria-invalid", "true");
-          input.focus();
-          return;
-        }
-        input.removeAttribute("aria-invalid");
-        gtag("event", "repo_report_submit", { event_category: "dayonebuilder_resolver", repo });
-        window.location.href = `/repo/?repo=${encodeURIComponent(repo)}`;
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "DayOneBuilder Resolver",
-        "url": "https://dayonebuilder.online/",
-        "description": "Static agent-readable resolver for choosing the best reusable executor from GitHub repos, skills, MCP servers, and action feeds."
       }
     </script>
     <style>
       :root {
-        --bg: #08090a;
-        --surface: #0d0e10;
-        --surface-2: #141517;
-        --ink: #f8fafc;
-        --text: #cbd5df;
-        --muted: #87909d;
-        --line: rgba(255,255,255,.1);
-        --strong: rgba(255,255,255,.18);
-        --green: #34d399;
-        --blue: #7dd3fc;
-        --amber: #fbbf24;
-        --max: 1120px;
+        --bg: #0b0d0c;
+        --panel: #121614;
+        --panel-2: #171b1f;
+        --ink: #fbfaf5;
+        --text: #d6d4ca;
+        --muted: #95938a;
+        --line: rgba(251, 250, 245, 0.14);
+        --strong: rgba(251, 250, 245, 0.28);
+        --green: #75d67d;
+        --blue: #8fc7ff;
+        --amber: #f2bd59;
+        --max: 1080px;
       }
       * { box-sizing: border-box; }
-      html, body { overflow-x: hidden; }
       body {
         margin: 0;
         color: var(--text);
@@ -87,50 +47,52 @@
         font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
       a { color: inherit; text-decoration: none; }
-      code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
       .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
       .nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 18px;
-        padding: 20px 0;
+        padding: 18px 0;
         border-bottom: 1px solid var(--line);
       }
-      .brand { color: var(--ink); font-weight: 750; letter-spacing: .01em; }
+      .brand { color: var(--ink); font-weight: 850; }
       .links { display: flex; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: 13px; }
       .links a:hover { color: var(--ink); }
+      main { padding-bottom: 48px; }
       .hero {
-        max-width: 780px;
-        padding: 52px 0 30px;
-      }
-      .eyebrow { color: var(--green); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
-      h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.08; }
-      h1 { margin-top: 14px; max-width: 11ch; font-size: clamp(2.35rem, 7vw, 5rem); }
-      h2 { font-size: clamp(1.45rem, 3vw, 2.2rem); }
-      h3 { font-size: 1rem; }
-      p { margin: 0; }
-      .lead { margin-top: 18px; max-width: 62ch; color: #dce2e8; font-size: 1.05rem; overflow-wrap: anywhere; }
-      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-      .repo-form {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 10px;
-        margin-top: 24px;
-        max-width: 720px;
+        grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+        gap: 26px;
+        align-items: center;
+        padding: 46px 0 28px;
       }
-      .repo-form input {
-        min-height: 42px;
-        width: 100%;
-        border: 1px solid var(--strong);
-        border-radius: 8px;
-        background: var(--surface);
-        color: var(--ink);
-        font: inherit;
-        padding: 0 12px;
+      .eyebrow {
+        color: var(--green);
+        font-size: 12px;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
-      .repo-form input:focus { outline: 1px solid var(--blue); }
-      .repo-form input[aria-invalid="true"] { border-color: #f87171; }
+      h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.08; }
+      h1 { margin-top: 12px; max-width: 11ch; font-size: clamp(2.4rem, 7vw, 5rem); }
+      h2 { font-size: clamp(1.45rem, 3vw, 2.2rem); }
+      h3 { font-size: 1.08rem; }
+      p { margin: 0; }
+      .lead { margin-top: 16px; max-width: 64ch; color: #e9e5d9; font-size: 1.08rem; }
+      .promise {
+        margin-top: 18px;
+        display: inline-flex;
+        width: fit-content;
+        max-width: 100%;
+        border: 1px solid rgba(117, 214, 125, 0.36);
+        border-radius: 999px;
+        padding: 7px 11px;
+        color: #d9f9dd;
+        background: rgba(117, 214, 125, 0.08);
+        font-weight: 750;
+      }
+      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
       .btn {
         display: inline-flex;
         align-items: center;
@@ -140,369 +102,147 @@
         border-radius: 8px;
         border: 1px solid var(--strong);
         background: var(--ink);
-        color: #08090a;
-        font: inherit;
-        font-weight: 700;
-        cursor: pointer;
+        color: #0b0d0c;
+        font-weight: 850;
       }
       .btn.secondary { background: transparent; color: var(--ink); }
-      .panel, .pick, .contract {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--surface);
-      }
-      .stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin-top: 24px; }
-      .stat { padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
-      .stat strong { display: block; color: var(--ink); font-size: 1.35rem; }
-      .stat span { color: var(--muted); font-size: 12px; }
-      .section { padding: 28px 0; }
-      .section-head { display: flex; align-items: end; justify-content: space-between; gap: 18px; margin-bottom: 14px; }
-      .section-head p { max-width: 58ch; color: var(--muted); }
-      .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-      .pick { padding: 16px; display: grid; gap: 12px; }
-      .pick-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; }
-      .pick-mark {
-        color: var(--green);
-        border: 1px solid rgba(52,211,153,.35);
-        border-radius: 999px;
-        padding: 4px 8px;
-        font-size: 12px;
-        font-weight: 750;
-        white-space: nowrap;
-      }
-      .meta { display: flex; flex-wrap: wrap; gap: 8px; }
-      .meta span { border: 1px solid var(--line); border-radius: 999px; padding: 5px 8px; color: var(--muted); font-size: 12px; }
-      .path { padding: 10px 12px; border: 1px dashed var(--line); border-radius: 8px; overflow-wrap: anywhere; color: #eef2f7; background: rgba(255,255,255,.03); }
-      .contract { padding: 16px; }
-      .contract p, .pick p { color: var(--muted); }
-      .endpoint-card {
+      .proof {
         display: grid;
         gap: 10px;
         padding: 16px;
         border: 1px solid var(--line);
         border-radius: 8px;
-        background: var(--surface);
+        background: linear-gradient(145deg, var(--panel), var(--panel-2));
       }
-      .endpoint-card p { color: var(--muted); }
-      .command-line {
-        padding: 10px 12px;
-        border: 1px dashed var(--line);
-        border-radius: 8px;
-        background: rgba(255,255,255,.03);
-        color: #e5edf6;
-        overflow-wrap: anywhere;
-      }
-      .badge-lab {
+      .proof-row {
         display: grid;
-        grid-template-columns: minmax(0, .9fr) minmax(320px, 1.1fr);
-        gap: 12px;
-        align-items: stretch;
-      }
-      .readme-card {
-        position: relative;
-        overflow: hidden;
-        padding: 18px;
-        min-height: 270px;
-        border: 1px solid var(--strong);
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 10px;
+        align-items: start;
+        padding: 10px;
+        border: 1px solid rgba(251, 250, 245, 0.1);
         border-radius: 8px;
-        background:
-          radial-gradient(circle at 85% 15%, rgba(52,211,153,.2), transparent 28%),
-          linear-gradient(135deg, #111827 0%, #0b0d10 58%, #121212 100%);
+        background: rgba(251, 250, 245, 0.03);
       }
-      .readme-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image:
-          linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
-        background-size: 22px 22px;
-        mask-image: linear-gradient(135deg, rgba(0,0,0,.6), transparent 75%);
-        pointer-events: none;
-      }
-      .readme-card > * { position: relative; }
-      .badge-strip {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        width: fit-content;
-        max-width: 100%;
-        margin-bottom: 18px;
-        padding: 6px 10px;
-        border: 1px solid rgba(52,211,153,.42);
-        border-radius: 999px;
-        background: rgba(52,211,153,.08);
-        color: #d1fae5;
-        font-size: 12px;
-        font-weight: 800;
-      }
-      .badge-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 99px;
-        background: var(--green);
-        box-shadow: 0 0 18px rgba(52,211,153,.8);
-      }
-      .readme-card h3 { max-width: 18ch; font-size: 1.9rem; }
-      .readme-card p { max-width: 48ch; margin-top: 10px; color: #d7dde5; }
-      .pull-score {
+      .proof-row strong { color: var(--ink); }
+      .proof-row span { color: var(--muted); }
+      .section { padding: 28px 0 0; }
+      .section-head {
         display: flex;
         align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 14px;
+      }
+      .section-head p { max-width: 58ch; color: var(--muted); }
+      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+      .card {
+        display: grid;
         gap: 12px;
-        margin-top: 14px;
-      }
-      .pull-score strong {
-        color: var(--ink);
-        font-size: clamp(3.4rem, 8vw, 5rem);
-        line-height: .86;
-      }
-      .pull-score span {
-        max-width: 12ch;
-        color: #d1fae5;
-        font-size: .86rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: .06em;
-      }
-      .formula {
-        color: var(--muted);
-        font-size: 12px;
-      }
-      .signal-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px;
-        margin-top: 18px;
-      }
-      .signal {
-        padding: 10px;
-        border: 1px solid rgba(255,255,255,.12);
-        border-radius: 8px;
-        background: rgba(255,255,255,.04);
-      }
-      .signal span {
-        display: block;
-        color: var(--muted);
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: .06em;
-      }
-      .signal strong {
-        display: block;
-        margin-top: 4px;
-        color: var(--ink);
-        font-size: 1rem;
-      }
-      .copy-box {
-        display: grid;
-        gap: 10px;
-        padding: 18px;
+        min-height: 236px;
+        padding: 16px;
         border: 1px solid var(--line);
         border-radius: 8px;
-        background: var(--surface);
+        background: var(--panel);
       }
-      .copy-box pre {
-        margin: 0;
-        padding: 12px;
-        overflow-x: auto;
-        border: 1px dashed var(--line);
-        border-radius: 8px;
-        color: #e5edf6;
-        background: rgba(255,255,255,.03);
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
-      }
-      .agent-badge {
-        display: block;
-        width: 100%;
-        max-width: 760px;
-        border: 1px solid var(--strong);
-        border-radius: 14px;
-        background: var(--surface);
-      }
-      .endpoint-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 12px;
-      }
-      .endpoint-links a {
+      .card p { color: var(--muted); }
+      .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+      .tags span {
         border: 1px solid var(--line);
-        border-radius: 7px;
+        border-radius: 999px;
         padding: 5px 8px;
         color: var(--muted);
         font-size: 12px;
       }
-      .endpoint-links a:hover { color: var(--ink); border-color: var(--strong); }
-      footer { margin-top: 26px; padding: 24px 0 40px; border-top: 1px solid var(--line); color: var(--muted); }
-      .footer-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; }
+      .tags .hot { color: var(--amber); border-color: rgba(242, 189, 89, 0.38); }
+      .tags .live { color: var(--blue); border-color: rgba(143, 199, 255, 0.36); }
+      .card .btn { align-self: end; width: fit-content; }
+      .rule {
+        margin-top: 18px;
+        padding: 14px;
+        border-left: 3px solid var(--amber);
+        background: rgba(242, 189, 89, 0.08);
+        color: #efe7d6;
+      }
+      footer { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); }
       @media (max-width: 860px) {
-        .grid, .stats, .badge-lab, .repo-form { grid-template-columns: 1fr; }
+        .hero, .grid { grid-template-columns: 1fr; }
         .nav, .section-head { align-items: start; flex-direction: column; }
-        .links { width: 100%; }
       }
       @media (max-width: 560px) {
         .wrap { width: min(calc(100% - 24px), var(--max)); }
         .hero { padding-top: 34px; }
-        .links {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 8px 14px;
-        }
-        .lead, .section-head p, .pick p, .contract p { max-width: 34ch; }
-        .btn { width: 100%; white-space: normal; }
-        .pick-head { flex-direction: column; }
-        .pick-mark { white-space: normal; }
-        .signal-grid { grid-template-columns: 1fr; }
+        .links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; }
+        .btn { width: 100%; }
+        .promise { border-radius: 8px; }
+        .proof-row { grid-template-columns: 1fr; }
       }
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <nav class="nav" aria-label="Primary">
-          <a class="brand" href="/">DayOneBuilder</a>
-          <div class="links">
-          <a href="/dob-task-resolver/">Task Resolver</a>
-          <a href="/repo/">Repo Report</a>
-          <a href="/agent-magnet/upstash-context7/">Agent Magnet</a>
-          <a href="/free-bill-tracker-template/">Bill Tracker</a>
-          <a href="/collections/index.json">Collections</a>
-          <a href="/skills/dayonebuilder-resolver/SKILL.md">Skill</a>
-          <a href="https://github.com/DayOneBuilder">GitHub</a>
-        </div>
+    <header class="wrap nav">
+      <a class="brand" href="/">DayOneBuilder</a>
+      <nav class="links" aria-label="Primary navigation">
+        <a href="/products/">Products</a>
+        <a href="/free-rental-property-inspection-checklist-template-uk/">Current test</a>
+        <a href="/free-bill-tracker-template/">Bill tracker</a>
+        <a href="/llms.txt">Agent notes</a>
       </nav>
+    </header>
 
-      <main>
-        <section class="hero">
-          <span class="eyebrow">Agent-native resolver</span>
-          <h1>Task in. Executor out.</h1>
-          <p class="lead">
-            Agents should fetch a resolver collection, not browse a homepage. DayOneBuilder returns the best source URL, install or call path, verification step, and fallback for the task.
-          </p>
-          <form id="repo-form" class="repo-form" autocomplete="off" onsubmit="openRepoReport(event)">
-            <label class="sr-only" for="repo-url" style="display:none">GitHub repository URL</label>
-            <input id="repo-url" name="repo" placeholder="https://github.com/owner/repo" />
-            <button class="btn" type="submit">Analyze repo</button>
-          </form>
+    <main class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <div class="eyebrow">Public product lab</div>
+          <h1 id="hero-title">Useful first.</h1>
+          <p class="lead">DayOneBuilder ships narrow tools for real jobs, watches whether people use them, and only keeps pushing the ones with clear demand and a paid artifact path.</p>
+          <div class="promise">Useful first. Paid only when demand is real.</div>
           <div class="actions">
-            <a class="btn" href="/dob-task-resolver/">Resolve a task</a>
-            <a class="btn secondary" href="/agent-actions.json">Call action feed</a>
+            <a class="btn" href="/free-rental-property-inspection-checklist-template-uk/" onclick="trackLabClick('current_rental_inspection')">Open current test</a>
+            <a class="btn secondary" href="/products/" onclick="trackLabClick('products_index')">See product tests</a>
           </div>
-          <div class="stats" aria-label="Resolver contract">
-            <div class="stat"><strong>Source</strong><span>primary repo stays visible</span></div>
-            <div class="stat"><strong>Action</strong><span>one install, call, or open step</span></div>
-            <div class="stat"><strong>Proof</strong><span>smoke test or fallback required</span></div>
-          </div>
-        </section>
-
-        <section class="section" aria-labelledby="agent-entrypoints">
-          <div class="section-head">
-            <div>
-              <span class="eyebrow">Agent entrypoints</span>
-              <h2 id="agent-entrypoints">Fetch the resolver.</h2>
-            </div>
-            <p>The homepage is only a doorway. The useful surface is the static collection resolver, repo report, action feed, and installable skill an agent can invoke during work.</p>
-          </div>
-          <div class="grid">
-            <article class="endpoint-card">
-              <h3>Task resolver</h3>
-              <p>Use when the agent has a task and needs the best executor.</p>
-              <div class="command-line"><code>GET /dob-task-resolver/?task=browser%20automation</code></div>
-              <a class="btn secondary" href="/dob-task-resolver/">Open resolver</a>
-            </article>
-            <article class="endpoint-card">
-              <h3>GitHub repo report</h3>
-              <p>Use when the agent already has a repo and needs source-of-truth signals.</p>
-              <div class="command-line"><code>GET /repo/?repo=owner/name</code></div>
-              <a class="btn secondary" href="/repo/">Open repo report</a>
-            </article>
-            <article class="endpoint-card">
-              <h3>Installable skill</h3>
-              <p>Use inside an agent runtime to make resolver lookup a default step.</p>
-              <div class="command-line"><code>https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md</code></div>
-              <a class="btn secondary" href="/skills/dayonebuilder-resolver/SKILL.md">Open skill</a>
-            </article>
-            <article class="endpoint-card">
-              <h3>Collections</h3>
-              <p>Machine-readable groups of source-first recommendations and fallbacks.</p>
-              <div class="command-line"><code>GET /collections/index.json</code></div>
-              <a class="btn secondary" href="/collections/index.json">Open collections</a>
-            </article>
-            <article class="endpoint-card">
-              <h3>Action feed</h3>
-              <p>Machine-readable task aliases, first actions, smoke tests, and fallbacks.</p>
-              <div class="command-line"><code>GET /agent-actions.json</code></div>
-              <a class="btn secondary" href="/agent-actions.json">Open JSON</a>
-            </article>
-            <article class="endpoint-card">
-              <h3>Collection JSON</h3>
-              <p>Start with agent skills, MCP servers, browser automation, and fresh docs.</p>
-              <div class="command-line"><code>GET /collections/agent-skills.json</code></div>
-              <a class="btn secondary" href="/collections/agent-skills.json">Open collection</a>
-            </article>
-            <article class="endpoint-card">
-              <h3>Bill tracker template</h3>
-              <p>Use a no-login household bill tracker, then save it in browser or export CSV.</p>
-              <div class="command-line"><code>GET /free-bill-tracker-template/</code></div>
-              <a class="btn secondary" href="/free-bill-tracker-template/">Open template</a>
-            </article>
-            <article class="endpoint-card">
-              <h3>MCP adapter contract</h3>
-              <p>Tool shape for agents that call MCP instead of reading static feeds.</p>
-              <div class="command-line"><code>dob_recommend_executor(task)</code></div>
-              <a class="btn secondary" href="/mcp/dayonebuilder-resolver.json">Open MCP contract</a>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" aria-labelledby="contract">
-          <div class="section-head">
-            <div>
-              <span class="eyebrow">How DayOneBuilder earns routes</span>
-              <h2 id="contract">By making the next action obvious.</h2>
-            </div>
-            <p>The resolver should feel useful before it asks anyone to believe it. A good recommendation is a card, badge, command, URL, and verification step.</p>
-          </div>
-          <div class="grid">
-            <article class="contract"><h3>Best executor</h3><p>The resolver should choose the best external source for the task, not the best DayOneBuilder-owned page.</p></article>
-            <article class="contract"><h3>Repo URL in</h3><p>A GitHub URL opens a report page with public GitHub data and agent-usefulness checks.</p></article>
-            <article class="contract"><h3>Collections first</h3><p>Agents should fetch static JSON collections directly instead of reading marketing copy.</p></article>
-            <article class="contract"><h3>Skill packaging</h3><p>The skill makes this resolver a reusable agent habit: check source, action path, smoke test, fallback.</p></article>
-            <article class="contract"><h3>Telemetry loop</h3><p>The resolver watches task submissions, repo reports, outbound source clicks, install snippet copies, and repeat agent routes.</p></article>
-          </div>
-        </section>
-
-        <section class="section" aria-labelledby="agent-magnet">
-          <div class="section-head">
-            <div>
-              <span class="eyebrow">Agent Magnet badge</span>
-              <h2 id="agent-magnet">Show the public agent footprint.</h2>
-            </div>
-            <p>Agent Mention Index counts public GitHub code-search hits for exact repo mentions inside agent-facing files. It is a visible proxy for agent routing, not private GitHub traffic.</p>
-          </div>
-          <div class="badge-lab">
-            <a href="/agent-magnet/upstash-context7/" aria-label="Open Agent Magnet report for upstash/context7">
-              <img class="agent-badge" src="/badges/upstash-context7-agent-magnet.svg" alt="Agent Magnet badge for upstash/context7" />
-            </a>
-            <article class="copy-box">
-              <h3>README embed</h3>
-              <p>Use a badge only when it links to query evidence for that repository.</p>
-              <pre>[![Agent Magnet: Agent Mentions 1.5k](https://dayonebuilder.online/badges/upstash-context7-agent-magnet.svg)](https://dayonebuilder.online/agent-magnet/upstash-context7/)</pre>
-              <div class="actions">
-                <a class="btn secondary" href="/agent-magnet/upstash-context7/">Open evidence page</a>
-                <a class="btn secondary" href="https://github.com/DayOneBuilder/agent-magnet">Open GitHub repo</a>
-              </div>
-            </article>
-          </div>
-        </section>
-      </main>
-
-      <footer>
-        <div class="footer-row">
-          <span>DayOneBuilder Resolver</span>
-          <span><a href="/dob-task-resolver/">Task Resolver</a> / <a href="/repo/">Repo Report</a> / <a href="/agent-magnet/upstash-context7/">Agent Magnet</a> / <a href="/collections/index.json">collections</a> / <a href="/agent-actions.json">actions</a></span>
         </div>
-      </footer>
-    </div>
+        <aside class="proof" aria-label="Product lab operating rules">
+          <div class="proof-row"><strong>Demand</strong><span>Exact search or workflow evidence before deeper build work.</span></div>
+          <div class="proof-row"><strong>Use</strong><span>The page must help immediately: calculate, generate, export, copy, or save.</span></div>
+          <div class="proof-row"><strong>Money</strong><span>A paid workbook, template, or custom artifact is tested only after the free path is useful.</span></div>
+        </aside>
+      </section>
+
+      <section class="section" aria-labelledby="current-tests">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Current product tests</div>
+            <h2 id="current-tests">Small tools under paid-artifact validation.</h2>
+          </div>
+          <p>This is not a broad catalog. Weak pages get archived or deprioritized; the homepage points to tests with a concrete user job and measurement path.</p>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="tags"><span class="hot">current focus</span><span>checklist</span></div>
+            <h3>Free rental property inspection checklist template UK</h3>
+            <p>Create a move-in or move-out inspection checklist, mark issue priority, and export a shareable record.</p>
+            <a class="btn secondary" href="/free-rental-property-inspection-checklist-template-uk/" onclick="trackLabClick('rental_inspection_card')">Open checklist</a>
+          </article>
+          <article class="card">
+            <div class="tags"><span class="live">live</span><span>calculator</span></div>
+            <h3>Mortgage payoff calculator</h3>
+            <p>Calculate payoff timing from current balance, APR, and monthly payment, then export the result.</p>
+            <a class="btn secondary" href="/mortgage-payoff-calculator-based-on-current-balance/" onclick="trackLabClick('mortgage_card')">Open calculator</a>
+          </article>
+          <article class="card">
+            <div class="tags"><span class="live">live</span><span>tracker</span></div>
+            <h3>Free bill tracker template</h3>
+            <p>Build a monthly bill tracker with browser save, copy, and CSV export before any paid workbook pitch.</p>
+            <a class="btn secondary" href="/free-bill-tracker-template/" onclick="trackLabClick('bill_tracker_card')">Open tracker</a>
+          </article>
+        </div>
+        <p class="rule">A page is not a win because it exists. It has to produce real starts, completions, returns, clicks to the paid path, or revenue intent.</p>
+      </section>
+    </main>
+
+    <footer class="wrap">
+      <span>DayOneBuilder product lab</span>
+    </footer>
   </body>
 </html>
