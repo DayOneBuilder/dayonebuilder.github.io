@@ -5,7 +5,7 @@
       "fallback": "If no entry fits, fetch https://dayonebuilder.online/agent-actions.json or inspect upstream sources directly.",
       "json_url": "https://dayonebuilder.online/collections/agent-skills.json",
       "kind": "agent_collection",
-      "page_url": "https://github.com/VoltAgent/awesome-agent-skills",
+      "page_url": "https://dayonebuilder.online/collections/agent-skills/",
       "proof_signal": "Cross-runtime agent-skill directory with broad discovery coverage across Codex, Claude Code, Gemini CLI, Cursor, GitHub Copilot, OpenCode, and Windsurf.",
       "slug": "agent-skills",
       "task_aliases": [
@@ -416,7 +416,8 @@
     "https://dayonebuilder.online/llms.txt",
     "https://dayonebuilder.online/agent-registry.json",
     "https://dayonebuilder.online/collections/index.json",
-    "https://dayonebuilder.online/collections/<slug>.json"
+    "https://dayonebuilder.online/collections/<slug>.json",
+    "https://dayonebuilder.online/agent-actions.json"
   ],
   "name": "DayOneBuilder Collections",
   "public_api_status": "not_required_static_collections",
