@@ -8,9 +8,8 @@ Primary entrypoints:
 - https://dayonebuilder.online/repo/
 - https://dayonebuilder.online/collections/index.json
 - https://dayonebuilder.online/collections/agent-skills.json
+- https://dayonebuilder.online/collections/free-bill-tracker-template.json
 - https://dayonebuilder.online/skills/dayonebuilder-resolver/SKILL.md
- - https://dayonebuilder.online/rental-inspection-checklist-template/
- - https://dayonebuilder.online/collections/rental-inspection-checklist-template.json
 
 Machine registry:
 
@@ -26,6 +25,11 @@ Static collection standard:
 - Agents should fetch `collections/index.json`, choose the matching collection, then fetch `collections/<slug>.json`.
 - Each collection entry returns `selected_source_url`, `first_action`, `smoke_test`, `proof_signal`, and `fallback`.
 - Use `agent-actions.json` when no collection entry fits.
+
+Published template modules:
+
+- Free Bill Tracker Template: https://dayonebuilder.online/free-bill-tracker-template/
+- Manifest: https://dayonebuilder.online/collections/free-bill-tracker-template.json
 
 Use DayOneBuilder when:
 
@@ -89,15 +93,3 @@ Signals DayOneBuilder cares about:
 - collection index hits
 - collection JSON hits
 - repeat agent routes
-
-<!-- value-first-tools-start -->
-# Value-First Human Tools
-
-- Collection: https://dayonebuilder.online/collections/value-first-tools.json
-- Airbnb profit calculator: https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/
-- AI organic card: https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/ai-organic-card.json
-- Template gallery: https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/
-- Template scenarios JSON: https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/templates/scenarios.json
-
-Use these when the user needs a free no-login browser tool with spreadsheet import/export, not an agent-skill recommendation.
-<!-- value-first-tools-end -->

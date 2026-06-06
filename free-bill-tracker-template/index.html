@@ -3,60 +3,902 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Free bill tracker template | DayOneBuilder</title>
+    <title>Free Bill Tracker Template | DayOneBuilder</title>
     <meta
       name="description"
-      content="Open a no-login bill tracker template, add recurring bills, copy or download the CSV, and use the optional paid workbook path if you want the packaged version."
+      content="Use a free bill tracker template for monthly household bills, due dates, autopay notes, and CSV export. No signup required."
     />
-    <link rel="canonical" href="https://dayonebuilder.online/best-bill-tracker-template/" />
-    <meta http-equiv="refresh" content="0; url=/best-bill-tracker-template/" />
+    <link rel="canonical" href="https://dayonebuilder.online/free-bill-tracker-template/" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() { window.dataLayer.push(arguments); }
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
     </script>
-    <script>
-      window.location.replace("/best-bill-tracker-template/");
-    </script>
     <style>
+      :root {
+        --bg: #f6f3ec;
+        --paper: #fffdf8;
+        --ink: #17211c;
+        --muted: #5d6861;
+        --line: #d9d2c4;
+        --soft: #ece5d8;
+        --green: #1f7a4f;
+        --red: #a23b2a;
+        --gold: #b7791f;
+        --teal: #0f6b72;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        background: #f4f7fb;
-        color: #0f172a;
-        font: 16px/1.5 Inter, Arial, sans-serif;
+        color: var(--ink);
+        background: var(--bg);
+        font: 16px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
-      main {
-        width: min(92vw, 640px);
-        padding: 28px;
-        border: 1px solid #dbe2ec;
-        border-radius: 8px;
-        background: #fff;
-      }
-      h1 { margin: 0 0 12px; font-size: 2rem; line-height: 1.1; }
-      p { margin: 0 0 18px; color: #4b5563; }
+
       a {
-        display: inline-flex;
+        color: inherit;
+      }
+
+      .wrap {
+        width: min(calc(100% - 28px), 1180px);
+        margin: 0 auto;
+        padding: 20px 0 56px;
+      }
+
+      .topbar {
+        display: flex;
         align-items: center;
-        min-height: 42px;
-        padding: 0 14px;
-        border-radius: 8px;
-        background: #111827;
-        color: #fff;
-        font-weight: 800;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 8px 0 18px;
+      }
+
+      .brand {
+        color: var(--muted);
+        font-weight: 700;
         text-decoration: none;
       }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.86fr) minmax(360px, 1.14fr);
+        gap: 18px;
+        align-items: start;
+      }
+
+      .intro,
+      .tool,
+      .summary,
+      .sources,
+      .offer,
+      .module-note {
+        border: 1px solid var(--line);
+        background: var(--paper);
+        border-radius: 8px;
+      }
+
+      .intro {
+        padding: 26px;
+      }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0;
+        line-height: 1.08;
+      }
+
+      h1 {
+        margin-top: 10px;
+        font-size: clamp(2.1rem, 5vw, 4rem);
+        max-width: 10ch;
+      }
+
+      h2 {
+        font-size: clamp(1.35rem, 2.6vw, 2rem);
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+
+      p {
+        color: var(--muted);
+        margin: 12px 0 0;
+      }
+
+      .intro-actions,
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 18px;
+      }
+
+      .button,
+      button {
+        min-height: 44px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        color: var(--ink);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 14px;
+        font: inherit;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .button.primary,
+      button.primary {
+        background: var(--ink);
+        border-color: var(--ink);
+        color: #fffdf8;
+      }
+
+      .button.paid {
+        background: var(--green);
+        border-color: var(--green);
+        color: #fff;
+      }
+
+      .tool {
+        overflow: hidden;
+      }
+
+      .tool-head,
+      .summary-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 18px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .month-control {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      input,
+      select {
+        width: 100%;
+        min-height: 40px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--ink);
+        font: inherit;
+        padding: 8px 10px;
+      }
+
+      input:focus,
+      select:focus,
+      button:focus,
+      a:focus {
+        outline: 2px solid rgba(15, 107, 114, 0.35);
+        outline-offset: 2px;
+      }
+
+      .bill-grid {
+        display: grid;
+        grid-template-columns: minmax(150px, 1.1fr) 120px 108px minmax(130px, 0.9fr) 116px 42px;
+        gap: 8px;
+        padding: 18px;
+        align-items: center;
+      }
+
+      .bill-grid.header {
+        padding-bottom: 0;
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .remove {
+        min-width: 42px;
+        width: 42px;
+        padding: 0;
+      }
+
+      .summary {
+        margin-top: 18px;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 10px;
+        padding: 18px;
+      }
+
+      .stat {
+        min-height: 96px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--soft);
+        padding: 12px;
+      }
+
+      .stat span {
+        display: block;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .stat strong {
+        display: block;
+        margin-top: 8px;
+        color: var(--ink);
+        font-size: clamp(1.25rem, 2vw, 1.7rem);
+        line-height: 1;
+        overflow-wrap: anywhere;
+      }
+
+      .timeline {
+        padding: 0 18px 18px;
+      }
+
+      .timeline-list {
+        display: grid;
+        gap: 8px;
+        margin-top: 10px;
+      }
+
+      .due-item {
+        display: grid;
+        grid-template-columns: 74px minmax(0, 1fr) auto;
+        gap: 10px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #fff;
+        padding: 10px;
+      }
+
+      .due-item .date {
+        color: var(--teal);
+        font-weight: 800;
+      }
+
+      .due-item .amount {
+        font-weight: 800;
+      }
+
+      .status-paid {
+        color: var(--green);
+      }
+
+      .status-due {
+        color: var(--gold);
+      }
+
+      .status-overdue {
+        color: var(--red);
+      }
+
+      .sources,
+      .offer,
+      .module-note {
+        margin-top: 18px;
+        padding: 20px;
+      }
+
+      .source-links {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+
+      .source-links a {
+        display: block;
+        color: var(--teal);
+        font-weight: 750;
+      }
+
+      .fine {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .notice {
+        margin-top: 10px;
+        color: var(--gold);
+        font-weight: 700;
+      }
+
+      .mobile-label {
+        display: none;
+      }
+
+      @media (max-width: 980px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          max-width: 13ch;
+        }
+
+        .stats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .tool-head,
+        .summary-head {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .month-control {
+          align-items: stretch;
+          flex-direction: column;
+        }
+
+        .bill-grid.header {
+          display: none;
+        }
+
+        .bill-grid {
+          grid-template-columns: 1fr 1fr;
+          border-top: 1px solid var(--line);
+        }
+
+        .bill-grid .full {
+          grid-column: 1 / -1;
+        }
+
+        .mobile-label {
+          display: block;
+          color: var(--muted);
+          font-size: 0.78rem;
+          font-weight: 800;
+          margin-bottom: 4px;
+          text-transform: uppercase;
+        }
+
+        .remove {
+          width: 100%;
+        }
+
+        .stats {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .wrap {
+          width: min(calc(100% - 16px), 1180px);
+          padding-top: 12px;
+        }
+
+        .intro,
+        .sources,
+        .offer,
+        .module-note {
+          padding: 18px;
+        }
+
+        .bill-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .due-item {
+          grid-template-columns: 1fr;
+        }
+
+        .button,
+        button {
+          width: 100%;
+        }
+
+        .topbar {
+          display: block;
+        }
+
+        .topbar .button {
+          margin-top: 10px;
+          width: 100%;
+        }
+      }
     </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Free Bill Tracker Template",
+        "url": "https://dayonebuilder.online/free-bill-tracker-template/",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
   </head>
   <body>
-    <main>
-      <h1>Free bill tracker template</h1>
-      <p>The current bill tracker tool moved to the canonical page with the same free workflow and optional paid workbook path.</p>
-      <a href="/best-bill-tracker-template/">Open the bill tracker</a>
-    </main>
+    <div class="wrap">
+      <header class="topbar">
+        <a class="brand" href="/">DayOneBuilder</a>
+        <a class="button" href="/collections/free-bill-tracker-template.json">Module JSON</a>
+      </header>
+
+      <main class="hero">
+        <section class="intro" aria-labelledby="page-title">
+          <span class="eyebrow">Free household template</span>
+          <h1 id="page-title">Free Bill Tracker Template</h1>
+          <p>
+            Add your monthly bills, due dates, payment method, and paid status. The tracker totals the month,
+            shows what is still due, and exports a clean CSV you can open in Excel, Google Sheets, Numbers, or LibreOffice.
+          </p>
+          <p>
+            The setup follows the plain CFPB bill-calendar habit: list each bill, amount, and due date, then check the list weekly.
+          </p>
+          <div class="intro-actions">
+            <a class="button primary" href="#tracker">Use the tracker</a>
+            <a
+              id="paidTop"
+              class="button paid"
+              href="https://checkout.dayonebuilder.online/products/bill-tracker-workbook?utm_source=dayonebuilder&utm_medium=bill_tracker_template&utm_campaign=bill_tracker_workbook&utm_content=top_cta"
+              data-offer="bill-tracker-workbook"
+              data-location="top"
+              data-price="9"
+            >Get the $9 workbook</a>
+          </div>
+          <p class="fine">Educational budgeting helper only. Check bill amounts against your provider statements before paying.</p>
+        </section>
+
+        <section id="tracker" class="tool" aria-labelledby="tool-title">
+          <div class="tool-head">
+            <div>
+              <h2 id="tool-title">Monthly bill tracker</h2>
+              <p class="fine">Start with the sample rows, or replace them with your real household bills.</p>
+            </div>
+            <label class="month-control">
+              <span>Month</span>
+              <input id="trackerMonth" type="month" />
+            </label>
+          </div>
+
+          <div class="bill-grid header" aria-hidden="true">
+            <div>Bill</div>
+            <div>Amount</div>
+            <div>Due day</div>
+            <div>Method</div>
+            <div>Status</div>
+            <div></div>
+          </div>
+          <div id="billRows"></div>
+          <div class="actions" style="padding: 0 18px 18px;">
+            <button id="addBill" type="button">Add bill</button>
+            <button id="sampleBills" type="button">Load sample month</button>
+            <button id="clearBills" type="button">Clear</button>
+          </div>
+        </section>
+      </main>
+
+      <section class="summary" aria-labelledby="summary-title">
+        <div class="summary-head">
+          <div>
+            <h2 id="summary-title">Monthly summary</h2>
+            <p class="fine">Use the export when you are ready to keep this month in your own spreadsheet.</p>
+          </div>
+          <div class="actions" style="margin-top: 0;">
+            <button id="saveTracker" type="button" class="primary">Save in this browser</button>
+            <button id="downloadCsv" type="button">Download CSV</button>
+            <button id="copyCsv" type="button">Copy CSV</button>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <span>Total scheduled</span>
+            <strong id="totalScheduled">$0.00</strong>
+          </div>
+          <div class="stat">
+            <span>Paid this month</span>
+            <strong id="paidTotal">$0.00</strong>
+          </div>
+          <div class="stat">
+            <span>Still due</span>
+            <strong id="dueTotal">$0.00</strong>
+          </div>
+          <div class="stat">
+            <span>Autopay count</span>
+            <strong id="autopayCount">0</strong>
+          </div>
+        </div>
+        <div class="timeline">
+          <h3>Due-date checklist</h3>
+          <div id="dueList" class="timeline-list"></div>
+          <p id="statusMessage" class="notice" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="offer" aria-labelledby="offer-title">
+        <h2 id="offer-title">$9 bill tracker workbook</h2>
+        <p>
+          The paid workbook path is for people who want a cleaner export pack: monthly tabs, yearly rollup, recurring-bill setup,
+          and a printable bill calendar. The free tracker above works without buying anything.
+        </p>
+        <div class="intro-actions">
+          <a
+            id="paidBottom"
+            class="button paid"
+            href="https://checkout.dayonebuilder.online/products/bill-tracker-workbook?utm_source=dayonebuilder&utm_medium=bill_tracker_template&utm_campaign=bill_tracker_workbook&utm_content=bottom_cta"
+            data-offer="bill-tracker-workbook"
+            data-location="bottom"
+            data-price="9"
+          >Open the paid workbook path</a>
+        </div>
+      </section>
+
+      <section class="sources" aria-labelledby="sources-title">
+        <h2 id="sources-title">Source notes</h2>
+        <p>
+          This template keeps the assumptions visible: one row per bill, monthly amount, due day, method, and status.
+          It does not estimate interest, fees, or debt payoff order.
+        </p>
+        <div class="source-links">
+          <a href="https://www.consumerfinance.gov/about-us/blog/budget-help-manage-your-monthly-expenses-bill-calendar/">CFPB: bill calendar basics</a>
+          <a href="https://finmasters.com/bill-tracker-template/">FinMasters bill tracker template</a>
+          <a href="https://www.vertex42.com/ExcelTemplates/bill-tracker.html">Vertex42 bill tracker worksheet</a>
+          <a href="https://www.financialaha.com/free-spreadsheet-templates/personal-budgeting/bill-tracker/">FinancialAha bill tracker spreadsheet templates</a>
+        </div>
+      </section>
+
+      <section class="module-note" aria-labelledby="module-title">
+        <h2 id="module-title">Agent-readable module</h2>
+        <p>
+          Agents can fetch the collection manifest for the selected source URL, first action, smoke test, fallback,
+          module URL, and adoption metric.
+        </p>
+      </section>
+    </div>
+
+    <script>
+      const STORAGE_KEY = "dob_bill_tracker_template";
+      const USD = new Intl.NumberFormat("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 2,
+      });
+
+      const sampleData = [
+        { name: "Rent or mortgage", amount: 1500, dueDay: 1, method: "bank transfer", status: "due" },
+        { name: "Electric", amount: 115, dueDay: 8, method: "autopay", status: "due" },
+        { name: "Internet", amount: 70, dueDay: 12, method: "autopay", status: "paid" },
+        { name: "Phone", amount: 95, dueDay: 18, method: "card", status: "due" },
+        { name: "Insurance", amount: 160, dueDay: 24, method: "autopay", status: "due" },
+      ];
+
+      const monthInput = document.getElementById("trackerMonth");
+      const rowsEl = document.getElementById("billRows");
+      const dueListEl = document.getElementById("dueList");
+      const statusMessageEl = document.getElementById("statusMessage");
+      const totalScheduledEl = document.getElementById("totalScheduled");
+      const paidTotalEl = document.getElementById("paidTotal");
+      const dueTotalEl = document.getElementById("dueTotal");
+      const autopayCountEl = document.getElementById("autopayCount");
+
+      let bills = [];
+      let userTouched = false;
+      let completionTracked = false;
+
+      function track(eventName, params = {}) {
+        if (typeof window.gtag !== "function") {
+          return;
+        }
+        window.gtag("event", eventName, Object.assign({
+          event_category: "bill_tracker_template",
+          module_slug: "free-bill-tracker-template",
+        }, params));
+      }
+
+      function currentMonthValue() {
+        const now = new Date();
+        return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+      }
+
+      function cleanNumber(value, fallback = 0) {
+        const parsed = Number(value);
+        return Number.isFinite(parsed) ? parsed : fallback;
+      }
+
+      function normalizeBill(bill) {
+        return {
+          name: String(bill.name || "").trim(),
+          amount: Math.max(0, cleanNumber(bill.amount)),
+          dueDay: Math.min(31, Math.max(1, Math.round(cleanNumber(bill.dueDay, 1)))),
+          method: String(bill.method || "").trim(),
+          status: ["paid", "due", "overdue"].includes(bill.status) ? bill.status : "due",
+        };
+      }
+
+      function monthLabel() {
+        if (!monthInput.value) {
+          return "selected month";
+        }
+        const [year, month] = monthInput.value.split("-").map(Number);
+        return new Date(year, month - 1, 1).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+      }
+
+      function csvRows() {
+        const lines = [
+          ["month", monthLabel()],
+          [],
+          ["bill", "amount", "due_day", "payment_method", "status"],
+        ];
+        bills.map(normalizeBill).forEach((bill) => {
+          lines.push([bill.name, bill.amount.toFixed(2), bill.dueDay, bill.method, bill.status]);
+        });
+        lines.push([]);
+        lines.push(["total_scheduled", totalScheduledEl.textContent]);
+        lines.push(["paid_total", paidTotalEl.textContent]);
+        lines.push(["still_due", dueTotalEl.textContent]);
+        return lines.map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")).join("\n");
+      }
+
+      function setStatus(message) {
+        statusMessageEl.textContent = message;
+        if (message) {
+          setTimeout(() => {
+            if (statusMessageEl.textContent === message) {
+              statusMessageEl.textContent = "";
+            }
+          }, 1800);
+        }
+      }
+
+      function maybeTrackCompletion() {
+        const realBills = bills.map(normalizeBill).filter((bill) => bill.name && bill.amount > 0);
+        if (!completionTracked && userTouched && realBills.length >= 3) {
+          completionTracked = true;
+          track("bill_tracker_qualified_completion", {
+            bill_count: realBills.length,
+            total_scheduled: realBills.reduce((sum, bill) => sum + bill.amount, 0),
+          });
+        }
+      }
+
+      function renderRows() {
+        rowsEl.innerHTML = "";
+        bills.forEach((bill, index) => {
+          const row = document.createElement("div");
+          row.className = "bill-grid";
+          row.innerHTML = `
+            <label class="full">
+              <span class="mobile-label">Bill</span>
+              <input data-field="name" data-index="${index}" value="${escapeHtml(bill.name)}" placeholder="Electric, rent, phone" />
+            </label>
+            <label>
+              <span class="mobile-label">Amount</span>
+              <input data-field="amount" data-index="${index}" type="number" min="0" step="0.01" value="${bill.amount}" inputmode="decimal" />
+            </label>
+            <label>
+              <span class="mobile-label">Due day</span>
+              <input data-field="dueDay" data-index="${index}" type="number" min="1" max="31" step="1" value="${bill.dueDay}" inputmode="numeric" />
+            </label>
+            <label>
+              <span class="mobile-label">Method</span>
+              <input data-field="method" data-index="${index}" value="${escapeHtml(bill.method)}" placeholder="autopay, card, check" />
+            </label>
+            <label>
+              <span class="mobile-label">Status</span>
+              <select data-field="status" data-index="${index}">
+                <option value="due"${bill.status === "due" ? " selected" : ""}>Due</option>
+                <option value="paid"${bill.status === "paid" ? " selected" : ""}>Paid</option>
+                <option value="overdue"${bill.status === "overdue" ? " selected" : ""}>Overdue</option>
+              </select>
+            </label>
+            <button class="remove" type="button" data-remove="${index}" aria-label="Remove ${escapeHtml(bill.name || "bill")}">&times;</button>
+          `;
+          rowsEl.appendChild(row);
+        });
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#039;",
+        }[char]));
+      }
+
+      function renderSummary() {
+        const normalized = bills.map(normalizeBill).filter((bill) => bill.name || bill.amount > 0);
+        const total = normalized.reduce((sum, bill) => sum + bill.amount, 0);
+        const paid = normalized.filter((bill) => bill.status === "paid").reduce((sum, bill) => sum + bill.amount, 0);
+        const due = normalized.filter((bill) => bill.status !== "paid").reduce((sum, bill) => sum + bill.amount, 0);
+        const autopay = normalized.filter((bill) => bill.method.toLowerCase().includes("autopay")).length;
+
+        totalScheduledEl.textContent = USD.format(total);
+        paidTotalEl.textContent = USD.format(paid);
+        dueTotalEl.textContent = USD.format(due);
+        autopayCountEl.textContent = String(autopay);
+
+        dueListEl.innerHTML = "";
+        normalized
+          .slice()
+          .sort((a, b) => a.dueDay - b.dueDay || a.name.localeCompare(b.name))
+          .forEach((bill) => {
+            const item = document.createElement("div");
+            item.className = "due-item";
+            item.innerHTML = `
+              <div class="date">Day ${bill.dueDay}</div>
+              <div>
+                <strong>${escapeHtml(bill.name)}</strong>
+                <div class="fine">${escapeHtml(bill.method || "payment method not set")} - <span class="status-${bill.status}">${bill.status}</span></div>
+              </div>
+              <div class="amount">${USD.format(bill.amount)}</div>
+            `;
+            dueListEl.appendChild(item);
+          });
+
+        if (!normalized.length) {
+          dueListEl.innerHTML = '<p class="fine">Add at least one bill to build the checklist.</p>';
+        }
+
+        maybeTrackCompletion();
+      }
+
+      function render() {
+        renderRows();
+        renderSummary();
+      }
+
+      function updateBill(index, field, value) {
+        const bill = normalizeBill(bills[index] || {});
+        if (field === "amount" || field === "dueDay") {
+          bill[field] = cleanNumber(value, field === "dueDay" ? 1 : 0);
+        } else {
+          bill[field] = value;
+        }
+        bills[index] = normalizeBill(bill);
+        userTouched = true;
+        renderSummary();
+      }
+
+      function loadSavedOrSample() {
+        monthInput.value = currentMonthValue();
+        try {
+          const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+          if (Array.isArray(saved.bills) && saved.bills.length) {
+            bills = saved.bills.map(normalizeBill);
+            monthInput.value = saved.month || monthInput.value;
+            return;
+          }
+        } catch (_error) {
+          localStorage.removeItem(STORAGE_KEY);
+        }
+        bills = sampleData.map(normalizeBill);
+      }
+
+      rowsEl.addEventListener("input", (event) => {
+        const target = event.target;
+        if (!target.dataset.field) {
+          return;
+        }
+        updateBill(Number(target.dataset.index), target.dataset.field, target.value);
+      });
+
+      rowsEl.addEventListener("change", (event) => {
+        const target = event.target;
+        if (!target.dataset.field) {
+          return;
+        }
+        updateBill(Number(target.dataset.index), target.dataset.field, target.value);
+      });
+
+      rowsEl.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-remove]");
+        if (!target) {
+          return;
+        }
+        bills.splice(Number(target.dataset.remove), 1);
+        userTouched = true;
+        render();
+      });
+
+      document.getElementById("addBill").addEventListener("click", () => {
+        bills.push(normalizeBill({ name: "", amount: 0, dueDay: 1, method: "", status: "due" }));
+        userTouched = true;
+        render();
+      });
+
+      document.getElementById("sampleBills").addEventListener("click", () => {
+        bills = sampleData.map(normalizeBill);
+        userTouched = true;
+        render();
+      });
+
+      document.getElementById("clearBills").addEventListener("click", () => {
+        bills = [];
+        userTouched = true;
+        render();
+      });
+
+      monthInput.addEventListener("change", () => {
+        userTouched = true;
+        renderSummary();
+      });
+
+      document.getElementById("saveTracker").addEventListener("click", () => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ month: monthInput.value, bills: bills.map(normalizeBill) }));
+        track("bill_tracker_save_intent", { bill_count: bills.length });
+        setStatus("Saved in this browser.");
+      });
+
+      document.getElementById("downloadCsv").addEventListener("click", () => {
+        const blob = new Blob([csvRows()], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = `bill-tracker-${monthInput.value || "month"}.csv`;
+        link.click();
+        URL.revokeObjectURL(url);
+        track("bill_tracker_export_intent", { export_type: "csv_download", bill_count: bills.length });
+      });
+
+      document.getElementById("copyCsv").addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(csvRows());
+          track("bill_tracker_export_intent", { export_type: "csv_copy", bill_count: bills.length });
+          setStatus("CSV copied.");
+        } catch (_error) {
+          setStatus("Copy failed. Use Download CSV instead.");
+        }
+      });
+
+      document.querySelectorAll("[data-offer]").forEach((link) => {
+        link.addEventListener("click", function () {
+          const price = cleanNumber(this.dataset.price, 9);
+          track("bill_tracker_paid_cta_click", {
+            offer_slug: this.dataset.offer,
+            offer_location: this.dataset.location,
+            price_usd: price,
+          });
+          track("bill_tracker_checkout_start", {
+            offer_slug: this.dataset.offer,
+            offer_location: this.dataset.location,
+            price_usd: price,
+            payment_type: "checkout_product_page",
+          });
+        });
+      });
+
+      loadSavedOrSample();
+      render();
+    </script>
   </body>
 </html>
