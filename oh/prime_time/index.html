@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ПРАЙМ-ТАЙМ предпринимателей и инвесторов</title>
+    <meta
+      name="description"
+      content="Интерактивная визуализация прайм-тайма предпринимателей и инвесторов по возрасту."
+    />
+    <link rel="canonical" href="https://dayonebuilder.online/oh/prime_time/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="ПРАЙМ-ТАЙМ предпринимателей и инвесторов" />
+    <meta
+      property="og:description"
+      content="Интерактивная визуализация прайм-тайма предпринимателей и инвесторов по возрасту."
+    />
+    <meta property="og:url" content="https://dayonebuilder.online/oh/prime_time/" />
+    <meta property="og:image" content="https://dayonebuilder.online/oh/prime_time/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ПРАЙМ-ТАЙМ предпринимателей и инвесторов" />
+    <meta
+      name="twitter:description"
+      content="Интерактивная визуализация прайм-тайма предпринимателей и инвесторов по возрасту."
+    />
+    <meta name="twitter:image" content="https://dayonebuilder.online/oh/prime_time/og.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Roboto+Condensed:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=20260606" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="hero-panel" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <h1 id="page-title">ПРАЙМ-ТАЙМ</h1>
+          <p>предпринимателей и инвесторов</p>
+        </div>
+
+        <section
+          class="curve-card"
+          aria-label="ПРАЙМ-ТАЙМ предпринимателей и инвесторов"
+        >
+          <div class="card-topline">
+            <div class="mode-title founders">
+              <strong>ПРЕДПРИНИМАТЕЛИ</strong>
+              <span>Строить, Создавать, Масштабировать</span>
+            </div>
+            <div class="mode-title investors">
+              <strong>ИНВЕСТОРЫ</strong>
+              <span>Распределять, Сложный процент, Умножать</span>
+            </div>
+          </div>
+
+          <div class="infographic" id="infographic">
+            <aside class="legend" aria-label="Рычаги">
+              <div class="axis-high">высокий</div>
+              <button class="lever active" type="button" data-lever="startup">
+                <span class="line-sample blue-solid"></span>
+                <span class="lever-text">Создание предприятий /<br />Успех стартапа</span>
+                <span class="lever-icon">↗</span>
+              </button>
+              <button class="lever" type="button" data-lever="risk">
+                <span class="line-sample pale-dash"></span>
+                <span class="lever-text">Энергия и аппетит<br />к риску</span>
+                <span class="lever-icon">ϟ</span>
+              </button>
+              <button class="lever" type="button" data-lever="technical">
+                <span class="line-sample pale-dot"></span>
+                <span class="lever-text">Техническая /<br />Скорость выполнения</span>
+                <span class="lever-icon">&lt;/&gt;</span>
+              </button>
+              <button class="lever" type="button" data-lever="judgement">
+                <span class="line-sample green-solid"></span>
+                <span class="lever-text">Инвестиционный<br />навык / Суждение</span>
+                <span class="lever-icon">◎</span>
+              </button>
+              <button class="lever" type="button" data-lever="capital">
+                <span class="line-sample green-dash"></span>
+                <span class="lever-text">База капитала</span>
+                <span class="lever-icon">▦</span>
+              </button>
+              <button class="lever" type="button" data-lever="deals">
+                <span class="line-sample green-dot"></span>
+                <span class="lever-text">Сеть и поток<br />сделок</span>
+                <span class="lever-icon">≋</span>
+              </button>
+              <div class="axis-low">низкий</div>
+            </aside>
+
+            <div class="axis-title">ОТНОСИТЕЛЬНОЕ<br />ВЛИЯНИЕ / РЫЧАГ</div>
+
+            <div class="chart-wrap">
+              <svg
+                class="chart"
+                id="chart"
+                viewBox="0 0 900 590"
+                role="img"
+                aria-label="ВОЗРАСТ"
+              >
+                <defs>
+                  <linearGradient id="founderBand" x1="0" x2="1" y1="0" y2="0">
+                    <stop offset="0" stop-color="#1b4f80" stop-opacity="0.16" />
+                    <stop offset="1" stop-color="#285b8b" stop-opacity="0.28" />
+                  </linearGradient>
+                  <linearGradient id="investorBand" x1="0" x2="1" y1="0" y2="0">
+                    <stop offset="0" stop-color="#2c683f" stop-opacity="0.16" />
+                    <stop offset="1" stop-color="#477b32" stop-opacity="0.3" />
+                  </linearGradient>
+                  <filter id="curveGlow">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <marker
+                    id="arrow"
+                    markerWidth="12"
+                    markerHeight="12"
+                    refX="9"
+                    refY="6"
+                    orient="auto"
+                    markerUnits="strokeWidth"
+                  >
+                    <path d="M 0 0 L 10 6 L 0 12 z" fill="rgba(255, 255, 255, 0.64)" />
+                  </marker>
+                </defs>
+
+                <rect id="founderBandRect" class="founder-band" x="250" y="52" width="255" height="420" />
+                <rect id="investorBandRect" class="investor-band" x="505" y="52" width="355" height="420" />
+
+                <g class="grid-lines">
+                  <line id="xBaseLine" x1="40" y1="472" x2="880" y2="472" marker-end="url(#arrow)" />
+                  <line id="yBaseLine" x1="40" y1="472" x2="40" y2="52" marker-end="url(#arrow)" />
+                </g>
+
+                <g class="stage-label founder-stage">
+                  <circle cx="298" cy="96" r="24" />
+                  <text x="338" y="91">Прайм-тайм</text>
+                  <text x="338" y="123">для создания</text>
+                  <text class="age-range" x="370" y="171">~30 до 45</text>
+                </g>
+
+                <g class="stage-label investor-stage">
+                  <circle cx="610" cy="96" r="24" />
+                  <text x="650" y="91">Прайм-тайм для</text>
+                  <text x="650" y="123">инвестирования</text>
+                  <text class="age-range" x="682" y="171">~45 до 70+</text>
+                </g>
+
+                <g class="curves" id="curves"></g>
+
+                <g class="cursor-layer">
+                  <line id="ageMarker" class="age-marker" x1="412" y1="52" x2="412" y2="472" />
+                  <circle id="markerDot" class="marker-dot" cx="412" cy="255" r="7" />
+                </g>
+
+                <g class="x-axis" id="xAxis"></g>
+                <text class="x-title" x="455" y="565">ВОЗРАСТ</text>
+              </svg>
+            </div>
+
+            <aside class="side-note">
+              <p>Предприниматели превращают идеи в компании.</p>
+              <p>Инвесторы превращают капитал в совокупные результаты.</p>
+              <p>Разные пути. Одно и то же преимущество сложного процента.</p>
+            </aside>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
