@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "activeHypothesisId": "bill_tracker_artifact_click_v1",
+  "hypotheses": [
+    {
+      "id": "bill_tracker_artifact_click_v1",
+      "status": "active",
+      "owner": "startaper",
+      "sceneId": "bill_tracker_workbench",
+      "productSlug": "free-bill-tracker-template",
+      "targetUrl": "/free-bill-tracker-template/",
+      "weight": 1,
+      "transition": "artifact_click",
+      "transitionTargets": ["artifact", "mini_user_signal"],
+      "successEvents": [
+        "pixel_transition_click",
+        "bill_tracker_qualified_completion",
+        "bill_tracker_export_intent",
+        "bill_tracker_paid_cta_click"
+      ],
+      "interactionRules": {
+        "emptyWorldClick": "nudge_current_phase",
+        "artifactClick": "transition",
+        "miniUserClick": "transition",
+        "actorClick": "reaction_only",
+        "restart": "never_on_single_click"
+      },
+      "killRule": {
+        "metric": "pixel_transition_click",
+        "threshold": 0,
+        "afterSceneCompletions": 200,
+        "action": "try_next_transition_hypothesis"
+      }
+    }
+  ]
+}

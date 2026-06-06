@@ -16,9 +16,12 @@ const state = {
   renderStarted: false,
   characters: [],
   actions: {},
+  experiment: null,
   scene: null,
   actors: [],
-  artifact: { ready: false, x: 0, y: 0, w: 0, h: 0, pulse: 0 }
+  artifact: { ready: false, x: 0, y: 0, w: 0, h: 0, pulse: 0 },
+  nudge: { until: 0, x: 0, y: 0, phase: "idle", startedAt: 0 },
+  miniUsers: []
 };
 
 function track(name, params = {}) {
@@ -30,6 +33,22 @@ function track(name, params = {}) {
       ...params
     });
   }
+}
+
+function trackOnce(key, name, params = {}) {
+  if (state.tracked.has(key)) return;
+  state.tracked.add(key);
+  track(name, params);
+}
+
+function eventParams(params = {}) {
+  return {
+    scene_id: state.scene?.id,
+    hypothesis_id: state.experiment?.id,
+    product_slug: state.experiment?.productSlug || state.scene?.productSlug,
+    target_url: state.experiment?.targetUrl || state.scene?.exitUrl,
+    ...params
+  };
 }
 
 async function readJson(path) {
@@ -98,6 +117,10 @@ function sceneLength() {
   return state.scene?.duration || 14800;
 }
 
+function firstActorAt() {
+  return Math.min(...state.actors.map((actor) => actor.visibleFrom ?? actor.timeline?.[0]?.at ?? 0));
+}
+
 function sceneTime(now) {
   const length = sceneLength();
   if (REDUCED_MOTION) {
@@ -105,6 +128,91 @@ function sceneTime(now) {
     return Math.min(now - state.start, revealAt + 3600);
   }
   return (now - state.start) % length;
+}
+
+function selectHypothesis(experimentData, sceneData) {
+  const hypotheses = experimentData?.hypotheses || [];
+  const activeId = experimentData?.activeHypothesisId;
+  const explicit = hypotheses.find((item) => item.id === activeId && item.status === "active");
+  const active = explicit || hypotheses.find((item) => item.status === "active") || null;
+  if (active) return active;
+  const scene = (sceneData.scenes || []).find((item) => item.id === sceneData.defaultScene) || sceneData.scenes[0];
+  return {
+    id: "default_scene_transition",
+    sceneId: scene?.id,
+    productSlug: scene?.productSlug,
+    targetUrl: scene?.exitUrl,
+    transition: "artifact_click",
+    transitionTargets: ["artifact"]
+  };
+}
+
+function nudgePhase(t) {
+  const story = state.scene?.story || {};
+  const revealAt = state.scene?.artifact?.revealAt || 17600;
+  if (state.artifact.ready || t >= revealAt) return "artifact_focus";
+  if (t < firstActorAt()) return "summon";
+  if (t < (story.blueprintAt || 5600)) return "sort_problem";
+  if (t < (story.machineAt || 10400)) return "plan_blueprint";
+  if (t < revealAt) return "build_test";
+  return "artifact_focus";
+}
+
+function pullNextBeatCloser(t) {
+  const story = state.scene?.story || {};
+  const beats = [
+    firstActorAt(),
+    story.blueprintAt,
+    story.machineAt,
+    story.testAt,
+    state.scene?.artifact?.revealAt,
+    story.feedbackAt,
+    story.nextSignalAt
+  ].filter((beat) => Number.isFinite(beat) && beat > t + 900);
+  if (!beats.length) return 0;
+  const next = Math.min(...beats);
+  const jump = clamp(next - t - 900, 0, 850);
+  state.start -= jump;
+  return jump;
+}
+
+function nudgeWorld(point, now) {
+  const t = sceneTime(now);
+  const phase = nudgePhase(t);
+  const jumpMs = phase === "artifact_focus" ? 0 : pullNextBeatCloser(t);
+  state.nudge = {
+    until: now + 1250,
+    x: point.x,
+    y: point.y,
+    phase,
+    startedAt: now
+  };
+
+  if (phase === "artifact_focus") {
+    track("pixel_artifact_focus", eventParams({ interaction_phase: phase }));
+  } else {
+    track("pixel_table_nudge", eventParams({ interaction_phase: phase, accelerated_ms: jumpMs }));
+  }
+}
+
+function transitionTargetUrl() {
+  return state.experiment?.targetUrl || state.scene?.exitUrl || "/";
+}
+
+function transitionProductSlug() {
+  return state.experiment?.productSlug || state.scene?.productSlug || "";
+}
+
+function transitionToProduct(type) {
+  const targetUrl = transitionTargetUrl();
+  const params = eventParams({
+    transition_type: type,
+    target_url: targetUrl,
+    product_slug: transitionProductSlug()
+  });
+  track("pixel_transition_click", params);
+  track("product_exit", params);
+  window.location.href = targetUrl;
 }
 
 function actorSnapshot(actor, now) {
@@ -342,6 +450,31 @@ function drawStoryProps(now) {
   drawNextSignal(t, now);
 }
 
+function drawNudge(now) {
+  if (now >= state.nudge.until) return;
+  const alpha = clamp((state.nudge.until - now) / 900, 0, 1);
+  const age = now - state.nudge.startedAt;
+  const phase = state.nudge.phase;
+  const focusArtifact = phase === "artifact_focus";
+  const x = focusArtifact ? state.artifact.x + state.artifact.w / 2 : state.nudge.x;
+  const y = focusArtifact ? state.artifact.y + state.artifact.h / 2 : state.nudge.y;
+  const radius = 18 + age / 18;
+
+  CTX.save();
+  CTX.globalAlpha = alpha * 0.56;
+  CTX.strokeStyle = focusArtifact ? "#ffe19a" : "#8fc7ff";
+  CTX.lineWidth = 4;
+  CTX.beginPath();
+  CTX.arc(x, y, radius, 0, Math.PI * 2);
+  CTX.stroke();
+  CTX.globalAlpha = alpha;
+  for (let i = 0; i < 7; i += 1) {
+    const angle = age / 150 + i * 0.9;
+    drawPixelRect(x + Math.cos(angle) * (radius + 12), y + Math.sin(angle) * (radius * 0.4 + 8), 4, 4, focusArtifact ? "#ffe19a" : "#8fc7ff");
+  }
+  CTX.restore();
+}
+
 function drawArtifact(now) {
   const revealAt = state.scene.artifact.revealAt || 9400;
   const t = sceneTime(now);
@@ -370,8 +503,9 @@ function drawArtifact(now) {
     return;
   }
 
-  if (!state.tracked.has("artifact_reveal")) track("artifact_reveal", { product: state.scene.productSlug });
-  const glow = 0.18 + state.artifact.pulse * 0.16;
+  trackOnce("pixel_artifact_reveal", "pixel_artifact_reveal", eventParams({ transition_type: state.experiment?.transition || "artifact_click" }));
+  const focused = now < state.nudge.until && state.nudge.phase === "artifact_focus";
+  const glow = 0.18 + state.artifact.pulse * 0.16 + (focused ? 0.22 : 0);
   CTX.globalAlpha = glow;
   CTX.fillStyle = "#ffd36f";
   CTX.beginPath();
@@ -442,11 +576,11 @@ function drawMiniUser(x, y, color, signal) {
   }
 }
 
-function drawMiniUsers(now) {
+function miniUserSnapshots(now) {
   const t = sceneTime(now);
   const feedbackAt = state.scene.story?.feedbackAt || 19600;
   const alpha = fadeIn(t, feedbackAt, 700) * fadeOut(t, 26300, 1000);
-  if (alpha <= 0) return;
+  if (alpha <= 0) return [];
 
   const baseY = state.height * 0.82;
   const destinations = [
@@ -454,20 +588,63 @@ function drawMiniUsers(now) {
     { start: state.width + 24, x: state.width * 0.54, color: "#f3ead2", signal: "coin", delay: 520 },
     { start: state.width * 0.5, x: state.width * 0.49, color: "#75d67d", signal: "none", delay: 980 }
   ];
-  CTX.globalAlpha = alpha;
-  for (const item of destinations) {
+  return destinations.map((item) => {
     const local = ease(clamp((t - feedbackAt - item.delay) / 1600, 0, 1));
-    const x = item.start + (item.x - item.start) * local;
-    const y = baseY + Math.sin((now + item.delay) / 180) * 3;
-    drawMiniUser(x, y, item.color, item.signal);
-  }
+    return {
+      x: item.start + (item.x - item.start) * local,
+      y: baseY + Math.sin((now + item.delay) / 180) * 3,
+      color: item.color,
+      signal: item.signal,
+      alpha
+    };
+  });
+}
+
+function drawMiniUsers(now) {
+  const snapshots = miniUserSnapshots(now);
+  if (!snapshots.length) return;
+
+  CTX.globalAlpha = snapshots[0].alpha;
+  for (const item of snapshots) drawMiniUser(item.x, item.y, item.color, item.signal);
   CTX.globalAlpha = 1;
 }
 
+function miniUserContains(point, now) {
+  const targets = state.experiment?.transitionTargets || [];
+  if (!targets.includes("mini_user_signal")) return false;
+  return miniUserSnapshots(now).some((user) => {
+    const dx = point.x - user.x;
+    const dy = point.y - user.y;
+    return Math.sqrt(dx * dx + dy * dy) < 32;
+  });
+}
+
+function trackStoryProgress(now) {
+  const t = sceneTime(now);
+  const story = state.scene?.story || {};
+  if (t >= (story.problemAt || 0)) {
+    trackOnce("pixel_problem_seen", "pixel_problem_seen", eventParams());
+  }
+  for (const actor of state.actors) {
+    const visibleFrom = actor.visibleFrom ?? actor.timeline?.[0]?.at ?? 0;
+    if (t >= visibleFrom) {
+      trackOnce(`pixel_actor_enter:${actor.character}`, "pixel_actor_enter", eventParams({
+        character: actor.character,
+        actor_role: actor.role || ""
+      }));
+    }
+  }
+  if (t >= (story.nextSignalAt || sceneLength() - 1800)) {
+    trackOnce("pixel_scene_complete", "pixel_scene_complete", eventParams());
+  }
+}
+
 function render(now) {
+  trackStoryProgress(now);
   drawBackground(now);
   drawStoryProps(now);
   drawArtifact(now);
+  drawNudge(now);
   const snapshots = state.actors
     .map((actor) => actorSnapshot(actor, now))
     .filter(Boolean)
@@ -525,21 +702,24 @@ function onPointerLeave() {
 
 function onPointerDown(event) {
   const point = pointFromEvent(event);
+  const now = performance.now();
   state.pointer = { ...point, active: true };
   if (artifactContains(point)) {
-    track("product_exit", { product: state.scene.productSlug, exit_url: state.scene.exitUrl });
-    window.location.href = state.scene.exitUrl;
+    transitionToProduct("artifact_click");
     return;
   }
-  const actor = nearestActor(point.x, point.y, performance.now());
+  if (miniUserContains(point, now)) {
+    transitionToProduct("mini_user_signal");
+    return;
+  }
+  const actor = nearestActor(point.x, point.y, now);
   if (actor) {
-    state.poke.set(actor.character, performance.now() + 1150);
+    state.poke.set(actor.character, now + 1150);
     const action = Math.random() > 0.5 ? "character_poke" : "character_hop";
-    track(action, { character: actor.character });
+    track(action, eventParams({ character: actor.character }));
     return;
   }
-  state.start = performance.now();
-  track("world_restart");
+  nudgeWorld(point, now);
 }
 
 async function boot() {
@@ -549,16 +729,21 @@ async function boot() {
   CANVAS.addEventListener("pointermove", onPointerMove);
   CANVAS.addEventListener("pointerleave", onPointerLeave);
   CANVAS.addEventListener("pointerdown", onPointerDown);
-  EXIT.addEventListener("click", () => track("product_exit", { product: state.scene.productSlug, exit_url: state.scene.exitUrl }));
+  EXIT.addEventListener("click", () => track("product_exit", eventParams({ transition_type: "artifact_link" })));
 
-  const [characterData, actionData, sceneData] = await Promise.all([
+  const [characterData, actionData, sceneData, experimentData] = await Promise.all([
     readJson("/assets/pixel-world/characters.json"),
     readJson("/assets/pixel-world/actions.json"),
-    readJson("/assets/pixel-world/scenes.json")
+    readJson("/assets/pixel-world/scenes.json"),
+    readJson("/assets/pixel-world/experiments.json")
   ]);
   state.actions = actionData.actions || {};
-  state.scene = (sceneData.scenes || []).find((scene) => scene.id === sceneData.defaultScene) || sceneData.scenes[0];
+  state.experiment = selectHypothesis(experimentData, sceneData);
+  state.scene = (sceneData.scenes || []).find((scene) => scene.id === state.experiment.sceneId) ||
+    (sceneData.scenes || []).find((scene) => scene.id === sceneData.defaultScene) ||
+    sceneData.scenes[0];
   state.actors = state.scene.actors || [];
+  EXIT.href = transitionTargetUrl();
   state.characters = (characterData.characters || []).map((character) => ({ ...character, loadedFrames: {} }));
   startRender();
   for (const character of state.characters) {
@@ -570,7 +755,8 @@ async function boot() {
       });
     }
   }
-  track("pixel_world_view", { scene: state.scene.id });
+  trackOnce("pixel_world_view", "pixel_world_view", eventParams());
+  trackOnce("pixel_scene_start", "pixel_scene_start", eventParams({ transition_type: state.experiment.transition || "artifact_click" }));
 }
 
 boot().catch((error) => {
