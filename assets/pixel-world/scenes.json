@@ -7,6 +7,10 @@
       "productSlug": "free-bill-tracker-template",
       "exitUrl": "/free-bill-tracker-template/",
       "duration": 28000,
+      "loop": {
+        "mode": "working_loop",
+        "startAt": 10400
+      },
       "artifact": {
         "id": "bill_tracker",
         "kind": "paper_stack",

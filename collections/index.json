@@ -19,6 +19,23 @@
         "third party tool safety check"
       ],
       "title": "Agent Skills And Tooling"
+    },
+    {
+      "entry_count": 1,
+      "fallback": "If this tracker does not fit, compare FinMasters, Vertex42, and FinancialAha templates and choose the one that matches the user's spreadsheet format.",
+      "json_url": "https://dayonebuilder.online/collections/free-bill-tracker-template.json",
+      "kind": "product_module",
+      "page_url": "https://dayonebuilder.online/free-bill-tracker-template/",
+      "proof_signal": "Static public module with versioned manifest, CFPB bill-calendar source link, browser save intent, CSV export intent, paid CTA telemetry, and no-login core workflow.",
+      "slug": "free-bill-tracker-template",
+      "task_aliases": [
+        "free bill tracker template",
+        "monthly bill tracker",
+        "household bill tracker",
+        "bill calendar spreadsheet",
+        "track monthly bills"
+      ],
+      "title": "Free Bill Tracker Template"
     }
   ],
   "discovery_flow": [

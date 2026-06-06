@@ -1,6 +1,16 @@
 {
   "version": 1,
   "activeHypothesisId": "bill_tracker_artifact_click_v1",
+  "persistentProjectLinks": [
+    {
+      "id": "bill_tracker_workbench",
+      "productSlug": "free-bill-tracker-template",
+      "targetUrl": "/free-bill-tracker-template/",
+      "icon": "paper_stack",
+      "slot": 0,
+      "source": "built_project"
+    }
+  ],
   "hypotheses": [
     {
       "id": "bill_tracker_artifact_click_v1",

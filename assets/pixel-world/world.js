@@ -1,6 +1,7 @@
 const ROOT = document.getElementById("pixel-world-root");
 const CANVAS = document.getElementById("pixel-world-canvas");
 const EXIT = document.getElementById("pixel-world-exit");
+const PROJECT_LINKS = document.getElementById("pixel-project-links");
 const CTX = CANVAS.getContext("2d", { alpha: false });
 const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -17,6 +18,7 @@ const state = {
   characters: [],
   actions: {},
   experiment: null,
+  projectLinks: [],
   scene: null,
   actors: [],
   artifact: { ready: false, x: 0, y: 0, w: 0, h: 0, pulse: 0 },
@@ -90,6 +92,7 @@ function resize() {
   CANVAS.style.height = `${height}px`;
   CTX.setTransform(dpr, 0, 0, dpr, 0, 0);
   CTX.imageSmoothingEnabled = false;
+  updateProjectLinkHitboxes();
 }
 
 function characterById(id) {
@@ -123,11 +126,15 @@ function firstActorAt() {
 
 function sceneTime(now) {
   const length = sceneLength();
+  const elapsed = now - state.start;
   if (REDUCED_MOTION) {
     const revealAt = state.scene?.artifact?.revealAt || Math.round(length * 0.64);
-    return Math.min(now - state.start, revealAt + 3600);
+    return Math.min(elapsed, revealAt + 3600);
   }
-  return (now - state.start) % length;
+  if (elapsed <= length) return elapsed;
+  const loopStart = state.scene?.loop?.startAt || 0;
+  const loopLength = Math.max(1, length - loopStart);
+  return loopStart + ((elapsed - length) % loopLength);
 }
 
 function selectHypothesis(experimentData, sceneData) {
@@ -213,6 +220,103 @@ function transitionToProduct(type) {
   track("pixel_transition_click", params);
   track("product_exit", params);
   window.location.href = targetUrl;
+}
+
+function projectLinksFromExperiments(experimentData, activeHypothesis) {
+  const configured = experimentData?.persistentProjectLinks || [];
+  if (configured.length) return configured;
+  return [{
+    id: activeHypothesis?.id || "default_project",
+    productSlug: activeHypothesis?.productSlug,
+    targetUrl: activeHypothesis?.targetUrl,
+    icon: "paper_stack",
+    slot: 0,
+    source: "active_hypothesis"
+  }].filter((link) => link.targetUrl);
+}
+
+function projectDockSlots() {
+  return state.projectLinks.map((link, index) => {
+    const slot = Number.isFinite(link.slot) ? link.slot : index;
+    const right = state.width < 520 ? 22 : 34;
+    const top = state.width < 520 ? 84 : 98;
+    const gap = state.width < 520 ? 58 : 64;
+    const w = state.width < 520 ? 50 : 56;
+    const h = state.width < 520 ? 48 : 52;
+    return {
+      ...link,
+      x: state.width - right - w,
+      y: top + slot * gap,
+      w,
+      h
+    };
+  });
+}
+
+function updateProjectLinkHitboxes() {
+  const slots = projectDockSlots();
+  const anchors = PROJECT_LINKS ? [...PROJECT_LINKS.querySelectorAll("[data-project-link]")] : [];
+  for (const anchor of anchors) {
+    const slot = slots.find((item) => item.id === anchor.dataset.projectLink);
+    if (!slot) continue;
+    anchor.style.left = `${slot.x}px`;
+    anchor.style.top = `${slot.y}px`;
+    anchor.style.width = `${slot.w}px`;
+    anchor.style.height = `${slot.h}px`;
+  }
+}
+
+function setupProjectLinks() {
+  if (!PROJECT_LINKS) return;
+  PROJECT_LINKS.textContent = "";
+  for (const link of state.projectLinks) {
+    const anchor = document.createElement("a");
+    anchor.className = "pixel-project-link";
+    anchor.href = link.targetUrl;
+    anchor.dataset.projectLink = link.id;
+    anchor.setAttribute("aria-label", `Open ${link.productSlug || "project"}`);
+    anchor.addEventListener("click", () => {
+      track("pixel_transition_click", eventParams({
+        transition_type: "project_dock",
+        product_slug: link.productSlug,
+        target_url: link.targetUrl,
+        project_link_id: link.id
+      }));
+    });
+    PROJECT_LINKS.append(anchor);
+  }
+  updateProjectLinkHitboxes();
+}
+
+function drawProjectIcon(slot, now) {
+  const pulse = (Math.sin(now / 420 + slot.slot) + 1) / 2;
+  const x = slot.x;
+  const y = slot.y;
+  const w = slot.w;
+  const h = slot.h;
+  CTX.save();
+  CTX.globalAlpha = 0.88;
+  drawPixelRect(x - 6, y + h - 8, w + 12, 8, "#161d27");
+  drawPixelRect(x, y + 8, w, h - 12, "#2b3444");
+  drawPixelRect(x + 6, y + 2, w - 12, 10, "#3d2f34");
+  drawPixelRect(x + 11, y + 13, w - 22, h - 24, "#f3ead2");
+  drawPixelRect(x + 11, y + 13, w - 22, 6, "#fff8dd");
+  drawPixelRect(x + 16, y + 24, w - 32, 4, "#7083a3");
+  drawPixelRect(x + 16, y + 33, w - 40, 4, "#d69a41");
+  drawPixelRect(x + w - 18, y + 6, 12, 12, "#75d67d");
+  CTX.globalAlpha = 0.22 + pulse * 0.14;
+  CTX.beginPath();
+  CTX.arc(x + w / 2, y + h / 2, Math.max(w, h) * 0.72, 0, Math.PI * 2);
+  CTX.fillStyle = "#ffd36f";
+  CTX.fill();
+  CTX.restore();
+}
+
+function drawProjectDock(now) {
+  const slots = projectDockSlots();
+  if (!slots.length) return;
+  updateProjectLinkHitboxes();
+  for (const slot of slots) drawProjectIcon(slot, now);
 }
 
 function actorSnapshot(actor, now) {
@@ -651,6 +755,7 @@ function render(now) {
     .sort((a, b) => a.y - b.y);
   for (const snapshot of snapshots) drawCharacter(snapshot);
   drawMiniUsers(now);
+  drawProjectDock(now);
   requestAnimationFrame(render);
 }
 
@@ -743,6 +848,8 @@ async function boot() {
     (sceneData.scenes || []).find((scene) => scene.id === sceneData.defaultScene) ||
     sceneData.scenes[0];
   state.actors = state.scene.actors || [];
+  state.projectLinks = projectLinksFromExperiments(experimentData, state.experiment);
+  setupProjectLinks();
   EXIT.href = transitionTargetUrl();
   state.characters = (characterData.characters || []).map((character) => ({ ...character, loadedFrames: {} }));
   startRender();

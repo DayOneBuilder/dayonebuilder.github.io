@@ -31,6 +31,8 @@ body {
 }
 
 #pixel-world-canvas {
+  position: relative;
+  z-index: 0;
   display: block;
   width: 100vw;
   height: 100svh;
@@ -40,8 +42,31 @@ body {
   cursor: pointer;
 }
 
+.pixel-project-links {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.pixel-project-link {
+  position: fixed;
+  width: 56px;
+  height: 52px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: auto;
+}
+
+.pixel-project-link:focus-visible {
+  opacity: 1;
+  outline: 3px solid var(--world-ink);
+  outline-offset: 4px;
+}
+
 .pixel-world-exit {
   position: fixed;
+  z-index: 4;
   left: 50%;
   top: 50%;
   width: 88px;
