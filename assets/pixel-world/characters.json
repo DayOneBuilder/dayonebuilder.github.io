@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "frameSize": 224,
+  "defaultAnchor": { "x": 0.5, "y": 0.86 },
+  "requiredPoses": ["idle", "wave", "hop", "reveal"],
+  "characters": [
+    {
+      "id": "maker_spark",
+      "role": "builder",
+      "scale": 0.62,
+      "anchor": { "x": 0.5, "y": 0.9 },
+      "frames": {
+        "idle": "/assets/pixel-world/characters/maker_spark/idle.png",
+        "wave": "/assets/pixel-world/characters/maker_spark/wave.png",
+        "hop": "/assets/pixel-world/characters/maker_spark/hop.png",
+        "reveal": "/assets/pixel-world/characters/maker_spark/reveal.png"
+      },
+      "fallbacks": {
+        "walk": "idle",
+        "build": "wave",
+        "carry": "wave",
+        "surprised": "hop"
+      }
+    },
+    {
+      "id": "blueprint_capsule",
+      "role": "planner",
+      "scale": 0.58,
+      "anchor": { "x": 0.5, "y": 0.88 },
+      "frames": {
+        "idle": "/assets/pixel-world/characters/blueprint_capsule/idle.png",
+        "wave": "/assets/pixel-world/characters/blueprint_capsule/wave.png",
+        "hop": "/assets/pixel-world/characters/blueprint_capsule/hop.png",
+        "reveal": "/assets/pixel-world/characters/blueprint_capsule/reveal.png"
+      },
+      "fallbacks": {
+        "walk": "idle",
+        "build": "wave",
+        "carry": "wave",
+        "surprised": "hop"
+      }
+    },
+    {
+      "id": "toolbox_block",
+      "role": "carrier",
+      "scale": 0.56,
+      "anchor": { "x": 0.5, "y": 0.88 },
+      "frames": {
+        "idle": "/assets/pixel-world/characters/toolbox_block/idle.png",
+        "wave": "/assets/pixel-world/characters/toolbox_block/wave.png",
+        "hop": "/assets/pixel-world/characters/toolbox_block/hop.png",
+        "reveal": "/assets/pixel-world/characters/toolbox_block/reveal.png"
+      },
+      "fallbacks": {
+        "walk": "idle",
+        "build": "wave",
+        "carry": "wave",
+        "surprised": "hop"
+      }
+    },
+    {
+      "id": "command_block",
+      "role": "operator",
+      "scale": 0.54,
+      "anchor": { "x": 0.5, "y": 0.88 },
+      "frames": {
+        "idle": "/assets/pixel-world/characters/command_block/idle.png",
+        "wave": "/assets/pixel-world/characters/command_block/wave.png",
+        "hop": "/assets/pixel-world/characters/command_block/hop.png",
+        "reveal": "/assets/pixel-world/characters/command_block/reveal.png"
+      },
+      "fallbacks": {
+        "walk": "idle",
+        "build": "wave",
+        "carry": "wave",
+        "surprised": "hop"
+      }
+    }
+  ]
+}

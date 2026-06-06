@@ -1,0 +1,83 @@
+:root {
+  color-scheme: dark;
+  --world-bg: #252933;
+  --world-ink: #f8f3d7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-width: 320px;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 58%, rgba(255, 216, 128, 0.08), transparent 24%),
+    radial-gradient(circle at 18% 12%, rgba(89, 164, 255, 0.11), transparent 24%),
+    linear-gradient(180deg, #30343f 0%, #222733 58%, #181b23 100%);
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+#pixel-world-root {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+#pixel-world-canvas {
+  display: block;
+  width: 100vw;
+  height: 100svh;
+  min-height: 100vh;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  cursor: pointer;
+}
+
+.pixel-world-exit {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 88px;
+  height: 72px;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pixel-world-exit.is-ready {
+  pointer-events: auto;
+}
+
+.pixel-world-exit:focus-visible {
+  opacity: 1;
+  outline: 3px solid var(--world-ink);
+  outline-offset: 5px;
+}
+
+.pixel-world-noscript {
+  position: fixed;
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  min-height: 42px;
+  padding: 10px 14px;
+  border: 1px solid rgba(248, 243, 215, 0.35);
+  border-radius: 8px;
+  color: var(--world-ink);
+  background: rgba(24, 27, 35, 0.9);
+  text-decoration: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #pixel-world-canvas {
+    cursor: default;
+  }
+}

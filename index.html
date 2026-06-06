@@ -2,247 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DayOneBuilder | Public product lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>DayOneBuilder</title>
     <meta
       name="description"
-      content="DayOneBuilder is a public product lab shipping small useful tools, then keeping only the ones that show real use, clear demand, and a believable paid artifact path."
+      content="A tiny living pixel world where little builders make useful things."
     />
     <link rel="canonical" href="https://dayonebuilder.online/" />
+    <link rel="preload" href="/assets/pixel-world/characters/maker_spark/idle.png" as="image" />
+    <link rel="stylesheet" href="/assets/pixel-world/world.css" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() { window.dataLayer.push(arguments); }
+      function gtag(){ dataLayer.push(arguments); }
       gtag("js", new Date());
       gtag("config", "G-KQMLYS3VVE");
-      function trackLabClick(label) {
-        if (typeof window.gtag === "function") {
-          gtag("event", "product_lab_click", {
-            event_category: "dayonebuilder_product_lab",
-            link_label: label
-          });
-        }
-      }
     </script>
-    <style>
-      :root {
-        --bg: #0b0d0c;
-        --panel: #121614;
-        --panel-2: #171b1f;
-        --ink: #fbfaf5;
-        --text: #d6d4ca;
-        --muted: #95938a;
-        --line: rgba(251, 250, 245, 0.14);
-        --strong: rgba(251, 250, 245, 0.28);
-        --green: #75d67d;
-        --blue: #8fc7ff;
-        --amber: #f2bd59;
-        --max: 1080px;
-      }
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        color: var(--text);
-        background: var(--bg);
-        font: 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      }
-      a { color: inherit; text-decoration: none; }
-      .wrap { width: min(calc(100% - 32px), var(--max)); margin: 0 auto; }
-      .nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 18px;
-        padding: 18px 0;
-        border-bottom: 1px solid var(--line);
-      }
-      .brand { color: var(--ink); font-weight: 850; }
-      .links { display: flex; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: 13px; }
-      .links a:hover { color: var(--ink); }
-      main { padding-bottom: 48px; }
-      .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
-        gap: 26px;
-        align-items: center;
-        padding: 46px 0 28px;
-      }
-      .eyebrow {
-        color: var(--green);
-        font-size: 12px;
-        font-weight: 850;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-      h1, h2, h3 { margin: 0; color: var(--ink); line-height: 1.08; }
-      h1 { margin-top: 12px; max-width: 11ch; font-size: clamp(2.4rem, 7vw, 5rem); }
-      h2 { font-size: clamp(1.45rem, 3vw, 2.2rem); }
-      h3 { font-size: 1.08rem; }
-      p { margin: 0; }
-      .lead { margin-top: 16px; max-width: 64ch; color: #e9e5d9; font-size: 1.08rem; }
-      .promise {
-        margin-top: 18px;
-        display: inline-flex;
-        width: fit-content;
-        max-width: 100%;
-        border: 1px solid rgba(117, 214, 125, 0.36);
-        border-radius: 999px;
-        padding: 7px 11px;
-        color: #d9f9dd;
-        background: rgba(117, 214, 125, 0.08);
-        font-weight: 750;
-      }
-      .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 42px;
-        padding: 0 14px;
-        border-radius: 8px;
-        border: 1px solid var(--strong);
-        background: var(--ink);
-        color: #0b0d0c;
-        font-weight: 850;
-      }
-      .btn.secondary { background: transparent; color: var(--ink); }
-      .proof {
-        display: grid;
-        gap: 10px;
-        padding: 16px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: linear-gradient(145deg, var(--panel), var(--panel-2));
-      }
-      .proof-row {
-        display: grid;
-        grid-template-columns: 82px minmax(0, 1fr);
-        gap: 10px;
-        align-items: start;
-        padding: 10px;
-        border: 1px solid rgba(251, 250, 245, 0.1);
-        border-radius: 8px;
-        background: rgba(251, 250, 245, 0.03);
-      }
-      .proof-row strong { color: var(--ink); }
-      .proof-row span { color: var(--muted); }
-      .section { padding: 28px 0 0; }
-      .section-head {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 20px;
-        margin-bottom: 14px;
-      }
-      .section-head p { max-width: 58ch; color: var(--muted); }
-      .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
-      .card {
-        display: grid;
-        gap: 12px;
-        min-height: 236px;
-        padding: 16px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--panel);
-      }
-      .card p { color: var(--muted); }
-      .tags { display: flex; flex-wrap: wrap; gap: 8px; }
-      .tags span {
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        padding: 5px 8px;
-        color: var(--muted);
-        font-size: 12px;
-      }
-      .tags .hot { color: var(--amber); border-color: rgba(242, 189, 89, 0.38); }
-      .tags .live { color: var(--blue); border-color: rgba(143, 199, 255, 0.36); }
-      .card .btn { align-self: end; width: fit-content; }
-      .rule {
-        margin-top: 18px;
-        padding: 14px;
-        border-left: 3px solid var(--amber);
-        background: rgba(242, 189, 89, 0.08);
-        color: #efe7d6;
-      }
-      footer { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); color: var(--muted); }
-      @media (max-width: 860px) {
-        .hero, .grid { grid-template-columns: 1fr; }
-        .nav, .section-head { align-items: start; flex-direction: column; }
-      }
-      @media (max-width: 560px) {
-        .wrap { width: min(calc(100% - 24px), var(--max)); }
-        .hero { padding-top: 34px; }
-        .links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 14px; }
-        .btn { width: 100%; }
-        .promise { border-radius: 8px; }
-        .proof-row { grid-template-columns: 1fr; }
-      }
-    </style>
   </head>
   <body>
-    <header class="wrap nav">
-      <a class="brand" href="/">DayOneBuilder</a>
-      <nav class="links" aria-label="Primary navigation">
-        <a href="/products/">Products</a>
-        <a href="/free-rental-property-inspection-checklist-template-uk/">Current test</a>
-        <a href="/free-bill-tracker-template/">Bill tracker</a>
-        <a href="/llms.txt">Agent notes</a>
-      </nav>
-    </header>
-
-    <main class="wrap">
-      <section class="hero" aria-labelledby="hero-title">
-        <div>
-          <div class="eyebrow">Public product lab</div>
-          <h1 id="hero-title">Useful first.</h1>
-          <p class="lead">DayOneBuilder ships narrow tools for real jobs, watches whether people use them, and only keeps pushing the ones with clear demand and a paid artifact path.</p>
-          <div class="promise">Useful first. Paid only when demand is real.</div>
-          <div class="actions">
-            <a class="btn" href="/free-rental-property-inspection-checklist-template-uk/" onclick="trackLabClick('current_rental_inspection')">Open current test</a>
-            <a class="btn secondary" href="/products/" onclick="trackLabClick('products_index')">See product tests</a>
-          </div>
-        </div>
-        <aside class="proof" aria-label="Product lab operating rules">
-          <div class="proof-row"><strong>Demand</strong><span>Exact search or workflow evidence before deeper build work.</span></div>
-          <div class="proof-row"><strong>Use</strong><span>The page must help immediately: calculate, generate, export, copy, or save.</span></div>
-          <div class="proof-row"><strong>Money</strong><span>A paid workbook, template, or custom artifact is tested only after the free path is useful.</span></div>
-        </aside>
-      </section>
-
-      <section class="section" aria-labelledby="current-tests">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Current product tests</div>
-            <h2 id="current-tests">Small tools under paid-artifact validation.</h2>
-          </div>
-          <p>This is not a broad catalog. Weak pages get archived or deprioritized; the homepage points to tests with a concrete user job and measurement path.</p>
-        </div>
-        <div class="grid">
-          <article class="card">
-            <div class="tags"><span class="hot">current focus</span><span>checklist</span></div>
-            <h3>Free rental property inspection checklist template UK</h3>
-            <p>Create a move-in or move-out inspection checklist, mark issue priority, and export a shareable record.</p>
-            <a class="btn secondary" href="/free-rental-property-inspection-checklist-template-uk/" onclick="trackLabClick('rental_inspection_card')">Open checklist</a>
-          </article>
-          <article class="card">
-            <div class="tags"><span class="live">live</span><span>calculator</span></div>
-            <h3>Mortgage payoff calculator</h3>
-            <p>Calculate payoff timing from current balance, APR, and monthly payment, then export the result.</p>
-            <a class="btn secondary" href="/mortgage-payoff-calculator-based-on-current-balance/" onclick="trackLabClick('mortgage_card')">Open calculator</a>
-          </article>
-          <article class="card">
-            <div class="tags"><span class="live">live</span><span>tracker</span></div>
-            <h3>Free bill tracker template</h3>
-            <p>Build a monthly bill tracker with browser save, copy, and CSV export before any paid workbook pitch.</p>
-            <a class="btn secondary" href="/free-bill-tracker-template/" onclick="trackLabClick('bill_tracker_card')">Open tracker</a>
-          </article>
-        </div>
-        <p class="rule">A page is not a win because it exists. It has to produce real starts, completions, returns, clicks to the paid path, or revenue intent.</p>
-      </section>
+    <main
+      id="pixel-world-root"
+      data-world="dayonebuilder-living-toy"
+      aria-label="A small pixel world with tiny builders making useful things."
+    >
+      <canvas id="pixel-world-canvas"></canvas>
+      <a
+        id="pixel-world-exit"
+        class="pixel-world-exit"
+        href="/free-bill-tracker-template/"
+        aria-label="Open the tiny thing they built"
+      ></a>
+      <noscript>
+        <a class="pixel-world-noscript" href="/free-bill-tracker-template/">Open the tiny thing</a>
+      </noscript>
     </main>
-
-    <footer class="wrap">
-      <span>DayOneBuilder product lab</span>
-    </footer>
+    <script type="module" src="/assets/pixel-world/world.js"></script>
   </body>
 </html>

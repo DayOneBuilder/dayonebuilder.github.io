@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "actions": {
+    "idle": {
+      "duration": 2200,
+      "pose": "idle",
+      "motion": "breathe"
+    },
+    "wave_at_user": {
+      "duration": 1200,
+      "pose": "wave",
+      "motion": "tiny_sway",
+      "event": "character_poke"
+    },
+    "hop": {
+      "duration": 900,
+      "pose": "hop",
+      "motion": "hop_arc",
+      "event": "character_hop"
+    },
+    "inspect": {
+      "duration": 1800,
+      "pose": "idle",
+      "motion": "lean_in"
+    },
+    "carry": {
+      "duration": 1600,
+      "pose": "wave",
+      "motion": "walk_bob"
+    },
+    "build_artifact": {
+      "duration": 3600,
+      "pose": "wave",
+      "motion": "workbench_bounce",
+      "event": "artifact_build"
+    },
+    "reveal_product": {
+      "duration": 1800,
+      "pose": "reveal",
+      "motion": "proud_reveal",
+      "event": "artifact_reveal"
+    },
+    "sleep": {
+      "duration": 2600,
+      "pose": "idle",
+      "motion": "sleepy_sway"
+    },
+    "surprised": {
+      "duration": 1000,
+      "pose": "hop",
+      "motion": "pop"
+    }
+  }
+}
