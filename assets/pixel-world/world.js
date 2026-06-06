@@ -13,6 +13,7 @@ const state = {
   poke: new Map(),
   tracked: new Set(),
   images: new Map(),
+  renderStarted: false,
   characters: [],
   actions: {},
   scene: null,
@@ -90,7 +91,7 @@ function frameFor(character, pose) {
   const actualPose = character.frames[pose]
     ? pose
     : character.fallbacks?.[pose] || "idle";
-  return character.loadedFrames[actualPose] || character.loadedFrames.idle;
+  return character.loadedFrames[actualPose] || character.loadedFrames.idle || null;
 }
 
 function sceneLength() {
@@ -401,6 +402,7 @@ function drawSparks(cx, cy, now, count) {
 function drawCharacter(snapshot) {
   const { character, pose, x, y, scale, opacity } = snapshot;
   const image = frameFor(character, pose);
+  if (!image) return;
   const size = 224 * scale;
   const anchor = character.anchor || { x: 0.5, y: 0.88 };
   const drawX = Math.round(x - size * anchor.x);
@@ -475,6 +477,12 @@ function render(now) {
   requestAnimationFrame(render);
 }
 
+function startRender() {
+  if (state.renderStarted) return;
+  state.renderStarted = true;
+  requestAnimationFrame(render);
+}
+
 function nearestActor(x, y, now) {
   let best = null;
   let bestDistance = Infinity;
@@ -536,6 +544,7 @@ function onPointerDown(event) {
 
 async function boot() {
   resize();
+  drawBackground(performance.now());
   window.addEventListener("resize", resize);
   CANVAS.addEventListener("pointermove", onPointerMove);
   CANVAS.addEventListener("pointerleave", onPointerLeave);
@@ -548,17 +557,20 @@ async function boot() {
     readJson("/assets/pixel-world/scenes.json")
   ]);
   state.actions = actionData.actions || {};
-  state.characters = await Promise.all((characterData.characters || []).map(async (character) => {
-    const loadedFrames = {};
-    for (const [pose, src] of Object.entries(character.frames || {})) {
-      loadedFrames[pose] = await loadImage(src);
-    }
-    return { ...character, loadedFrames };
-  }));
   state.scene = (sceneData.scenes || []).find((scene) => scene.id === sceneData.defaultScene) || sceneData.scenes[0];
   state.actors = state.scene.actors || [];
+  state.characters = (characterData.characters || []).map((character) => ({ ...character, loadedFrames: {} }));
+  startRender();
+  for (const character of state.characters) {
+    for (const [pose, src] of Object.entries(character.frames || {})) {
+      loadImage(src).then((image) => {
+        character.loadedFrames[pose] = image;
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
+  }
   track("pixel_world_view", { scene: state.scene.id });
-  requestAnimationFrame(render);
 }
 
 boot().catch((error) => {
