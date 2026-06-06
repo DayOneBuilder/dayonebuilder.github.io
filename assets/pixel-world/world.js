@@ -93,19 +93,31 @@ function frameFor(character, pose) {
   return character.loadedFrames[actualPose] || character.loadedFrames.idle;
 }
 
+function sceneLength() {
+  return state.scene?.duration || 14800;
+}
+
 function sceneTime(now) {
-  const length = 14800;
-  if (REDUCED_MOTION) return Math.min(now - state.start, 9800);
+  const length = sceneLength();
+  if (REDUCED_MOTION) {
+    const revealAt = state.scene?.artifact?.revealAt || Math.round(length * 0.64);
+    return Math.min(now - state.start, revealAt + 3600);
+  }
   return (now - state.start) % length;
 }
 
 function actorSnapshot(actor, now) {
   const character = characterById(actor.character);
+  if (!character) return null;
+
   const t = sceneTime(now);
+  const visibleFrom = actor.visibleFrom ?? actor.timeline?.[0]?.at ?? 0;
+  if (t < visibleFrom) return null;
+
   let actionStep = actor.timeline[0];
   let previousPosition = actor.start;
   let lastPosition = actor.start;
-  let nextStepAt = 14800;
+  let nextStepAt = sceneLength();
 
   for (let index = 0; index < actor.timeline.length; index += 1) {
     const step = actor.timeline[index];
@@ -113,7 +125,7 @@ function actorSnapshot(actor, now) {
       actionStep = step;
       previousPosition = lastPosition;
       if (step.to) lastPosition = step.to;
-      nextStepAt = actor.timeline[index + 1]?.at || 14800;
+      nextStepAt = actor.timeline[index + 1]?.at || sceneLength();
     } else {
       nextStepAt = step.at;
       break;
@@ -145,6 +157,7 @@ function actorSnapshot(actor, now) {
     x: x + offset.x,
     y: y + offset.y,
     scale: character.scale * offset.scale * worldScale(),
+    opacity: clamp((t - visibleFrom) / 520, 0, 1),
     local,
     actionId: actionStep.action
   };
@@ -154,18 +167,28 @@ function motionOffset(motion, local, now, seed) {
   const slow = now / 1000 + seed.length * 0.31;
   if (REDUCED_MOTION) return { x: 0, y: 0, scale: 1 };
   switch (motion) {
+    case "enter_slide":
+      return { x: 0, y: -Math.sin(local * Math.PI) * 18, scale: 0.88 + ease(local) * 0.12 };
     case "hop_arc":
       return { x: 0, y: -Math.sin(local * Math.PI) * 46, scale: 1 + Math.sin(local * Math.PI) * 0.05 };
     case "tiny_sway":
       return { x: Math.sin(slow * 6) * 5, y: Math.sin(slow * 9) * 3, scale: 1 };
     case "lean_in":
       return { x: Math.sin(local * Math.PI) * 12, y: Math.sin(local * Math.PI) * 5, scale: 1.02 };
+    case "scan":
+      return { x: Math.sin(slow * 5) * 6, y: Math.cos(slow * 4) * 2, scale: 1.01 };
+    case "sort_bob":
+      return { x: Math.sin(slow * 9) * 8, y: Math.abs(Math.sin(slow * 11)) * -5, scale: 1 };
     case "walk_bob":
       return { x: Math.sin(slow * 14) * 3, y: Math.abs(Math.sin(slow * 14)) * -7, scale: 1 };
     case "workbench_bounce":
       return { x: Math.sin(slow * 18) * 5, y: Math.sin(slow * 24) * 4, scale: 1 };
+    case "test_shake":
+      return { x: Math.sin(slow * 34) * 4, y: Math.sin(slow * 28) * 3, scale: 1 + Math.sin(slow * 18) * 0.02 };
     case "proud_reveal":
       return { x: 0, y: Math.sin(local * Math.PI) * -18, scale: 1 + Math.sin(local * Math.PI) * 0.08 };
+    case "celebrate":
+      return { x: Math.sin(slow * 10) * 5, y: -Math.abs(Math.sin(slow * 8)) * 13, scale: 1.04 };
     case "sleepy_sway":
       return { x: Math.sin(slow * 2) * 2, y: Math.cos(slow * 2) * 2, scale: 1 };
     case "pop":
@@ -218,10 +241,111 @@ function drawBackground(now) {
   drawPixelRect(benchX + 170, benchY - 12, 52, 10, "#8fb7ff");
 }
 
+function fadeIn(t, start, duration = 700) {
+  return clamp((t - start) / duration, 0, 1);
+}
+
+function fadeOut(t, start, duration = 700) {
+  return 1 - clamp((t - start) / duration, 0, 1);
+}
+
+function drawProblemPile(t) {
+  const story = state.scene.story || {};
+  const start = story.problemAt || 0;
+  const alpha = fadeIn(t, start, 500) * fadeOut(t, 13400, 1600);
+  if (alpha <= 0) return;
+
+  const x = state.width * 0.45;
+  const y = state.height * 0.64;
+  CTX.globalAlpha = alpha;
+  drawPixelRect(x - 82, y - 18, 38, 30, "#f2e7c9");
+  drawPixelRect(x - 77, y - 12, 28, 4, "#6e7f9e");
+  drawPixelRect(x - 76, y - 2, 22, 4, "#c9594a");
+  drawPixelRect(x - 26, y - 26, 22, 22, "#d9a34c");
+  drawPixelRect(x - 20, y - 20, 10, 10, "#7a5828");
+  drawPixelRect(x + 14, y - 16, 36, 24, "#8fb7ff");
+  drawPixelRect(x + 20, y - 10, 8, 8, "#f2e7c9");
+  drawPixelRect(x + 34, y - 10, 8, 8, "#f2e7c9");
+  drawPixelRect(x + 66, y - 8, 18, 18, "#d65f5a");
+  drawPixelRect(x + 72, y - 2, 6, 6, "#f5d1bf");
+  CTX.globalAlpha = alpha * (0.4 + Math.sin(performance.now() / 180) * 0.16);
+  drawPixelRect(x - 4, y - 46, 8, 8, "#ffe19a");
+  CTX.globalAlpha = 1;
+}
+
+function drawBlueprint(t) {
+  const story = state.scene.story || {};
+  const alpha = fadeIn(t, story.blueprintAt || 5600, 700) * fadeOut(t, 13800, 1300);
+  if (alpha <= 0) return;
+
+  const x = state.width * 0.55;
+  const y = state.height * 0.57;
+  CTX.globalAlpha = alpha;
+  drawPixelRect(x - 68, y - 36, 136, 72, "#224e7a");
+  drawPixelRect(x - 60, y - 28, 120, 56, "#8fc7ff");
+  for (let gx = -48; gx <= 48; gx += 24) drawPixelRect(x + gx, y - 28, 2, 56, "#4f8ab9");
+  for (let gy = -18; gy <= 18; gy += 18) drawPixelRect(x - 60, y + gy, 120, 2, "#4f8ab9");
+  drawPixelRect(x - 34, y - 8, 28, 16, "#f3ead2");
+  drawPixelRect(x + 18, y - 14, 24, 30, "#d9a34c");
+  drawPixelRect(x - 2, y + 16, 58, 4, "#23435f");
+  CTX.globalAlpha = 1;
+}
+
+function drawTestMachine(t, now) {
+  const story = state.scene.story || {};
+  const alpha = fadeIn(t, story.machineAt || 10400, 650) * fadeOut(t, 23600, 2200);
+  if (alpha <= 0) return;
+
+  const x = state.width * 0.5;
+  const y = state.height * 0.64;
+  const testing = t >= (story.testAt || 14200) && t < (state.scene.artifact?.revealAt || 17600);
+  CTX.globalAlpha = alpha;
+  drawPixelRect(x - 72, y - 34, 144, 52, "#242f3f");
+  drawPixelRect(x - 62, y - 24, 46, 32, "#40516a");
+  drawPixelRect(x + 20, y - 22, 40, 28, testing ? "#d65f5a" : "#617087");
+  drawPixelRect(x - 8, y - 8, 16, 16, "#d9a34c");
+  drawPixelRect(x + 28, y - 14, 24, 6, testing ? "#ffe19a" : "#75d67d");
+  drawPixelRect(x - 48, y + 18, 16, 28, "#1a202b");
+  drawPixelRect(x + 44, y + 18, 16, 28, "#1a202b");
+  if (testing) {
+    drawSparks(x + Math.sin(now / 110) * 12, y - 34, now, 8);
+  }
+  CTX.globalAlpha = 1;
+}
+
+function drawNextSignal(t, now) {
+  const story = state.scene.story || {};
+  const alpha = fadeIn(t, story.nextSignalAt || 23800, 900);
+  if (alpha <= 0) return;
+
+  const x = state.width * 0.83;
+  const y = state.height * 0.52;
+  const pulse = (Math.sin(now / 220) + 1) / 2;
+  CTX.globalAlpha = alpha;
+  drawPixelRect(x - 18, y + 30, 36, 10, "#3d2f34");
+  drawPixelRect(x - 4, y - 6, 8, 38, "#8fb7ff");
+  drawPixelRect(x - 18, y - 18, 36, 16, "#f3ead2");
+  CTX.globalAlpha = alpha * (0.24 + pulse * 0.32);
+  CTX.beginPath();
+  CTX.arc(x, y - 10, 42 + pulse * 20, 0, Math.PI * 2);
+  CTX.fillStyle = "#8fc7ff";
+  CTX.fill();
+  CTX.globalAlpha = 1;
+}
+
+function drawStoryProps(now) {
+  const t = sceneTime(now);
+  drawProblemPile(t);
+  drawBlueprint(t);
+  drawTestMachine(t, now);
+  drawNextSignal(t, now);
+}
+
 function drawArtifact(now) {
   const revealAt = state.scene.artifact.revealAt || 9400;
   const t = sceneTime(now);
-  const ready = t >= revealAt || state.artifact.ready;
+  const hideAt = state.scene.artifact.hideAt || sceneLength() - 1000;
+  const ready = t >= revealAt && t <= hideAt;
   const x = state.width * 0.5;
   const y = state.height * 0.59;
   state.artifact.ready = ready;
@@ -237,8 +361,8 @@ function drawArtifact(now) {
   EXIT.style.height = `${state.artifact.h}px`;
 
   if (!ready) {
-    if (t > 5200) {
-      CTX.globalAlpha = clamp((t - 5200) / 3800, 0, 0.9);
+    if (t > 10400 && t < revealAt) {
+      CTX.globalAlpha = clamp((t - 10400) / 3800, 0, 0.9);
       drawSparks(x, y, now, 10);
       CTX.globalAlpha = 1;
     }
@@ -275,38 +399,79 @@ function drawSparks(cx, cy, now, count) {
 }
 
 function drawCharacter(snapshot) {
-  const { character, pose, x, y, scale } = snapshot;
+  const { character, pose, x, y, scale, opacity } = snapshot;
   const image = frameFor(character, pose);
   const size = 224 * scale;
   const anchor = character.anchor || { x: 0.5, y: 0.88 };
   const drawX = Math.round(x - size * anchor.x);
   const drawY = Math.round(y - size * anchor.y);
 
-  CTX.globalAlpha = 0.35;
+  CTX.save();
+  CTX.globalAlpha = 0.35 * opacity;
   CTX.fillStyle = "#07090d";
   CTX.beginPath();
   CTX.ellipse(Math.round(x), Math.round(y + 5), Math.max(22, size * 0.25), Math.max(5, size * 0.055), 0, 0, Math.PI * 2);
   CTX.fill();
-  CTX.globalAlpha = 1;
+  CTX.globalAlpha = opacity;
   CTX.drawImage(image, drawX, drawY, Math.round(size), Math.round(size));
 
   const dx = state.pointer.x - x;
   const dy = state.pointer.y - (y - size * 0.45);
   const close = state.pointer.active && Math.sqrt(dx * dx + dy * dy) < size * 0.65;
   if (close) {
-    CTX.globalAlpha = 0.75;
+    CTX.globalAlpha = 0.75 * opacity;
     drawPixelRect(x - 5, drawY - 12 + Math.sin(performance.now() / 120) * 3, 10, 10, "#ffe19a");
-    CTX.globalAlpha = 1;
   }
+  CTX.restore();
+}
+
+function drawMiniUser(x, y, color, signal) {
+  drawPixelRect(x - 6, y - 18, 12, 12, color);
+  drawPixelRect(x - 8, y - 6, 16, 18, "#263445");
+  drawPixelRect(x - 10, y + 12, 6, 12, "#101722");
+  drawPixelRect(x + 4, y + 12, 6, 12, "#101722");
+  if (signal === "star") {
+    drawPixelRect(x + 12, y - 24, 6, 6, "#ffe19a");
+    drawPixelRect(x + 14, y - 28, 2, 14, "#ffe19a");
+    drawPixelRect(x + 8, y - 22, 14, 2, "#ffe19a");
+  } else if (signal === "coin") {
+    drawPixelRect(x + 12, y - 22, 12, 12, "#d9a34c");
+    drawPixelRect(x + 16, y - 18, 4, 4, "#7a5828");
+  }
+}
+
+function drawMiniUsers(now) {
+  const t = sceneTime(now);
+  const feedbackAt = state.scene.story?.feedbackAt || 19600;
+  const alpha = fadeIn(t, feedbackAt, 700) * fadeOut(t, 26300, 1000);
+  if (alpha <= 0) return;
+
+  const baseY = state.height * 0.82;
+  const destinations = [
+    { start: -26, x: state.width * 0.43, color: "#8fc7ff", signal: "star", delay: 0 },
+    { start: state.width + 24, x: state.width * 0.54, color: "#f3ead2", signal: "coin", delay: 520 },
+    { start: state.width * 0.5, x: state.width * 0.49, color: "#75d67d", signal: "none", delay: 980 }
+  ];
+  CTX.globalAlpha = alpha;
+  for (const item of destinations) {
+    const local = ease(clamp((t - feedbackAt - item.delay) / 1600, 0, 1));
+    const x = item.start + (item.x - item.start) * local;
+    const y = baseY + Math.sin((now + item.delay) / 180) * 3;
+    drawMiniUser(x, y, item.color, item.signal);
+  }
+  CTX.globalAlpha = 1;
 }
 
 function render(now) {
   drawBackground(now);
+  drawStoryProps(now);
   drawArtifact(now);
   const snapshots = state.actors
     .map((actor) => actorSnapshot(actor, now))
+    .filter(Boolean)
     .sort((a, b) => a.y - b.y);
   for (const snapshot of snapshots) drawCharacter(snapshot);
+  drawMiniUsers(now);
   requestAnimationFrame(render);
 }
 
@@ -315,6 +480,7 @@ function nearestActor(x, y, now) {
   let bestDistance = Infinity;
   for (const actor of state.actors) {
     const snap = actorSnapshot(actor, now);
+    if (!snap) continue;
     const dx = x - snap.x;
     const dy = y - snap.y + 42;
     const distance = Math.sqrt(dx * dx + dy * dy);

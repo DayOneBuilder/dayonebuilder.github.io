@@ -1,6 +1,11 @@
 {
   "version": 1,
   "actions": {
+    "enter": {
+      "duration": 1400,
+      "pose": "hop",
+      "motion": "enter_slide"
+    },
     "idle": {
       "duration": 2200,
       "pose": "idle",
@@ -23,6 +28,16 @@
       "pose": "idle",
       "motion": "lean_in"
     },
+    "sort_problem": {
+      "duration": 2400,
+      "pose": "idle",
+      "motion": "sort_bob"
+    },
+    "plan_blueprint": {
+      "duration": 2400,
+      "pose": "wave",
+      "motion": "scan"
+    },
     "carry": {
       "duration": 1600,
       "pose": "wave",
@@ -34,11 +49,27 @@
       "motion": "workbench_bounce",
       "event": "artifact_build"
     },
+    "test_artifact": {
+      "duration": 2400,
+      "pose": "hop",
+      "motion": "test_shake",
+      "event": "artifact_test"
+    },
     "reveal_product": {
       "duration": 1800,
       "pose": "reveal",
       "motion": "proud_reveal",
       "event": "artifact_reveal"
+    },
+    "celebrate_signal": {
+      "duration": 2200,
+      "pose": "reveal",
+      "motion": "celebrate"
+    },
+    "scan_next_signal": {
+      "duration": 2200,
+      "pose": "idle",
+      "motion": "scan"
     },
     "sleep": {
       "duration": 2600,

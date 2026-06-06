@@ -6,54 +6,80 @@
       "id": "bill_tracker_workbench",
       "productSlug": "free-bill-tracker-template",
       "exitUrl": "/free-bill-tracker-template/",
+      "duration": 28000,
       "artifact": {
         "id": "bill_tracker",
         "kind": "paper_stack",
-        "revealAt": 9400
+        "revealAt": 17600,
+        "hideAt": 26600
+      },
+      "story": {
+        "problemAt": 300,
+        "blueprintAt": 5600,
+        "machineAt": 10400,
+        "testAt": 14200,
+        "feedbackAt": 19600,
+        "nextSignalAt": 23800
       },
       "actors": [
         {
           "character": "maker_spark",
-          "start": { "x": 0.36, "y": 0.74 },
+          "role": "finder_builder",
+          "visibleFrom": 1200,
+          "start": { "x": -0.12, "y": 0.76 },
           "timeline": [
-            { "at": 0, "action": "idle" },
-            { "at": 1400, "action": "wave_at_user" },
-            { "at": 3500, "action": "carry", "to": { "x": 0.49, "y": 0.72 } },
-            { "at": 5600, "action": "build_artifact" },
-            { "at": 9400, "action": "reveal_product" }
+            { "at": 1200, "action": "enter", "to": { "x": 0.34, "y": 0.75 } },
+            { "at": 3200, "action": "sort_problem" },
+            { "at": 6600, "action": "carry", "to": { "x": 0.47, "y": 0.73 } },
+            { "at": 11000, "action": "build_artifact" },
+            { "at": 14400, "action": "test_artifact" },
+            { "at": 17600, "action": "reveal_product" },
+            { "at": 20500, "action": "celebrate_signal" },
+            { "at": 24000, "action": "scan_next_signal", "to": { "x": 0.32, "y": 0.76 } }
           ]
         },
         {
           "character": "blueprint_capsule",
-          "start": { "x": 0.57, "y": 0.72 },
+          "role": "planner",
+          "visibleFrom": 4200,
+          "start": { "x": 1.12, "y": 0.75 },
           "timeline": [
-            { "at": 0, "action": "idle" },
-            { "at": 2200, "action": "hop" },
-            { "at": 4300, "action": "inspect" },
-            { "at": 6500, "action": "build_artifact" },
-            { "at": 9800, "action": "wave_at_user" }
+            { "at": 4200, "action": "enter", "to": { "x": 0.58, "y": 0.73 } },
+            { "at": 6000, "action": "plan_blueprint" },
+            { "at": 9000, "action": "inspect" },
+            { "at": 12000, "action": "build_artifact" },
+            { "at": 15000, "action": "test_artifact" },
+            { "at": 19800, "action": "wave_at_user" },
+            { "at": 23200, "action": "scan_next_signal" }
           ]
         },
         {
           "character": "toolbox_block",
-          "start": { "x": 0.22, "y": 0.78 },
+          "role": "carrier",
+          "visibleFrom": 7200,
+          "start": { "x": -0.14, "y": 0.79 },
           "timeline": [
-            { "at": 0, "action": "sleep" },
-            { "at": 2800, "action": "surprised" },
-            { "at": 4700, "action": "carry", "to": { "x": 0.42, "y": 0.76 } },
-            { "at": 7200, "action": "build_artifact" },
-            { "at": 10300, "action": "hop" }
+            { "at": 7200, "action": "enter", "to": { "x": 0.24, "y": 0.79 } },
+            { "at": 9000, "action": "carry", "to": { "x": 0.41, "y": 0.77 } },
+            { "at": 11800, "action": "build_artifact" },
+            { "at": 14800, "action": "surprised" },
+            { "at": 20300, "action": "hop" },
+            { "at": 23800, "action": "scan_next_signal" }
           ]
         },
         {
           "character": "command_block",
-          "start": { "x": 0.77, "y": 0.77 },
+          "role": "tester",
+          "visibleFrom": 10000,
+          "start": { "x": 1.14, "y": 0.79 },
           "timeline": [
-            { "at": 0, "action": "idle" },
-            { "at": 3000, "action": "inspect" },
-            { "at": 5200, "action": "wave_at_user" },
-            { "at": 7600, "action": "build_artifact" },
-            { "at": 10600, "action": "reveal_product" }
+            { "at": 10000, "action": "enter", "to": { "x": 0.77, "y": 0.78 } },
+            { "at": 12000, "action": "inspect" },
+            { "at": 14200, "action": "test_artifact" },
+            { "at": 17000, "action": "build_artifact" },
+            { "at": 18400, "action": "reveal_product" },
+            { "at": 21400, "action": "wave_at_user" },
+            { "at": 24200, "action": "scan_next_signal" }
           ]
         }
       ]
