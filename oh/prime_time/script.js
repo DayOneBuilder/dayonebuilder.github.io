@@ -6,7 +6,12 @@ const marker = document.getElementById("ageMarker");
 const markerDot = document.getElementById("markerDot");
 const chartWrap = document.querySelector(".chart-wrap");
 const leverButtons = [...document.querySelectorAll(".lever")];
+const actionResult = document.getElementById("actionResult");
+const stageSteps = [...document.querySelectorAll(".stage-step")];
+const shareInsightButton = document.getElementById("shareInsight");
+const copyInsightButton = document.getElementById("copyInsight");
 const compact = window.matchMedia("(max-width: 720px)").matches;
+let currentShareText = "";
 
 const plot = {
   left: 40,
@@ -79,6 +84,14 @@ const levers = [
 ];
 
 const curveEls = new Map();
+
+const stages = [
+  { id: "20", min: 0, max: 29, text: "В 20 важно исследовать." },
+  { id: "30", min: 30, max: 39, text: "В 30 - строить." },
+  { id: "40", min: 40, max: 49, text: "В 40 - масштабировать." },
+  { id: "50", min: 50, max: 59, text: "В 50 - усиливать других." },
+  { id: "60", min: 60, max: 120, text: "В 60+ - передавать мудрость и создавать наследие." },
+];
 
 function configureChartFrame() {
   chart.setAttribute("viewBox", `0 0 ${viewWidth} 590`);
@@ -189,6 +202,10 @@ function activeLeverForAge(age) {
     .sort((a, b) => b.value - a.value)[0].lever;
 }
 
+function stageForAge(age) {
+  return stages.find((stage) => age >= stage.min && age <= stage.max) || stages[0];
+}
+
 function setActive(id) {
   curveEls.forEach((path, leverId) => {
     path.classList.toggle("active", leverId === id);
@@ -203,6 +220,8 @@ function setActive(id) {
 function updateFromAge(age) {
   const clampedAge = Math.max(plot.minAge, Math.min(plot.maxAge, age));
   const active = activeLeverForAge(clampedAge);
+  const roundedAge = Math.round(clampedAge);
+  const activeStage = stageForAge(roundedAge);
   const x = ageToX(clampedAge);
   const y = valueToY(active.value(clampedAge));
 
@@ -211,6 +230,49 @@ function updateFromAge(age) {
   markerDot.setAttribute("cx", x);
   markerDot.setAttribute("cy", y);
   setActive(active.id);
+  updateAction(roundedAge, activeStage);
+}
+
+function updateAction(age, stage) {
+  actionResult.textContent = stage.text;
+  currentShareText = `Мне ${age}. ${stage.text} ПРАЙМ-ТАЙМ предпринимателей и инвесторов: https://dayonebuilder.online/oh/prime_time/`;
+
+  stageSteps.forEach((step) => {
+    step.classList.toggle("active", step.dataset.stage === stage.id);
+  });
+}
+
+async function copyInsight() {
+  try {
+    await navigator.clipboard.writeText(currentShareText);
+  } catch (error) {
+    window.prompt("Скопируй текст", currentShareText);
+  }
+  copyInsightButton.textContent = "Скопировано";
+  window.setTimeout(() => {
+    copyInsightButton.textContent = "Скопировать";
+  }, 1400);
+}
+
+async function shareInsight() {
+  const shareData = {
+    title: "ПРАЙМ-ТАЙМ предпринимателей и инвесторов",
+    text: currentShareText,
+    url: "https://dayonebuilder.online/oh/prime_time/",
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        await copyInsight();
+      }
+    }
+    return;
+  }
+
+  await copyInsight();
 }
 
 function pointerToChartAge(event) {
@@ -244,3 +306,6 @@ leverButtons.forEach((button) => {
   button.addEventListener("pointerenter", () => setActive(button.dataset.lever));
   button.addEventListener("focus", () => setActive(button.dataset.lever));
 });
+
+copyInsightButton.addEventListener("click", copyInsight);
+shareInsightButton.addEventListener("click", shareInsight);
