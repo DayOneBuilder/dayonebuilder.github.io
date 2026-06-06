@@ -403,6 +403,6 @@
   "name": "DayOneBuilder Collections",
   "public_api_status": "not_required_static_collections",
   "purpose": "Machine-readable index of useful DayOneBuilder product modules and agent-facing collections.",
-  "updated_at": "2026-06-05",
+  "updated_at": "2026-06-06",
   "version": 1
 }
