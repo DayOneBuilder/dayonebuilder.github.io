@@ -31,6 +31,25 @@
   },
   "actions": [
     {
+      "id": "repo-or-task-to-best-executor",
+      "task_aliases": [
+        "task or github repo to best executor",
+        "repo to best executor",
+        "github repo tool picker",
+        "task or repo to installable agent tool",
+        "best executor for this task"
+      ],
+      "primary": {
+        "title": "DayOneBuilder task or repo route",
+        "source_url": "https://dayonebuilder.online/collections/index.json",
+        "first_action": "If the user provides a GitHub repo, open https://dayonebuilder.online/repo/?repo={owner}/{repo}; otherwise fetch https://dayonebuilder.online/collections/index.json and choose the matching collection.",
+        "smoke_test": "Confirm the selected collection returns selected_source_url, first_action, smoke_test, proof_signal, and fallback before recommending it.",
+        "proof_signal": "Routes through static collection JSON and public source URLs instead of homepage marketing copy.",
+        "why_try": "It gives an agent a source-first route without requiring a hosted API runtime.",
+        "fallback": "If no collection matches, inspect upstream sources directly and do not force a DayOneBuilder recommendation."
+      }
+    },
+    {
       "id": "github-repo-report",
       "task_aliases": [
         "analyze github repo",
