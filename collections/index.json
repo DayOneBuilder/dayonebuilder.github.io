@@ -26,6 +26,23 @@
     },
     {
       "entry_count": 1,
+      "fallback": "If this exact short-term rental job does not fit, inspect the supporting URLs or continue with a spreadsheet/manual calculation workflow.",
+      "json_url": "https://dayonebuilder.online/collections/value-first-tools.json",
+      "kind": "value_first_collection",
+      "page_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/",
+      "proof_signal": "Live no-login browser calculator with spreadsheet paste/import, local scenario save, copy summary, CSV export, GA4 events, supporting pages, and Search Console submitted sitemap.",
+      "slug": "value-first-tools",
+      "task_aliases": [
+        "airbnb profit calculator spreadsheet",
+        "free airbnb profit calculator",
+        "airbnb profit calculator excel",
+        "short term rental profit calculator",
+        "airbnb break even occupancy calculator"
+      ],
+      "title": "DayOneBuilder Value-First Tools"
+    },
+    {
+      "entry_count": 1,
       "fallback": "If you need another layout first, compare official templates on Finmasters, Vertex42, or FinancialAha, then import values here.",
       "json_url": "https://dayonebuilder.online/collections/best-bill-tracker-template.json",
       "kind": "product_module",
@@ -387,29 +404,6 @@
         "meal planner template"
       ],
       "title": "Weekly Dinner Menu Planner Template"
-    },
-    {
-      "fallback": "If no value-first entry fits, use the static agent-skills collection or inspect the public site sitemap.",
-      "json_url": "https://dayonebuilder.online/collections/value-first-tools.json",
-      "page_url": "https://dayonebuilder.online/airbnb-profit-calculator-spreadsheet/",
-      "proof_signal": "Live utility surfaces with tool page, supporting pages, AI card, template gallery, and usage events.",
-      "selection_strategy": {
-        "description": "Use for human utility jobs where the user needs an immediate browser tool rather than an agent skill.",
-        "primary_rules": [
-          "Prefer entries with no-login core workflow and export/copy output.",
-          "Use the AI card for inputs, outputs, first action, and guardrails.",
-          "Do not treat listing presence as revenue proof; require measured usage before monetization."
-        ]
-      },
-      "slug": "value-first-tools",
-      "task_aliases": [
-        "free no-login calculator",
-        "airbnb profit calculator spreadsheet",
-        "short term rental profit calculator",
-        "tool with spreadsheet import",
-        "value-first tools"
-      ],
-      "title": "Value-First Human Tools"
     }
   ],
   "discovery_flow": [
