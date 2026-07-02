@@ -500,30 +500,6 @@
         margin-bottom: 22px;
       }
 
-      .avatar {
-        display: grid;
-        place-items: center;
-        width: 56px;
-        height: 56px;
-        border: 1px solid rgba(53, 211, 153, 0.28);
-        border-radius: var(--radius);
-        background: #0e1713;
-        color: var(--green);
-        font-weight: 800;
-      }
-
-      .profile-name strong {
-        display: block;
-        font-size: 20px;
-      }
-
-      .profile-name span {
-        display: block;
-        margin-top: 4px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
       .checks {
         display: grid;
         gap: 10px;
@@ -547,17 +523,6 @@
         border-radius: 50%;
         background: var(--green);
         flex: 0 0 auto;
-      }
-
-      .live-note {
-        margin-top: 18px;
-        padding: 14px;
-        border: 1px solid rgba(245, 184, 75, 0.18);
-        border-radius: var(--radius);
-        background: rgba(245, 184, 75, 0.07);
-        color: #efd8ad;
-        font-size: 14px;
-        line-height: 1.55;
       }
 
       .quote {
@@ -796,7 +761,7 @@
           </a>
           <nav class="nav-links" aria-label="Навигация">
             <a href="#services">Услуги</a>
-            <a href="#proof">Доверие</a>
+            <a href="#proof">Как выбрать</a>
             <a
               class="btn btn-secondary"
               href="https://kwork.ru/user/DayOneBuilder?ref=15189887"
@@ -838,10 +803,10 @@
                 >Посмотреть профиль</a>
               </div>
               <div class="proof-row" aria-label="Почему открывать профиль Kwork">
-                <div class="proof"><strong>Живые цифры</strong><span>рейтинг, отзывы и заказы не дублируются на сайте</span></div>
-                <div class="proof"><strong>Без рассинхрона</strong><span>история продавца всегда проверяется на стороне Kwork</span></div>
-                <div class="proof"><strong>Через Kwork</strong><span>задача, условия и переписка остаются в одном месте</span></div>
-                <div class="proof"><strong>Проверяемо</strong><span>на выходе рабочий результат, который можно протестировать</span></div>
+                <div class="proof"><strong>Точный вход</strong><span>файл, ошибка, ссылка или текущий процесс</span></div>
+                <div class="proof"><strong>Быстрый разбор</strong><span>сначала причина, потом понятный план исправления</span></div>
+                <div class="proof"><strong>Через Kwork</strong><span>условия, файлы и переписка остаются в заказе</span></div>
+                <div class="proof"><strong>Проверка</strong><span>результат можно открыть, запустить или сверить</span></div>
               </div>
             </div>
 
@@ -891,7 +856,7 @@
           <div class="wrap">
             <div class="section-head">
               <h2 id="services-title">Рабочие кворки</h2>
-              <p>Каждая карточка ведет на профиль Kwork, где можно показать задачу и выбрать подходящий формат.</p>
+              <p>Каждая карточка ведет на конкретный кворк. Если сомневаетесь, можно открыть ближайший по смыслу и уточнить задачу в переписке.</p>
             </div>
             <div class="services">
               <article class="service">
@@ -966,32 +931,23 @@
           <div class="wrap">
             <div class="proof-band">
               <div class="proof-band-grid">
-                <aside class="profile-card" aria-label="Данные профиля Kwork">
-                  <div class="profile-name">
-                    <div class="avatar" aria-hidden="true">DOB</div>
-                    <div>
-                      <strong>DayOneBuilder</strong>
-                      <span>Бен Айсон, Python / AI Engineer</span>
-                    </div>
-                  </div>
+                <aside class="profile-card" aria-label="Как выбрать кворк">
+                  <div class="quote-mark">Как выбрать кворк</div>
+                  <h2 id="proof-title">Если не уверены, куда нажать</h2>
                   <ul class="checks">
-                    <li>Актуальные рейтинг, отзывы и история заказов открываются по ссылке на Kwork.</li>
-                    <li>Сайт не хранит копию показателей, которые меняются после каждого нового заказа.</li>
-                    <li>Фокус профиля: Python, AI, API, n8n, Playwright, Sheets, Telegram bots.</li>
-                    <li>Лучший первый шаг - показать файл, ошибку, ссылку или текущий процесс.</li>
+                    <li>Если сломался код, бот или формула - открывайте карточку про исправление.</li>
+                    <li>Если нужно связать сервисы - выбирайте форму, CRM/API, Sheets или Telegram.</li>
+                    <li>Если проблема в файле - выбирайте прайс, таблицу, CSV, Excel или PDF.</li>
                   </ul>
-                  <div class="live-note">
-                    Числа намеренно не продублированы здесь: они должны оставаться живыми на Kwork, а не стареть на статическом сайте.
-                  </div>
                 </aside>
                 <div class="quote">
-                  <div class="quote-mark" id="proof-title">Что ценят заказчики</div>
+                  <div class="quote-mark">Перед заказом</div>
                   <blockquote>
-                    Находит рабочие решения для задач, которые сначала кажутся непрактичными.
+                    Достаточно показать текущую ошибку и желаемый результат.
                   </blockquote>
                   <p>
-                    По отзывам: держит срок, остается на связи, не навязывает лишнее и может предложить более простой
-                    экономичный путь, если он лучше подходит задаче.
+                    В сообщении на Kwork приложите файл, ссылку, скриншот или короткое описание процесса.
+                    Если выбран не тот кворк, это можно уточнить в переписке до старта работы.
                   </p>
                 </div>
               </div>
