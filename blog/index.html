@@ -3,122 +3,179 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Статьи — DayOneBuilder | Разборы задач по автоматизации</title>
-<meta name="description" content="Практические разборы: автоматизация счетов, Google Таблицы, WhatsApp и Telegram, починка скриптов и интеграций. Из реальных задач, до проверяемого результата." />
-<meta name="theme-color" content="#08090a" />
+<title>Блог — DayOneBuilder | Разборы задач по автоматизации</title>
+<meta name="description" content="Разборы типовых проблем малого бизнеса: счета вручную, прайс не грузится, код от ChatGPT ломается — и как это чинится. Пишет Бен Айсон, Python / AI инженер." />
+<meta name="theme-color" content="#000000" />
 <link rel="canonical" href="https://dayonebuilder.online/blog/" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
 <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="DayOneBuilder" />
-<meta property="og:title" content="Статьи — DayOneBuilder" />
-<meta property="og:description" content="Практические разборы задач по автоматизации: из реальных заказов, до проверяемого результата." />
+<meta property="og:title" content="Блог — DayOneBuilder | Разборы задач по автоматизации" />
+<meta property="og:description" content="Разборы типовых проблем малого бизнеса и как это чинится. Пишет Бен Айсон, Python / AI инженер." />
 <meta property="og:url" content="https://dayonebuilder.online/blog/" />
 <meta property="og:image" content="https://dayonebuilder.online/assets/og/dayonebuilder-og-glowing-workbench.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Блог — DayOneBuilder | Разборы задач по автоматизации" />
+<meta name="twitter:image" content="https://dayonebuilder.online/assets/og/dayonebuilder-og-glowing-workbench.png" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-KQMLYS3VVE");</script>
 <style>
   :root{
-    --bg:#08090a;--surface:#0e100f;--surface-2:#141613;
-    --line:rgba(255,255,255,.09);--line-soft:rgba(255,255,255,.055);
-    --fg:#f4f7f5;--muted:#9ba39e;--dim:#6b726d;
-    --accent:#3ddc84;--accent-ink:#08130c;--accent-dim:rgba(61,220,132,.13);
-    --radius:14px;--maxw:1140px;
-    --sans:system-ui,-apple-system,"SF Pro Display","Segoe UI",Roboto,sans-serif;
-    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",monospace;
+    --bg:#000000; --card:#0c0d0c; --line:#1b1d1b; --line2:#2a2d2a;
+    --white:#ffffff; --hi:#d3d6d3; --grey:#8c908c; --dim:#565955;
+    --green:#19b976; --green-2:#1ed687; --glow:rgba(25,185,118,.30);
+    --sans:"Helvetica Neue",Arial,"Segoe UI",system-ui,sans-serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;min-height:100%;background:var(--bg)}
-  body{background:radial-gradient(1100px 500px at 50% -12%, rgba(61,220,132,.05), transparent 62%),var(--bg);
-    color:var(--fg);font-family:var(--sans);-webkit-font-smoothing:antialiased;line-height:1.55;letter-spacing:-.008em;overflow-x:hidden}
-  ::selection{background:var(--accent);color:var(--accent-ink)}
-  a{color:inherit}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
-  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  header.site{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
-    background:rgba(8,9,10,.72);border-bottom:1px solid var(--line-soft)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
-  .mark{width:30px;height:30px;flex:none}
-  .brand b{font-size:15px;font-weight:650;letter-spacing:-.02em}
-  .brand .sub{display:block;font-size:11px;color:var(--dim);font-weight:500}
-  .nav-links{display:flex;align-items:center;gap:28px}
-  .nav-links a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .15s}
-  .nav-links a:hover,.nav-links a.on{color:var(--fg)}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600;border-radius:10px;
-    padding:10px 16px;border:1px solid transparent;text-decoration:none;white-space:nowrap;
-    transition:transform .12s, background .15s}
-  .btn-primary{background:var(--accent);color:var(--accent-ink)}
-  .btn-primary:hover{background:#4ee796}
-  .head{padding:56px 0 8px}
-  .kicker{font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
-  h1{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.06;letter-spacing:-.03em;font-weight:700;margin:12px 0 0;text-wrap:balance}
-  .sub-lede{font-size:15.5px;color:var(--muted);max-width:56ch;margin:16px 0 0;line-height:1.6}
-  .list{padding:36px 0 8px;display:grid;grid-template-columns:1fr;gap:16px;max-width:820px}
-  .post{display:block;border:1px solid var(--line-soft);border-radius:var(--radius);padding:24px 24px;
-    background:var(--surface);text-decoration:none;transition:border-color .18s, transform .18s, background .18s}
-  .post:hover{border-color:rgba(61,220,132,.35);transform:translateY(-2px);background:var(--surface-2)}
-  .post .pk{display:flex;gap:10px;align-items:center;font:600 11.5px/1 var(--mono);letter-spacing:.07em;
-    text-transform:uppercase;color:var(--accent)}
-  .post .pk .m{color:var(--dim);letter-spacing:.02em;text-transform:none;font-weight:500}
-  .post h2{font-size:20px;font-weight:650;letter-spacing:-.02em;margin:12px 0 8px;line-height:1.25;text-wrap:balance}
-  .post p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.55}
-  .post .go{margin-top:14px;display:inline-flex;gap:6px;align-items:center;font-size:13.5px;font-weight:600;color:var(--fg)}
-  .post:hover .go{color:var(--accent)}
-  footer.site{border-top:1px solid var(--line-soft);padding:34px 0;margin-top:56px}
-  .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--dim);font-size:13px}
-  .foot a{color:var(--dim);text-decoration:none}
-  .foot a:hover{color:var(--muted)}
-  @media(max-width:640px){.nav-links{display:none}.head{padding-top:40px}}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--hi);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  ::selection{background:rgba(25,185,118,.28)}
+  :focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+
+  header.nav{position:sticky;top:0;z-index:40;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav .wrap{display:flex;align-items:center;gap:26px;height:62px}
+  .logo{display:flex;align-items:center;gap:9px;font-weight:600;letter-spacing:-.01em;color:#fff;font-size:16px}
+  .logo .sq{width:11px;height:11px;background:var(--green);box-shadow:0 0 12px var(--glow);flex:none}
+  .nav .links{display:flex;gap:22px;margin-left:8px}
+  .nav .links a{font-size:13.5px;color:var(--grey);transition:color .2s}
+  .nav .links a:hover,.nav .links a.active{color:#fff}
+  .nav .right{margin-left:auto;display:flex;align-items:center;gap:12px}
+  .nav .kw{font-size:13.5px;color:var(--grey)} .nav .kw:hover{color:#fff}
+  .pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;font-size:13.5px;font-weight:500;padding:9px 18px;transition:transform .15s,box-shadow .2s}
+  .pill.green{background:var(--green);color:#04120b;font-weight:600} .pill.green:hover{box-shadow:0 6px 26px var(--glow);transform:translateY(-1px)}
+  .pill.glass{background:#0e0f0e;color:var(--hi);border:1px solid var(--line2)} .pill.glass:hover{border-color:#3a3e3a;color:#fff}
+  .pill.lg{padding:13px 26px;font-size:15px}
+  @media(max-width:760px){.nav .links{display:none}}
+
+  .bhero{position:relative;text-align:center;padding:70px 0 22px;overflow:hidden}
+  .bhero::before{content:"";position:absolute;inset:0;z-index:0;
+    background:radial-gradient(70% 60% at 50% 6%,rgba(25,185,118,.10),transparent 60%),
+      linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
+    background-size:100% 100%,42px 42px,42px 42px;
+    -webkit-mask-image:radial-gradient(70% 70% at 50% 20%,#000,transparent 80%);mask-image:radial-gradient(70% 70% at 50% 20%,#000,transparent 80%)}
+  .bhero>*{position:relative;z-index:1}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.22em;color:var(--grey);text-transform:uppercase} .eyebrow .dot{color:var(--green)}
+  .bhero h1{font-weight:300;letter-spacing:-.02em;line-height:1.07;margin:18px auto 0;max-width:20ch;font-size:clamp(31px,5vw,56px);color:var(--dim);text-wrap:balance} .bhero h1 b{font-weight:400;color:#fff}
+  .bhero .sub{max-width:58ch;margin:20px auto 0;color:var(--grey);font-size:clamp(15px,1.6vw,17px)}
+  .authorchip{display:inline-flex;align-items:center;gap:10px;margin-top:24px;border:1px solid var(--line);border-radius:999px;padding:6px 16px 6px 6px;background:var(--card)}
+  .authorchip img{width:30px;height:30px;border-radius:50%;object-fit:cover}
+  .authorchip span{font-family:var(--mono);font-size:12px;color:var(--grey)} .authorchip b{color:var(--hi);font-weight:500}
+
+  section{padding:40px 0} section.first{padding-top:26px}
+  .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+  .sec-head .k{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--green);text-transform:uppercase;white-space:nowrap}
+  .sec-head h2{margin:0;font-weight:300;font-size:clamp(23px,3vw,32px);letter-spacing:-.02em;color:#fff}
+
+  .featured{display:block;background:linear-gradient(#0d0e0d,#090a09);border:1px solid var(--line2);border-radius:16px;padding:34px;position:relative;overflow:hidden;transition:border-color .25s,transform .2s}
+  .featured:hover{border-color:#3a3e3a;transform:translateY(-2px)} .featured:hover .pread{color:var(--green-2)}
+  .featured::before{content:"";position:absolute;right:-50px;top:-50px;width:260px;height:260px;background:radial-gradient(circle,var(--glow),transparent 70%);filter:blur(22px)}
+  .featured>*{position:relative}
+  .featured .pmeta{font-family:var(--mono);font-size:12px;color:var(--grey);text-transform:uppercase;letter-spacing:.06em} .featured .ptag{color:var(--green)}
+  .featured h3{margin:14px 0 12px;font-weight:300;font-size:clamp(24px,3.2vw,38px);letter-spacing:-.02em;color:#fff;max-width:24ch;line-height:1.1}
+  .featured p{margin:0 0 20px;color:var(--grey);font-size:16px;max-width:64ch}
+  .featured .pread{font-family:var(--mono);font-size:14px;color:var(--green);transition:color .2s}
+
+  .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .post{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px;transition:border-color .25s,transform .2s}
+  .post:hover{border-color:#33372f;transform:translateY(-2px)} .post:hover .pread{color:var(--green-2)}
+  .post .pmeta{font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--grey);text-transform:uppercase} .post .ptag{color:var(--green)}
+  .post h3{margin:0;font-size:17px;font-weight:500;color:#fff;letter-spacing:-.01em;line-height:1.28}
+  .post p{margin:0;color:var(--grey);font-size:14px;flex:1}
+  .post .pread{font-family:var(--mono);font-size:13px;color:var(--grey);transition:color .2s}
+  .post.soon{opacity:.72} .post.soon .ptag{color:var(--grey)}
+  @media(max-width:820px){.posts{grid-template-columns:1fr}}
+
+  .cta{text-align:center;position:relative;overflow:hidden;margin-top:26px;border:1px solid var(--line);border-radius:16px;padding:48px 24px;background:var(--card)}
+  .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 90% at 50% 100%,rgba(25,185,118,.12),transparent 65%)}
+  .cta>*{position:relative}
+  .cta h2{font-weight:300;font-size:clamp(24px,3.4vw,38px);letter-spacing:-.02em;color:#fff;margin:0 auto;max-width:22ch}
+  .cta p{color:var(--grey);margin:14px auto 0;max-width:46ch}
+  .cta .row{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--dim);font-size:13px;margin-top:44px}
+  footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center}
+  footer .logo{font-size:14px}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
 </head>
 <body>
-  <header class="site">
-    <div class="container nav">
-      <a class="brand" href="/">
-        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <rect x="1" y="1" width="30" height="30" rx="8" stroke="rgba(255,255,255,.14)"/>
-          <path d="M9 22V10h5.2c3.4 0 5.8 2.4 5.8 6s-2.4 6-5.8 6H9z" stroke="#3ddc84" stroke-width="1.7" stroke-linejoin="round"/>
-          <circle cx="22.5" cy="21.5" r="1.7" fill="#3ddc84"/>
-        </svg>
-        <span><b>DayOneBuilder</b><span class="sub">Python / AI инженер</span></span>
-      </a>
-      <nav class="nav-links">
-        <a href="/#work">С чем приходят</a>
-        <a href="/#kworks">Кворки</a>
-        <a class="on" href="/blog/">Статьи</a>
-      </nav>
-      <a class="btn btn-primary" href="https://kwork.ru/user/DayOneBuilder?ref=15189887" target="_blank" rel="noopener">Открыть Kwork</a>
-    </div>
-  </header>
-
-  <div class="container">
-    <div class="head">
-      <div class="kicker">Статьи</div>
-      <h1>Разборы задач по автоматизации</h1>
-      <p class="sub-lede">Практические разборы из реальных заказов: счета и таблицы, WhatsApp и Telegram, скрипты и интеграции. Каждая статья - причина, план и проверяемый результат.</p>
-    </div>
-
-    <div class="list">
-      <a class="post" href="/blog/scheta-v-whatsapp-iz-google-tablicy/">
-        <div class="pk"><span>Автоматизация</span><span class="m">· 13 июля 2026 · 12 мин</span></div>
-        <h2>Счета клиентам из Google Таблицы: автоматом в WhatsApp и Telegram</h2>
-        <p>Как перевести счета на автомат, не переезжая из привычной таблицы: PDF вложением, официальный API без бана, цены 2026 и чек-лист запуска из семи шагов.</p>
-        <span class="go">Читать разбор <span aria-hidden="true">→</span></span>
-      </a>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="/"><span class="sq"></span>Ben Ison</a>
+    <nav class="links">
+      <a href="/#work">С чем приходят</a>
+      <a href="/#kworks">Кворки</a>
+      <a href="/#how">Как работаю</a>
+      <a href="/blog/" class="active">Блог</a>
+    </nav>
+    <div class="right">
+      <a class="kw" href="https://kwork.ru/user/DayOneBuilder?ref=15189887" target="_blank" rel="noopener">Kwork ↗</a>
+      <a class="pill green" href="https://kwork.ru/user/DayOneBuilder?ref=15189887" target="_blank" rel="noopener">Обсудить задачу</a>
     </div>
   </div>
+</header>
 
-  <footer class="site">
-    <div class="container foot">
-      <span>© DayOneBuilder — Python / AI инженер</span>
-      <span><a href="/">Главная</a></span>
+<main id="top">
+  <section class="bhero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot">◗</span>&nbsp; DAYONEBUILDER · ЗАПИСКИ ИНЖЕНЕРА</div>
+      <h1>Что <b>ломается</b> у заказчиков — <b>и как это чинится.</b></h1>
+      <p class="sub">Разбираю типовые проблемы: счета выставляются вручную, прайс не грузится, код от ChatGPT падает через неделю. По делу, без воды и продающих лозунгов.</p>
+      <a class="authorchip" href="/"><img src="/images/ben.jpg" width="30" height="30" alt="Бен Айсон"><span>Пишет <b>Бен Айсон</b> · Python / AI Engineer</span></a>
     </div>
-  </footer>
-<script>
-document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a[href*="kwork.ru"]'):null;
-if(a&&window.gtag){try{gtag('event','kwork_click',{from:'blog_index'});}catch(_){}}},true);
-</script>
+  </section>
+
+  <section class="first">
+    <div class="wrap">
+      <a class="featured" href="/blog/scheta-v-whatsapp-iz-google-tablicy/">
+        <div class="pmeta"><span class="ptag">▶ Свежее</span> · Автоматизация · 12 мин · 13.07.2026</div>
+        <h3>Счета клиентам из Google Таблицы: автоматом в WhatsApp и Telegram</h3>
+        <p>Разбор для владельцев, которые собирают счета руками: как ваша же таблица начинает сама делать PDF и отправлять их клиентам — с ценами 2026 года, реальным кейсом и честными оговорками про баны и блокировку WhatsApp в России.</p>
+        <span class="pread">Читать статью →</span>
+      </a>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head"><span class="k">В работе</span><h2>Следующие разборы</h2></div>
+      <div class="posts">
+        <a class="post soon" href="#"><span class="pmeta"><span class="ptag">Скоро</span> · Парсинг</span><h3>«Прайс не грузится на сайт»: 3 причины и как починить</h3><p>Битые кодировки, кривой XLSX, «плавающие» заголовки — и парсер, который не падает на следующей выгрузке.</p><span class="pread">В работе →</span></a>
+        <a class="post soon" href="#"><span class="pmeta"><span class="ptag">Скоро</span> · AI</span><h3>Код от ChatGPT ломается через неделю — почему</h3><p>Где нейросеть срезает углы и как довести её черновик до кода, который переживёт продакшн.</p><span class="pread">В работе →</span></a>
+        <a class="post soon" href="#"><span class="pmeta"><span class="ptag">Скоро</span> · 1С</span><h3>Внешняя печатная форма в 1С УТ 11.5 без программиста в штате</h3><p>Когда нужна своя форма «Реализация товаров», а держать 1С-ника ради этого дорого.</p><span class="pread">В работе →</span></a>
+        <a class="post soon" href="#"><span class="pmeta"><span class="ptag">Скоро</span> · Боты</span><h3>Телеграм-бот для приёма заявок за выходные</h3><p>Что реально нужно, чтобы бот собирал заявки и не терял их, — и чего точно делать не стоит.</p><span class="pread">В работе →</span></a>
+        <a class="post soon" href="#"><span class="pmeta"><span class="ptag">Скоро</span> · Парсинг</span><h3>Парсер маркетплейса, который не падает</h3><p>Ретраи, лимиты, смена вёрстки — сбор данных, который переживёт неделю без няньки.</p><span class="pread">В работе →</span></a>
+        <a class="post soon" href="#"><span class="pmeta"><span class="ptag">Скоро</span> · Таблицы</span><h3>Google Sheets как маленькая CRM: где предел</h3><p>Докуда таблицы тянут учёт клиентов и когда честнее сказать «пора переезжать».</p><span class="pread">В работе →</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cta">
+        <h2>Нужно то же самое — но под вашу задачу?</h2>
+        <p>Опишите, что ломается. Перескажу своими словами, дам план и честный срок с запасом.</p>
+        <div class="row">
+          <a class="pill green lg" href="https://kwork.ru/script-programming/50705069/scheta-i-akty-vruchnuyu-nastroyu-pdf-iz-tablitsy?ref=15189887" target="_blank" rel="noopener">Обсудить на Kwork</a>
+          <a class="pill glass lg" href="https://kwork.ru/user/DayOneBuilder?ref=15189887" target="_blank" rel="noopener">Профиль на Kwork ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/"><span class="sq"></span>&nbsp;Ben Ison</a>
+    <span>Python / AI Engineer · DayOneBuilder · © 2026</span>
+  </div>
+</footer>
 </body>
 </html>

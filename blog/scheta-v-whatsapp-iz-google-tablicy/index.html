@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Счета из Google Таблицы в WhatsApp и Telegram: разбор 2026</title>
 <meta name="description" content="Как отправлять счета из Google Таблицы автоматически: PDF вложением в WhatsApp или Telegram, без бана. Реальный случай, цены 2026, чек-лист запуска." />
-<meta name="theme-color" content="#08090a" />
+<meta name="theme-color" content="#000000" />
 <link rel="canonical" href="https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy/" />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
@@ -26,19 +26,19 @@
 <script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Счета клиентам из Google Таблицы: автоматом в WhatsApp и Telegram", "description": "Как отправлять счета из Google Таблицы автоматически: PDF вложением в WhatsApp или Telegram, без бана. Реальный случай, цены 2026, чек-лист запуска.", "inLanguage": "ru", "datePublished": "2026-07-13", "dateModified": "2026-07-13", "author": {"@type": "Person", "name": "Бен Айсон", "url": "https://dayonebuilder.online/"}, "publisher": {"@type": "Organization", "name": "DayOneBuilder", "url": "https://dayonebuilder.online/", "logo": {"@type": "ImageObject", "url": "https://dayonebuilder.online/images/icon-512.png"}}, "image": "https://dayonebuilder.online/assets/og/dayonebuilder-og-glowing-workbench.png", "mainEntityOfPage": "https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy/"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Главная", "item": "https://dayonebuilder.online/"}, {"@type": "ListItem", "position": 2, "name": "Статьи", "item": "https://dayonebuilder.online/blog/"}, {"@type": "ListItem", "position": 3, "name": "Счета из Google Таблицы в WhatsApp и Telegram", "item": "https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy/"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Можно ли отправить PDF-счёт вложением, а не ссылкой на Google Диск?", "acceptedAnswer": {"@type": "Answer", "text": "Да, и нужно именно так. И WhatsApp Business API, и Telegram Bot API умеют отправлять документы файлом. Клиент получает обычное вложение: открыл - оплатил. Ссылка на Диск требует доступа и живёт, пока жив файл."}}, {"@type": "Question", "name": "Счета своим клиентам - это рассылка, за которую банят и штрафуют?", "acceptedAnswer": {"@type": "Answer", "text": "Нет. Счёт по действующему заказу - транзакционное сообщение, а не реклама: под рекламные штрафы оно не подпадает, а у WhatsApp для таких сообщений есть отдельная категория utility-шаблонов. Банят за «серые» шлюзы и рассылки по холодным базам - это другая история."}}, {"@type": "Question", "name": "Сколько стоит отправка 50-200 счетов в месяц?", "acceptedAnswer": {"@type": "Answer", "text": "Через свою связку: Telegram - бесплатно; WhatsApp - единицы рублей за счёт вне 24-часового окна, бесплатно внутри окна, плюс абонплата провайдера, если подключаться не напрямую к Meta. Через сервис-интегратор - от 1 000-6 000 рублей в месяц подписки плюс те же сообщения."}}, {"@type": "Question", "name": "Что будет, если в таблице ошибка - клиент получит кривой счёт?", "acceptedAnswer": {"@type": "Answer", "text": "При правильной сборке - нет. Guard-формулы помечают строку с ошибкой «на проверку», и она не попадает в отправку. Это ключевое отличие продуманной связки от «скрипта на коленке»."}}, {"@type": "Question", "name": "А расширения для браузера, которые шлют сообщения из таблицы, - разве не проще?", "acceptedAnswer": {"@type": "Answer", "text": "Проще - до первой проблемы. Они работают поверх WhatsApp Web, с вашего личного номера и вне правил платформы: риск бана реален, а сам сервис может закрыться, как уже случилось с известными инструментами этого класса. Для потока счетов - нет."}}]}]</script>
 <style>
   :root{
-    --bg:#08090a;--surface:#0e100f;--surface-2:#141613;
+    --bg:#000000;--surface:#0e100f;--surface-2:#141613;
     --line:rgba(255,255,255,.09);--line-soft:rgba(255,255,255,.055);
     --fg:#f4f7f5;--muted:#9ba39e;--dim:#6b726d;
-    --accent:#3ddc84;--accent-ink:#08130c;--accent-dim:rgba(61,220,132,.13);
+    --accent:#19b976;--accent-ink:#08130c;--accent-dim:rgba(25,185,118,.13);
     --danger:#f0736f;--radius:14px;--maxw:1140px;--colw:720px;
-    --sans:system-ui,-apple-system,"SF Pro Display","Segoe UI",Roboto,sans-serif;
+    --sans:"Helvetica Neue",Arial,"Segoe UI",system-ui,sans-serif;
     --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",monospace;
   }
   *{box-sizing:border-box}
   html,body{margin:0;min-height:100%;background:var(--bg)}
   body{
     background:
-      radial-gradient(1100px 500px at 50% -12%, rgba(61,220,132,.05), transparent 62%),
+      radial-gradient(1100px 500px at 50% -12%, rgba(25,185,118,.05), transparent 62%),
       var(--bg);
     color:var(--fg);font-family:var(--sans);-webkit-font-smoothing:antialiased;
     line-height:1.6;letter-spacing:-.005em;overflow-x:hidden;
@@ -59,15 +59,15 @@
   .nav-links a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .15s}
   .nav-links a:hover,.nav-links a.on{color:var(--fg)}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    font-size:14px;font-weight:600;border-radius:10px;padding:10px 16px;cursor:pointer;
+    font-size:14px;font-weight:600;border-radius:999px;padding:10px 18px;cursor:pointer;
     border:1px solid transparent;text-decoration:none;white-space:nowrap;
     transition:transform .12s, background .15s, border-color .15s}
   .btn:active{transform:translateY(1px)}
   .btn-primary{background:var(--accent);color:var(--accent-ink)}
-  .btn-primary:hover{background:#4ee796}
+  .btn-primary:hover{background:#1ed687}
   .btn-ghost{background:transparent;color:var(--fg);border-color:var(--line)}
   .btn-ghost:hover{border-color:rgba(255,255,255,.28)}
-  .btn-lg{padding:13px 22px;font-size:15px;border-radius:11px}
+  .btn-lg{padding:13px 22px;font-size:15px;border-radius:999px}
 
   /* article scaffold */
   .art{max-width:var(--colw);margin:0 auto;padding:44px 24px 0}
@@ -81,7 +81,7 @@
     font-weight:700;margin:14px 0 0;text-wrap:balance;overflow-wrap:normal;hyphens:none}
   .lede{font-size:clamp(1.02rem,1.3vw,1.14rem);color:var(--muted);margin:18px 0 0;line-height:1.6}
 
-  .promise{margin:28px 0 0;border:1px solid rgba(61,220,132,.22);border-radius:var(--radius);
+  .promise{margin:28px 0 0;border:1px solid rgba(25,185,118,.22);border-radius:var(--radius);
     background:var(--accent-dim);padding:20px 22px}
   .promise .pt{font:600 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
   .promise ul{margin:12px 0 0;padding-left:20px}
@@ -96,7 +96,7 @@
   .art-body p b,.art-body li b{color:var(--fg)}
   .art-body ul,.art-body ol{margin:14px 0 0;padding-left:22px}
   .art-body li{font-size:15.5px;margin:7px 0;color:#d9ded9}
-  .tldr{margin:14px 0 0;border-left:3px solid var(--accent);background:rgba(61,220,132,.06);
+  .tldr{margin:14px 0 0;border-left:3px solid var(--accent);background:rgba(25,185,118,.06);
     border-radius:0 10px 10px 0;padding:12px 16px}
   .tldr p{margin:0;font-size:14.5px}
   .tldr .tl-tag{font:700 11px/1 var(--mono);letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
@@ -117,7 +117,7 @@
   .quote .qa{display:block;margin-top:8px;font:500 12.5px/1 var(--mono);font-style:normal;color:var(--dim)}
 
   .cta-inline{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--radius);
-    background:linear-gradient(180deg,var(--surface),#0b0d0c);padding:20px 22px;
+    background:linear-gradient(180deg,var(--surface),#070807);padding:20px 22px;
     display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between}
   .cta-inline .cx{max-width:46ch}
   .cta-inline b{font-size:15px}
@@ -140,13 +140,13 @@
   .author{margin:36px 0 0;display:flex;gap:14px;align-items:center;border:1px solid var(--line-soft);
     border-radius:var(--radius);padding:16px 18px;background:var(--surface)}
   .author img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none;
-    border:1px solid var(--line);box-shadow:0 0 0 3px rgba(61,220,132,.1)}
+    border:1px solid var(--line);box-shadow:0 0 0 3px rgba(25,185,118,.1)}
   .author b{font-size:14.5px;display:block}
   .author small{font-size:12.5px;color:var(--dim)}
 
   .final{max-width:var(--colw);margin:44px auto 0;border:1px solid var(--line);border-radius:20px;
     padding:40px 30px;text-align:center;
-    background:radial-gradient(600px 260px at 50% 0%, rgba(61,220,132,.08), transparent 70%), var(--surface)}
+    background:radial-gradient(600px 260px at 50% 0%, rgba(25,185,118,.08), transparent 70%), var(--surface)}
   .final h2{font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.025em;margin:0 auto;max-width:22ch;text-wrap:balance}
   .final p{font-size:14.5px;color:var(--muted);max-width:46ch;margin:14px auto 24px}
   .final .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
@@ -168,12 +168,8 @@
   <header class="site">
     <div class="container nav">
       <a class="brand" href="/">
-        <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-          <rect x="1" y="1" width="30" height="30" rx="8" stroke="rgba(255,255,255,.14)"/>
-          <path d="M9 22V10h5.2c3.4 0 5.8 2.4 5.8 6s-2.4 6-5.8 6H9z" stroke="#3ddc84" stroke-width="1.7" stroke-linejoin="round"/>
-          <circle cx="22.5" cy="21.5" r="1.7" fill="#3ddc84"/>
-        </svg>
-        <span><b>DayOneBuilder</b><span class="sub">Python / AI инженер</span></span>
+        <span style="width:12px;height:12px;background:var(--accent);box-shadow:0 0 12px rgba(25,185,118,.45);display:inline-block;flex:none"></span>
+        <span><b>Ben Ison</b><span class="sub">Python / AI инженер</span></span>
       </a>
       <nav class="nav-links">
         <a href="/#work">С чем приходят</a>
