@@ -82,16 +82,31 @@
   .sub{max-width:56ch;margin:26px auto 0;color:var(--grey);font-size:clamp(15px,1.6vw,17px)}
   .cta-row{display:flex;gap:12px;justify-content:center;margin-top:30px;flex-wrap:wrap}
 
-  .console-wrap{margin:52px auto 0;max-width:760px;position:relative}
-  .console-wrap::after{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:14px;background:radial-gradient(60% 120% at 50% 0,var(--glow),transparent 70%);filter:blur(14px)}
-  .console{background:linear-gradient(#0b0c0b,#070807);border:1px solid var(--line2);border-radius:12px;text-align:left;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.9)}
-  .console .bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);background:#0a0b0a}
-  .console .bar .d{width:11px;height:11px;border-radius:50%;background:#262826} .console .bar .d.g{background:var(--green)}
-  .console .bar .title{margin-left:8px;font-family:var(--mono);font-size:12px;color:var(--grey)}
-  .console .body{padding:18px 18px 20px;font-family:var(--mono);font-size:clamp(12px,1.5vw,13.5px);line-height:1.85;min-height:196px}
-  .console .ln{white-space:pre-wrap;word-break:break-word}
-  .console .p{color:var(--green)} .console .cmd{color:#fff} .console .arw{color:var(--teal)} .console .cmt{color:var(--dim)} .console .ok{color:var(--green);font-weight:600;letter-spacing:.08em}
-  .caret{display:inline-block;width:8px;height:1.05em;background:var(--green);vertical-align:-2px;margin-left:2px;animation:blink 1.05s steps(1) infinite;box-shadow:0 0 8px var(--glow)}
+  .taskbox{margin:46px auto 0;max-width:720px;text-align:left;position:relative;background:linear-gradient(#0c0d0c,#080908);border:1px solid var(--line2);border-radius:16px;padding:22px 22px 24px}
+  .taskbox::after{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:17px;background:radial-gradient(60% 120% at 50% 0,var(--glow),transparent 70%);filter:blur(16px)}
+  .taskbox .tlabel{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);display:block;margin-bottom:13px}
+  .taskbox .tlabel span{color:var(--grey)}
+  .taskrow{display:flex;gap:10px;flex-wrap:wrap}
+  .taskrow input{flex:1;min-width:200px;background:#0a0b0a;border:1px solid var(--line2);border-radius:11px;padding:13px 15px;color:#fff;font-family:var(--sans);font-size:15px}
+  .taskrow input::placeholder{color:var(--dim)}
+  .taskrow input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(25,185,118,.15)}
+  .taskrow .go{background:var(--green);color:#04120b;font-weight:600;border:0;border-radius:11px;padding:0 24px;font-size:15px;cursor:pointer;white-space:nowrap;transition:box-shadow .2s}
+  .taskrow .go:hover{box-shadow:0 6px 22px var(--glow)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+  .chips .lab{font-family:var(--mono);font-size:11.5px;color:var(--grey);margin-right:2px}
+  .chip{background:#0e0f0e;border:1px solid var(--line2);color:var(--hi);border-radius:999px;padding:7px 13px;font-size:13px;cursor:pointer;transition:border-color .18s,background .18s,color .18s}
+  .chip:hover{border-color:#3a3e3a;color:#fff}
+  .chip.active{border-color:var(--green);color:#fff;background:rgba(25,185,118,.1)}
+  .result{margin-top:20px;border-top:1px solid var(--line);padding-top:18px;display:grid;gap:13px}
+  .result .rrow{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:start}
+  .result .rk{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--green);padding-top:3px}
+  .result .rv{color:var(--hi);font-size:14.5px;line-height:1.55}
+  .result .plan{display:flex;flex-direction:column;gap:5px}
+  .result .plan span{display:flex;gap:8px} .result .plan i{color:var(--green);font-style:normal}
+  .result #r-cta{margin-top:6px;justify-self:start}
+  .result.show>*{animation:up .5s cubic-bezier(.2,.7,.2,1) both}
+  .result.show>*:nth-child(2){animation-delay:.06s} .result.show>*:nth-child(3){animation-delay:.13s} .result.show>*:nth-child(4){animation-delay:.2s}
+  @media(max-width:560px){.result .rrow{grid-template-columns:1fr;gap:4px}.taskrow .go{width:100%}}
 
   section{padding:70px 0;position:relative}
   .sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:32px;flex-wrap:wrap}
@@ -196,10 +211,18 @@
         <a class="pill green lg" href="https://kwork.ru/user/DayOneBuilder?ref=15189887" target="_blank" rel="noopener">Обсудить задачу</a>
         <a class="pill glass lg" href="#kworks">Готовые кворки</a>
       </div>
-      <div class="console-wrap fade d4">
-        <div class="console">
-          <div class="bar"><span class="d"></span><span class="d"></span><span class="d g"></span><span class="title">ben@dayonebuilder — заявка</span></div>
-          <div class="body" id="term"><span class="ln" id="termtext"></span><span class="caret" id="caret"></span></div>
+      <div class="taskbox fade d4" id="taskbox">
+        <span class="tlabel">◗ Разбор задачи <span>— опишите своими словами или выберите частую</span></span>
+        <div class="taskrow">
+          <input id="taskin" type="text" placeholder="Например: счета выставляю вручную…" autocomplete="off" aria-label="Опишите вашу задачу">
+          <button class="go" id="taskgo" type="button">Разобрать</button>
+        </div>
+        <div class="chips" id="chips"><span class="lab">Частые задачи:</span></div>
+        <div class="result" id="result" aria-live="polite">
+          <div class="rrow"><span class="rk">Понял так</span><span class="rv" id="r-understand"></span></div>
+          <div class="rrow"><span class="rk">План</span><span class="rv"><span class="plan" id="r-plan"></span></span></div>
+          <div class="rrow"><span class="rk">Срок</span><span class="rv" id="r-eta"></span></div>
+          <a class="pill green" id="r-cta" href="#" target="_blank" rel="noopener">Обсудить эту задачу на Kwork ↗</a>
         </div>
       </div>
     </div>
@@ -334,22 +357,70 @@
 
 <script>
 (function(){
-  var el=document.getElementById('termtext'); if(!el) return;
-  var seq=[
-    {t:'$ ben разбери "прайс не грузится на сайт"\n',c:'cmd'},
-    {t:'→ понял: XLSX не парсится из-за формата\n',c:'plain',arw:true},
-    {t:'→ план: parser → API → проверка после перезагрузки\n',c:'plain',arw:true},
-    {t:'→ срок: 2 дня (с запасом)\n',c:'plain',arw:true},
-    {t:'✓ РАЗОБРАНО\n',c:'ok'},
-    {t:'# жду вашу задачу…',c:'cmt'}
+  var input=document.getElementById('taskin'); if(!input) return;
+  var chipsEl=document.getElementById('chips'), out=document.getElementById('result');
+  var U=document.getElementById('r-understand'), P=document.getElementById('r-plan'), E=document.getElementById('r-eta'), C=document.getElementById('r-cta');
+  var PROFILE='https://kwork.ru/user/DayOneBuilder?ref=15189887';
+  var TASKS=[
+    {id:'price',chip:'Прайс не грузится',input:'Прайс не грузится на сайт',kw:['прайс','price','каталог','выгрузк'],
+     understand:'Выгрузка (XLSX / CSV) не доезжает до сайта — битый формат, кодировка или «плавающие» заголовки колонок.',
+     plan:['Проверю файл и найду, что блокирует','Поправлю парсер или выгрузку','Проверю результат после перезагрузки'],
+     eta:'1–2 дня, с запасом',
+     url:'https://kwork.ru/bulletin-boards/52974541/prays-list-ne-zagruzhaetsya-naydu-oshibki-v-fayle?ref=15189887'},
+    {id:'scheta',chip:'Счета вручную',input:'Счета выставляю вручную',kw:['счет','счёт','акт','инвойс','pdf'],
+     understand:'Счета собираются руками и уходят клиентам по одному — это ваше время и риск ошибок в суммах.',
+     plan:['Соберу реестр в вашей же таблице','Пакетно сгенерирую PDF по шаблону','Автоотправка в WhatsApp / Telegram со статусами'],
+     eta:'2–4 дня, с запасом',
+     url:'https://kwork.ru/script-programming/50705069/scheta-i-akty-vruchnuyu-nastroyu-pdf-iz-tablitsy?ref=15189887'},
+    {id:'form',chip:'Форма → таблица',input:'Заявки с формы не попадают в таблицу',kw:['форм','тильд','tilda','лид'],
+     understand:'Заявки с формы теряются или их приходится вручную переносить в таблицу.',
+     plan:['Свяжу форму с Google Sheets','Настрою поля и формат записи','Оставлю проверку, что заявки доходят'],
+     eta:'1 день',
+     url:'https://kwork.ru/script-programming/50704783/svyazhu-formu-sayta-s-google-sheets?ref=15189887'},
+    {id:'gpt',chip:'Код от ChatGPT ломается',input:'Код от ChatGPT ломается',kw:['chatgpt','gpt','код','скрипт','ошибк','бот'],
+     understand:'Нейросеть дала код, но он падает или работает не так, как нужно.',
+     plan:['Найду причину сбоя','Поправлю логику','Покажу, как проверить на ваших данных'],
+     eta:'1–2 дня',
+     url:'https://kwork.ru/script-programming/50704914/chatgpt-dal-kod-no-lomaetsya-pochinyu-skript-formulu-bota?ref=15189887'},
+    {id:'tg',chip:'Заявки вижу поздно',input:'Не вижу заявки вовремя',kw:['заявк','telegram','телеграм','уведомл','вовремя'],
+     understand:'Заявки приходят, но вы узнаёте о них поздно — и что-то теряется.',
+     plan:['Настрою уведомления в Telegram','Из таблицы, формы или CRM','Проверю на реальной заявке'],
+     eta:'1 день',
+     url:'https://kwork.ru/script-programming/52959196/ne-vidite-zayavki-vovremya-nastroyu-telegram?ref=15189887'},
+    {id:'formula',chip:'Формула не считает',input:'Формула в таблице не считает',kw:['формул','excel','эксель','таблиц','sheets','считает'],
+     understand:'Формула в Google Sheets или Excel даёт ошибку либо неверный результат.',
+     plan:['Разберу формулу и данные','Починю и покрою крайние случаи','Сделаю результат проверяемым'],
+     eta:'от нескольких часов до 1 дня',
+     url:'https://kwork.ru/script-programming/52958991/pochinyu-formulu-v-gugl-tablitsakh-ili-excel?ref=15189887'}
   ];
-  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-  function paint(arr){var html='';for(var i=0;i<arr.length;i++){var s=arr[i];var cls=s.c==='ok'?'ok':s.c==='cmt'?'cmt':s.c==='cmd'?'cmd':'';var txt=esc(s.text);if(s.c==='cmd'){txt='<span class="p">$</span>'+esc(s.text.slice(1));}else if(s.arw){txt='<span class="arw">→</span>'+esc(s.text.slice(1));}html+='<span class="'+cls+'">'+txt+'</span>';}el.innerHTML=html;}
-  if(reduce){paint(seq.map(function(s){return {text:s.t,c:s.c,arw:s.arw};}));return;}
-  var built=[],li=0,ci=0;
-  function tick(){if(li>=seq.length)return;var line=seq[li];if(ci===0)built.push({text:'',c:line.c,arw:line.arw});ci++;built[built.length-1].text=line.t.slice(0,ci);paint(built);if(ci>=line.t.length){li++;ci=0;var pause=line.c==='ok'?520:line.t.indexOf('→')===0?360:220;setTimeout(tick,pause);}else setTimeout(tick,18+Math.random()*34);}
-  setTimeout(tick,600);
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+  function render(t){
+    U.textContent=t.understand;
+    P.innerHTML=t.plan.map(function(s,i){return '<span><i>'+(i+1)+'.</i> '+esc(s)+'</span>';}).join('');
+    E.textContent=t.eta;
+    C.setAttribute('href',t.url);
+    out.classList.remove('show'); void out.offsetWidth; out.classList.add('show');
+    var kids=chipsEl.querySelectorAll('.chip');
+    for(var i=0;i<kids.length;i++){ kids[i].classList.toggle('active',kids[i].getAttribute('data-id')===t.id); }
+  }
+  TASKS.forEach(function(t){
+    var b=document.createElement('button'); b.type='button'; b.className='chip'; b.textContent=t.chip; b.setAttribute('data-id',t.id);
+    b.addEventListener('click',function(){ input.value=t.input; render(t); });
+    chipsEl.appendChild(b);
+  });
+  function analyze(){
+    var q=(input.value||'').toLowerCase().trim();
+    if(!q){ render(TASKS[0]); return; }
+    var found=null;
+    for(var i=0;i<TASKS.length && !found;i++){ for(var j=0;j<TASKS[i].kw.length;j++){ if(q.indexOf(TASKS[i].kw[j])>-1){ found=TASKS[i]; break; } } }
+    if(found){ render(found); }
+    else{ render({id:'',understand:'Понял: «'+input.value.trim()+'». Разберу лично и вернусь с планом и честным сроком.',
+      plan:['Уточню детали в переписке','Дам план и честный срок с запасом','Сделаю и проверю на ваших данных'],
+      eta:'скажу после короткого уточнения',url:PROFILE}); }
+  }
+  document.getElementById('taskgo').addEventListener('click',analyze);
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); analyze(); } });
+  render(TASKS[0]);
 })();
 </script>
 </body>
