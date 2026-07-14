@@ -229,7 +229,7 @@
         <div class="chips" id="chips"><span class="lab">Частые задачи — нажмите, чтобы увидеть разбор:</span></div>
         <div class="answer" id="answer" aria-live="polite">
           <div class="ans-head"><span class="dot">✓</span> Разбор вашей задачи</div>
-          <p class="ans-restate"><span class="lead">Если правильно понял —</span> <span id="r-understand"></span></p>
+          <p class="ans-restate"><span class="lead">Решаем проблему:</span> <span id="r-understand"></span></p>
           <div><span class="ans-k">Что сделаю</span><ol class="plan" id="r-plan"></ol></div>
           <div class="ans-eta"><span class="ans-k">Срок</span><span class="val" id="r-eta"></span></div>
           <a class="pill green" id="r-cta" href="#" target="_blank" rel="noopener">Обсудить эту задачу на Kwork ↗</a>
@@ -424,7 +424,7 @@
     var found=null;
     for(var i=0;i<TASKS.length && !found;i++){ for(var j=0;j<TASKS[i].kw.length;j++){ if(q.indexOf(TASKS[i].kw[j])>-1){ found=TASKS[i]; break; } } }
     if(found){ render(found); }
-    else{ render({id:'',understand:'вы написали: «'+input.value.trim()+'». Это не из примеров выше — разберу лично и вернусь с планом и честным сроком.',
+    else{ render({id:'',understand:'«'+input.value.trim()+'» — это не из примеров выше. Разберу лично и вернусь с планом и честным сроком.',
       plan:['Уточню пару деталей в переписке','Дам план и честный срок с запасом','Сделаю и проверю на ваших данных'],
       eta:'скажу после короткого уточнения',url:PROFILE}); }
   }
