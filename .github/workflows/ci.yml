@@ -1,0 +1,31 @@
+name: CI
+
+# Guards against regressions like ffbc4e1, where an unescaped apostrophe in an
+# inline <script> silently killed the home task-picker widget. Runs on every
+# push and PR to main so a broken script can't reach GitHub Pages unnoticed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Hard guard, zero dependencies: every inline <script> must parse.
+      - name: Inline JS syntax check
+        run: node scripts/check-inline-js.mjs .
+
+      # Behavioural guard: the home widget must actually render its chips + panel.
+      # ubuntu-latest ships Google Chrome; point the check at it.
+      - name: Home widget DOM check
+        run: node scripts/check-home-widget.mjs .
+        env:
+          CHROME_PATH: /usr/bin/google-chrome

@@ -1,0 +1,11 @@
+{
+  "name": "dayonebuilder-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site for dayonebuilder.online — regression checks.",
+  "scripts": {
+    "test": "bash scripts/test.sh",
+    "test:syntax": "node scripts/check-inline-js.mjs .",
+    "test:widget": "node scripts/check-home-widget.mjs ."
+  }
+}
