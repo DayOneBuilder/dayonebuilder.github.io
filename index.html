@@ -423,7 +423,7 @@
      plan:['Set up an alert on the exact event: new row, status change, or a daily summary','Test it on a copy: a row arrives, the ping lands in seconds','Go live on Google triggers - no extra subscription'],
      eta:'about 1 day',
      url:KW.tg},
-    {id:'report',nochip:true,kw:['report','totals','add up','reconcile','does not match','doesn't match','stripe','payout'],
+    {id:'report',nochip:true,kw:['report','totals','add up','reconcile','does not match',"doesn't match",'stripe','payout'],
      understand:'exports pile up, the report is hand-built, and the totals never match the source.',
      plan:['Clean dates, numbers, duplicates and shifted columns on a copy','Build one report on formulas you can trace','Check the totals against a number you trust - or the export itself'],
      eta:'1-2 days',
@@ -461,7 +461,7 @@
     var found=null;
     for(var i=0;i<TASKS.length && !found;i++){ for(var j=0;j<TASKS[i].kw.length;j++){ if(q.indexOf(TASKS[i].kw[j])>-1){ found=TASKS[i]; break; } } }
     if(found){ render(found); }
-    else{ render({id:'',understand:'"'+input.value.trim()+'" is not one of the samples above. I'll look at it myself and come back with a plan and an honest deadline.',
+    else{ render({id:'',understand:'"'+input.value.trim()+'" is not one of the samples above. I\'ll look at it myself and come back with a plan and an honest deadline.',
       plan:['I clarify a couple of details in chat','You get a plan and a deadline with buffer built in','I build it and verify it on your data'],
       eta:'agreed after one short chat',url:PROFILE}); }
   }
