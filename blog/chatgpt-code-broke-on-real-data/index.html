@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>ChatGPT Wrote Your Script. Your Real Data Broke It.</title>
+<meta name="description" content="Your ChatGPT code works on sample data but not real data. The example had 10 clean rows; your export has 5,000 messy ones. How to tell crashed from lying." />
+<meta name="theme-color" content="#000000" />
+<link rel="canonical" href="https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/" />
+<link rel="alternate" hreflang="en" href="https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="DayOneBuilder" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="ChatGPT Wrote Your Script. Your Real Data Broke It." />
+<meta property="og:description" content="Your ChatGPT code works on sample data but not real data. The example had 10 clean rows; your export has 5,000 messy ones. How to tell crashed from lying." />
+<meta property="og:url" content="https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/" />
+<meta property="og:image" content="https://dayonebuilder.online/assets/og/dayonebuilder-og-glowing-workbench.png" />
+<meta property="article:published_time" content="2026-07-17T12:00:00+03:00" />
+<meta property="article:author" content="Ben Ison" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="ChatGPT Wrote Your Script. Your Real Data Broke It." />
+<meta name="twitter:description" content="Your ChatGPT code works on sample data but not real data. The example had 10 clean rows; your export has 5,000 messy ones. How to tell crashed from lying." />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-KQMLYS3VVE");</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "ChatGPT wrote your script. Your real data broke it.", "description": "Your ChatGPT code works on sample data but not real data. The example had 10 clean rows; your export has 5,000 messy ones. How to tell crashed from lying.", "inLanguage": "en", "datePublished": "2026-07-17T12:00:00+03:00", "dateModified": "2026-07-17T12:00:00+03:00", "author": {"@type": "Person", "name": "Ben Ison", "url": "https://dayonebuilder.online/", "jobTitle": "Python / AI Engineer", "knowsAbout": ["Google Sheets", "Microsoft Excel", "Google Apps Script", "VBA", "Python", "CSV import", "AI-generated code", "PDF generation", "API integration"], "sameAs": ["https://kwork.com/user/dayonebuilder", "https://dayonebuilder.online/", "https://kwork.ru/user/DayOneBuilder"]}, "publisher": {"@type": "Organization", "name": "DayOneBuilder", "url": "https://dayonebuilder.online/", "logo": {"@type": "ImageObject", "url": "https://dayonebuilder.online/images/icon-512.png"}}, "image": "https://dayonebuilder.online/assets/og/dayonebuilder-og-glowing-workbench.png", "mainEntityOfPage": "https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dayonebuilder.online/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://dayonebuilder.online/blog/"}, {"@type": "ListItem", "position": 3, "name": "ChatGPT wrote your script. Your real data broke it.", "item": "https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "The script worked for months and just started failing. Nothing changed.", "acceptedAnswer": {"@type": "Answer", "text": "The code did not change. The file grew. The most common version is a script that needs five and a half minutes on a sheet that gets a little longer every week - and Apps Script stops at six, on free and paid accounts alike. The tell is that it fails in the busy morning and passes at lunchtime."}}, {"@type": "Question", "name": "Should I just ask ChatGPT to fix its own code?", "acceptedAnswer": {"@type": "Answer", "text": "Once, sure. It often works. But if you have been round that loop twice and it still fails, stop: each rewrite starts from scratch, so it can change logic you never asked it to touch. And when the ceiling is arithmetic - 2,100 network calls against a six-minute limit - no rewrite gets there. Collect a reproduction instead: the smallest slice of real data that reliably breaks it."}}, {"@type": "Question", "name": "How do I know if the number it gave me is actually right?", "acceptedAnswer": {"@type": "Answer", "text": "Compare it to one number you already know from somewhere else. Last month's total, the count at the bottom of the sheet, an invoice you can see. If those two disagree, you have your answer without reading any code. If you have no independent number to compare against, that is worth fixing before anything else - a report nobody can check is not a report."}}, {"@type": "Question", "name": "Is a paid tier or a better model going to solve this?", "acceptedAnswer": {"@type": "Answer", "text": "Not for the six-minute limit: Google publishes the same runtime ceiling for consumer and Workspace accounts. And a better model does not know your data any better - your column names and business rules were not in its training data at any tier. Better models write cleaner generic code. The gap between generic and yours stays exactly where it was."}}, {"@type": "Question", "name": "I do not understand the code at all. Is that a problem for getting it fixed?", "acceptedAnswer": {"@type": "Answer", "text": "No - that is the normal case here. The code is readable on its own; the story behind it is not needed. What is needed is what you expected to see, what you got instead, and a copy of the data it failed on. In plain words, with no technical terms."}}]}]</script>
+<style>
+  :root{
+    --bg:#000000;--surface:#0e100f;--surface-2:#141613;
+    --line:rgba(255,255,255,.09);--line-soft:rgba(255,255,255,.055);
+    --fg:#f4f7f5;--muted:#9ba39e;--dim:#6b726d;
+    --accent:#19b976;--accent-ink:#08130c;--accent-dim:rgba(25,185,118,.13);
+    --danger:#f0736f;--radius:14px;--maxw:1140px;--colw:720px;
+    --sans:"Helvetica Neue",Arial,"Segoe UI",system-ui,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg)}
+  body{
+    background:
+      radial-gradient(1100px 500px at 50% -12%, rgba(25,185,118,.05), transparent 62%),
+      var(--bg);
+    color:var(--fg);font-family:var(--sans);-webkit-font-smoothing:antialiased;
+    line-height:1.6;letter-spacing:-.005em;overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  header.site{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
+    background:rgba(8,9,10,.72);border-bottom:1px solid var(--line-soft)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+  .brand b{font-size:15px;font-weight:650;letter-spacing:-.02em}
+  .brand .sub{display:block;font-size:11px;color:var(--dim);font-weight:500}
+  .nav-links{display:flex;align-items:center;gap:28px}
+  .nav-links a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .15s}
+  .nav-links a:hover,.nav-links a.on{color:var(--fg)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-size:14px;font-weight:600;border-radius:999px;padding:10px 18px;cursor:pointer;
+    border:1px solid transparent;text-decoration:none;white-space:nowrap;
+    transition:transform .12s, background .15s, border-color .15s}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--accent);color:var(--accent-ink)}
+  .btn-primary:hover{background:#1ed687}
+  .btn-ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.28)}
+  .btn-lg{padding:13px 22px;font-size:15px;border-radius:999px}
+
+  .art{max-width:var(--colw);margin:0 auto;padding:44px 24px 0}
+  .crumbs{font:500 12.5px/1.5 var(--mono);color:var(--dim)}
+  .crumbs a{color:var(--dim);text-decoration:none}
+  .crumbs a:hover{color:var(--muted)}
+  .art-kicker{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:26px;
+    font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .art-kicker .meta{color:var(--dim);letter-spacing:.02em;text-transform:none;font-weight:500}
+  h1{font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.03em;
+    font-weight:700;margin:14px 0 0;text-wrap:balance;overflow-wrap:normal;hyphens:none}
+  .lede{font-size:clamp(1.02rem,1.3vw,1.14rem);color:var(--muted);margin:18px 0 0;line-height:1.6}
+
+  .promise{margin:28px 0 0;border:1px solid rgba(25,185,118,.22);border-radius:var(--radius);
+    background:var(--accent-dim);padding:20px 22px}
+  .promise .pt{font:600 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .promise ul{margin:12px 0 0;padding-left:20px}
+  .promise li{margin:6px 0;font-size:14.5px}
+  .promise .pm{margin-top:12px;font:500 12.5px/1.5 var(--mono);color:var(--muted)}
+
+  .art-body{padding-bottom:8px}
+  .art-body h2{font-size:clamp(1.35rem,2.4vw,1.7rem);line-height:1.15;letter-spacing:-.02em;
+    font-weight:670;margin:44px 0 0;text-wrap:balance}
+  .art-body h3{font-size:1.08rem;font-weight:640;margin:28px 0 0;letter-spacing:-.015em}
+  .art-body p{font-size:15.5px;margin:14px 0 0;color:#d9dedb}
+  .art-body p b,.art-body li b{color:var(--fg)}
+  .art-body ul,.art-body ol{margin:14px 0 0;padding-left:22px}
+  .art-body li{font-size:15.5px;margin:7px 0;color:#d9ded9}
+  .tldr{margin:14px 0 0;border-left:3px solid var(--accent);background:rgba(25,185,118,.06);
+    border-radius:0 10px 10px 0;padding:12px 16px}
+  .tldr p{margin:0;font-size:14.5px}
+  .tldr .tl-tag{font:700 11px/1 var(--mono);letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
+  .callout{margin:16px 0 0;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--surface)}
+  .callout .ct{font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+  .callout.warn .ct{color:#fbbf24}
+  .callout.info .ct{color:var(--muted)}
+  .callout p{margin:8px 0 0;font-size:14.5px}
+  .tbl-wrap{overflow-x:auto;margin:16px 0 0;border:1px solid var(--line-soft);border-radius:12px}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  th{font:600 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--dim);background:rgba(255,255,255,.015)}
+  tr:last-child td{border-bottom:none}
+  td{color:#d9ded9}
+  code{font-family:var(--mono);font-size:.92em;background:rgba(255,255,255,.05);
+    border:1px solid var(--line-soft);border-radius:6px;padding:2px 6px}
+  .cta-inline{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--radius);
+    background:linear-gradient(180deg,var(--surface),#070807);padding:20px 22px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between}
+  .cta-inline .cx{max-width:46ch}
+  .cta-inline b{font-size:15px}
+  .cta-inline p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
+
+  .cause{margin:16px 0 0;border:1px solid var(--line-soft);border-radius:12px;background:var(--surface);overflow:hidden}
+  .cause .crow{display:grid;grid-template-columns:88px 1fr;gap:0;border-top:1px solid var(--line-soft)}
+  .cause .crow:first-child{border-top:none}
+  .cause .ck{font:600 10.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);
+    padding:12px 0 12px 16px}
+  .cause .cv{padding:12px 16px 12px 0;font-size:14.5px;color:#d9ded9}
+  .cause .cv code{white-space:nowrap}
+  @media(max-width:560px){.cause .crow{grid-template-columns:1fr}.cause .ck{padding:12px 16px 0}.cause .cv{padding:4px 16px 12px}}
+
+  .steps-block{counter-reset:st;margin:16px 0 0;border:1px solid var(--line-soft);border-radius:12px;overflow:hidden}
+  .stp{counter-increment:st;padding:16px 18px;border-top:1px solid var(--line-soft);display:grid;grid-template-columns:34px 1fr;gap:12px}
+  .stp:first-child{border-top:none}
+  .stp::before{content:counter(st,decimal-leading-zero);font:700 12px/1.9 var(--mono);color:var(--accent)}
+  .stp b{display:block;font-size:14.5px}
+  .stp p{margin:5px 0 0;font-size:14px;color:var(--muted)}
+
+  .sources{margin:44px 0 0;border-top:1px solid var(--line-soft);padding-top:20px}
+  .sources .st{font:600 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+  .sources ol{margin:12px 0 0;padding-left:20px}
+  .sources li{font-size:13px;color:var(--muted);margin:6px 0;overflow-wrap:anywhere}
+  .sources a{color:var(--muted)}
+  .sources a:hover{color:var(--fg)}
+
+  .author{margin:36px 0 0;display:flex;gap:14px;align-items:center;border:1px solid var(--line-soft);
+    border-radius:var(--radius);padding:16px 18px;background:var(--surface)}
+  .author img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none;
+    border:1px solid var(--line);box-shadow:0 0 0 3px rgba(25,185,118,.1)}
+  .author b{font-size:14.5px;display:block}
+  .author small{font-size:12.5px;color:var(--dim)}
+
+  .final{max-width:var(--colw);margin:44px auto 0;border:1px solid var(--line);border-radius:20px;
+    padding:40px 30px;text-align:center;
+    background:radial-gradient(600px 260px at 50% 0%, rgba(25,185,118,.08), transparent 70%), var(--surface)}
+  .final h2{font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.025em;margin:0 auto;max-width:24ch;text-wrap:balance}
+  .final p{font-size:14.5px;color:var(--muted);max-width:48ch;margin:14px auto 24px}
+  .final .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+  footer.site{border-top:1px solid var(--line-soft);padding:34px 0;margin-top:56px}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--dim);font-size:13px}
+  .foot a{color:var(--dim);text-decoration:none}
+  .foot a:hover{color:var(--muted)}
+
+
+  blockquote{margin:20px 0 0;border-left:3px solid var(--accent);background:rgba(25,185,118,.05);border-radius:0 10px 10px 0;padding:14px 18px}
+  blockquote p{margin:0;font-size:15px;color:#d9dedb;font-style:italic}
+  blockquote cite{display:block;margin-top:10px;font:500 12.5px/1.5 var(--mono);font-style:normal;color:var(--dim)}
+  blockquote cite a{color:var(--muted);text-decoration:none}
+  blockquote cite a:hover{color:var(--fg)}
+  .steps-list{counter-reset:sl;list-style:none;margin:16px 0 0;padding:0}
+  .steps-list li{counter-increment:sl;display:grid;grid-template-columns:28px 1fr;gap:12px;margin:12px 0;font-size:15.5px;color:#d9ded9;line-height:1.5}
+  .steps-list li::before{content:counter(sl);font:700 12px/1.6 var(--mono);color:var(--accent);border:1px solid var(--line);border-radius:6px;width:24px;height:24px;text-align:center}
+  @media(max-width:640px){
+    .nav-links{display:none}
+    .art{padding-top:30px}
+    .cta-inline{flex-direction:column;align-items:flex-start}
+  }
+  @media(prefers-reduced-motion:reduce){.btn:active{transform:none}}
+</style>
+</head>
+<body>
+  <header class="site">
+    <div class="container nav">
+      <a class="brand" href="/">
+        <span style="width:12px;height:12px;background:var(--accent);box-shadow:0 0 12px rgba(25,185,118,.45);display:inline-block;flex:none"></span>
+        <span><b>Ben Ison</b><span class="sub">Python / AI Engineer</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/#work">What people bring</a>
+        <a href="/#kworks">Kworks</a>
+        <a class="on" href="/blog/">Blog</a>
+      </nav>
+      <a class="btn btn-primary" href="https://kwork.com/user/dayonebuilder" target="_blank" rel="noopener">Open Kwork</a>
+    </div>
+  </header>
+  <article class="art">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / ChatGPT wrote your script</nav>
+    <div class="art-kicker"><span>AI code · Google Sheets</span><span class="meta">· 17 July 2026 · 12 min read</span></div>
+    <h1>ChatGPT wrote your script. Your real data broke it.</h1>
+    <p class="lede">It ran perfectly on the sample rows. On your actual file it either died or, worse, handed you a number that looks right and is not. Here is why that happens, and what to do about it.</p>
+    <div class="promise">
+      <div class="pt">What you get from this article</div>
+      <ul><li>The fork that decides everything: did it crash, or is it lying?</li><li>Why the same script takes 70 seconds instead of one, in Google's own numbers</li><li>The failure with no error message, and the one check that catches it</li><li>Six corners a model cuts by default, and the checklist that closes them</li><li>When to stop rewriting and hand it to a person</li></ul>
+      <div class="pm">Run the fork: the fork takes about a minute · Saves: the afternoon you were going to spend pasting errors back into the chat</div>
+    </div>
+    <div class="art-body">
+<p>You asked ChatGPT for a script. It gave you one, politely, in seconds. You pasted it in, ran it on a few rows, and it worked. Then you pointed it at the actual file, and it either fell over or - the worse outcome - it did not fall over at all and handed you a number.</p>
+<p>Both of those have the same root, and it is not that you did something wrong.</p>
+<h2 id="why-did-it-work-on-the-example-and-not-on-your-d">Why did it work on the example and not on your data?</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> ChatGPT code works on sample data but not real data because ten clean rows cannot fail. The sample was too small to tell a good script from a bad one. Your real file fails in ways the sample could not: blank rows, numbers that arrived as text, three date formats, a column somebody renamed last spring.</p></div>
+<p>Think about what the model actually saw. It saw the shape of your problem, described in a sentence or two, plus maybe a handful of sample rows you typed by hand.</p>
+<p>Those rows were clean, because you made them. Every number was a number, nothing was blank, and there was one date format. Nobody had sorted the sheet at 2am or pasted a column out of a bank export.</p>
+<p>Your real file is none of those things. It has 5,000 rows that arrived from six directions over three years. It has a column where 40 entries are text because they came out of an export. It has a blank row in the middle that somebody left as a visual separator.</p>
+<p>The script did not change between the two runs. The data did. That is the whole story, and the rest of this article is the detail.</p>
+<h2 id="is-it-crashed-or-is-it-lying">Is it crashed, or is it lying?</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> a crashed script and a lying script are two different problems with two different fixes, and confusing them wastes your afternoon. A crash is loud and honest: it tells you something broke and roughly where. A wrong number is quiet and expensive, and it will sit in your reports until somebody happens to check.</p></div>
+<p>Before you touch anything, sort your situation into one of these:</p>
+<div class="tbl-wrap"><table><tr><th>What you see</th><th>What kind of broken</th><th>Where to go</th></tr><tr><td>An error message, a red box, "Exceeded maximum execution time", nothing happens at all</td><td>Crashed</td><td>The three timeout sections below</td></tr><tr><td>It finishes, reports success, and gives you a number you do not trust</td><td>Lying</td><td>From "the number is wrong and nothing errored" onwards</td></tr><tr><td>It finishes, and some rows are updated and some are not</td><td>Both, and this is the nastiest</td><td>The checklist section, and read every word</td></tr></table></div>
+<p>If the symptom is that your totals look wrong and no script is involved at all, you are in a different building: I took the seven real causes apart in <a href="/blog/why-your-spreadsheet-total-is-wrong/">why your spreadsheet total is wrong</a>, and the <a href="/blog/why-your-spreadsheet-total-is-wrong/#triage">60-second triage</a> there tells you in three formulas whether the data is lying or the formula is.</p>
+<h2 id="what-exceeded-maximum-execution-time-actually-me">What "Exceeded maximum execution time" actually means</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> Google gives any Apps Script six minutes per run, then stops it dead at whatever line it was on. The limit is identical on a free account and a paid Workspace one, so upgrading changes nothing. The reason it appears out of nowhere is that your file crossed the threshold, and the script that fit last quarter no longer does.</p></div>
+<p>Google's quota page is blunt about the consequence:</p>
+<blockquote><p>If you exceed a quota or limitation, your script throws an exception and execution stops.</p><cite><a href="https://developers.google.com/apps-script/guides/services/quotas" target=_blank rel=noopener>Google, Quotas for Google Services</a></cite></blockquote>
+<p>Six minutes per execution, consumer and Workspace alike. Custom functions - the kind you call from inside a cell with <code>=myFunction()</code> - get 30 seconds.</p>
+<p>The part that makes people think their file is haunted is that this arrives late. Here is a real one from Google's own community forum:</p>
+<blockquote><p>Just recently my google script has been returning an error message of Exceeded Maximum Execution Time. I've been running the script for months and have never had any issues until last week. It errors out usually in the morning but will run just find [sic] by mid-day. Nothing has changed in the script since I first wrote it.</p><cite><a href="https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0" target=_blank rel=noopener>Cameron Coile, Google Apps Script Community</a></cite></blockquote>
+<p>Nothing changed in the script. The file grew. A script that needs five and a half minutes today needs six and a half next quarter, and then it is over. The time-of-day thing is real too: a loaded morning is slower than a quiet lunchtime, so the same script passes at noon and fails at 9am, which feels exactly like a haunting and is just arithmetic.</p>
+<h2 id="why-does-the-same-script-take-70-seconds-instead">Why does the same script take 70 seconds instead of one?</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> because the model wrote a loop that talks to the sheet once per cell. Google's own documentation puts the cost of that at 70 seconds against 1 second for the same result. On ten rows you cannot see the difference. On five thousand, one of them dies.</p></div>
+<p>This is the single most useful thing to understand here, so let me use Google's numbers rather than mine:</p>
+<blockquote><p>Alternating read and write commands is slow. To speed up a script, read all data into an array with one command, perform operations on the array data, and write the data out with one command.</p><cite><a href="https://developers.google.com/apps-script/guides/support/best-practices" target=_blank rel=noopener>Google, Apps Script Best Practices</a></cite></blockquote>
+<p>And the measurement, on the same 100x100 block of cells:</p>
+<blockquote><p>The inefficient code takes about 70 seconds to run, while the efficient code runs in just 1 second.</p><cite><a href="https://developers.google.com/apps-script/guides/support/best-practices" target=_blank rel=noopener>Google, Apps Script Best Practices</a></cite></blockquote>
+<p>Seventy times, for output that is character-for-character identical.</p>
+<p>Now, why does a model reach for the slow one? Because reading a cell, doing something, writing the cell back is the obvious way to say it, and the obvious way is what shows up most in the text it learned from. The choice is a reasonable one. It only becomes wrong at a volume the model was never shown.</p>
+<p>An expert on the same Google forum names the culprit in one line:</p>
+<blockquote><p>The classic example is setting Sheet cell values individually, one per loop.</p><cite><a href="https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0" target=_blank rel=noopener>Alan Wells, Google Apps Script Community</a></cite></blockquote>
+<p>Here is what that pattern costs on a real sheet. One user measured his own script at nearly five minutes for a single pass over 500 rows:</p>
+<blockquote><p>to run through the 500 rows looking for one email address once and generate an HTML email of 13 rows takes nearly 5 minutes</p><cite><a href="https://groups.google.com/g/google-apps-script-community/c/IMCFHQcWWEw" target=_blank rel=noopener>Dean Barrett, Google Apps Script Community</a></cite></blockquote>
+<p>Sit with that rate for a second. Five minutes for 500 rows is about 0.6 seconds per row, and the arithmetic from there is mine, not Google's: against today's six-minute ceiling, a script running at that rate is finished at roughly 600 rows. Your file has 5,000. It never had a chance, and the ten-row test could not have told you.</p>
+<h2 id="why-just-make-it-faster-cannot-work">Why "just make it faster" cannot work</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> sometimes the ceiling is arithmetic rather than code quality. When a script needs 105 minutes of network calls and the platform allows six, no rewrite closes that gap, and the model will cheerfully keep producing rewrites anyway. Knowing which kind of wall you are against saves you an afternoon of pasting errors into a chat window.</p></div>
+<p>The clearest case on the forum: a user needed about 2,100 order numbers, each one a separate call out to an API.</p>
+<blockquote><p>Each URL request can take 3-5 seconds to process and doing 2100 of them will certainly not be possible ever within the 6 mins window.</p><cite><a href="https://groups.google.com/g/google-apps-script-community/c/HyCxPjvwyI4" target=_blank rel=noopener>George Ghanem, Google Apps Script Community</a></cite></blockquote>
+<p>Do that multiplication: 2,100 requests at 3 seconds each is 105 minutes against a 360-second ceiling. You are not 10% over. You are off by a factor of seventeen. That job needs a different shape entirely - batching, saved progress, a trigger that picks up where the last run stopped - and no amount of "please optimise this" produces a different shape, because you did not ask for one.</p>
+<p>Which brings up the loop most people are stuck in when they give up: paste the error back, get a rewrite, run it, paste the next error. It feels like converging. Someone on Hacker News put the problem with it better than I could:</p>
+<blockquote><p>my gut reaction to "take an AI-inflated codebase and apply AI deflation to it" is something like "that's akin to applying two rounds of lossy transcoding; the errors don't cancel out, they cross-multiply"</p><cite><a href="https://news.ycombinator.com/item?id=48825761" target=_blank rel=noopener>fwlr, Hacker News</a></cite></blockquote>
+<p>Each rewrite starts from scratch. It can quietly change logic you never asked it to touch. And piling more of the conversation in does not help as much as you would hope. Chroma's research on long context found that "models do not use their context uniformly; instead, their performance grows increasingly unreliable as input length grows" (<a href="https://www.trychroma.com/research/context-rot" target=_blank rel=noopener>Context Rot</a>).</p>
+<p>If you have pasted the final fixed version five times and it still fails, that is information. It means the loop cannot close from where you are standing.</p>
+<div class="cta-inline"><div class="cx"><b>Rather not spend the afternoon on this?</b><p>Send me the error text and a copy of the file. I find the cause, fix one failing scenario, and check it against your data. $10, and Kwork holds the payment until you accept it.</p></div><a class="btn btn-primary" href="https://kwork.com/scripting/53560025/i-will-fix-the-code-chatgpt-gave-you-that-breaks-on-your-real-data" target="_blank" rel="noopener">Open the kwork</a></div>
+<h2 id="the-number-is-wrong-and-nothing-errored-why">The number is wrong and nothing errored. Why?</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> your script assumed a number and your export handed it a string that looks exactly like one. Nothing crashes, because nothing is technically wrong - the formula simply skips what it does not recognise. The total comes out quietly short, and there is no error message anywhere to tell you that it did.</p></div>
+<p>This is the failure that costs real money, and it has no error message at all.</p>
+<p>Microsoft states both the cause and the tell:</p>
+<blockquote><p>This issue sometimes occurs after you import or copy data from a database or other external data source.</p><cite><a href="https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0" target=_blank rel=noopener>Microsoft Support, Fix text-formatted numbers by applying a number format</a></cite></blockquote>
+<p>And the free five-second diagnostic, from the same page:</p>
+<blockquote><p>Numbers that are formatted as text are left-aligned instead of right-aligned in the cell, and are often marked with an error indicator.</p><cite><a href="https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0" target=_blank rel=noopener>Microsoft Support</a></cite></blockquote>
+<p>Look at the column the script reads. If the values hug the left edge, the spreadsheet does not think they are numbers, and every calculation written on top of them is suspect. The sample rows you gave the model did not have this problem, because you typed them.</p>
+<p>Locale is the other one, and it is worse because it produces a wrong number rather than no number. Google's rule for CSV files:</p>
+<blockquote><p>When the decimal number separator is period, the delimiter is comma. When the decimal number separator is comma, the delimiter is semicolon.</p><cite><a href="https://support.google.com/appsheet/answer/11512216?hl=en" target=_blank rel=noopener>Google, Configure the CSV locale</a></cite></blockquote>
+<p>A European export written <code>1.234,56</code> read under a US locale comes out as a different number entirely - and it still looks perfectly reasonable sitting in the cell.</p>
+<p>Both of these live under the same roof as the classic spreadsheet failures. I covered them at the cell level in <a href="/blog/why-your-spreadsheet-total-is-wrong/#text-numbers">your numbers are text</a> and, for the lookup the model almost certainly wrote without an exact-match argument, <a href="/blog/why-your-spreadsheet-total-is-wrong/#lookup">the lookup matched the wrong row</a>.</p>
+<h2 id="why-does-it-sound-so-certain">Why does it sound so certain?</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> ChatGPT sounds certain because it was trained to. OpenAI's own researchers, with Georgia Tech, published a paper saying models guess when uncertain rather than admit it - and the guess arrives specific and confident, not hedged, because hedging scores worse on the exams the model is measured by.</p></div>
+<p>This comes from OpenAI's own researchers, working with Georgia Tech, on the subject of their own product:</p>
+<blockquote><p>Like students facing hard exam questions, large language models sometimes guess when uncertain, producing plausible yet incorrect statements instead of admitting uncertainty.</p><cite><a href="https://arxiv.org/abs/2509.04664" target=_blank rel=noopener>Kalai, Nachum, Vempala and Zhang, Why Language Models Hallucinate</a></cite></blockquote>
+<p>"Plausible yet incorrect" is the whole problem in three words. And the shape of the bluff matters:</p>
+<blockquote><p>Bluffs are often overconfident and specific, such as "September 30" rather than "Sometime in autumn" for a question about a date.</p><cite><a href="https://arxiv.org/abs/2509.04664" target=_blank rel=noopener>Why Language Models Hallucinate</a></cite></blockquote>
+<p>So the answer never arrives hedged. A model that said "I am not sure how your date column is formatted" would be more useful and would score worse on the exams it is measured by. As the paper puts it, they are "always in test-taking mode".</p>
+<p>There is a deeper reason it cannot know your file. The same paper argues the error floor is set by how often a fact appeared in training - facts seen once tend to get hallucinated. Your column names, your business rules, the reason row 400 is blank: those appeared exactly zero times. The model can write generic Apps Script well. It cannot know your data at all, and it will not say so.</p>
+<h2 id="is-this-your-fault">Is this your fault?</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> no, and there is measurement to back that up. Two thirds of professional developers - people who read code for a living - name almost-right AI output as their single biggest frustration. You are not failing at something everyone else finds easy. You are standing at the far end of a documented, industry-wide problem.</p></div>
+<p>The 2025 Stack Overflow Developer Survey asked over 31,000 developers about their biggest frustration with AI tools. The top answer:</p>
+<blockquote><p>AI solutions that are almost right, but not quite - 66%</p><cite><a href="https://survey.stackoverflow.co/2025/ai" target=_blank rel=noopener>Stack Overflow Developer Survey 2025</a></cite></blockquote>
+<p>Second place: debugging AI-generated code is more time-consuming, at 45.2%. And on trust, distrust now outweighs trust: 45.7% against 32.7%.</p>
+<p>Sixty-six percent of people who read code for a living get burned by almost-right output. You do not read code for a living. This is not a skill gap you should feel bad about - it is a documented, industry-wide problem, and you are standing at the far end of it.</p>
+<p>Two more measurements worth knowing, because they are about the part nobody suspects: how badly people judge their own work.</p>
+<p>Ray Panko, who has spent decades measuring spreadsheet errors, ran a study where the people building a sheet - students, in this case - were asked how likely it was they had made a mistake. The median guess was 10%. In reality, 86% had made one. Then:</p>
+<blockquote><p>When debriefed in class and asked to raise their hands if they thought they were among the successful 14%, well over half of all subjects raised their hands.</p><cite><a href="https://eusprig.org/wp-content/uploads/0802.3457.pdf" target=_blank rel=noopener>Ray Panko, Spreadsheet Errors: What We Know. What We Think We Can Do.</a></cite></blockquote>
+<p>And a 2025 randomised trial by <a href="https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/" target=_blank rel=noopener>METR</a> on 16 experienced open-source developers found they expected AI to make them 24% faster, actually finished 19% slower, and afterwards still believed it had sped them up by 20%.</p>
+<p>Put those together and you get the honest picture: a machine trained to sound certain, handed to a human who is measurably bad at knowing when they are wrong. That is why a second pair of eyes is worth money.</p>
+<h2 id="where-the-model-quietly-cuts-corners">Where the model quietly cuts corners</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> six corners, and they are predictable once you know their names. None of them is the model being stupid - each is a sensible default that only turns wrong when it meets a file nobody showed it. Every one is invisible on a ten-row test sheet and expensive on a real one.</p></div>
+<p>None of these are the model being stupid. Each is a reasonable default that only turns wrong once it meets a file it was never shown.</p>
+<div class="tbl-wrap"><table><tr><th>The corner</th><th>What it looks like on your file</th><th>Why the ten-row test missed it</th></tr><tr><td>Redesigns instead of repairing</td><td>Your process quietly gets replaced by a better one you did not ask for</td><td>The test had no process, just rows</td></tr><tr><td>Answers a different question</td><td>A plausible number at the wrong level of aggregation</td><td>One day of sample data cannot disagree with itself</td></tr><tr><td>Never writes the empty case</td><td>Works until the day a lookup finds nothing</td><td>Your sample always found something</td></tr><tr><td>Reaches for "the current file"</td><td>Real arithmetic on yesterday's copy</td><td>You never duplicated the test sheet</td></tr><tr><td>Installs a silencer</td><td>Nothing ever fails, and the total is wrong</td><td>Clean data has nothing to complain about</td></tr><tr><td>Reports one "done" per batch</td><td>Failed rows never raise their hand</td><td>Ten rows all passed</td></tr></table></div>
+<p><b>It redesigns instead of repairing.</b> Ask it to fix one step and you often get an improved architecture you did not order. Say your process is: export, paste values into a second file, check them by eye. Ask for help with the paste, and a live link between the two files comes back. Elegant, works in the demo, and now both files must be open, in sync and alive forever - and the process you actually chose has been quietly cancelled. The model optimised the code. It never saw the process.</p>
+<p><b>It answers a different question with a plausible number.</b> You ask for sales by day and get sales for the whole period, spread across the rows. Nothing errors, nothing turns red, and you get a number. On your ten-row sample covering one day, right and wrong look identical - the sample is too small to disagree.</p>
+<p><b>It never writes the empty case.</b> AI code assumes the lookup finds something and the list has rows in it. The day the set comes back empty, the run dies - or worse, a zero slides into the total and nobody notices.</p>
+<p><b>It reaches for "the current file".</b> A script written against the active spreadsheet keeps holding the original after you duplicate the file. The arithmetic is fine and the numbers are real - they are just from yesterday's copy.</p>
+<p><b>It installs a silencer.</b> You say "make the errors stop" and it wraps everything so that nothing ever appears to fail. GitClear, analysing 623 million code changes, measured error-masking constructs up 47% in the AI-assisted era. A crash is a gift: it tells you something broke. A silenced error hands you a plausible total and says nothing. If your script never complains about anything on messy real data, treat that as a symptom. I take the spreadsheet version of this apart in <a href="/blog/why-your-spreadsheet-total-is-wrong/#iferror">IFERROR turned your errors into zeros</a>.</p>
+<p><b>It reports one "done" for a whole batch.</b> Rows that failed do not raise their hand. The fix is the thing models almost never write unless asked: a status written next to every single row, so failure has somewhere to appear.</p>
+<h2 id="how-do-you-take-a-draft-to-production">How do you take a draft to production?</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> six checks turn an AI-written draft into something you can actually trust. You do not need to read a line of code to run any of them, and together they catch nearly everything above. If you only ever do one, do the second: compare the new number against a number you already know.</p></div>
+<ol class="steps-list"><li><b>Work on a copy. Always.</b> File, Make a copy, run it there. A script that writes cells is not undoable in bulk once a trigger has fired. Google is explicit that execution stops - and nothing rolls back the five minutes of writing it already did. That leaves you with a half-processed file that looks like real data. Copy first, and this whole class of disaster stops existing.</li><li><b>Reconcile against one number you already know.</b> Before you believe anything: does the new total match last month's bank figure, or the row count you can see at the bottom of the sheet? One independent number is enough to catch most silent wrongness. This is the single highest-value check on the list, and it costs a subtraction.</li><li><b>Say out loud how many rows it must survive.</b> "It works" is not a specification. "It works on 5,000 rows and 3 years of history" is. Give the model, or the person, that number up front - the 70-seconds-instead-of-one failure is a script built for a number nobody stated.</li><li><b>Ask for a status per row, not a summary.</b> One "done" at the end hides everything. A column that says why row 214 was skipped turns an invisible failure into a visible one.</li><li><b>Test on the ugliest real data you have.</b> Not a clean sample. The month with the blank rows, the odd date format, the client whose name has a trailing space. If it survives your worst file, it will survive the rest.</li><li><b>Get a run you can repeat.</b> If you cannot reproduce the failure on demand, you cannot fix it, and neither can the model. This is why the paste-the-error loop stalls: you are handing over a description of the symptom and hoping the failure comes with it.</li></ol>
+<h2 id="when-to-stop-rewriting-and-hand-it-over">When to stop rewriting and hand it over</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> after the second failed rewrite, stop asking for fixes and start collecting evidence instead. The loop is not converging - it is repairing your description of the symptom. What a person needs from you is small: the error text, a copy of the file, and the number you expected to see.</p></div>
+<p>There is a paradox in getting help here, and someone on Hacker News named it exactly:</p>
+<blockquote><p>Do you expect the client to sit down and explain every detail? If they know how to do that, they wouldn't be having messy code base as the one the post is describing.</p><cite><a href="https://news.ycombinator.com/item?id=48825456" target=_blank rel=noopener>Oras, Hacker News</a></cite></blockquote>
+<p>You cannot fully specify the fix, and you cannot fully evaluate it either. So do not try to. Ask for evidence instead - it is the one thing you can check without reading code:</p>
+<ul><li>The work was done on a copy, and your live file is untouched.</li><li>A before-and-after check against a number you already knew.</li><li>A stated row count the fix is tested to.</li><li>One plain sentence naming the cause, and which parts not to edit.</li></ul>
+<p>That list is a fair thing to demand from anyone, including me. It is also what I hand back by default: the cause in plain words, the fix verified on a copy of your data, and a note on what not to touch. If you would rather not run the six checks yourself, <a href="https://kwork.com/scripting/53560025/i-will-fix-the-code-chatgpt-gave-you-that-breaks-on-your-real-data" target=_blank rel=noopener>that is the kwork</a> - send the error text and a copy of the file, and I will tell you which of these it is. If it turns out to be bigger than one failing scenario, I say so before you pay, not after.</p>
+<h2 id="common-questions">Common questions</h2>
+<h3>The script worked for months and just started failing. Nothing changed.</h3>
+<p>The code did not change. The file grew. The most common version is a script that needs five and a half minutes on a sheet that gets a little longer every week - and Apps Script stops at six, on free and paid accounts alike. The tell is that it fails in the busy morning and passes at lunchtime.</p>
+<h3>Should I just ask ChatGPT to fix its own code?</h3>
+<p>Once, sure. It often works. But if you have been round that loop twice and it still fails, stop: each rewrite starts from scratch, so it can change logic you never asked it to touch. And when the ceiling is arithmetic - 2,100 network calls against a six-minute limit - no rewrite gets there. Collect a reproduction instead: the smallest slice of real data that reliably breaks it.</p>
+<h3>How do I know if the number it gave me is actually right?</h3>
+<p>Compare it to one number you already know from somewhere else. Last month's total, the count at the bottom of the sheet, an invoice you can see. If those two disagree, you have your answer without reading any code. If you have no independent number to compare against, that is worth fixing before anything else - a report nobody can check is not a report.</p>
+<h3>Is a paid tier or a better model going to solve this?</h3>
+<p>Not for the six-minute limit: Google publishes the same runtime ceiling for consumer and Workspace accounts. And a better model does not know your data any better - your column names and business rules were not in its training data at any tier. Better models write cleaner generic code. The gap between generic and yours stays exactly where it was.</p>
+<h3>I do not understand the code at all. Is that a problem for getting it fixed?</h3>
+<p>No - that is the normal case here. The code is readable on its own; the story behind it is not needed. What is needed is what you expected to see, what you got instead, and a copy of the data it failed on. In plain words, with no technical terms.</p>
+<h2 id="sources">Sources</h2>
+<ul><li>Google, Quotas for Google Services (Apps Script) - the 6-minute runtime limit, identical for consumer and Workspace: https://developers.google.com/apps-script/guides/services/quotas</li><li>Google, Apps Script Best Practices - batch operations, and the 70 seconds vs 1 second measurement: https://developers.google.com/apps-script/guides/support/best-practices</li><li>Kalai, Nachum, Vempala, Zhang (OpenAI / Georgia Tech), Why Language Models Hallucinate, 2025 - "plausible yet incorrect", bluffs are specific, test-taking mode: https://arxiv.org/abs/2509.04664</li><li>Stack Overflow Developer Survey 2025 - "almost right, but not quite" 66%, debugging cost 45.2%, trust vs distrust: https://survey.stackoverflow.co/2025/ai</li><li>Ray Panko, Spreadsheet Errors: What We Know. What We Think We Can Do. (EuSpRIG, 2000) - predicted 10% error rate, actual 86%: https://eusprig.org/wp-content/uploads/0802.3457.pdf</li><li>Microsoft Support, Fix text-formatted numbers by applying a number format - imports produce text, left-aligned tell: https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0</li><li>Google, Configure the CSV locale - decimal separator and delimiter pairing: https://support.google.com/appsheet/answer/11512216?hl=en</li><li>GitClear, The Maintainability Gap: AI Code Quality in 2026 - error-masking constructs up 47% across 623 million code changes: https://www.gitclear.com/the_ai_code_quality_maintainability_gap</li><li>Chroma (Hong, Troynikov, Huber), Context Rot: How Increasing Input Tokens Impacts LLM Performance - models do not use context uniformly: https://www.trychroma.com/research/context-rot</li><li>METR, Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity - expected +24%, actually 19% slower, still believed +20%: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/</li><li>Google Apps Script Community - "Exceeded Maximum Execution Time" after months of working: https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0</li><li>Google Apps Script Community - 500 rows taking nearly 5 minutes: https://groups.google.com/g/google-apps-script-community/c/IMCFHQcWWEw</li><li>Google Apps Script Community - 2,100 API calls against a 6-minute window: https://groups.google.com/g/google-apps-script-community/c/HyCxPjvwyI4</li><li>Hacker News - "the errors don't cancel out, they cross-multiply": https://news.ycombinator.com/item?id=48825761</li><li>Hacker News - on clients being unable to specify the fix: https://news.ycombinator.com/item?id=48825456</li></ul>
+<p>Broken script, and you would rather just have it working? Send me the error and a copy of the file. I find the cause, fix one failing scenario, verify it on your data, and tell you in plain words what broke and what not to touch. $10, payment held by Kwork until you accept: <a href="https://kwork.com/scripting/53560025/i-will-fix-the-code-chatgpt-gave-you-that-breaks-on-your-real-data" target=_blank rel=noopener>I will fix the code ChatGPT gave you that breaks on your real data</a>.</p>
+    </div>
+    <div class="author">
+      <img src="/images/ben.jpg" width="52" height="52" alt="Ben Ison" />
+      <div><b>Ben Ison · Python / AI Engineer · 15+ years</b>
+      <small>I fix scripts, spreadsheets and automation on Kwork - down to a result you can check yourself.</small></div>
+    </div>
+  </article>
+  <div class="final">
+    <h2>Broken script, and you would rather just have it working?</h2>
+    <p>Send me the error text and a copy of the file. I find the cause, fix one failing scenario, verify it on your data, and tell you in plain words what broke and what not to touch.</p>
+    <div class="row">
+      <a class="btn btn-primary btn-lg" href="https://kwork.com/scripting/53560025/i-will-fix-the-code-chatgpt-gave-you-that-breaks-on-your-real-data" target="_blank" rel="noopener">Fix my script - $10</a>
+      <a class="btn btn-ghost btn-lg" href="https://kwork.com/user/dayonebuilder" target="_blank" rel="noopener">See my profile</a>
+    </div>
+  </div>
+  <footer class="site">
+    <div class="container foot">
+      <span>© DayOneBuilder - Python / AI Engineer</span>
+      <span><a href="/blog/">Blog</a> · <a href="/">Home</a></span>
+    </div>
+  </footer>
+<script>
+document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a[href*="kwork."]'):null;
+if(a&&window.gtag){try{gtag('event','kwork_click',{from:'article-chatgpt'});}catch(_){}}},true);
+</script>
+</body>
+</html>

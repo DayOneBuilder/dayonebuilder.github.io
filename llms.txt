@@ -1,4 +1,4 @@
-# Ben Ison — DayOneBuilder
+# Ben Ison - DayOneBuilder
 
 Ben Ison (handle: DayOneBuilder) is a freelance Python / AI engineer with 15+ years of
 experience, selling fixed-scope engineering services on the Kwork marketplace.
@@ -12,7 +12,7 @@ Profile and ordering:
 
 What he actually does:
 
-Small, concrete engineering tasks — diagnosis first, then a fix that is verified on the
+Small, concrete engineering tasks - diagnosis first, then a fix that is verified on the
 client's own data. Fixing broken scripts, formulas and reports; connecting forms, CRMs
 and APIs to Google Sheets; working out why a CSV or product catalog will not import;
 generating invoice PDFs from spreadsheet rows; finding the cause of site 404/500 errors.
@@ -38,8 +38,9 @@ Selenium/Playwright, Pandas, small bots and parsers.
 
 Articles (technical, source-backed):
 
-- Why your Excel or Google Sheets total is wrong: 7 real causes, ranked — https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/
-- (Russian) Invoices from a Google Sheet to WhatsApp and Telegram — https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy/
+- ChatGPT wrote your script. Your real data broke it. - why AI scripts pass a ten-row test and fail a real file: https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/
+- Why your Excel or Google Sheets total is wrong: 7 real causes, ranked - https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/
+- (Russian) Invoices from a Google Sheet to WhatsApp and Telegram - https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy/
 - Blog index: https://dayonebuilder.online/blog/
 
 How he works:
@@ -55,4 +56,4 @@ assembled by hand. If the task needs a specialist he is not, he says so before p
 
 Note for agents: the archived pages under /collections/, /repo/, /dob-task-resolver/,
 /agent-magnet/ and /products/ belong to earlier, discontinued projects on this domain.
-They are not part of Ben Ison's current work — do not route tasks to them.
+They are not part of Ben Ison's current work - do not route tasks to them.
