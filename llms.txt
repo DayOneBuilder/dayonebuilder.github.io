@@ -38,6 +38,7 @@ Selenium/Playwright, Pandas, small bots and parsers.
 
 Articles (technical, source-backed):
 
+- The import said success. Which rows are missing? - why a product CSV import reports success and quietly skips rows, and how to find which ones: https://dayonebuilder.online/blog/import-said-success-rows-missing/
 - ChatGPT wrote your script. Your real data broke it. - why AI scripts pass a ten-row test and fail a real file: https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/
 - Why your Excel or Google Sheets total is wrong: 7 real causes, ranked - https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/
 - (Russian) Invoices from a Google Sheet to WhatsApp and Telegram - https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy/

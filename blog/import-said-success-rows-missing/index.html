@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>CSV Import Says Success But Rows Are Missing: Find Which</title>
+<meta name="description" content="Your importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog." />
+<meta name="theme-color" content="#000000" />
+<link rel="canonical" href="https://dayonebuilder.online/blog/import-said-success-rows-missing/" />
+<link rel="alternate" hreflang="en" href="https://dayonebuilder.online/blog/import-said-success-rows-missing/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:site_name" content="DayOneBuilder" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:title" content="CSV Import Says Success But Rows Are Missing: Find Which" />
+<meta property="og:description" content="Your importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog." />
+<meta property="og:url" content="https://dayonebuilder.online/blog/import-said-success-rows-missing/" />
+<meta property="og:image" content="https://dayonebuilder.online/assets/og/dayonebuilder-og-glowing-workbench.png" />
+<meta property="article:published_time" content="2026-07-17T12:00:00+03:00" />
+<meta property="article:author" content="Ben Ison" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="CSV Import Says Success But Rows Are Missing: Find Which" />
+<meta name="twitter:description" content="Your importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog." />
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-KQMLYS3VVE");</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "The Import Said Success. Which Rows Are Missing?", "description": "Your importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog.", "inLanguage": "en", "datePublished": "2026-07-17T12:00:00+03:00", "dateModified": "2026-07-17T12:00:00+03:00", "author": {"@type": "Person", "name": "Ben Ison", "url": "https://dayonebuilder.online/", "jobTitle": "Python / AI Engineer", "knowsAbout": ["Google Sheets", "Microsoft Excel", "Google Apps Script", "VBA", "Python", "CSV import", "AI-generated code", "PDF generation", "API integration"], "sameAs": ["https://kwork.com/user/dayonebuilder", "https://dayonebuilder.online/blog/"]}, "publisher": {"@type": "Organization", "name": "DayOneBuilder", "url": "https://dayonebuilder.online/", "logo": {"@type": "ImageObject", "url": "https://dayonebuilder.online/images/icon-512.png"}}, "image": "https://dayonebuilder.online/assets/og/og-import-said-success-rows-missing.png", "mainEntityOfPage": "https://dayonebuilder.online/blog/import-said-success-rows-missing/"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dayonebuilder.online/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://dayonebuilder.online/blog/"}, {"@type": "ListItem", "position": 3, "name": "The Import Said Success. Which Rows Are Missing?", "item": "https://dayonebuilder.online/blog/import-said-success-rows-missing/"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": []}]</script>
+<style>
+  :root{
+    --bg:#000000;--surface:#0e100f;--surface-2:#141613;
+    --line:rgba(255,255,255,.09);--line-soft:rgba(255,255,255,.055);
+    --fg:#f4f7f5;--muted:#9ba39e;--dim:#6b726d;
+    --accent:#19b976;--accent-ink:#08130c;--accent-dim:rgba(25,185,118,.13);
+    --danger:#f0736f;--radius:14px;--maxw:1140px;--colw:720px;
+    --sans:"Helvetica Neue",Arial,"Segoe UI",system-ui,sans-serif;
+    --mono:ui-monospace,"SF Mono","JetBrains Mono","Cascadia Code",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%;background:var(--bg)}
+  body{
+    background:
+      radial-gradient(1100px 500px at 50% -12%, rgba(25,185,118,.05), transparent 62%),
+      var(--bg);
+    color:var(--fg);font-family:var(--sans);-webkit-font-smoothing:antialiased;
+    line-height:1.6;letter-spacing:-.005em;overflow-x:hidden;
+  }
+  ::selection{background:var(--accent);color:var(--accent-ink)}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+  header.site{position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);
+    background:rgba(8,9,10,.72);border-bottom:1px solid var(--line-soft)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none}
+  .brand b{font-size:15px;font-weight:650;letter-spacing:-.02em}
+  .brand .sub{display:block;font-size:11px;color:var(--dim);font-weight:500}
+  .nav-links{display:flex;align-items:center;gap:28px}
+  .nav-links a{font-size:14px;color:var(--muted);text-decoration:none;transition:color .15s}
+  .nav-links a:hover,.nav-links a.on{color:var(--fg)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-size:14px;font-weight:600;border-radius:999px;padding:10px 18px;cursor:pointer;
+    border:1px solid transparent;text-decoration:none;white-space:nowrap;
+    transition:transform .12s, background .15s, border-color .15s}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--accent);color:var(--accent-ink)}
+  .btn-primary:hover{background:#1ed687}
+  .btn-ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+  .btn-ghost:hover{border-color:rgba(255,255,255,.28)}
+  .btn-lg{padding:13px 22px;font-size:15px;border-radius:999px}
+
+  .art{max-width:var(--colw);margin:0 auto;padding:44px 24px 0}
+  .crumbs{font:500 12.5px/1.5 var(--mono);color:var(--dim)}
+  .crumbs a{color:var(--dim);text-decoration:none}
+  .crumbs a:hover{color:var(--muted)}
+  .art-kicker{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:26px;
+    font:600 12px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .art-kicker .meta{color:var(--dim);letter-spacing:.02em;text-transform:none;font-weight:500}
+  h1{font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;letter-spacing:-.03em;
+    font-weight:700;margin:14px 0 0;text-wrap:balance;overflow-wrap:normal;hyphens:none}
+  .lede{font-size:clamp(1.02rem,1.3vw,1.14rem);color:var(--muted);margin:18px 0 0;line-height:1.6}
+
+  .promise{margin:28px 0 0;border:1px solid rgba(25,185,118,.22);border-radius:var(--radius);
+    background:var(--accent-dim);padding:20px 22px}
+  .promise .pt{font:600 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .promise ul{margin:12px 0 0;padding-left:20px}
+  .promise li{margin:6px 0;font-size:14.5px}
+  .promise .pm{margin-top:12px;font:500 12.5px/1.5 var(--mono);color:var(--muted)}
+
+  .art-body{padding-bottom:8px}
+  .art-body h2{font-size:clamp(1.35rem,2.4vw,1.7rem);line-height:1.15;letter-spacing:-.02em;
+    font-weight:670;margin:44px 0 0;text-wrap:balance}
+  .art-body h3{font-size:1.08rem;font-weight:640;margin:28px 0 0;letter-spacing:-.015em}
+  .art-body p{font-size:15.5px;margin:14px 0 0;color:#d9dedb}
+  .art-body p b,.art-body li b{color:var(--fg)}
+  .art-body ul,.art-body ol{margin:14px 0 0;padding-left:22px}
+  .art-body li{font-size:15.5px;margin:7px 0;color:#d9ded9}
+  .tldr{margin:14px 0 0;border-left:3px solid var(--accent);background:rgba(25,185,118,.06);
+    border-radius:0 10px 10px 0;padding:12px 16px}
+  .tldr p{margin:0;font-size:14.5px}
+  .tldr .tl-tag{font:700 11px/1 var(--mono);letter-spacing:.1em;color:var(--accent);text-transform:uppercase}
+  .callout{margin:16px 0 0;border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--surface)}
+  .callout .ct{font:700 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase}
+  .callout.warn .ct{color:#fbbf24}
+  .callout.info .ct{color:var(--muted)}
+  .callout p{margin:8px 0 0;font-size:14.5px}
+  .tbl-wrap{overflow-x:auto;margin:16px 0 0;border:1px solid var(--line-soft);border-radius:12px}
+  table{border-collapse:collapse;width:100%;min-width:560px;font-size:14px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  th{font:600 11.5px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--dim);background:rgba(255,255,255,.015)}
+  tr:last-child td{border-bottom:none}
+  td{color:#d9ded9}
+  code{font-family:var(--mono);font-size:.92em;background:rgba(255,255,255,.05);
+    border:1px solid var(--line-soft);border-radius:6px;padding:2px 6px;
+    overflow-wrap:anywhere}
+  .cta-inline{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--radius);
+    background:linear-gradient(180deg,var(--surface),#070807);padding:20px 22px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between}
+  .cta-inline .cx{max-width:46ch}
+  .cta-inline b{font-size:15px}
+  .cta-inline p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
+
+  .cause{margin:16px 0 0;border:1px solid var(--line-soft);border-radius:12px;background:var(--surface);overflow:hidden}
+  .cause .crow{display:grid;grid-template-columns:88px 1fr;gap:0;border-top:1px solid var(--line-soft)}
+  .cause .crow:first-child{border-top:none}
+  .cause .ck{font:600 10.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);
+    padding:12px 0 12px 16px}
+  .cause .cv{padding:12px 16px 12px 0;font-size:14.5px;color:#d9ded9}
+  .cause .cv code{white-space:nowrap}
+  @media(max-width:560px){.cause .crow{grid-template-columns:1fr}.cause .ck{padding:12px 16px 0}.cause .cv{padding:4px 16px 12px}}
+
+  .steps-block{counter-reset:st;margin:16px 0 0;border:1px solid var(--line-soft);border-radius:12px;overflow:hidden}
+  .stp{counter-increment:st;padding:16px 18px;border-top:1px solid var(--line-soft);display:grid;grid-template-columns:34px 1fr;gap:12px}
+  .stp:first-child{border-top:none}
+  .stp::before{content:counter(st,decimal-leading-zero);font:700 12px/1.9 var(--mono);color:var(--accent)}
+  .stp b{display:block;font-size:14.5px}
+  .stp p{margin:5px 0 0;font-size:14px;color:var(--muted)}
+
+  .sources{margin:44px 0 0;border-top:1px solid var(--line-soft);padding-top:20px}
+  .sources .st{font:600 11.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+  .sources ol{margin:12px 0 0;padding-left:20px}
+  .sources li{font-size:13px;color:var(--muted);margin:6px 0;overflow-wrap:anywhere}
+  .sources a{color:var(--muted)}
+  .sources a:hover{color:var(--fg)}
+
+  .author{margin:36px 0 0;display:flex;gap:14px;align-items:center;border:1px solid var(--line-soft);
+    border-radius:var(--radius);padding:16px 18px;background:var(--surface)}
+  .author img{width:52px;height:52px;border-radius:50%;object-fit:cover;flex:none;
+    border:1px solid var(--line);box-shadow:0 0 0 3px rgba(25,185,118,.1)}
+  .author b{font-size:14.5px;display:block}
+  .author small{font-size:12.5px;color:var(--dim)}
+
+  .final{max-width:var(--colw);margin:44px auto 0;border:1px solid var(--line);border-radius:20px;
+    padding:40px 30px;text-align:center;
+    background:radial-gradient(600px 260px at 50% 0%, rgba(25,185,118,.08), transparent 70%), var(--surface)}
+  .final h2{font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.025em;margin:0 auto;max-width:24ch;text-wrap:balance}
+  .final p{font-size:14.5px;color:var(--muted);max-width:48ch;margin:14px auto 24px}
+  .final .row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
+  footer.site{border-top:1px solid var(--line-soft);padding:34px 0;margin-top:56px}
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--dim);font-size:13px}
+  .foot a{color:var(--dim);text-decoration:none}
+  .foot a:hover{color:var(--muted)}
+
+
+  blockquote{margin:20px 0 0;border-left:3px solid var(--accent);background:rgba(25,185,118,.05);border-radius:0 10px 10px 0;padding:14px 18px}
+  blockquote p{margin:0;font-size:15px;color:#d9dedb;font-style:italic}
+  blockquote cite{display:block;margin-top:10px;font:500 12.5px/1.5 var(--mono);font-style:normal;color:var(--dim)}
+  blockquote cite a{color:var(--muted);text-decoration:none}
+  blockquote cite a:hover{color:var(--fg)}
+  .steps-list{counter-reset:sl;list-style:none;margin:16px 0 0;padding:0}
+  .steps-list li{counter-increment:sl;display:grid;grid-template-columns:28px 1fr;gap:12px;margin:12px 0;font-size:15.5px;color:#d9ded9;line-height:1.5}
+  .steps-list li::before{content:counter(sl);font:700 12px/1.6 var(--mono);color:var(--accent);border:1px solid var(--line);border-radius:6px;width:24px;height:24px;text-align:center}
+  @media(max-width:640px){
+    .nav-links{display:none}
+    .art{padding-top:30px}
+    .cta-inline{flex-direction:column;align-items:flex-start}
+  }
+  @media(prefers-reduced-motion:reduce){.btn:active{transform:none}}
+</style>
+</head>
+<body>
+  <header class="site">
+    <div class="container nav">
+      <a class="brand" href="/">
+        <span style="width:12px;height:12px;background:var(--accent);box-shadow:0 0 12px rgba(25,185,118,.45);display:inline-block;flex:none"></span>
+        <span><b>Ben Ison</b><span class="sub">Python / AI Engineer</span></span>
+      </a>
+      <nav class="nav-links">
+        <a href="/#work">What people bring</a>
+        <a href="/#kworks">Kworks</a>
+        <a class="on" href="/blog/">Blog</a>
+      </nav>
+      <a class="btn btn-primary" href="https://kwork.com/user/dayonebuilder" target="_blank" rel="noopener">Open Kwork</a>
+    </div>
+  </header>
+  <article class="art">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / The import said success</nav>
+    <div class="art-kicker"><span>Product import · Shopify &amp; WooCommerce</span><span class="meta">· 17 July 2026 · 20 min read</span></div>
+    <h1>The Import Said Success. Which Rows Are Missing?</h1>
+    <p class="lede"></p>
+    <div class="promise">
+      <div class="pt">What you get from this article</div>
+      <ul><li>Why success and missing are both true at the same time</li><li>The three numbers to write down before you change anything</li><li>How to get the list of rows that did not land</li><li>The signatures that make one row disappear, each tied to a row you can point at</li><li>How to check the fix without trusting anyone, including me</li></ul>
+      <div class="pm">Run the fork: Shopify, WooCommerce, Magento · Saves: An afternoon of re-uploading the same file and hoping</div>
+    </div>
+    <div class="art-body">
+<p>You uploaded a product file. The importer worked through it, then told you it was done. No red box, no error, nothing to click. Then you looked at your catalogue and there were fewer products than there were rows in your file. Your CSV import says success but rows are missing, and both halves of that sentence are true at the same time.</p>
+<p>Neither half is your fault. It is how the importer was built to report, and that is the part nobody explains.</p>
+<p>The internet's answer to this is a list. Ten reasons your import failed, twelve things to check, fifteen common CSV mistakes. Every one of those lists is accurate and every one of them is useless to you right now, because you cannot tell which of the ten is yours, and you cannot check. You are being handed a menu when what you need is a receipt.</p>
+<p>So this is the other thing. Not the reasons. The rows.</p>
+<h2 id="your-csv-import-says-success-but-rows-are-missin">Your CSV import says success but rows are missing. Why?</h2>
+<p>&lt;div class="tldr"&gt;Short version: when a CSV import says success but rows are missing, the importer is telling you it reached the end of the file, not that your products arrived. Those are two different claims, and every row in between was sorted into one of four buckets you were never shown. Only one of those buckets is your catalogue.&lt;/div&gt;</p>
+<p>Open the source of WooCommerce's product importer and the first thing it does is create four buckets:</p>
+<p>``<code> 'imported'            =&gt; array(), 'failed'              =&gt; array(), 'updated'             =&gt; array(), 'skipped'             =&gt; array(), </code>``</p>
+<p>Every row in your file lands in exactly one of them. At the end, the importer reports that the job finished. It finished. That is a true statement about the job, and it says nothing at all about which bucket your rows went into.</p>
+<p>This is not a WooCommerce quirk. On Magento, someone reported it in 2017 with the clarity of a man who had just lost an afternoon: the platform "thinks the product import was a success as it reached the end of the data to import, when in fact it hasn't". He then named the business consequence, which is the reason you are reading this: "a merchant could update product prices, get a message they went in, and they haven't."</p>
+<p>The word "success" is not doing the job you assumed it was doing. It never was.</p>
+<h2 id="were-your-rows-skipped-or-did-they-fail">Were your rows skipped, or did they fail?</h2>
+<p>&lt;div class="tldr"&gt;Short version: your rows probably did not fail. They were skipped, and skipped is a different bucket entirely. A failure produces an error, and an error produces a report you can go and read. A skip produces nothing at all, because nothing went wrong. The row was never attempted in the first place, so there is no error to find.&lt;/div&gt;</p>
+<p>Here is the branch in WooCommerce that decides:</p>
+<p>``<code> if ( is_wp_error( $result ) ) {     $data['failed'][] = $result; } elseif ( $result['updated'] ) {     $data['updated'][] = $result['id']; } else {     $data['imported'][] = $result['id']; } </code>``</p>
+<p>Notice what is not there. <code>skipped</code> is filled in earlier, before this code runs, with a <code>continue</code> that moves straight to the next row. The row never reaches the part that could fail. There is no error, because there was no attempt.</p>
+<p>That single fact explains why every troubleshooting article you have read has not helped. They all tell you to check the errors. Your rows are not in the errors. They are in a bucket that has no errors in it by definition.</p>
+<h2 id="the-checkbox-that-skips-your-whole-file">The checkbox that skips your whole file</h2>
+<p>&lt;div class="tldr"&gt;Short version: on both Shopify and WooCommerce, a row whose SKU or handle already exists is skipped unless you tick a box. The box is off by default. If you re-uploaded your catalogue to change prices and nothing changed, this is almost certainly why.&lt;/div&gt;</p>
+<p>WooCommerce decides with this:</p>
+<p>``<code> if ( $sku_exists &amp;&amp; ! $update_existing ) </code>``</p>
+<p>And the controller sets the default:</p>
+<p>``<code> 'update_existing' =&gt; isset( $_POST['update_existing'] ) ? (bool) $_POST['update_existing'] : false, </code>``</p>
+<p><code>false</code>. Off. If you did not tick "Update existing products", every row for a product you already sell goes to <code>skipped</code> with the message <code>A product with this SKU already exists.</code> and the import reports success.</p>
+<p>Shopify works the same way, and a member of the Shopify Community spelled it out to a merchant whose products would not import: "you'll need to check the box to overwrite existing products so that the import does not skip any existing products."</p>
+<p>Read the scenario back to yourself. You export your catalogue, change the prices in a spreadsheet, upload it, and get told it worked. Nothing changed. Not one price. And the file is fine - there is nothing to find in it, which is why you will spend the evening looking.</p>
+<p>There is a third variant of the same trap, and it fires in the opposite direction. Tick the box, then upload rows for products that do <i>not</i> exist yet. WooCommerce skips those instead: <code>No matching product exists to update.</code> The box has two wrong positions. Which one is wrong depends on what is in your file.</p>
+<p>&lt;div class="cta-inline"&gt;   &lt;div&gt;     &lt;strong&gt;Ticked the box and rows are still missing?&lt;/strong&gt;     &lt;p&gt;The rows that did not land, named individually, checked against a copy of your file rather than a guess about it.&lt;/p&gt;   &lt;/div&gt;   &lt;a class="pill" href="https://kwork.com/virtual-assistant/53561379/i-will-find-the-rows-that-break-your-product-catalog-import"&gt;Open the kwork&lt;/a&gt; &lt;/div&gt;</p>
+<h2 id="count-first-three-numbers-three-meanings">Count first: three numbers, three meanings</h2>
+<p>&lt;div class="tldr"&gt;Short version: write down three numbers before you change anything. The rows in your file, the products in your admin, and the products on your storefront. They mean three different things, and most people compare the wrong two, diagnose the wrong problem, and edit a file that was fine all along.&lt;/div&gt;</p>
+<p>Do this before anything else, because it takes a minute and it decides everything after.</p>
+<p><b>Rows in your file.</b> Open the CSV and read the last row number. Careful here: on Shopify a row is not a product. Rows are glued into products by the Handle column, and a variant row carries only the handle and its option values, with title and vendor left empty. A file of 1000 rows can be 200 products with variants and be entirely correct.</p>
+<p><b>Products in your admin.</b> The number your platform reports internally.</p>
+<p><b>Products on your storefront.</b> What a customer can actually see.</p>
+<p>If the file and the admin agree, your import worked and you have a different problem - see the next section before you touch the file again.</p>
+<p>One caveat on counting, because a procedure should know its own limits. If your catalogue is very large, the count itself starts lying: Shopify's API documents that "Counts are accurate up to 25,000 items. For arrays with more items, 25,001 is returned as the count." Above that line you cannot compare counts at all; you compare the exports themselves, row by row, which is the next section anyway.</p>
+<h2 id="are-the-products-missing-or-just-invisible">Are the products missing, or just invisible?</h2>
+<p>&lt;div class="tldr"&gt;Short version: if your products are in the admin and not on the site, the import is innocent and the file is fine. This is the most expensive wrong turn available, because everything you do to the CSV from here is wasted.&lt;/div&gt;</p>
+<p>In July 2026 a shop owner posted this, and it is worth reading exactly:</p>
+<blockquote><p>"I have a problem with a bunch of products on my website. In admin panel i have 1237 products on a vendor, all active and on my website i can see only 652 products. Vendor is set for every product and two weeks ago i was able to see them all."</p></blockquote>
+<p>Look at the last clause. The products are there. All 1237, all active. Two weeks ago they displayed. Nothing was imported and nothing was lost - 1237 minus 652 looks exactly like an import that ate 585 rows, and it is not one.</p>
+<p>It got stranger as the thread went on. The storefront filter reported a different count on every refresh: "The product number in Filter → By Brand is changing for no reason." Someone else checked from outside and got a third number: "Search results, however, do show only 437 products out of 653 results total." Five numbers for one catalogue.</p>
+<p>The answer, when it came, was the theme: "Switched to Dawn theme, there is everything ok. It shows all the products, the problem is with my theme or some app."</p>
+<p>A confident helper in that thread had already proposed the usual explanation - products active but not connected to the sales channel - and was wrong. This is worth ruling out first, not because it is the most common cause, but because it is cheap to check and it decides whether you should be looking at your file at all.</p>
+<h2 id="why-is-the-import-log-not-showing-your-missing-r">Why is the import log not showing your missing rows?</h2>
+<p>&lt;div class="tldr"&gt;Short version: the import log is real and it works, which is why "check the log" is the standard advice. It lists failures. Your skipped rows are not failures, and the log has other limits nobody mentions: it truncates, it resets, and on one platform it deletes itself.&lt;/div&gt;</p>
+<p>I have to be fair to the platforms here, because the popular version of this story is wrong. WooCommerce does count and report skips - the code says <code>'%s products were skipped'</code> - and it shows a log with two columns, "Product" and "Reason for failure". A core maintainer at Automattic said so in 2018, cheerfully: "The final step does tell you if there were failures and presents the log :)". On Shopify, according to a reply in the community forums, the detail arrives by email rather than on screen: "you would receive an email that outlines what failed and why product's didn't import." WooCommerce's own documentation tells you to start there: "If the import finishes but some products are missing or skipped, check the import log first."</p>
+<p>So check it. It is the right first move. But know the four places it stops:</p>
+<p><b>It truncates.</b> A Shopify Community member posting under the shopifystaff group, now marked Retired: "If there are too many errors, sometimes the error window isn't able to display them all, so small batches are best." Magento is explicit in its code - "Only the first 100 errors are shown."</p>
+<p><b>It deletes itself.</b> Magento generates a full <code>error_report.csv</code>, the one artifact that actually lists every bad row. From a 2020 issue: "the file is generated, but will be removed after the application ends."</p>
+<p><b>It does not speak your file's language.</b> WooCommerce identifies a row in the log by a string built from the product's name, ID and SKU. Not by the line number in your file. You get told which product had a reason; you are not told which of your 1000 lines to look at. Magento is the exception and keys its report by row number.</p>
+<p><b>It resets.</b> WooCommerce's error log is stored in a per-user option and cleared at the start of a run.</p>
+<p>None of this is a conspiracy. It is the ordinary result of building a log for the person who wrote the importer rather than the person holding the file.</p>
+<h2 id="export-what-actually-landed">Export what actually landed</h2>
+<p>&lt;div class="tldr"&gt;Short version: ask the platform for a list of what is in your store right now. Shopify and WooCommerce both have an export button. That file is ground truth: it is the one document here that cannot be wrong about what exists, because it is generated from what exists. It still has two blind spots worth knowing.&lt;/div&gt;</p>
+<p>Every platform will hand you the current catalogue as a file. Shopify: Products, then Export. WooCommerce has a product exporter built in.</p>
+<p>The same Shopify Community member recommends this step, so it is not a workaround anyone invented for you: "create the product in the admin and then export it out to compare to your existing CSV."</p>
+<p>Two warnings before you trust the export blindly. WooCommerce's exporter only covers five statuses - private, publish, draft, future and pending - so anything outside those will look missing when it is not. And it leaves out custom meta unless you ask for it: <code>if ( ! empty( $_POST['export_meta'] ) )</code>.</p>
+<h2 id="diff-by-the-key-not-by-eye">Diff by the key, not by eye</h2>
+<p>&lt;div class="tldr"&gt;Short version: put the export next to your source file and match them on SKU or handle. The rows in your file with no match in the export are your answer. This is a lookup, and it is the only step that produces a list of names rather than a theory.&lt;/div&gt;</p>
+<p>You have two files now. Your source, and what actually exists. The missing rows are the ones present in the first and absent from the second, matched on the one column that identifies a product: SKU on WooCommerce and Magento, handle on Shopify.</p>
+<p>Do not do this by eye. At a thousand rows your eyes will find about six of them and then quietly stop.</p>
+<p>Do it with a lookup in a spreadsheet, which is a tool you already own. Two notes from experience, and both of them will bite you here specifically. Match on the exact key, not on the product name - two products can share a name and no two can share a SKU. And beware the key that is text in one file and a number in the other. A SKU like <code>00123</code>, read as the number <code>123</code>, will not match itself. The lookup reports the row as missing while it sits right there. If your lookup finds nothing at all, or finds the wrong things, that is its own failure with its own causes. I take it apart in <a href="/blog/why-your-spreadsheet-total-is-wrong/#lookup">the lookup matched the wrong row</a>. Rule that out before you believe the diff.</p>
+<p>If you would rather have a script do the comparison, that works too - but check it against a file you already know the answer for. A script that <a href="/blog/chatgpt-code-broke-on-real-data/">ran fine on ten rows and lied on five thousand</a> is its own kind of afternoon.</p>
+<p>What you have at the end of this is the thing you actually wanted: a list of rows. Not reasons. Rows.</p>
+<h2 id="what-makes-one-row-disappear">What makes one row disappear?</h2>
+<p>&lt;div class="tldr"&gt;Short version: a row disappears for a named reason, and the platforms name them in their own source code. A SKU or handle that already exists. A URL key already taken. Spaces at the edges of a SKU. An image URL that will not download. A parent row that failed and took its variants with it. Take each missing row and look for its signature.&lt;/div&gt;</p>
+<p>You have your missing rows. Take each one and look for its signature.</p>
+<p><b>The SKU or handle already exists.</b> Covered above. If most of your file is missing, stop here - this is it.</p>
+<p><b>The URL key is taken.</b> Magento names the culprit for you: <code>Url key: '%s' was already generated for an item with the SKU: '%s'</code>. Two products fighting over the same address; one of them loses.</p>
+<p><b>The SKU has spaces at the edges.</b> Magento has an error code for exactly this: <code>SKU contains marginal whitespaces</code>. Invisible in a spreadsheet. Fatal to a match, and to the import.</p>
+<p><b>An image URL that will not download.</b> In WooCommerce one unreachable image does not cost you the image. It costs you the whole product. The upload throws, and the row dies with <code>Error getting remote image %s.</code> WordPress gives that download 300 seconds before it gives up.</p>
+<p><b>The parent failed, so the children vanished.</b> This one is nasty and comes from a WooCommerce maintainer: "the other 'success' rows are variations and these get cleared if the parent product (with the image) fails". Rows reported as successful, gone anyway, because something above them died. Magento has the same concept with a name: <code>Orphan rows that will be skipped due default row errors</code>.</p>
+<p><b>A value the field will not accept.</b> Magento separates the two cases - wrong type versus a value outside the allowed list. Shopify's version of this arrives as a validation message that does name the line, like the one a very experienced importer hit in July 2026 and could not explain: <code>Line 2: Validation failed: Cannot add more than 10000 references to a file.</code> He opened his post with "I like to think I am well versed in importing CSV files to Shopify." It is not you.</p>
+<p><b>The importer is older than the limit.</b> Shopify raised the variant ceiling from 100 to 2048 in the 2024-04 API and made it available to every merchant on 15 October 2025. But the old limit did not die; it moved. Shopify's own changelog warns that "merchants using apps that are not using the in-support GraphQL product APIs may have a downgraded or broken experience". Your store supports 2048. Your import plugin, written in 2023 and never updated, cuts at 101. The age of the tool is a diagnosis.</p>
+<p><b>The store is too big for the day.</b> Once a store passes 50,000 variants, Shopify adds a throttle of 1000 new variants per day, and it "don't apply to stores on the Shopify Plus plan". This is why the same file behaves differently for you and for someone else.</p>
+<p>&lt;div class="cta-inline"&gt;   &lt;div&gt;     &lt;strong&gt;Have the list of rows but not the reasons?&lt;/strong&gt;     &lt;p&gt;Each missing row matched to the thing that stopped it, on a copy of your file, with the check you can run again yourself.&lt;/p&gt;   &lt;/div&gt;   &lt;a class="pill" href="https://kwork.com/virtual-assistant/53560711/i-will-find-why-your-price-list-or-csv-keeps-failing-to-import"&gt;Open the kwork&lt;/a&gt; &lt;/div&gt;</p>
+<h2 id="what-if-a-row-landed-but-landed-wrong">What if a row landed, but landed wrong?</h2>
+<p>&lt;div class="tldr"&gt;Short version: a missing row shows up in a count, which is why you found it. A row that imported with the wrong data shows up nowhere at all. Nobody counts it, because by every measure the platform has, that row worked. This is the failure that reaches your customers.&lt;/div&gt;</p>
+<p>The rows you can count are the good news. Here is the bad news, from a WooCommerce thread this year, a shop with more than 1400 products:</p>
+<blockquote><p>"Simple products updated perfectly. However, the majority of Variation products became completely empty."</p></blockquote>
+<p>The owner had done the careful thing. He mapped only the three columns he wanted to change and set everything else to "Do not import", "assuming this would protect the existing [data]". It did not. That thread was closed by a moderator on a timer, not by a fix: "We haven't heard back from you in a while, so I'm going to mark this as resolved."</p>
+<p>There is an open WooCommerce issue from January 2025, still open as I write this in July 2026, that documents the shape of it: "No warning about invalid columns | Import successful | Products imported with empty values". The same issue records the perfect version of this failure - "Import complete, failed to import 69 (of 69!) products".</p>
+<p>And a Shopify owner with 800 products found a field that simply evaporates, quietly, every time: "No error message appears at any point. The category drops silently every time. This is not anything you are doing wrong."</p>
+<p>The diff you ran two sections ago will not catch any of this, because the row is there. To catch it, compare the values instead of the keys. Same two files, same lookup. But this time you check that the price in the export matches the price in your source, not just that the SKU exists in both.</p>
+<p>One more reason to care, and it is the reason to work on a copy. As one Shopify Community member put it: "Changes made by CSV cannot be undone."</p>
+<h2 id="fix-on-a-copy-then-re-run-the-diff">Fix on a copy, then re-run the diff</h2>
+<p>&lt;div class="tldr"&gt;Short version: change the copy, never the live catalogue. Then run the same comparison a second time. The re-run is the point: it turns "I think I fixed it" into a number you can count, and you produced that number yourself, on your own file, without taking anyone's word for it. Including mine.&lt;/div&gt;</p>
+<p>Work on a copy of your file. Never on the live catalogue, because of the sentence above: CSV changes do not have an undo.</p>
+<p>Then the part that matters more than the fix. Run the diff again. The same export, the same lookup, the same key. If the missing list comes back empty, it is done. If it comes back with four rows, you have four rows to look at instead of a feeling that something is still wrong.</p>
+<p>This is the whole reason to do it in this order. A fix you cannot check is a story someone told you. A fix that turns a list of 153 rows into a list of zero is a fact, and you produced it yourself, on your own file, in a tool you already know how to use.</p>
+<h2 id="where-should-you-look-first">Where should you look first?</h2>
+<p>&lt;div class="tldr"&gt;Short version: match what you are seeing on screen to the first place worth looking. This is a triage rather than a diagnosis: it will not tell you the answer, but it will stop you working the wrong file. Start at the row that matches your symptom and work from there.&lt;/div&gt;</p>
+<div class="tbl-wrap"><table><tr><th>What you are seeing</th><th>Look here first</th></tr><tr><td>Import said success, prices did not change</td><td>The update or overwrite checkbox. Default is off.</td></tr><tr><td>Import said success, nothing at all was added</td><td>Same checkbox, same reason: everything already existed.</td></tr><tr><td>Products are in the admin but not on the site</td><td>Not an import problem. Theme, channel or collection.</td></tr><tr><td>Some variants missing, products present</td><td>Parent row failed, or an import tool older than the 2048 limit.</td></tr><tr><td>Products imported, fields empty</td><td>Column mapping. The diff by key will not see this; compare values.</td></tr><tr><td>A few rows missing, no pattern</td><td>Image URLs, whitespace in SKUs, values outside an allowed list.</td></tr><tr><td>Re-import says "SKU already exists" for products you cannot see</td><td>Leftovers from the failed import. Export first, do not just re-upload.</td></tr><tr><td>Big catalogue, missing count keeps moving</td><td>Daily variant throttle above 50,000 variants, or a count over the 25,000 reporting limit.</td></tr><tr><td>The error window looked short</td><td>It was truncated. Do not re-run the import to read the rest: a second run wipes the first run's log, and CSV changes have no undo. Get the rest from the export diff.</td></tr></table></div>
+<h2 id="if-you-have-not-imported-yet">If you have not imported yet</h2>
+<p>&lt;div class="tldr"&gt;Short version: import twenty rows before you import a thousand. The whole problem described in this article is that a failure at scale looks exactly like a success at scale. Twenty rows tells you which of the two you are about to get, while it still costs you a minute.&lt;/div&gt;</p>
+<p>Take twenty rows from your file. Import those. Look at what landed - not the message, the products. Then do the diff on twenty rows, where you can also just count them by hand and confirm the method agrees with your eyes.</p>
+<p>If the twenty are wrong, you found out at twenty. If they are right, you have cleared the file, not the scale. The throttles, the truncated error window and the count ceiling in this article only appear on the big run, so keep the diff for that one too.</p>
+<h2 id="the-part-nobody-in-the-search-results-will-tell-">The part nobody in the search results will tell you</h2>
+<p>&lt;div class="tldr"&gt;Short version: the pages ranking above this one are written by Shopify, by WooCommerce, and by the companies selling import plugins. None of them can write the sentence this article is built on, because it is a sentence about their own product failing quietly. That is not a conspiracy. It is just who gets to rank.&lt;/div&gt;</p>
+<p>The lists are not wrong. They are written by people who cannot say this next part.</p>
+<p>Shopify's help centre cannot tell you that Shopify's importer skipped your rows and called it success. The companies ranking above them sell import plugins - WebToffee, eMagicOne and the rest - and "importers quietly skip rows and report success" is not a sentence you write when your product is an importer. One vendor runs three separate domains for the same question across three platforms. The people who rank for this are, structurally, the people who cannot say it.</p>
+<p>I sell neither a platform nor a plugin. I get to say it: the importer is not lying to you, exactly. It answered a question you did not ask. It told you the job finished. You wanted to know where your products went, and those are not the same sentence, and the gap between them is where your afternoon went.</p>
+<p>Now you know which rows. The rest is just reading them.</p>
+<p>&lt;div class="cta-final"&gt;   &lt;strong&gt;Or send me the file.&lt;/strong&gt;   &lt;p&gt;Show me the file you uploaded and what your catalogue looks like now. You get the rows that did not land, named individually, each with the thing that stopped it, and a check you can re-run yourself. Work happens on a copy. $10, and I say so before you pay if your task is not one of these.&lt;/p&gt;   &lt;a class="pill" href="https://kwork.com/virtual-assistant/53561379/i-will-find-the-rows-that-break-your-product-catalog-import"&gt;Open the kwork&lt;/a&gt; &lt;/div&gt;</p>
+<h2 id="sources">Sources</h2>
+<p>All quotes below were checked against the raw page or the raw source file, not a summary of one.</p>
+<ul><li>WooCommerce product importer, source: <a href="https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/includes/import/class-wc-product-csv-importer.php" target=_blank rel=noopener>class-wc-product-csv-importer.php</a> - the four buckets, the skip conditions and their messages.</li><li>WooCommerce importer controller, source: <a href="https://raw.githubusercontent.com/woocommerce/woocommerce/trunk/plugins/woocommerce/includes/admin/importers/class-wc-product-csv-importer-controller.php" target=_blank rel=noopener>class-wc-product-csv-importer-controller.php</a> - <code>update_existing</code> defaults to false; batch size 30.</li><li>WooCommerce issue <a href="https://github.com/woocommerce/woocommerce/issues/19863" target=_blank rel=noopener>#19863</a> - Mike Jolley (Automattic) on the log, and on variations cleared when a parent fails.</li><li>WooCommerce issue <a href="https://github.com/woocommerce/woocommerce/issues/54841" target=_blank rel=noopener>#54841</a> - open since January 2025: import complete, 69 of 69 products failed.</li><li>Magento issue <a href="https://github.com/magento/magento2/issues/5846" target=_blank rel=noopener>#5846</a> - "thinks the product import was a success as it reached the end of the data to import".</li><li>Magento issue <a href="https://github.com/magento/magento2/issues/28420" target=_blank rel=noopener>#28420</a> - the error report file is generated, then removed.</li><li>Shopify changelog: <a href="https://shopify.dev/changelog/the-product-variant-limit-is-now-2048-for-all-merchants" target=_blank rel=noopener>variant limit raised to 2048 for all merchants</a>, 15 October 2025, including the warning about apps on older APIs.</li><li>Shopify: <a href="https://shopify.dev/docs/api/usage/limits" target=_blank rel=noopener>API rate limits</a> - the 25,000 count ceiling, the 50,000-variant daily throttle, and the Plus exemption.</li><li>Shopify Community: <a href="https://community.shopify.com/t/csv-import-issue/645056" target=_blank rel=noopener>CSV Import Issue</a> - the 10000-references validation message.</li><li>Shopify Community: <a href="https://community.shopify.com/t/missing-active-products-on-website/647043" target=_blank rel=noopener>Missing active products on website</a> - 1237 in the admin, 652 on the site, and the theme.</li><li>WordPress: <a href="https://developer.wordpress.org/reference/functions/wp_max_upload_size/" target=_blank rel=noopener>wp_max_upload_size()</a> - the upload ceiling is the smaller of two PHP settings.</li></ul>
+    </div>
+    <div class="author">
+      <img src="/images/ben.jpg" width="52" height="52" alt="Ben Ison" />
+      <div><b>Ben Ison · Python / AI Engineer · 15+ years</b>
+      <small>I fix scripts, spreadsheets and automation on Kwork - down to a result you can check yourself.</small></div>
+    </div>
+  </article>
+  <div class="final">
+    <h2>Broken script, and you would rather just have it working?</h2>
+    <p>Send me the error text and a copy of the file. I find the cause, fix one failing scenario, verify it on your data, and tell you in plain words what broke and what not to touch.</p>
+    <div class="row">
+      <a class="btn btn-primary btn-lg" href="https://kwork.com/virtual-assistant/53561379/i-will-find-the-rows-that-break-your-product-catalog-import" target="_blank" rel="noopener">Fix my script - $10</a>
+      <a class="btn btn-ghost btn-lg" href="https://kwork.com/user/dayonebuilder" target="_blank" rel="noopener">See my profile</a>
+    </div>
+  </div>
+  <footer class="site">
+    <div class="container foot">
+      <span>© DayOneBuilder - Python / AI Engineer</span>
+      <span><a href="/blog/">Blog</a> · <a href="/">Home</a></span>
+    </div>
+  </footer>
+<script>
+document.addEventListener('click',function(e){var a=e.target.closest?e.target.closest('a[href*="kwork."]'):null;
+if(a&&window.gtag){try{gtag('event','kwork_click',{from:'article-import-rows-missing'});}catch(_){}}},true);
+</script>
+</body>
+</html>
