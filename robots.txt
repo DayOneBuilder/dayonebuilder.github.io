@@ -4,15 +4,14 @@ Disallow: /downloads/
 
 Sitemap: https://dayonebuilder.online/sitemap.xml
 
-# Primary human/product surfaces
+# Primary surfaces (English)
 # home: https://dayonebuilder.online/
-# product tests: https://dayonebuilder.online/products/
-# current test: https://dayonebuilder.online/free-rental-property-inspection-checklist-template-uk/
-
-# Secondary agent-readable support surfaces
+# blog: https://dayonebuilder.online/blog/
 # llms.txt: https://dayonebuilder.online/llms.txt
-# registry: https://dayonebuilder.online/agent-registry.json
-# actions: https://dayonebuilder.online/agent-actions.json
-# resolver: https://dayonebuilder.online/dob-task-resolver/
-# repo report: https://dayonebuilder.online/repo/
-# static collection index: https://dayonebuilder.online/collections/index.json
+
+# Russian versions (reachable by direct link and via search)
+# home: https://dayonebuilder.online/ru/
+# blog: https://dayonebuilder.online/ru/blog/
+
+# Archived surfaces from earlier projects on this domain — not current work
+# /products/, /collections/, /repo/, /dob-task-resolver/, /agent-magnet/

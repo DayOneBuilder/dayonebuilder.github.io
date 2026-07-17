@@ -24,6 +24,14 @@ Follow `DESIGN.md` for all visual decisions:
 ├── DESIGN.md           # Design system reference
 ├── AGENTS.md           # This file — repo rules
 ├── README.md           # Project readme
+├── blog/
+│   ├── index.html      # Blog index (English)
+│   └── <slug>/
+│       └── index.html  # One article per folder
+├── ru/
+│   ├── index.html      # Russian landing
+│   └── blog/
+│       └── index.html  # Russian blog index
 ├── speech-test/
 │   └── index.html      # Speech Test project
 └── <project-name>/
@@ -50,6 +58,18 @@ Run `scripts/check-google-analytics.sh` before pushing changes.
 ### Language
 - All UI text in **English**
 - All commit messages in **English**, descriptive
+- The site is English-first. Russian pages live under `/ru/` and are reachable only by direct
+  link or from search — never link to them from an English page (`hreflang` is the one exception).
+- Exception: `/blog/scheta-v-whatsapp-iz-google-tablicy/` is Russian at a root-level `/blog/` URL.
+  Its URL is frozen — it holds earned search ranking. Do not move it; it navigates back into `/ru/`.
+- One language per page. Never mix English UI with Russian copy or vice versa.
+
+### Kwork links
+- All Kwork links point to **kwork.com** (the English marketplace), never kwork.ru.
+- The `?ref=15189887` affiliate parameter belongs to kwork.ru and is **not** verified on kwork.com.
+  Use clean URLs until an affiliate link generated in the kwork.com dashboard is confirmed to attribute.
+- Verify a gig URL returns 200 before linking it: moderation renames slugs and moves gigs between
+  category paths (both then 301 by gig id).
 
 ### Projects
 - Each project lives in its own subfolder with its own `index.html`
