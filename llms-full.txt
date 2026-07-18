@@ -301,7 +301,7 @@ So this is the other thing. Not the reasons. The rows.
 
 ## Your CSV import says success but rows are missing. Why?
 
-> <div class="tldr">Short version: when a CSV import says success but rows are missing, the importer is telling you it reached the end of the file, not that your products arrived. Those are two different claims. Every row in your file was sorted into one of five buckets, and only two of them mean the row became a product you can sell.</div>
+> Short version: when a CSV import says success but rows are missing, the importer is telling you it reached the end of the file, not that your products arrived. Those are two different claims. Every row in your file was sorted into one of five buckets, and only two of them mean the row became a product you can sell.
 
 Open the source of WooCommerce's product importer and one of the first things it does is create five buckets:
 
@@ -315,7 +315,7 @@ The word "success" is not doing the job you assumed it was doing. It never was.
 
 ## Were your rows skipped, or did they fail?
 
-> <div class="tldr">Short version: your rows probably did not fail. They were skipped, which is a different bucket with a different meaning. A failed row was attempted and something went wrong. A skipped row was never attempted at all: the importer looked at it, decided it already had that product, and moved on. Both get recorded. Only one of them is a bug.</div>
+> Short version: your rows probably did not fail. They were skipped, which is a different bucket with a different meaning. A failed row was attempted and something went wrong. A skipped row was never attempted at all: the importer looked at it, decided it already had that product, and moved on. Both get recorded. Only one of them is a bug.
 
 Here is the branch in WooCommerce that decides:
 
@@ -327,7 +327,7 @@ That single fact changes where you look, but not in the way the troubleshooting 
 
 ## The checkbox that skips your whole file
 
-> <div class="tldr">Short version: on both Shopify and WooCommerce, a row whose SKU or handle already exists is skipped unless you tick a box. The box is off by default. If you re-uploaded your catalogue to change prices and nothing changed, this is almost certainly why.</div>
+> Short version: on both Shopify and WooCommerce, a row whose SKU or handle already exists is skipped unless you tick a box. The box is off by default. If you re-uploaded your catalogue to change prices and nothing changed, this is almost certainly why.
 
 WooCommerce decides with this:
 
@@ -347,7 +347,7 @@ There is a third variant of the same trap, and it fires in the opposite directio
 
 ## Count first: three numbers, three meanings
 
-> <div class="tldr">Short version: write down three numbers before you change anything. The rows in your file, the products in your admin, and the products on your storefront. They mean three different things, and most people compare the wrong two, diagnose the wrong problem, and edit a file that was fine all along.</div>
+> Short version: write down three numbers before you change anything. The rows in your file, the products in your admin, and the products on your storefront. They mean three different things, and most people compare the wrong two, diagnose the wrong problem, and edit a file that was fine all along.
 
 Do this before anything else, because it takes a minute and it decides everything after.
 
@@ -363,7 +363,7 @@ One caveat on counting, because a procedure should know its own limits. If your 
 
 ## Are the products missing, or just invisible?
 
-> <div class="tldr">Short version: if your products are in the admin and not on the site, the import is innocent and the file is fine. This is the most expensive wrong turn available, because everything you do to the CSV from here is wasted.</div>
+> Short version: if your products are in the admin and not on the site, the import is innocent and the file is fine. This is the most expensive wrong turn available, because everything you do to the CSV from here is wasted.
 
 In July 2026 a shop owner posted this, and it is worth reading exactly:
 
@@ -379,7 +379,7 @@ A confident helper in that thread had already proposed the usual explanation - p
 
 ## The log names your rows once, then it is gone
 
-> <div class="tldr">Short version: the import log is real, it works, and on WooCommerce it does list your skipped rows with a reason for each. That is why "check the log" is the standard advice, and it is right. The catch is what the log is: one screen, no address to return to, named by product rather than by line, wiped by the next run, and truncated when there is a lot to say.</div>
+> Short version: the import log is real, it works, and on WooCommerce it does list your skipped rows with a reason for each. That is why "check the log" is the standard advice, and it is right. The catch is what the log is: one screen, no address to return to, named by product rather than by line, wiped by the next run, and truncated when there is a lot to say.
 
 I have to be fair to the platforms here, because the popular version of this story is wrong and I believed it myself until I read the code. WooCommerce counts skips and says so: `'%s products were skipped'`. It merges them into the same log as the failures, in one line you can go and read: `array_merge( $error_log, $results['failed'], $results['skipped'] )`. It shows that log a table with two columns, "Product" and "Reason for failure". A core maintainer at Automattic said so in 2018, cheerfully: "The final step does tell you if there were failures and presents the log :)". On Shopify, according to a reply in the community forums, the detail arrives by email rather than on screen: "you would receive an email that outlines what failed and why product's didn't import." WooCommerce's own documentation tells you to start there: "If the import finishes but some products are missing or skipped, check the import log first."
 
@@ -397,7 +397,7 @@ None of this is a conspiracy. It is the ordinary result of building a log for th
 
 ## How do you get a list of what actually landed?
 
-> <div class="tldr">Short version: ask the platform for a list of what is in your store right now. Shopify and WooCommerce both have an export button. That file is ground truth: it is the one document here that cannot be wrong about what exists, because it is generated from what exists. It still has two blind spots worth knowing.</div>
+> Short version: ask the platform for a list of what is in your store right now. Shopify and WooCommerce both have an export button. That file is ground truth: it is the one document here that cannot be wrong about what exists, because it is generated from what exists. It still has two blind spots worth knowing.
 
 Every platform will hand you the current catalogue as a file. Shopify: Products, then Export. WooCommerce has a product exporter built in.
 
@@ -407,7 +407,7 @@ Two warnings before you trust the export blindly. WooCommerce's exporter only co
 
 ## Diff by the key, not by eye
 
-> <div class="tldr">Short version: put the export next to your source file and match them on SKU or handle. The rows in your file with no match in the export are your answer. This is a lookup, and it is the only step that produces a list of names rather than a theory.</div>
+> Short version: put the export next to your source file and match them on SKU or handle. The rows in your file with no match in the export are your answer. This is a lookup, and it is the only step that produces a list of names rather than a theory.
 
 You have two files now. Your source, and what actually exists. The missing rows are the ones present in the first and absent from the second, matched on the one column that identifies a product: SKU on WooCommerce and Magento, handle on Shopify.
 
@@ -421,7 +421,7 @@ What you have at the end of this is the thing you actually wanted: a list of row
 
 ## What makes one row disappear?
 
-> <div class="tldr">Short version: a row disappears for a named reason, and the platforms name them in their own source code. A SKU or handle that already exists. A URL key already taken. Spaces at the edges of a SKU. An image URL that will not download. A parent row that failed and took its variants with it. Take each missing row and look for its signature.</div>
+> Short version: a row disappears for a named reason, and the platforms name them in their own source code. A SKU or handle that already exists. A URL key already taken. Spaces at the edges of a SKU. An image URL that will not download. A parent row that failed and took its variants with it. Take each missing row and look for its signature.
 
 You have your missing rows. Take each one and look for its signature below.
 
@@ -459,11 +459,11 @@ You have your missing rows. Take each one and look for its signature below.
 
 ## What if a row landed, but landed wrong?
 
-> <div class="tldr">Short version: a missing row shows up in a count, which is why you found it. A row that imported with the wrong data shows up nowhere at all. Nobody counts it, because by every measure the platform has, that row worked. This is the failure that reaches your customers.</div>
+> Short version: a missing row shows up in a count, which is why you found it. A row that imported with the wrong data shows up nowhere at all. Nobody counts it, because by every measure the platform has, that row worked. This is the failure that reaches your customers.
 
 The rows you can count are the good news. Here is the bad news, from a WooCommerce thread this year, a shop with more than 1400 products:
 
-> "Simple products updated perfectly. However, the majority of Variation products became completely empty..." <cite>The sentence goes on to say that their existing prices and descriptions were wiped out with them.</cite>
+> "Simple products updated perfectly. However, the majority of Variation products became completely empty..."The sentence goes on to say that their existing prices and descriptions were wiped out with them.
 
 The owner had done the careful thing. He mapped only the three columns he wanted to change and set everything else to "Do not import", "assuming this would protect the existing [data]". It did not. That thread was closed by a moderator on a timer, not by a fix: "We haven't heard back from you in a while, so I'm going to mark this as resolved."
 
@@ -477,7 +477,7 @@ One more reason to care, and it is the reason to work on a copy. As one Shopify 
 
 ## Fix on a copy, then re-run the diff
 
-> <div class="tldr">Short version: change the copy, never the live catalogue. Then run the same comparison a second time. The re-run is the point: it turns "I think I fixed it" into a number you can count, and you produced that number yourself, on your own file, without taking anyone's word for it. Including mine.</div>
+> Short version: change the copy, never the live catalogue. Then run the same comparison a second time. The re-run is the point: it turns "I think I fixed it" into a number you can count, and you produced that number yourself, on your own file, without taking anyone's word for it. Including mine.
 
 Work on a copy of your file. Never on the live catalogue, because of the sentence above: CSV changes do not have an undo.
 
@@ -487,7 +487,7 @@ This is the whole reason to do it in this order. A fix you cannot check is a sto
 
 ## Where should you look first?
 
-> <div class="tldr">Short version: match what you are seeing on screen to the first place worth looking. This is a triage rather than a diagnosis: it will not tell you the answer, but it will stop you working the wrong file. Start at the row that matches your symptom and work from there.</div>
+> Short version: match what you are seeing on screen to the first place worth looking. This is a triage rather than a diagnosis: it will not tell you the answer, but it will stop you working the wrong file. Start at the row that matches your symptom and work from there.
 
 | What you are seeing | Look here first |
 
@@ -513,7 +513,7 @@ This is the whole reason to do it in this order. A fix you cannot check is a sto
 
 ## If you have not imported yet
 
-> <div class="tldr">Short version: import twenty rows before you import a thousand. The whole problem described in this article is that a failure at scale looks exactly like a success at scale. Twenty rows tells you which of the two you are about to get, while it still costs you a minute.</div>
+> Short version: import twenty rows before you import a thousand. The whole problem described in this article is that a failure at scale looks exactly like a success at scale. Twenty rows tells you which of the two you are about to get, while it still costs you a minute.
 
 Take twenty rows from your file. Import those. Look at what landed - not the message, the products. Then do the diff on twenty rows, where you can also just count them by hand and confirm the method agrees with your eyes.
 
@@ -521,7 +521,7 @@ If the twenty are wrong, you found out at twenty. If they are right, you have cl
 
 ## The part nobody in the search results will tell you
 
-> <div class="tldr">Short version: the pages ranking above this one are written by Shopify, by WooCommerce, and by the companies selling import plugins. None of them can write the sentence this article is built on, because it is a sentence about their own product failing quietly. That is not a conspiracy. It is just who gets to rank.</div>
+> Short version: the pages ranking above this one are written by Shopify, by WooCommerce, and by the companies selling import plugins. None of them can write the sentence this article is built on, because it is a sentence about their own product failing quietly. That is not a conspiracy. It is just who gets to rank.
 
 The lists are not wrong. They are written by people who cannot say this next part.
 
@@ -530,8 +530,6 @@ Shopify's help centre cannot tell you that Shopify's importer skipped your rows 
 I sell neither a platform nor a plugin. I get to say it: the importer is not lying to you, exactly. It answered a question you did not ask. It told you the job finished. You wanted to know where your products went, and those are not the same sentence, and the gap between them is where your afternoon went.
 
 Now you know which rows. The rest is just reading them.
-
-<div class="cta-final"> <strong>Or send me the file.</strong> <p>Show me the file you uploaded and what your catalogue looks like now. You get the rows that did not land, named individually, each with the thing that stopped it, and a check you can re-run yourself. Work happens on a copy. $10, and I say so before you pay if your task is not one of these.</p> <a class="pill" href="https://kwork.com/virtual-assistant/53561379/i-will-find-the-rows-that-break-your-product-catalog-import">Open the kwork</a> </div>
 
 ## Common questions
 
