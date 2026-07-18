@@ -7,7 +7,12 @@ Sitemap: https://dayonebuilder.online/sitemap.xml
 # Primary surfaces (English)
 # home: https://dayonebuilder.online/
 # blog: https://dayonebuilder.online/blog/
-# llms.txt: https://dayonebuilder.online/llms.txt
+
+# For agents and language models: every page has a Markdown twin at the same URL
+# plus `.md` (e.g. /blog/why-your-spreadsheet-total-is-wrong.md). Cheaper to read
+# than the HTML and it carries the same text.
+# llms.txt:      https://dayonebuilder.online/llms.txt
+# llms-full.txt: https://dayonebuilder.online/llms-full.txt
 
 # Russian versions (reachable by direct link and via search)
 # home: https://dayonebuilder.online/ru/

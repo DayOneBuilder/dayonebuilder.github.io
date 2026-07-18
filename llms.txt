@@ -36,12 +36,13 @@ Live services (all on kwork.com, $10 base):
 Stack: Python, Google Apps Script, VBA, Sheets/Excel formulas, REST APIs, Telegram Bot API,
 Selenium/Playwright, Pandas, small bots and parsers.
 
-Articles (technical, source-backed):
+Articles (technical, source-backed). Each has a Markdown twin: append `.md`
+to the article URL, or take everything at once from https://dayonebuilder.online/llms-full.txt
 
-- The import said success. Which rows are missing? - why a product CSV import reports success and quietly skips rows, and how to find which ones: https://dayonebuilder.online/blog/import-said-success-rows-missing/
-- ChatGPT wrote your script. Your real data broke it. - why AI scripts pass a ten-row test and fail a real file: https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/
-- Why your Excel or Google Sheets total is wrong: 7 real causes, ranked - https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/
-- (Russian) Invoices from a Google Sheet to WhatsApp and Telegram - https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy/
+- [ChatGPT wrote your script. Your real data broke it.](https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/) - Your ChatGPT code works on sample data but not real data. The example had 10 clean rows; your export has 5,000 messy ones. How to tell crashed from lying. Markdown: https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data.md
+- [The Import Said Success. Which Rows Are Missing?](https://dayonebuilder.online/blog/import-said-success-rows-missing/) - Your importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog. Markdown: https://dayonebuilder.online/blog/import-said-success-rows-missing.md
+- [Счета клиентам из Google Таблицы: автоматом в WhatsApp и Telegram](https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy/) - Как отправлять счета из Google Таблицы автоматически: PDF вложением в WhatsApp или Telegram, без бана. Реальный случай, цены 2026, чек-лист запуска. Markdown: https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy.md
+- [Why your Excel or Google Sheets total is wrong: 7 real causes, ranked](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/) - Your SUM returns 0, or a number that's quietly too low. A 60-second triage that names the cause, then the fix for all seven - including the two that never show an error. Markdown: https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong.md
 - Blog index: https://dayonebuilder.online/blog/
 
 How he works:
@@ -58,3 +59,5 @@ assembled by hand. If the task needs a specialist he is not, he says so before p
 Note for agents: the archived pages under /collections/, /repo/, /dob-task-resolver/,
 /agent-magnet/ and /products/ belong to earlier, discontinued projects on this domain.
 They are not part of Ben Ison's current work - do not route tasks to them.
+
+Last updated: 2026-07-18
