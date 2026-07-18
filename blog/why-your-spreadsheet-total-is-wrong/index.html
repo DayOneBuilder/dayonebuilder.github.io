@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Why Your Excel or Google Sheets Total Is Wrong: 7 Real Causes, Ranked</title>
-<meta name="description" content="Your SUM returns 0, or a number that's quietly too low. A 60-second triage that names the cause, then the fix for all seven - including the two that never show an error." />
+<meta name="description" content="Your SUM returns 0, or a number that&#x27;s quietly too low. A 60-second triage that names the cause, then the fix for all seven - including the two that never show an error." />
 <meta name="theme-color" content="#000000" />
 <link rel="canonical" href="https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/" />
 <link rel="alternate" hreflang="en" href="https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/" />
@@ -14,18 +14,21 @@
 <meta property="og:type" content="article" />
 <meta property="og:site_name" content="DayOneBuilder" />
 <meta property="og:locale" content="en_US" />
-<meta property="og:title" content="Why Your Excel or Google Sheets Total Is Wrong: 7 Real Causes, Ranked" />
-<meta property="og:description" content="Your SUM returns 0, or a number that's quietly too low. A 60-second triage that names the cause, then the fix for all seven." />
+<meta property="og:title" content="Why your Excel or Google Sheets total is wrong: 7 real causes, ranked" />
+<meta property="og:description" content="Your SUM returns 0, or a number that&#x27;s quietly too low. A 60-second triage that names the cause, then the fix for all seven - including the two that never show an error." />
 <meta property="og:url" content="https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/" />
 <meta property="og:image" content="https://dayonebuilder.online/assets/og/og-why-your-spreadsheet-total-is-wrong.png" />
-<meta property="article:published_time" content="2026-07-17" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Why your Excel or Google Sheets total is wrong: 7 real causes, ranked" />
+<meta property="article:published_time" content="2026-07-17T12:00:00+03:00" />
 <meta property="article:author" content="Ben Ison" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Why Your Excel or Google Sheets Total Is Wrong: 7 Real Causes, Ranked" />
-<meta name="twitter:description" content="Your SUM returns 0, or a number that's quietly too low. A 60-second triage that names the cause, then the fix for all seven." />
+<meta name="twitter:title" content="Why your Excel or Google Sheets total is wrong: 7 real causes, ranked" />
+<meta name="twitter:description" content="Your SUM returns 0, or a number that&#x27;s quietly too low. A 60-second triage that names the cause, then the fix for all seven - including the two that never show an error." />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-KQMLYS3VVE"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag("js",new Date());gtag("config","G-KQMLYS3VVE");</script>
-<script type="application/ld+json">[{"@context":"https://schema.org","@type":"Article","headline":"Why your Excel or Google Sheets total is wrong: 7 real causes, ranked","description":"Your SUM returns 0, or a number that's quietly too low. A 60-second triage that names the cause, then the fix for all seven - including the two that never show an error.","inLanguage":"en","datePublished":"2026-07-17","dateModified":"2026-07-17","author":{"@type":"Person","name":"Ben Ison","url":"https://dayonebuilder.online/"},"publisher":{"@type":"Organization","name":"DayOneBuilder","url":"https://dayonebuilder.online/","logo":{"@type":"ImageObject","url":"https://dayonebuilder.online/images/icon-512.png"}},"image":"https://dayonebuilder.online/assets/og/og-why-your-spreadsheet-total-is-wrong.png","mainEntityOfPage":"https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/"},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://dayonebuilder.online/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://dayonebuilder.online/blog/"},{"@type":"ListItem","position":3,"name":"Why your spreadsheet total is wrong","item":"https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/"}]},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"My SUM shows 0, but the cells clearly contain numbers. Why?","acceptedAnswer":{"@type":"Answer","text":"Because they are not numbers - they are text that looks like numbers. SUM ignores text inside a referenced range rather than erroring, so a column of text numbers totals to 0. Check it with =COUNT(B2:B500) against =COUNTA(B2:B500): COUNT only counts real numbers, so if it is lower, you have found your cause."}},{"@type":"Question","name":"Why doesn't formatting the column as Number fix it?","acceptedAnswer":{"@type":"Answer","text":"Because a number format changes how a value is displayed, not what the value is. A text cell reformatted as Number is still text. You have to convert the value: Excel's Convert to Number on the error indicator, a Paste Special multiply by 1, or the VALUE function. In Google Sheets, VALUE or a re-import with the right locale does the same job."}},{"@type":"Question","name":"The total changed after someone sorted the sheet. What happened?","acceptedAnswer":{"@type":"Answer","text":"Usually the sort covered only part of the table - one column selected instead of the whole range - so the rows were scrambled against each other. The total may be arithmetically fine while every row now pairs the wrong client with the wrong amount. Undo, then sort the full table or use an Excel Table, which sorts as one object."}},{"@type":"Question","name":"Is Google Sheets more reliable than Excel for this?","acceptedAnswer":{"@type":"Answer","text":"No. All seven causes exist in both, with the same fixes. Sheets sees more text-number problems because of imports and locale mismatches - a European export written as 1.234,56 lands as text in a US-locale sheet. Excel sees more stale totals, because it has a manual calculation mode Sheets has no equivalent of."}},{"@type":"Question","name":"How long does it take to find which cause it is?","acceptedAnswer":{"@type":"Answer","text":"The triage is three formulas and about a minute, and it names the cause in most files. Fixing it is usually the same day, once the cause is known. The exception is a report built from several exports, where the totals disagree because the sources disagree - that takes longer, and no formula shortcut exists for it."}}]}]</script>
+<script type="application/ld+json">[{"@context": "https://schema.org", "@type": "Article", "headline": "Why your Excel or Google Sheets total is wrong: 7 real causes, ranked", "description": "Your SUM returns 0, or a number that's quietly too low. A 60-second triage that names the cause, then the fix for all seven - including the two that never show an error.", "inLanguage": "en", "datePublished": "2026-07-17T12:00:00+03:00", "dateModified": "2026-07-17T12:00:00+03:00", "author": {"@type": "Person", "name": "Ben Ison", "url": "https://dayonebuilder.online/", "jobTitle": "Python / AI Engineer", "knowsAbout": ["Google Sheets", "Microsoft Excel", "Google Apps Script", "VBA", "Python", "CSV import", "AI-generated code", "PDF generation", "API integration"], "sameAs": ["https://kwork.com/user/dayonebuilder", "https://dayonebuilder.online/blog/"]}, "publisher": {"@type": "Organization", "name": "DayOneBuilder", "url": "https://dayonebuilder.online/", "logo": {"@type": "ImageObject", "url": "https://dayonebuilder.online/images/icon-512.png"}}, "image": "https://dayonebuilder.online/assets/og/og-why-your-spreadsheet-total-is-wrong.png", "mainEntityOfPage": "https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/"}, {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://dayonebuilder.online/"}, {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://dayonebuilder.online/blog/"}, {"@type": "ListItem", "position": 3, "name": "Why your Excel or Google Sheets total is wrong: 7 real causes, ranked", "item": "https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/"}]}, {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "My SUM shows 0, but the cells clearly contain numbers.", "acceptedAnswer": {"@type": "Answer", "text": "They contain things that look like numbers. SUM ignores text in a referenced range rather than erroring, so a column of text numbers totals to a confident 0. Run =COUNT(B2:B500) against =COUNTA(B2:B500): COUNT sees only real numbers, so if it comes back lower, that's your answer in about four seconds."}}, {"@type": "Question", "name": "Why doesn't formatting the column as Number fix it?", "acceptedAnswer": {"@type": "Answer", "text": "Because a number format governs how a value is displayed, not what the value is. Text wearing a Number format is still text. You have to convert: Convert to Number on Excel's error indicator, a Paste Special multiply by 1, or VALUE(). In Sheets, VALUE() or a re-import with the correct locale."}}, {"@type": "Question", "name": "The total changed after someone sorted the sheet.", "acceptedAnswer": {"@type": "Answer", "text": "Usually the sort covered part of the table rather than all of it - one column selected instead of the whole range - so rows were scrambled against each other. The arithmetic may be flawless while every row now pairs the wrong client with the wrong amount. Undo immediately if you can, and sort the whole table, or use an Excel Table, which sorts as a single object."}}, {"@type": "Question", "name": "Is Google Sheets more reliable than Excel for this?", "acceptedAnswer": {"@type": "Answer", "text": "No. All seven exist in both, with the same fixes. Sheets sees more text-number trouble, because it lives on imports and locale mismatches. Excel sees more stale totals, because it has a manual calculation mode. Pick on other grounds."}}, {"@type": "Question", "name": "How long does it take to find which one it is?", "acceptedAnswer": {"@type": "Answer", "text": "The triage is three formulas and about a minute, and in most files it names the cause outright. The fix is usually the same day once you know what you're fixing. The honest exception: a report assembled from several exports whose totals disagree because the sources disagree. No formula shortens that one - it's reconciliation work, and anyone promising otherwise hasn't opened the file."}}]}]</script>
 <style>
   :root{
     --bg:#000000;--surface:#0e100f;--surface-2:#141613;
@@ -121,13 +124,22 @@
   .cta-inline b{font-size:15px}
   .cta-inline p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
 
+  blockquote{margin:20px 0 0;border-left:3px solid var(--accent);background:rgba(25,185,118,.05);border-radius:0 10px 10px 0;padding:14px 18px}
+  blockquote p{margin:0;font-size:15px;color:#d9dedb;font-style:italic}
+  blockquote cite{display:block;margin-top:10px;font:500 12.5px/1.5 var(--mono);font-style:normal;color:var(--dim)}
+  blockquote cite a{color:var(--muted);text-decoration:none}
+  blockquote cite a:hover{color:var(--fg)}
+  .steps-list{counter-reset:sl;list-style:none;margin:16px 0 0;padding:0}
+  .steps-list li{counter-increment:sl;display:grid;grid-template-columns:28px 1fr;gap:12px;margin:12px 0;font-size:15.5px;color:#d9ded9;line-height:1.5}
+  .steps-list li::before{content:counter(sl);font:700 12px/1.6 var(--mono);color:var(--accent);border:1px solid var(--line);border-radius:6px;width:24px;height:24px;text-align:center}
   .cause{margin:16px 0 0;border:1px solid var(--line-soft);border-radius:12px;background:var(--surface);overflow:hidden}
-  .cause .crow{display:grid;grid-template-columns:88px 1fr;gap:0;border-top:1px solid var(--line-soft)}
+  .cause .crow{display:grid;grid-template-columns:74px 1fr;gap:0;border-top:1px solid var(--line-soft)}
   .cause .crow:first-child{border-top:none}
-  .cause .ck{font:600 10.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);
-    padding:12px 0 12px 16px}
-  .cause .cv{padding:12px 16px 12px 0;font-size:14.5px;color:#d9ded9}
-  .cause .cv code{white-space:nowrap}
+  .cause .ck{font:600 10.5px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding:12px 0 12px 16px}
+  .cause .cv{padding:12px 16px 12px 12px;font-size:14.5px;color:#d9ded9;overflow-wrap:anywhere}
+  .cause .cv code{overflow-wrap:anywhere;white-space:normal}
+  .cause .ctitle{padding:13px 16px;font-size:15px;font-weight:650;color:var(--fg);border-top:1px solid var(--line-soft)}
+  .cause .ctitle:first-child{border-top:none}
   @media(max-width:560px){.cause .crow{grid-template-columns:1fr}.cause .ck{padding:12px 16px 0}.cause .cv{padding:4px 16px 12px}}
 
   .steps-block{counter-reset:st;margin:16px 0 0;border:1px solid var(--line-soft);border-radius:12px;overflow:hidden}
@@ -186,191 +198,91 @@
       <a class="btn btn-primary" href="https://kwork.com/user/dayonebuilder" target="_blank" rel="noopener">Open Kwork</a>
     </div>
   </header>
-
   <article class="art">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/blog/">Blog</a> / Why your spreadsheet total is wrong</nav>
-    <div class="art-kicker"><span>Spreadsheets · Excel &amp; Google Sheets</span><span class="meta">· 17 July 2026 · 11 min read</span></div>
-    <h1>Why your Excel or Google Sheets total is wrong: 7&nbsp;real causes, ranked</h1>
+    <div class="art-kicker"><span>Spreadsheets · Excel &amp; Google Sheets</span><span class="meta">· 17 July 2026 · 12 min read</span></div>
+    <h1>Why your Excel or Google Sheets total is wrong: 7 real causes, ranked</h1>
     <p class="lede">Your SUM says 0. Or worse, it says something believable that happens to be too low, and it has been saying it for months. Here is the triage I run before touching anything, and the seven causes it lands on - ordered by how often they actually turn out to be the culprit.</p>
-
     <div class="promise">
       <div class="pt">What you get from this article</div>
-      <ul><li>A 60-second triage: three formulas that name the cause</li><li>All seven causes with the tell, the fix, and what it looks like in Sheets vs Excel</li><li>The two causes that never show an error - the expensive ones</li><li>A symptom table: "the total is X" → look here first</li><li>Six changes that stop it coming back</li></ul>
-      <div class="pm">Run the triage: ~1 minute · Typical fix once the cause is known: same day</div>
+      <ul><li>A 60-second triage: three formulas that name the cause</li><li>All seven causes with the tell, the fix, and what it looks like in Sheets vs Excel</li><li>The two causes that never show an error - the expensive ones</li><li>A symptom table: 'the total is X' → look here first</li><li>Six changes that stop it coming back</li></ul>
+      <div class="pm">Run the fork: Excel, Google Sheets · Saves: ~1 minute to name the cause, same day to fix it</div>
     </div>
-
     <div class="art-body">
-      <p>A wrong total in a spreadsheet is rarely a mystery. It is almost always one of seven things, and six of them announce themselves within a minute if you ask the right question. The trouble is that the usual first move - staring at the formula - is the one that tells you least. The formula is usually fine. It is the data underneath that is lying to it.</p>
-      <p>So start with the data.</p>
-
-      <h2 id="triage">The 60-second triage</h2>
-      <div class="tldr"><p><span class="tl-tag">Short version:</span> three formulas in three empty cells. Their answers narrow seven causes down to one or two before you have touched anything.</p></div>
-      <p>Put these next to your data - say your numbers live in <code>B2:B500</code>:</p>
-      <div class="steps-block">
-        <div class="stp"><div><b><code>=COUNT(B2:B500)</code> against <code>=COUNTA(B2:B500)</code></b><p>COUNT counts only real numbers. COUNTA counts everything that isn't empty. If COUNT is lower, some of your "numbers" are text - cause #1, and you can stop reading the rest of the triage.</p></div></div>
-        <div class="stp"><div><b><code>=SUM(B2:B500)</code> against <code>=SUBTOTAL(109,B2:B500)</code></b><p>SUBTOTAL with 109 skips rows that are hidden or filtered out; SUM does not. If the two disagree, hidden rows are in play - cause #5.</p></div></div>
-        <div class="stp"><div><b><code>=COUNTA(B:B)</code> against the last row your total actually covers</b><p>Column B has 812 filled cells but your SUM stops at row 500? The range stopped growing - cause #2. This is the one that hides for months, because nothing about it looks broken.</p></div></div>
-      </div>
-      <p>Two more worth knowing: <code>=SUMPRODUCT(--ISTEXT(B2:B500))</code> counts text cells directly, and in Excel, tapping <b>F9</b> is a one-second test for a stale total (see the note at the end). Now the seven, in the order they actually turn up.</p>
-
-      <div class="cta-inline">
-        <div class="cx">
-          <b>Rather not run the triage yourself?</b>
-          <p>Send me a copy of the sheet and the number you expected. I'll tell you which of the seven it is - and if it's a two-minute fix, I'll say that too.</p>
-        </div>
-        <a class="btn btn-ghost" href="https://kwork.com/user/dayonebuilder" target="_blank" rel="noopener">Send me the sheet</a>
-      </div>
-
-      <h2 id="text-numbers">1. Your numbers are text</h2>
-      <div class="cause">
-        <div class="crow"><div class="ck">Tell</div><div class="cv">SUM returns 0, or far too little. The values sit on the <b>left</b> of their cells - real numbers align right. Excel adds a small green triangle.</div></div>
-        <div class="crow"><div class="ck">Why</div><div class="cv">SUM ignores text inside a referenced range instead of complaining. A whole column of text numbers sums to a confident, wrong <code>0</code>.</div></div>
-        <div class="crow"><div class="ck">Fix</div><div class="cv">Convert the values, don't reformat them: Excel's <b>Convert to Number</b> on the error indicator, a Paste Special <b>multiply by 1</b>, or <code>=VALUE(A2)</code>.</div></div>
-      </div>
-      <p>This is first by a wide margin, and it earns the place because SUM's behaviour is documented and merciless: text in a referenced range is <b>ignored</b>, not flagged. No error, no warning - just a total that is missing the rows it silently declined to add. The same silence has a bigger version outside the spreadsheet: a product importer that <a href="/blog/import-said-success-rows-missing/">reports success and quietly skips the rows it declined</a>.</p>
-      <p>Where the text comes from, roughly in order: a CSV or platform export where every column arrives as text; a leading apostrophe someone typed to "keep the formatting"; a currency symbol or thousands separator typed into a text-formatted cell; a cell formatted as Text <i>before</i> the number was entered; and the nastiest one - a <b>non-breaking space</b> (character 160) riding along from an HTML or web export. That last one is invisible, and <code>TRIM</code> will not remove it: TRIM was built for the plain ASCII space, character 32. You need <code>=VALUE(SUBSTITUTE(TRIM(A2),CHAR(160),""))</code>.</p>
-      <div class="callout warn"><div class="ct">The trap</div><p>Formatting the column as Number does <b>not</b> fix this. A number format changes how a value is shown, never what it is - a text cell wearing a Number format is still text. This is the single most common reason people conclude "the file is cursed" and start over.</p></div>
-      <p>In Google Sheets the same fixes apply, minus the green triangle. Sheets sees more of this than Excel does, for one boring reason: locale. A European export written <code>1.234,56</code> dropped into a US-locale sheet isn't a number at all - it's a string with punctuation in the wrong places. Re-import with the right locale, or convert explicitly.</p>
-
-      <h2 id="range">2. The range stopped growing</h2>
-      <div class="cause">
-        <div class="crow"><div class="ck">Tell</div><div class="cv">The total is <b>plausible</b>, just low. Nothing errors. It has probably been wrong for months.</div></div>
-        <div class="crow"><div class="ck">Why</div><div class="cv"><code>=SUM(B2:B50)</code> was written when the data ended at row 50. It now ends at row 812. Rows appended <b>below</b> a range never join it.</div></div>
-        <div class="crow"><div class="ck">Fix</div><div class="cv">An Excel Table (<code>Ctrl+T</code>) whose total grows with the data, a whole-column <code>=SUM(B:B)</code>, or in Sheets an open-ended <code>=SUM(B2:B)</code>.</div></div>
-      </div>
-      <p>Cause #1 is the loudest; this one is the most expensive, because it never looks like a bug. Revenue is "down a bit this quarter" and nobody suspects the total - they suspect the market. Inserting a row <i>inside</i> a range extends it automatically, which is exactly why people trust ranges they shouldn't: the failure only shows up when data is appended past the end, which is how every export in the world adds data.</p>
-      <p>Excel Tables are the real fix rather than the clever one. A Table knows where its data ends, so the total, the chart and every formula referring to it move together. Whole-column sums work too, as long as the column holds nothing but that data - no stray note at the bottom, no second total parked underneath.</p>
-
-      <h2 id="duplicates">3. Rows are counted twice</h2>
-      <div class="cause">
-        <div class="crow"><div class="ck">Tell</div><div class="cv">The total is <b>higher</b> than the source system says. Often suspiciously close to double, or to 1.5×.</div></div>
-        <div class="crow"><div class="ck">Why</div><div class="cv">An export ran twice, someone pasted the same batch again, or a lookup fanned out - one order matched three rows in a table with repeated keys.</div></div>
-        <div class="crow"><div class="ck">Fix</div><div class="cv">Deduplicate on a <b>stable key</b> (order id, or order id + line number), never on "the row looks the same". <code>UNIQUE</code> in Sheets, Remove Duplicates in Excel.</div></div>
-      </div>
-      <p>Compare <code>=COUNTA(A2:A500)</code> with <code>=COUNTUNIQUE(A2:A500)</code> in Sheets, or <code>=SUMPRODUCT((A2:A500&lt;&gt;"")/COUNTIF(A2:A500,A2:A500&amp;""))</code> in Excel. A gap means repeated keys - which is either duplicate rows, or a legitimately repeating key that your lookup is about to multiply.</p>
-      <div class="callout warn"><div class="ct">Careful here</div><p>Deduplicating on the whole row deletes real data. Two identical sales of the same item, same price, same day are two sales, not one row typed twice. Key on the identifier, not on the row's appearance - and if there is no identifier, that's the actual finding: the export needs one before the report can be trusted.</p></div>
-
-      <div class="cta-inline">
-        <div class="cx">
-          <b>Report totals that never match the source?</b>
-          <p>Duplicates, shifted columns, dates that are half text - cleaned on a copy, with the totals checked back against the export itself.</p>
-        </div>
-        <a class="btn btn-primary" href="https://kwork.com/virtual-assistant/53561215/i-will-fix-the-csv-or-excel-report-whose-totals-never-add-up" target="_blank" rel="noopener">Open the kwork</a>
-      </div>
-
-      <h2 id="lookup">4. The lookup matched the wrong row</h2>
-      <div class="cause">
-        <div class="crow"><div class="ck">Tell</div><div class="cv">Some rows are right, some are wrong, and there is no pattern you can see. Spot-check five rows by hand and two are nonsense.</div></div>
-        <div class="crow"><div class="ck">Why</div><div class="cv">VLOOKUP's fourth argument defaults to <b>approximate match</b>. Left out, it returns the next largest value below yours - and it needs the data sorted ascending, which nobody checks.</div></div>
-        <div class="crow"><div class="ck">Fix</div><div class="cv">Exact match, always: <code>FALSE</code> as the fourth argument, or <code>XLOOKUP</code>, which is exact by default, or <code>INDEX</code>+<code>MATCH</code> with a <code>0</code>.</div></div>
-      </div>
-      <p>This one is dangerous precisely because it is not an error. <code>=VLOOKUP(A2,Prices!A:C,3)</code> - no fourth argument - will happily return a price. Just not always the right one. On sorted data it mostly works, which is how it survives review; on unsorted data it returns whatever happened to sit above the gap.</p>
-      <p>Two companions worth checking at the same time. <b>Key mismatch:</b> <code>"00123"</code> as text and <code>123</code> as a number are different keys, and so are <code>"Acme Ltd"</code> and <code>"Acme Ltd "</code> with its trailing space - the second is a genuine, and genuinely infuriating, cause of a report being 40% #N/A. <b>Column drift:</b> a VLOOKUP's column index is a plain number, so the day someone inserts a column into the source table, <code>3</code> quietly starts pointing at the wrong column. XLOOKUP and INDEX+MATCH refer to the column itself and survive it.</p>
-
-      <h2 id="hidden">5. Hidden and filtered rows are still in the total</h2>
-      <div class="cause">
-        <div class="crow"><div class="ck">Tell</div><div class="cv">The screen shows 12 rows; the total belongs to all 40. Filter to "Paid" and the number doesn't move.</div></div>
-        <div class="crow"><div class="ck">Why</div><div class="cv">SUM does not care what you can see. Hiding a row is a display choice, not a data one.</div></div>
-        <div class="crow"><div class="ck">Fix</div><div class="cv"><code>=SUBTOTAL(109,B2:B500)</code> ignores both filtered-out and manually hidden rows. <code>=SUBTOTAL(9,...)</code> ignores filtered rows but keeps hidden ones - worth knowing which you want.</div></div>
-      </div>
-      <p>The real damage here isn't the wrong number, it's the screenshot: a filtered view and a SUM in the same picture, pasted into an email, read by someone who reasonably assumes they belong to each other. If a total is going to be read next to a filter, it has to obey the filter. That is SUBTOTAL's entire job, or AGGREGATE's if you also want it to step over error values while it works.</p>
-
-      <h2 id="iferror">6. IFERROR turned your errors into zeros</h2>
-      <div class="cause">
-        <div class="crow"><div class="ck">Tell</div><div class="cv">Nothing at all. No error anywhere on the sheet. The total is simply, calmly wrong.</div></div>
-        <div class="crow"><div class="ck">Why</div><div class="cv"><code>=IFERROR(VLOOKUP(...),0)</code> - every failed lookup becomes a zero, and zeros disappear into a sum without trace.</div></div>
-        <div class="crow"><div class="ck">Fix</div><div class="cv">Guard, don't hide: <code>=IFERROR(VLOOKUP(...),"CHECK")</code>, then <code>=COUNTIF(C2:C500,"CHECK")</code> tells you how many rows failed.</div></div>
-      </div>
-      <p>Of the seven, this is the one I'd call self-inflicted, and it comes from a good instinct. The sheet was full of <code>#N/A</code>, someone tidied it up, and the tidying worked: the errors are gone. So is the information that 60 rows never found a price. A zero is a claim - it says "this row contributed nothing" - and IFERROR let the sheet make that claim 60 times without being asked.</p>
-      <p>If that <code>IFERROR</code> was written for you by an AI, it is worth knowing why: asking a model to make the errors stop is exactly the request that produces a silencer. I take that apart in <a href="/blog/chatgpt-code-broke-on-real-data/">ChatGPT wrote your script. Your real data broke it.</a></p>
+<p>A wrong total in a spreadsheet is rarely a mystery. It is almost always one of seven things, and six of them announce themselves within a minute if you ask the right question. The trouble is that the usual first move - staring at the formula - is the one that tells you least. The formula is usually fine. It is the data underneath that is lying to it.</p>
+<p>So start with the data.</p>
+<h2 id="the-60-second-triage">The 60-second triage</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> three formulas in three empty cells. Their answers narrow seven causes down to one or two before you have touched anything.</p></div>
+<p>Put these next to your data - say your numbers live in <code>B2:B500</code>:</p>
+<div class="steps-block"><div class="stp"><div><b><code>=COUNT(B2:B500)</code> against <code>=COUNTA(B2:B500)</code></b><p>COUNT counts only real numbers. COUNTA counts everything that isn't empty. If COUNT is lower, some of your "numbers" are text - cause #1, and you can stop reading the rest of the triage.</p></div></div><div class="stp"><div><b><code>=SUM(B2:B500)</code> against <code>=SUBTOTAL(109,B2:B500)</code></b><p>SUBTOTAL with 109 skips rows that are hidden or filtered out; SUM does not. If the two disagree, hidden rows are in play - cause #5.</p></div></div><div class="stp"><div><b><code>=COUNTA(B:B)</code> against the last row your total actually covers</b><p>Column B has 812 filled cells but your SUM stops at row 500? The range stopped growing - cause #2. This is the one that hides for months, because nothing about it looks broken.</p></div></div></div>
+<p>Two more worth knowing: <code>=SUMPRODUCT(--ISTEXT(B2:B500))</code> counts text cells directly, and in Excel, tapping <b>F9</b> is a one-second test for a stale total (see the note at the end). Now the seven, in the order they actually turn up.</p>
+<div class="cta-inline"><div class="cx"><b>Rather not run the triage yourself?</b><p>Send me a copy of the sheet and the number you expected. I'll tell you which of the seven it is - and if it's a two-minute fix, I'll say that too.</p></div><a class="btn btn-ghost" href="https://kwork.com/user/dayonebuilder" target="_blank" rel="noopener">Send me the sheet</a></div>
+<h2 id="1-your-numbers-are-text">1. Your numbers are text</h2>
+<div class="cause"><div class="crow"><div class="ck">Tell</div><div class="cv">SUM returns 0, or far too little. The values sit on the <b>left</b> of their cells - real numbers align right. Excel adds a small green triangle.</div></div><div class="crow"><div class="ck">Why</div><div class="cv">SUM ignores text inside a referenced range instead of complaining. A whole column of text numbers sums to a confident, wrong <code>0</code>.</div></div><div class="crow"><div class="ck">Fix</div><div class="cv">Convert the values, don't reformat them: Excel's <b>Convert to Number</b> on the error indicator, a Paste Special <b>multiply by 1</b>, or <code>=VALUE(A2)</code>.</div></div></div>
+<p>This is first by a wide margin, and it earns the place because SUM's behaviour is documented and merciless: text in a referenced range is <b>ignored</b>, not flagged. No error, no warning - just a total that is missing the rows it silently declined to add. The same silence has a bigger version outside the spreadsheet: a product importer that <a href="/blog/import-said-success-rows-missing/">reports success and quietly skips the rows it declined</a>.</p>
+<p>Where the text comes from, roughly in order: a CSV or platform export where every column arrives as text; a leading apostrophe someone typed to "keep the formatting"; a currency symbol or thousands separator typed into a text-formatted cell; a cell formatted as Text <i>before</i> the number was entered; and the nastiest one - a <b>non-breaking space</b> (character 160) riding along from an HTML or web export. That last one is invisible, and <code>TRIM</code> will not remove it: TRIM was built for the plain ASCII space, character 32. You need <code>=VALUE(SUBSTITUTE(TRIM(A2),CHAR(160),""))</code>.</p>
+<div class="callout warn"><div class="ct">The trap</div><p>Formatting the column as Number does <b>not</b> fix this. A number format changes how a value is shown, never what it is - a text cell wearing a Number format is still text. This is the single most common reason people conclude "the file is cursed" and start over.</p></div>
+<p>In Google Sheets the same fixes apply, minus the green triangle. Sheets sees more of this than Excel does, for one boring reason: locale. A European export written <code>1.234,56</code> dropped into a US-locale sheet isn't a number at all - it's a string with punctuation in the wrong places. Re-import with the right locale, or convert explicitly.</p>
+<h2 id="2-the-range-stopped-growing">2. The range stopped growing</h2>
+<div class="cause"><div class="crow"><div class="ck">Tell</div><div class="cv">The total is <b>plausible</b>, just low. Nothing errors. It has probably been wrong for months.</div></div><div class="crow"><div class="ck">Why</div><div class="cv"><code>=SUM(B2:B50)</code> was written when the data ended at row 50. It now ends at row 812. Rows appended <b>below</b> a range never join it.</div></div><div class="crow"><div class="ck">Fix</div><div class="cv">An Excel Table (<code>Ctrl+T</code>) whose total grows with the data, a whole-column <code>=SUM(B:B)</code>, or in Sheets an open-ended <code>=SUM(B2:B)</code>.</div></div></div>
+<p>Cause #1 is the loudest; this one is the most expensive, because it never looks like a bug. Revenue is "down a bit this quarter" and nobody suspects the total - they suspect the market. Inserting a row <i>inside</i> a range extends it automatically, which is exactly why people trust ranges they shouldn't: the failure only shows up when data is appended past the end, which is how every export in the world adds data.</p>
+<p>Excel Tables are the real fix rather than the clever one. A Table knows where its data ends, so the total, the chart and every formula referring to it move together. Whole-column sums work too, as long as the column holds nothing but that data - no stray note at the bottom, no second total parked underneath.</p>
+<h2 id="3-rows-are-counted-twice">3. Rows are counted twice</h2>
+<div class="cause"><div class="crow"><div class="ck">Tell</div><div class="cv">The total is <b>higher</b> than the source system says. Often suspiciously close to double, or to 1.5×.</div></div><div class="crow"><div class="ck">Why</div><div class="cv">An export ran twice, someone pasted the same batch again, or a lookup fanned out - one order matched three rows in a table with repeated keys.</div></div><div class="crow"><div class="ck">Fix</div><div class="cv">Deduplicate on a <b>stable key</b> (order id, or order id + line number), never on "the row looks the same". <code>UNIQUE</code> in Sheets, Remove Duplicates in Excel.</div></div></div>
+<p>Compare <code>=COUNTA(A2:A500)</code> with <code>=COUNTUNIQUE(A2:A500)</code> in Sheets, or <code>=SUMPRODUCT((A2:A500&lt;&gt;"")/COUNTIF(A2:A500,A2:A500&amp;""))</code> in Excel. A gap means repeated keys - which is either duplicate rows, or a legitimately repeating key that your lookup is about to multiply.</p>
+<div class="callout warn"><div class="ct">Careful here</div><p>Deduplicating on the whole row deletes real data. Two identical sales of the same item, same price, same day are two sales, not one row typed twice. Key on the identifier, not on the row's appearance - and if there is no identifier, that's the actual finding: the export needs one before the report can be trusted.</p></div>
+<div class="cta-inline"><div class="cx"><b>Report totals that never match the source?</b><p>Duplicates, shifted columns, dates that are half text - cleaned on a copy, with the totals checked back against the export itself.</p></div><a class="btn btn-primary" href="https://kwork.com/virtual-assistant/53561215/i-will-fix-the-csv-or-excel-report-whose-totals-never-add-up" target="_blank" rel="noopener">Open the kwork</a></div>
+<h2 id="4-the-lookup-matched-the-wrong-row">4. The lookup matched the wrong row</h2>
+<div class="cause"><div class="crow"><div class="ck">Tell</div><div class="cv">Some rows are right, some are wrong, and there is no pattern you can see. Spot-check five rows by hand and two are nonsense.</div></div><div class="crow"><div class="ck">Why</div><div class="cv">VLOOKUP's fourth argument defaults to <b>approximate match</b>. Left out, it returns the next largest value below yours - and it needs the data sorted ascending, which nobody checks.</div></div><div class="crow"><div class="ck">Fix</div><div class="cv">Exact match, always: <code>FALSE</code> as the fourth argument, or <code>XLOOKUP</code>, which is exact by default, or <code>INDEX</code>+<code>MATCH</code> with a <code>0</code>.</div></div></div>
+<p>This one is dangerous precisely because it is not an error. <code>=VLOOKUP(A2,Prices!A:C,3)</code> - no fourth argument - will happily return a price. Just not always the right one. On sorted data it mostly works, which is how it survives review; on unsorted data it returns whatever happened to sit above the gap.</p>
+<p>Two companions worth checking at the same time. <b>Key mismatch:</b> <code>"00123"</code> as text and <code>123</code> as a number are different keys, and so are <code>"Acme Ltd"</code> and <code>"Acme Ltd "</code> with its trailing space - the second is a genuine, and genuinely infuriating, cause of a report being 40% #N/A. <b>Column drift:</b> a VLOOKUP's column index is a plain number, so the day someone inserts a column into the source table, <code>3</code> quietly starts pointing at the wrong column. XLOOKUP and INDEX+MATCH refer to the column itself and survive it.</p>
+<h2 id="5-hidden-and-filtered-rows-are-still-in-the-tota">5. Hidden and filtered rows are still in the total</h2>
+<div class="cause"><div class="crow"><div class="ck">Tell</div><div class="cv">The screen shows 12 rows; the total belongs to all 40. Filter to "Paid" and the number doesn't move.</div></div><div class="crow"><div class="ck">Why</div><div class="cv">SUM does not care what you can see. Hiding a row is a display choice, not a data one.</div></div><div class="crow"><div class="ck">Fix</div><div class="cv"><code>=SUBTOTAL(109,B2:B500)</code> ignores both filtered-out and manually hidden rows. <code>=SUBTOTAL(9,...)</code> ignores filtered rows but keeps hidden ones - worth knowing which you want.</div></div></div>
+<p>The real damage here isn't the wrong number, it's the screenshot: a filtered view and a SUM in the same picture, pasted into an email, read by someone who reasonably assumes they belong to each other. If a total is going to be read next to a filter, it has to obey the filter. That is SUBTOTAL's entire job, or AGGREGATE's if you also want it to step over error values while it works.</p>
+<h2 id="6-iferror-turned-your-errors-into-zeros">6. IFERROR turned your errors into zeros</h2>
+<div class="cause"><div class="crow"><div class="ck">Tell</div><div class="cv">Nothing at all. No error anywhere on the sheet. The total is simply, calmly wrong.</div></div><div class="crow"><div class="ck">Why</div><div class="cv"><code>=IFERROR(VLOOKUP(...),0)</code> - every failed lookup becomes a zero, and zeros disappear into a sum without trace.</div></div><div class="crow"><div class="ck">Fix</div><div class="cv">Guard, don't hide: <code>=IFERROR(VLOOKUP(...),"CHECK")</code>, then <code>=COUNTIF(C2:C500,"CHECK")</code> tells you how many rows failed.</div></div></div>
+<p>Of the seven, this is the one I'd call self-inflicted, and it comes from a good instinct. The sheet was full of <code>#N/A</code>, someone tidied it up, and the tidying worked: the errors are gone. So is the information that 60 rows never found a price. A zero is a claim - it says "this row contributed nothing" - and IFERROR let the sheet make that claim 60 times without being asked.</p>
+<p>If that <code>IFERROR</code> was written for you by an AI, it is worth knowing why: asking a model to make the errors stop is exactly the request that produces a silencer. I take that apart in <a href="/blog/chatgpt-code-broke-on-real-data/">ChatGPT wrote your script. Your real data broke it.</a></p>
 <p>The rule I hold to on every file I touch: a guard formula may <b>flag</b> a problem, never swallow it. <code>"CHECK"</code> in a cell is impossible to ignore and impossible to sum. A zero is easy to ignore and sums beautifully. If a number is going to be wrong, let it be loudly wrong.</p>
-
-      <h2 id="rounding">7. Rounding: what you see isn't what you sum</h2>
-      <div class="cause">
-        <div class="crow"><div class="ck">Tell</div><div class="cv">The total is off by cents. Every individual row looks perfect. Someone in accounts has noticed and is not letting it go.</div></div>
-        <div class="crow"><div class="ck">Why</div><div class="cv">The cell displays 2 decimals and stores 8. You are summing the 8, and reading the 2.</div></div>
-        <div class="crow"><div class="ck">Fix</div><div class="cv"><code>=ROUND(x,2)</code> where the value is <b>calculated</b>, not in the number format. Format changes the display; ROUND changes the value.</div></div>
-      </div>
-      <p>A hundred rows each hiding a third decimal will drift the total by a few cents, and "a few cents" is enough to make a finance team distrust the whole report - correctly, as it happens, because a number that can't be reproduced by hand isn't much of a number.</p>
-      <p>Underneath this sits real floating-point arithmetic: Excel follows the IEEE 754 standard and keeps 15 digits of precision, so a handful of decimal fractions genuinely cannot be stored exactly, and the classic <code>0.1 + 0.2</code> lands a hair off 0.3. It's rarely your actual bug - display rounding beats it to the punch nearly every time - but it's the reason the fix is ROUND at the point of calculation rather than trusting the arithmetic to be tidy.</p>
-      <div class="callout warn"><div class="ct">Don't reach for this one</div><p>Excel's <b>Set precision as displayed</b> option looks like it solves this in one click. It solves it by permanently overwriting your stored values with the rounded ones. There is no undo, and the data you threw away is gone for good.</p></div>
-
-      <h2 id="stale">The one that isn't a cause at all</h2>
-      <p>Before you go hunting: in Excel, press <b>F9</b>. If the total changes, nothing was broken - the workbook was in manual calculation mode and the total was simply stale. Someone switched it on years ago to speed up a heavy file, and it followed the file forever. Google Sheets has no equivalent, which is one thing it genuinely gets right.</p>
-
-      <h2 id="table">Which one is it: symptom table</h2>
-      <div class="tbl-wrap"><table>
-        <tr><th>The total is...</th><th>Look here first</th><th>Confirm with</th></tr>
-        <tr><td>0, or wildly too low</td><td>Text numbers (#1)</td><td><code>COUNT</code> vs <code>COUNTA</code></td></tr>
-        <tr><td>Believable, but low</td><td>Range stopped growing (#2)</td><td><code>COUNTA(B:B)</code> vs your range</td></tr>
-        <tr><td>Higher than the source system</td><td>Duplicate rows (#3)</td><td>Unique count vs row count</td></tr>
-        <tr><td>Right in places, wrong in others</td><td>Lookup matched wrong (#4)</td><td>Hand-check 5 rows</td></tr>
-        <tr><td>Ignoring your filter</td><td>Hidden rows (#5)</td><td><code>SUM</code> vs <code>SUBTOTAL(109,...)</code></td></tr>
-        <tr><td>Wrong, with no error in sight</td><td>IFERROR zeros (#6)</td><td>Search formulas for <code>IFERROR</code></td></tr>
-        <tr><td>Off by cents</td><td>Display rounding (#7)</td><td>Widen the decimals and look</td></tr>
-        <tr><td>Changing when you press F9</td><td>Manual calculation</td><td>Formulas → Calculation Options</td></tr>
-      </table></div>
-
-      <h2 id="prevention">Six changes that stop it coming back</h2>
-      <div class="tldr"><p><span class="tl-tag">Short version:</span> the fix is one afternoon. Making the file incapable of lying to you again is the same afternoon, if you do it while you're already in there.</p></div>
-      <div class="steps-block">
-        <div class="stp"><div><b>One table, one shape</b><p>Excel Table or open-ended range. Ranges with hard-coded ends are a time bomb, and the timer runs out the day the data outgrows them.</p></div></div>
-        <div class="stp"><div><b>Clean keys on arrival, not at lookup time</b><p>TRIM and type-normalise the identifier column as it enters the sheet. Every downstream lookup then works on keys that are actually equal.</p></div></div>
-        <div class="stp"><div><b>Guards that flag, never hide</b><p><code>"CHECK"</code>, not <code>0</code>. Plus one cell counting the CHECKs, so a broken row has somewhere to show up.</p></div></div>
-        <div class="stp"><div><b>Exact match only</b><p>XLOOKUP, or FALSE. There is no report where "the closest price below yours" is the intended behaviour.</p></div></div>
-        <div class="stp"><div><b>A reconciliation cell</b><p>One cell: your total minus the source system's total. It should read 0. When it doesn't, you learn on the day it breaks - not in the quarterly review.</p></div></div>
-        <div class="stp"><div><b>ROUND where you calculate</b><p>Decide the precision once, in the formula. The number format is for humans, not for arithmetic.</p></div></div>
-      </div>
-      <p>The reconciliation cell is the one to take if you take only one. Everything above is about finding a wrong number; that cell is about the wrong number finding <i>you</i>, immediately, which is a much better arrangement. It's also the cheapest thing on the list - a subtraction and a conditional format.</p>
-
-      <h2 id="faq">Common questions</h2>
-      <h3>My SUM shows 0, but the cells clearly contain numbers.</h3>
-      <p>They contain things that look like numbers. SUM ignores text in a referenced range rather than erroring, so a column of text numbers totals to a confident 0. Run <code>=COUNT(B2:B500)</code> against <code>=COUNTA(B2:B500)</code>: COUNT sees only real numbers, so if it comes back lower, that's your answer in about four seconds.</p>
-      <h3>Why doesn't formatting the column as Number fix it?</h3>
-      <p>Because a number format governs how a value is displayed, not what the value is. Text wearing a Number format is still text. You have to convert: Convert to Number on Excel's error indicator, a Paste Special multiply by 1, or <code>VALUE()</code>. In Sheets, <code>VALUE()</code> or a re-import with the correct locale.</p>
-      <h3>The total changed after someone sorted the sheet.</h3>
-      <p>Usually the sort covered part of the table rather than all of it - one column selected instead of the whole range - so rows were scrambled against each other. The arithmetic may be flawless while every row now pairs the wrong client with the wrong amount. Undo immediately if you can, and sort the whole table, or use an Excel Table, which sorts as a single object.</p>
-      <h3>Is Google Sheets more reliable than Excel for this?</h3>
-      <p>No. All seven exist in both, with the same fixes. Sheets sees more text-number trouble, because it lives on imports and locale mismatches. Excel sees more stale totals, because it has a manual calculation mode. Pick on other grounds.</p>
-      <h3>How long does it take to find which one it is?</h3>
-      <p>The triage is three formulas and about a minute, and in most files it names the cause outright. The fix is usually the same day once you know what you're fixing. The honest exception: a report assembled from several exports whose totals disagree because the <i>sources</i> disagree. No formula shortens that one - it's reconciliation work, and anyone promising otherwise hasn't opened the file.</p>
+<h2 id="7-rounding-what-you-see-isnt-what-you-sum">7. Rounding: what you see isn't what you sum</h2>
+<div class="cause"><div class="crow"><div class="ck">Tell</div><div class="cv">The total is off by cents. Every individual row looks perfect. Someone in accounts has noticed and is not letting it go.</div></div><div class="crow"><div class="ck">Why</div><div class="cv">The cell displays 2 decimals and stores 8. You are summing the 8, and reading the 2.</div></div><div class="crow"><div class="ck">Fix</div><div class="cv"><code>=ROUND(x,2)</code> where the value is <b>calculated</b>, not in the number format. Format changes the display; ROUND changes the value.</div></div></div>
+<p>A hundred rows each hiding a third decimal will drift the total by a few cents, and "a few cents" is enough to make a finance team distrust the whole report - correctly, as it happens, because a number that can't be reproduced by hand isn't much of a number.</p>
+<p>Underneath this sits real floating-point arithmetic: Excel follows the IEEE 754 standard and keeps 15 digits of precision, so a handful of decimal fractions genuinely cannot be stored exactly, and the classic <code>0.1 + 0.2</code> lands a hair off 0.3. It's rarely your actual bug - display rounding beats it to the punch nearly every time - but it's the reason the fix is ROUND at the point of calculation rather than trusting the arithmetic to be tidy.</p>
+<div class="callout warn"><div class="ct">Don't reach for this one</div><p>Excel's <b>Set precision as displayed</b> option looks like it solves this in one click. It solves it by permanently overwriting your stored values with the rounded ones. There is no undo, and the data you threw away is gone for good.</p></div>
+<h2 id="the-one-that-isnt-a-cause-at-all">The one that isn't a cause at all</h2>
+<p>Before you go hunting: in Excel, press <b>F9</b>. If the total changes, nothing was broken - the workbook was in manual calculation mode and the total was simply stale. Someone switched it on years ago to speed up a heavy file, and it followed the file forever. Google Sheets has no equivalent, which is one thing it genuinely gets right.</p>
+<h2 id="which-one-is-it-symptom-table">Which one is it: symptom table</h2>
+<div class="tbl-wrap"><table><tr><th>The total is...</th><th>Look here first</th><th>Confirm with</th></tr><tr><td>0, or wildly too low</td><td>Text numbers (#1)</td><td><code>COUNT</code> vs <code>COUNTA</code></td></tr><tr><td>Believable, but low</td><td>Range stopped growing (#2)</td><td><code>COUNTA(B:B)</code> vs your range</td></tr><tr><td>Higher than the source system</td><td>Duplicate rows (#3)</td><td>Unique count vs row count</td></tr><tr><td>Right in places, wrong in others</td><td>Lookup matched wrong (#4)</td><td>Hand-check 5 rows</td></tr><tr><td>Ignoring your filter</td><td>Hidden rows (#5)</td><td><code>SUM</code> vs <code>SUBTOTAL(109,...)</code></td></tr><tr><td>Wrong, with no error in sight</td><td>IFERROR zeros (#6)</td><td>Search formulas for <code>IFERROR</code></td></tr><tr><td>Off by cents</td><td>Display rounding (#7)</td><td>Widen the decimals and look</td></tr><tr><td>Changing when you press F9</td><td>Manual calculation</td><td>Formulas → Calculation Options</td></tr></table></div>
+<h2 id="six-changes-that-stop-it-coming-back">Six changes that stop it coming back</h2>
+<div class="tldr"><p><span class="tl-tag">Short version:</span> the fix is one afternoon. Making the file incapable of lying to you again is the same afternoon, if you do it while you're already in there.</p></div>
+<div class="steps-block"><div class="stp"><div><b>One table, one shape</b><p>Excel Table or open-ended range. Ranges with hard-coded ends are a time bomb, and the timer runs out the day the data outgrows them.</p></div></div><div class="stp"><div><b>Clean keys on arrival, not at lookup time</b><p>TRIM and type-normalise the identifier column as it enters the sheet. Every downstream lookup then works on keys that are actually equal.</p></div></div><div class="stp"><div><b>Guards that flag, never hide</b><p><code>"CHECK"</code>, not <code>0</code>. Plus one cell counting the CHECKs, so a broken row has somewhere to show up.</p></div></div><div class="stp"><div><b>Exact match only</b><p>XLOOKUP, or FALSE. There is no report where "the closest price below yours" is the intended behaviour.</p></div></div><div class="stp"><div><b>A reconciliation cell</b><p>One cell: your total minus the source system's total. It should read 0. When it doesn't, you learn on the day it breaks - not in the quarterly review.</p></div></div><div class="stp"><div><b>ROUND where you calculate</b><p>Decide the precision once, in the formula. The number format is for humans, not for arithmetic.</p></div></div></div>
+<p>The reconciliation cell is the one to take if you take only one. Everything above is about finding a wrong number; that cell is about the wrong number finding <i>you</i>, immediately, which is a much better arrangement. It's also the cheapest thing on the list - a subtraction and a conditional format.</p>
+<h2 id="common-questions">Common questions</h2>
+<h3>My SUM shows 0, but the cells clearly contain numbers.</h3>
+<p>They contain things that look like numbers. SUM ignores text in a referenced range rather than erroring, so a column of text numbers totals to a confident 0. Run <code>=COUNT(B2:B500)</code> against <code>=COUNTA(B2:B500)</code>: COUNT sees only real numbers, so if it comes back lower, that's your answer in about four seconds.</p>
+<h3>Why doesn't formatting the column as Number fix it?</h3>
+<p>Because a number format governs how a value is displayed, not what the value is. Text wearing a Number format is still text. You have to convert: Convert to Number on Excel's error indicator, a Paste Special multiply by 1, or <code>VALUE()</code>. In Sheets, <code>VALUE()</code> or a re-import with the correct locale.</p>
+<h3>The total changed after someone sorted the sheet.</h3>
+<p>Usually the sort covered part of the table rather than all of it - one column selected instead of the whole range - so rows were scrambled against each other. The arithmetic may be flawless while every row now pairs the wrong client with the wrong amount. Undo immediately if you can, and sort the whole table, or use an Excel Table, which sorts as a single object.</p>
+<h3>Is Google Sheets more reliable than Excel for this?</h3>
+<p>No. All seven exist in both, with the same fixes. Sheets sees more text-number trouble, because it lives on imports and locale mismatches. Excel sees more stale totals, because it has a manual calculation mode. Pick on other grounds.</p>
+<h3>How long does it take to find which one it is?</h3>
+<p>The triage is three formulas and about a minute, and in most files it names the cause outright. The fix is usually the same day once you know what you're fixing. The honest exception: a report assembled from several exports whose totals disagree because the <i>sources</i> disagree. No formula shortens that one - it's reconciliation work, and anyone promising otherwise hasn't opened the file.</p>
     </div>
-
     <div class="author">
       <img src="/images/ben.jpg" width="52" height="52" alt="Ben Ison" />
       <div><b>Ben Ison · Python / AI Engineer · 15+ years</b>
       <small>I fix scripts, spreadsheets and automation on Kwork - down to a result you can check yourself.</small></div>
     </div>
-
-    <div class="sources">
-      <div class="st">Sources</div>
-      <ol>
-        <li><a href="https://support.microsoft.com/en-us/excel/functions/sum-function" target="_blank" rel="noopener nofollow">Microsoft - SUM function: text and logical values in a referenced range are ignored</a></li>
-        <li><a href="https://support.microsoft.com/en-us/office/convert-numbers-stored-as-text-to-numbers-in-excel-40105f2a-fe79-4477-a171-c5bad0f0a885" target="_blank" rel="noopener nofollow">Microsoft - Convert numbers stored as text to numbers (green triangle, Convert to Number, multiply by 1, VALUE)</a></li>
-        <li><a href="https://support.microsoft.com/en-us/office/trim-function-410388fa-c5df-49c6-b16c-9e5630b479f9" target="_blank" rel="noopener nofollow">Microsoft - TRIM function: built for ASCII space 32; does not remove the non-breaking space (160)</a></li>
-        <li><a href="https://support.microsoft.com/en-us/excel/top-ten-ways-to-clean-your-data" target="_blank" rel="noopener nofollow">Microsoft - Top ten ways to clean your data (TRIM, CLEAN, SUBSTITUTE combinations)</a></li>
-        <li><a href="https://support.microsoft.com/en-us/office/subtotal-function-7b027003-f060-4ade-9040-e478765b9939" target="_blank" rel="noopener nofollow">Microsoft - SUBTOTAL function: 101-111 ignore rows hidden by Hide Rows; filtered rows are always excluded</a></li>
-        <li><a href="https://support.microsoft.com/en-us/office/aggregate-function-43b9278e-6aa7-4f17-92b6-e19993fa26df" target="_blank" rel="noopener nofollow">Microsoft - AGGREGATE function: ignore hidden rows and error values</a></li>
-        <li><a href="https://support.microsoft.com/en-us/office/vlookup-function-0bbc8083-26fe-4963-8ab8-93a18ad188a1" target="_blank" rel="noopener nofollow">Microsoft - VLOOKUP function: range_lookup defaults to TRUE (approximate match), which requires ascending order</a></li>
-        <li><a href="https://support.microsoft.com/en-us/office/xlookup-function-b7fd680e-6d10-43e6-84f9-88eae8bf5929" target="_blank" rel="noopener nofollow">Microsoft - XLOOKUP function: exact match by default</a></li>
-        <li><a href="https://support.microsoft.com/en-us/office/how-to-correct-a-n-a-error-in-the-vlookup-function-e037d763-ffc3-4fae-a909-89c482d389b2" target="_blank" rel="noopener nofollow">Microsoft - How to correct a #N/A error in VLOOKUP (trailing spaces, mismatched types)</a></li>
-        <li><a href="https://learn.microsoft.com/en-us/troubleshoot/microsoft-365-apps/excel/floating-point-arithmetic-inaccurate-result" target="_blank" rel="noopener nofollow">Microsoft - Floating-point arithmetic may give inaccurate results in Excel (IEEE 754, 15 digits of precision, Set precision as displayed)</a></li>
-        <li><a href="https://support.microsoft.com/en-us/office/change-formula-recalculation-iteration-or-precision-in-excel-73fc7dac-91cf-4d36-86e8-67124f6bcce4" target="_blank" rel="noopener nofollow">Microsoft - Change formula recalculation, iteration, or precision (manual calculation mode, F9)</a></li>
-        <li><a href="https://support.google.com/docs/table/25273" target="_blank" rel="noopener nofollow">Google - Google Sheets function list (VALUE, SUBTOTAL, COUNTUNIQUE, UNIQUE, IFERROR)</a></li>
-        <li><a href="https://support.google.com/docs/answer/3093343" target="_blank" rel="noopener nofollow">Google - VALUE function in Google Sheets</a></li>
-      </ol>
-    </div>
   </article>
-
   <div class="final">
-    <h2>Wrong number in your sheet, and you'd rather just have it fixed?</h2>
-    <p>Send me a copy of the file and the number you expected to see. I'll find the cause, fix it on the copy, and tell you in plain words what broke - and what not to touch next time.</p>
+    <h2>Broken script, and you would rather just have it working?</h2>
+    <p>Send me the error text and a copy of the file. I find the cause, fix one failing scenario, verify it on your data, and tell you in plain words what broke and what not to touch.</p>
     <div class="row">
-      <a class="btn btn-primary btn-lg" href="https://kwork.com/virtual-assistant/53561575/i-will-fix-a-google-sheets-or-excel-formula-that-gives-wrong-numbers" target="_blank" rel="noopener">Fix my spreadsheet - $10</a>
+      <a class="btn btn-primary btn-lg" href="https://kwork.com/virtual-assistant/53561575/i-will-fix-a-google-sheets-or-excel-formula-that-gives-wrong-numbers" target="_blank" rel="noopener">Fix my script - $10</a>
       <a class="btn btn-ghost btn-lg" href="https://kwork.com/user/dayonebuilder" target="_blank" rel="noopener">See my profile</a>
     </div>
   </div>
-
   <footer class="site">
     <div class="container foot">
       <span>© DayOneBuilder - Python / AI Engineer</span>
