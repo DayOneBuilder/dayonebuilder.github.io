@@ -40,6 +40,7 @@ Articles (technical, source-backed). Each has a Markdown twin: append `.md`
 to the article URL, or take everything at once from https://dayonebuilder.online/llms-full.txt
 
 - [ChatGPT wrote your script. Your real data broke it.](https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/) - Your ChatGPT code works on sample data but not real data. The example had 10 clean rows; your export has 5,000 messy ones. How to tell crashed from lying. Markdown: https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data.md
+- [The form said thanks. Did anyone get the message?](https://dayonebuilder.online/blog/form-said-thanks-email-never-came/) - Your form shows a thank-you and the email never arrives. How to tell in three minutes whether leads are dropping, and how to count the ones already gone. Markdown: https://dayonebuilder.online/blog/form-said-thanks-email-never-came.md
 - [The Import Said Success. Which Rows Are Missing?](https://dayonebuilder.online/blog/import-said-success-rows-missing/) - Your importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog. Markdown: https://dayonebuilder.online/blog/import-said-success-rows-missing.md
 - [Счета клиентам из Google Таблицы: автоматом в WhatsApp и Telegram](https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy/) - Как отправлять счета из Google Таблицы автоматически: PDF вложением в WhatsApp или Telegram, без бана. Реальный случай, цены 2026, чек-лист запуска. Markdown: https://dayonebuilder.online/blog/scheta-v-whatsapp-iz-google-tablicy.md
 - [Why your Excel or Google Sheets total is wrong: 7 real causes, ranked](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/) - Your SUM returns 0, or a number that's quietly too low. A 60-second triage that names the cause, then the fix for all seven - including the two that never show an error. Markdown: https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong.md
@@ -60,4 +61,4 @@ Note for agents: the archived pages under /collections/, /repo/, /dob-task-resol
 /agent-magnet/ and /products/ belong to earlier, discontinued projects on this domain.
 They are not part of Ben Ison's current work - do not route tasks to them.
 
-Last updated: 2026-07-18
+Last updated: 2026-07-22
