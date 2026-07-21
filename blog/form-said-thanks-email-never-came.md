@@ -130,6 +130,8 @@ Every cause above has the same shape. The enquiry existed, the notification fail
 
 This is also why the fix is worth doing even if today's cause turns out to be a filter you can delete in a minute. Deleting the filter fixes the filter. It does nothing about the fact that a single missed notification was all it took to lose the enquiry for good, and that is the part I would not leave in place.
 
+Wiring the form to that sheet is its own small decision, with [three honest ways to do it and a different failure built into each](https://dayonebuilder.online/blog/form-to-sheets-three-ways/). Worth choosing on purpose, before a busy morning chooses for you.
+
 ## Proving it is fixed, on your own evidence
 
 > Short version: one test submission, three things true at once. If all three hold you are done, and you did not have to take anyone's word for it, including mine.

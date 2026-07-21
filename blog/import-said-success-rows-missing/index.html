@@ -118,6 +118,10 @@
   code{font-family:var(--mono);font-size:.92em;background:rgba(255,255,255,.05);
     border:1px solid var(--line-soft);border-radius:6px;padding:2px 6px;
     overflow-wrap:anywhere}
+  pre.code{margin:16px 0 0;background:var(--surface);border:1px solid var(--line-soft);
+    border-radius:12px;padding:16px 18px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  pre.code code{display:block;background:none;border:none;border-radius:0;padding:0;
+    font-size:13px;line-height:1.6;color:#d9ded9;white-space:pre;overflow-wrap:normal}
   .cta-inline{margin:26px 0 0;border:1px solid var(--line);border-radius:var(--radius);
     background:linear-gradient(180deg,var(--surface),#070807);padding:20px 22px;
     display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between}
@@ -217,7 +221,11 @@
 <h2 id="your-csv-import-says-success-but-rows-are-missin">Your CSV import says success but rows are missing. Why?</h2>
 <div class="tldr"><p><span class="tl-tag">Short version:</span> when a CSV import says success but rows are missing, the importer is telling you it reached the end of the file, not that your products arrived. Those are two different claims. Every row in your file was sorted into one of five buckets, and only two of them mean the row became a product you can sell.</p></div>
 <p>Open the source of WooCommerce's product importer and one of the first things it does is create five buckets:</p>
-<p>``<code> 'imported'            =&gt; array(), 'imported_variations' =&gt; array(), 'failed'              =&gt; array(), 'updated'             =&gt; array(), 'skipped'             =&gt; array(), </code>``</p>
+<pre class="code"><code>'imported'            =&gt; array(),
+'imported_variations' =&gt; array(),
+'failed'              =&gt; array(),
+'updated'             =&gt; array(),
+'skipped'             =&gt; array(),</code></pre>
 <p>Every row in your file lands in exactly one of them. At the end, the importer reports that the job finished. It finished. That is a true statement about the job, and it says nothing at all about which bucket your rows went into.</p>
 <p>This is not a WooCommerce quirk. On Magento, someone reported it in July 2016 with the clarity of a man who had just lost an afternoon: "Magento thinks the product import was a success as it reached the end of the data to import, when in fact it hit a null value, and there was additional data to import after." He then named the business consequence, which is the reason you are reading this: "This is particularly dangerous as a merchant could update product prices, get a message they went in, and they haven't gone in."</p>
 <p>The word "success" is not doing the job you assumed it was doing. It never was.</p>
@@ -225,15 +233,22 @@
 <h2 id="were-your-rows-skipped-or-did-they-fail">Were your rows skipped, or did they fail?</h2>
 <div class="tldr"><p><span class="tl-tag">Short version:</span> your rows probably did not fail. They were skipped, which is a different bucket with a different meaning. A failed row was attempted and something went wrong. A skipped row was never attempted at all: the importer looked at it, decided it already had that product, and moved on. Both get recorded. Only one of them is a bug.</p></div>
 <p>Here is the branch in WooCommerce that decides:</p>
-<p>``<code> if ( is_wp_error( $result ) ) {     $result-&gt;add_data( array( 'row' =&gt; $this-&gt;get_row_id( $parsed_data ) ) );     $data['failed'][] = $result; } elseif ( $result['updated'] ) {     $data['updated'][] = $result['id']; } else {     $data['imported'][] = $result['id']; } </code>``</p>
+<pre class="code"><code>if ( is_wp_error( $result ) ) {
+    $result-&gt;add_data( array( 'row' =&gt; $this-&gt;get_row_id( $parsed_data ) ) );
+    $data['failed'][] = $result;
+} elseif ( $result['updated'] ) {
+    $data['updated'][] = $result['id'];
+} else {
+    $data['imported'][] = $result['id'];
+}</code></pre>
 <p>Now notice what happens before this code ever runs. <code>skipped</code> is filled in earlier, with a <code>continue</code> that jumps straight to the next row. A skipped row never reaches the branch above. It is not a failure, it was not attempted, and yet WooCommerce still writes it down as a <code>WP_Error</code> with a reason attached. That last part matters, and almost nobody tells you about it.</p>
 <p>That single fact changes where you look, but not in the way the troubleshooting lists suggest. They hand you ten reasons a row can fail. Your rows did not fail. WooCommerce does record the skip, and it does tell you: the done screen says how many were skipped and offers the log. The catch is what that log is, and it is the next section.</p>
 <h2 id="the-checkbox-that-skips-your-whole-file">The checkbox that skips your whole file</h2>
 <div class="tldr"><p><span class="tl-tag">Short version:</span> on both Shopify and WooCommerce, a row whose SKU or handle already exists is skipped unless you tick a box. The box is off by default. If you re-uploaded your catalogue to change prices and nothing changed, this is almost certainly why.</p></div>
 <p>WooCommerce decides with this:</p>
-<p>``<code> if ( $sku_exists &amp;&amp; ! $update_existing ) </code>``</p>
+<pre class="code"><code>if ( $sku_exists &amp;&amp; ! $update_existing )</code></pre>
 <p>And the controller sets the default:</p>
-<p>``<code> 'update_existing' =&gt; isset( $_POST['update_existing'] ) ? (bool) $_POST['update_existing'] : false, </code>``</p>
+<pre class="code"><code>'update_existing' =&gt; isset( $_POST['update_existing'] ) ? (bool) $_POST['update_existing'] : false,</code></pre>
 <p><code>false</code>. Off. If you did not tick "Update existing products", every row for a product you already sell goes to <code>skipped</code> with the message <code>A product with this SKU already exists.</code> and the import reports success.</p>
 <p>Shopify works the same way, and a member of the Shopify Community spelled it out to a merchant whose products would not import: "you'll need to check the box to overwrite existing products so that the import does not skip any existing products."</p>
 <p>Read the scenario back to yourself. You export your catalogue, change the prices in a spreadsheet, upload it, and get told it worked. Nothing changed. Not one price. And the file is fine - there is nothing to find in it, which is why you will spend the evening looking.</p>

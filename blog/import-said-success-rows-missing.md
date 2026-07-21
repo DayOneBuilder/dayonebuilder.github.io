@@ -24,7 +24,13 @@ So this is the other thing. Not the reasons. The rows.
 
 Open the source of WooCommerce's product importer and one of the first things it does is create five buckets:
 
-``` 'imported' => array(), 'imported_variations' => array(), 'failed' => array(), 'updated' => array(), 'skipped' => array(), ```
+```
+'imported'            => array(),
+'imported_variations' => array(),
+'failed'              => array(),
+'updated'             => array(),
+'skipped'             => array(),
+```
 
 Every row in your file lands in exactly one of them. At the end, the importer reports that the job finished. It finished. That is a true statement about the job, and it says nothing at all about which bucket your rows went into.
 
@@ -40,7 +46,16 @@ The same word does the same damage outside a catalogue. A contact form's thank-y
 
 Here is the branch in WooCommerce that decides:
 
-``` if ( is_wp_error( $result ) ) { $result->add_data( array( 'row' => $this->get_row_id( $parsed_data ) ) ); $data['failed'][] = $result; } elseif ( $result['updated'] ) { $data['updated'][] = $result['id']; } else { $data['imported'][] = $result['id']; } ```
+```
+if ( is_wp_error( $result ) ) {
+    $result->add_data( array( 'row' => $this->get_row_id( $parsed_data ) ) );
+    $data['failed'][] = $result;
+} elseif ( $result['updated'] ) {
+    $data['updated'][] = $result['id'];
+} else {
+    $data['imported'][] = $result['id'];
+}
+```
 
 Now notice what happens before this code ever runs. `skipped` is filled in earlier, with a `continue` that jumps straight to the next row. A skipped row never reaches the branch above. It is not a failure, it was not attempted, and yet WooCommerce still writes it down as a `WP_Error` with a reason attached. That last part matters, and almost nobody tells you about it.
 
@@ -52,11 +67,15 @@ That single fact changes where you look, but not in the way the troubleshooting 
 
 WooCommerce decides with this:
 
-``` if ( $sku_exists && ! $update_existing ) ```
+```
+if ( $sku_exists && ! $update_existing )
+```
 
 And the controller sets the default:
 
-``` 'update_existing' => isset( $_POST['update_existing'] ) ? (bool) $_POST['update_existing'] : false, ```
+```
+'update_existing' => isset( $_POST['update_existing'] ) ? (bool) $_POST['update_existing'] : false,
+```
 
 `false`. Off. If you did not tick "Update existing products", every row for a product you already sell goes to `skipped` with the message `A product with this SKU already exists.` and the import reports success.
 

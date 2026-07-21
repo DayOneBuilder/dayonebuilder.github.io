@@ -1,16 +1,16 @@
 {
   "_note": "Редакторские тексты карточек индекса. Размещение (published vs coming) генератор решает САМ по файловой системе - здесь только copy. Опубликованная статья не может попасть в stubs. Собирать: python3 tools/build-blog-index.py",
-  "latest": "import-said-success-rows-missing",
+  "latest": "form-to-sheets-three-ways",
   "featured_blurb": {
-    "import-said-success-rows-missing": "Every guide hands you ten reasons an import fails. None of them tells you which of your rows went missing, and you cannot check a reason. WooCommerce's own source code sorts your file into five buckets, and one unticked checkbox sends every existing SKU to the one called skipped while the screen still says success. Here is how to get the list of rows, then the reason for each."
+    "form-to-sheets-three-ways": "Every guide picks one way to connect a form to a spreadsheet and calls it the answer. There are three, they all work, and each one fails in a specific place - Apps Script drops rows under load without a lock, a no-code bridge meets its price the month you get busy, a backend is real upkeep. Here is the map you read before you choose, and how to make any of them fail on a Tuesday you picked rather than in front of a customer."
   },
   "blurbs": {
     "why-your-spreadsheet-total-is-wrong": "A 60-second triage that names the cause, then the fix for each of the seven - including the two that never show an error.",
     "chatgpt-code-broke-on-real-data": "It ran perfectly on ten sample rows and fell over on your actual file - or worse, did not fall over and handed you a number.",
-    "import-said-success-rows-missing": "The importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog."
+    "import-said-success-rows-missing": "The importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog.",
+    "form-said-thanks-email-never-came": "The form showed a thank-you and the email never arrived. How to tell in a few minutes whether leads are dropping, and how to count the ones already gone."
   },
   "stubs": [
-    {"tag": "Google Sheets", "title": "HTML form to Google Sheets: 3 ways that work, and where each one breaks", "blurb": "Apps Script, a no-code bridge, or a real backend - what each one costs you the day traffic actually arrives."},
     {"tag": "Automation", "title": "Invoices from a spreadsheet row: the boring build that works", "blurb": "One template, one row, one click - and the guard formulas that stop a broken invoice reaching a client."},
     {"tag": "APIs", "title": "Google Sheets as a small CRM: where the limit really is", "blurb": "How far a spreadsheet carries your customer records, and when it's honest to say \"time to move\"."},
     {"tag": "Websites", "title": "404 after a migration: finding the cause before repairing anything", "blurb": "A read-only way to tell a redirect problem from a plugin problem from a server problem."}
