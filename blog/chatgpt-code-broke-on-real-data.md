@@ -52,13 +52,15 @@ The same split shows up when the tool is not yours at all: a platform importer c
 
 Google's quota page is blunt about the consequence:
 
-> If you exceed a quota or limitation, your script throws an exception and execution stops.[Google, Quotas for Google Services](https://developers.google.com/apps-script/guides/services/quotas)
+> If you exceed a quota or limitation, your script throws an exception and execution stops.
+> - [Google, Quotas for Google Services](https://developers.google.com/apps-script/guides/services/quotas)
 
 Six minutes per execution, consumer and Workspace alike. Custom functions - the kind you call from inside a cell with `=myFunction()` - get 30 seconds.
 
 The part that makes people think their file is haunted is that this arrives late. Here is a real one from Google's own community forum:
 
-> Just recently my google script has been returning an error message of Exceeded Maximum Execution Time. I've been running the script for months and have never had any issues until last week. It errors out usually in the morning but will run just find [sic] by mid-day. Nothing has changed in the script since I first wrote it.[Cameron Coile, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0)
+> Just recently my google script has been returning an error message of Exceeded Maximum Execution Time. I've been running the script for months and have never had any issues until last week. It errors out usually in the morning but will run just find [sic] by mid-day. Nothing has changed in the script since I first wrote it.
+> - [Cameron Coile, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0)
 
 Nothing changed in the script. The file grew. A script that needs five and a half minutes today needs six and a half next quarter, and then it is over. The time-of-day thing is real too: a loaded morning is slower than a quiet lunchtime, so the same script passes at noon and fails at 9am, which feels exactly like a haunting and is just arithmetic.
 
@@ -68,11 +70,13 @@ Nothing changed in the script. The file grew. A script that needs five and a hal
 
 This is the single most useful thing to understand here, so let me use Google's numbers rather than mine:
 
-> Alternating read and write commands is slow. To speed up a script, read all data into an array with one command, perform operations on the array data, and write the data out with one command.[Google, Apps Script Best Practices](https://developers.google.com/apps-script/guides/support/best-practices)
+> Alternating read and write commands is slow. To speed up a script, read all data into an array with one command, perform operations on the array data, and write the data out with one command.
+> - [Google, Apps Script Best Practices](https://developers.google.com/apps-script/guides/support/best-practices)
 
 And the measurement, on the same 100x100 block of cells:
 
-> The inefficient code takes about 70 seconds to run, while the efficient code runs in just 1 second.[Google, Apps Script Best Practices](https://developers.google.com/apps-script/guides/support/best-practices)
+> The inefficient code takes about 70 seconds to run, while the efficient code runs in just 1 second.
+> - [Google, Apps Script Best Practices](https://developers.google.com/apps-script/guides/support/best-practices)
 
 Seventy times, for output that is character-for-character identical.
 
@@ -80,11 +84,13 @@ Now, why does a model reach for the slow one? Because reading a cell, doing some
 
 An expert on the same Google forum names the culprit in one line:
 
-> The classic example is setting Sheet cell values individually, one per loop.[Alan Wells, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0)
+> The classic example is setting Sheet cell values individually, one per loop.
+> - [Alan Wells, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0)
 
 Here is what that pattern costs on a real sheet. One user measured his own script at nearly five minutes for a single pass over 500 rows:
 
-> to run through the 500 rows looking for one email address once and generate an HTML email of 13 rows takes nearly 5 minutes[Dean Barrett, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/IMCFHQcWWEw)
+> to run through the 500 rows looking for one email address once and generate an HTML email of 13 rows takes nearly 5 minutes
+> - [Dean Barrett, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/IMCFHQcWWEw)
 
 Sit with that rate for a second. Five minutes for 500 rows is about 0.6 seconds per row, and the arithmetic from there is mine, not Google's: against today's six-minute ceiling, a script running at that rate is finished at roughly 600 rows. Your file has 5,000. It never had a chance, and the ten-row test could not have told you.
 
@@ -94,13 +100,15 @@ Sit with that rate for a second. Five minutes for 500 rows is about 0.6 seconds 
 
 The clearest case on the forum: a user needed about 2,100 order numbers, each one a separate call out to an API.
 
-> Each URL request can take 3-5 seconds to process and doing 2100 of them will certainly not be possible ever within the 6 mins window.[George Ghanem, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/HyCxPjvwyI4)
+> Each URL request can take 3-5 seconds to process and doing 2100 of them will certainly not be possible ever within the 6 mins window.
+> - [George Ghanem, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/HyCxPjvwyI4)
 
 Do that multiplication: 2,100 requests at 3 seconds each is 105 minutes against a 360-second ceiling. You are not 10% over. You are off by a factor of seventeen. That job needs a different shape entirely - batching, saved progress, a trigger that picks up where the last run stopped - and no amount of "please optimise this" produces a different shape, because you did not ask for one.
 
 Which brings up the loop most people are stuck in when they give up: paste the error back, get a rewrite, run it, paste the next error. It feels like converging. Someone on Hacker News put the problem with it better than I could:
 
-> my gut reaction to "take an AI-inflated codebase and apply AI deflation to it" is something like "that's akin to applying two rounds of lossy transcoding; the errors don't cancel out, they cross-multiply"[fwlr, Hacker News](https://news.ycombinator.com/item?id=48825761)
+> my gut reaction to "take an AI-inflated codebase and apply AI deflation to it" is something like "that's akin to applying two rounds of lossy transcoding; the errors don't cancel out, they cross-multiply"
+> - [fwlr, Hacker News](https://news.ycombinator.com/item?id=48825761)
 
 Each rewrite starts from scratch. It can quietly change logic you never asked it to touch. And piling more of the conversation in does not help as much as you would hope. Chroma's research on long context found that "models do not use their context uniformly; instead, their performance grows increasingly unreliable as input length grows" ([Context Rot](https://www.trychroma.com/research/context-rot)).
 
@@ -114,17 +122,20 @@ This is the failure that costs real money, and it has no error message at all.
 
 Microsoft states both the cause and the tell:
 
-> This issue sometimes occurs after you import or copy data from a database or other external data source.[Microsoft Support, Fix text-formatted numbers by applying a number format](https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0)
+> This issue sometimes occurs after you import or copy data from a database or other external data source.
+> - [Microsoft Support, Fix text-formatted numbers by applying a number format](https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0)
 
 And the free five-second diagnostic, from the same page:
 
-> Numbers that are formatted as text are left-aligned instead of right-aligned in the cell, and are often marked with an error indicator.[Microsoft Support](https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0)
+> Numbers that are formatted as text are left-aligned instead of right-aligned in the cell, and are often marked with an error indicator.
+> - [Microsoft Support](https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0)
 
 Look at the column the script reads. If the values hug the left edge, the spreadsheet does not think they are numbers, and every calculation written on top of them is suspect. The sample rows you gave the model did not have this problem, because you typed them.
 
 Locale is the other one, and it is worse because it produces a wrong number rather than no number. Google's rule for CSV files:
 
-> When the decimal number separator is period, the delimiter is comma. When the decimal number separator is comma, the delimiter is semicolon.[Google, Configure the CSV locale](https://support.google.com/appsheet/answer/11512216?hl=en)
+> When the decimal number separator is period, the delimiter is comma. When the decimal number separator is comma, the delimiter is semicolon.
+> - [Google, Configure the CSV locale](https://support.google.com/appsheet/answer/11512216?hl=en)
 
 A European export written `1.234,56` read under a US locale comes out as a different number entirely - and it still looks perfectly reasonable sitting in the cell.
 
@@ -136,11 +147,13 @@ Both of these live under the same roof as the classic spreadsheet failures. I co
 
 This comes from OpenAI's own researchers, working with Georgia Tech, on the subject of their own product:
 
-> Like students facing hard exam questions, large language models sometimes guess when uncertain, producing plausible yet incorrect statements instead of admitting uncertainty.[Kalai, Nachum, Vempala and Zhang, Why Language Models Hallucinate](https://arxiv.org/abs/2509.04664)
+> Like students facing hard exam questions, large language models sometimes guess when uncertain, producing plausible yet incorrect statements instead of admitting uncertainty.
+> - [Kalai, Nachum, Vempala and Zhang, Why Language Models Hallucinate](https://arxiv.org/abs/2509.04664)
 
 "Plausible yet incorrect" is the whole problem in three words. And the shape of the bluff matters:
 
-> Bluffs are often overconfident and specific, such as "September 30" rather than "Sometime in autumn" for a question about a date.[Why Language Models Hallucinate](https://arxiv.org/abs/2509.04664)
+> Bluffs are often overconfident and specific, such as "September 30" rather than "Sometime in autumn" for a question about a date.
+> - [Why Language Models Hallucinate](https://arxiv.org/abs/2509.04664)
 
 So the answer never arrives hedged. A model that said "I am not sure how your date column is formatted" would be more useful and would score worse on the exams it is measured by. As the paper puts it, they are "always in test-taking mode".
 
@@ -152,7 +165,8 @@ There is a deeper reason it cannot know your file. The same paper argues the err
 
 The 2025 Stack Overflow Developer Survey asked over 31,000 developers about their biggest frustration with AI tools. The top answer:
 
-> AI solutions that are almost right, but not quite - 66%[Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai)
+> AI solutions that are almost right, but not quite - 66%
+> - [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai)
 
 Second place: debugging AI-generated code is more time-consuming, at 45.2%. And on trust, distrust now outweighs trust: 45.7% against 32.7%.
 
@@ -162,7 +176,8 @@ Two more measurements worth knowing, because they are about the part nobody susp
 
 Ray Panko, who has spent decades measuring spreadsheet errors, ran a study where the people building a sheet - students, in this case - were asked how likely it was they had made a mistake. The median guess was 10%. In reality, 86% had made one. Then:
 
-> When debriefed in class and asked to raise their hands if they thought they were among the successful 14%, well over half of all subjects raised their hands.[Ray Panko, Spreadsheet Errors: What We Know. What We Think We Can Do.](https://eusprig.org/wp-content/uploads/0802.3457.pdf)
+> When debriefed in class and asked to raise their hands if they thought they were among the successful 14%, well over half of all subjects raised their hands.
+> - [Ray Panko, Spreadsheet Errors: What We Know. What We Think We Can Do.](https://eusprig.org/wp-content/uploads/0802.3457.pdf)
 
 And a 2025 randomised trial by [METR](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) on 16 experienced open-source developers found they expected AI to make them 24% faster, actually finished 19% slower, and afterwards still believed it had sped them up by 20%.
 
@@ -200,7 +215,7 @@ None of these are the model being stupid. Each is a reasonable default that only
 
 **It installs a silencer.** You say "make the errors stop" and it wraps everything so that nothing ever appears to fail. GitClear, analysing 623 million code changes, measured error-masking constructs up 47% in the AI-assisted era. A crash is a gift: it tells you something broke. A silenced error hands you a plausible total and says nothing. If your script never complains about anything on messy real data, treat that as a symptom. I take the spreadsheet version of this apart in [IFERROR turned your errors into zeros](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#iferror).
 
-**It reports one "done" for a whole batch.** Rows that failed do not raise their hand. The fix is the thing models almost never write unless asked: a status written next to every single row, so failure has somewhere to appear.
+**It reports one "done" for a whole batch.** Rows that failed do not raise their hand. The fix is the thing models almost never write unless asked: a status written next to every single row, so failure has somewhere to appear. Websites fail this way one level up: a single thank-you screen stands in for four separate stages of delivery and can only see the first, which is [the contact form that says thanks while the enquiry goes nowhere](https://dayonebuilder.online/blog/form-said-thanks-email-never-came/).
 
 ## How do you take a draft to production?
 
@@ -219,7 +234,8 @@ None of these are the model being stupid. Each is a reasonable default that only
 
 There is a paradox in getting help here, and someone on Hacker News named it exactly:
 
-> Do you expect the client to sit down and explain every detail? If they know how to do that, they wouldn't be having messy code base as the one the post is describing.[Oras, Hacker News](https://news.ycombinator.com/item?id=48825456)
+> Do you expect the client to sit down and explain every detail? If they know how to do that, they wouldn't be having messy code base as the one the post is describing.
+> - [Oras, Hacker News](https://news.ycombinator.com/item?id=48825456)
 
 You cannot fully specify the fix, and you cannot fully evaluate it either. So do not try to. Ask for evidence instead - it is the one thing you can check without reading code:
 

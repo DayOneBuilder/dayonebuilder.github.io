@@ -8,7 +8,7 @@ Published: 2026-07-17
 Language: en
 
 ---
-
+Your importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog.
 
 You uploaded a product file. The importer worked through it, then told you it was done. No red box, no error, nothing to click. Then you looked at your catalogue and there were fewer products than there were rows in your file. Your CSV import says success but rows are missing, and both halves of that sentence are true at the same time.
 
@@ -31,6 +31,8 @@ Every row in your file lands in exactly one of them. At the end, the importer re
 This is not a WooCommerce quirk. On Magento, someone reported it in July 2016 with the clarity of a man who had just lost an afternoon: "Magento thinks the product import was a success as it reached the end of the data to import, when in fact it hit a null value, and there was additional data to import after." He then named the business consequence, which is the reason you are reading this: "This is particularly dangerous as a merchant could update product prices, get a message they went in, and they haven't gone in."
 
 The word "success" is not doing the job you assumed it was doing. It never was.
+
+The same word does the same damage outside a catalogue. A contact form's thank-you screen reports that the form ran, not that anyone received the enquiry, which is how [a form keeps saying thanks while the message reaches no one](https://dayonebuilder.online/blog/form-said-thanks-email-never-came/).
 
 ## Were your rows skipped, or did they fail?
 
@@ -144,37 +146,37 @@ What you have at the end of this is the thing you actually wanted: a list of row
 
 You have your missing rows. Take each one and look for its signature below.
 
-- **The SKU or handle already existsWhy:** Covered above, and it is the big one. If most of your file is missing, stop here - the update checkbox was off, and every row you already sell was skipped.
-
-- **The URL key is already takenWhy:** Two products want the same web address, and one of them loses. Magento names the culprit for you: `Url key: '%s' was already generated for an item with the SKU: '%s'`.
-
-- **The SKU has spaces at the edgesWhy:** Invisible in a spreadsheet, fatal to a match. Magento has an error code for exactly this: `SKU contains marginal whitespaces`.
-
-- **An image URL that will not downloadWhy:** In WooCommerce one unreachable image does not cost you the image. It costs you the whole product. The upload throws and the row dies with `Error getting remote image %s.` WordPress gives that download 300 seconds before it gives up.
-
-- **The parent failed, so the children vanishedWhy:** A row can be valid and still disappear because something above it died. From a WooCommerce maintainer: "the other 'success' rows are variations and these get cleared if the parent product (with the image) fails to import". Magento has a name for the same thing: `Orphan rows that will be skipped due default row errors`.
-
-- **A value the field will not acceptWhy:** Wrong type, or a value outside the allowed list. Shopify's version names the line, like the one a very experienced importer hit in July 2026 and could not explain: `Line 2: Validation failed: Cannot add more than 10000 references to a file.` He opened with "I like to think I am well versed in importing CSV files to Shopify." It is not you.
-
-- **The importer is older than the limitWhy:** Shopify raised the variant ceiling from 100 to 2048 in the 2024-04 API and gave it to every merchant on 15 October 2025. But the old limit did not die, it moved. Shopify's changelog warns that "merchants using apps that are not using the in-support GraphQL product APIs may have a downgraded or broken experience". Your store supports 2048; a plugin written in 2023 and never updated cuts at 101. The age of the tool is a diagnosis.
-
-- **The store is too big for the dayWhy:** Once a store passes 50,000 variants, Shopify adds a throttle of 1000 new variants per day, and it "don't apply to stores on the Shopify Plus plan". This is why the same file behaves differently for you and for someone with a smaller catalogue.
-
 **The SKU or handle already exists**
+
+- **Why:** Covered above, and it is the big one. If most of your file is missing, stop here - the update checkbox was off, and every row you already sell was skipped.
 
 **The URL key is already taken**
 
+- **Why:** Two products want the same web address, and one of them loses. Magento names the culprit for you: `Url key: '%s' was already generated for an item with the SKU: '%s'`.
+
 **The SKU has spaces at the edges**
+
+- **Why:** Invisible in a spreadsheet, fatal to a match. Magento has an error code for exactly this: `SKU contains marginal whitespaces`.
 
 **An image URL that will not download**
 
+- **Why:** In WooCommerce one unreachable image does not cost you the image. It costs you the whole product. The upload throws and the row dies with `Error getting remote image %s.` WordPress gives that download 300 seconds before it gives up.
+
 **The parent failed, so the children vanished**
+
+- **Why:** A row can be valid and still disappear because something above it died. From a WooCommerce maintainer: "the other 'success' rows are variations and these get cleared if the parent product (with the image) fails to import". Magento has a name for the same thing: `Orphan rows that will be skipped due default row errors`.
 
 **A value the field will not accept**
 
+- **Why:** Wrong type, or a value outside the allowed list. Shopify's version names the line, like the one a very experienced importer hit in July 2026 and could not explain: `Line 2: Validation failed: Cannot add more than 10000 references to a file.` He opened with "I like to think I am well versed in importing CSV files to Shopify." It is not you.
+
 **The importer is older than the limit**
 
+- **Why:** Shopify raised the variant ceiling from 100 to 2048 in the 2024-04 API and gave it to every merchant on 15 October 2025. But the old limit did not die, it moved. Shopify's changelog warns that "merchants using apps that are not using the in-support GraphQL product APIs may have a downgraded or broken experience". Your store supports 2048; a plugin written in 2023 and never updated cuts at 101. The age of the tool is a diagnosis.
+
 **The store is too big for the day**
+
+- **Why:** Once a store passes 50,000 variants, Shopify adds a throttle of 1000 new variants per day, and it "don't apply to stores on the Shopify Plus plan". This is why the same file behaves differently for you and for someone with a smaller catalogue.
 
 ## What if a row landed, but landed wrong?
 
@@ -182,7 +184,8 @@ You have your missing rows. Take each one and look for its signature below.
 
 The rows you can count are the good news. Here is the bad news, from a WooCommerce thread this year, a shop with more than 1400 products:
 
-> "Simple products updated perfectly. However, the majority of Variation products became completely empty..."The sentence goes on to say that their existing prices and descriptions were wiped out with them.
+> "Simple products updated perfectly. However, the majority of Variation products became completely empty..."
+> - The sentence goes on to say that their existing prices and descriptions were wiped out with them.
 
 The owner had done the careful thing. He mapped only the three columns he wanted to change and set everything else to "Do not import", "assuming this would protect the existing [data]". It did not. That thread was closed by a moderator on a timer, not by a fix: "We haven't heard back from you in a while, so I'm going to mark this as resolved."
 

@@ -59,13 +59,15 @@ The same split shows up when the tool is not yours at all: a platform importer c
 
 Google's quota page is blunt about the consequence:
 
-> If you exceed a quota or limitation, your script throws an exception and execution stops.[Google, Quotas for Google Services](https://developers.google.com/apps-script/guides/services/quotas)
+> If you exceed a quota or limitation, your script throws an exception and execution stops.
+> - [Google, Quotas for Google Services](https://developers.google.com/apps-script/guides/services/quotas)
 
 Six minutes per execution, consumer and Workspace alike. Custom functions - the kind you call from inside a cell with `=myFunction()` - get 30 seconds.
 
 The part that makes people think their file is haunted is that this arrives late. Here is a real one from Google's own community forum:
 
-> Just recently my google script has been returning an error message of Exceeded Maximum Execution Time. I've been running the script for months and have never had any issues until last week. It errors out usually in the morning but will run just find [sic] by mid-day. Nothing has changed in the script since I first wrote it.[Cameron Coile, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0)
+> Just recently my google script has been returning an error message of Exceeded Maximum Execution Time. I've been running the script for months and have never had any issues until last week. It errors out usually in the morning but will run just find [sic] by mid-day. Nothing has changed in the script since I first wrote it.
+> - [Cameron Coile, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0)
 
 Nothing changed in the script. The file grew. A script that needs five and a half minutes today needs six and a half next quarter, and then it is over. The time-of-day thing is real too: a loaded morning is slower than a quiet lunchtime, so the same script passes at noon and fails at 9am, which feels exactly like a haunting and is just arithmetic.
 
@@ -75,11 +77,13 @@ Nothing changed in the script. The file grew. A script that needs five and a hal
 
 This is the single most useful thing to understand here, so let me use Google's numbers rather than mine:
 
-> Alternating read and write commands is slow. To speed up a script, read all data into an array with one command, perform operations on the array data, and write the data out with one command.[Google, Apps Script Best Practices](https://developers.google.com/apps-script/guides/support/best-practices)
+> Alternating read and write commands is slow. To speed up a script, read all data into an array with one command, perform operations on the array data, and write the data out with one command.
+> - [Google, Apps Script Best Practices](https://developers.google.com/apps-script/guides/support/best-practices)
 
 And the measurement, on the same 100x100 block of cells:
 
-> The inefficient code takes about 70 seconds to run, while the efficient code runs in just 1 second.[Google, Apps Script Best Practices](https://developers.google.com/apps-script/guides/support/best-practices)
+> The inefficient code takes about 70 seconds to run, while the efficient code runs in just 1 second.
+> - [Google, Apps Script Best Practices](https://developers.google.com/apps-script/guides/support/best-practices)
 
 Seventy times, for output that is character-for-character identical.
 
@@ -87,11 +91,13 @@ Now, why does a model reach for the slow one? Because reading a cell, doing some
 
 An expert on the same Google forum names the culprit in one line:
 
-> The classic example is setting Sheet cell values individually, one per loop.[Alan Wells, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0)
+> The classic example is setting Sheet cell values individually, one per loop.
+> - [Alan Wells, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/5VITsm55SS0)
 
 Here is what that pattern costs on a real sheet. One user measured his own script at nearly five minutes for a single pass over 500 rows:
 
-> to run through the 500 rows looking for one email address once and generate an HTML email of 13 rows takes nearly 5 minutes[Dean Barrett, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/IMCFHQcWWEw)
+> to run through the 500 rows looking for one email address once and generate an HTML email of 13 rows takes nearly 5 minutes
+> - [Dean Barrett, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/IMCFHQcWWEw)
 
 Sit with that rate for a second. Five minutes for 500 rows is about 0.6 seconds per row, and the arithmetic from there is mine, not Google's: against today's six-minute ceiling, a script running at that rate is finished at roughly 600 rows. Your file has 5,000. It never had a chance, and the ten-row test could not have told you.
 
@@ -101,13 +107,15 @@ Sit with that rate for a second. Five minutes for 500 rows is about 0.6 seconds 
 
 The clearest case on the forum: a user needed about 2,100 order numbers, each one a separate call out to an API.
 
-> Each URL request can take 3-5 seconds to process and doing 2100 of them will certainly not be possible ever within the 6 mins window.[George Ghanem, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/HyCxPjvwyI4)
+> Each URL request can take 3-5 seconds to process and doing 2100 of them will certainly not be possible ever within the 6 mins window.
+> - [George Ghanem, Google Apps Script Community](https://groups.google.com/g/google-apps-script-community/c/HyCxPjvwyI4)
 
 Do that multiplication: 2,100 requests at 3 seconds each is 105 minutes against a 360-second ceiling. You are not 10% over. You are off by a factor of seventeen. That job needs a different shape entirely - batching, saved progress, a trigger that picks up where the last run stopped - and no amount of "please optimise this" produces a different shape, because you did not ask for one.
 
 Which brings up the loop most people are stuck in when they give up: paste the error back, get a rewrite, run it, paste the next error. It feels like converging. Someone on Hacker News put the problem with it better than I could:
 
-> my gut reaction to "take an AI-inflated codebase and apply AI deflation to it" is something like "that's akin to applying two rounds of lossy transcoding; the errors don't cancel out, they cross-multiply"[fwlr, Hacker News](https://news.ycombinator.com/item?id=48825761)
+> my gut reaction to "take an AI-inflated codebase and apply AI deflation to it" is something like "that's akin to applying two rounds of lossy transcoding; the errors don't cancel out, they cross-multiply"
+> - [fwlr, Hacker News](https://news.ycombinator.com/item?id=48825761)
 
 Each rewrite starts from scratch. It can quietly change logic you never asked it to touch. And piling more of the conversation in does not help as much as you would hope. Chroma's research on long context found that "models do not use their context uniformly; instead, their performance grows increasingly unreliable as input length grows" ([Context Rot](https://www.trychroma.com/research/context-rot)).
 
@@ -121,17 +129,20 @@ This is the failure that costs real money, and it has no error message at all.
 
 Microsoft states both the cause and the tell:
 
-> This issue sometimes occurs after you import or copy data from a database or other external data source.[Microsoft Support, Fix text-formatted numbers by applying a number format](https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0)
+> This issue sometimes occurs after you import or copy data from a database or other external data source.
+> - [Microsoft Support, Fix text-formatted numbers by applying a number format](https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0)
 
 And the free five-second diagnostic, from the same page:
 
-> Numbers that are formatted as text are left-aligned instead of right-aligned in the cell, and are often marked with an error indicator.[Microsoft Support](https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0)
+> Numbers that are formatted as text are left-aligned instead of right-aligned in the cell, and are often marked with an error indicator.
+> - [Microsoft Support](https://support.microsoft.com/en-us/office/fix-text-formatted-numbers-by-applying-a-number-format-6599c03a-954d-4d83-b78a-23af2c8845d0)
 
 Look at the column the script reads. If the values hug the left edge, the spreadsheet does not think they are numbers, and every calculation written on top of them is suspect. The sample rows you gave the model did not have this problem, because you typed them.
 
 Locale is the other one, and it is worse because it produces a wrong number rather than no number. Google's rule for CSV files:
 
-> When the decimal number separator is period, the delimiter is comma. When the decimal number separator is comma, the delimiter is semicolon.[Google, Configure the CSV locale](https://support.google.com/appsheet/answer/11512216?hl=en)
+> When the decimal number separator is period, the delimiter is comma. When the decimal number separator is comma, the delimiter is semicolon.
+> - [Google, Configure the CSV locale](https://support.google.com/appsheet/answer/11512216?hl=en)
 
 A European export written `1.234,56` read under a US locale comes out as a different number entirely - and it still looks perfectly reasonable sitting in the cell.
 
@@ -143,11 +154,13 @@ Both of these live under the same roof as the classic spreadsheet failures. I co
 
 This comes from OpenAI's own researchers, working with Georgia Tech, on the subject of their own product:
 
-> Like students facing hard exam questions, large language models sometimes guess when uncertain, producing plausible yet incorrect statements instead of admitting uncertainty.[Kalai, Nachum, Vempala and Zhang, Why Language Models Hallucinate](https://arxiv.org/abs/2509.04664)
+> Like students facing hard exam questions, large language models sometimes guess when uncertain, producing plausible yet incorrect statements instead of admitting uncertainty.
+> - [Kalai, Nachum, Vempala and Zhang, Why Language Models Hallucinate](https://arxiv.org/abs/2509.04664)
 
 "Plausible yet incorrect" is the whole problem in three words. And the shape of the bluff matters:
 
-> Bluffs are often overconfident and specific, such as "September 30" rather than "Sometime in autumn" for a question about a date.[Why Language Models Hallucinate](https://arxiv.org/abs/2509.04664)
+> Bluffs are often overconfident and specific, such as "September 30" rather than "Sometime in autumn" for a question about a date.
+> - [Why Language Models Hallucinate](https://arxiv.org/abs/2509.04664)
 
 So the answer never arrives hedged. A model that said "I am not sure how your date column is formatted" would be more useful and would score worse on the exams it is measured by. As the paper puts it, they are "always in test-taking mode".
 
@@ -159,7 +172,8 @@ There is a deeper reason it cannot know your file. The same paper argues the err
 
 The 2025 Stack Overflow Developer Survey asked over 31,000 developers about their biggest frustration with AI tools. The top answer:
 
-> AI solutions that are almost right, but not quite - 66%[Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai)
+> AI solutions that are almost right, but not quite - 66%
+> - [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/2025/ai)
 
 Second place: debugging AI-generated code is more time-consuming, at 45.2%. And on trust, distrust now outweighs trust: 45.7% against 32.7%.
 
@@ -169,7 +183,8 @@ Two more measurements worth knowing, because they are about the part nobody susp
 
 Ray Panko, who has spent decades measuring spreadsheet errors, ran a study where the people building a sheet - students, in this case - were asked how likely it was they had made a mistake. The median guess was 10%. In reality, 86% had made one. Then:
 
-> When debriefed in class and asked to raise their hands if they thought they were among the successful 14%, well over half of all subjects raised their hands.[Ray Panko, Spreadsheet Errors: What We Know. What We Think We Can Do.](https://eusprig.org/wp-content/uploads/0802.3457.pdf)
+> When debriefed in class and asked to raise their hands if they thought they were among the successful 14%, well over half of all subjects raised their hands.
+> - [Ray Panko, Spreadsheet Errors: What We Know. What We Think We Can Do.](https://eusprig.org/wp-content/uploads/0802.3457.pdf)
 
 And a 2025 randomised trial by [METR](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) on 16 experienced open-source developers found they expected AI to make them 24% faster, actually finished 19% slower, and afterwards still believed it had sped them up by 20%.
 
@@ -207,7 +222,7 @@ None of these are the model being stupid. Each is a reasonable default that only
 
 **It installs a silencer.** You say "make the errors stop" and it wraps everything so that nothing ever appears to fail. GitClear, analysing 623 million code changes, measured error-masking constructs up 47% in the AI-assisted era. A crash is a gift: it tells you something broke. A silenced error hands you a plausible total and says nothing. If your script never complains about anything on messy real data, treat that as a symptom. I take the spreadsheet version of this apart in [IFERROR turned your errors into zeros](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#iferror).
 
-**It reports one "done" for a whole batch.** Rows that failed do not raise their hand. The fix is the thing models almost never write unless asked: a status written next to every single row, so failure has somewhere to appear.
+**It reports one "done" for a whole batch.** Rows that failed do not raise their hand. The fix is the thing models almost never write unless asked: a status written next to every single row, so failure has somewhere to appear. Websites fail this way one level up: a single thank-you screen stands in for four separate stages of delivery and can only see the first, which is [the contact form that says thanks while the enquiry goes nowhere](https://dayonebuilder.online/blog/form-said-thanks-email-never-came/).
 
 ## How do you take a draft to production?
 
@@ -226,7 +241,8 @@ None of these are the model being stupid. Each is a reasonable default that only
 
 There is a paradox in getting help here, and someone on Hacker News named it exactly:
 
-> Do you expect the client to sit down and explain every detail? If they know how to do that, they wouldn't be having messy code base as the one the post is describing.[Oras, Hacker News](https://news.ycombinator.com/item?id=48825456)
+> Do you expect the client to sit down and explain every detail? If they know how to do that, they wouldn't be having messy code base as the one the post is describing.
+> - [Oras, Hacker News](https://news.ycombinator.com/item?id=48825456)
 
 You cannot fully specify the fix, and you cannot fully evaluate it either. So do not try to. Ask for evidence instead - it is the one thing you can check without reading code:
 
@@ -289,11 +305,11 @@ Published: 2026-07-22
 Language: en
 
 ---
-
+Someone filled in your form, saw the thank-you, and assumed you got it. You did not, and neither of you knows. Here is how to find out whether it is happening to you, and how much already has.
 
 Someone filled in your contact form. They saw the thank-you message, so they think you have their enquiry. You never got an email. Neither of you knows anything is wrong, and both of you are waiting for the other to speak first.
 
-This is the quietest way a business loses money. Nothing breaks. No error appears anywhere. The form works, the site works, and the enquiries stop arriving. Most owners find out weeks later, and usually by accident, when a customer says "I did write to you."
+Your contact form says sent, but no email arrives, and this is the quietest way a business loses money. Nothing breaks. No error appears anywhere. The form works, the site works, and the enquiries stop arriving. Most owners find out weeks later, and usually by accident, when a customer says "I did write to you."
 
 Search for the problem and you land in a plugin manual. Usually for WordPress, usually published by whoever sells the plugin, and usually ending on the same instruction: install this, configure sending, done. That may well turn out to be your fix. It is also a fix for a cause nobody has established yet, on a platform you might not even be running.
 
@@ -303,81 +319,87 @@ The part missing from those pages is everything that comes before the fix. Wheth
 
 > Short version: the thank-you screen answers a question you never asked. It confirms the form ran. It says nothing about whether anything reached you, because the code that draws that screen never finds out. A submission crosses four separate stages, and only the last one puts an email in front of a human.
 
-The clearest statement of this comes from the documentation of the thing doing the sending. PHP, the language most website forms are built on, describes what its mail function actually promises:
+The clearest statement of this comes from the documentation of the thing doing the sending. PHP, which runs the server side of most of the web, describes what its mail function actually promises:
 
-> It is important to note that just because the mail was accepted for delivery, it does NOT mean the mail will actually reach the intended destination.[PHP Manual, mail() return values](https://www.php.net/manual/en/function.mail.php)
+> It is important to note that just because the mail was accepted for delivery, it does NOT mean the mail will actually reach the intended destination.
+> - [PHP Manual, mail() return values](https://www.php.net/manual/en/function.mail.php)
 
 That sentence is the whole problem in one line. The form asked the server to send an email. The server said "accepted." Your site treated "accepted" as "done" and showed a thank-you. Everything after that point happens somewhere you cannot see.
 
 Here is the full path a submission takes:
 
-- **The browser sends the form** — The visitor clicks. Their data reaches your site. This almost never fails, and this is the only stage the thank-you message actually knows about.
+1. **The browser sends the form** - The visitor clicks. Their data reaches your site. This almost never fails, and this is the only stage the thank-you message actually knows about.
 
-- **Your site hands the message to a mail server** — It hands it over and gets back an acknowledgement. Not a delivery, an acknowledgement. This is where `accepted for delivery` is decided, and it is the last thing your site hears about it.
+2. **Your site hands the message to a mail server** - It hands it over and gets back an acknowledgement. Not a delivery, an acknowledgement. This is where `accepted for delivery` is decided, and it is the last thing your site hears about it.
 
-- **The receiving mail service decides what to do** — Gmail, Outlook or whoever runs your mailbox now judges the message. It can accept it, put it in spam, or reject it outright. Your site is not told which.
+3. **The receiving mail service decides what to do** - Gmail, Outlook or whoever runs your mailbox now judges the message. It can accept it, put it in spam, or reject it outright. Your site is not told which.
 
-- **Something puts it in front of you** — Or a filter files it away, or it lands in a folder you never open. The message can exist and still never be read.
+4. **Something puts it in front of you** - Or a filter files it away, or it lands in a folder you never open. The message can exist and still never be read.
 
 The thank-you covers stage one. Stages two through four happen in silence, and a failure in any of them looks identical from the outside: a happy visitor and an empty inbox.
 
 > **The trap** Testing your own form from your own computer proves almost nothing. Mail from you to you often takes a shorter route and skips the checks that kill real messages. The test that matters is a submission that looks like a stranger's, sent to the address you actually watch.
 
-## The three-minute check
+## How do you check whether it is happening to you?
 
 > Short version: three checks, in this order, and you can run all of them without touching your site. They tell you whether the problem is delivery, filtering, or something never having been sent at all.
 
-- **Send one real submission from outside your own network** — Use your phone on mobile data, not your office wifi, and put a real address you control in the reply field. Write something you can search for later, like a nonsense word. This is now a marked message you can hunt for.
+1. **Send one real submission the way a stranger would** - Fill the form in as a customer would, and put an address you control at a different provider in the reply field - a personal Gmail if your business runs on Outlook, or the other way round. What matters is not your network but that the address is not the same domain as the one you are testing, because that is the exact case that gets filtered. Write a nonsense word into the message so you can search for it later.
 
-- **Search your whole mailbox for that word, not just the inbox** — In Gmail, search `in:anywhere` so it covers spam, archive and every label. If the message is there, delivery works and something on your end filed it. That is a filter problem, and it is the good outcome.
+2. **Search your whole mailbox for that word, not just the inbox** - Look in the inbox first, then widen it. In Gmail, searching `in:anywhere` adds Spam and Trash to the search, which the plain inbox search skips - and Trash is exactly where a rule with a delete action drops things. If the message turns up anywhere, delivery works and something on your end filed it. That is a filter problem, and it is the good outcome.
 
-- **Ask your form where it thinks the submission went** — Most platforms keep a log or a submissions list separate from email. If your submission appears there but not in your mailbox, the form is fine and the email is dying. If it appears in neither, the form never got it.
+3. **Ask your form where it thinks the submission went** - Most platforms keep a log or a submissions list separate from email. If your submission appears there but not in your mailbox, the form is fine and the email is dying. If it appears in neither, the form never got it.
 
-Three outcomes, three different problems, and you now know which one is yours. That is the whole point of doing this before changing anything.
+Three outcomes, three different problems, and now you know which one is yours before you have changed a single setting.
 
-## What "accepted for delivery" actually hides
+## Where does the message actually go?
 
-These are the five ways the message disappears after your site stops watching. Each one has a tell, so you can name yours rather than working through all five.
+You can hear the exact shape of this on any platform's support forum. One Shopify store owner put it as plainly as anyone:
 
-- **1. The message was never authenticatedTell:** Nothing arrives from your site, but mail you write by hand from the same domain arrives fine.
+> The contact form I have on the website is submitting all right but i am not receiving any emails on my email.
+> - Store owner, [Shopify Community](https://community.shopify.com/t/why-am-i-not-receiving-emails-from-my-websites-contact-form/291473)
 
-- **Why:** Your site sends mail without the records that prove the mail is really yours. Google requires every sender to have SPF or DKIM set up, and bulk senders to have DMARC as well. Messages without them, in Google's own words, might be marked as spam or rejected.
+Submitting all right, not receiving any emails. Both halves true at once, and everything that fits between them is the five causes below. Each one has a tell, so you can usually name yours rather than working through all five.
 
-- **Fix:** Send through an authenticated mail service instead of the web server. This is the fix the plugin guides are pointing at, and for this cause they are right.
+**1. The message was never authenticated**
 
-- **2. The reply-to address pretends to be the visitorTell:** Enquiries arrive from some senders and not others, with no pattern you can see.
+- **Tell:** Nothing arrives from your site, but mail you write by hand from the same domain arrives fine.
+
+- **Why:** Your site sends mail without the records that prove the mail is really yours. To reach a Gmail inbox, [Google now requires every sender to set up SPF or DKIM](https://support.google.com/a/answer/81126), and anyone sending more than 5,000 messages a day to have SPF, DKIM and DMARC all three. Messages without them, in Google's own words, "might be marked as spam or rejected." Microsoft brought in the same demand for Outlook.com in 2025, so this is where mail is going, not a Gmail quirk.
+
+- **Fix:** Send through an authenticated mail service instead of the web server. This is the fix the plugin guides are pointing at, and for this cause they are right. It means changes to your domain's DNS, though, and getting SPF wrong - two SPF records instead of one is the classic mistake - can take down every email your domain sends. If you do not run your own DNS, this is the one cause to hand to whoever does, rather than try on a live domain.
+
+**2. The reply-to address pretends to be the visitor**
+
+- **Tell:** Enquiries arrive from some senders and not others, with no pattern you can see.
 
 - **Why:** Many forms put the visitor's address in the from field, so the message claims to come from a domain that never authorised your server. That is the exact shape of a forged email, and filters treat it as one.
 
 - **Fix:** Send from your own domain and put the visitor's address in reply-to. The reply button still works, and the message stops looking forged.
 
-- **3. Your own filter is eating itTell:** The message exists somewhere in your mailbox when you search everything, just not in the inbox.
+**3. Your own filter is eating it**
 
-- **Why:** A rule you set up years ago, a spam classifier that decided one message was junk and applied that to the rest, or a shared mailbox where someone else's rule moves them. Squarespace tells its own users to add its sending address to their mail rules, which is a platform openly admitting this happens.
+- **Tell:** The message exists somewhere in your mailbox when you search everything, just not in the inbox.
 
-- **Fix:** Find the rule and remove it, then whitelist the sending address. Cheapest fix on this list, and worth ruling out first.
+- **Why:** A rule you set up years ago, a spam classifier that decided one message was junk and applied that to the rest, or a shared mailbox where someone else's rule moves them. [Squarespace tells its own users to add its sending address to their mail rules](https://support.squarespace.com/hc/en-us/articles/205813938-Troubleshooting-form-issues), which is a platform openly admitting this happens.
 
-- **4. It goes to an address nobody opensTell:** You find the enquiries immediately, in a mailbox nobody has logged into since the site was built.
+- **Fix:** Find the rule and remove it, then whitelist the sending address. Cheapest fix on this list, and worth ruling out first - but if it is a shared mailbox, check whose rule it is before deleting it, because that rule may be doing a job for someone else.
+
+**4. It goes to an address nobody opens**
+
+- **Tell:** You find the enquiries immediately, in a mailbox nobody has logged into since the site was built.
 
 - **Why:** The notification address is whatever was typed during setup: a developer's address, an old info@ that forwards nowhere, a staff member who left. Nothing is broken and nothing is being read.
 
 - **Fix:** Point it at an address a person actually watches, then send a test submission to prove where it landed.
 
-- **5. Nothing was ever sentTell:** The submission does not appear in your mailbox, and does not appear in the form's own records either.
+**5. Nothing was ever sent**
+
+- **Tell:** The submission does not appear in your mailbox, and does not appear in the form's own records either.
 
 - **Why:** A form that fails before sending, an integration that quietly disconnected, or a required field the platform needs before it will record anything at all. The thank-you can still show, because the thank-you is often just the next screen.
 
-- **Fix:** Check the form's own submissions list first. This cause is rarer than the others and much worse, because there is nothing to recover.
-
-**1. The message was never authenticated**
-
-**2. The reply-to address pretends to be the visitor**
-
-**3. Your own filter is eating it**
-
-**4. It goes to an address nobody opens**
-
-**5. Nothing was ever sent**
+- **Fix:** Check the form's own submissions list first. This is the worst cause on the list, because unlike the others there is nothing sitting in a folder to recover.
 
 ## How many did you already lose?
 
@@ -389,33 +411,31 @@ If you have no analytics, you are not stuck, you are just working with a shorter
 
 > **Be careful what you conclude** A gap between page views and enquiries is a strong signal, not a proof. Refreshes, bots and people who open the page twice all inflate the view count. Treat the number as "something is wrong, and roughly this big," not as a precise count of lost customers.
 
-Either way, the answer arrives as a number you can act on rather than a worry you carry around. That matters more than precision here.
+Either way you end up with a number you can act on instead of a nagging sense that something is off. A rough number you can defend beats a precise one you made up.
 
 ## The fix that ends this whole class of problem
 
-> Short version: stop letting email be the only record. An email is a notification that an enquiry exists. It is a terrible place to keep the enquiry itself, because a notification you did not receive leaves nothing behind.
+> Short version: stop letting email be the only record. Whenever someone hands me a form that "sometimes loses messages," this is where I end up, because an email is a notification that an enquiry exists, and it is a terrible place to keep the enquiry itself - a notification you never received leaves nothing behind to find.
 
-Every cause above has the same shape. The enquiry existed, the notification failed, and because the notification was the only copy, the enquiry ceased to exist. Fix the notification and you fix today's cause. Fix the architecture and the whole class stops mattering.
+Every cause above has the same shape. The enquiry existed, the notification failed, and because the notification was the only copy, the enquiry was gone. Chase the notification and you have fixed one cause until the next one turns up. Write the enquiry down the moment it arrives, before any email is attempted, and none of the five can cost you a customer again - the worst any of them does then is delay when you read it.
 
-The architecture is one sentence: every submission gets written somewhere durable the moment it arrives, and the email becomes a convenience on top.
+1. **Write every submission to a store first** - A spreadsheet is enough. A row per enquiry, with a timestamp, before any email is attempted. If mail breaks tomorrow, nothing is lost, it is just unread.
 
-- **Write every submission to a store first** — A spreadsheet is enough. A row per enquiry, with a timestamp, before any email is attempted. If mail breaks tomorrow, nothing is lost, it is just unread.
+2. **Keep the email, but demote it** - It stays useful for speed. It is no longer the record, so its failure costs you a delay rather than a customer.
 
-- **Keep the email, but demote it** — It stays useful for speed. It is no longer the record, so its failure costs you a delay rather than a customer.
+3. **Make silence visible** - An empty inbox looks the same whether nobody wrote or everything broke. A quick weekly glance at the store, or an alert when a row lands, tells the two apart.
 
-- **Make silence visible** — An empty inbox looks the same whether nobody wrote or everything broke. A quick weekly glance at the store, or an alert when a row lands, tells the two apart.
-
-This is also why the fix is worth doing even if today's cause turns out to be a filter you can delete in a minute. The filter was not the problem. Having one copy of something valuable was the problem.
+This is also why the fix is worth doing even if today's cause turns out to be a filter you can delete in a minute. Deleting the filter fixes the filter. It does nothing about the fact that a single missed notification was all it took to lose the enquiry for good, and that is the part I would not leave in place.
 
 ## Proving it is fixed, on your own evidence
 
-> Short version: one test submission, three things true at once. If all three hold, you are done, and you did not have to take anyone's word for it.
+> Short version: one test submission, three things true at once. If all three hold you are done, and you did not have to take anyone's word for it, including mine.
 
-- **The row appears in the store** — Send a test submission and watch the row land, with the right values in the right columns. Data in the wrong column is a fix that has not finished.
+1. **The row appears in the store** - Send a test submission and watch the row land, with the right values in the right columns. Data in the wrong column is a fix that has not finished.
 
-- **The email arrives at a watched address** — From outside your network, to the mailbox a human actually reads. If it lands in spam, you found a second problem while the first was still fresh.
+2. **The email arrives at a watched address** - From outside your network, to the mailbox a human actually reads. If it lands in spam, you found a second problem while the first was still fresh.
 
-- **A stranger's submission does the same** — Ask someone with a different email provider to send one. Providers disagree about what looks suspicious, and one of them disagreeing is what started this.
+3. **A stranger's submission does the same** - Ask someone with a different email provider to send one. Providers disagree about what looks suspicious, and one of them disagreeing is what started this.
 
 Run all three now, and again in a month. Mail providers change their rules, domains expire, and staff leave. A form that worked in July is not evidence about a form in December.
 
@@ -429,7 +449,7 @@ Almost certainly not your site. Mail providers tightened their rules: since Febr
 
 ### Is this a WordPress problem?
 
-No. The guides are mostly about WordPress because WordPress has the biggest plugin market, so the biggest search traffic. The forums of Shopify and Squarespace are full of the same complaint, and platform-hosted forms fail the same four stages. What differs is which part you can reach. On your own site you can change how the mail is sent. On a hosted platform you mostly change where it is stored and who it goes to.
+No. The guides are mostly about WordPress because WordPress runs more sites than anything else, and the people writing those guides have an SMTP plugin to sell. The forums of Shopify and Squarespace are full of the same complaint, and platform-hosted forms fail the same four stages. What differs is which part you can reach: on your own site you can change how the mail is sent and add the authentication that keeps it out of spam, while on a hosted platform you are mostly limited to changing where the submission is stored and which address it is sent to, because the sending itself belongs to the platform.
 
 ### The submissions are in spam. Can I just tell people to check spam?
 
@@ -441,7 +461,14 @@ Whichever one writes the enquiry down before it tries to email you. That single 
 
 ### What does this cost me in time, realistically?
 
-The three-minute check usually names it, because the three outcomes map onto different causes. Fixing it is the same day for a filter or a wrong address, and an afternoon for authentication or a storage setup. The exception is the fifth cause, where nothing was ever recorded: that one is quick to fix going forward and impossible to fix backwards, which is the argument for not leaving it.
+The check usually names it in a few minutes, because the three outcomes map onto different causes. Fixing it is the same day for a filter or a wrong address, and an afternoon for authentication or a storage setup. The exception is the fifth cause, where nothing was ever recorded: that one is quick to fix going forward and impossible to fix backwards, which is the argument for not leaving it.
+
+## Sources
+
+- [PHP Manual - `mail()` return values](https://www.php.net/manual/en/function.mail.php): mail accepted for delivery is not mail that reached its destination.
+- [Google - Email sender guidelines](https://support.google.com/a/answer/81126): SPF/DKIM required to reach Gmail since February 2024; SPF, DKIM and DMARC for senders of 5,000+ messages a day.
+- [Squarespace - Troubleshooting form issues](https://support.squarespace.com/hc/en-us/articles/205813938-Troubleshooting-form-issues): storage and email notification are separate; the platform asks users to whitelist its sending address.
+- [Shopify Community - contact form not receiving emails](https://community.shopify.com/t/why-am-i-not-receiving-emails-from-my-websites-contact-form/291473): the same symptom, in a store owner's words.
 
 # The Import Said Success. Which Rows Are Missing?
 
@@ -453,7 +480,7 @@ Published: 2026-07-17
 Language: en
 
 ---
-
+Your importer reported success and quietly skipped rows. How to find which ones, on a copy, before you touch the live catalog.
 
 You uploaded a product file. The importer worked through it, then told you it was done. No red box, no error, nothing to click. Then you looked at your catalogue and there were fewer products than there were rows in your file. Your CSV import says success but rows are missing, and both halves of that sentence are true at the same time.
 
@@ -476,6 +503,8 @@ Every row in your file lands in exactly one of them. At the end, the importer re
 This is not a WooCommerce quirk. On Magento, someone reported it in July 2016 with the clarity of a man who had just lost an afternoon: "Magento thinks the product import was a success as it reached the end of the data to import, when in fact it hit a null value, and there was additional data to import after." He then named the business consequence, which is the reason you are reading this: "This is particularly dangerous as a merchant could update product prices, get a message they went in, and they haven't gone in."
 
 The word "success" is not doing the job you assumed it was doing. It never was.
+
+The same word does the same damage outside a catalogue. A contact form's thank-you screen reports that the form ran, not that anyone received the enquiry, which is how [a form keeps saying thanks while the message reaches no one](https://dayonebuilder.online/blog/form-said-thanks-email-never-came/).
 
 ## Were your rows skipped, or did they fail?
 
@@ -589,37 +618,37 @@ What you have at the end of this is the thing you actually wanted: a list of row
 
 You have your missing rows. Take each one and look for its signature below.
 
-- **The SKU or handle already existsWhy:** Covered above, and it is the big one. If most of your file is missing, stop here - the update checkbox was off, and every row you already sell was skipped.
-
-- **The URL key is already takenWhy:** Two products want the same web address, and one of them loses. Magento names the culprit for you: `Url key: '%s' was already generated for an item with the SKU: '%s'`.
-
-- **The SKU has spaces at the edgesWhy:** Invisible in a spreadsheet, fatal to a match. Magento has an error code for exactly this: `SKU contains marginal whitespaces`.
-
-- **An image URL that will not downloadWhy:** In WooCommerce one unreachable image does not cost you the image. It costs you the whole product. The upload throws and the row dies with `Error getting remote image %s.` WordPress gives that download 300 seconds before it gives up.
-
-- **The parent failed, so the children vanishedWhy:** A row can be valid and still disappear because something above it died. From a WooCommerce maintainer: "the other 'success' rows are variations and these get cleared if the parent product (with the image) fails to import". Magento has a name for the same thing: `Orphan rows that will be skipped due default row errors`.
-
-- **A value the field will not acceptWhy:** Wrong type, or a value outside the allowed list. Shopify's version names the line, like the one a very experienced importer hit in July 2026 and could not explain: `Line 2: Validation failed: Cannot add more than 10000 references to a file.` He opened with "I like to think I am well versed in importing CSV files to Shopify." It is not you.
-
-- **The importer is older than the limitWhy:** Shopify raised the variant ceiling from 100 to 2048 in the 2024-04 API and gave it to every merchant on 15 October 2025. But the old limit did not die, it moved. Shopify's changelog warns that "merchants using apps that are not using the in-support GraphQL product APIs may have a downgraded or broken experience". Your store supports 2048; a plugin written in 2023 and never updated cuts at 101. The age of the tool is a diagnosis.
-
-- **The store is too big for the dayWhy:** Once a store passes 50,000 variants, Shopify adds a throttle of 1000 new variants per day, and it "don't apply to stores on the Shopify Plus plan". This is why the same file behaves differently for you and for someone with a smaller catalogue.
-
 **The SKU or handle already exists**
+
+- **Why:** Covered above, and it is the big one. If most of your file is missing, stop here - the update checkbox was off, and every row you already sell was skipped.
 
 **The URL key is already taken**
 
+- **Why:** Two products want the same web address, and one of them loses. Magento names the culprit for you: `Url key: '%s' was already generated for an item with the SKU: '%s'`.
+
 **The SKU has spaces at the edges**
+
+- **Why:** Invisible in a spreadsheet, fatal to a match. Magento has an error code for exactly this: `SKU contains marginal whitespaces`.
 
 **An image URL that will not download**
 
+- **Why:** In WooCommerce one unreachable image does not cost you the image. It costs you the whole product. The upload throws and the row dies with `Error getting remote image %s.` WordPress gives that download 300 seconds before it gives up.
+
 **The parent failed, so the children vanished**
+
+- **Why:** A row can be valid and still disappear because something above it died. From a WooCommerce maintainer: "the other 'success' rows are variations and these get cleared if the parent product (with the image) fails to import". Magento has a name for the same thing: `Orphan rows that will be skipped due default row errors`.
 
 **A value the field will not accept**
 
+- **Why:** Wrong type, or a value outside the allowed list. Shopify's version names the line, like the one a very experienced importer hit in July 2026 and could not explain: `Line 2: Validation failed: Cannot add more than 10000 references to a file.` He opened with "I like to think I am well versed in importing CSV files to Shopify." It is not you.
+
 **The importer is older than the limit**
 
+- **Why:** Shopify raised the variant ceiling from 100 to 2048 in the 2024-04 API and gave it to every merchant on 15 October 2025. But the old limit did not die, it moved. Shopify's changelog warns that "merchants using apps that are not using the in-support GraphQL product APIs may have a downgraded or broken experience". Your store supports 2048; a plugin written in 2023 and never updated cuts at 101. The age of the tool is a diagnosis.
+
 **The store is too big for the day**
+
+- **Why:** Once a store passes 50,000 variants, Shopify adds a throttle of 1000 new variants per day, and it "don't apply to stores on the Shopify Plus plan". This is why the same file behaves differently for you and for someone with a smaller catalogue.
 
 ## What if a row landed, but landed wrong?
 
@@ -627,7 +656,8 @@ You have your missing rows. Take each one and look for its signature below.
 
 The rows you can count are the good news. Here is the bad news, from a WooCommerce thread this year, a shop with more than 1400 products:
 
-> "Simple products updated perfectly. However, the majority of Variation products became completely empty..."The sentence goes on to say that their existing prices and descriptions were wiped out with them.
+> "Simple products updated perfectly. However, the majority of Variation products became completely empty..."
+> - The sentence goes on to say that their existing prices and descriptions were wiped out with them.
 
 The owner had done the careful thing. He mapped only the three columns he wanted to change and set everything else to "Do not import", "assuming this would protect the existing [data]". It did not. That thread was closed by a moderator on a timer, not by a fix: "We haven't heard back from you in a while, so I'm going to mark this as resolved."
 
@@ -796,15 +826,15 @@ Language: ru
 
 Что было сделано, по шагам:
 
-- **Реестр счетов в той же таблице** — Отдельный лист «Счета к выгрузке»: номер заказа, клиент, сумма, номер телефона, статус отправки. Никакого нового интерфейса - только новый лист.
+1. **Реестр счетов в той же таблице** - Отдельный лист «Счета к выгрузке»: номер заказа, клиент, сумма, номер телефона, статус отправки. Никакого нового интерфейса - только новый лист.
 
-- **Пакетная генерация PDF** — Скрипт собирает счета по шаблону сразу пачкой - не по одному. PDF уходит файлом, не ссылкой на Диск: клиенту не нужен доступ и аккаунт.
+2. **Пакетная генерация PDF** - Скрипт собирает счета по шаблону сразу пачкой - не по одному. PDF уходит файлом, не ссылкой на Диск: клиенту не нужен доступ и аккаунт.
 
-- **Автоотправка по строкам** — Отправка идёт через официальный API по строкам реестра. Статус и ошибка пишутся в ту же строку - видно, кому ушло, кому нет и почему.
+3. **Автоотправка по строкам** - Отправка идёт через официальный API по строкам реестра. Статус и ошибка пишутся в ту же строку - видно, кому ушло, кому нет и почему.
 
-- **Защита от «битых» данных** — Формулы обёрнуты в защиту от #N/A: пустой или кривой набор данных не валит сводку и не уезжает клиенту в PDF - строка помечается на проверку.
+4. **Защита от «битых» данных** - Формулы обёрнуты в защиту от #N/A: пустой или кривой набор данных не валит сводку и не уезжает клиенту в PDF - строка помечается на проверку.
 
-- **Тестовый прогон** — Сначала всё гоняется на своём номере, потом на паре реальных счетов, и только после этого включается в работу.
+5. **Тестовый прогон** - Сначала всё гоняется на своём номере, потом на паре реальных счетов, и только после этого включается в работу.
 
 Результат, если пересказать обратную связь владельца: ручной работы стало заметно меньше, счета выглядят профессиональнее, а один из клиентов после перехода сделал заказ крупнее обычного. Отдельная деталь, которую я считаю главной: **владелец остался в своей таблице**. Ничего не пришлось переучивать. Такой же принцип - чинить процесс, не ломая привычки - я держу и в остальных задачах: [с чем приходят чаще всего - на главной](https://dayonebuilder.online/ru/).
 
@@ -883,19 +913,19 @@ Language: ru
 
 > Коротко: семь шагов от аудита таблицы до боевого включения. Каждый шаг проверяем: видно, что работает, до перехода к следующему.
 
-- **Аудит реестра** — Один лист - один счёт на строку: клиент, сумма или позиции, телефон, статус. Убрать дубли и «исторические» колонки.
+1. **Аудит реестра** - Один лист - один счёт на строку: клиент, сумма или позиции, телефон, статус. Убрать дубли и «исторические» колонки.
 
-- **Шаблон счёта** — Реквизиты, нумерация, дата, позиции - с подстановками из реестра. Один шаблон, а не десять копий.
+2. **Шаблон счёта** - Реквизиты, нумерация, дата, позиции - с подстановками из реестра. Один шаблон, а не десять копий.
 
-- **Генерация PDF** — Скрипт собирает PDF по шаблону пачкой. Проверка: три тестовых счёта открываются и выглядят одинаково правильно.
+3. **Генерация PDF** - Скрипт собирает PDF по шаблону пачкой. Проверка: три тестовых счёта открываются и выглядят одинаково правильно.
 
-- **Канал отправки** — Клиенты вне РФ - официальный WhatsApp Business API через провайдера, счёт - utility-шаблоном. Клиенты в РФ - Telegram-бот. Основной номер не используется нигде.
+4. **Канал отправки** - Клиенты вне РФ - официальный WhatsApp Business API через провайдера, счёт - utility-шаблоном. Клиенты в РФ - Telegram-бот. Основной номер не используется нигде.
 
-- **Guard-формулы и валидация** — IFNA/IFERROR на все подстановки, проверка данных на телефон и сумму, защита листа с формулами.
+5. **Guard-формулы и валидация** - IFNA/IFERROR на все подстановки, проверка данных на телефон и сумму, защита листа с формулами.
 
-- **Тест на себе** — Полный цикл на своём номере: генерация, отправка, статус в строке. Потом - на 2-3 реальных счетах.
+6. **Тест на себе** - Полный цикл на своём номере: генерация, отправка, статус в строке. Потом - на 2-3 реальных счетах.
 
-- **Включение и наблюдение** — Первая неделя - с ежедневным взглядом на колонку ошибок. Дальше - по факту.
+7. **Включение и наблюдение** - Первая неделя - с ежедневным взглядом на колонку ошибок. Дальше - по факту.
 
 ## Частые вопросы
 
@@ -943,11 +973,11 @@ So start with the data.
 
 Put these next to your data - say your numbers live in `B2:B500`:
 
-- **`=COUNT(B2:B500)` against `=COUNTA(B2:B500)`** — COUNT counts only real numbers. COUNTA counts everything that isn't empty. If COUNT is lower, some of your "numbers" are text - cause #1, and you can stop reading the rest of the triage.
+1. **`=COUNT(B2:B500)` against `=COUNTA(B2:B500)`** - COUNT counts only real numbers. COUNTA counts everything that isn't empty. If COUNT is lower, some of your "numbers" are text - cause #1, and you can stop reading the rest of the triage.
 
-- **`=SUM(B2:B500)` against `=SUBTOTAL(109,B2:B500)`** — SUBTOTAL with 109 skips rows that are hidden or filtered out; SUM does not. If the two disagree, hidden rows are in play - cause #5.
+2. **`=SUM(B2:B500)` against `=SUBTOTAL(109,B2:B500)`** - SUBTOTAL with 109 skips rows that are hidden or filtered out; SUM does not. If the two disagree, hidden rows are in play - cause #5.
 
-- **`=COUNTA(B:B)` against the last row your total actually covers** — Column B has 812 filled cells but your SUM stops at row 500? The range stopped growing - cause #2. This is the one that hides for months, because nothing about it looks broken.
+3. **`=COUNTA(B:B)` against the last row your total actually covers** - Column B has 812 filled cells but your SUM stops at row 500? The range stopped growing - cause #2. This is the one that hides for months, because nothing about it looks broken.
 
 Two more worth knowing: `=SUMPRODUCT(--ISTEXT(B2:B500))` counts text cells directly, and in Excel, tapping **F9** is a one-second test for a stale total (see the note at the end). Now the seven, in the order they actually turn up.
 
@@ -1071,19 +1101,21 @@ Before you go hunting: in Excel, press **F9**. If the total changes, nothing was
 
 > Short version: the fix is one afternoon. Making the file incapable of lying to you again is the same afternoon, if you do it while you're already in there.
 
-- **One table, one shape** — Excel Table or open-ended range. Ranges with hard-coded ends are a time bomb, and the timer runs out the day the data outgrows them.
+1. **One table, one shape** - Excel Table or open-ended range. Ranges with hard-coded ends are a time bomb, and the timer runs out the day the data outgrows them.
 
-- **Clean keys on arrival, not at lookup time** — TRIM and type-normalise the identifier column as it enters the sheet. Every downstream lookup then works on keys that are actually equal.
+2. **Clean keys on arrival, not at lookup time** - TRIM and type-normalise the identifier column as it enters the sheet. Every downstream lookup then works on keys that are actually equal.
 
-- **Guards that flag, never hide** — `"CHECK"`, not `0`. Plus one cell counting the CHECKs, so a broken row has somewhere to show up.
+3. **Guards that flag, never hide** - `"CHECK"`, not `0`. Plus one cell counting the CHECKs, so a broken row has somewhere to show up.
 
-- **Exact match only** — XLOOKUP, or FALSE. There is no report where "the closest price below yours" is the intended behaviour.
+4. **Exact match only** - XLOOKUP, or FALSE. There is no report where "the closest price below yours" is the intended behaviour.
 
-- **A reconciliation cell** — One cell: your total minus the source system's total. It should read 0. When it doesn't, you learn on the day it breaks - not in the quarterly review.
+5. **A reconciliation cell** - One cell: your total minus the source system's total. It should read 0. When it doesn't, you learn on the day it breaks - not in the quarterly review.
 
-- **ROUND where you calculate** — Decide the precision once, in the formula. The number format is for humans, not for arithmetic.
+6. **ROUND where you calculate** - Decide the precision once, in the formula. The number format is for humans, not for arithmetic.
 
 The reconciliation cell is the one to take if you take only one. Everything above is about finding a wrong number; that cell is about the wrong number finding *you*, immediately, which is a much better arrangement. It's also the cheapest thing on the list - a subtraction and a conditional format.
+
+The same idea travels well past spreadsheets. A contact form that only sends an email has nothing to reconcile against, which is how [a form can keep saying thank you while no enquiry reaches anyone](https://dayonebuilder.online/blog/form-said-thanks-email-never-came/).
 
 ## Common questions
 

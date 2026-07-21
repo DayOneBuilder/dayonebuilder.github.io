@@ -20,11 +20,11 @@ So start with the data.
 
 Put these next to your data - say your numbers live in `B2:B500`:
 
-- **`=COUNT(B2:B500)` against `=COUNTA(B2:B500)`** — COUNT counts only real numbers. COUNTA counts everything that isn't empty. If COUNT is lower, some of your "numbers" are text - cause #1, and you can stop reading the rest of the triage.
+1. **`=COUNT(B2:B500)` against `=COUNTA(B2:B500)`** - COUNT counts only real numbers. COUNTA counts everything that isn't empty. If COUNT is lower, some of your "numbers" are text - cause #1, and you can stop reading the rest of the triage.
 
-- **`=SUM(B2:B500)` against `=SUBTOTAL(109,B2:B500)`** — SUBTOTAL with 109 skips rows that are hidden or filtered out; SUM does not. If the two disagree, hidden rows are in play - cause #5.
+2. **`=SUM(B2:B500)` against `=SUBTOTAL(109,B2:B500)`** - SUBTOTAL with 109 skips rows that are hidden or filtered out; SUM does not. If the two disagree, hidden rows are in play - cause #5.
 
-- **`=COUNTA(B:B)` against the last row your total actually covers** — Column B has 812 filled cells but your SUM stops at row 500? The range stopped growing - cause #2. This is the one that hides for months, because nothing about it looks broken.
+3. **`=COUNTA(B:B)` against the last row your total actually covers** - Column B has 812 filled cells but your SUM stops at row 500? The range stopped growing - cause #2. This is the one that hides for months, because nothing about it looks broken.
 
 Two more worth knowing: `=SUMPRODUCT(--ISTEXT(B2:B500))` counts text cells directly, and in Excel, tapping **F9** is a one-second test for a stale total (see the note at the end). Now the seven, in the order they actually turn up.
 
@@ -148,19 +148,21 @@ Before you go hunting: in Excel, press **F9**. If the total changes, nothing was
 
 > Short version: the fix is one afternoon. Making the file incapable of lying to you again is the same afternoon, if you do it while you're already in there.
 
-- **One table, one shape** — Excel Table or open-ended range. Ranges with hard-coded ends are a time bomb, and the timer runs out the day the data outgrows them.
+1. **One table, one shape** - Excel Table or open-ended range. Ranges with hard-coded ends are a time bomb, and the timer runs out the day the data outgrows them.
 
-- **Clean keys on arrival, not at lookup time** — TRIM and type-normalise the identifier column as it enters the sheet. Every downstream lookup then works on keys that are actually equal.
+2. **Clean keys on arrival, not at lookup time** - TRIM and type-normalise the identifier column as it enters the sheet. Every downstream lookup then works on keys that are actually equal.
 
-- **Guards that flag, never hide** — `"CHECK"`, not `0`. Plus one cell counting the CHECKs, so a broken row has somewhere to show up.
+3. **Guards that flag, never hide** - `"CHECK"`, not `0`. Plus one cell counting the CHECKs, so a broken row has somewhere to show up.
 
-- **Exact match only** — XLOOKUP, or FALSE. There is no report where "the closest price below yours" is the intended behaviour.
+4. **Exact match only** - XLOOKUP, or FALSE. There is no report where "the closest price below yours" is the intended behaviour.
 
-- **A reconciliation cell** — One cell: your total minus the source system's total. It should read 0. When it doesn't, you learn on the day it breaks - not in the quarterly review.
+5. **A reconciliation cell** - One cell: your total minus the source system's total. It should read 0. When it doesn't, you learn on the day it breaks - not in the quarterly review.
 
-- **ROUND where you calculate** — Decide the precision once, in the formula. The number format is for humans, not for arithmetic.
+6. **ROUND where you calculate** - Decide the precision once, in the formula. The number format is for humans, not for arithmetic.
 
 The reconciliation cell is the one to take if you take only one. Everything above is about finding a wrong number; that cell is about the wrong number finding *you*, immediately, which is a much better arrangement. It's also the cheapest thing on the list - a subtraction and a conditional format.
+
+The same idea travels well past spreadsheets. A contact form that only sends an email has nothing to reconcile against, which is how [a form can keep saying thank you while no enquiry reaches anyone](https://dayonebuilder.online/blog/form-said-thanks-email-never-came/).
 
 ## Common questions
 
