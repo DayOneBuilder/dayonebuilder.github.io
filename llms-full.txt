@@ -49,7 +49,7 @@ Before you touch anything, sort your situation into one of these:
 
 | It finishes, and some rows are updated and some are not | Both, and this is the nastiest | The checklist section, and read every word |
 
-If the symptom is that your totals look wrong and no script is involved at all, you are in a different building: I took the seven real causes apart in [why your spreadsheet total is wrong](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/), and the [60-second triage](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#triage) there tells you in three formulas whether the data is lying or the formula is.
+If the symptom is that your totals look wrong and no script is involved at all, you are in a different building: I took the seven real causes apart in [why your spreadsheet total is wrong](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/), and the [60-second triage](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#the-60-second-triage) there tells you in three formulas whether the data is lying or the formula is.
 
 The same split shows up when the tool is not yours at all: a platform importer can finish, report success, and [leave rows out without raising a single error](https://dayonebuilder.online/blog/import-said-success-rows-missing/).
 
@@ -146,7 +146,7 @@ Locale is the other one, and it is worse because it produces a wrong number rath
 
 A European export written `1.234,56` read under a US locale comes out as a different number entirely - and it still looks perfectly reasonable sitting in the cell.
 
-Both of these live under the same roof as the classic spreadsheet failures. I covered them at the cell level in [your numbers are text](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#text-numbers) and, for the lookup the model almost certainly wrote without an exact-match argument, [the lookup matched the wrong row](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#lookup).
+Both of these live under the same roof as the classic spreadsheet failures. I covered them at the cell level in [your numbers are text](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#1-your-numbers-are-text) and, for the lookup the model almost certainly wrote without an exact-match argument, [the lookup matched the wrong row](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#4-the-lookup-matched-the-wrong-row).
 
 ## Why does it sound so certain?
 
@@ -220,7 +220,7 @@ None of these are the model being stupid. Each is a reasonable default that only
 
 **It reaches for "the current file".** A script written against the active spreadsheet keeps holding the original after you duplicate the file. The arithmetic is fine and the numbers are real - they are just from yesterday's copy.
 
-**It installs a silencer.** You say "make the errors stop" and it wraps everything so that nothing ever appears to fail. GitClear, analysing 623 million code changes, measured error-masking constructs up 47% in the AI-assisted era. A crash is a gift: it tells you something broke. A silenced error hands you a plausible total and says nothing. If your script never complains about anything on messy real data, treat that as a symptom. I take the spreadsheet version of this apart in [IFERROR turned your errors into zeros](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#iferror).
+**It installs a silencer.** You say "make the errors stop" and it wraps everything so that nothing ever appears to fail. GitClear, analysing 623 million code changes, measured error-masking constructs up 47% in the AI-assisted era. A crash is a gift: it tells you something broke. A silenced error hands you a plausible total and says nothing. If your script never complains about anything on messy real data, treat that as a symptom. I take the spreadsheet version of this apart in [IFERROR turned your errors into zeros](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#6-iferror-turned-your-errors-into-zeros).
 
 **It reports one "done" for a whole batch.** Rows that failed do not raise their hand. The fix is the thing models almost never write unless asked: a status written next to every single row, so failure has somewhere to appear. Websites fail this way one level up: a single thank-you screen stands in for four separate stages of delivery and can only see the first, which is [the contact form that says thanks while the enquiry goes nowhere](https://dayonebuilder.online/blog/form-said-thanks-email-never-came/).
 
@@ -606,7 +606,7 @@ You have two files now. Your source, and what actually exists. The missing rows 
 
 Do not do this by eye. At a thousand rows your eyes will find about six of them and then quietly stop.
 
-Do it with a lookup in a spreadsheet, which is a tool you already own. Two notes from experience, and both of them will bite you here specifically. Match on the exact key, not on the product name - two products can share a name and no two can share a SKU. And beware the key that is text in one file and a number in the other. A SKU like `00123`, read as the number `123`, will not match itself. The lookup reports the row as missing while it sits right there. If your lookup finds nothing at all, or finds the wrong things, that is its own failure with its own causes. I take it apart in [the lookup matched the wrong row](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#lookup). Rule that out before you believe the diff.
+Do it with a lookup in a spreadsheet, which is a tool you already own. Two notes from experience, and both of them will bite you here specifically. Match on the exact key, not on the product name - two products can share a name and no two can share a SKU. And beware the key that is text in one file and a number in the other. A SKU like `00123`, read as the number `123`, will not match itself. The lookup reports the row as missing while it sits right there. If your lookup finds nothing at all, or finds the wrong things, that is its own failure with its own causes. I take it apart in [the lookup matched the wrong row](https://dayonebuilder.online/blog/why-your-spreadsheet-total-is-wrong/#4-the-lookup-matched-the-wrong-row). Rule that out before you believe the diff.
 
 If you would rather have a script do the comparison, that works too - but check it against a file you already know the answer for. A script that [ran fine on ten rows and lied on five thousand](https://dayonebuilder.online/blog/chatgpt-code-broke-on-real-data/) is its own kind of afternoon.
 
