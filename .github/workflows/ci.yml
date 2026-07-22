@@ -29,3 +29,9 @@ jobs:
         run: node scripts/check-home-widget.mjs .
         env:
           CHROME_PATH: /usr/bin/google-chrome
+
+      # Link guard: every internal #anchor must point at an id that exists.
+      # Dead anchors still answer HTTP 200 - they just drop the reader at the
+      # top of the page - so only an id-level check catches them (see bb43df5).
+      - name: Internal anchor check
+        run: node scripts/check-anchors.mjs .
